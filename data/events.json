@@ -12,7 +12,11 @@
       "QUEST"
     ],
     "url": "https://psy-apple.club/",
-    "source": "Official PSY-APPLE site + 2026-10-05 lineup announcement"
+    "source": "Official PSY-APPLE site + 2026-10-05 lineup announcement",
+    "djIds": [
+      "yossy",
+      "waha"
+    ]
   },
   {
     "name": "S.O NIGHT LAST PARTY 0",
@@ -53,6 +57,10 @@
       "ANNIVERSARY"
     ],
     "url": "https://psy-apple.club/",
-    "source": "2026-10-17 anniversary announcement"
+    "source": "2026-10-17 anniversary announcement",
+    "djIds": [
+      "yossy",
+      "waha"
+    ]
   }
 ]
