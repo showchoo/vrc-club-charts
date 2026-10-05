@@ -30,6 +30,7 @@ def main() -> int:
     worlds = json.loads((ROOT / "data/worlds.json").read_text(encoding="utf-8"))
     ranking = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
     events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    djs = json.loads((ROOT / "data/djs.json").read_text(encoding="utf-8"))
 
     if not isinstance(worlds, list) or not worlds:
         fail("data/worlds.json must be a non-empty array")
@@ -122,11 +123,32 @@ def main() -> int:
                 errors += 1
             seen_events.add(key)
 
+    if not isinstance(djs, list):
+        fail("data/djs.json must be an array")
+        errors += 1
+    else:
+        seen_djs = set()
+        for i, dj in enumerate(djs, start=1):
+            name = str(dj.get("name", "")).strip()
+            if not name:
+                fail(f"dj #{i}: name is required")
+                errors += 1
+                continue
+            key = name.casefold()
+            if key in seen_djs:
+                fail(f"duplicate DJ name: {name}")
+                errors += 1
+            seen_djs.add(key)
+            genres = dj.get("genres", [])
+            if not isinstance(genres, list) or not all(isinstance(g, str) and g.strip() for g in genres):
+                fail(f"dj #{i}: genres must be a string array")
+                errors += 1
+
     if errors:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)
         return 1
 
-    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows, {len(events)} events")
+    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows, {len(events)} events, {len(djs)} DJs")
     return 0
 
 
