@@ -1338,3 +1338,65 @@ main,
     grid-row: 1 / span 3;
   }
 }
+
+
+/* World → Event → DJ gateway */
+.scene-gateway {
+  padding-top: 96px;
+}
+.scene-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(166,234,255,.12);
+  border-bottom: 1px solid rgba(166,234,255,.12);
+}
+.scene-card {
+  min-height: 330px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(166,234,255,.10);
+  background: rgba(255,255,255,.018);
+  transition: background .2s ease, transform .2s ease;
+}
+.scene-card:last-child { border-right: 0; }
+.scene-card:hover {
+  background: rgba(63,217,255,.055);
+  transform: translateY(-4px);
+}
+.scene-card > span {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .17em;
+}
+.scene-card strong {
+  margin-top: auto;
+  font-size: clamp(36px, 4.2vw, 62px);
+  letter-spacing: -.055em;
+  line-height: .9;
+}
+.scene-card p {
+  max-width: 270px;
+  margin: 18px 0 26px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.scene-card b {
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+.scene-card-accent {
+  background:
+    linear-gradient(160deg, rgba(63,217,255,.12), rgba(9,16,20,.6));
+}
+@media (max-width: 760px) {
+  .scene-grid { grid-template-columns: 1fr; }
+  .scene-card {
+    min-height: 230px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(166,234,255,.10);
+  }
+  .scene-card:last-child { border-bottom: 0; }
+}
