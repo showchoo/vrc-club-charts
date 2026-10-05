@@ -12,7 +12,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="stylesheet" href="styles.css?v=20261005-2" />
+  <link rel="stylesheet" href="styles.css?v=20261005-3" />
 </head>
 <body>
   <div class="noise"></div>
@@ -39,17 +39,47 @@
   </header>
 
   <main id="top">
-    <section class="hero shell">
-      <div class="eyebrow"><span class="pulse-dot"></span><span data-i18n="weekly">WEEKLY VR NIGHTLIFE INDEX</span></div>
-      <h1><span data-i18n="heroA">今週、行くべき</span><br><em data-i18n="heroB">VRChatクラブ。</em></h1>
-      <p class="hero-copy" data-i18n="heroCopy">来場の伸びと、お気に入り増加。そして空間・照明・音響・ギミックの作り込み。人気だけでは見つからないクラブを毎週ランキングします。</p>
-      <div class="hero-meta">
-        <span id="dataStatus" class="status-pill">LOADING</span>
-        <span id="updatedAt">—</span>
-        <span>•</span>
-        <span id="worldCount">— worlds</span>
+    <section class="hero hero-poster">
+      <div class="hero-frame shell">
+        <div class="hero-rail hero-rail-left">VRC CLUB CHARTS / WEEKLY INDEX / 2026</div>
+        <div class="hero-rail hero-rail-right">VR NIGHTLIFE / WORLD RANKING / PUBLIC BETA</div>
+
+        <div class="hero-eyebrow">
+          <span class="pulse-dot"></span>
+          <span data-i18n="weekly">WEEKLY VR NIGHTLIFE INDEX</span>
+        </div>
+
+        <div class="hero-type" aria-hidden="true">
+          <span>VRC</span>
+          <span>CLUB</span>
+          <span class="hero-type-accent">CHARTS</span>
+        </div>
+
+        <div class="hero-prism" aria-hidden="true">
+          <span class="prism-cyan"></span>
+          <span class="prism-dark"></span>
+          <span class="prism-edge"></span>
+          <span class="prism-glow"></span>
+        </div>
+
+        <div class="hero-message">
+          <p class="hero-statement"><span data-i18n="heroA">今週、行くべき</span><br><em data-i18n="heroB">VRChatクラブ。</em></p>
+          <p class="hero-copy" data-i18n="heroCopy">来場の伸びと、お気に入り増加。そして空間・照明・音響・ギミックの作り込み。人気だけでは見つからないクラブを毎週ランキングします。</p>
+          <div class="hero-meta">
+            <span id="dataStatus" class="status-pill">LOADING</span>
+            <span id="updatedAt">—</span>
+            <span>•</span>
+            <span id="worldCount">— worlds</span>
+          </div>
+        </div>
+
+        <div class="hero-index">01 / WEEKLY CLUB INDEX</div>
       </div>
     </section>
+
+    <div class="signal-strip" aria-hidden="true">
+      <div class="signal-track">WEEKLY CLUB INDEX&nbsp;&nbsp;•&nbsp;&nbsp;LIGHT&nbsp;&nbsp;•&nbsp;&nbsp;SOUND&nbsp;&nbsp;•&nbsp;&nbsp;SPACE&nbsp;&nbsp;•&nbsp;&nbsp;IMMERSION&nbsp;&nbsp;•&nbsp;&nbsp;VR NIGHTLIFE&nbsp;&nbsp;•&nbsp;&nbsp;WEEKLY CLUB INDEX&nbsp;&nbsp;•&nbsp;&nbsp;LIGHT&nbsp;&nbsp;•&nbsp;&nbsp;SOUND&nbsp;&nbsp;•&nbsp;&nbsp;SPACE&nbsp;&nbsp;•&nbsp;&nbsp;IMMERSION&nbsp;&nbsp;•&nbsp;&nbsp;VR NIGHTLIFE</div>
+    </div>
 
     <section class="shell controls" aria-label="filters">
       <div id="genreFilters" class="chip-row"></div>
