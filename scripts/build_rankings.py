@@ -50,6 +50,7 @@ def main():
 
     latest_map = {w['id']:w for w in latest[1]['worlds']} if latest else {}
     prior_map = {w['id']:w for w in prior[1]['worlds']} if prior else {}
+    latest_skipped = {w.get('id'): w.get('status') for w in latest[1].get('skipped', [])} if latest else {}
 
     rows = []
     for wid, seed in seed_by_id.items():
@@ -65,6 +66,7 @@ def main():
             'genres': seed.get('genres', []),
             'editorialStatus': editorial_status,
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
+            'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
             'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
             'weekly': {'visits': dv, 'favorites': df},
             '_craft': craft,
