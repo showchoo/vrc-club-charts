@@ -7,6 +7,7 @@ on:
       - "index.html"
       - "about.html"
       - "privacy.html"
+      - "reviewer.html"
       - "app.js"
       - "styles.css"
       - "favicon.svg"
@@ -56,7 +57,7 @@ jobs:
       - name: Prepare public artifact
         run: |
           mkdir _site
-          cp index.html about.html privacy.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html reviewer.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/events.json _site/data/
