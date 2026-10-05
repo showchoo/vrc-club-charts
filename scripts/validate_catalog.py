@@ -128,8 +128,18 @@ def main() -> int:
         errors += 1
     else:
         seen_djs = set()
+        seen_dj_ids = set()
         for i, dj in enumerate(djs, start=1):
+            dj_id = str(dj.get("id", "")).strip()
             name = str(dj.get("name", "")).strip()
+            if not dj_id or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{1,63}", dj_id):
+                fail(f"dj #{i}: valid lowercase id is required")
+                errors += 1
+            elif dj_id in seen_dj_ids:
+                fail(f"duplicate DJ id: {dj_id}")
+                errors += 1
+            else:
+                seen_dj_ids.add(dj_id)
             if not name:
                 fail(f"dj #{i}: name is required")
                 errors += 1
@@ -143,6 +153,14 @@ def main() -> int:
             if not isinstance(genres, list) or not all(isinstance(g, str) and g.strip() for g in genres):
                 fail(f"dj #{i}: genres must be a string array")
                 errors += 1
+
+    if isinstance(events, list) and isinstance(djs, list):
+        valid_dj_ids = {str(d.get("id", "")).strip() for d in djs if d.get("id")}
+        for i, event in enumerate(events, start=1):
+            for dj_id in event.get("djIds", []) or []:
+                if dj_id not in valid_dj_ids:
+                    fail(f"event #{i}: unknown djId {dj_id!r}")
+                    errors += 1
 
     if errors:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)
