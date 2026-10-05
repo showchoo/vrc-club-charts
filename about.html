@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — VRC Club Charts</title>
+  <meta name="description" content="VRC Club Chartsの目的、ランキング算出方法、編集方針について。" />
+  <meta name="theme-color" content="#090a10" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
+    <nav class="nav"><a class="nav-link" href="index.html">Charts</a><a class="nav-link active" href="about.html">About</a><a class="nav-link" href="privacy.html">Privacy</a></nav>
+  </header>
+  <main class="shell prose-page">
+    <p class="kicker">ABOUT</p>
+    <h1>VRChatのクラブを、<br><em>「いま」と「作り込み」で探す。</em></h1>
+    <p class="lead">VRC Club Chartsは、VRChatのクラブ／DJ／音楽ワールドに特化した独立ランキングです。累計Visitsだけでは埋もれてしまう新しいクラブや、空間・照明・音響の完成度が高いワールドを見つけやすくすることを目的としています。</p>
+
+    <section class="prose-section">
+      <h2>ランキングの考え方</h2>
+      <p><strong>Overall</strong> は、ライブデータが2週分揃った後、週間Momentum 55%とCraftsmanship 45%で計算します。Momentumは7日間のVisits増加とFavorites増加を正規化して算出します。</p>
+      <p><strong>Craftsmanship</strong> はVisual 20、Lighting / VJ 20、Sound 15、Spatial design 15、Interaction 10、VR originality 10、Optimization 10の100点満点です。公開ベータ時点の編集スコアは暫定値で、実地確認後に更新します。</p>
+    </section>
+
+    <section class="prose-section">
+      <h2>編集方針</h2>
+      <p>スポンサー枠や広告を将来導入しても、ランキング順位そのものは販売しません。有料掲載を行う場合はSponsored / Adなどと明示し、編集ランキングとは分離します。</p>
+      <p>削除済み・非公開化されたワールド、クラブ用途から大きく外れたワールド、データ品質に問題があるワールドは掲載対象から外すことがあります。</p>
+    </section>
+
+    <section class="prose-section">
+      <h2>データ更新</h2>
+      <p>公開World IDを定期スナップショット化し、週間差分を静的JSONへ反映します。通常のページ閲覧時にはVRChat APIへ問い合わせません。</p>
+    </section>
+
+    <p class="disclaimer">VRC Club Charts is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.</p>
+  </main>
+  <footer class="site-footer shell"><span>VRC CLUB CHARTS / PUBLIC BETA</span><span class="footer-links"><a href="index.html">Charts</a><a href="privacy.html">Privacy</a></span></footer>
+</body>
+</html>
