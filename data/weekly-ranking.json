@@ -1,0 +1,55 @@
+{
+  "status": "seed",
+  "updatedAt": "MVP seed — weekly deltas begin after 2 snapshots",
+  "methodVersion": "0.2",
+  "worlds": [
+    {
+      "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
+      "name": "Club Deviate",
+      "author": "TOTC",
+      "genres": ["EXPERIMENTAL","DJ","IMMERSIVE"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 95.0,"overall": 95.0}
+    },
+    {
+      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+      "name": "TUBE VR - IN THE DANCE",
+      "author": "Hadean",
+      "genres": ["MUSIC","DANCE","IMMERSIVE","QUEST"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 94.0,"overall": 94.0}
+    },
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "genres": ["CLUB","STAGE LIGHTING","AUDIOLINK"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 92.0,"overall": 92.0}
+    },
+    {
+      "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
+      "name": "SONAR_Spillways",
+      "author": "Llamahat",
+      "genres": ["MUSIC","CLUB","DJ","QUEST"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 86.0,"overall": 86.0}
+    },
+    {
+      "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
+      "name": "CLUB IGLO",
+      "author": "EZKIMO_O'",
+      "genres": ["CLUB","LIVE","DJ"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 85.0,"overall": 85.0}
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1.222",
+      "author": "TGCFabian",
+      "genres": ["CLUB","AUDIOLINK","QUEST"],
+      "weekly": {"visits": null,"favorites": null},
+      "scores": {"trending": 0.0,"craftsmanship": 82.0,"overall": 82.0}
+    }
+  ]
+}
