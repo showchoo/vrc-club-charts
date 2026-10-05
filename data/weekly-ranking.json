@@ -33,7 +33,8 @@
         "MUSIC",
         "DANCE",
         "IMMERSIVE",
-        "QUEST"
+        "QUEST",
+        "CLUB"
       ],
       "weekly": {
         "visits": null,
@@ -45,7 +46,7 @@
         "overall": null
       },
       "editorialStatus": "unreviewed",
-      "chartEligible": false,
+      "chartEligible": true,
       "source": null
     },
     {
@@ -1898,81 +1899,6 @@
       "chartEligible": true
     },
     {
-      "id": "wrld_d3179055-a51c-4998-9051-0217850d74c6",
-      "name": "MMD AfterDark the dance continues",
-      "author": "TheMCPanda",
-      "genres": [
-        "MUSIC",
-        "DANCE",
-        "MMD",
-        "QUEST"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/dance",
-      "chartEligible": false
-    },
-    {
-      "id": "wrld_40047403-ec3a-46a8-b780-389619d8f2a9",
-      "name": "MMD Night",
-      "author": "shiuk",
-      "genres": [
-        "MUSIC",
-        "DANCE",
-        "MMD"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/dance",
-      "chartEligible": false
-    },
-    {
       "id": "wrld_ebc4bce3-2372-4b1e-ab0c-f9e1f8095958",
       "name": "超！寝転ん盆踊り2026",
       "author": "Nekoro",
@@ -2009,155 +1935,6 @@
       },
       "source": "https://www.vrcw.net/category/detail/dance",
       "chartEligible": true
-    },
-    {
-      "id": "wrld_73808a9d-e4e4-412c-8973-a88e6ffd286d",
-      "name": "〖YAKEKU-SORAN 〗DanceStudio",
-      "author": "さまーうぉず",
-      "genres": [
-        "MUSIC",
-        "DANCE",
-        "STUDIO",
-        "QUEST"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/dance",
-      "chartEligible": false
-    },
-    {
-      "id": "wrld_64512407-2f2f-44e5-b7fc-4bdc4a188d4f",
-      "name": "もうダンスダンスダンスワールド",
-      "author": "nyasuta",
-      "genres": [
-        "MUSIC",
-        "DANCE",
-        "STUDIO"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/dance",
-      "chartEligible": false
-    },
-    {
-      "id": "wrld_079d7e4c-6e77-4b6e-ae0e-4bba5bc97472",
-      "name": "Ingress dance studio v2",
-      "author": "Clamat",
-      "genres": [
-        "DANCE",
-        "STUDIO",
-        "QUEST"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/dance",
-      "chartEligible": false
-    },
-    {
-      "id": "wrld_d2d0399f-6d0e-4678-9d9c-48079d470206",
-      "name": "-yuuri-Luminous Blue",
-      "author": "o_ゆうり_o",
-      "genres": [
-        "MUSIC",
-        "AUDIOLINK",
-        "QUEST"
-      ],
-      "editorialStatus": "unreviewed",
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      },
-      "source": "https://www.vrcw.net/category/detail/music",
-      "chartEligible": false
     },
     {
       "id": "wrld_2e4d3fe6-3255-4e53-9905-6089bf141358",
@@ -2588,44 +2365,6 @@
       "source": "https://www.vrcw.net/world/detail/wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
-      "availabilityStatus": "available",
-      "releaseStatus": null,
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      }
-    },
-    {
-      "id": "wrld_29cc6261-866c-443b-a872-042b8993d39d",
-      "name": "Yokuraの海の家 beachside clubhouse",
-      "author": "Yokuraaaaa",
-      "genres": [
-        "MUSIC",
-        "DJ",
-        "BEACH",
-        "QUEST"
-      ],
-      "source": "https://www.vrcw.net/world/detail/wrld_29cc6261-866c-443b-a872-042b8993d39d",
-      "editorialStatus": "unreviewed",
-      "chartEligible": false,
       "availabilityStatus": "available",
       "releaseStatus": null,
       "thumbnail": null,
