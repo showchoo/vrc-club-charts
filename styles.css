@@ -175,3 +175,101 @@ code { color: var(--accent-strong); }
 .prose-section p { color: var(--ink-soft); line-height: 1.8; }
 .prose-section strong { color: var(--text); }
 @media (max-width: 760px) { .prose-page { padding-top: 76px; } .footer-links { gap:10px; } }
+
+
+.bg-objects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-object {
+  position: absolute;
+  filter: saturate(110%);
+}
+.orb {
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255,255,255,.42), rgba(138,238,255,.22) 20%, rgba(58,197,255,.16) 38%, rgba(34,112,151,.10) 56%, rgba(14,26,32,0) 72%);
+  box-shadow: 0 0 80px rgba(63,217,255,.10), inset 0 0 40px rgba(255,255,255,.05);
+}
+.orb-a {
+  width: 28rem;
+  height: 28rem;
+  top: 8rem;
+  left: -7rem;
+  opacity: .55;
+}
+.orb-b {
+  width: 18rem;
+  height: 18rem;
+  right: 4rem;
+  top: 24rem;
+  opacity: .30;
+}
+.glass {
+  border: 1px solid rgba(190,242,255,.16);
+  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(63,217,255,.06));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 20px 70px rgba(0,0,0,.20);
+  backdrop-filter: blur(10px);
+}
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 10% 12%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.02));
+  opacity: .7;
+}
+.glass-a {
+  width: 11rem;
+  height: 24rem;
+  right: 8%;
+  top: 7rem;
+  border-radius: 3.4rem;
+  transform: rotate(24deg);
+  opacity: .34;
+}
+.glass-b {
+  width: 16rem;
+  height: 7rem;
+  left: 18%;
+  bottom: 8rem;
+  border-radius: 999px;
+  transform: rotate(-18deg);
+  opacity: .20;
+}
+.ring {
+  width: 30rem;
+  height: 30rem;
+  left: -10rem;
+  bottom: -10rem;
+  border-radius: 50%;
+  border: 1px solid rgba(147,235,255,.18);
+  box-shadow: inset 0 0 40px rgba(63,217,255,.05), 0 0 70px rgba(63,217,255,.04);
+  opacity: .34;
+}
+.ring::before,
+.ring::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(147,235,255,.10);
+}
+.ring::after {
+  inset: 24%;
+}
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) {
+  .orb-a { width: 20rem; height: 20rem; left: -6rem; top: 9rem; opacity: .42; }
+  .orb-b { width: 12rem; height: 12rem; right: -1rem; top: 26rem; opacity: .22; }
+  .glass-a { width: 8rem; height: 18rem; right: -1rem; top: 8rem; opacity: .22; }
+  .glass-b { width: 11rem; height: 5rem; left: -1rem; bottom: 6rem; opacity: .16; }
+  .ring { width: 18rem; height: 18rem; left: -6rem; bottom: -6rem; opacity: .25; }
+}
