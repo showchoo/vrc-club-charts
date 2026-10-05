@@ -1283,3 +1283,58 @@ main,
   .dj-grid { grid-template-columns: 1fr; }
   .dj-card { min-height: 260px; }
 }
+
+
+/* DJ profile relationships */
+.dj-detail-mark {
+  color: rgba(63,217,255,.42);
+}
+.dj-detail-meta {
+  grid-template-columns: 1fr 1fr;
+}
+.dj-appearances {
+  padding-top: 58px;
+}
+.dj-event-list {
+  border-top: 1px solid rgba(166,234,255,.12);
+}
+.dj-event-row {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 170px 1fr minmax(180px, .7fr) 28px;
+  gap: 18px;
+  align-items: center;
+  border-bottom: 1px solid rgba(166,234,255,.10);
+  color: var(--muted);
+  font-size: 11px;
+}
+.dj-event-row strong {
+  color: var(--text);
+  font-size: 15px;
+}
+.dj-event-row:hover strong,
+.dj-event-row:hover > span:last-child {
+  color: var(--accent);
+}
+.dj-events-empty {
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(166,234,255,.10);
+}
+@media (max-width: 700px) {
+  .dj-event-row {
+    grid-template-columns: 1fr 28px;
+    gap: 6px 12px;
+    padding: 16px 0;
+  }
+  .dj-event-row span:nth-child(1),
+  .dj-event-row span:nth-child(3) {
+    grid-column: 1;
+  }
+  .dj-event-row > span:last-child {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+  }
+}
