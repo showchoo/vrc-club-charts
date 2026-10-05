@@ -54,3 +54,23 @@ Discovery expansion uses public listings from:
 Additional individual detail pages were checked for worlds such as Psychedelic Festival Dome, FBT Pulse Nighclub, LIQUID ˸ LAB, 13th Floor DJ, Channel 13, Club Neon pulse, Club Neon Lotus, Audiolinkバチバチワールド, オーディオリンク大聖堂, TMJ CLUB, ProBuilder BOX, and Zulfur's Smoking Lounge.
 
 The expanded catalog is discovery-only unless an editorial score is present. Being listed does not imply endorsement or an editorial ranking.
+
+
+## 60-world catalog expansion — 2026-10-05
+
+Ten additional DJ/music worlds were added from the VRCW DJ category after checking that the listing did not show them as deleted:
+
+- Eden 6 — `wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad`
+- Decibel Vault VR Event Center — `wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f`
+- BMF SHARKCITY CLUB — `wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa`
+- ZODIAC DJ MAP — `wrld_8dd8d168-509f-4191-98dc-844dbf4f9df3`
+- EL REGGAETION ROOM — `wrld_980770fa-673c-41bd-86ac-5394fab2cc41`
+- ZODIAC DJ EVENT — `wrld_0daf27f5-462f-4223-936f-be107dbdb195`
+- SON OF A BEACH — `wrld_92ca3241-20fa-4805-9c17-41c475ce84be`
+- Trance VR˸ TranceMission — `wrld_1a13ec63-43ae-4616-bb80-f7c05f2a6d99`
+- Project Obsidian 2․0 — `wrld_30412c54-724d-45d0-901b-ef832ab2f97f`
+- The Beach Rave — `wrld_786726d2-81c7-4356-8db8-7c29503c56ad`
+
+Source category: https://www.vrcw.net/category/detail/dj
+
+As with the other Discovery entries, this verifies identity/category metadata only. It does not constitute an editorial score or endorsement.
