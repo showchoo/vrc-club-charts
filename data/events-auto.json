@@ -1,77 +1,5 @@
 [
   {
-    "id": "feed-a3020ed85a5b1167de2a",
-    "name": "Karaoke En españolǃǃǃ",
-    "start": "2026-10-05T04:30:00Z",
-    "end": "2026-10-05T07:30:00Z",
-    "organizer": "Meraki Elysium",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_9f9ffab0-b6e7-4895-bceb-64cf55091b00/calendar/cal_fa343d12-2df8-42df-80a8-71ce0db6db21",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "a3020ed85a5b1167de2a",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-4742ddb75d14c3d7b1aa",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-05T09:39:00Z",
-    "end": "2026-10-07T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_eb8dbfce-484b-4f77-be73-ecda59032261",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "4742ddb75d14c3d7b1aa",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-f1f51019d4972ce90699",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-05T09:39:00Z",
-    "end": "2026-10-07T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_d7e86a90-16b8-429d-ab16-f25eff374d55",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "f1f51019d4972ce90699",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-feda26db5a934e7a6824",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-05T11:30:00Z",
-    "end": "2026-10-05T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_225a9699-7b2c-429b-8f97-fc00c3c706a0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "feda26db5a934e7a6824",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-8375efd4b05fe830678b",
     "name": "VRCライブイベント「双星」",
     "start": "2026-10-05T11:50:00Z",
@@ -103,42 +31,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "1c7a6c9488c169a87bb8",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7f2319975aadb2b9689c",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-05T12:50:00Z",
-    "end": "2026-10-05T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_8bd8d57d-9dff-49e0-9419-5ca0f5fd833b",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7f2319975aadb2b9689c",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-b922fc15dbf97176e9e9",
-    "name": "ビーチBARイベント Barbana定期開店",
-    "start": "2026-10-05T13:00:00Z",
-    "end": "2026-10-05T14:00:00Z",
-    "organizer": "ビーチBARイベントBarbana",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_063ef280-549a-4768-849b-cb417657a23b/calendar/cal_6de89a89-017d-4410-b06e-a32d6e346306",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "b922fc15dbf97176e9e9",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -200,78 +92,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-236f26137f4924dadb65",
-    "name": "Inelegant Decay - Monday",
-    "start": "2026-10-06T03:00:00Z",
-    "end": "2026-10-06T07:00:00Z",
-    "organizer": "Nyanpire",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_09f5dae8-ab55-48ff-9530-a4f1ef143f92/calendar/cal_711ae045-71c5-4c0d-8687-de6d3d2e8d5e",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "236f26137f4924dadb65",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-e431dc7370572987cfc3",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-06T09:39:00Z",
-    "end": "2026-10-08T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_5f6b5148-ecc9-4ab3-9bda-c8c875124d37",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "e431dc7370572987cfc3",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-898a526d67c46ebb1b0e",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-06T09:39:00Z",
-    "end": "2026-10-08T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_914b1b8d-d8c5-4f62-b246-2b1e64090e50",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "898a526d67c46ebb1b0e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-207993f68d2092159d20",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-06T11:30:00Z",
-    "end": "2026-10-06T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_69205eb1-0be2-45ed-9086-135558696f64",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "207993f68d2092159d20",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-aeeef20d67bff95e430f",
     "name": "Quest Dance party Club No.278 [ VRC Quest対応DJイベント] 📅10月06日(火) OPEN 20:40 JST～ START 21:00 JST～ 今…",
     "start": "2026-10-06T11:40:00Z",
@@ -304,42 +124,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "47dd9af4048515dd6180",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7a654025888a10b10c31",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-06T12:50:00Z",
-    "end": "2026-10-06T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_a3393492-78ab-49f5-afa0-67f1e19c5955",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7a654025888a10b10c31",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-6185c8f459377493007b",
-    "name": "Dream Jail",
-    "start": "2026-10-06T13:00:00Z",
-    "end": "2026-10-06T14:59:00Z",
-    "organizer": "Mepp Group",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://vrchat.com/home/group/grp_2b79ee25-e454-4707-8890-63a05f4a42b4/calendar/cal_644db9de-2c2d-429d-80a0-82abdcbce6b1",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6185c8f459377493007b",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -421,96 +205,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-b0c774488f67f87eaa5a",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-07T09:39:00Z",
-    "end": "2026-10-09T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_b773631c-870e-464a-9a1a-38629111d85b",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "b0c774488f67f87eaa5a",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-4506be0f075887d65527",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-07T09:39:00Z",
-    "end": "2026-10-09T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_80a0ed5e-2052-44f2-ae63-c0460caf36ea",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "4506be0f075887d65527",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-2cb280d9c94664ef02b8",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-07T11:30:00Z",
-    "end": "2026-10-07T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_b2e4e698-865c-4168-a213-8154b9138d33",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "2cb280d9c94664ef02b8",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-occ_cf531371ae01f70fa7fd",
-    "name": "【10月度 開催 のお知らせ🎃】 『ダンス・パレット！』🎨 ダンス未経験の子も気軽に遊びに来てねー！ フルトラじゃなくても大丈夫！ 3点、デスクトップの方もお待ちしております🫶 ​📅 毎週水曜…",
-    "start": "2026-10-07T12:30:00Z",
-    "end": null,
-    "organizer": "@OniwaYasaN1998",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://x.com/OniwaYasaN1998/status/2106949777799930341?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "occ_cf531371ae01f70fa7fd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-fc17ad4a2210c90a7a40",
-    "name": "ゆるふわパラパラ部",
-    "start": "2026-10-07T12:30:00Z",
-    "end": "2026-10-07T13:30:00Z",
-    "organizer": "ゆるふわパラパラ部",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_a1cc7cdc-fbf2-4d88-acdb-8b239cbd5efe/calendar/cal_af43b3b5-b5b8-416f-a7ff-919d8357b844",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "fc17ad4a2210c90a7a40",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-ec23f9d9e96ac0c9c576",
     "name": "転生したら推しに囲われてメイド喫茶はじめました2",
     "start": "2026-10-07T12:50:00Z",
@@ -524,24 +218,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "ec23f9d9e96ac0c9c576",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-a8f8079a5c5fe4256e55",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-07T12:50:00Z",
-    "end": "2026-10-07T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_917fd010-ab3d-483a-a1b2-c8044ffca040",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "a8f8079a5c5fe4256e55",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -565,24 +241,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-daa82d9e300412d5a2b0",
-    "name": "Moonlit EU",
-    "start": "2026-10-07T18:00:00Z",
-    "end": "2026-10-07T20:30:00Z",
-    "organizer": "Trans",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/calendar/cal_d7cdeb19-cd44-4137-9e47-9028bcd66882",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "daa82d9e300412d5a2b0",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-83e7c10d6f01553e3cf2",
     "name": "The Listening Lounge",
     "start": "2026-10-07T19:00:00Z",
@@ -596,24 +254,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "83e7c10d6f01553e3cf2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-050b8452a06f3ab416df",
-    "name": "Moonlit NA",
-    "start": "2026-10-08T01:00:00Z",
-    "end": "2026-10-08T03:30:00Z",
-    "organizer": "Trans",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/calendar/cal_bb942614-3b2d-4934-9842-9543af518955",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "050b8452a06f3ab416df",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -637,96 +277,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-5331cb5bc97440c1efcd",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-08T09:39:00Z",
-    "end": "2026-10-10T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_ff1e13f0-39b1-46e4-b559-cbe656dcf5d0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5331cb5bc97440c1efcd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-3dc88f91b7f72852b41e",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-08T09:39:00Z",
-    "end": "2026-10-10T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_31841248-f01b-4e4b-a9f0-0db23b9f54e1",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "3dc88f91b7f72852b41e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-be3ae92249c5115d81c6",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-08T11:30:00Z",
-    "end": "2026-10-08T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_388fd591-cd7a-41a8-adc1-39c310bde3e6",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "be3ae92249c5115d81c6",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-3f2b6c3b58ce2d79a8f4",
-    "name": "-VRCメンズアバターダンス集会スサノオー！-",
-    "start": "2026-10-08T12:00:00Z",
-    "end": "2026-10-08T13:00:00Z",
-    "organizer": "MALE AVATAR DANCE GROUP -SUSANOH-",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_c933e75f-c1b7-42fd-812d-19a1b9c9b321/calendar/cal_000fb9ce-30b5-4d0e-9d20-3dbbfad5b243",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "3f2b6c3b58ce2d79a8f4",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9e843113443accc487ad",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-08T12:50:00Z",
-    "end": "2026-10-08T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_15fe3126-5313-48b6-8b55-8731edaac178",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9e843113443accc487ad",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-4e6dd2f60edd4b871cdc",
     "name": "9/19 #JPTOWN夏祭り（ VRC ） 9/21 🆕 #トリモチライブ感謝祭 （秋葉原） 9/23 #らいVおん vol.26（大阪） 10/31 （大阪） 12/19 （江古田） 12…",
     "start": "2026-10-08T13:00:00Z",
@@ -745,42 +295,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-039101bd8f5a7845df93",
-    "name": "ダンス練習会をまた 開催 します🦈ﾔﾙｿﾞﾔﾙｿﾞ 10/8(木)22:00~ VRC にてWaackダンスの練習会をやります💃 ・Waackやったことない人でも歓迎です👌🦈 ・はじめましての…",
-    "start": "2026-10-08T13:00:00Z",
-    "end": null,
-    "organizer": "@_jaspear",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://x.com/_jaspear/status/2104160923565039991?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "039101bd8f5a7845df93",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-293a0eb5f40bfa9702f2",
-    "name": "FURRY KARAOKE NIGHT",
-    "start": "2026-10-08T19:00:00Z",
-    "end": "2026-10-08T21:59:00Z",
-    "organizer": "Furryheaven Germany",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_537413d2-1d27-4fa1-aa80-b85a0f09d0eb/calendar/cal_01d40cd3-a648-4c62-83c9-755b8f5332dd",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "293a0eb5f40bfa9702f2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-6635bd76bff9222a6ff7",
     "name": "Music is my Theraphy by Old Dragon",
     "start": "2026-10-08T19:00:00Z",
@@ -794,97 +308,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6635bd76bff9222a6ff7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-24c3553d9b6ac410f5d5",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-09T09:39:00Z",
-    "end": "2026-10-11T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_2dc1dcb3-d328-41c9-bdd6-b4c24c25e3c5",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "24c3553d9b6ac410f5d5",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-e80e8ecfbd2e207c564c",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-09T09:39:00Z",
-    "end": "2026-10-11T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_a9afe576-6a8b-47ef-a569-4625a07601a0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "e80e8ecfbd2e207c564c",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-3d105d21b7e1a4d27c71",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-09T11:30:00Z",
-    "end": "2026-10-09T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_578008ac-abd1-40cb-b611-f827f0b28fe1",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "3d105d21b7e1a4d27c71",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-11c60190c53bf567ec6e",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-09T12:50:00Z",
-    "end": "2026-10-09T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_fd4e9666-b835-4164-90eb-5a0159114605",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "11c60190c53bf567ec6e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-4d5fefc05a3eb835c232",
-    "name": "P․U․L․S․E 2nd Treatment ｜ Liquid Funk Session",
-    "start": "2026-10-09T13:00:00Z",
-    "end": "2026-10-09T16:00:00Z",
-    "organizer": "․P․U․L․S․E",
-    "worldName": "VRChat",
-    "genres": [
-      "DRUM & BASS",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_2f088280-b535-481f-b1ea-47ec9c66372b/calendar/cal_9b254c95-c5d1-4329-805f-a41932c240ac",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "4d5fefc05a3eb835c232",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -926,24 +349,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-a78193d96825e31dada6",
-    "name": "BELKA",
-    "start": "2026-10-09T19:00:00Z",
-    "end": "2026-10-09T20:30:00Z",
-    "organizer": "BELKA",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_89820bbe-a4e5-44a0-a0d3-eeee898f7b86/calendar/cal_f5d82512-a725-471b-99d0-757b3301b7f4",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "a78193d96825e31dada6",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-ee3aacf46cbae6ea81fd",
     "name": "PARADISE Пятница в Mint Cat Club",
     "start": "2026-10-09T19:00:00Z",
@@ -975,42 +380,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5f89d3c6e7b77170480e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d4262d77e0fb5a18e5d2",
-    "name": "BORRACHERA TERAPÉUTICA S․A․C․",
-    "start": "2026-10-10T09:39:00Z",
-    "end": "2026-10-12T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_1d8226b7-a21f-489c-801b-9074752f0861",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d4262d77e0fb5a18e5d2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-2b114aa2ce46c4d4e2d4",
-    "name": "LA JUNTA DE LOS CEBADOS",
-    "start": "2026-10-10T09:39:00Z",
-    "end": "2026-10-12T11:39:00Z",
-    "organizer": "JAMONES",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_6a1be934-1692-4525-8056-003b50460d94/calendar/cal_626372ce-fe6c-404a-af31-7b033be703b8",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "2b114aa2ce46c4d4e2d4",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -1052,60 +421,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-dcb5ba147589b817fea2",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-10T11:30:00Z",
-    "end": "2026-10-10T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_a07a1024-cb70-4587-a0d3-745765020443",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "dcb5ba147589b817fea2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-4e967326494a44be1623",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-10T12:50:00Z",
-    "end": "2026-10-10T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_b0127210-7b39-4ea0-a4ad-76583b268f8f",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "4e967326494a44be1623",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-12152a2d53474b3a4afe",
-    "name": "Karaoke Night",
-    "start": "2026-10-10T19:00:00Z",
-    "end": "2026-10-11T02:00:00Z",
-    "organizer": "Furry Music",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_731972f2-d10c-487b-9973-086a1a1ac983/calendar/cal_f4cf9027-59a6-4bbb-a0a3-371a40c15931",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "12152a2d53474b3a4afe",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-12bf9add90b6ed769a19",
     "name": "Sinful Saturday - Dance Event",
     "start": "2026-10-10T19:00:00Z",
@@ -1125,132 +440,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-960f24d50bc325b4aeb3",
-    "name": "SANCTUM 5 YEAR ANNIVERSARY˸ EU",
-    "start": "2026-10-10T21:00:00Z",
-    "end": "2026-10-11T00:00:00Z",
-    "organizer": "DOME ドーム",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_97342897-3ef3-42d7-9704-590b85f9da4b/calendar/cal_2c71f1a4-3edf-4b9e-bd15-f596c340ef23",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "960f24d50bc325b4aeb3",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-a53c1dd99b114f38efa7",
-    "name": "Noche de Karaoke Cyber Club",
-    "start": "2026-10-10T21:30:00Z",
-    "end": "2026-10-11T01:30:00Z",
-    "organizer": "Cyber Club VR",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_f719392c-316c-4aed-81af-459b0a7ff26a/calendar/cal_039a572a-e5f4-443b-ad0d-4026ada57aa9",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "a53c1dd99b114f38efa7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-e76889c8dbd0ea03980d",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-11T11:30:00Z",
-    "end": "2026-10-11T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_e4a734a8-428c-4792-9a11-d7b1bf3e6a01",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "e76889c8dbd0ea03980d",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-0d9a60f1acb0d0c12056",
-    "name": "ちびっこダンスくらぶ",
-    "start": "2026-10-11T12:00:00Z",
-    "end": "2026-10-11T13:00:00Z",
-    "organizer": "まめがく",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_2c0d2e4d-737b-4371-90f9-18643f0382ee/calendar/cal_d3778765-9574-45c2-83da-20198329b734",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "0d9a60f1acb0d0c12056",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-b174b05fcc50b684f5b2",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-11T12:50:00Z",
-    "end": "2026-10-11T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_f4566847-2b11-4a40-aef0-c44835600ed0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "b174b05fcc50b684f5b2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7b511354e755546a071d",
-    "name": "LAPDANCE NIGHT",
-    "start": "2026-10-11T17:00:00Z",
-    "end": "2026-10-11T19:00:00Z",
-    "organizer": "BARDAK",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_1a1ad15a-2cdc-4991-9c59-2ca531abab5a/calendar/cal_fd0269dd-3a05-4560-a8ba-60167b35af8b",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7b511354e755546a071d",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-6855b81488889156540e",
-    "name": "Rainbow Karaoke",
-    "start": "2026-10-11T20:00:00Z",
-    "end": "2026-10-11T22:00:00Z",
-    "organizer": "Rainbow Library",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_cfe83d78-3e76-4a0a-b28d-d42ca670af88/calendar/cal_3ba710ca-a5f1-4131-9b0e-f7d98b5d0bdd",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6855b81488889156540e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-d7e036fc447d6de1303f",
     "name": "Sunday EVENT 10 PM CET 4 PM EST NSFW",
     "start": "2026-10-11T20:00:00Z",
@@ -1264,78 +453,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d7e036fc447d6de1303f",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d42c5df4b77b61765a0a",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-12T11:30:00Z",
-    "end": "2026-10-12T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_6191d3ee-f443-42c5-a02e-8cfb42c3d259",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d42c5df4b77b61765a0a",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9a3079cbd32cfe4947ae",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-12T12:50:00Z",
-    "end": "2026-10-12T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_04c73c01-4000-42ef-89e8-afb689d2c6dd",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9a3079cbd32cfe4947ae",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-aca49f660b23d71e5ae5",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-13T11:30:00Z",
-    "end": "2026-10-13T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_cac428dd-a13c-4880-9c26-655ffa8bbd52",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "aca49f660b23d71e5ae5",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-57f6749f88b29c5faaa2",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-13T12:50:00Z",
-    "end": "2026-10-13T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_fb83cc9d-b9be-4c0c-91a5-55d51f2b1fbe",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "57f6749f88b29c5faaa2",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -1379,168 +496,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-5dcd531c0a9bb45047b7",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-14T11:30:00Z",
-    "end": "2026-10-14T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_ac455073-29e0-4866-a22f-a4bff89aecea",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5dcd531c0a9bb45047b7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-6cc23f2ae6c3e42851dd",
-    "name": "【10月度 開催 のお知らせ🎃】 『ダンス・パレット！』🎨 ダンス未経験の子も気軽に遊びに来てねー！ フルトラじゃなくても大丈夫！ 3点、デスクトップの方もお待ちしております🫶 ​📅 毎週水曜…",
-    "start": "2026-10-14T12:30:00Z",
-    "end": null,
-    "organizer": "@OniwaYasaN1998",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://x.com/OniwaYasaN1998/status/2106949777799930341?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6cc23f2ae6c3e42851dd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d6619b162f7c2faf6ade",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-14T12:50:00Z",
-    "end": "2026-10-14T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_66ff67a1-9ba9-45f5-a252-ce8581c66ca7",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d6619b162f7c2faf6ade",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d060eb3c68fd2fdab6c8",
-    "name": "Moonlit EU",
-    "start": "2026-10-14T18:00:00Z",
-    "end": "2026-10-14T20:30:00Z",
-    "organizer": "Trans",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/calendar/cal_5ea37c75-f297-49f4-a875-25fd69be82eb",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d060eb3c68fd2fdab6c8",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-deb81607554ed055ebf1",
-    "name": "Moonlit NA",
-    "start": "2026-10-15T01:00:00Z",
-    "end": "2026-10-15T03:30:00Z",
-    "organizer": "Trans",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b33be984-4b29-46f2-a19b-3acfff8aac00/calendar/cal_e8da0490-a5e4-4a9f-b7e8-d1b3bc02ae3d",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "deb81607554ed055ebf1",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-bbf63d27121f009394e9",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-15T11:30:00Z",
-    "end": "2026-10-15T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_8aeead3f-0352-42eb-8f3a-9ab0d4ea6034",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "bbf63d27121f009394e9",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7a4e2c389c92cf5f77f1",
-    "name": "-VRCメンズアバターダンス集会スサノオー！-",
-    "start": "2026-10-15T12:00:00Z",
-    "end": "2026-10-15T13:00:00Z",
-    "organizer": "MALE AVATAR DANCE GROUP -SUSANOH-",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_c933e75f-c1b7-42fd-812d-19a1b9c9b321/calendar/cal_29bfa0ea-e761-4e94-a7fb-f358a50edca9",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7a4e2c389c92cf5f77f1",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-33a2e12ecdfe8c770c19",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-15T12:50:00Z",
-    "end": "2026-10-15T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_341a19a2-46f9-48df-886c-7fee7f219f71",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "33a2e12ecdfe8c770c19",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-0660b159c8fad7aeb2bf",
-    "name": "FURRY KARAOKE NIGHT",
-    "start": "2026-10-15T19:00:00Z",
-    "end": "2026-10-15T21:59:00Z",
-    "organizer": "Furryheaven Germany",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_537413d2-1d27-4fa1-aa80-b85a0f09d0eb/calendar/cal_6ec579f6-4ae6-42a0-a189-1d13d612504d",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "0660b159c8fad7aeb2bf",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-10f91474b29336d05715",
     "name": "Music is my Theraphy by Old Dragon",
     "start": "2026-10-15T19:00:00Z",
@@ -1554,42 +509,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "10f91474b29336d05715",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-6555c21601f3e34057ed",
-    "name": "【20˸30 or 20˸45~】ソーラン節、踊ろうǃ【15分エクササイズ】",
-    "start": "2026-10-16T11:30:00Z",
-    "end": "2026-10-16T12:00:00Z",
-    "organizer": "-メタバースソーラン- Metaverse Soran",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d3b55a85-1fbf-41de-bc6e-8bc745591859/calendar/cal_1cf2f9a1-6823-404d-8cc9-6e7845cb012a",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6555c21601f3e34057ed",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-ed47dbfaf846d949fb65",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-16T12:50:00Z",
-    "end": "2026-10-16T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_14c7f2b5-1663-4f42-aa2f-c1260805eaee",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "ed47dbfaf846d949fb65",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -1613,19 +532,164 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-0636a193769ab1cd54c2",
-    "name": "BELKA",
+    "id": "feed-770027acbf158e5ae10c",
+    "name": "PARADISE Пятница в Mint Cat Club",
     "start": "2026-10-16T19:00:00Z",
     "end": "2026-10-16T20:30:00Z",
-    "organizer": "BELKA",
+    "organizer": "Mint Cat Club",
     "worldName": "VRChat",
     "genres": [
       "DANCE"
     ],
-    "url": "https://vrchat.com/home/group/grp_89820bbe-a4e5-44a0-a0d3-eeee898f7b86/calendar/cal_218889f6-58f0-4d74-b150-5b6ad292e206",
+    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_f1a4e5cd-338b-417b-b405-9efc98ec0193",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "0636a193769ab1cd54c2",
+    "upstreamId": "770027acbf158e5ae10c",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-ff9c090753ffff18b52d",
+    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
+    "start": "2026-10-16T21:00:00Z",
+    "end": "2026-10-16T22:30:00Z",
+    "organizer": "CLUB LMNTRIX",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_c54b4477-7351-421a-b3f0-ef1adc0a26b3",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "ff9c090753ffff18b52d",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-d923c23941e189e94d64",
+    "name": "🔥 VRChat Music Live⚡️ 𝐒𝐭𝐫𝐨𝐥𝐥𝐙 vs 𝗛𝗶𝗧𝗼𝗡𝗮𝗠𝗶 Live Tour \"THIS IS WAR\" Day2 - あなたの部屋をライブハウスに - 🗓️2026…",
+    "start": "2026-10-17T12:30:00Z",
+    "end": null,
+    "organizer": "@ClubColumn",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/ClubColumn/status/2105656233097417211?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "d923c23941e189e94d64",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-5af0373c79c73d511940",
+    "name": "Back in the Inside Club",
+    "start": "2026-10-17T18:00:00Z",
+    "end": "2026-10-18T00:00:00Z",
+    "organizer": "The Teknoir Project",
+    "worldName": "VRChat",
+    "genres": [
+      "MUSIC"
+    ],
+    "url": "https://vrchat.com/home/group/grp_f3cfc1c2-af05-4ffc-8d1d-27bea4e5115c/calendar/cal_ab9ed329-2390-4fb2-bc95-aa36ec717fb4",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "5af0373c79c73d511940",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-45990af5ef6a5bee4bf1",
+    "name": "Sinful Saturday - Dance Event",
+    "start": "2026-10-17T19:00:00Z",
+    "end": "2026-10-17T21:00:00Z",
+    "organizer": "RaClub",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE",
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_45754c73-7dc7-46ba-8c2b-236c9ba94daf/calendar/cal_3a84f392-9986-4378-8c6d-8300db3fab63",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "45990af5ef6a5bee4bf1",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-9625e147b5149aaf2087",
+    "name": "Sunday EVENT 10 PM CET 4 PM EST NSFW",
+    "start": "2026-10-18T20:00:00Z",
+    "end": "2026-10-18T21:30:00Z",
+    "organizer": "CLUB LMNTRIX",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_d6231176-2f5a-4db0-8056-073538b9a5f6",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "9625e147b5149aaf2087",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-1bf9139748f344f8526d",
+    "name": "Tuesday Regular EVENT 11 PM CET 5 PM EST NSFW",
+    "start": "2026-10-20T21:00:00Z",
+    "end": "2026-10-20T22:30:00Z",
+    "organizer": "CLUB LMNTRIX",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_6bb39d53-4cfc-4f08-ba6d-10e041e86302",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "1bf9139748f344f8526d",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-9b48e6c5b6fbfaf577a5",
+    "name": "PARADISE Пятница в Mint Cat Club",
+    "start": "2026-10-23T19:00:00Z",
+    "end": "2026-10-23T20:30:00Z",
+    "organizer": "Mint Cat Club",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_4a492d3f-f312-47fd-ae98-248e13e21d10",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "9b48e6c5b6fbfaf577a5",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-c818276c58604e7858cd",
+    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
+    "start": "2026-10-23T21:00:00Z",
+    "end": "2026-10-23T22:30:00Z",
+    "organizer": "CLUB LMNTRIX",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_1a47de4b-6eef-4f2f-92a4-96163deffa30",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "c818276c58604e7858cd",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
