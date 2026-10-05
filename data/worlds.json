@@ -28,10 +28,11 @@
       "MUSIC",
       "DANCE",
       "IMMERSIVE",
-      "QUEST"
+      "QUEST",
+      "CLUB"
     ],
     "editorialStatus": "unreviewed",
-    "chartEligible": false,
+    "chartEligible": true,
     "legacyEditorialSeed": {
       "visual": 19,
       "lighting": 19,
@@ -986,33 +987,6 @@
     "chartEligible": true
   },
   {
-    "id": "wrld_d3179055-a51c-4998-9051-0217850d74c6",
-    "name": "MMD AfterDark the dance continues",
-    "author": "TheMCPanda",
-    "genres": [
-      "MUSIC",
-      "DANCE",
-      "MMD",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/dance",
-    "chartEligible": false
-  },
-  {
-    "id": "wrld_40047403-ec3a-46a8-b780-389619d8f2a9",
-    "name": "MMD Night",
-    "author": "shiuk",
-    "genres": [
-      "MUSIC",
-      "DANCE",
-      "MMD"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/dance",
-    "chartEligible": false
-  },
-  {
     "id": "wrld_ebc4bce3-2372-4b1e-ab0c-f9e1f8095958",
     "name": "超！寝転ん盆踊り2026",
     "author": "Nekoro",
@@ -1025,59 +999,6 @@
     "editorialStatus": "unreviewed",
     "source": "https://www.vrcw.net/category/detail/dance",
     "chartEligible": true
-  },
-  {
-    "id": "wrld_73808a9d-e4e4-412c-8973-a88e6ffd286d",
-    "name": "〖YAKEKU-SORAN 〗DanceStudio",
-    "author": "さまーうぉず",
-    "genres": [
-      "MUSIC",
-      "DANCE",
-      "STUDIO",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/dance",
-    "chartEligible": false
-  },
-  {
-    "id": "wrld_64512407-2f2f-44e5-b7fc-4bdc4a188d4f",
-    "name": "もうダンスダンスダンスワールド",
-    "author": "nyasuta",
-    "genres": [
-      "MUSIC",
-      "DANCE",
-      "STUDIO"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/dance",
-    "chartEligible": false
-  },
-  {
-    "id": "wrld_079d7e4c-6e77-4b6e-ae0e-4bba5bc97472",
-    "name": "Ingress dance studio v2",
-    "author": "Clamat",
-    "genres": [
-      "DANCE",
-      "STUDIO",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/dance",
-    "chartEligible": false
-  },
-  {
-    "id": "wrld_d2d0399f-6d0e-4678-9d9c-48079d470206",
-    "name": "-yuuri-Luminous Blue",
-    "author": "o_ゆうり_o",
-    "genres": [
-      "MUSIC",
-      "AUDIOLINK",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "source": "https://www.vrcw.net/category/detail/music",
-    "chartEligible": false
   },
   {
     "id": "wrld_2e4d3fe6-3255-4e53-9905-6089bf141358",
@@ -1244,20 +1165,6 @@
     "editorialStatus": "unreviewed",
     "chartEligible": true,
     "source": "https://www.vrcw.net/world/detail/wrld_4f015255-390a-44cb-9e81-bd2021eb970a"
-  },
-  {
-    "id": "wrld_29cc6261-866c-443b-a872-042b8993d39d",
-    "name": "Yokuraの海の家 beachside clubhouse",
-    "author": "Yokuraaaaa",
-    "genres": [
-      "MUSIC",
-      "DJ",
-      "BEACH",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "chartEligible": false,
-    "source": "https://www.vrcw.net/world/detail/wrld_29cc6261-866c-443b-a872-042b8993d39d"
   },
   {
     "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
