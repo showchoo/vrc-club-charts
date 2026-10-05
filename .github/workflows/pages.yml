@@ -8,6 +8,7 @@ on:
       - "about.html"
       - "privacy.html"
       - "reviewer.html"
+      - "reviewer-admin.html"
       - "app.js"
       - "styles.css"
       - "favicon.svg"
@@ -62,7 +63,7 @@ jobs:
         run: |
           python scripts/build_review_scores.py
           mkdir _site
-          cp index.html about.html privacy.html reviewer.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/review-scores.json _site/data/
