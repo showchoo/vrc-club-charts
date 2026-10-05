@@ -12,6 +12,8 @@ const fmtEndTime = new Intl.DateTimeFormat('ja-JP', {
   timeZoneName: 'short'
 });
 
+function eventDetailUrl(id) { return id ? `events/${id}.html` : 'events.html'; }
+
 function esc(s='') {
   return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
@@ -41,7 +43,7 @@ function eventCard(e) {
   const status = eventStatus(e);
   return `<article class="event-card ${status === 'LIVE NOW' ? 'event-live' : ''}">
     <div class="event-card-top"><span class="event-date">${esc(eventTime(e))}</span><span class="event-status">${status}</span></div>
-    <h3>${esc(e.name)}</h3>
+    <h3><a class="world-title-link" href="${eventDetailUrl(e.id)}">${esc(e.name)}</a></h3>
     <div class="event-world">${world}</div>
     <div class="event-organizer">by ${esc(e.organizer || '—')}</div>
     <div class="tags">${tags}</div>
