@@ -200,7 +200,9 @@ jobs:
             } else if (title.startsWith("[Reviewer]")) {
               kind = "reviewer";
               const name = field("VRChat display name");
+              const githubLogin = String(issue.user?.login || "").trim().toLowerCase();
               if (!name) throw new Error("Missing VRChat display name.");
+              if (!githubLogin) throw new Error("Reviewer application has no GitHub login.");
 
               const tags = field("Relevant experience")
                 .split("\n")
@@ -223,7 +225,8 @@ jobs:
 
               const file = await getJson("data/reviewers.json");
               const duplicate = file.data.find(r =>
-                String(r.name || "").trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase()
+                String(r.name || "").trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase() ||
+                String(r.github || "").trim().toLowerCase() === githubLogin
               );
               if (duplicate) {
                 await github.rest.issues.createComment({
@@ -245,6 +248,7 @@ jobs:
                 id,
                 name,
                 status: "active",
+                github: githubLogin,
                 tags: [...new Set(tags)],
                 affiliations: [...new Set(affiliations)],
                 approvedAt: new Date().toISOString(),
@@ -258,7 +262,9 @@ jobs:
               kind = "review";
               const reviewerId = field("Reviewer ID").trim();
               const worldId = field("VRChat World ID").trim();
+              const githubLogin = String(issue.user?.login || "").trim().toLowerCase();
               if (!reviewerId) throw new Error("Missing Reviewer ID.");
+              if (!githubLogin) throw new Error("Review submission has no GitHub login.");
               if (!/^wrld_[0-9a-fA-F-]{36}$/.test(worldId)) throw new Error("Invalid VRChat World ID.");
 
               const scoreDefs = [
@@ -283,6 +289,13 @@ jobs:
                 throw new Error("Review total cannot exceed 100.");
               }
 
+              const confirmations = field("Required confirmations");
+              const checkedCount = confirmations.split("\n").filter(line => /^- \[x\]/i.test(line)).length;
+              if (checkedCount < 3) throw new Error("All required reviewer confirmations must be checked.");
+
+              const reviewComment = field("Review comment").trim();
+              if (!reviewComment) throw new Error("Review comment is required.");
+
               const conflictRaw = field("Conflict of interest").trim();
               if (!/^(No|Yes\b)/i.test(conflictRaw)) {
                 throw new Error("Conflict of interest must explicitly be Yes or No.");
@@ -292,21 +305,32 @@ jobs:
               const reviewedAtRaw = field("Review date").trim();
               let reviewedAt = reviewedAtRaw;
               if (/^\d{4}-\d{2}-\d{2}$/.test(reviewedAtRaw)) {
-                reviewedAt = `${reviewedAtRaw}T00:00:00Z`;
+                const parsed = new Date(`${reviewedAtRaw}T00:00:00Z`);
+                if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== reviewedAtRaw) {
+                  throw new Error("Review date is not a real calendar date.");
+                }
+                reviewedAt = parsed.toISOString();
               } else if (!reviewedAtRaw || Number.isNaN(Date.parse(reviewedAtRaw))) {
                 throw new Error("Review date must be YYYY-MM-DD or a valid ISO 8601 date/time.");
               } else {
                 reviewedAt = new Date(reviewedAtRaw).toISOString();
+              }
+              if (new Date(reviewedAt).getTime() > Date.now() + 5 * 60 * 1000) {
+                throw new Error("Review date cannot be in the future.");
               }
 
               const reviewers = await getJson("data/reviewers.json");
               const reviewer = reviewers.data.find(r => r.id === reviewerId);
               if (!reviewer) throw new Error(`Unknown Reviewer ID: ${reviewerId}`);
               if (reviewer.status !== "active") throw new Error(`Reviewer is not active: ${reviewerId}`);
+              if (String(reviewer.github || "").trim().toLowerCase() !== githubLogin) {
+                throw new Error("Reviewer ID does not belong to the GitHub account that submitted this Issue.");
+              }
 
               const worlds = await getJson("data/worlds.json");
               const world = worlds.data.find(w => w.id === worldId);
               if (!world) throw new Error(`World is not tracked: ${worldId}`);
+              if (world.chartEligible !== true) throw new Error("World is directory-only and not eligible for Craftsmanship Ranking.");
 
               const file = await getJson("data/reviews.json");
               const id = `review-${issueNo}`;
@@ -328,7 +352,7 @@ jobs:
                 status: "published",
                 reviewedAt,
                 scores,
-                comment: field("Review comment").trim(),
+                comment: reviewComment,
                 sourceIssue: issueNo,
               };
               file.data.push(entry);
