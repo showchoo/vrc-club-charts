@@ -1,20 +1,23 @@
-# VRC Club Charts — Public Beta 0.2
+# VRC Club Charts — Public Beta
 
-A static-first weekly ranking site for VRChat club / DJ / music worlds.
+A static-first weekly ranking and discovery site for VRChat club / DJ / music worlds.
+
+Public site: https://showchoo.github.io/vrc-club-charts/
 
 ## Current build
 
-- Japanese / English responsive ranking UI
-- Overall / Trending / Craftsmanship charts
-- Genre filtering and search
-- Curated starter world list
-- Editorial craftsmanship score out of 100
-- Conservative weekly public-world snapshot collector
-- Weekly delta + ranking builder
-- GitHub Actions auto-refresh workflow
-- Vercel-ready security headers
-- About / methodology / privacy pages
-- No database, no backend, no paid dependency required for the beta
+- 60 tracked VRChat club / DJ / music worlds
+- 6 provisional editorial-ranked worlds
+- 54 discovery / pending-review worlds
+- Overall / Trending / Craftsmanship views
+- Search + curated genre filters
+- Discovery sorting by popularity / visits / favorites / name
+- Static world directory and one SEO-friendly detail page per tracked world
+- Weekly visits / favorites snapshots
+- VRChat thumbnail capture when available
+- Automatic hiding of worlds confirmed unavailable by the snapshot collector
+- Canonical metadata, JSON-LD and generated sitemap
+- GitHub Pages hosting with no database/backend required
 
 ## Ranking model
 
@@ -35,97 +38,58 @@ Craftsmanship category maxima:
 - VR originality 10
 - Optimization 10
 
-Until the second snapshot is available, the site is explicitly shown as **Seed mode**. Overall uses the provisional craftsmanship order and Trending is shown as collecting data.
+Until a prior snapshot at least roughly six days old exists, the site is shown as **Seed mode**. Trending remains in data-collection mode.
 
-The starter craftsmanship scores are provisional editorial placeholders. Review them in-world before treating them as a final published editorial ranking.
+Unreviewed Discovery worlds do not receive a Craftsmanship score and are excluded from editorial Overall ranking until reviewed. They can participate in Trending once weekly data exists.
 
-## VRChat API constraints
+## Data collection
 
-This project does **not** ask for or store VRChat login credentials.
+The public site never calls the VRChat API during page views.
 
-The collector is designed around a curated list of public World IDs, caching, a descriptive User-Agent, conservative spacing between requests, randomized start delay, and stopping on HTTP 429 rather than retrying aggressively.
+The scheduled collector:
+- reads the curated World IDs from `data/worlds.json`
+- uses no VRChat login credentials
+- sends a descriptive User-Agent
+- spaces requests conservatively
+- adds a randomized start delay
+- stops on HTTP 429
+- records skipped / unavailable worlds
+- stores snapshots under `data/snapshots/`
 
-Before the first automated snapshot, create the GitHub Actions repository variable:
+The full VRChat snapshot workflow runs **weekly or by explicit manual dispatch only**, not on ordinary code commits.
 
-`VRC_USER_AGENT=VRCClubCharts/0.2 https://YOUR-LIVE-SITE.example/about`
+## Static publishing
 
-The community VRChat API documentation describes `GET /worlds/{worldId}` as usable without authentication, but some fields can be absent or zero for unauthenticated requests. Confirm `visits` and `favorites` are populated during the first production run before relying on them commercially.
+GitHub Pages deploys:
+- the main chart
+- About / Privacy
+- the public ranking JSON
+- a generated `/worlds/` directory
+- a generated detail page for every tracked world
+- a generated sitemap containing those world pages
 
-## Local preview
+`scripts/build_static_pages.py` generates the directory, detail pages and sitemap at deploy time.
 
-```bash
-python -m http.server 8000
-```
+## Key files
 
-Open `http://localhost:8000`.
-
-## First data run
-
-After the first public URL exists:
-
-```bash
-export VRC_USER_AGENT='VRCClubCharts/0.2 https://YOUR-LIVE-SITE.example/about'
-python scripts/snapshot.py --no-jitter
-python scripts/build_rankings.py
-```
-
-A second snapshot at least about six days later activates weekly momentum.
-
-## Vercel deployment
-
-This repository is ready for a plain static Vercel project.
-
-- Framework preset: Other / no framework
-- Root directory: repository root
-- Build command: none
-- Output directory: repository root / default static output
-- `vercel.json` supplies security and cache headers
-- `.vercelignore` keeps automation/source files out of the public deployment
-
-Recommended flow:
-
-1. Create a GitHub repository named `vrc-club-charts`.
-2. Push this folder to the default branch.
-3. Import the repository into Vercel.
-4. Deploy the seed site.
-5. Use the live `/about` URL in the `VRC_USER_AGENT` repository variable.
-6. Run `Update weekly rankings` manually once.
-7. Verify the snapshot contains non-zero `visits` and `favorites` where expected.
-8. Let the scheduled workflow run weekly; each committed ranking update triggers a new Vercel deployment.
-
-## Add a world
-
-Edit `data/worlds.json`. Each entry needs a valid `wrld_...` World ID and editorial metadata. The collector validates World ID format before sending requests.
-
-## Monetization policy
-
-Future monetization can include display advertising, clearly labeled sponsored events / featured clubs, and creator analytics. Ranking positions themselves should not be sold.
-
-## Files
-
-- `index.html` — charts
-- `about.html` — methodology and editorial policy
-- `privacy.html` — initial privacy policy
+- `index.html` — main charts and discovery
+- `about.html` — methodology / editorial policy
+- `privacy.html` — privacy policy
 - `app.js` / `styles.css` — frontend
-- `data/worlds.json` — curated world registry
-- `data/weekly-ranking.json` — generated public chart data
-- `scripts/snapshot.py` — conservative world snapshot collector
+- `data/worlds.json` — curated registry
+- `data/weekly-ranking.json` — public chart payload
+- `scripts/snapshot.py` — conservative VRChat collector
 - `scripts/build_rankings.py` — ranking builder
-- `.github/workflows/update-rankings.yml` — scheduled update
-- `vercel.json` — deployment headers
+- `scripts/build_static_pages.py` — static world page + sitemap generator
+- `.github/workflows/update-rankings.yml` — weekly snapshot
+- `.github/workflows/pages.yml` — GitHub Pages deployment
+
+## Editorial / monetization policy
+
+Starter editorial scores are provisional public-beta placeholders and should be reviewed in-world before being treated as final editorial judgments.
+
+Future monetization can include display ads, clearly labeled sponsored events / featured clubs, and creator analytics. Ranking positions themselves should not be sold.
 
 ## Trademark
 
 This is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.
-
-
-## Current public beta
-
-- Public site: https://showchoo.github.io/vrc-club-charts/
-- 50 tracked VRChat club / DJ / music worlds
-- 6 provisional editorial-ranked worlds
-- 44 discovery / pending-review worlds
-- Weekly static snapshots for visits and favorites
-- Unreviewed worlds are excluded from Craftsmanship/Overall editorial scoring
-- Snapshot pipeline now captures VRChat thumbnails and records unavailable worlds
-- Sitemap / canonical metadata are included for search discovery
