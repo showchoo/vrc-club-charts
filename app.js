@@ -23,7 +23,7 @@ function pickWorlds(worlds) {
       if (af !== bf) return bf - af;
       return String(a.name).localeCompare(String(b.name));
     })
-    .slice(0, 8);
+    .slice(0, 6);
 }
 
 function worldCard(w) {
@@ -89,7 +89,7 @@ function renderEvents() {
       return end >= now;
     })
     .sort((a,b) => new Date(a.start) - new Date(b.start))
-    .slice(0, 4);
+    .slice(0, 3);
   const wrap = document.getElementById('focusEvents');
   wrap.innerHTML = upcoming.length
     ? upcoming.map(eventCard).join('')
