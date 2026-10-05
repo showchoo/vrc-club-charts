@@ -1,19 +1,4 @@
-const state = { lang: 'ja', worlds: [], events: [], reviewScores: null };
-
-const copy = {
-  ja: {
-    heroTitle: 'VRChatクラブを、<br><em>作り込みで比べる。</em>',
-    heroCopy: '人気順では見つからない、空間・照明・音響・ギミックの完成度。まずは世界中のクラブ情報を集め、レビュアー評価が揃ったところから本当のCraftsmanship Rankingへ移行します。',
-    missionTitle: '人気ではなく、<br>作り込みで選ぶ。',
-    missionCopy: 'VisitsやFavoritesは「人気」の参考にはなります。でも、このサイトが最終的に答えたいのは「VRChatで最も作り込まれたクラブはどこか？」です。'
-  },
-  en: {
-    heroTitle: 'Rank VRChat clubs<br><em>by craftsmanship.</em>',
-    heroCopy: 'Beyond popularity: spatial design, lighting, sound and interaction. We are building the directory first, then moving to a reviewer-based Craftsmanship Ranking as panel reviews accumulate.',
-    missionTitle: 'Not popularity.<br>Craftsmanship.',
-    missionCopy: 'Visits and Favorites can show popularity. The question this project ultimately wants to answer is: which VRChat clubs are the most carefully crafted?'
-  }
-};
+const state = { worlds: [], events: [], reviewScores: null };
 
 const fmt = new Intl.NumberFormat('en-US');
 
@@ -25,15 +10,6 @@ function esc(value='') {
 
 function worldDetailUrl(id) { return `worlds/${id}.html`; }
 function eventDetailUrl(id) { return id ? `events/${id}.html` : 'events.html'; }
-
-function applyLanguage() {
-  const t = copy[state.lang];
-  document.getElementById('heroTitle').innerHTML = t.heroTitle;
-  document.getElementById('heroCopy').textContent = t.heroCopy;
-  document.getElementById('missionTitle').innerHTML = t.missionTitle;
-  document.getElementById('missionCopy').textContent = t.missionCopy;
-  document.getElementById('langToggle').textContent = state.lang === 'ja' ? 'EN' : 'JA';
-}
 
 function pickWorlds(worlds) {
   return worlds
@@ -88,7 +64,7 @@ function eventStatus(e, now=Date.now()) {
 
 function eventCard(e) {
   const d = new Date(e.start);
-  const when = new Intl.DateTimeFormat(state.lang === 'ja' ? 'ja-JP' : 'en-US', {
+  const when = new Intl.DateTimeFormat('ja-JP', {
     month:'short', day:'numeric', weekday:'short', hour:'2-digit', minute:'2-digit'
   }).format(d);
   const source = e.autoImported ? 'PUBLIC FEED' : 'CURATED';
@@ -140,11 +116,4 @@ async function load() {
   }
 }
 
-document.getElementById('langToggle')?.addEventListener('click', () => {
-  state.lang = state.lang === 'ja' ? 'en' : 'ja';
-  applyLanguage();
-  renderEvents();
-});
-
-applyLanguage();
 load();
