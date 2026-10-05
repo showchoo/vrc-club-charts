@@ -25,6 +25,10 @@ on:
       - "djs.html"
       - "events.html"
       - "data/weekly-ranking.json"
+      - "scripts/build_review_scores.py"
+      - "data/review-scores.json"
+      - "data/reviews.json"
+      - "data/reviewers.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -56,10 +60,12 @@ jobs:
 
       - name: Prepare public artifact
         run: |
+          python scripts/build_review_scores.py
           mkdir _site
           cp index.html about.html privacy.html reviewer.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
+          cp data/review-scores.json _site/data/
           cp data/events.json _site/data/
           cp data/djs.json _site/data/
           python scripts/build_static_pages.py _site
