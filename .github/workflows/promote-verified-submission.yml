@@ -100,7 +100,8 @@ jobs:
                 });
                 return;
               }
-              registry.data.push({ id: worldId, name, author, genres, editorialStatus: "unreviewed" });
+              const chartEligible = genres.some(g => ["CLUB","DJ","RAVE","NIGHT","EVENT"].includes(g));
+              registry.data.push({ id: worldId, name, author, genres, editorialStatus: "unreviewed", chartEligible });
 
               const ranking = await getJson("data/weekly-ranking.json");
               ranking.data.worlds.push({
@@ -109,6 +110,7 @@ jobs:
                 author,
                 genres,
                 editorialStatus: "unreviewed",
+                chartEligible,
                 availabilityStatus: "available",
                 releaseStatus: null,
                 thumbnail: null,
