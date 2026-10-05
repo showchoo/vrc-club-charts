@@ -6,6 +6,10 @@ on:
     paths:
       - "data/worlds.json"
       - "data/weekly-ranking.json"
+      - "scripts/build_review_scores.py"
+      - "data/review-scores.json"
+      - "data/reviews.json"
+      - "data/reviewers.json"
       - "data/events.json"
       - "data/events-auto.json"
       - "data/djs.json"
@@ -39,6 +43,8 @@ jobs:
           python-version: "3.12"
       - name: Compile Python
         run: python -m compileall -q scripts
+      - name: Build reviewer panel scores
+        run: python scripts/build_review_scores.py
       - name: Validate catalog
         run: python scripts/validate_catalog.py
       - name: Smoke-test static generation
@@ -46,6 +52,7 @@ jobs:
           mkdir -p /tmp/vcc-site
           cp styles.css favicon.svg /tmp/vcc-site/
           test -f reviewer.html
+          test -f data/review-scores.json
           python scripts/build_static_pages.py /tmp/vcc-site
           python scripts/build_og_image.py /tmp/vcc-site
           test -f /tmp/vcc-site/worlds/index.html
