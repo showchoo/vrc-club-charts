@@ -4124,3 +4124,25 @@ main,
 .review-total strong[data-over="true"]{color:#ff9e9e}
 .review-total b{color:#76919a;font-size:10px;margin-bottom:4px}
 @media(max-width:800px){.review-score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.reviewer-apply-form select {
+  width:100%;
+  box-sizing:border-box;
+  padding:13px 14px;
+  border:1px solid rgba(172,239,255,.13);
+  border-radius:12px;
+  outline:none;
+  background:rgba(3,11,15,.56);
+  color:#e7fbff;
+  font:inherit;
+  font-size:13px;
+  line-height:1.5;
+}
+.reviewer-apply-form select:focus {
+  border-color:rgba(63,217,255,.48);
+  box-shadow:0 0 0 3px rgba(63,217,255,.07);
+}
+.reviewer-apply-form select option {
+  background:#091216;
+  color:#e7fbff;
+}
