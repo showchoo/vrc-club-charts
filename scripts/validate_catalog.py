@@ -96,7 +96,17 @@ def main() -> int:
         errors += 1
     else:
         seen_events = set()
+        seen_event_ids = set()
         for i, event in enumerate(events, start=1):
+            event_id = str(event.get("id", "")).strip()
+            if not event_id or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{1,95}", event_id):
+                fail(f"event #{i}: valid lowercase id is required")
+                errors += 1
+            elif event_id in seen_event_ids:
+                fail(f"duplicate event id: {event_id}")
+                errors += 1
+            else:
+                seen_event_ids.add(event_id)
             name = str(event.get("name", "")).strip()
             start = str(event.get("start", "")).strip()
             wid = str(event.get("worldId", "")).strip()
