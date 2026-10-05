@@ -11,6 +11,7 @@ on:
       - "data/djs.json"
       - "scripts/build_rankings.py"
       - "scripts/build_static_pages.py"
+      - "scripts/build_og_image.py"
       - "scripts/import_event_feed.py"
       - "scripts/validate_catalog.py"
       - ".github/workflows/validate.yml"
@@ -44,8 +45,10 @@ jobs:
           mkdir -p /tmp/vcc-site
           cp styles.css favicon.svg /tmp/vcc-site/
           python scripts/build_static_pages.py /tmp/vcc-site
+          python scripts/build_og_image.py /tmp/vcc-site
           test -f /tmp/vcc-site/worlds/index.html
           test -d /tmp/vcc-site/events
           test -d /tmp/vcc-site/djs
           test -f /tmp/vcc-site/events.ics
-          test -f /tmp/vcc-site/sitemap.xml\n          test -s /tmp/vcc-site/og-image.png
+          test -f /tmp/vcc-site/sitemap.xml
+          test -s /tmp/vcc-site/og-image.png
