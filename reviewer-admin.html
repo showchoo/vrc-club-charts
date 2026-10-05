@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Reviewer Admin — VRC Club Charts</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=20261006-38" />
+  <style>
+    body.admin-page{min-height:100vh}
+    .admin-shell{width:min(1080px,calc(100% - 32px));margin:0 auto;padding:56px 0 80px}
+    .admin-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:28px}
+    .admin-top h1{margin:6px 0 8px;font-size:clamp(34px,6vw,64px);line-height:.95}
+    .admin-top p{max-width:680px;color:#7f9aa4;font-size:12px;line-height:1.7}
+    .admin-lock,.admin-panel{border:1px solid rgba(172,239,255,.13);border-radius:20px;background:linear-gradient(145deg,rgba(25,43,51,.6),rgba(7,15,19,.42));backdrop-filter:blur(18px);box-shadow:0 20px 55px rgba(0,0,0,.22)}
+    .admin-lock{padding:22px;max-width:620px}
+    .admin-lock-row{display:flex;gap:10px}
+    .admin-lock input{flex:1;min-width:0;padding:13px 14px;border:1px solid rgba(172,239,255,.14);border-radius:12px;background:rgba(3,11,15,.58);color:#e9fbff;outline:none}
+    .admin-lock input:focus{border-color:rgba(63,217,255,.48);box-shadow:0 0 0 3px rgba(63,217,255,.07)}
+    .admin-status{min-height:20px;margin-top:10px;font-size:11px;color:#88a4ad}
+    .admin-status[data-state="error"]{color:#ff9e9e}.admin-status[data-state="success"]{color:#8fe7ba}
+    .admin-panel{padding:18px}
+    .admin-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
+    .admin-toolbar strong{font-size:13px}.admin-count{color:#5edcf9;font-family:monospace}
+    .admin-list{display:grid;gap:12px}
+    .admin-card{padding:17px;border:1px solid rgba(172,239,255,.09);border-radius:15px;background:rgba(4,12,16,.45)}
+    .admin-card-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+    .admin-card h2{margin:0;font-size:20px}.admin-card time{color:#6f8790;font-size:9px;white-space:nowrap}
+    .admin-meta{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+    .admin-meta span{padding:5px 7px;border:1px solid rgba(172,239,255,.1);border-radius:999px;color:#8eb0ba;font-size:8px;letter-spacing:.08em}
+    .admin-data{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .admin-data > div{padding:11px;border-radius:11px;background:rgba(255,255,255,.025)}
+    .admin-data b{display:block;margin-bottom:6px;color:#6f8a94;font-size:8px;letter-spacing:.12em}
+    .admin-data p{margin:0;color:#c7dde3;font-size:11px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+    .admin-actions{display:flex;gap:8px;margin-top:14px}
+    .admin-actions button,.admin-toolbar button,.admin-lock button,.credential-box button{border:0;cursor:pointer}
+    .admin-actions .reject{padding:10px 13px;border:1px solid rgba(255,120,120,.18);border-radius:10px;background:rgba(255,100,100,.06);color:#ffaaaa}
+    .admin-actions .approve{padding:10px 13px;border-radius:10px;background:#50ddff;color:#041318;font-weight:900}
+    .admin-actions button:disabled{opacity:.5;cursor:wait}
+    .empty-admin{padding:40px 18px;text-align:center;color:#708a94;font-size:12px}
+    .credential-box{margin-top:14px;padding:14px;border:1px solid rgba(101,242,173,.24);border-radius:13px;background:rgba(49,190,119,.06)}
+    .credential-box strong{display:block;color:#93efbc;margin-bottom:8px}
+    .credential-row{display:grid;grid-template-columns:130px 1fr auto;gap:8px;align-items:center;margin-top:6px}
+    .credential-row span{color:#7b959e;font-size:9px}.credential-row code{overflow-wrap:anywhere;color:#d9fff0;font-size:10px}.credential-row button{padding:7px 9px;border-radius:8px;background:rgba(255,255,255,.08);color:#d7edf2}
+    .danger-note{margin-top:8px;color:#9aaeb5;font-size:9px;line-height:1.5}
+    .hidden{display:none!important}
+    @media(max-width:700px){.admin-top,.admin-card-head{flex-direction:column}.admin-lock-row,.admin-actions{flex-direction:column}.admin-data{grid-template-columns:1fr}.credential-row{grid-template-columns:1fr}.admin-toolbar{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body class="admin-page">
+  <div class="noise"></div>
+  <main class="admin-shell">
+    <div class="admin-top">
+      <div>
+        <p class="kicker">PRIVATE REVIEWER CONSOLE</p>
+        <h1>Reviewer Admin</h1>
+        <p>申請内容を確認して、Approve / Rejectする管理画面です。承認するとReviewer IDと専用アクセスコードを発行します。</p>
+      </div>
+      <a class="secondary-button" href="reviewer.html">← Reviewer page</a>
+    </div>
+
+    <section class="admin-lock" id="lockPanel">
+      <p class="kicker">ADMIN KEY</p>
+      <div class="admin-lock-row">
+        <input id="adminKey" type="password" autocomplete="off" placeholder="管理キーを入力" />
+        <button class="primary-button" id="unlockButton" type="button">UNLOCK →</button>
+      </div>
+      <div class="admin-status" id="loginStatus" role="status"></div>
+    </section>
+
+    <section class="admin-panel hidden" id="adminPanel">
+      <div class="admin-toolbar">
+        <strong>PENDING APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
+        <div>
+          <button class="secondary-button" id="refreshButton" type="button">REFRESH</button>
+          <button class="secondary-button" id="lockButton" type="button">LOCK</button>
+        </div>
+      </div>
+      <div class="admin-list" id="applicationList"></div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/reviewer-admin';
+      const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
+      const storageKey = 'vccReviewerAdminKey';
+      const lockPanel = document.getElementById('lockPanel');
+      const adminPanel = document.getElementById('adminPanel');
+      const adminKeyInput = document.getElementById('adminKey');
+      const unlockButton = document.getElementById('unlockButton');
+      const refreshButton = document.getElementById('refreshButton');
+      const lockButton = document.getElementById('lockButton');
+      const list = document.getElementById('applicationList');
+      const pendingCount = document.getElementById('pendingCount');
+      const loginStatus = document.getElementById('loginStatus');
+
+      const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const fmt = (iso) => {
+        try { return new Intl.DateTimeFormat('ja-JP',{dateStyle:'medium',timeStyle:'short'}).format(new Date(iso)); }
+        catch (_) { return String(iso || ''); }
+      };
+
+      function getKey(){ return sessionStorage.getItem(storageKey) || ''; }
+      function setLoginStatus(message,state=''){ loginStatus.textContent=message; loginStatus.dataset.state=state; }
+
+      async function callAdmin(action,id){
+        const key=getKey();
+        if(!key) throw new Error('管理キーがありません。');
+        const res=await fetch(endpoint,{
+          method:'POST',
+          headers:{
+            'apikey':apiKey,
+            'Content-Type':'application/json',
+            'x-vcc-admin-key':key
+          },
+          body:JSON.stringify(id ? {action,id} : {action})
+        });
+        let data={};
+        try{ data=await res.json(); }catch(_){}
+        if(res.status===401){
+          sessionStorage.removeItem(storageKey);
+          throw new Error('管理キーが違います。');
+        }
+        if(!res.ok) throw new Error(data.error || '管理APIでエラーが発生しました。');
+        return data;
+      }
+
+      function showLocked(){
+        adminPanel.classList.add('hidden');
+        lockPanel.classList.remove('hidden');
+        adminKeyInput.value='';
+        adminKeyInput.focus();
+      }
+
+      function showUnlocked(){
+        lockPanel.classList.add('hidden');
+        adminPanel.classList.remove('hidden');
+      }
+
+      function credentialBox(reviewerId,code){
+        const box=document.createElement('div');
+        box.className='credential-box';
+        box.innerHTML=`
+          <strong>APPROVED — この情報は今ここで保存してください</strong>
+          <div class="credential-row"><span>Reviewer ID</span><code>${esc(reviewerId)}</code><button type="button" data-copy="${esc(reviewerId)}">COPY</button></div>
+          <div class="credential-row"><span>Access Code</span><code>${esc(code)}</code><button type="button" data-copy="${esc(code)}">COPY</button></div>
+          <div class="danger-note">Access Codeは平文では保存されません。この画面を閉じる前にReviewer本人へ安全に伝えてください。</div>`;
+        box.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{await navigator.clipboard.writeText(btn.dataset.copy);btn.textContent='COPIED';}));
+        return box;
+      }
+
+      function render(applications){
+        pendingCount.textContent=applications.length;
+        list.innerHTML='';
+        if(!applications.length){
+          list.innerHTML='<div class="empty-admin">現在、審査待ちの申請はありません。</div>';
+          return;
+        }
+
+        for(const app of applications){
+          const card=document.createElement('article');
+          card.className='admin-card';
+          const tags=(app.experience || []).map(t=>`<span>${esc(t)}</span>`).join('');
+          card.innerHTML=`
+            <div class="admin-card-head">
+              <div><h2>${esc(app.vrchat_name)}</h2><div class="admin-meta">${tags}</div></div>
+              <time>${esc(fmt(app.created_at))}</time>
+            </div>
+            <div class="admin-data">
+              <div><b>CONTACT</b><p>${esc(app.contact)}</p></div>
+              <div><b>AVAILABILITY</b><p>${esc(app.availability || '—')}</p></div>
+              <div><b>BACKGROUND</b><p>${esc(app.background)}</p></div>
+              <div><b>AFFILIATIONS</b><p>${esc(app.affiliations || '—')}</p></div>
+            </div>
+            <div class="admin-actions">
+              <button class="approve" type="button">APPROVE</button>
+              <button class="reject" type="button">REJECT</button>
+            </div>`;
+
+          const approve=card.querySelector('.approve');
+          const reject=card.querySelector('.reject');
+
+          approve.addEventListener('click',async()=>{
+            if(!confirm(`${app.vrchat_name} をReviewerとして承認しますか？`)) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              const data=await callAdmin('approve',app.id);
+              card.querySelector('.admin-actions').remove();
+              card.appendChild(credentialBox(data.reviewerId,data.reviewerAccessCode));
+              pendingCount.textContent=Math.max(0,Number(pendingCount.textContent)-1);
+            }catch(err){ alert(err.message);approve.disabled=reject.disabled=false; }
+          });
+
+          reject.addEventListener('click',async()=>{
+            if(!confirm(`${app.vrchat_name} の申請をRejectしますか？`)) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              await callAdmin('reject',app.id);
+              card.remove();
+              pendingCount.textContent=Math.max(0,Number(pendingCount.textContent)-1);
+              if(!list.querySelector('.admin-card')) list.innerHTML='<div class="empty-admin">現在、審査待ちの申請はありません。</div>';
+            }catch(err){ alert(err.message);approve.disabled=reject.disabled=false; }
+          });
+
+          list.appendChild(card);
+        }
+      }
+
+      async function load(){
+        setLoginStatus('確認中…');
+        try{
+          const data=await callAdmin('list');
+          showUnlocked();
+          render(data.applications || []);
+          setLoginStatus('');
+        }catch(err){
+          showLocked();
+          setLoginStatus(err.message,'error');
+        }
+      }
+
+      unlockButton.addEventListener('click',async()=>{
+        const key=adminKeyInput.value.trim();
+        if(!key){setLoginStatus('管理キーを入力してください。','error');return;}
+        sessionStorage.setItem(storageKey,key);
+        await load();
+      });
+      adminKeyInput.addEventListener('keydown',e=>{if(e.key==='Enter') unlockButton.click();});
+      refreshButton.addEventListener('click',load);
+      lockButton.addEventListener('click',()=>{sessionStorage.removeItem(storageKey);showLocked();setLoginStatus('ロックしました。','success');});
+
+      if(getKey()) load(); else showLocked();
+    })();
+  </script>
+</body>
+</html>
