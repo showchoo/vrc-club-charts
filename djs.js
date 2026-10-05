@@ -1,4 +1,4 @@
-const state = { genre: 'ALL', djs: [] };
+const state = { genre: 'ALL', query: '', djs: [] };
 
 function djProfileUrl(id) { return `djs/${id}.html`; }
 
@@ -36,8 +36,13 @@ function djCard(d) {
 }
 
 function render() {
+  const q = state.query.trim().toLowerCase();
   const items = state.djs
-    .filter(d => state.genre === 'ALL' || (d.genres || []).includes(state.genre))
+    .filter(d => {
+      const genreOk = state.genre === 'ALL' || (d.genres || []).includes(state.genre);
+      const hay = `${d.name || ''} ${d.role || ''} ${(d.affiliations || []).join(' ')} ${(d.genres || []).join(' ')}`.toLowerCase();
+      return genreOk && (!q || hay.includes(q));
+    })
     .sort((a,b) => a.name.localeCompare(b.name));
   document.getElementById('djGrid').innerHTML = items.map(djCard).join('');
   document.getElementById('djCount').textContent = `${items.length} profiles · non-ranked`;
@@ -55,4 +60,9 @@ async function init() {
     console.error(err);
   }
 }
+document.getElementById('djSearch')?.addEventListener('input', e => {
+  state.query = e.target.value;
+  render();
+});
+
 init();
