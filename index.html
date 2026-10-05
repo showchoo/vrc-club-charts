@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VRC Club Charts — VRChat Craftsmanship Ranking Project</title>
-  <meta name="description" content="VRChatクラブを、人気ではなく作り込みで評価するランキングを目指すプロジェクト。現在は100ワールドの情報・イベント・DJを整理するPublic Beta。" />
+  <meta name="description" content="VRChatクラブを、人気ではなく作り込みで評価するランキングを目指すプロジェクト。現在は100ワールドの情報を整理するPublic Beta。" />
   <meta name="theme-color" content="#0d171c" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://showchoo.github.io/vrc-club-charts/" />
   <meta property="og:title" content="VRC Club Charts" />
-  <meta property="og:description" content="From nightlife directory to reviewer-based VRChat craftsmanship ranking." />
+  <meta property="og:description" content="From VRChat nightlife directory to reviewer-based craftsmanship ranking." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://showchoo.github.io/vrc-club-charts/" />
   <meta property="og:site_name" content="VRC Club Charts" />
@@ -20,18 +20,17 @@
   <meta name="twitter:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=20261005-31" />
+  <link rel="stylesheet" href="styles.css?v=20261005-32" />
 </head>
-<body class="focus-home">
+<body class="focus-home calm-home">
   <div class="noise"></div>
 
-  <header class="site-header focus-header">
+  <header class="site-header focus-header calm-header">
     <a class="brand" href="#top" aria-label="VRC Club Charts home">
       <span class="brand-mark">VCC</span>
       <span>VRC CLUB CHARTS</span>
     </a>
-    <nav class="nav focus-nav">
-      <a class="nav-link active" href="#mission">Mission</a>
+    <nav class="nav focus-nav calm-nav">
       <a class="nav-link" href="worlds/">Worlds</a>
       <a class="nav-link" href="events.html">Events</a>
       <a class="nav-link" href="reviewer.html">Reviewer</a>
@@ -40,122 +39,93 @@
   </header>
 
   <main id="top">
-    <section class="focus-hero">
-      <div class="shell focus-hero-inner">
-        <div class="focus-hero-copy">
+    <section class="calm-hero">
+      <div class="shell calm-hero-inner">
+        <div class="calm-hero-copy">
           <p class="focus-eyebrow"><span></span> VRCHAT NIGHTLIFE / PUBLIC BETA</p>
-          <h1 id="heroTitle">VRChatクラブを、<br><em>作り込みで比べる。</em></h1>
-          <p id="heroCopy" class="focus-lead">人気順では見つからない、空間・照明・音響・ギミックの完成度。まずは世界中のクラブ情報を集め、レビュアー評価が揃ったところから本当のCraftsmanship Rankingへ移行します。</p>
-          <div class="focus-actions">
-            <a class="primary-button" href="worlds/">100 WORLDSを見る ↗</a>
-            <a class="secondary-button" href="reviewer.html">REVIEWER SYSTEM ↗</a>
+          <h1>VRChatクラブを、<br><em>作り込みで比べる。</em></h1>
+          <p class="calm-lead">まずは世界中のクラブを見つけやすく。レビューが集まったら、複数レビュアーによるCraftsmanship Rankingを主役にします。</p>
+          <div class="focus-actions calm-actions">
+            <a class="primary-button" href="worlds/">クラブを探す ↗</a>
+            <a class="secondary-button" href="reviewer.html">評価制度を見る ↗</a>
+          </div>
+          <div class="calm-status">
+            <span><strong id="metricWorlds">100</strong> WORLDS</span>
+            <i></i>
+            <span><strong id="metricPanel">0</strong> PANEL REVIEWED</span>
+            <i></i>
+            <span>REVIEWER PANEL PREPARING</span>
           </div>
         </div>
 
-        <div class="focus-hero-art" aria-hidden="true">
-          <div class="focus-word">CRAFT</div>
-          <div class="focus-slab focus-slab-a"></div>
-          <div class="focus-slab focus-slab-b"></div>
-          <div class="focus-cross">+</div>
-        </div>
-
-        <div class="focus-metrics">
-          <div><strong id="metricWorlds">100</strong><span>WORLDS TRACKED</span></div>
-          <div><strong id="metricPanel">0</strong><span>PANEL REVIEWED</span></div>
-          <div><strong>7</strong><span>CRAFT CRITERIA</span></div>
+        <div class="calm-hero-art" aria-hidden="true">
+          <div class="calm-type">CRAFT</div>
+          <div class="calm-object calm-object-a"></div>
+          <div class="calm-object calm-object-b"></div>
         </div>
       </div>
     </section>
 
-    <section id="mission" class="shell focus-section focus-mission">
-      <div class="focus-section-head">
-        <p class="kicker">THE GOAL</p>
-        <h2 id="missionTitle">人気ではなく、<br>作り込みで選ぶ。</h2>
-        <p id="missionCopy">VisitsやFavoritesは「人気」の参考にはなります。でも、このサイトが最終的に答えたいのは「VRChatで最も作り込まれたクラブはどこか？」です。</p>
+    <section class="shell calm-purpose">
+      <div class="calm-purpose-intro">
+        <p class="kicker">WHAT THIS SITE IS BECOMING</p>
+        <h2>今は情報サイト。<br>最終形は評価サイト。</h2>
       </div>
-
-      <div class="criteria-grid">
-        <article><b>20</b><strong>Visual</strong><span>空間・質感・統一感</span></article>
-        <article><b>20</b><strong>Lighting & VJ</strong><span>照明・レーザー・映像演出</span></article>
-        <article><b>15</b><strong>Sound</strong><span>音響・AudioLink・DJ適性</span></article>
-        <article><b>15</b><strong>Spatial</strong><span>フロア・導線・空間設計</span></article>
-        <article><b>10</b><strong>Interaction</strong><span>操作・ギミック・参加性</span></article>
-        <article><b>10</b><strong>VR Originality</strong><span>VRならではの表現</span></article>
-        <article><b>10</b><strong>Optimization</strong><span>軽さ・安定性・実用性</span></article>
+      <div class="calm-purpose-flow">
+        <article>
+          <span>NOW</span>
+          <strong>Find the clubs</strong>
+          <p>ワールド、イベント、DJを整理して、まずシーン全体を見つけやすくします。</p>
+        </article>
+        <div class="calm-arrow">→</div>
+        <article>
+          <span>GOAL</span>
+          <strong>Rank the craftsmanship</strong>
+          <p>複数レビュアーが同じ基準で実地評価し、レビュー数と信頼度も公開します。</p>
+        </article>
       </div>
+      <a class="text-link" href="reviewer.html">Reviewer制度と7つの評価基準を見る ↗</a>
     </section>
 
-    <section class="focus-stage">
-      <div class="shell">
-        <div class="focus-section-head compact">
-          <p class="kicker">CURRENT STAGE</p>
-          <h2>ランキングの前に、<br>信頼できる土台を作る。</h2>
-        </div>
-        <div class="stage-grid">
-          <article class="stage-card active">
-            <span>01 / NOW</span>
-            <strong>Nightlife Directory</strong>
-            <p>クラブ、イベント、DJを集める。100ワールドからスタート。</p>
-          </article>
-          <article class="stage-card">
-            <span>02 / NEXT</span>
-            <strong>Reviewer Panel</strong>
-            <p>複数レビュアーが同じ7基準で実際にワールドを評価。</p>
-          </article>
-          <article class="stage-card">
-            <span>03 / GOAL</span>
-            <strong>Craftsmanship Ranking</strong>
-            <p>レビュー数と信頼度を公開し、作り込みランキングを主役にする。</p>
-          </article>
-        </div>
-        <div class="stage-note">
-          <span>現在の仮スコアは正式ランキングには使用しません。</span>
-          <a href="reviewer.html">評価制度を見る ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell focus-section">
-      <div class="focus-section-head row">
+    <section class="shell calm-section">
+      <div class="calm-section-head">
         <div>
-          <p class="kicker">EXPLORE WORLDS</p>
-          <h2>まず、クラブを知る。</h2>
+          <p class="kicker">EXPLORE</p>
+          <h2>クラブを探す。</h2>
         </div>
-        <a class="section-link" href="worlds/">ALL 100 WORLDS ↗</a>
+        <a class="section-link" href="worlds/">ALL WORLDS ↗</a>
       </div>
-      <div id="focusWorldGrid" class="focus-world-grid">
+      <div id="focusWorldGrid" class="calm-world-grid">
         <div class="focus-loading">Loading worlds…</div>
       </div>
     </section>
 
-    <section class="focus-events-section">
+    <section class="calm-events-section">
       <div class="shell">
-        <div class="focus-section-head row">
+        <div class="calm-section-head">
           <div>
             <p class="kicker">TONIGHT / NEXT</p>
             <h2>次に行けるイベント。</h2>
           </div>
           <a class="section-link" href="events.html">ALL EVENTS ↗</a>
         </div>
-        <div id="focusEvents" class="focus-events">
+        <div id="focusEvents" class="calm-events">
           <div class="focus-loading">Loading events…</div>
         </div>
       </div>
     </section>
 
-    <section class="shell focus-review-cta">
+    <section class="shell calm-reviewer-cta">
+      <p class="kicker">CRAFTSMANSHIP PANEL</p>
       <div>
-        <p class="kicker">BUILD THE RANKING</p>
-        <h2>「好き」ではなく、<br>同じ基準で評価する。</h2>
+        <h2>ランキングは、<br>人が見て決める。</h2>
+        <p>人気投票ではなく、実際にワールドへ入った複数レビュアーが共通基準で評価します。制作者本人の自己評価やスポンサー費用は点数に入りません。</p>
       </div>
-      <div>
-        <p>将来のランキングは、誰でも押せる人気投票ではなく、実際にワールドへ入った複数レビュアーによるパネル評価を中心にします。制作者本人の自己評価やスポンサー費用は点数に入りません。</p>
-        <a class="primary-button" href="reviewer.html">REVIEWER PROGRAM ↗</a>
-      </div>
+      <a class="primary-button" href="reviewer.html">REVIEWER SYSTEM ↗</a>
     </section>
   </main>
 
-  <footer class="site-footer shell focus-footer">
+  <footer class="site-footer shell calm-footer">
     <span>VRC CLUB CHARTS / PUBLIC BETA</span>
     <span class="footer-links">
       <a href="worlds/">Worlds</a>
@@ -167,6 +137,6 @@
     </span>
   </footer>
 
-  <script src="app.js?v=20261005-31" defer></script>
+  <script src="app.js?v=20261005-32" defer></script>
 </body>
 </html>
