@@ -140,7 +140,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <meta property="og:url" content="{esc(canonical)}" />
   <meta property="og:site_name" content="VRC Club Charts" />\n  <meta property="og:image" content="{esc(BASE_URL)}og-image.png" />\n  <meta property="og:image:width" content="1200" />\n  <meta property="og:image:height" content="630" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:image" content="{esc(BASE_URL)}og-image.png" />
   <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-16" />
+  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-30" />
   <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -158,6 +158,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
       <a class="{cls('worlds')}" href="{prefix}worlds/index.html">Worlds</a>
       <a class="{cls('events')}" href="{prefix}events.html">Events</a>
       <a class="{cls('djs')}" href="{prefix}djs.html">DJs</a>
+      <a class="{cls('reviewer')}" href="{prefix}reviewer.html">Reviewer</a>
       <a class="{cls('about')}" href="{prefix}about.html">About</a>
     </nav>
   </header>
@@ -167,7 +168,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
 def footer(prefix: str = "") -> str:
     return f"""  <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / PUBLIC BETA</span>
-    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
+    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviewer</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
   </footer>
 </body>
 </html>
@@ -630,6 +631,7 @@ def main() -> int:
         f"{BASE_URL}privacy.html",
         f"{BASE_URL}events.html",
         f"{BASE_URL}djs.html",
+        f"{BASE_URL}reviewer.html",
         f"{BASE_URL}worlds/",
     ]
     urls.extend(
