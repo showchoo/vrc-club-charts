@@ -35,37 +35,55 @@ def event_id(event: dict) -> str:
     return "event-" + hashlib.sha1(seed.encode("utf-8")).hexdigest()[:16]
 
 
-def event_match_key(event: dict) -> tuple[str, str]:
-    name = re.sub(r"[^a-z0-9ぁ-んァ-ヶ一-龯]+", "", str(event.get("name") or "").casefold())
-    raw_start = str(event.get("start") or "")
+def normalized_event_name(event: dict) -> str:
+    return re.sub(r"[^a-z0-9ぁ-んァ-ヶ一-龯]+", "", str(event.get("name") or "").casefold())
+
+
+def event_start_utc(event: dict) -> dt.datetime | None:
+    raw = str(event.get("start") or "")
     try:
-        parsed = dt.datetime.fromisoformat(raw_start.replace("Z", "+00:00"))
-        if parsed.tzinfo is None:
-            parsed = parsed.replace(tzinfo=dt.timezone.utc)
-        start_key = parsed.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M")
+        parsed = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
     except ValueError:
-        start_key = raw_start[:16]
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=dt.timezone.utc)
+    return parsed.astimezone(dt.timezone.utc)
+
+
+def event_match_key(event: dict) -> tuple[str, str]:
+    name = normalized_event_name(event)
+    parsed = event_start_utc(event)
+    start_key = parsed.strftime("%Y-%m-%dT%H:%M") if parsed else str(event.get("start") or "")[:16]
     return name, start_key
+
+
+def likely_same_event(a: dict, b: dict) -> bool:
+    if event_id(a) == event_id(b):
+        return True
+    a_start, b_start = event_start_utc(a), event_start_utc(b)
+    if a_start is None or b_start is None:
+        return False
+    delta = abs((a_start - b_start).total_seconds())
+    a_name, b_name = normalized_event_name(a), normalized_event_name(b)
+    if a_name and a_name == b_name and delta <= 6 * 3600:
+        return True
+    shorter, longer = sorted((a_name, b_name), key=len)
+    if len(shorter) >= 10 and shorter in longer and delta <= 2 * 3600:
+        return True
+    a_url = str(a.get("url") or "").strip().rstrip("/")
+    b_url = str(b.get("url") or "").strip().rstrip("/")
+    if a_url and a_url == b_url and delta <= 30 * 60:
+        return True
+    return False
 
 
 def merge_events(manual: list[dict], automatic: list[dict]) -> list[dict]:
     """Merge curated and imported events. Curated/manual records always win."""
     merged: list[dict] = []
-    seen_ids: set[str] = set()
-    seen_keys: set[tuple[str, str]] = set()
-    seen_url_starts: set[tuple[str, str]] = set()
 
     def add(event: dict) -> bool:
-        eid = event_id(event)
-        key = event_match_key(event)
-        url = str(event.get("url") or "").strip().rstrip("/")
-        url_start = (url, key[1])
-        if eid in seen_ids or key in seen_keys or (url and url_start in seen_url_starts):
+        if any(likely_same_event(event, existing) for existing in merged):
             return False
-        seen_ids.add(eid)
-        seen_keys.add(key)
-        if url:
-            seen_url_starts.add(url_start)
         merged.append(event)
         return True
 
