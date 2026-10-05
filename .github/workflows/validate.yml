@@ -43,6 +43,11 @@ jobs:
           python-version: "3.12"
       - name: Compile Python
         run: python -m compileall -q scripts
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check events.js
+          node --check djs.js
       - name: Build reviewer panel scores
         run: python scripts/build_review_scores.py
       - name: Validate catalog
