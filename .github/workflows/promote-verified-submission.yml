@@ -197,6 +197,63 @@ jobs:
               writes = [file];
               summary = `Add DJ: ${name}`;
 
+            } else if (title.startsWith("[Reviewer]")) {
+              kind = "reviewer";
+              const name = field("VRChat display name");
+              if (!name) throw new Error("Missing VRChat display name.");
+
+              const tags = field("Relevant experience")
+                .split("\n")
+                .filter(line => /^- \[x\]/i.test(line))
+                .map(line => line.replace(/^- \[x\]\s*/i, "").trim())
+                .map(label => ({
+                  "Clubber / regular VRChat nightlife attendee": "clubber",
+                  "DJ": "dj",
+                  "VJ / lighting": "vj-lighting",
+                  "World creator": "world-creator",
+                  "Event staff / organizer": "event-staff-organizer",
+                  "Other relevant experience": "other",
+                })[label])
+                .filter(Boolean);
+
+              const affiliations = field("Worlds / groups you are directly affiliated with")
+                .split("\n")
+                .map(line => line.replace(/^[-*]\s*/, "").trim())
+                .filter(Boolean);
+
+              const file = await getJson("data/reviewers.json");
+              const duplicate = file.data.find(r =>
+                String(r.name || "").trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase()
+              );
+              if (duplicate) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNo,
+                  body: `Cannot create a reviewer PR: **${name}** is already registered as \`${duplicate.id}\`.`
+                });
+                return;
+              }
+
+              let id = `reviewer-${slug(name, `applicant-${issueNo}`)}`.slice(0, 63);
+              if (file.data.some(r => r.id === id)) {
+                const suffix = `-${issueNo}`;
+                id = `${id.slice(0, 63 - suffix.length)}${suffix}`;
+              }
+
+              file.data.push({
+                id,
+                name,
+                status: "active",
+                tags: [...new Set(tags)],
+                affiliations: [...new Set(affiliations)],
+                approvedAt: new Date().toISOString(),
+              });
+              file.data.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+
+              writes = [file];
+              summary = `Add reviewer: ${name}`;
+
             } else {
               return;
             }
