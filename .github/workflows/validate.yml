@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
     paths:
+      - "index.html"
+      - "about.html"
+      - "privacy.html"
+      - "events.html"
+      - "djs.html"
+      - "app.js"
+      - "events.js"
+      - "djs.js"
+      - "styles.css"
       - "data/worlds.json"
       - "data/weekly-ranking.json"
       - "scripts/build_review_scores.py"
@@ -22,6 +31,9 @@ on:
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
+      - "*.html"
+      - "*.js"
+      - "*.css"
       - "data/worlds.json"
       - "data/weekly-ranking.json"
       - "data/events.json"
