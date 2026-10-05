@@ -12,6 +12,7 @@ on:
       - "favicon.svg"
       - "site.webmanifest"
       - "robots.txt"
+      - "sitemap.xml"
       - "data/weekly-ranking.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -41,7 +42,7 @@ jobs:
       - name: Prepare public artifact
         run: |
           mkdir _site
-          cp index.html about.html privacy.html app.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html app.js styles.css favicon.svg site.webmanifest robots.txt sitemap.xml _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           touch _site/.nojekyll
