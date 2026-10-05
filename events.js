@@ -43,8 +43,9 @@ function eventCard(e) {
     ? `<a class="event-link" href="${esc(e.url)}" target="_blank" rel="noreferrer">PUBLIC INFO ↗</a>`
     : '';
   const status = eventStatus(e);
-  return `<article class="event-card ${status === 'LIVE NOW' ? 'event-live' : ''}">
-    <div class="event-card-top"><span class="event-date">${esc(eventTime(e))}</span><span class="event-status">${status}</span></div>
+  const provenance = e.autoImported ? 'PUBLIC FEED' : 'CURATED';
+  return `<article class="event-card ${status === 'LIVE NOW' ? 'event-live' : ''} ${e.autoImported ? 'event-auto' : 'event-curated'}">
+    <div class="event-card-top"><span class="event-date">${esc(eventTime(e))}</span><span class="event-badges"><span class="event-provenance">${provenance}</span><span class="event-status">${status}</span></span></div>
     <h3><a class="world-title-link" href="${eventDetailUrl(e.id)}">${esc(e.name)}</a></h3>
     <div class="event-world">${world}</div>
     <div class="event-organizer">by ${esc(e.organizer || '—')}</div>
