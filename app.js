@@ -121,7 +121,7 @@ function card(w, rank) {
   return `<article class="podium-card ${w.thumbnail ? 'has-thumb' : ''}">
     ${mediaHtml(w)}
     <div class="rank-badge">${String(rank).padStart(2,'0')}</div>
-    <h3>${escapeHtml(w.name)}</h3>
+    <h3><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
     <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
     <div class="score-line">
