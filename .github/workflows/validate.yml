@@ -6,6 +6,7 @@ on:
     paths:
       - "data/worlds.json"
       - "data/weekly-ranking.json"
+      - "data/events.json"
       - "scripts/build_rankings.py"
       - "scripts/build_static_pages.py"
       - "scripts/validate_catalog.py"
