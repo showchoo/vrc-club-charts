@@ -97,3 +97,16 @@ The first DJ profiles come from the publicly documented PSY-APPLE member roster 
 - https://psy-apple.club/
 
 Names, roles, affiliations and genre labels are directory metadata only. The DJ directory is explicitly non-ranked. This initial crew-based seed is not intended to represent the full VRChat DJ scene; public submissions are enabled so the directory can broaden over time.
+
+
+## Automated event feed
+
+VRC Club Charts consumes the public canonical event feed from:
+
+- VRChat Event Calendar: https://kafka2306.github.io/cast_event_cal/
+- Public JSON: https://kafka2306.github.io/cast_event_cal/events.json
+- Source repository: https://github.com/KAFKA2306/cast_event_cal
+
+The upstream project normalizes event identity, time, source provenance and confidence. VRC Club Charts does **not** mirror the full calendar. `scripts/import_event_feed.py` independently filters the feed to near-term music/nightlife events with evidence such as DJ, club, rave, live, concert, trance, techno, house, festival, AudioLink or related terms. Karaoke / fitness / exercise noise is excluded.
+
+Imported entries are stored in `data/events-auto.json`, labeled **PUBLIC FEED** in the UI, and kept distinct from manually curated events. Inclusion in the public feed is not an editorial endorsement and never affects World ranking scores.
