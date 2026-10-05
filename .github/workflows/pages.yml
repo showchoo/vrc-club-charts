@@ -13,6 +13,7 @@ on:
       - "site.webmanifest"
       - "robots.txt"
       - "sitemap.xml"
+      - "scripts/build_static_pages.py"
       - "data/weekly-ranking.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -39,12 +40,17 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Prepare public artifact
         run: |
           mkdir _site
-          cp index.html about.html privacy.html app.js styles.css favicon.svg site.webmanifest robots.txt sitemap.xml _site/
+          cp index.html about.html privacy.html app.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
+          python scripts/build_static_pages.py _site
           touch _site/.nojekyll
 
       - name: Upload artifact
