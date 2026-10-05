@@ -14,6 +14,7 @@ on:
       - "scripts/build_og_image.py"
       - "scripts/import_event_feed.py"
       - "scripts/validate_catalog.py"
+      - "reviewer.html"
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
@@ -44,6 +45,7 @@ jobs:
         run: |
           mkdir -p /tmp/vcc-site
           cp styles.css favicon.svg /tmp/vcc-site/
+          test -f reviewer.html
           python scripts/build_static_pages.py /tmp/vcc-site
           python scripts/build_og_image.py /tmp/vcc-site
           test -f /tmp/vcc-site/worlds/index.html
