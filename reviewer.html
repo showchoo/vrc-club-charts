@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261006-39" />
+  <link rel="stylesheet" href="styles.css?v=20261006-40" />
 </head>
 <body class="reviewer-page">
   <div class="noise"></div>
@@ -175,7 +175,7 @@
           </div>
 
           <div class="reviewer-form-grid">
-            <label><span>World</span><input name="world_id" list="reviewWorldList" placeholder="World IDを入力 / 選択" required /><datalist id="reviewWorldList"></datalist></label>
+            <label><span>World <small>ランキング対象のみ</small></span><select name="world_id" id="reviewWorldSelect" required><option value="">Worldを選択</option></select></label>
             <label><span>Review date</span><input name="reviewed_at" type="date" required /></label>
           </div>
 
@@ -305,7 +305,7 @@
       if (!form) return;
       const status = document.getElementById('reviewSubmitStatus');
       const totalEl = document.getElementById('reviewTotal');
-      const worldList = document.getElementById('reviewWorldList');
+      const worldSelect = document.getElementById('reviewWorldSelect');
       const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/review-submit';
       const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
       const scoreNames = ['visual','lighting','sound','spatial','interaction','originality','optimization'];
@@ -319,9 +319,10 @@
         .then(r => r.ok ? r.json() : Promise.reject())
         .then(data => {
           const worlds = Array.isArray(data?.worlds) ? data.worlds : [];
-          worldList.innerHTML = worlds
-            .filter(w => w.chartEligible === true && w.id)
-            .map(w => '<option value="' + String(w.id).replace(/"/g,'&quot;') + '">' + String(w.name || w.id).replace(/</g,'&lt;') + '</option>')
+          const eligible = worlds.filter(w => w.chartEligible === true && w.id);
+          eligible.sort((a,b) => String(a.name || '').localeCompare(String(b.name || ''), 'ja'));
+          worldSelect.innerHTML = '<option value="">Worldを選択</option>' + eligible
+            .map(w => '<option value="' + String(w.id).replace(/"/g,'&quot;') + '">' + String(w.name || w.id).replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</option>')
             .join('');
         }).catch(() => {});
 
