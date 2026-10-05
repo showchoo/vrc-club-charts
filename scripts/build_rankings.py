@@ -39,6 +39,11 @@ def load_snapshots():
 def main():
     seeds = json.loads((ROOT/'data/worlds.json').read_text(encoding='utf-8'))
     seed_by_id = {w['id']: w for w in seeds}
+    public_path = ROOT/'data/weekly-ranking.json'
+    try:
+        previous_public = json.loads(public_path.read_text(encoding='utf-8')) if public_path.exists() else {}
+    except Exception:
+        previous_public = {}
     snaps = load_snapshots()
 
     latest = snaps[-1] if snaps else None
@@ -95,6 +100,36 @@ def main():
         }
         for k in ['_craft','_visits','_favs']: r.pop(k, None)
 
+    def positions(items, score_key):
+        eligible = [r for r in items if (r.get('scores') or {}).get(score_key) is not None]
+        eligible.sort(key=lambda r: ((r.get('scores') or {}).get(score_key) or -1), reverse=True)
+        return {r['id']: i + 1 for i, r in enumerate(eligible)}
+
+    prev_rows = previous_public.get('worlds', []) if isinstance(previous_public, dict) else []
+    prev_overall = positions(prev_rows, 'overall')
+    prev_trending = positions(prev_rows, 'trending') if previous_public.get('status') == 'live' else {}
+    prev_craft = positions(prev_rows, 'craftsmanship')
+
+    cur_overall = positions(rows, 'overall')
+    cur_trending = positions(rows, 'trending') if has_trend else {}
+    cur_craft = positions(rows, 'craftsmanship')
+
+    for r in rows:
+        wid = r['id']
+        movement = {}
+        for key, current_map, previous_map in [
+            ('overall', cur_overall, prev_overall),
+            ('trending', cur_trending, prev_trending),
+            ('craftsmanship', cur_craft, prev_craft),
+        ]:
+            if wid not in current_map:
+                movement[key] = None
+            elif wid not in previous_map:
+                movement[key] = 'new'
+            else:
+                movement[key] = previous_map[wid] - current_map[wid]
+        r['movement'] = movement
+
     rows.sort(key=lambda r: (r['scores']['overall'] is not None, r['scores']['overall'] or -1), reverse=True)
     payload = {
         'status': 'live' if has_trend else 'seed',
@@ -102,7 +137,7 @@ def main():
         'methodVersion': '0.3',
         'worlds': rows,
     }
-    (ROOT/'data/weekly-ranking.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    public_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print(f"Built ranking for {len(rows)} worlds; status={payload['status']}")
 
 if __name__ == '__main__':
