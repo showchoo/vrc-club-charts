@@ -1,0 +1,82 @@
+name: Submit a VRChat club world
+description: Suggest a public VRChat club / DJ / music world for VRC Club Charts
+title: "[World] "
+labels:
+  - world-submission
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a world for VRC Club Charts.
+
+        Submission does **not** guarantee an editorial score or ranking position. Rankings are not sold. Eligible worlds may first appear in **Discovery / Pending Review**.
+
+  - type: input
+    id: world_name
+    attributes:
+      label: World name
+      placeholder: Club Example
+    validations:
+      required: true
+
+  - type: input
+    id: world_id
+    attributes:
+      label: VRChat World ID
+      description: Must begin with wrld_
+      placeholder: wrld_00000000-0000-0000-0000-000000000000
+    validations:
+      required: true
+
+  - type: input
+    id: vrchat_url
+    attributes:
+      label: VRChat world URL
+      placeholder: https://vrchat.com/home/world/wrld_...
+    validations:
+      required: false
+
+  - type: input
+    id: creator
+    attributes:
+      label: Creator / author
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: categories
+    attributes:
+      label: Categories
+      options:
+        - label: Club
+        - label: DJ
+        - label: Music
+        - label: Rave
+        - label: AudioLink
+        - label: Event venue
+        - label: Quest compatible
+        - label: Other
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Why should this world be listed?
+      description: Briefly describe the music / nightlife use, notable features, or regular events.
+    validations:
+      required: true
+
+  - type: input
+    id: evidence
+    attributes:
+      label: Supporting public link
+      description: Optional public page, event page, creator post, VRCW entry, etc.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I understand that submission does not buy or guarantee a ranking position.
+          required: true
