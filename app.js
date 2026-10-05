@@ -1,4 +1,4 @@
-const state = { lang: 'ja', worlds: [], events: [] };
+const state = { lang: 'ja', worlds: [], events: [], reviewScores: null };
 
 const copy = {
   ja: {
@@ -69,9 +69,8 @@ function worldCard(w) {
 
 function renderWorlds() {
   const available = state.worlds.filter(w => w.availabilityStatus !== 'unavailable');
-  const reviewed = available.filter(w => w.editorialStatus === 'reviewed');
   document.getElementById('metricWorlds').textContent = fmt.format(available.length);
-  document.getElementById('metricPanel').textContent = fmt.format(reviewed.length);
+  document.getElementById('metricPanel').textContent = fmt.format(state.reviewScores?.summary?.scoredWorlds || 0);
 
   const grid = document.getElementById('focusWorldGrid');
   const chosen = pickWorlds(available);
@@ -123,13 +122,15 @@ function renderEvents() {
 
 async function load() {
   try {
-    const [worldRes,eventRes] = await Promise.all([
+    const [worldRes,eventRes,reviewRes] = await Promise.all([
       fetch('data/weekly-ranking.json', {cache:'no-store'}),
-      fetch('data/events.json', {cache:'no-store'})
+      fetch('data/events.json', {cache:'no-store'}),
+      fetch('data/review-scores.json', {cache:'no-store'})
     ]);
     if (!worldRes.ok) throw new Error('World data unavailable');
     state.worlds = (await worldRes.json()).worlds || [];
     state.events = eventRes.ok ? await eventRes.json() : [];
+    state.reviewScores = reviewRes.ok ? await reviewRes.json() : null;
     renderWorlds();
     renderEvents();
   } catch (err) {
