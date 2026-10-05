@@ -534,7 +534,8 @@ def index_page(worlds: list[dict]) -> str:
         if w.get("availabilityStatus") == "unavailable":
             continue
         genres = " / ".join((w.get("genres") or [])[:4])
-        status = "reviewed" if w.get("editorialStatus") != "unreviewed" else "discovery"
+        panel_status = (w.get("panelReview") or {}).get("status")
+        status = "reviewed" if panel_status in {"provisional", "ranked"} else "discovery"
         hay = " ".join([
             str(w.get("name") or ""),
             str(w.get("author") or ""),
@@ -549,13 +550,13 @@ def index_page(worlds: list[dict]) -> str:
     return page_head("Worlds — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
-    <h1>VRChat club worlds.</h1>
-    <p class="lead">{len(cards)} tracked worlds. Reviewed rankings and discovery candidates in one directory.</p>
+    <h1>VRChat nightlife worlds.</h1>
+    <p class="lead">{len(cards)} tracked worlds. Browse the directory now; panel-reviewed craftsmanship scores will appear as reviewer coverage grows.</p>
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World, creator, genre" /></label>
       <div class="chip-row" id="worldDirectoryFilters">
         <button class="chip active" type="button" data-status-filter="all">ALL</button>
-        <button class="chip" type="button" data-status-filter="reviewed">REVIEWED</button>
+        <button class="chip" type="button" data-status-filter="reviewed">PANEL REVIEWED</button>
         <button class="chip" type="button" data-status-filter="discovery">DISCOVERY</button>
       </div>
       <span id="worldDirectoryCount" class="discovery-count">{len(cards)} WORLDS</span>
