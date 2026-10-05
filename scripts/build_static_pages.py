@@ -64,7 +64,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <meta property="og:url" content="{esc(canonical)}" />
   <meta property="og:site_name" content="VRC Club Charts" />
   <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-15" />
+  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-16" />
   <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
 </head>
 <body>
