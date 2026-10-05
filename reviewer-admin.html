@@ -323,9 +323,9 @@
             </div>
             <div class="admin-data">
               <div><b>WORLD ID</b><p>${esc(candidate.id)}</p></div>
-              <div><b>AUTHOR HINT</b><p>${esc(candidate.authorHint || '—')}</p></div>
+              <div><b>AUTHOR</b><p>${esc(candidate.authorHint || '—')}</p></div>
               <div><b>FIRST DISCOVERED</b><p>${esc(candidate.firstDiscoveredAt || '—')}</p></div>
-              <div><b>SOURCE</b><p>${safeSource ? `<a class="candidate-source" href="${esc(safeSource)}" target="_blank" rel="noreferrer">VRCW source ↗</a>` : '—'}</p></div>
+              <div><b>SOURCE</b><p>${safeSource ? `<a class="candidate-source" href="${esc(safeSource)}" target="_blank" rel="noreferrer">SOURCE ↗</a>` : '—'}</p></div>
             </div>
             <div class="admin-meta">${reasons}</div>
             <div class="admin-actions">
