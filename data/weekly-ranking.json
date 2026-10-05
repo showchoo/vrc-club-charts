@@ -21,7 +21,8 @@
         "craftsmanship": 95,
         "overall": 95
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": true
     },
     {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
@@ -42,7 +43,8 @@
         "craftsmanship": 94,
         "overall": 94
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": false
     },
     {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
@@ -62,7 +64,8 @@
         "craftsmanship": 92,
         "overall": 92
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": true
     },
     {
       "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
@@ -83,7 +86,8 @@
         "craftsmanship": 86,
         "overall": 86
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": true
     },
     {
       "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
@@ -103,7 +107,8 @@
         "craftsmanship": 85,
         "overall": 85
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": true
     },
     {
       "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
@@ -123,7 +128,8 @@
         "craftsmanship": 82,
         "overall": 82
       },
-      "editorialStatus": "provisional"
+      "editorialStatus": "provisional",
+      "chartEligible": true
     },
     {
       "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
@@ -144,7 +150,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
@@ -165,7 +172,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
@@ -186,7 +194,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
@@ -207,7 +216,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_c41077d4-336d-4d83-9c29-75c3aa7d3aef",
@@ -227,7 +237,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
@@ -248,7 +259,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
@@ -269,7 +281,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
@@ -290,7 +303,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
@@ -311,7 +325,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
@@ -332,7 +347,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
@@ -353,7 +369,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
@@ -374,7 +391,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
@@ -395,7 +413,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
@@ -416,7 +435,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
@@ -437,7 +457,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_ce4feb59-8cf3-4119-988c-dbb1c317dee3",
@@ -456,7 +477,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
@@ -477,7 +499,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_556018f9-5e94-486c-b30d-aa294deb923b",
@@ -497,7 +520,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
@@ -516,7 +540,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_28f87118-050c-4d1f-a6b1-74a73f7a6b88",
@@ -536,7 +561,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
@@ -556,7 +582,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_c80885cb-561c-4a2a-becc-559709006fe9",
@@ -576,7 +603,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_16baa8ad-1395-4546-9670-771a7759b3c4",
@@ -596,7 +624,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
@@ -616,7 +645,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
@@ -636,7 +666,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_63039b3d-42e8-4f40-9825-cb51ba99a16d",
@@ -655,7 +686,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_06fdbbc8-21b0-41fd-85db-492fd087c950",
@@ -674,7 +706,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
@@ -694,7 +727,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_4a35e054-acdc-4504-a1a1-5c8f48856203",
@@ -714,7 +748,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_773cd358-ac92-49ad-8eb0-3f8c0ed139c9",
@@ -734,7 +769,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
@@ -755,7 +791,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350",
@@ -776,7 +813,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_0b42489a-dfb5-4bc5-821e-91a59f4aeee2",
@@ -796,7 +834,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_83d25bd7-5eb3-423d-b5b1-03708d4769da",
@@ -816,7 +855,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_5ab2330c-f507-42a4-9a46-4a0be0745d13",
@@ -837,7 +877,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_b3ab4099-30a8-45c8-bc7b-60c96c8c60c3",
@@ -859,7 +900,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
@@ -880,7 +922,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -901,7 +944,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_3e537d1b-0be6-4826-b3c2-4b20807d68bf",
@@ -923,7 +967,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -944,7 +989,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
@@ -966,7 +1012,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
@@ -987,7 +1034,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_d4e02d69-2d17-4972-9c7a-712b076039be",
@@ -1008,7 +1056,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
@@ -1029,7 +1078,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
@@ -1056,7 +1106,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -1083,7 +1134,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa",
@@ -1109,7 +1161,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_8dd8d168-509f-4191-98dc-844dbf4f9df3",
@@ -1135,7 +1188,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_980770fa-673c-41bd-86ac-5394fab2cc41",
@@ -1160,7 +1214,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",
@@ -1187,7 +1242,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_92ca3241-20fa-4805-9c17-41c475ce84be",
@@ -1214,7 +1270,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_1a13ec63-43ae-4616-bb80-f7c05f2a6d99",
@@ -1241,7 +1298,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_30412c54-724d-45d0-901b-ef832ab2f97f",
@@ -1266,7 +1324,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_786726d2-81c7-4356-8db8-7c29503c56ad",
@@ -1293,7 +1352,8 @@
         "trending": 0,
         "craftsmanship": null,
         "overall": null
-      }
+      },
+      "chartEligible": true
     },
     {
       "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
@@ -1329,7 +1389,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/club"
+      "source": "https://www.vrcw.net/category/detail/club",
+      "chartEligible": true
     },
     {
       "id": "wrld_a92b6b6c-f31f-4d79-a6ff-d20b50e4641f",
@@ -1364,7 +1425,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/club"
+      "source": "https://www.vrcw.net/category/detail/club",
+      "chartEligible": true
     },
     {
       "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
@@ -1399,7 +1461,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/club"
+      "source": "https://www.vrcw.net/category/detail/club",
+      "chartEligible": true
     },
     {
       "id": "wrld_b372bdec-7819-4e45-b82d-d8727f2f7dc1",
@@ -1435,7 +1498,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_1aeb37ec-5a1a-46de-b3f7-9c31c29d4ec8",
@@ -1471,7 +1535,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_3583582a-e53b-44f4-bcfa-d8b1d28a5096",
@@ -1508,7 +1573,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_b89ce0b6-f867-4569-b958-7bf91839d7e1",
@@ -1544,7 +1610,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5",
@@ -1580,7 +1647,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_24ad9d9c-1489-406d-af2f-aeb938831280",
@@ -1616,7 +1684,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dj"
+      "source": "https://www.vrcw.net/category/detail/dj",
+      "chartEligible": true
     },
     {
       "id": "wrld_bd302e3d-0951-4596-99a3-ae99aad7b1d9",
@@ -1653,7 +1722,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/event_venue"
+      "source": "https://www.vrcw.net/category/detail/event_venue",
+      "chartEligible": true
     },
     {
       "id": "wrld_56195c9e-dac2-4c9b-ab89-2b53b7443037",
@@ -1689,7 +1759,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/event_venue"
+      "source": "https://www.vrcw.net/category/detail/event_venue",
+      "chartEligible": true
     },
     {
       "id": "wrld_501c9f08-cd8c-4b77-94d9-69e631ff5374",
@@ -1725,7 +1796,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/event_venue"
+      "source": "https://www.vrcw.net/category/detail/event_venue",
+      "chartEligible": true
     },
     {
       "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
@@ -1762,7 +1834,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/music"
+      "source": "https://www.vrcw.net/category/detail/music",
+      "chartEligible": true
     },
     {
       "id": "wrld_d3179055-a51c-4998-9051-0217850d74c6",
@@ -1799,7 +1872,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": false
     },
     {
       "id": "wrld_40047403-ec3a-46a8-b780-389619d8f2a9",
@@ -1835,7 +1909,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": false
     },
     {
       "id": "wrld_ebc4bce3-2372-4b1e-ab0c-f9e1f8095958",
@@ -1872,7 +1947,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": true
     },
     {
       "id": "wrld_73808a9d-e4e4-412c-8973-a88e6ffd286d",
@@ -1909,7 +1985,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": false
     },
     {
       "id": "wrld_64512407-2f2f-44e5-b7fc-4bdc4a188d4f",
@@ -1945,7 +2022,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": false
     },
     {
       "id": "wrld_079d7e4c-6e77-4b6e-ae0e-4bba5bc97472",
@@ -1981,7 +2059,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/dance"
+      "source": "https://www.vrcw.net/category/detail/dance",
+      "chartEligible": false
     },
     {
       "id": "wrld_d2d0399f-6d0e-4678-9d9c-48079d470206",
@@ -2017,7 +2096,8 @@
         "trending": null,
         "craftsmanship": null
       },
-      "source": "https://www.vrcw.net/category/detail/music"
+      "source": "https://www.vrcw.net/category/detail/music",
+      "chartEligible": false
     }
   ]
 }
