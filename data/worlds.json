@@ -8,8 +8,9 @@
       "DJ",
       "IMMERSIVE"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "legacyEditorialSeed": {
       "visual": 20,
       "lighting": 18,
       "sound": 14,
@@ -17,8 +18,7 @@
       "interaction": 9,
       "originality": 10,
       "optimization": 9
-    },
-    "chartEligible": true
+    }
   },
   {
     "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
@@ -30,8 +30,9 @@
       "IMMERSIVE",
       "QUEST"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": false,
+    "legacyEditorialSeed": {
       "visual": 19,
       "lighting": 19,
       "sound": 15,
@@ -39,8 +40,7 @@
       "interaction": 8,
       "originality": 10,
       "optimization": 9
-    },
-    "chartEligible": false
+    }
   },
   {
     "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
@@ -51,8 +51,9 @@
       "STAGE LIGHTING",
       "AUDIOLINK"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "legacyEditorialSeed": {
       "visual": 18,
       "lighting": 20,
       "sound": 14,
@@ -60,8 +61,7 @@
       "interaction": 9,
       "originality": 9,
       "optimization": 9
-    },
-    "chartEligible": true
+    }
   },
   {
     "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
@@ -73,8 +73,9 @@
       "DJ",
       "QUEST"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "legacyEditorialSeed": {
       "visual": 17,
       "lighting": 17,
       "sound": 14,
@@ -82,8 +83,7 @@
       "interaction": 8,
       "originality": 8,
       "optimization": 9
-    },
-    "chartEligible": true
+    }
   },
   {
     "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
@@ -94,8 +94,9 @@
       "LIVE",
       "DJ"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "legacyEditorialSeed": {
       "visual": 16,
       "lighting": 17,
       "sound": 14,
@@ -103,8 +104,7 @@
       "interaction": 8,
       "originality": 8,
       "optimization": 9
-    },
-    "chartEligible": true
+    }
   },
   {
     "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
@@ -115,8 +115,9 @@
       "AUDIOLINK",
       "QUEST"
     ],
-    "editorialStatus": "provisional",
-    "editorial": {
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "legacyEditorialSeed": {
       "visual": 16,
       "lighting": 17,
       "sound": 13,
@@ -124,8 +125,7 @@
       "interaction": 8,
       "originality": 7,
       "optimization": 9
-    },
-    "chartEligible": true
+    }
   },
   {
     "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
