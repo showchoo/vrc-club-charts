@@ -754,5 +754,229 @@
       "QUEST"
     ],
     "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
+    "name": "Poolside Chill House",
+    "author": "JimmyyJames",
+    "genres": [
+      "CLUB",
+      "NIGHT",
+      "MUSIC"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_a92b6b6c-f31f-4d79-a6ff-d20b50e4641f",
+    "name": "Saiko Blossom Fantasies",
+    "author": "Sakumi_Saiko",
+    "genres": [
+      "CLUB",
+      "NIGHT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
+    "name": "Clubroom",
+    "author": "Gssam",
+    "genres": [
+      "CLUB",
+      "HANGOUT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_b372bdec-7819-4e45-b82d-d8727f2f7dc1",
+    "name": "MPS DJ",
+    "author": "jack14050",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_1aeb37ec-5a1a-46de-b3f7-9c31c29d4ec8",
+    "name": "The Last Drop",
+    "author": "VikingMan",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "NIGHT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_3583582a-e53b-44f4-bcfa-d8b1d28a5096",
+    "name": "チル＆v睡＆DJ ワールド（ベータ版）",
+    "author": "GUNYON1",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "NIGHT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_b89ce0b6-f867-4569-b958-7bf91839d7e1",
+    "name": "PARooM",
+    "author": "ぱるみん",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "NIGHT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5",
+    "name": "Daft Punk Alive 2007（BETA）",
+    "author": "Daft Pυnk",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "LIVE"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_24ad9d9c-1489-406d-af2f-aeb938831280",
+    "name": "padded boiler room",
+    "author": "KER 3271",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "EVENT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_bd302e3d-0951-4596-99a3-ae99aad7b1d9",
+    "name": "Spanish Cooming Soon Club",
+    "author": "врзешка",
+    "genres": [
+      "CLUB",
+      "DANCE",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_56195c9e-dac2-4c9b-ab89-2b53b7443037",
+    "name": "PJKT˸ Fest 2026 - Hub Pre-Release",
+    "author": "Karet",
+    "genres": [
+      "FESTIVAL",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_501c9f08-cd8c-4b77-94d9-69e631ff5374",
+    "name": "中文歌友会-体育场EMF舞台旧",
+    "author": "小杨又失利了",
+    "genres": [
+      "MUSIC",
+      "EVENT",
+      "FESTIVAL"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+    "name": "アストロビーチ",
+    "author": "チョス_Thoth",
+    "genres": [
+      "MUSIC",
+      "STAGE",
+      "BEACH",
+      "EVENT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_d3179055-a51c-4998-9051-0217850d74c6",
+    "name": "MMD AfterDark the dance continues",
+    "author": "TheMCPanda",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "MMD",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_40047403-ec3a-46a8-b780-389619d8f2a9",
+    "name": "MMD Night",
+    "author": "shiuk",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "MMD"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_ebc4bce3-2372-4b1e-ab0c-f9e1f8095958",
+    "name": "超！寝転ん盆踊り2026",
+    "author": "Nekoro",
+    "genres": [
+      "DANCE",
+      "EVENT",
+      "FESTIVAL",
+      "JAPAN"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_73808a9d-e4e4-412c-8973-a88e6ffd286d",
+    "name": "〖YAKEKU-SORAN 〗DanceStudio",
+    "author": "さまーうぉず",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "STUDIO",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_64512407-2f2f-44e5-b7fc-4bdc4a188d4f",
+    "name": "もうダンスダンスダンスワールド",
+    "author": "nyasuta",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "STUDIO"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_079d7e4c-6e77-4b6e-ae0e-4bba5bc97472",
+    "name": "Ingress dance studio v2",
+    "author": "Clamat",
+    "genres": [
+      "DANCE",
+      "STUDIO",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_d2d0399f-6d0e-4678-9d9c-48079d470206",
+    "name": "-yuuri-Luminous Blue",
+    "author": "o_ゆうり_o",
+    "genres": [
+      "MUSIC",
+      "AUDIOLINK",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
   }
 ]
