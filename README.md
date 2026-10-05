@@ -18,6 +18,8 @@ Public site: https://showchoo.github.io/vrc-club-charts/
 - Automatic hiding of worlds confirmed unavailable by the snapshot collector
 - Canonical metadata, JSON-LD and generated sitemap
 - GitHub Pages hosting with no database/backend required
+- Event calendar with separate event registry and public submission form
+- World and event submissions via GitHub Issue Forms
 
 ## Ranking model
 
@@ -75,6 +77,8 @@ GitHub Pages deploys:
 - `index.html` — main charts and discovery
 - `about.html` — methodology / editorial policy
 - `privacy.html` — privacy policy
+- `events.html` / `events.js` — upcoming VRChat music event calendar
+- `data/events.json` — curated event registry
 - `app.js` / `styles.css` — frontend
 - `data/worlds.json` — curated registry
 - `data/weekly-ranking.json` — public chart payload
