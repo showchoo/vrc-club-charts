@@ -67,11 +67,14 @@ function renderCraftRanking() {
 
   if (!rows.length) {
     board.innerHTML = `<div class="ranking-empty">
-      <div class="ranking-empty-mark">—</div>
-      <div>
+      <div class="ranking-empty-visual" aria-hidden="true">
+        <span data-text="00">00</span>
+        <b>AWAITING REVIEWS</b>
+      </div>
+      <div class="ranking-empty-copy">
         <span>OFFICIAL PANEL RANKING</span>
-        <strong>まだ正式順位はありません。</strong>
-        <p>3人以上の独立したレビュアー評価が集まったワールドから、ここにCraftsmanship Rankingが表示されます。仮の点数や人気順で埋めることはしません。</p>
+        <strong>正式ランキング準備中</strong>
+        <p>3人以上の独立レビューが揃ったワールドから順位を公開します。人気順や仮点数では埋めません。</p>
       </div>
       <a class="secondary-button" href="reviewer.html">HOW IT WORKS ↗</a>
     </div>`;
@@ -189,8 +192,12 @@ function initRankingScene() {
   function draw() {
     cx += (tx - cx) * 0.075;
     cy += (ty - cy) * 0.075;
-    scene.style.setProperty('--scene-x', cx.toFixed(3));
-    scene.style.setProperty('--scene-y', cy.toFixed(3));
+    const sx = cx.toFixed(3);
+    const sy = cy.toFixed(3);
+    scene.style.setProperty('--scene-x', sx);
+    scene.style.setProperty('--scene-y', sy);
+    hero.style.setProperty('--scene-x', sx);
+    hero.style.setProperty('--scene-y', sy);
     if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) {
       raf = requestAnimationFrame(draw);
     } else {
