@@ -226,8 +226,9 @@ function homeEventCard(event) {
   }).format(start);
   const status = homeEventStatus(event);
   const detail = event.id ? `events/${event.id}.html` : 'events.html';
+  const provenance = event.autoImported ? 'PUBLIC FEED' : 'CURATED';
   return `<a class="home-event-card ${status === 'LIVE NOW' ? 'is-live' : ''}" href="${detail}">
-    <div class="home-event-top"><span>${escapeHtml(when)}</span><b>${status}</b></div>
+    <div class="home-event-top"><span>${escapeHtml(when)}</span><span class="home-event-badges"><i>${provenance}</i><b>${status}</b></span></div>
     <h3>${escapeHtml(event.name)}</h3>
     <p>${escapeHtml(event.worldName || 'VRChat event instance')}</p>
     <div class="tags">${(event.genres || []).slice(0,3).map(g=>`<span class="tag">${escapeHtml(g)}</span>`).join('')}</div>
