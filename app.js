@@ -78,6 +78,15 @@ function visibleScore(w) {
   return value == null ? '—' : Number(value).toFixed(1);
 }
 
+function movementHtml(w) {
+  const value = w.movement?.[state.view];
+  if (value === 'new') return '<span class="movement movement-new">NEW</span>';
+  if (typeof value !== 'number') return '';
+  if (value > 0) return `<span class="movement movement-up">↑${value}</span>`;
+  if (value < 0) return `<span class="movement movement-down">↓${Math.abs(value)}</span>`;
+  return '<span class="movement movement-flat">—</span>';
+}
+
 function discoveryCard(w) {
   const visits = w.totals?.visits;
   const favorites = w.totals?.favorites;
@@ -120,7 +129,7 @@ function sortDiscovery(items) {
 function card(w, rank) {
   return `<article class="podium-card ${w.thumbnail ? 'has-thumb' : ''}">
     ${mediaHtml(w)}
-    <div class="rank-badge">${String(rank).padStart(2,'0')}</div>
+    <div class="rank-heading"><div class="rank-badge">${String(rank).padStart(2,'0')}</div>${movementHtml(w)}</div>
     <h3><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
     <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
@@ -133,7 +142,7 @@ function card(w, rank) {
 
 function row(w, rank) {
   return `<article class="rank-row">
-    <div class="rank-index">${String(rank).padStart(2,'0')}</div>
+    <div class="rank-index-wrap"><div class="rank-index">${String(rank).padStart(2,'0')}</div>${movementHtml(w)}</div>
     <div><div class="world-name"><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></div><div class="world-meta">${escapeHtml(w.author || '—')} · ${(w.genres||[]).join(' / ')}</div></div>
     <div class="metric"><strong>${visibleScore(w)}</strong><span>score</span></div>
     <div class="metric"><strong>${formatDelta(w.weekly?.visits)}</strong><span>7d visits</span></div>
