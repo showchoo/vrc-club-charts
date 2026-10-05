@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "name": "PSY-APPLE — Weekly Psy-Trance Party",
+    "start": "2026-10-05T22:00:00+09:00",
+    "end": "2026-10-06T01:00:00+09:00",
+    "organizer": "PSY-APPLE / yossy222 & Waha~",
+    "worldId": "wrld_5ab2330c-f507-42a4-9a46-4a0be0745d13",
+    "worldName": "Psychedelic Festival Dome / Group+ PSYAPL.9537",
+    "genres": [
+      "PSYTRANCE",
+      "DJ",
+      "QUEST"
+    ],
+    "url": "https://psy-apple.club/",
+    "source": "Official PSY-APPLE site + 2026-10-05 lineup announcement"
+  },
+  {
+    "name": "S.O NIGHT LAST PARTY 0",
+    "start": "2026-10-06T21:00:00+09:00",
+    "end": "2026-10-07T00:10:00+09:00",
+    "organizer": "かんらふ",
+    "worldName": "HeXaHedron (Group+)",
+    "genres": [
+      "DJ",
+      "MUSIC",
+      "EVENT"
+    ],
+    "url": "https://x.com/kanlaf35",
+    "source": "Organizer announcement mirrored by Yahoo realtime search"
+  },
+  {
+    "name": "Quest Dance party Club No.278",
+    "start": "2026-10-06T21:00:00+09:00",
+    "organizer": "Quest Danceparty Club",
+    "worldName": "VRChat Group instance",
+    "genres": [
+      "DJ",
+      "DANCE",
+      "QUEST"
+    ],
+    "url": "https://kafka2306.github.io/cast_event_cal/",
+    "source": "VRChat Event Calendar — 2026-10-06 OPEN 20:40 / START 21:00 JST"
+  },
+  {
+    "name": "PSY-APPLE : 5th Anniversary",
+    "start": "2026-10-17T20:00:00+09:00",
+    "end": "2026-10-18T08:00:00+09:00",
+    "organizer": "PSY-APPLE",
+    "worldName": "PSY-APPLE Group+",
+    "genres": [
+      "PSYTRANCE",
+      "DJ",
+      "ANNIVERSARY"
+    ],
+    "url": "https://psy-apple.club/",
+    "source": "2026-10-17 anniversary announcement"
+  }
+]
