@@ -52,11 +52,13 @@ def clean(value) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
 
-def source_text(event: dict) -> str:
+def source_text(event: dict, *, include_category: bool = True) -> str:
     parts = [
         event.get("title"), event.get("description"), event.get("organizer"),
-        event.get("location"), event.get("category"), " ".join(event.get("tags") or []),
+        event.get("location"), " ".join(event.get("tags") or []),
     ]
+    if include_category:
+        parts.append(event.get("category"))
     return " " + " ".join(clean(x).lower() for x in parts if x) + " "
 
 
@@ -90,7 +92,9 @@ def is_music_event(event: dict, now: dt.datetime) -> bool:
 
     category = clean(event.get("category")).lower()
     category_ok = category in {x.lower() for x in ALLOWED_CATEGORIES}
-    text = source_text(event)
+    # Category is only a coarse gate. It must not satisfy the content keyword
+    # test by itself, otherwise every generic "music/dance" calendar entry gets in.
+    text = source_text(event, include_category=False)
     keyword_ok = any(term in text for term in STRONG_TERMS)
     return category_ok and keyword_ok and bool(clean(event.get("url")))
 
@@ -133,6 +137,7 @@ def main() -> int:
             "source": "KAFKA2306/cast_event_cal public event feed",
             "sourceProvider": "cast_event_cal",
             "upstreamId": clean(event.get("id")),
+            "upstreamCategory": clean(event.get("category")),
             "autoImported": True,
             "confidence": event.get("confidence"),
         })
@@ -140,7 +145,7 @@ def main() -> int:
     # Stable ordering and hard cap keep the public site focused rather than mirroring
     # the entire upstream calendar.
     selected.sort(key=lambda e: (e["start"], e["name"].casefold()))
-    selected = selected[:120]
+    selected = selected[:90]
     OUT.write_text(json.dumps(selected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Imported {len(selected)} music/dance event candidates from {len(rows)} upstream events")
     return 0
