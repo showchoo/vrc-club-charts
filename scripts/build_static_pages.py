@@ -153,11 +153,10 @@ def site_header(prefix: str = "", active: str = "") -> str:
         return "nav-link active" if key == active else "nav-link"
     return f"""  <header class="site-header">
     <a class="brand" href="{prefix}index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
-    <nav class="nav">
-      <a class="{cls('charts')}" href="{prefix}index.html">Charts</a>
+    <nav class="nav focus-nav">
+      <a class="{cls('home')}" href="{prefix}index.html">Home</a>
       <a class="{cls('worlds')}" href="{prefix}worlds/index.html">Worlds</a>
       <a class="{cls('events')}" href="{prefix}events.html">Events</a>
-      <a class="{cls('djs')}" href="{prefix}djs.html">DJs</a>
       <a class="{cls('reviewer')}" href="{prefix}reviewer.html">Reviewer</a>
       <a class="{cls('about')}" href="{prefix}about.html">About</a>
     </nav>
