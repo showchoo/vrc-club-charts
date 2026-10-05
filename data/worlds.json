@@ -630,5 +630,129 @@
       "EVENT"
     ],
     "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
+    "name": "Eden 6",
+    "author": "SimplySymmetry",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "DANCE",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+    "name": "Decibel Vault VR Event Center",
+    "author": "SoundInVolumes",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "DANCE",
+      "EVENT",
+      "STAGE"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa",
+    "name": "BMF SHARKCITY CLUB",
+    "author": "ҠąɾէìҽrĎøƐ",
+    "genres": [
+      "MUSIC",
+      "CLUB",
+      "DJ",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_8dd8d168-509f-4191-98dc-844dbf4f9df3",
+    "name": "ZODIAC DJ MAP",
+    "author": "Virgo4u",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "NIGHT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_980770fa-673c-41bd-86ac-5394fab2cc41",
+    "name": "EL REGGAETION ROOM",
+    "author": "AlyKat128",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",
+    "name": "ZODIAC DJ EVENT",
+    "author": "Virgo4u",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "EVENT",
+      "NIGHT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_92ca3241-20fa-4805-9c17-41c475ce84be",
+    "name": "SON OF A BEACH",
+    "author": "Stariielle",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "EVENT",
+      "BEACH",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_1a13ec63-43ae-4616-bb80-f7c05f2a6d99",
+    "name": "Trance VR˸ TranceMission",
+    "author": "Kitsune。",
+    "genres": [
+      "MUSIC",
+      "CLUB",
+      "DJ",
+      "TRANCE",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_30412c54-724d-45d0-901b-ef832ab2f97f",
+    "name": "Project Obsidian 2․0",
+    "author": "Aryhith",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "EVENT"
+    ],
+    "editorialStatus": "unreviewed"
+  },
+  {
+    "id": "wrld_786726d2-81c7-4356-8db8-7c29503c56ad",
+    "name": "The Beach Rave",
+    "author": "ES Studios",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "RAVE",
+      "BEACH",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed"
   }
 ]
