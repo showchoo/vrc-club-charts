@@ -2,6 +2,11 @@ name: Discover new club Worlds
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/discover_worlds.py"
+      - ".github/workflows/discover-worlds.yml"
   schedule:
     # Daily at 02:47 JST. Candidate discovery is lightweight and does not call VRChat search APIs.
     - cron: "47 17 * * *"
