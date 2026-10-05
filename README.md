@@ -117,3 +117,15 @@ Future monetization can include display advertising, clearly labeled sponsored e
 ## Trademark
 
 This is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.
+
+
+## Current public beta
+
+- Public site: https://showchoo.github.io/vrc-club-charts/
+- 50 tracked VRChat club / DJ / music worlds
+- 6 provisional editorial-ranked worlds
+- 44 discovery / pending-review worlds
+- Weekly static snapshots for visits and favorites
+- Unreviewed worlds are excluded from Craftsmanship/Overall editorial scoring
+- Snapshot pipeline now captures VRChat thumbnails and records unavailable worlds
+- Sitemap / canonical metadata are included for search discovery
