@@ -76,7 +76,7 @@ def site_header(prefix: str = "") -> str:
 def footer(prefix: str = "") -> str:
     return f"""  <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / PUBLIC BETA</span>
-    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
+    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
   </footer>
 </body>
 </html>
@@ -179,6 +179,7 @@ def main() -> int:
         BASE_URL,
         f"{BASE_URL}about.html",
         f"{BASE_URL}privacy.html",
+        f"{BASE_URL}events.html",
         f"{BASE_URL}worlds/",
     ]
     urls.extend(
