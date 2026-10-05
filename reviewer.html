@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261006-37" />
+  <link rel="stylesheet" href="styles.css?v=20261006-39" />
 </head>
 <body class="reviewer-page">
   <div class="noise"></div>
@@ -159,10 +159,58 @@
         </form>
       </div>
 
-      <div class="reviewer-actions reviewer-actions-secondary">
-        <a class="secondary-button" href="https://github.com/showchoo/vrc-club-charts/issues/new?template=review_submission.yml" target="_blank" rel="noreferrer">APPROVED REVIEWER: SUBMIT A REVIEW ↗</a>
+      <div class="reviewer-apply-card reviewer-review-card" id="submit-review">
+        <div class="reviewer-apply-head">
+          <div>
+            <p class="kicker">SUBMIT A REVIEW</p>
+            <h3>Craftsmanship Review</h3>
+          </div>
+          <span>APPROVED REVIEWERS</span>
+        </div>
+
+        <form class="reviewer-apply-form" id="reviewSubmitForm">
+          <div class="reviewer-form-grid">
+            <label><span>Reviewer ID</span><input name="reviewer_id" maxlength="64" placeholder="reviewer-..." required /></label>
+            <label><span>Access Code</span><input name="access_code" type="password" autocomplete="off" placeholder="vcc_rev_..." required /></label>
+          </div>
+
+          <div class="reviewer-form-grid">
+            <label><span>World</span><input name="world_id" list="reviewWorldList" placeholder="World IDを入力 / 選択" required /><datalist id="reviewWorldList"></datalist></label>
+            <label><span>Review date</span><input name="reviewed_at" type="date" required /></label>
+          </div>
+
+          <fieldset>
+            <legend>7 criteria <small>合計100点</small></legend>
+            <div class="review-score-grid">
+              <label><span>Visual /20</span><input type="number" name="visual" min="0" max="20" step="1" required /></label>
+              <label><span>Lighting & VJ /20</span><input type="number" name="lighting" min="0" max="20" step="1" required /></label>
+              <label><span>Sound /15</span><input type="number" name="sound" min="0" max="15" step="1" required /></label>
+              <label><span>Spatial /15</span><input type="number" name="spatial" min="0" max="15" step="1" required /></label>
+              <label><span>Interaction /10</span><input type="number" name="interaction" min="0" max="10" step="1" required /></label>
+              <label><span>VR Originality /10</span><input type="number" name="originality" min="0" max="10" step="1" required /></label>
+              <label><span>Optimization /10</span><input type="number" name="optimization" min="0" max="10" step="1" required /></label>
+              <div class="review-total"><span>TOTAL</span><strong id="reviewTotal">0</strong><b>/100</b></div>
+            </div>
+          </fieldset>
+
+          <label>
+            <span>Review comment</span>
+            <textarea name="comment" minlength="10" maxlength="2000" rows="4" placeholder="点数の根拠や印象を簡潔に。" required></textarea>
+          </label>
+
+          <div class="reviewer-principles">
+            <label><input type="checkbox" name="conflict" /><span>このWorld / Groupの制作者・スタッフ等、直接の利害関係があります。</span></label>
+            <label><input type="checkbox" name="visited" required /><span>実際にこのWorldへ入り、共通の7項目基準で採点しました。</span></label>
+          </div>
+
+          <div class="reviewer-submit-row">
+            <button class="primary-button reviewer-submit" type="submit">SUBMIT REVIEW →</button>
+            <p>送信後は管理者確認を経て公開されます。</p>
+          </div>
+          <div class="reviewer-form-status" id="reviewSubmitStatus" role="status" aria-live="polite"></div>
+        </form>
       </div>
-      <p class="reviewer-action-note">レビュー投稿は承認済みReviewerのみ有効です。1 Reviewer × 1 Worldにつき最新の公開レビュー1件だけが集計されます。</p>
+      <p class="reviewer-action-note">承認済みReviewerのみ投稿できます。1 Reviewer × 1 Worldでは、公開済みレビューのうち最新のものだけがランキング集計に使われます。</p>
     </section>
 
     <p class="disclaimer">The reviewer system is in public beta. Reviewer approval is manual; valid reviews from approved reviewers are ingested and ranked automatically. Thresholds may be refined as real review data accumulates.</p>
@@ -244,6 +292,87 @@
           setStatus('申請を受け付けました。審査後、記入した連絡先へ案内します。', 'success');
         } catch (error) {
           setStatus(error instanceof Error ? error.message : '送信できませんでした。', 'error');
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const form = document.getElementById('reviewSubmitForm');
+      if (!form) return;
+      const status = document.getElementById('reviewSubmitStatus');
+      const totalEl = document.getElementById('reviewTotal');
+      const worldList = document.getElementById('reviewWorldList');
+      const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/review-submit';
+      const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
+      const scoreNames = ['visual','lighting','sound','spatial','interaction','originality','optimization'];
+
+      const today = new Date();
+      const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0,10);
+      form.elements.reviewed_at.value = localToday;
+      form.elements.reviewer_id.value = localStorage.getItem('vccReviewerId') || '';
+
+      fetch('data/weekly-ranking.json')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+          const worlds = Array.isArray(data?.worlds) ? data.worlds : [];
+          worldList.innerHTML = worlds
+            .filter(w => w.chartEligible === true && w.id)
+            .map(w => '<option value="' + String(w.id).replace(/"/g,'&quot;') + '">' + String(w.name || w.id).replace(/</g,'&lt;') + '</option>')
+            .join('');
+        }).catch(() => {});
+
+      function updateTotal() {
+        const total = scoreNames.reduce((sum,name) => sum + (Number(form.elements[name].value) || 0), 0);
+        totalEl.textContent = String(total);
+        totalEl.dataset.over = total > 100 ? 'true' : 'false';
+      }
+      scoreNames.forEach(name => form.elements[name].addEventListener('input', updateTotal));
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submit = form.querySelector('button[type="submit"]');
+        const total = scoreNames.reduce((sum,name) => sum + Number(form.elements[name].value), 0);
+        if (total > 100) {
+          status.textContent = '合計点が100点を超えています。';
+          status.dataset.state = 'error';
+          return;
+        }
+        const reviewerId = form.elements.reviewer_id.value.trim();
+        const payload = {
+          reviewerId,
+          accessCode: form.elements.access_code.value.trim(),
+          worldId: form.elements.world_id.value.trim(),
+          reviewedAt: form.elements.reviewed_at.value,
+          conflict: form.elements.conflict.checked,
+          scores: Object.fromEntries(scoreNames.map(name => [name, Number(form.elements[name].value)])),
+          comment: form.elements.comment.value.trim()
+        };
+        submit.disabled = true;
+        status.textContent = '送信中…';
+        status.dataset.state = 'loading';
+        try {
+          const response = await fetch(endpoint, {
+            method:'POST',
+            headers:{'apikey':apiKey,'Content-Type':'application/json'},
+            body:JSON.stringify(payload)
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.error || 'レビューを送信できませんでした。');
+          localStorage.setItem('vccReviewerId', reviewerId);
+          const keepReviewer = reviewerId;
+          form.reset();
+          form.elements.reviewer_id.value = keepReviewer;
+          form.elements.reviewed_at.value = localToday;
+          updateTotal();
+          status.textContent = 'レビューを受け付けました。管理者確認後に公開されます。';
+          status.dataset.state = 'success';
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : 'レビューを送信できませんでした。';
+          status.dataset.state = 'error';
         } finally {
           submit.disabled = false;
         }
