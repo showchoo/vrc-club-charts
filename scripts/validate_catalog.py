@@ -82,6 +82,9 @@ def main() -> int:
         if not isinstance(w.get("chartEligible"), bool):
             fail(f"{wid}: chartEligible must be boolean")
             errors += 1
+        elif w.get("chartEligible") is not True:
+            fail(f"{wid}: main World catalog is club-only; chartEligible must be true")
+            errors += 1
 
     ranked_ids = [w.get("id") for w in ranking.get("worlds", [])]
     unknown = sorted(set(ranked_ids) - seen)
