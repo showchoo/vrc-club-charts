@@ -74,3 +74,26 @@ Ten additional DJ/music worlds were added from the VRCW DJ category after checki
 Source category: https://www.vrcw.net/category/detail/dj
 
 As with the other Discovery entries, this verifies identity/category metadata only. It does not constitute an editorial score or endorsement.
+
+
+## Event calendar seed — 2026-10-05
+
+Initial event data is intentionally small and manually verified.
+
+- PSY-APPLE official site: https://psy-apple.club/
+  - official description: Psychedelic Trance party in VRChat/Cluster
+  - regular schedule: every Monday at 22:00 JST
+  - VRChat Group: PSYAPL.9537
+- PSY-APPLE current 2026-10-05 lineup/time announcement was checked from public social search.
+- PSY-APPLE 5th Anniversary on 2026-10-17 20:00–08:00 JST was checked from public organizer/performer announcements.
+- S.O NIGHT LAST PARTY 0 on 2026-10-06 21:00–24:10 JST was checked from the organizer announcement mirrored in public realtime search.
+- Quest Dance party Club No.278 on 2026-10-06 was checked from the VRChat Event Calendar public listing.
+
+Event listing never changes a world’s ranking score.
+
+## DJ directory seed — 2026-10-05
+
+The first DJ profiles come from the publicly documented PSY-APPLE member roster at:
+- https://psy-apple.club/
+
+Names, roles, affiliations and genre labels are directory metadata only. The DJ directory is explicitly non-ranked. This initial crew-based seed is not intended to represent the full VRChat DJ scene; public submissions are enabled so the directory can broaden over time.
