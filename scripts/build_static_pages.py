@@ -55,7 +55,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <meta property="og:url" content="{esc(canonical)}" />
   <meta property="og:site_name" content="VRC Club Charts" />
   <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-12" />
+  <link rel="stylesheet" href="{prefix}styles.css?v=20261005-13" />
   <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -63,15 +63,17 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
 """
 
 
-def site_header(prefix: str = "") -> str:
+def site_header(prefix: str = "", active: str = "") -> str:
+    def cls(key: str) -> str:
+        return "nav-link active" if key == active else "nav-link"
     return f"""  <header class="site-header">
     <a class="brand" href="{prefix}index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
     <nav class="nav">
-      <a class="nav-link" href="{prefix}index.html">Charts</a>
-      <a class="nav-link active" href="{prefix}worlds/index.html">Worlds</a>
-      <a class="nav-link" href="{prefix}events.html">Events</a>
-      <a class="nav-link" href="{prefix}djs.html">DJs</a>
-      <a class="nav-link" href="{prefix}about.html">About</a>
+      <a class="{cls('charts')}" href="{prefix}index.html">Charts</a>
+      <a class="{cls('worlds')}" href="{prefix}worlds/index.html">Worlds</a>
+      <a class="{cls('events')}" href="{prefix}events.html">Events</a>
+      <a class="{cls('djs')}" href="{prefix}djs.html">DJs</a>
+      <a class="{cls('about')}" href="{prefix}about.html">About</a>
     </nav>
   </header>
 """
@@ -191,7 +193,7 @@ def world_page(w: dict) -> str:
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
 
-    return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../") + f"""
+    return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
     <a class="world-back" href="../index.html#discoverySection">← VRC Club Charts</a>
     <section class="world-detail-hero">
@@ -227,6 +229,73 @@ def world_page(w: dict) -> str:
 """ + footer("../")
 
 
+def dj_page(dj: dict, events: list[dict]) -> str:
+    dj_id = dj.get("id", "")
+    name = dj.get("name") or dj_id
+    role = dj.get("role") or "DJ"
+    affiliations = dj.get("affiliations") or []
+    genres = dj.get("genres") or []
+    source = dj.get("source")
+    canonical = f"{BASE_URL}djs/{quote(dj_id)}.html"
+    description = f"{name} — VRChat DJ profile, genres and upcoming appearances on VRC Club Charts."
+    tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres)
+    crews = " / ".join(affiliations) or "—"
+
+    appearances = []
+    for event in sorted(events, key=lambda e: e.get("start", "")):
+        if dj_id not in (event.get("djIds") or []):
+            continue
+        when = str(event.get("start") or "").replace("T", " ")[:16]
+        appearances.append(
+            f'<a class="dj-event-row" href="../events.html"><span>{esc(when)}</span>'
+            f'<strong>{esc(event.get("name"))}</strong><span>{esc(event.get("worldName") or "VRChat")}</span><span>↗</span></a>'
+        )
+
+    person_ld = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": name,
+        "description": role,
+        "url": canonical,
+        "knowsAbout": genres,
+        "memberOf": affiliations,
+    }
+    source_button = (
+        f'<a class="secondary-button" href="{esc(source)}" target="_blank" rel="noreferrer">PUBLIC SOURCE ↗</a>'
+        if source else ""
+    )
+    appearances_html = "".join(appearances) if appearances else '<div class="dj-events-empty">Upcoming linked appearances are being collected.</div>'
+
+    return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "djs") + f"""
+  <main class="shell world-detail-page dj-detail-page">
+    <a class="world-back" href="../djs.html">← DJ Directory</a>
+    <section class="world-detail-hero dj-detail-hero">
+      <div class="world-detail-copy">
+        <p class="kicker">NON-RANKED DJ PROFILE</p>
+        <h1>{esc(name)}</h1>
+        <p class="world-detail-author">{esc(role)}</p>
+        <div class="tags">{tags}</div>
+        <div class="world-detail-actions">{source_button}</div>
+      </div>
+      <div class="world-detail-image world-detail-image-placeholder dj-detail-mark">DJ</div>
+    </section>
+
+    <section class="world-detail-meta dj-detail-meta">
+      <div><span>AFFILIATION</span><strong>{esc(crews)}</strong></div>
+      <div><span>PROFILE TYPE</span><strong>DIRECTORY / NON-RANKED</strong></div>
+    </section>
+
+    <section class="dj-appearances">
+      <div class="section-heading">
+        <div><p class="kicker">APPEARANCES</p><h2>Upcoming events</h2></div>
+      </div>
+      <div class="dj-event-list">{appearances_html}</div>
+    </section>
+    <script type="application/ld+json">{json.dumps(person_ld, ensure_ascii=False)}</script>
+  </main>
+""" + footer("../")
+
+
 def index_page(worlds: list[dict]) -> str:
     canonical = f"{BASE_URL}worlds/"
     description = "Browse VRChat club, DJ, rave and AudioLink worlds tracked by VRC Club Charts."
@@ -241,7 +310,7 @@ def index_page(worlds: list[dict]) -> str:
           <span>{esc(genres)}</span>
           <span>↗</span>
         </a>""")
-    return page_head("Worlds — VRC Club Charts", description, canonical, "../") + site_header("../") + f"""
+    return page_head("Worlds — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>VRChat club worlds.</h1>
@@ -259,12 +328,20 @@ def main() -> int:
     data = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
     worlds = data.get("worlds", [])
     events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    djs = json.loads((ROOT / "data/djs.json").read_text(encoding="utf-8"))
 
     world_dir = out / "worlds"
     world_dir.mkdir(parents=True, exist_ok=True)
     for w in worlds:
         (world_dir / f"{w['id']}.html").write_text(world_page(w), encoding="utf-8")
     (world_dir / "index.html").write_text(index_page(worlds), encoding="utf-8")
+
+    dj_dir = out / "djs"
+    dj_dir.mkdir(parents=True, exist_ok=True)
+    for dj in djs:
+        if dj.get("id"):
+            (dj_dir / f"{dj['id']}.html").write_text(dj_page(dj, events), encoding="utf-8")
+
     (out / "events.ics").write_text(build_ics(events), encoding="utf-8", newline="")
     inject_event_json_ld(out, events)
 
@@ -281,6 +358,11 @@ def main() -> int:
         for w in worlds
         if w.get("availabilityStatus") != "unavailable"
     )
+    urls.extend(
+        f"{BASE_URL}djs/{quote(dj['id'])}.html"
+        for dj in djs
+        if dj.get("id")
+    )
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for i, url in enumerate(urls):
         priority = "1.0" if i == 0 else ("0.8" if "/worlds/" in url else "0.5")
@@ -288,7 +370,7 @@ def main() -> int:
         sitemap += f"  <url><loc>{esc(url)}</loc><changefreq>{change}</changefreq><priority>{priority}</priority></url>\n"
     sitemap += "</urlset>\n"
     (out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-    print(f"Generated {len(worlds)} world pages, {len(events)} calendar events, ICS feed and sitemap")
+    print(f"Generated {len(worlds)} world pages, {len(djs)} DJ pages, {len(events)} calendar events, ICS feed and sitemap")
     return 0
 
 
