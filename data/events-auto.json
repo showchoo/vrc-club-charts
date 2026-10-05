@@ -13,6 +13,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "a3020ed85a5b1167de2a",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -30,6 +31,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "4742ddb75d14c3d7b1aa",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -47,6 +49,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "f1f51019d4972ce90699",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -64,6 +67,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "feda26db5a934e7a6824",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -81,6 +85,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "8375efd4b05fe830678b",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -98,6 +103,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "1c7a6c9488c169a87bb8",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -115,6 +121,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "7f2319975aadb2b9689c",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -132,6 +139,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "b922fc15dbf97176e9e9",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -149,6 +157,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "91f37a418d597418954c",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -167,6 +176,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "90217ed0f38d93b92070",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -185,6 +195,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "82860e99b4d59768b550",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -202,6 +213,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "236f26137f4924dadb65",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -219,6 +231,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "e431dc7370572987cfc3",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -236,6 +249,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "898a526d67c46ebb1b0e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -253,6 +267,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "207993f68d2092159d20",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -271,6 +286,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "aeeef20d67bff95e430f",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -288,6 +304,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "47dd9af4048515dd6180",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -305,6 +322,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "7a654025888a10b10c31",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -322,6 +340,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6185c8f459377493007b",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -341,6 +360,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "c96e9884304adfd71a6e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -359,6 +379,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "1cfbd27d1529d810351f",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -376,6 +397,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6923f2f9643dd8e05cde",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -394,6 +416,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "715f5bc4ed8b809dbed8",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -411,6 +434,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "b0c774488f67f87eaa5a",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -428,6 +452,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "4506be0f075887d65527",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -445,6 +470,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "2cb280d9c94664ef02b8",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -462,6 +488,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "occ_cf531371ae01f70fa7fd",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -479,6 +506,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "fc17ad4a2210c90a7a40",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -496,6 +524,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "ec23f9d9e96ac0c9c576",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -513,6 +542,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "a8f8079a5c5fe4256e55",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -530,6 +560,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "28d0a167d71240d06277",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -547,6 +578,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "daa82d9e300412d5a2b0",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -564,6 +596,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "83e7c10d6f01553e3cf2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -581,6 +614,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "050b8452a06f3ab416df",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -598,6 +632,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "0222354b3930b5dc93da",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -615,6 +650,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5331cb5bc97440c1efcd",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -632,6 +668,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "3dc88f91b7f72852b41e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -649,6 +686,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "be3ae92249c5115d81c6",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -666,6 +704,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "3f2b6c3b58ce2d79a8f4",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -683,6 +722,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "9e843113443accc487ad",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -700,6 +740,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "4e6dd2f60edd4b871cdc",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -717,6 +758,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "039101bd8f5a7845df93",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -734,6 +776,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "293a0eb5f40bfa9702f2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -751,6 +794,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6635bd76bff9222a6ff7",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -768,6 +812,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "24c3553d9b6ac410f5d5",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -785,6 +830,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "e80e8ecfbd2e207c564c",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -802,6 +848,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "3d105d21b7e1a4d27c71",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -819,6 +866,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "11c60190c53bf567ec6e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -837,6 +885,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "4d5fefc05a3eb835c232",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -854,6 +903,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d5d2744514a6018e3d46",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -871,6 +921,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "f940f588f95beb66b14b",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -888,6 +939,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "a78193d96825e31dada6",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -905,6 +957,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "ee3aacf46cbae6ea81fd",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -922,6 +975,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5f89d3c6e7b77170480e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -939,6 +993,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d4262d77e0fb5a18e5d2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -956,6 +1011,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "2b114aa2ce46c4d4e2d4",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -973,6 +1029,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6eb8b3cfe483b3c5f95c",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -990,6 +1047,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "occ_262593b01cd08986691c",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1007,6 +1065,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "dcb5ba147589b817fea2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1024,6 +1083,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "4e967326494a44be1623",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1041,6 +1101,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "12152a2d53474b3a4afe",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1059,6 +1120,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "12bf9add90b6ed769a19",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1076,6 +1138,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "960f24d50bc325b4aeb3",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1093,6 +1156,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "a53c1dd99b114f38efa7",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1110,6 +1174,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "e76889c8dbd0ea03980d",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1127,6 +1192,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "0d9a60f1acb0d0c12056",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1144,6 +1210,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "b174b05fcc50b684f5b2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1161,6 +1228,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "7b511354e755546a071d",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1178,6 +1246,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6855b81488889156540e",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1195,6 +1264,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d7e036fc447d6de1303f",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1212,6 +1282,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d42c5df4b77b61765a0a",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1229,6 +1300,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "9a3079cbd32cfe4947ae",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1246,6 +1318,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "aca49f660b23d71e5ae5",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1263,6 +1336,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "57f6749f88b29c5faaa2",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1282,6 +1356,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "b3e1b4ceca8daa5a62ea",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1299,6 +1374,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5c7a52b0db7ef45a63b4",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1316,6 +1392,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5dcd531c0a9bb45047b7",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1333,6 +1410,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6cc23f2ae6c3e42851dd",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1350,6 +1428,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d6619b162f7c2faf6ade",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1367,6 +1446,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "d060eb3c68fd2fdab6c8",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1384,6 +1464,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "deb81607554ed055ebf1",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1401,6 +1482,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "bbf63d27121f009394e9",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1418,6 +1500,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "7a4e2c389c92cf5f77f1",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1435,6 +1518,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "33a2e12ecdfe8c770c19",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1452,6 +1536,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "0660b159c8fad7aeb2bf",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1469,6 +1554,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "10f91474b29336d05715",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1486,6 +1572,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "6555c21601f3e34057ed",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1503,6 +1590,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "ed47dbfaf846d949fb65",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1520,6 +1608,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "c37518a8f382773041ca",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
@@ -1537,381 +1626,7 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "0636a193769ab1cd54c2",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-770027acbf158e5ae10c",
-    "name": "PARADISE Пятница в Mint Cat Club",
-    "start": "2026-10-16T19:00:00Z",
-    "end": "2026-10-16T20:30:00Z",
-    "organizer": "Mint Cat Club",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_f1a4e5cd-338b-417b-b405-9efc98ec0193",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "770027acbf158e5ae10c",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-ff9c090753ffff18b52d",
-    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-16T21:00:00Z",
-    "end": "2026-10-16T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_c54b4477-7351-421a-b3f0-ef1adc0a26b3",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "ff9c090753ffff18b52d",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9f3bf47facd86930269c",
-    "name": "【 VRChat DJイベント告知 】 |◤ PSY-APPLE : 5th Anniversary ◢| 🍍2026/10/17 (Sat) 🍍20:00-08:00 (JST) 🎵LINE…",
-    "start": "2026-10-16T23:00:00Z",
-    "end": null,
-    "organizer": "@yossy222_VRC",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/yossy222_VRC/status/2106694545840955611?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9f3bf47facd86930269c",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d923c23941e189e94d64",
-    "name": "🔥 VRChat Music Live⚡️ 𝐒𝐭𝐫𝐨𝐥𝐥𝐙 vs 𝗛𝗶𝗧𝗼𝗡𝗮𝗠𝗶 Live Tour \"THIS IS WAR\" Day2 - あなたの部屋をライブハウスに - 🗓️2026…",
-    "start": "2026-10-17T12:30:00Z",
-    "end": null,
-    "organizer": "@ClubColumn",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/ClubColumn/status/2105656233097417211?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d923c23941e189e94d64",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-496c98c24996041fc4d3",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-17T12:50:00Z",
-    "end": "2026-10-17T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_9585f4dd-b5b3-4164-ab08-3dc3af07b9c7",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "496c98c24996041fc4d3",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-5af0373c79c73d511940",
-    "name": "Back in the Inside Club",
-    "start": "2026-10-17T18:00:00Z",
-    "end": "2026-10-18T00:00:00Z",
-    "organizer": "The Teknoir Project",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_f3cfc1c2-af05-4ffc-8d1d-27bea4e5115c/calendar/cal_ab9ed329-2390-4fb2-bc95-aa36ec717fb4",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5af0373c79c73d511940",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-75254d9b626582f7b16f",
-    "name": "Karaoke Night",
-    "start": "2026-10-17T19:00:00Z",
-    "end": "2026-10-18T02:00:00Z",
-    "organizer": "Furry Music",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_731972f2-d10c-487b-9973-086a1a1ac983/calendar/cal_73189b99-c3cf-48f8-bf53-b1664ca659b6",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "75254d9b626582f7b16f",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-45990af5ef6a5bee4bf1",
-    "name": "Sinful Saturday - Dance Event",
-    "start": "2026-10-17T19:00:00Z",
-    "end": "2026-10-17T21:00:00Z",
-    "organizer": "RaClub",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_45754c73-7dc7-46ba-8c2b-236c9ba94daf/calendar/cal_3a84f392-9986-4378-8c6d-8300db3fab63",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "45990af5ef6a5bee4bf1",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-254938700122aa8176b6",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-18T12:50:00Z",
-    "end": "2026-10-18T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_ba312b59-832f-4a77-a15a-4a8174e1fa3b",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "254938700122aa8176b6",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-f402b91d41d68f8c5230",
-    "name": "LAPDANCE NIGHT",
-    "start": "2026-10-18T17:00:00Z",
-    "end": "2026-10-18T19:00:00Z",
-    "organizer": "BARDAK",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_1a1ad15a-2cdc-4991-9c59-2ca531abab5a/calendar/cal_03f75e58-19a3-4320-b8b3-3b7524af6045",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "f402b91d41d68f8c5230",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9625e147b5149aaf2087",
-    "name": "Sunday EVENT 10 PM CET 4 PM EST NSFW",
-    "start": "2026-10-18T20:00:00Z",
-    "end": "2026-10-18T21:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_d6231176-2f5a-4db0-8056-073538b9a5f6",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9625e147b5149aaf2087",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-ebf4dcf8e4d33a66513b",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-19T12:50:00Z",
-    "end": "2026-10-19T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_1b7c941e-c354-43fc-8fef-bbda74f694b5",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "ebf4dcf8e4d33a66513b",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-6dbe706e40a1bd0dd919",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-20T12:50:00Z",
-    "end": "2026-10-20T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_c457da6b-45ae-4eb6-983c-3133aae837bc",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6dbe706e40a1bd0dd919",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-1bf9139748f344f8526d",
-    "name": "Tuesday Regular EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-20T21:00:00Z",
-    "end": "2026-10-20T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_6bb39d53-4cfc-4f08-ba6d-10e041e86302",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "1bf9139748f344f8526d",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-41ae7e7b7f272c6d5751",
-    "name": "【10月度 開催 のお知らせ🎃】 『ダンス・パレット！』🎨 ダンス未経験の子も気軽に遊びに来てねー！ フルトラじゃなくても大丈夫！ 3点、デスクトップの方もお待ちしております🫶 ​📅 毎週水曜…",
-    "start": "2026-10-21T12:30:00Z",
-    "end": null,
-    "organizer": "@OniwaYasaN1998",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://x.com/OniwaYasaN1998/status/2106949777799930341?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "41ae7e7b7f272c6d5751",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-8f514fd9c683d2c653fe",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-21T12:50:00Z",
-    "end": "2026-10-21T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_bf91577b-3b08-4c40-ac48-e809a78763f7",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "8f514fd9c683d2c653fe",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-73d15389af8b954759cd",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-22T12:50:00Z",
-    "end": "2026-10-22T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_c4dcf5ac-f32e-4f7f-9295-c9ffb83f3719",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "73d15389af8b954759cd",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-19c51d0837ce0eb1782f",
-    "name": "잠시후 10시ǃǃ 제13회 펭귄바 X 스피크업 콜라보 9월 음악 콘서트",
-    "start": "2026-10-23T12:50:00Z",
-    "end": "2026-10-23T14:50:00Z",
-    "organizer": "S P E A K U P",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_062ceb5f-f081-4cff-a7e4-21417b0de60a/calendar/cal_5d784a54-0377-4cfc-8d21-072cc94277fa",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "19c51d0837ce0eb1782f",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-1c95f810d94b8c87dc9e",
-    "name": "BELKA",
-    "start": "2026-10-23T19:00:00Z",
-    "end": "2026-10-23T20:30:00Z",
-    "organizer": "BELKA",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_89820bbe-a4e5-44a0-a0d3-eeee898f7b86/calendar/cal_e8499305-e81c-4657-bb18-4220e749a964",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "1c95f810d94b8c87dc9e",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9b48e6c5b6fbfaf577a5",
-    "name": "PARADISE Пятница в Mint Cat Club",
-    "start": "2026-10-23T19:00:00Z",
-    "end": "2026-10-23T20:30:00Z",
-    "organizer": "Mint Cat Club",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_4a492d3f-f312-47fd-ae98-248e13e21d10",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9b48e6c5b6fbfaf577a5",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-c818276c58604e7858cd",
-    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-23T21:00:00Z",
-    "end": "2026-10-23T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_1a47de4b-6eef-4f2f-92a4-96163deffa30",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "c818276c58604e7858cd",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-a884cc93a56fe04a705f",
-    "name": "【10月度 開催 のお知らせ🎃】 『ダンス・パレット！』🎨 ダンス未経験の子も気軽に遊びに来てねー！ フルトラじゃなくても大丈夫！ 3点、デスクトップの方もお待ちしております🫶 ​📅 毎週水曜…",
-    "start": "2026-10-28T12:30:00Z",
-    "end": null,
-    "organizer": "@OniwaYasaN1998",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://x.com/OniwaYasaN1998/status/2106949777799930341?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "a884cc93a56fe04a705f",
+    "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   }
