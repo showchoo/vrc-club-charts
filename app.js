@@ -31,6 +31,10 @@ const scoreOf = (w) => {
 
 function worldUrl(id) { return `https://vrchat.com/home/world/${id}`; }
 function formatDelta(n) { return n == null ? 'collecting' : `${n >= 0 ? '+' : ''}${fmt.format(n)}`; }
+function mediaHtml(w) {
+  if (!w.thumbnail) return '';
+  return `<img class="world-thumb-bg" src="${escapeHtml(w.thumbnail)}" alt="" loading="lazy" decoding="async" />`;
+}
 
 function setView(view) {
   state.view = view;
@@ -72,7 +76,8 @@ function visibleScore(w) {
 }
 
 function discoveryCard(w) {
-  return `<article class="discovery-card">
+  return `<article class="discovery-card ${w.thumbnail ? 'has-thumb' : ''}">
+    ${mediaHtml(w)}
     <div class="discovery-topline"><span>PENDING REVIEW</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
     <h3>${escapeHtml(w.name)}</h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
@@ -81,7 +86,8 @@ function discoveryCard(w) {
 }
 
 function card(w, rank) {
-  return `<article class="podium-card">
+  return `<article class="podium-card ${w.thumbnail ? 'has-thumb' : ''}">
+    ${mediaHtml(w)}
     <div class="rank-badge">${String(rank).padStart(2,'0')}</div>
     <h3>${escapeHtml(w.name)}</h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
