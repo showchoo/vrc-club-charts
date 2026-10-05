@@ -28,6 +28,7 @@ STRONG_TERMS = (
 EXCLUDE_TERMS = (
     "karaoke", "カラオケ", "exercise", "fitness", "workout",
     "エクササイズ", "フィットネス", "筋トレ", "yoga", "ヨガ",
+    "nsfw", "18+", "18＋", "adult only", "adult event",
 )
 GENRE_RULES = [
     ("PSYTRANCE", ("psytrance", "psy-trance", "psy trance", "サイケ")),
