@@ -1,0 +1,71 @@
+{
+  "capturedAt": "2026-10-05",
+  "worlds": [
+    {
+      "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
+      "name": "Club Deviate",
+      "author": "TOTC",
+      "visits": 89472,
+      "favorites": 3239,
+      "capacity": 80,
+      "recommendedCapacity": 80,
+      "releaseStatus": "public",
+      "updatedAt": "2026-08-09T11:14:42.731Z"
+    },
+    {
+      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+      "name": "TUBE VR x Sly Fest - Official Afterparty",
+      "author": "Hadean",
+      "visits": 2775,
+      "favorites": 59,
+      "capacity": 80,
+      "recommendedCapacity": 40,
+      "releaseStatus": "public",
+      "updatedAt": "2026-10-04T00:36:44.998Z"
+    },
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "visits": 2214903,
+      "favorites": 62896,
+      "capacity": 80,
+      "recommendedCapacity": 40,
+      "releaseStatus": "public",
+      "updatedAt": "2026-08-27T19:10:43.738Z"
+    },
+    {
+      "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
+      "name": "SONAR_Spillways",
+      "author": "Llamahat",
+      "visits": 106075,
+      "favorites": 3772,
+      "capacity": 80,
+      "recommendedCapacity": 80,
+      "releaseStatus": "public",
+      "updatedAt": "2025-11-22T21:04:35.264Z"
+    },
+    {
+      "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
+      "name": "CLUB IGLO",
+      "author": "EZKIMO_O'",
+      "visits": 2864,
+      "favorites": 61,
+      "capacity": 80,
+      "recommendedCapacity": 16,
+      "releaseStatus": "public",
+      "updatedAt": "2026-08-20T02:17:09.088Z"
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1․233",
+      "author": "TGCFabian",
+      "visits": 5309,
+      "favorites": 95,
+      "capacity": 80,
+      "recommendedCapacity": 32,
+      "releaseStatus": "public",
+      "updatedAt": "2026-09-28T17:43:15.619Z"
+    }
+  ]
+}
