@@ -1,3 +1,5 @@
+const state = { events: [], genre: 'ALL', query: '' };
+
 const fmtStart = new Intl.DateTimeFormat('ja-JP', {
   month: 'short',
   day: 'numeric',
@@ -51,31 +53,73 @@ function eventCard(e) {
   </article>`;
 }
 
-async function initEvents() {
+function upcomingEvents() {
+  const now = Date.now();
+  return state.events
+    .filter(e => {
+      if (!e || !e.start) return false;
+      const start = new Date(e.start).getTime();
+      const end = e.end ? new Date(e.end).getTime() : start + 6 * 60 * 60 * 1000;
+      return end >= now;
+    })
+    .sort((a,b) => new Date(a.start) - new Date(b.start));
+}
+
+function renderFilters() {
+  const available = new Set(upcomingEvents().flatMap(e => e.genres || []));
+  const preferred = ['ALL','DJ','MUSIC','DANCE','PSYTRANCE','PSY-TRANCE','QUEST','ANISON','IDOLM@STER','EVENT'];
+  const filters = preferred.filter(g => g === 'ALL' || available.has(g));
+  const wrap = document.getElementById('eventFilters');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  filters.forEach(g => {
+    const b = document.createElement('button');
+    b.className = `chip${state.genre === g ? ' active' : ''}`;
+    b.type = 'button';
+    b.textContent = g;
+    b.onclick = () => { state.genre = g; renderFilters(); render(); };
+    wrap.appendChild(b);
+  });
+}
+
+function render() {
+  const all = upcomingEvents();
+  const q = state.query.trim().toLowerCase();
+  const items = all.filter(e => {
+    const genreOk = state.genre === 'ALL' || (e.genres || []).includes(state.genre);
+    const hay = `${e.name || ''} ${e.organizer || ''} ${e.worldName || ''} ${(e.genres || []).join(' ')}`.toLowerCase();
+    return genreOk && (!q || hay.includes(q));
+  });
+
   const grid = document.getElementById('eventGrid');
   const empty = document.getElementById('eventEmpty');
+  const count = document.getElementById('eventCount');
+  const live = items.filter(e => eventStatus(e) === 'LIVE NOW').length;
+  count.textContent = live
+    ? `${items.length} shown / ${all.length} upcoming · ${live} live`
+    : `${items.length} shown / ${all.length} upcoming`;
+  grid.innerHTML = items.map(eventCard).join('');
+  empty.hidden = items.length > 0;
+}
+
+async function initEvents() {
   const count = document.getElementById('eventCount');
   try {
     const res = await fetch('data/events.json', {cache:'no-store'});
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const events = await res.json();
-    const now = Date.now();
-    const upcoming = events
-      .filter(e => {
-        if (!e || !e.start) return false;
-        const end = e.end ? new Date(e.end).getTime() : new Date(e.start).getTime() + 6 * 60 * 60 * 1000;
-        return end >= now;
-      })
-      .sort((a,b) => new Date(a.start) - new Date(b.start));
-    const live = upcoming.filter(e => eventStatus(e, now) === 'LIVE NOW').length;
-    count.textContent = live ? `${upcoming.length} upcoming · ${live} live` : `${upcoming.length} upcoming`;
-    grid.innerHTML = upcoming.map(eventCard).join('');
-    empty.hidden = upcoming.length > 0;
+    state.events = await res.json();
+    renderFilters();
+    render();
   } catch (err) {
     count.textContent = 'Data error';
-    empty.hidden = false;
+    document.getElementById('eventEmpty').hidden = false;
     console.error(err);
   }
 }
+
+document.getElementById('eventSearch')?.addEventListener('input', e => {
+  state.query = e.target.value;
+  render();
+});
 
 initEvents();
