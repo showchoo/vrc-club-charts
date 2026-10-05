@@ -96,9 +96,10 @@ function discoveryCard(w) {
         <span><strong>${favorites == null ? '—' : fmt.format(favorites)}</strong><small>FAVS</small></span>
       </div>`
     : '<div class="discovery-stats discovery-stats-pending"><span>DATA COLLECTING</span></div>';
+  const discoveryLabel = w.chartEligible === false ? 'DIRECTORY ONLY' : 'PENDING REVIEW';
   return `<article class="discovery-card ${w.thumbnail ? 'has-thumb' : ''}">
     ${mediaHtml(w)}
-    <div class="discovery-topline"><span>PENDING REVIEW</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
+    <div class="discovery-topline"><span>${discoveryLabel}</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
     <h3><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
     <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
@@ -163,8 +164,9 @@ function render() {
     return genreOk && (!q || hay.includes(q));
   });
 
-  const discovery = worlds.filter(w => w.editorialStatus === 'unreviewed');
+  const discovery = worlds.filter(w => w.editorialStatus === 'unreviewed' || w.chartEligible === false);
   let ranked = worlds.filter(w => {
+    if (w.chartEligible === false) return false;
     if (state.view === 'trending' && state.data.status === 'live') return true;
     return w.editorialStatus !== 'unreviewed';
   });
