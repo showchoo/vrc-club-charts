@@ -28,6 +28,7 @@ on:
       - "scripts/import_event_feed.py"
       - "scripts/validate_catalog.py"
       - "reviewer.html"
+      - "reviewer-admin.html"
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
@@ -65,6 +66,8 @@ jobs:
           node --check app.js
           node --check events.js
           node --check djs.js
+      - name: Sync approved reviewers
+        run: python scripts/sync_reviewers_from_supabase.py
       - name: Build reviewer panel scores
         run: python scripts/build_review_scores.py
       - name: Validate catalog
