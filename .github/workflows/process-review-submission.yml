@@ -1,0 +1,201 @@
+name: Process craftsmanship review
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: craftsmanship-review-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    if: startsWith(github.event.issue.title, '[Review]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate and publish review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || "";
+            const login = String(issue.user?.login || "").toLowerCase();
+
+            function field(label) {
+              const marker = "### " + label;
+              const start = body.indexOf(marker);
+              if (start < 0) return "";
+              const valueStart = start + marker.length;
+              const next = body.indexOf("\n### ", valueStart);
+              const raw = body.slice(valueStart, next < 0 ? body.length : next).trim();
+              return /^_No response_$/i.test(raw) ? "" : raw;
+            }
+
+            async function ensureLabel(name, color, description) {
+              try {
+                await github.rest.issues.getLabel({...context.repo, name});
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                await github.rest.issues.createLabel({...context.repo, name, color, description});
+              }
+            }
+
+            const errors = [];
+
+            const reviewersFile = await github.rest.repos.getContent({
+              ...context.repo,
+              path: "data/reviewers.json",
+              ref: "main",
+            });
+            const reviewers = JSON.parse(Buffer.from(reviewersFile.data.content, "base64").toString("utf8"));
+            const reviewer = reviewers.find(r =>
+              r.status === "active" &&
+              (String(r.github || "").toLowerCase() === login || String(r.id || "") === login)
+            );
+            if (!reviewer) errors.push("Your GitHub account is not registered as an active reviewer.");
+
+            const worldId = (field("VRChat World ID").match(/wrld_[0-9a-fA-F-]{36}/) || [])[0] || "";
+            const worldsFile = await github.rest.repos.getContent({
+              ...context.repo,
+              path: "data/worlds.json",
+              ref: "main",
+            });
+            const worlds = JSON.parse(Buffer.from(worldsFile.data.content, "base64").toString("utf8"));
+            const world = worlds.find(w => w.id === worldId);
+            if (!world) errors.push("The submitted World ID is not currently tracked.");
+            else if (world.chartEligible !== true) errors.push("This world is directory-only and is not eligible for the Craftsmanship Ranking.");
+
+            const scoreDefs = [
+              ["Visual — 0 to 20", "visual", 20],
+              ["Lighting & VJ — 0 to 20", "lighting", 20],
+              ["Sound — 0 to 15", "sound", 15],
+              ["Spatial — 0 to 15", "spatial", 15],
+              ["Interaction — 0 to 10", "interaction", 10],
+              ["VR Originality — 0 to 10", "originality", 10],
+              ["Optimization — 0 to 10", "optimization", 10],
+            ];
+            const scores = {};
+            for (const [label, key, max] of scoreDefs) {
+              const raw = field(label).trim();
+              const value = Number(raw);
+              if (raw === "" || !Number.isFinite(value) || value < 0 || value > max) {
+                errors.push(`${label} must be a number from 0 to ${max}.`);
+              } else {
+                scores[key] = value;
+              }
+            }
+
+            const confirmations = field("Required confirmations");
+            const checkedCount = confirmations.split("\n").filter(line => /^- \[x\]/i.test(line)).length;
+            if (checkedCount < 3) errors.push("All required reviewer confirmations must be checked.");
+
+            const affiliation = field("Direct affiliation with this world?");
+            const conflict = /^Yes/i.test(affiliation);
+            const notes = field("Review notes").trim();
+            if (!notes) errors.push("Review notes are required.");
+
+            await ensureLabel("review-submission", "20c7e8", "Craftsmanship review submission");
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: issue.number,
+              labels: ["review-submission"],
+            });
+
+            if (errors.length) {
+              await ensureLabel("needs-verification", "f0c36d", "Submission needs source and identity verification");
+              await github.rest.issues.addLabels({
+                ...context.repo,
+                issue_number: issue.number,
+                labels: ["needs-verification"],
+              });
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: issue.number,
+                body: ["Review was not published automatically:", "", ...errors.map(e => `- ${e}`)].join("\n"),
+              });
+              return;
+            }
+
+            const reviewsFile = await github.rest.repos.getContent({
+              ...context.repo,
+              path: "data/reviews.json",
+              ref: "main",
+            });
+            const reviews = JSON.parse(Buffer.from(reviewsFile.data.content, "base64").toString("utf8"));
+            const reviewId = `review-${issue.number}`;
+            const reviewerId = reviewer.id;
+            const reviewedAt = issue.created_at || new Date().toISOString();
+
+            for (const prior of reviews) {
+              if (
+                prior.id !== reviewId &&
+                prior.reviewerId === reviewerId &&
+                prior.worldId === worldId &&
+                prior.status === "published"
+              ) {
+                prior.status = "withdrawn";
+                prior.supersededBy = reviewId;
+              }
+            }
+
+            const entry = {
+              id: reviewId,
+              worldId,
+              reviewerId,
+              reviewedAt,
+              status: "published",
+              conflict,
+              scores,
+              notes,
+              sourceIssue: issue.html_url,
+              submittedAt: new Date().toISOString(),
+            };
+
+            const existing = reviews.findIndex(r => r.id === reviewId);
+            if (existing >= 0) reviews[existing] = entry;
+            else reviews.push(entry);
+
+            reviews.sort((a,b) =>
+              String(a.reviewedAt || "").localeCompare(String(b.reviewedAt || "")) ||
+              String(a.id).localeCompare(String(b.id))
+            );
+
+            await github.rest.repos.createOrUpdateFileContents({
+              ...context.repo,
+              path: "data/reviews.json",
+              branch: "main",
+              message: `review: publish ${reviewId} for ${worldId}`,
+              sha: reviewsFile.data.sha,
+              content: Buffer.from(JSON.stringify(reviews, null, 2) + "\n").toString("base64"),
+            });
+
+            await ensureLabel("published-review", "2da44e", "Published Craftsmanship review");
+            const labels = ["published-review"];
+            if (conflict) {
+              await ensureLabel("conflict-excluded", "8b949e", "Recorded review excluded from ranking due to direct affiliation");
+              labels.push("conflict-excluded");
+            }
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: issue.number,
+              labels,
+            });
+
+            const total = Object.values(scores).reduce((a,b) => a + b, 0);
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: issue.number,
+              body: conflict
+                ? `Review recorded (raw total: **${total}/100**) but excluded from ranking calculations because a direct affiliation was disclosed.`
+                : `Review published (raw total: **${total}/100**). Ranking data will be rebuilt automatically. Your newest review for this world is the only one counted.`,
+            });
+
+            await github.rest.issues.update({
+              ...context.repo,
+              issue_number: issue.number,
+              state: "closed",
+            });
