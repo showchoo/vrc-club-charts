@@ -1,7 +1,7 @@
 {
   "status": "seed",
   "updatedAt": "2026-10-05",
-  "methodVersion": "0.2",
+  "methodVersion": "0.3",
   "worlds": [
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
@@ -17,10 +17,11 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 95.0,
-        "overall": 95.0
-      }
+        "trending": 0,
+        "craftsmanship": 95,
+        "overall": 95
+      },
+      "editorialStatus": "provisional"
     },
     {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
@@ -37,10 +38,11 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 94.0,
-        "overall": 94.0
-      }
+        "trending": 0,
+        "craftsmanship": 94,
+        "overall": 94
+      },
+      "editorialStatus": "provisional"
     },
     {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
@@ -56,10 +58,11 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 92.0,
-        "overall": 92.0
-      }
+        "trending": 0,
+        "craftsmanship": 92,
+        "overall": 92
+      },
+      "editorialStatus": "provisional"
     },
     {
       "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
@@ -76,10 +79,11 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 86.0,
-        "overall": 86.0
-      }
+        "trending": 0,
+        "craftsmanship": 86,
+        "overall": 86
+      },
+      "editorialStatus": "provisional"
     },
     {
       "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
@@ -95,10 +99,11 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 85.0,
-        "overall": 85.0
-      }
+        "trending": 0,
+        "craftsmanship": 85,
+        "overall": 85
+      },
+      "editorialStatus": "provisional"
     },
     {
       "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
@@ -114,9 +119,324 @@
         "favorites": null
       },
       "scores": {
-        "trending": 0.0,
-        "craftsmanship": 82.0,
-        "overall": 82.0
+        "trending": 0,
+        "craftsmanship": 82,
+        "overall": 82
+      },
+      "editorialStatus": "provisional"
+    },
+    {
+      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
+      "name": "STRATA",
+      "author": "兎野しゃの／syano",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "LIVE"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
+      "name": "Lights Out Night Club",
+      "author": "Lights Out Host",
+      "genres": [
+        "CLUB",
+        "DANCE",
+        "AUDIOLINK",
+        "EVENT"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
+      "name": "Club Rayne",
+      "author": "Candy Rayne",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
+      "name": "Neon Catnip - Customizable DJ Venue",
+      "author": "DJ Megu",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_c41077d4-336d-4d83-9c29-75c3aa7d3aef",
+      "name": "The Cascade Club",
+      "author": "Zulfur_",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "RAVE"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
+      "name": "Club Earthquake 〖Night pool〗",
+      "author": "ro_tta",
+      "genres": [
+        "CLUB",
+        "MUSIC",
+        "AUDIOLINK",
+        "NIGHT"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
+      "name": "PLASMA Reactive Club",
+      "author": "TheCocasio",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
+      "name": "AudioLink ClubSystem",
+      "author": "JJavierPV",
+      "genres": [
+        "CLUB",
+        "AUDIOLINK",
+        "QUEST",
+        "MUSIC"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "EVENT"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
+      "name": "The Ruiners Club Venue［BETA VERSION］",
+      "author": "Ａｒｔｉ",
+      "genres": [
+        "CLUB",
+        "RAVE",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
+      "name": "Club Neon Spin",
+      "author": "Andron827",
+      "genres": [
+        "CLUB",
+        "DANCE",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
+      "name": "stadium rave A （audiolink party world ）",
+      "author": "ALDUMGAMES",
+      "genres": [
+        "CLUB",
+        "RAVE",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      }
+    },
+    {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "AUDIOLINK",
+        "JAPAN"
+      ],
+      "editorialStatus": "unreviewed",
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
       }
     }
   ]
