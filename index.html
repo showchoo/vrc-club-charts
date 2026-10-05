@@ -17,7 +17,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="stylesheet" href="styles.css?v=20261005-16" />
+  <link rel="stylesheet" href="styles.css?v=20261005-17" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"VRC Club Charts","url":"https://showchoo.github.io/vrc-club-charts/","description":"Weekly VRChat club, DJ and nightlife world charts and discovery directory.","inLanguage":["ja","en"]}</script>
 </head>
 <body>
@@ -118,6 +118,19 @@
       <div id="emptyState" class="empty-state" hidden>該当するワールドがありません。</div>
     </section>
 
+    <section class="shell home-events">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">TONIGHT / NEXT</p>
+          <h2>次に始まるイベント。</h2>
+        </div>
+        <a class="section-link" href="events.html">ALL EVENTS ↗</a>
+      </div>
+      <div id="homeEventsGrid" class="home-events-grid">
+        <div class="event-empty"><span>Loading events…</span></div>
+      </div>
+    </section>
+
     <section id="discoverySection" class="shell discovery-section">
       <div class="section-heading discovery-heading">
         <div>
@@ -197,6 +210,6 @@
     <span class="footer-links"><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
   </footer>
 
-  <script src="app.js?v=20261005-16" defer></script>
+  <script src="app.js?v=20261005-17" defer></script>
 </body>
 </html>
