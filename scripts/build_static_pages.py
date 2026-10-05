@@ -5,6 +5,7 @@ import datetime as dt
 import hashlib
 import html
 import json
+import re
 import sys
 from pathlib import Path
 from urllib.parse import quote
@@ -24,6 +25,14 @@ def fmt_num(value):
         return f"{int(value):,}"
     except (TypeError, ValueError):
         return "—"
+
+
+def event_id(event: dict) -> str:
+    explicit = str(event.get("id") or "").strip()
+    if explicit:
+        return re.sub(r"[^a-z0-9_-]+", "-", explicit.lower()).strip("-")[:96]
+    seed = f"{event.get('name')}|{event.get('start')}|{event.get('organizer')}"
+    return "event-" + hashlib.sha1(seed.encode("utf-8")).hexdigest()[:16]
 
 
 def page_head(title: str, description: str, canonical: str, prefix: str = "") -> str:
@@ -175,6 +184,86 @@ def inject_event_json_ld(out: Path, events: list[dict]) -> None:
     path.write_text(doc, encoding="utf-8")
 
 
+def event_page(event: dict, djs: list[dict]) -> str:
+    eid = event_id(event)
+    name = event.get("name") or eid
+    organizer = event.get("organizer") or "—"
+    world_name = event.get("worldName") or event.get("worldId") or "VRChat"
+    genres = event.get("genres") or []
+    tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
+    start = str(event.get("start") or "")
+    end = str(event.get("end") or "")
+    canonical = f"{BASE_URL}events/{quote(eid)}.html"
+    description = f"{name} — VRChat DJ / music event details on VRC Club Charts."
+    public_url = event.get("url")
+    world_id = event.get("worldId")
+    world_link = f'../worlds/{esc(world_id)}.html' if world_id else None
+
+    dj_by_id = {str(d.get("id")): d for d in djs if d.get("id")}
+    dj_cards = []
+    for dj_id in event.get("djIds") or []:
+        dj = dj_by_id.get(str(dj_id))
+        if not dj:
+            continue
+        genres_text = " / ".join((dj.get("genres") or [])[:3])
+        dj_cards.append(
+            f'<a class="relation-dj" href="../djs/{esc(dj_id)}.html">'
+            f'<strong>{esc(dj.get("name"))}</strong><span>{esc(genres_text or dj.get("role") or "DJ")}</span><b>↗</b></a>'
+        )
+    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">Lineup profiles are being connected.</div>'
+
+    buttons = []
+    if public_url:
+        buttons.append(f'<a class="primary-button" href="{esc(public_url)}" target="_blank" rel="noreferrer">PUBLIC INFO ↗</a>')
+    if world_link:
+        buttons.append(f'<a class="secondary-button" href="{world_link}">WORLD PROFILE ↗</a>')
+    actions = "".join(buttons)
+
+    event_ld = {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": name,
+        "startDate": start,
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {"@type": "VirtualLocation", "name": world_name, "url": public_url or canonical},
+        "organizer": {"@type": "Organization", "name": organizer},
+        "url": public_url or canonical,
+    }
+    if end:
+        event_ld["endDate"] = end
+
+    return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "events") + f"""
+  <main class="shell world-detail-page event-detail-page">
+    <a class="world-back" href="../events.html">← Event Calendar</a>
+    <section class="world-detail-hero event-detail-hero">
+      <div class="world-detail-copy">
+        <p class="kicker">VRCHAT EVENT</p>
+        <h1>{esc(name)}</h1>
+        <p class="world-detail-author">{esc(organizer)}</p>
+        <div class="tags">{tags}</div>
+        <div class="world-detail-actions">{actions}</div>
+      </div>
+      <div class="world-detail-image world-detail-image-placeholder event-detail-mark">LIVE</div>
+    </section>
+
+    <section class="world-detail-meta event-detail-meta">
+      <div><span>START</span><strong>{esc(start.replace("T", " ")[:16])}</strong></div>
+      <div><span>END</span><strong>{esc(end.replace("T", " ")[:16] if end else "—")}</strong></div>
+      <div><span>WORLD / INSTANCE</span><strong>{esc(world_name)}</strong></div>
+      <div><span>SOURCE</span><strong>{esc(event.get("source") or "Public organizer information")}</strong></div>
+    </section>
+
+    <section class="world-relations">
+      <div class="section-heading"><div><p class="kicker">LINEUP</p><h2>Connected DJs</h2></div></div>
+      <div class="relation-dj-grid">{djs_html}</div>
+    </section>
+
+    <script type="application/ld+json">{json.dumps(event_ld, ensure_ascii=False)}</script>
+  </main>
+""" + footer("../")
+
+
 def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
@@ -218,7 +307,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     for _, event in related_events[:6]:
         when = str(event.get("start") or "").replace("T", " ")[:16]
         event_rows.append(
-            f'<a class="relation-row" href="../events.html">'
+            f'<a class="relation-row" href="../events/{esc(event_id(event))}.html">'
             f'<span>{esc(when)}</span><strong>{esc(event.get("name"))}</strong>'
             f'<span>{esc(event.get("organizer") or "—")}</span><b>↗</b></a>'
         )
@@ -301,7 +390,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
             continue
         when = str(event.get("start") or "").replace("T", " ")[:16]
         appearances.append(
-            f'<a class="dj-event-row" href="../events.html"><span>{esc(when)}</span>'
+            f'<a class="dj-event-row" href="../events/{esc(event_id(event))}.html"><span>{esc(when)}</span>'
             f'<strong>{esc(event.get("name"))}</strong><span>{esc(event.get("worldName") or "VRChat")}</span><span>↗</span></a>'
         )
 
@@ -396,6 +485,12 @@ def main() -> int:
         if dj.get("id"):
             (dj_dir / f"{dj['id']}.html").write_text(dj_page(dj, events), encoding="utf-8")
 
+    event_dir = out / "events"
+    event_dir.mkdir(parents=True, exist_ok=True)
+    for event in events:
+        if event.get("name") and event.get("start"):
+            (event_dir / f"{event_id(event)}.html").write_text(event_page(event, djs), encoding="utf-8")
+
     (out / "events.ics").write_text(build_ics(events), encoding="utf-8", newline="")
     inject_event_json_ld(out, events)
 
@@ -417,6 +512,11 @@ def main() -> int:
         for dj in djs
         if dj.get("id")
     )
+    urls.extend(
+        f"{BASE_URL}events/{quote(event_id(event))}.html"
+        for event in events
+        if event.get("name") and event.get("start")
+    )
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for i, url in enumerate(urls):
         priority = "1.0" if i == 0 else ("0.8" if "/worlds/" in url else "0.5")
@@ -424,7 +524,7 @@ def main() -> int:
         sitemap += f"  <url><loc>{esc(url)}</loc><changefreq>{change}</changefreq><priority>{priority}</priority></url>\n"
     sitemap += "</urlset>\n"
     (out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-    print(f"Generated {len(worlds)} world pages, {len(djs)} DJ pages, {len(events)} calendar events, ICS feed and sitemap")
+    print(f"Generated {len(worlds)} world pages, {len(djs)} DJ pages, {len(events)} event pages, ICS feed and sitemap")
     return 0
 
 
