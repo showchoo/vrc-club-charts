@@ -111,4 +111,14 @@ This is an independent project and is not affiliated with VRChat Inc. â€œVRChatâ
 - Maintainers can apply the `verified` label after source verification.
 - Verified submissions can generate a catalog PR automatically.
 - World PRs update both `data/worlds.json` and the Discovery row in `data/weekly-ranking.json` so validation stays green.
-- 27 DJ profiles and 5 event records are currently connected to the World / Event / DJ portal structure.
+- 34 DJ / artist profiles and 8 curated event records are currently connected to the World / Event / DJ portal structure.
+
+
+### Daily public event import
+
+- `scripts/import_event_feed.py` reads the canonical public JSON from `KAFKA2306/cast_event_cal`.
+- It applies an independent, deterministic club / DJ / live-event filter.
+- `data/events-auto.json` is refreshed daily at 07:15 JST.
+- Curated events win when a matching public-feed variant exists.
+- The static build merges both sources into the public `data/events.json`, event detail pages, sitemap and ICS feed.
+- Events UI can switch between **ALL**, **CURATED**, and **PUBLIC FEED**.
