@@ -62,6 +62,8 @@ def main() -> int:
                 "capacity": w.get("capacity"),
                 "recommendedCapacity": w.get("recommendedCapacity"),
                 "releaseStatus": w.get("releaseStatus"),
+                "thumbnailImageUrl": w.get("thumbnailImageUrl"),
+                "imageUrl": w.get("imageUrl"),
                 "updatedAt": w.get("updated_at") or w.get("updatedAt"),
             })
             print(f"OK {seed['id']} {captured[-1]['name']}")
