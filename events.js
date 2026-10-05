@@ -1,4 +1,4 @@
-const state = { events: [], genre: 'ALL', query: '' };
+const state = { events: [], genre: 'ALL', source: 'ALL', query: '' };
 
 const fmtStart = new Intl.DateTimeFormat('ja-JP', {
   month: 'short',
@@ -66,6 +66,25 @@ function upcomingEvents() {
     .sort((a,b) => new Date(a.start) - new Date(b.start));
 }
 
+function renderSourceFilters() {
+  const wrap = document.getElementById('eventSourceFilters');
+  if (!wrap) return;
+  const options = [
+    ['ALL', 'ALL'],
+    ['CURATED', 'CURATED'],
+    ['PUBLIC', 'PUBLIC FEED'],
+  ];
+  wrap.innerHTML = '';
+  options.forEach(([value, label]) => {
+    const b = document.createElement('button');
+    b.className = `chip${state.source === value ? ' active' : ''}`;
+    b.type = 'button';
+    b.textContent = label;
+    b.onclick = () => { state.source = value; renderSourceFilters(); render(); };
+    wrap.appendChild(b);
+  });
+}
+
 function renderFilters() {
   const available = new Set(upcomingEvents().flatMap(e => e.genres || []));
   const preferred = ['ALL','DJ','MUSIC','DANCE','PSYTRANCE','PSY-TRANCE','QUEST','ANISON','IDOLM@STER','EVENT'];
@@ -88,8 +107,11 @@ function render() {
   const q = state.query.trim().toLowerCase();
   const items = all.filter(e => {
     const genreOk = state.genre === 'ALL' || (e.genres || []).includes(state.genre);
+    const sourceOk = state.source === 'ALL'
+      || (state.source === 'PUBLIC' && e.autoImported)
+      || (state.source === 'CURATED' && !e.autoImported);
     const hay = `${e.name || ''} ${e.organizer || ''} ${e.worldName || ''} ${(e.genres || []).join(' ')}`.toLowerCase();
-    return genreOk && (!q || hay.includes(q));
+    return genreOk && sourceOk && (!q || hay.includes(q));
   });
 
   const grid = document.getElementById('eventGrid');
@@ -109,6 +131,7 @@ async function initEvents() {
     const res = await fetch('data/events.json', {cache:'no-store'});
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     state.events = await res.json();
+    renderSourceFilters();
     renderFilters();
     render();
   } catch (err) {
