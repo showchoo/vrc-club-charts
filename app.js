@@ -101,6 +101,7 @@ function renderCraftRanking() {
   document.getElementById('metricReviewers').textContent = fmt.format(reviewerCount);
 
   const byId = new Map(state.worlds.map(w => [w.id, w]));
+  const editors = editorScoreMap();
   const rows = (state.reviewScores?.worlds || [])
     .filter(r => Number.isFinite(Number(r.score)))
     .map(r => ({...r, world: byId.get(r.worldId)}))
