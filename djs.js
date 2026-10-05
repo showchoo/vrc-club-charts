@@ -1,5 +1,7 @@
 const state = { genre: 'ALL', djs: [] };
 
+function djProfileUrl(id) { return `djs/${id}.html`; }
+
 function esc(s='') {
   return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
@@ -25,7 +27,7 @@ function djCard(d) {
   const source = d.source ? `<a class="dj-source" href="${esc(d.source)}" target="_blank" rel="noreferrer">SOURCE ↗</a>` : '';
   return `<article class="dj-card">
     <div class="dj-card-index">DJ</div>
-    <h3>${esc(d.name)}</h3>
+    <h3>${d.id ? `<a class="world-title-link" href="${djProfileUrl(d.id)}">${esc(d.name)}</a>` : esc(d.name)}</h3>
     <div class="dj-role">${esc(d.role || 'DJ')}</div>
     <div class="dj-affiliation">${esc(crews)}</div>
     <div class="tags">${genres}</div>
