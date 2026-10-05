@@ -347,15 +347,24 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     author = w.get("author") or "—"
     genres = w.get("genres") or []
     editorial_status = w.get("editorialStatus") or "unreviewed"
-    score = (w.get("scores") or {}).get("craftsmanship")
+    panel = w.get("panelReview") or {}
+    panel_status = panel.get("status") or "collecting"
+    panel_score = panel.get("score")
+    review_count = int(panel.get("reviewCount") or 0)
+    confidence = panel.get("confidence") or "low"
     totals = w.get("totals") or {}
     weekly = w.get("weekly") or {}
     thumbnail = w.get("thumbnail")
     canonical = f"{BASE_URL}worlds/{quote(wid)}.html"
     description = f"{name} by {author} — VRChat club / DJ world profile on VRC Club Charts."
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
-    status_text = "PROVISIONAL EDITORIAL" if editorial_status != "unreviewed" else "PENDING REVIEW"
-    score_html = fmt_num(score) if score is not None else "—"
+    if panel_status == "ranked":
+        status_text = "PANEL RANKED"
+    elif panel_status == "provisional":
+        status_text = "PROVISIONAL PANEL"
+    else:
+        status_text = "PENDING PANEL REVIEW"
+    score_html = f"{float(panel_score):.1f}" if panel_score is not None else "—"
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
     source_url = w.get("source")
@@ -418,16 +427,16 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     </section>
 
     <section class="world-detail-stats">
-      <article><span>CRAFT</span><strong>{esc(score_html)}</strong></article>
+      <article><span>PANEL SCORE</span><strong>{esc(score_html)}</strong></article>
+      <article><span>REVIEWS</span><strong>{esc(review_count)}</strong></article>
+      <article><span>CONFIDENCE</span><strong>{esc(confidence.upper())}</strong></article>
       <article><span>TOTAL VISITS</span><strong>{esc(fmt_num(totals.get("visits")))}</strong></article>
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
-      <article><span>7D VISITS</span><strong>{esc(fmt_num(weekly.get("visits")))}</strong></article>
-      <article><span>7D FAVS</span><strong>{esc(fmt_num(weekly.get("favorites")))}</strong></article>
     </section>
 
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
-      <div><span>STATUS</span><strong>{esc(editorial_status.upper())}</strong></div>
+      <div><span>REVIEW STATUS</span><strong>{esc(panel_status.upper())}</strong></div>
       <div><span>CAPACITY</span><strong>{esc(fmt_num(w.get("capacity")))}</strong></div>
       <div><span>WORLD UPDATED</span><strong>{esc(w.get("worldUpdatedAt") or "—")}</strong></div>
     </section>
@@ -446,7 +455,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
       <div class="relation-dj-grid">{djs_html}</div>
     </section>
 
-    <p class="disclaimer">Editorial scores marked provisional are public-beta placeholders. Unreviewed worlds are not assigned a Craftsmanship score until review.</p>
+    <p class="disclaimer">Craftsmanship scores are published only from the reviewer panel. Fewer than 3 independent reviews means no public score. <a href="../reviewer.html">Review methodology ↗</a></p>
   </main>
 """ + footer("../")
 
@@ -591,6 +600,16 @@ def main() -> int:
     out = Path(sys.argv[1])
     data = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
     worlds = data.get("worlds", [])
+    review_scores_path = ROOT / "data/review-scores.json"
+    review_scores = json.loads(review_scores_path.read_text(encoding="utf-8")) if review_scores_path.exists() else {"worlds": []}
+    review_by_world = {r.get("worldId"): r for r in review_scores.get("worlds", []) if r.get("worldId")}
+    for world in worlds:
+        world["panelReview"] = review_by_world.get(world.get("id"), {
+            "status": "collecting",
+            "score": None,
+            "reviewCount": 0,
+            "confidence": "low",
+        })
     manual_events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
     auto_events_path = ROOT / "data/events-auto.json"
     auto_events = json.loads(auto_events_path.read_text(encoding="utf-8")) if auto_events_path.exists() else []
