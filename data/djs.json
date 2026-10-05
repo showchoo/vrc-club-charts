@@ -9,7 +9,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "yossy"
   },
   {
     "name": "わは～♪ / Waha~",
@@ -21,7 +22,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "waha"
   },
   {
     "name": "yudaideath",
@@ -33,7 +35,8 @@
       "PSY-TRANCE",
       "HI-TECH"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "yudaideath"
   },
   {
     "name": "TOYZPLAY",
@@ -45,7 +48,8 @@
       "PSY-TRANCE",
       "PROGRESSIVE PSYTRANCE"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "toyzplay"
   },
   {
     "name": "ぶらん / Blanc",
@@ -57,7 +61,8 @@
       "PSY-TRANCE",
       "PROGRESSIVE HOUSE"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "blanc"
   },
   {
     "name": "TOTC",
@@ -69,7 +74,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "totc"
   },
   {
     "name": "Doctra",
@@ -81,7 +87,8 @@
       "PSY-TRANCE",
       "HI-TECH"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "doctra"
   },
   {
     "name": "獅丸 / Shishimaru",
@@ -93,7 +100,8 @@
       "PSY-TRANCE",
       "MORNING FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "shishimaru"
   },
   {
     "name": "こなたん / Konatan",
@@ -105,7 +113,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "konatan"
   },
   {
     "name": "ささみ / Sasami",
@@ -117,7 +126,8 @@
       "PSY-TRANCE",
       "PROGRESSIVE HOUSE"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "sasami"
   },
   {
     "name": "SQN",
@@ -129,7 +139,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "sqn"
   },
   {
     "name": "MipoMipo",
@@ -142,7 +153,8 @@
       "FULL-ON",
       "GOA TRANCE"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "mipomipo"
   },
   {
     "name": "にゃんちゃ / Nyancha",
@@ -154,7 +166,8 @@
       "PSY-TRANCE",
       "FULL-ON"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "nyancha"
   },
   {
     "name": "こはだ / Kohada",
@@ -167,6 +180,7 @@
       "DRUM'N'BASS",
       "KAWAII"
     ],
-    "source": "https://psy-apple.club/"
+    "source": "https://psy-apple.club/",
+    "id": "kohada"
   }
 ]
