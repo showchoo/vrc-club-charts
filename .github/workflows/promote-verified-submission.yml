@@ -23,11 +23,13 @@ jobs:
             const body = issue.body || "";
 
             function field(label) {
-              const escaped = label.replace(/[.*+?^$()|[\]\\{}]/g, "\\$&");
-              const re = new RegExp(`### ${escaped}\\s*\\n([\\s\\S]*?)(?=\\n### |$)`, "i");
-              const m = body.match(re);
-              if (!m) return "";
-              return m[1].trim().replace(/^_No response_$/i, "");
+              const marker = "### " + label;
+              const start = body.indexOf(marker);
+              if (start < 0) return "";
+              const valueStart = start + marker.length;
+              const next = body.indexOf("\n### ", valueStart);
+              const raw = body.slice(valueStart, next < 0 ? body.length : next).trim();
+              return /^_No response_$/i.test(raw) ? "" : raw;
             }
 
             function slug(value, fallback) {
@@ -48,6 +50,7 @@ jobs:
                 ref: "main",
               });
               return {
+                path,
                 sha: file.data.sha,
                 data: JSON.parse(Buffer.from(file.data.content, "base64").toString("utf8")),
               };
@@ -58,12 +61,14 @@ jobs:
               repo: context.repo.repo,
               branch: "main",
             });
+
             const issueNo = issue.number;
-            let kind, path, payload, summary;
+            let kind = "";
+            let summary = "";
+            let writes = [];
 
             if (title.startsWith("[World]")) {
               kind = "world";
-              path = "data/worlds.json";
               const worldId = (field("VRChat World ID").match(/wrld_[0-9a-fA-F-]{36}/) || [])[0];
               const name = field("World name");
               const author = field("Creator / author");
@@ -73,46 +78,85 @@ jobs:
                 .split("\n")
                 .filter(line => /^- \[x\]/i.test(line))
                 .map(line => line.replace(/^- \[x\]\s*/i, "").trim());
-              const map = {
-                "Club":"CLUB", "DJ":"DJ", "Music":"MUSIC", "Rave":"RAVE",
-                "AudioLink":"AUDIOLINK", "Event venue":"EVENT",
-                "Quest compatible":"QUEST", "Other":"OTHER"
+              const categoryMap = {
+                "Club":"CLUB",
+                "DJ":"DJ",
+                "Music":"MUSIC",
+                "Rave":"RAVE",
+                "AudioLink":"AUDIOLINK",
+                "Event venue":"EVENT",
+                "Quest compatible":"QUEST",
+                "Other":"OTHER"
               };
-              const genres = [...new Set(checked.map(x => map[x]).filter(Boolean))];
-              const file = await getJson(path);
-              if (file.data.some(w => w.id === worldId)) {
+              const genres = [...new Set(checked.map(x => categoryMap[x]).filter(Boolean))];
+
+              const registry = await getJson("data/worlds.json");
+              if (registry.data.some(w => w.id === worldId)) {
                 await github.rest.issues.createComment({
-                  owner: context.repo.owner, repo: context.repo.repo, issue_number: issueNo,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNo,
                   body: `Cannot create a listing PR: \`${worldId}\` is already tracked.`
                 });
                 return;
               }
-              file.data.push({ id: worldId, name, author, genres, editorialStatus: "unreviewed" });
-              payload = { sha: file.sha, data: file.data };
+              registry.data.push({ id: worldId, name, author, genres, editorialStatus: "unreviewed" });
+
+              const ranking = await getJson("data/weekly-ranking.json");
+              ranking.data.worlds.push({
+                id: worldId,
+                name,
+                author,
+                genres,
+                editorialStatus: "unreviewed",
+                availabilityStatus: "available",
+                releaseStatus: null,
+                thumbnail: null,
+                capacity: null,
+                recommendedCapacity: null,
+                worldUpdatedAt: null,
+                totals: { visits: null, favorites: null },
+                weekly: { visits: null, favorites: null },
+                scores: { trending: 0.0, craftsmanship: null, overall: null },
+                movement: { overall: null, trending: null, craftsmanship: null }
+              });
+
+              writes = [registry, ranking];
               summary = `Add world: ${name}`;
 
             } else if (title.startsWith("[Event]")) {
               kind = "event";
-              path = "data/events.json";
               const name = field("Event name");
               const startRaw = field("Start date and time");
               const organizer = field("Organizer / group");
               const worldName = field("World / instance name");
               const worldIdMatch = field("VRChat World ID").match(/wrld_[0-9a-fA-F-]{36}/);
               const publicLink = field("Public event link");
-              const genres = field("Genres / style").split(/[,/]/).map(s => s.trim().toUpperCase()).filter(Boolean);
-              if (!name || !startRaw || !organizer || !worldName || !publicLink) throw new Error("Missing required event fields.");
+              const genres = field("Genres / style")
+                .split(/[,/]/)
+                .map(s => s.trim().toUpperCase())
+                .filter(Boolean);
+              if (!name || !startRaw || !organizer || !worldName || !publicLink) {
+                throw new Error("Missing required event fields.");
+              }
 
               let start = startRaw.trim();
               const jst = start.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{1,2}:\d{2})\s*JST$/i);
               if (jst) start = `${jst[1]}T${jst[2]}:00+09:00`;
-              if (Number.isNaN(Date.parse(start))) throw new Error("Start time must be ISO 8601 or YYYY-MM-DD HH:MM JST.");
+              if (Number.isNaN(Date.parse(start))) {
+                throw new Error("Start time must be ISO 8601 or YYYY-MM-DD HH:MM JST.");
+              }
 
-              const file = await getJson(path);
+              const file = await getJson("data/events.json");
               const id = `${slug(name, "event")}-${start.slice(0,10)}-${issueNo}`.slice(0,95);
               if (file.data.some(e => e.id === id)) throw new Error("Generated event id already exists.");
+
               const entry = {
-                id, name, start, organizer, worldName,
+                id,
+                name,
+                start,
+                organizer,
+                worldName,
                 genres,
                 url: publicLink,
                 source: `Verified community submission #${issueNo}`
@@ -120,31 +164,35 @@ jobs:
               if (worldIdMatch) entry.worldId = worldIdMatch[0];
               file.data.push(entry);
               file.data.sort((a,b) => String(a.start).localeCompare(String(b.start)));
-              payload = { sha: file.sha, data: file.data };
+
+              writes = [file];
               summary = `Add event: ${name}`;
 
             } else if (title.startsWith("[DJ]")) {
               kind = "dj";
-              path = "data/djs.json";
               const name = field("DJ / artist name");
-              const genres = field("Main genres").split(/[,/]/).map(s => s.trim().toUpperCase()).filter(Boolean);
+              const genres = field("Main genres")
+                .split(/[,/]/)
+                .map(s => s.trim().toUpperCase())
+                .filter(Boolean);
               const affiliation = field("Crew / event / community affiliation");
               const publicLink = field("Public profile or music link");
               if (!name || !genres.length || !publicLink) throw new Error("Missing required DJ fields.");
 
-              const file = await getJson(path);
+              const file = await getJson("data/djs.json");
               let id = slug(name, `dj-${issueNo}`);
               if (file.data.some(d => d.id === id)) id = `${id}-${issueNo}`.slice(0,63);
-              const entry = {
+
+              file.data.push({
                 id,
                 name,
                 role: "DJ / Artist",
                 affiliations: affiliation ? [affiliation] : [],
                 genres,
                 source: publicLink
-              };
-              file.data.push(entry);
-              payload = { sha: file.sha, data: file.data };
+              });
+
+              writes = [file];
               summary = `Add DJ: ${name}`;
 
             } else {
@@ -163,15 +211,17 @@ jobs:
               if (error.status !== 422) throw error;
             }
 
-            await github.rest.repos.createOrUpdateFileContents({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              path,
-              branch,
-              message: `submission: ${summary}`,
-              sha: payload.sha,
-              content: Buffer.from(JSON.stringify(payload.data, null, 2) + "\n").toString("base64"),
-            });
+            for (const write of writes) {
+              await github.rest.repos.createOrUpdateFileContents({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: write.path,
+                branch,
+                message: `submission: ${summary}`,
+                sha: write.sha,
+                content: Buffer.from(JSON.stringify(write.data, null, 2) + "\n").toString("base64"),
+              });
+            }
 
             const pr = await github.rest.pulls.create({
               owner: context.repo.owner,
@@ -179,7 +229,7 @@ jobs:
               head: branch,
               base: "main",
               title: `[Verified submission] ${summary}`,
-              body: `Generated from verified issue #${issueNo}. Review the diff before merging.\n\nCloses #${issueNo}`,
+              body: `Generated from verified issue #${issueNo}. Review the diff and CI before merging.\n\nCloses #${issueNo}`,
             });
 
             await github.rest.issues.createComment({
