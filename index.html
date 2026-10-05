@@ -17,7 +17,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="stylesheet" href="styles.css?v=20261005-6" />
+  <link rel="stylesheet" href="styles.css?v=20261005-7" />
 </head>
 <body>
   <div class="noise"></div>
@@ -108,12 +108,26 @@
     </section>
 
     <section id="discoverySection" class="shell discovery-section">
-      <div class="section-heading">
+      <div class="section-heading discovery-heading">
         <div>
           <p class="kicker">DISCOVERY</p>
           <h2 id="discoveryTitle">掲載候補 / 未レビュー</h2>
         </div>
-        <p id="discoveryNote" class="section-note">公開情報でWorld IDを確認済み。作り込み評価は現地確認後にランキングへ反映します。</p>
+        <div class="discovery-side">
+          <p id="discoveryNote" class="section-note">公開情報でWorld IDを確認済み。作り込み評価は現地確認後にランキングへ反映します。</p>
+          <div class="discovery-toolbar">
+            <span id="discoveryCount" class="discovery-count">— worlds</span>
+            <label class="sort-control">
+              <span id="discoverySortLabel">並び順</span>
+              <select id="discoverySort" aria-label="Discovery sort">
+                <option value="popular">注目順</option>
+                <option value="visits">Visits</option>
+                <option value="favorites">Favorites</option>
+                <option value="name">A–Z</option>
+              </select>
+            </label>
+          </div>
+        </div>
       </div>
       <div id="discoveryGrid" class="discovery-grid"></div>
     </section>
@@ -160,6 +174,6 @@
     <span class="footer-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
   </footer>
 
-  <script src="app.js?v=20261005-6" defer></script>
+  <script src="app.js?v=20261005-7" defer></script>
 </body>
 </html>
