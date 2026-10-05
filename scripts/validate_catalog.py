@@ -99,12 +99,16 @@ def main() -> int:
             name = str(event.get("name", "")).strip()
             start = str(event.get("start", "")).strip()
             wid = str(event.get("worldId", "")).strip()
+            world_name = str(event.get("worldName", "")).strip()
             organizer = str(event.get("organizer", "")).strip()
-            if not name or not start or not wid or not organizer:
-                fail(f"event #{i}: name, start, worldId and organizer are required")
+            if not name or not start or not organizer:
+                fail(f"event #{i}: name, start and organizer are required")
                 errors += 1
                 continue
-            if not WORLD_ID_RE.fullmatch(wid):
+            if not wid and not world_name:
+                fail(f"event #{i}: either worldId or worldName is required")
+                errors += 1
+            if wid and not WORLD_ID_RE.fullmatch(wid):
                 fail(f"event #{i}: invalid worldId {wid!r}")
                 errors += 1
             try:
