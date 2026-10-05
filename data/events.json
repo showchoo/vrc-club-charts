@@ -16,7 +16,8 @@
     "djIds": [
       "yossy",
       "waha"
-    ]
+    ],
+    "id": "psy-apple-weekly-2026-10-05"
   },
   {
     "name": "S.O NIGHT LAST PARTY 0",
@@ -30,7 +31,8 @@
       "EVENT"
     ],
     "url": "https://x.com/kanlaf35",
-    "source": "Organizer announcement mirrored by Yahoo realtime search"
+    "source": "Organizer announcement mirrored by Yahoo realtime search",
+    "id": "so-night-last-party-0"
   },
   {
     "name": "Quest Dance party Club No.278",
@@ -43,7 +45,8 @@
       "QUEST"
     ],
     "url": "https://kafka2306.github.io/cast_event_cal/",
-    "source": "VRChat Event Calendar — 2026-10-06 OPEN 20:40 / START 21:00 JST"
+    "source": "VRChat Event Calendar — 2026-10-06 OPEN 20:40 / START 21:00 JST",
+    "id": "quest-dance-party-278"
   },
   {
     "name": "PSY-APPLE : 5th Anniversary",
@@ -61,6 +64,27 @@
     "djIds": [
       "yossy",
       "waha"
+    ],
+    "id": "psy-apple-5th-anniversary"
+  },
+  {
+    "id": "buimas-2026-10-23",
+    "name": "ぶいM@S！ — アイドルマスター ONLY DJ EVENT",
+    "start": "2026-10-23T21:00:00+09:00",
+    "organizer": "スタジオヤナギ / ヤナギ",
+    "worldName": "VRChat / event instance",
+    "genres": [
+      "DJ",
+      "IDOLM@STER",
+      "ANISON",
+      "EVENT"
+    ],
+    "url": "https://x.com/imasDJ_yanagi",
+    "source": "Official organizer announcement — 2026-10-23 21:00 JST",
+    "djIds": [
+      "yanagi",
+      "takuro3",
+      "kaji"
     ]
   }
 ]
