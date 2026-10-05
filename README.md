@@ -18,8 +18,10 @@ Public site: https://showchoo.github.io/vrc-club-charts/
 - Automatic hiding of worlds confirmed unavailable by the snapshot collector
 - Canonical metadata, JSON-LD and generated sitemap
 - GitHub Pages hosting with no database/backend required
-- Event calendar with separate event registry and public submission form
+- Event calendar with 4 verified seed events, ICS feed, structured data and public submission form
 - World and event submissions via GitHub Issue Forms
+- 14 non-ranked DJ profiles with genre filters, static profiles and event relationships
+- DJ submissions via GitHub Issue Forms
 
 ## Ranking model
 
@@ -68,7 +70,8 @@ GitHub Pages deploys:
 - the public ranking JSON
 - a generated `/worlds/` directory
 - a generated detail page for every tracked world
-- a generated sitemap containing those world pages
+- a generated sitemap containing world and DJ profile pages
+- `events.ics` for calendar subscription/import
 
 `scripts/build_static_pages.py` generates the directory, detail pages and sitemap at deploy time.
 
@@ -79,6 +82,8 @@ GitHub Pages deploys:
 - `privacy.html` — privacy policy
 - `events.html` / `events.js` — upcoming VRChat music event calendar
 - `data/events.json` — curated event registry
+- `djs.html` / `djs.js` — non-ranked DJ directory
+- `data/djs.json` — DJ profile registry
 - `app.js` / `styles.css` — frontend
 - `data/worlds.json` — curated registry
 - `data/weekly-ranking.json` — public chart payload
