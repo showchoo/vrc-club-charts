@@ -1,0 +1,62 @@
+name: Submit a VRChat DJ / artist
+description: Suggest a DJ or music performer for the VRC Club Charts directory
+title: "[DJ] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The DJ directory is **not a ranking**. Profiles help visitors discover artists, genres, crews and events.
+
+  - type: input
+    id: name
+    attributes:
+      label: DJ / artist name
+    validations:
+      required: true
+
+  - type: input
+    id: vrchat_name
+    attributes:
+      label: VRChat name
+      description: Optional if different from the artist name.
+    validations:
+      required: false
+
+  - type: input
+    id: genres
+    attributes:
+      label: Main genres
+      placeholder: Techno, House, Psy-Trance, DnB...
+    validations:
+      required: true
+
+  - type: input
+    id: affiliation
+    attributes:
+      label: Crew / event / community affiliation
+    validations:
+      required: false
+
+  - type: input
+    id: public_link
+    attributes:
+      label: Public profile or music link
+      description: X, SoundCloud, Mixcloud, YouTube, official crew page, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Residency, regular events, booking info, or other public context.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I understand that this directory is not a DJ ranking.
+          required: true
