@@ -338,5 +338,94 @@
       "PSY-TRANCE"
     ],
     "source": "https://x.com/yossy222_VRC"
+  },
+  {
+    "id": "reverse-vrc",
+    "name": "十六夜リバース",
+    "role": "DJ / Organizer",
+    "affiliations": [
+      "和風DJ BAR 夜桜と共に"
+    ],
+    "genres": [
+      "PSY-TRANCE",
+      "SUBCULTURE"
+    ],
+    "source": "https://x.com/Reverse_VRC_"
+  },
+  {
+    "id": "calico",
+    "name": "CALICO / 猫日和きゃりこ",
+    "role": "VR Singer / Organizer",
+    "affiliations": [
+      "anywhere LIVE",
+      "晴れときどき猫団"
+    ],
+    "genres": [
+      "VR LIVE",
+      "ACOUSTIC"
+    ],
+    "source": "https://calico-biyori.net/"
+  },
+  {
+    "id": "93poetry",
+    "name": "93poetry",
+    "role": "VR Artist",
+    "affiliations": [
+      "anywhere LIVE"
+    ],
+    "genres": [
+      "VR LIVE"
+    ],
+    "source": "https://calico-biyori.net/2W1S/"
+  },
+  {
+    "id": "schnee",
+    "name": "魔法少女シュネー",
+    "role": "VR Artist",
+    "affiliations": [
+      "anywhere LIVE"
+    ],
+    "genres": [
+      "VR LIVE"
+    ],
+    "source": "https://calico-biyori.net/2W1S/"
+  },
+  {
+    "id": "chimo",
+    "name": "Chimo＊",
+    "role": "Artist",
+    "affiliations": [
+      "anywhere LIVE"
+    ],
+    "genres": [
+      "ACOUSTIC",
+      "LIVE"
+    ],
+    "source": "https://calico-biyori.net/2W1S/"
+  },
+  {
+    "id": "m1chie",
+    "name": "m1chie",
+    "role": "Musician",
+    "affiliations": [
+      "anywhere LIVE"
+    ],
+    "genres": [
+      "ACOUSTIC",
+      "LIVE"
+    ],
+    "source": "https://calico-biyori.net/2W1S/"
+  },
+  {
+    "id": "aiya-fukami",
+    "name": "ふかみあいや",
+    "role": "VR Artist",
+    "affiliations": [
+      "anywhere LIVE"
+    ],
+    "genres": [
+      "VR LIVE"
+    ],
+    "source": "https://calico-biyori.net/2W1S/"
   }
 ]
