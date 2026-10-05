@@ -12,7 +12,7 @@
   <meta property="og:description" content="A non-ranked directory of VRChat DJs, genres and crews." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261005-16" />
+  <link rel="stylesheet" href="styles.css?v=20261005-19" />
 </head>
 <body>
   <div class="noise"></div>
@@ -40,7 +40,10 @@
         <div><p class="kicker">DIRECTORY BETA</p><h2>DJ / Artist</h2></div>
         <p id="djCount" class="section-note">Loading…</p>
       </div>
-      <div id="djFilters" class="chip-row dj-filters"></div>
+      <div class="dj-controls">
+        <div id="djFilters" class="chip-row dj-filters"></div>
+        <label class="search-wrap"><span>⌕</span><input id="djSearch" type="search" placeholder="DJ名・所属・ジャンル" aria-label="Search DJs" /></label>
+      </div>
       <div id="djGrid" class="dj-grid"></div>
     </section>
   </main>
@@ -48,6 +51,6 @@
     <span>VRC CLUB CHARTS / PUBLIC BETA</span>
     <span class="footer-links"><a href="index.html">Charts</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
   </footer>
-  <script src="djs.js?v=20261005-16" defer></script>
+  <script src="djs.js?v=20261005-19" defer></script>
 </body>
 </html>
