@@ -18,10 +18,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 95,
-        "overall": 95
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": true,
       "source": null
     },
@@ -41,10 +41,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 94,
-        "overall": 94
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": false,
       "source": null
     },
@@ -63,10 +63,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 92,
-        "overall": 92
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": true,
       "source": null
     },
@@ -86,10 +86,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 86,
-        "overall": 86
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": true,
       "source": null
     },
@@ -108,10 +108,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 85,
-        "overall": 85
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": true,
       "source": null
     },
@@ -130,10 +130,10 @@
       },
       "scores": {
         "trending": 0,
-        "craftsmanship": 82,
-        "overall": 82
+        "craftsmanship": null,
+        "overall": null
       },
-      "editorialStatus": "provisional",
+      "editorialStatus": "unreviewed",
       "chartEligible": true,
       "source": null
     },
