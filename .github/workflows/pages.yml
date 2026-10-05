@@ -14,6 +14,9 @@ on:
       - "robots.txt"
       - "sitemap.xml"
       - "scripts/build_static_pages.py"
+      - "data/events.json"
+      - "events.js"
+      - "events.html"
       - "data/weekly-ranking.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -47,9 +50,10 @@ jobs:
       - name: Prepare public artifact
         run: |
           mkdir _site
-          cp index.html about.html privacy.html app.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html events.html app.js events.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
+          cp data/events.json _site/data/
           python scripts/build_static_pages.py _site
           touch _site/.nojekyll
 
