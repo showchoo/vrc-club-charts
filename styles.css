@@ -1487,3 +1487,20 @@ main,
 @media (max-width: 520px) {
   .relation-dj-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Event detail */
+.event-detail-mark {
+  color: rgba(63,217,255,.44);
+  font-size: clamp(52px, 9vw, 120px);
+  letter-spacing: -.08em;
+}
+.event-detail-meta {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 800px) {
+  .event-detail-meta { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .event-detail-meta { grid-template-columns: 1fr; }
+}
