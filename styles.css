@@ -1644,3 +1644,29 @@ main,
     width: 100%;
   }
 }
+
+
+/* DJ search controls */
+.dj-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.dj-controls .dj-filters {
+  margin-bottom: 0;
+}
+.dj-controls .search-wrap {
+  flex: 0 1 340px;
+}
+@media (max-width: 760px) {
+  .dj-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dj-controls .search-wrap {
+    flex-basis: auto;
+    width: 100%;
+  }
+}
