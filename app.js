@@ -24,7 +24,10 @@ const copy = {
 };
 
 const fmt = new Intl.NumberFormat('en-US');
-const scoreOf = (w) => Number(w.scores?.[state.view] ?? 0);
+const scoreOf = (w) => {
+  const value = w.scores?.[state.view];
+  return value == null ? -1 : Number(value);
+};
 
 function worldUrl(id) { return `https://vrchat.com/home/world/${id}`; }
 function formatDelta(n) { return n == null ? 'collecting' : `${n >= 0 ? '+' : ''}${fmt.format(n)}`; }
@@ -64,7 +67,17 @@ function buildGenres(worlds) {
 
 function visibleScore(w) {
   if (state.data?.status !== 'live' && state.view === 'trending') return '—';
-  return scoreOf(w).toFixed(1);
+  const value = w.scores?.[state.view];
+  return value == null ? '—' : Number(value).toFixed(1);
+}
+
+function discoveryCard(w) {
+  return `<article class="discovery-card">
+    <div class="discovery-topline"><span>PENDING REVIEW</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
+    <h3>${escapeHtml(w.name)}</h3>
+    <div class="author">by ${escapeHtml(w.author || '—')}</div>
+    <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+  </article>`;
 }
 
 function card(w, rank) {
@@ -96,16 +109,33 @@ function escapeHtml(s='') { return String(s).replace(/[&<>'"]/g, c => ({'&':'&am
 function render() {
   if (!state.data) return;
   const q = state.query.trim().toLowerCase();
-  let worlds = state.data.worlds.filter(w => {
+  const worlds = state.data.worlds.filter(w => {
     const genreOk = state.genre === 'ALL' || (w.genres || []).includes(state.genre);
     const hay = `${w.name} ${w.author} ${(w.genres||[]).join(' ')}`.toLowerCase();
     return genreOk && (!q || hay.includes(q));
   });
-  worlds.sort((a,b) => scoreOf(b) - scoreOf(a));
-  const top = worlds.slice(0,3), rest = worlds.slice(3);
+
+  const discovery = worlds.filter(w => w.editorialStatus === 'unreviewed');
+  let ranked = worlds.filter(w => {
+    if (state.view === 'trending' && state.data.status === 'live') return true;
+    return w.editorialStatus !== 'unreviewed';
+  });
+
+  ranked.sort((a,b) => scoreOf(b) - scoreOf(a));
+  const top = ranked.slice(0,3), rest = ranked.slice(3);
   document.getElementById('podium').innerHTML = top.map((w,i)=>card(w,i+1)).join('');
   document.getElementById('ranking').innerHTML = rest.map((w,i)=>row(w,i+4)).join('');
-  document.getElementById('emptyState').hidden = worlds.length > 0;
+  document.getElementById('emptyState').hidden = ranked.length > 0;
+
+  const discoverySection = document.getElementById('discoverySection');
+  const discoveryGrid = document.getElementById('discoveryGrid');
+  if (discoverySection && discoveryGrid) {
+    discoverySection.hidden = discovery.length === 0;
+    discoveryGrid.innerHTML = discovery
+      .sort((a,b) => a.name.localeCompare(b.name))
+      .map(discoveryCard)
+      .join('');
+  }
 }
 
 function applyLanguage() {
@@ -113,6 +143,12 @@ function applyLanguage() {
   document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = copy[state.lang][el.dataset.i18n]);
   document.getElementById('langToggle').textContent = state.lang === 'ja' ? 'EN' : 'JA';
   document.getElementById('searchInput').placeholder = state.lang === 'ja' ? 'ワールド名・作者・ジャンル' : 'World, creator or genre';
+  const discoveryTitle = document.getElementById('discoveryTitle');
+  const discoveryNote = document.getElementById('discoveryNote');
+  if (discoveryTitle) discoveryTitle.textContent = state.lang === 'ja' ? '掲載候補 / 未レビュー' : 'Discovery / pending review';
+  if (discoveryNote) discoveryNote.textContent = state.lang === 'ja'
+    ? 'World IDと公開状態を確認済み。作り込み評価は現地確認後にランキングへ反映します。'
+    : 'World identity and public status verified. Editorial craft scoring follows an in-world review.';
   setView(state.view);
 }
 
