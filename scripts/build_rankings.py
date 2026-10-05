@@ -68,6 +68,13 @@ def main():
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
             'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
+            'capacity': now.get('capacity'),
+            'recommendedCapacity': now.get('recommendedCapacity'),
+            'worldUpdatedAt': now.get('updatedAt'),
+            'totals': {
+                'visits': now.get('visits'),
+                'favorites': now.get('favorites'),
+            },
             'weekly': {'visits': dv, 'favorites': df},
             '_craft': craft,
             '_visits': dv or 0,
