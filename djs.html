@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DJs — VRC Club Charts</title>
+  <meta name="description" content="VRChatクラブ／音楽コミュニティで活動するDJのディレクトリ。ランキングではなく、ジャンルと所属から探せます。" />
+  <meta name="theme-color" content="#0d171c" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://showchoo.github.io/vrc-club-charts/djs.html" />
+  <meta property="og:title" content="VRChat DJs — VRC Club Charts" />
+  <meta property="og:description" content="A non-ranked directory of VRChat DJs, genres and crews." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=20261005-13" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
+    <nav class="nav">
+      <a class="nav-link" href="index.html">Charts</a>
+      <a class="nav-link" href="worlds/">Worlds</a>
+      <a class="nav-link" href="events.html">Events</a>
+      <a class="nav-link active" href="djs.html">DJs</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+  </header>
+  <main class="shell djs-page">
+    <section class="djs-hero">
+      <p class="kicker">DJ DIRECTORY</p>
+      <h1>People behind<br><em>the sound.</em></h1>
+      <p class="lead">VRChatの音楽シーンで活動するDJを、ジャンルと所属から探すためのディレクトリです。DJ自体の順位付けはしません。</p>
+      <div class="djs-actions">
+        <a class="primary-button" href="https://github.com/showchoo/vrc-club-charts/issues/new?template=dj_submission.yml" target="_blank" rel="noreferrer">DJを登録 ↗</a>
+      </div>
+    </section>
+    <section>
+      <div class="section-heading">
+        <div><p class="kicker">DIRECTORY BETA</p><h2>DJ / Artist</h2></div>
+        <p id="djCount" class="section-note">Loading…</p>
+      </div>
+      <div id="djFilters" class="chip-row dj-filters"></div>
+      <div id="djGrid" class="dj-grid"></div>
+    </section>
+  </main>
+  <footer class="site-footer shell">
+    <span>VRC CLUB CHARTS / PUBLIC BETA</span>
+    <span class="footer-links"><a href="index.html">Charts</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
+  </footer>
+  <script src="djs.js?v=20261005-13" defer></script>
+</body>
+</html>
