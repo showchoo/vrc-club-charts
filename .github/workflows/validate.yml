@@ -19,6 +19,9 @@ on:
       - "scripts/sync_reviewers_from_supabase.py"
       - "scripts/sync_reviews_from_supabase.py"
       - "data/review-scores.json"
+      - "data/world-candidates.json"
+      - "scripts/discover_worlds.py"
+      - "scripts/sync_worlds_from_supabase.py"
       - "data/reviews.json"
       - "data/reviewers.json"
       - "data/events.json"
@@ -68,6 +71,10 @@ jobs:
           node --check app.js
           node --check events.js
           node --check djs.js
+      - name: Sync approved Worlds
+        run: |
+          python scripts/sync_worlds_from_supabase.py
+          python scripts/build_rankings.py
       - name: Sync approved reviewers
         run: python scripts/sync_reviewers_from_supabase.py
       - name: Sync approved reviews

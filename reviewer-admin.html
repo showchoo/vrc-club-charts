@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Reviewer Admin — VRC Club Charts</title>
+  <title>VCC Admin — VRC Club Charts</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20261006-38" />
   <style>
@@ -47,6 +47,11 @@
     .admin-queue-divider{height:1px;margin:26px 0;background:linear-gradient(90deg,rgba(63,217,255,.18),transparent)}
 .review-scoreline{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
 .review-scoreline span{padding:5px 7px;border:1px solid rgba(172,239,255,.1);border-radius:8px;color:#a8c6ce;font-size:9px}
+.admin-auto-label{color:#66828c;font-size:8px;letter-spacing:.12em}
+.candidate-score{display:inline-flex;align-items:baseline;gap:4px;color:#75e2fc}
+.candidate-score b{font-size:21px}.candidate-score small{font-size:8px;color:#718b94}
+.candidate-source{color:#8fd8e9;font-size:9px;text-decoration:none}
+.candidate-source:hover{text-decoration:underline}
 .hidden{display:none!important}
     @media(max-width:700px){.admin-top,.admin-card-head{flex-direction:column}.admin-lock-row,.admin-actions{flex-direction:column}.admin-data{grid-template-columns:1fr}.credential-row{grid-template-columns:1fr}.admin-toolbar{align-items:flex-start;flex-direction:column}}
   </style>
@@ -56,9 +61,9 @@
   <main class="admin-shell">
     <div class="admin-top">
       <div>
-        <p class="kicker">PRIVATE REVIEWER CONSOLE</p>
-        <h1>Reviewer Admin</h1>
-        <p>申請内容を確認して、Approve / Rejectする管理画面です。承認するとReviewer IDと専用アクセスコードを発行します。</p>
+        <p class="kicker">PRIVATE MODERATION CONSOLE</p>
+        <h1>VCC Admin</h1>
+        <p>Reviewer申請、レビュー、新規Club World候補を確認する管理画面です。自動探索したWorldは承認するまで公開カタログへ入りません。</p>
       </div>
       <a class="secondary-button" href="reviewer.html">← Reviewer page</a>
     </div>
@@ -88,6 +93,14 @@
         <strong>PENDING REVIEWS <span class="admin-count" id="pendingReviewCount">0</span></strong>
       </div>
       <div class="admin-list" id="reviewList"></div>
+
+      <div class="admin-queue-divider"></div>
+
+      <div class="admin-toolbar">
+        <strong>NEW WORLD CANDIDATES <span class="admin-count" id="worldCandidateCount">0</span></strong>
+        <span class="admin-auto-label">DAILY AUTO DISCOVERY</span>
+      </div>
+      <div class="admin-list" id="worldCandidateList"></div>
     </section>
   </main>
 
@@ -106,6 +119,8 @@
       const pendingCount = document.getElementById('pendingCount');
       const reviewList = document.getElementById('reviewList');
       const pendingReviewCount = document.getElementById('pendingReviewCount');
+      const worldCandidateList = document.getElementById('worldCandidateList');
+      const worldCandidateCount = document.getElementById('worldCandidateCount');
       const loginStatus = document.getElementById('loginStatus');
 
       const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -117,9 +132,11 @@
       function getKey(){ return sessionStorage.getItem(storageKey) || ''; }
       function setLoginStatus(message,state=''){ loginStatus.textContent=message; loginStatus.dataset.state=state; }
 
-      async function callAdmin(action,id){
+      async function callAdmin(action,id,extra={}){
         const key=getKey();
         if(!key) throw new Error('管理キーがありません。');
+        const payload={action,...extra};
+        if(id) payload.id=id;
         const res=await fetch(endpoint,{
           method:'POST',
           headers:{
@@ -127,7 +144,7 @@
             'Content-Type':'application/json',
             'x-vcc-admin-key':key
           },
-          body:JSON.stringify(id ? {action,id} : {action})
+          body:JSON.stringify(payload)
         });
         let data={};
         try{ data=await res.json(); }catch(_){}
@@ -278,13 +295,100 @@
         }
       }
 
+
+      function renderWorldCandidates(candidates,decisions){
+        const decided=new Map((decisions||[]).map(d=>[d.world_id,d.status]));
+        const pending=(candidates||[]).filter(c=>!decided.has(c.id));
+        worldCandidateCount.textContent=pending.length;
+        worldCandidateList.innerHTML='';
+        if(!pending.length){
+          worldCandidateList.innerHTML='<div class="empty-admin">現在、新しいClub World候補はありません。</div>';
+          return;
+        }
+
+        for(const candidate of pending){
+          const card=document.createElement('article');
+          card.className='admin-card';
+          const reasons=(candidate.reasons||[]).slice(0,8).map(r=>`<span>${esc(r)}</span>`).join('');
+          const cats=(candidate.sourceCategories||[]).map(r=>`<span>${esc(r)}</span>`).join('');
+          const source=String(candidate.source||'');
+          const safeSource=source.startsWith('https://www.vrcw.net/') ? source : '';
+          card.innerHTML=`
+            <div class="admin-card-head">
+              <div>
+                <h2>${esc(candidate.name || candidate.id)}</h2>
+                <div class="admin-meta">${cats}<span>${esc(candidate.confidence || 'candidate').toUpperCase()}</span></div>
+              </div>
+              <div class="candidate-score"><b>${Number(candidate.confidenceScore||0)}</b><small>/100</small></div>
+            </div>
+            <div class="admin-data">
+              <div><b>WORLD ID</b><p>${esc(candidate.id)}</p></div>
+              <div><b>AUTHOR HINT</b><p>${esc(candidate.authorHint || '—')}</p></div>
+              <div><b>FIRST DISCOVERED</b><p>${esc(candidate.firstDiscoveredAt || '—')}</p></div>
+              <div><b>SOURCE</b><p>${safeSource ? `<a class="candidate-source" href="${esc(safeSource)}" target="_blank" rel="noreferrer">VRCW source ↗</a>` : '—'}</p></div>
+            </div>
+            <div class="admin-meta">${reasons}</div>
+            <div class="admin-actions">
+              <button class="approve" type="button">APPROVE WORLD</button>
+              <button class="reject" type="button">REJECT</button>
+            </div>`;
+
+          const approve=card.querySelector('.approve');
+          const reject=card.querySelector('.reject');
+          approve.addEventListener('click',async()=>{
+            if(!confirm(`${candidate.name || candidate.id} をClub Worldとして掲載しますか？`)) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              const data=await callAdmin('approve_world_candidate',candidate.id,{
+                name:candidate.name || '',
+                source:safeSource,
+                sourceCategories:candidate.sourceCategories || [],
+                reasons:candidate.reasons || [],
+                confidenceScore:Number(candidate.confidenceScore||0)
+              });
+              card.remove();
+              worldCandidateCount.textContent=Math.max(0,Number(worldCandidateCount.textContent)-1);
+              if(!worldCandidateList.querySelector('.admin-card')) worldCandidateList.innerHTML='<div class="empty-admin">現在、新しいClub World候補はありません。</div>';
+              alert('Worldを承認しました: '+(data.name || candidate.name));
+            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
+          });
+          reject.addEventListener('click',async()=>{
+            if(!confirm(`${candidate.name || candidate.id} を候補から除外しますか？`)) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              await callAdmin('reject_world_candidate',candidate.id,{
+                name:candidate.name || '',
+                source:safeSource
+              });
+              card.remove();
+              worldCandidateCount.textContent=Math.max(0,Number(worldCandidateCount.textContent)-1);
+              if(!worldCandidateList.querySelector('.admin-card')) worldCandidateList.innerHTML='<div class="empty-admin">現在、新しいClub World候補はありません。</div>';
+            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
+          });
+          worldCandidateList.appendChild(card);
+        }
+      }
+
+      async function loadWorldCandidates(){
+        const response=await fetch('data/world-candidates.json',{cache:'no-store'});
+        if(!response.ok) return [];
+        const data=await response.json();
+        return Array.isArray(data) ? data : [];
+      }
+
       async function load(){
         setLoginStatus('確認中…');
         try{
-          const [data,reviews]=await Promise.all([callAdmin('list'),callAdmin('list_reviews')]);
+          const [data,reviews,worldDecisions,candidates]=await Promise.all([
+            callAdmin('list'),
+            callAdmin('list_reviews'),
+            callAdmin('list_world_candidate_decisions'),
+            loadWorldCandidates()
+          ]);
           showUnlocked();
           render(data.applications || []);
           renderReviews(reviews.reviews || []);
+          renderWorldCandidates(candidates,worldDecisions.decisions || []);
           setLoginStatus('');
         }catch(err){
           showLocked();

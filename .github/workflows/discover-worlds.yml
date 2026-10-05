@@ -1,0 +1,34 @@
+name: Discover new club Worlds
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 02:47 JST. Candidate discovery is lightweight and does not call VRChat search APIs.
+    - cron: "47 17 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discover-club-worlds
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover public club candidates
+        run: python scripts/discover_worlds.py
+      - name: Commit candidate queue
+        run: |
+          git config user.name "vrc-club-charts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/world-candidates.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: refresh World discovery candidates"
+          git push

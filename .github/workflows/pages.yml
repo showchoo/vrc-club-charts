@@ -32,6 +32,9 @@ on:
       - "data/review-scores.json"
       - "data/reviews.json"
       - "data/reviewers.json"
+      - "data/world-candidates.json"
+      - "scripts/discover_worlds.py"
+      - "scripts/sync_worlds_from_supabase.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   schedule:
@@ -65,6 +68,8 @@ jobs:
 
       - name: Prepare public artifact
         run: |
+          python scripts/sync_worlds_from_supabase.py
+          python scripts/build_rankings.py
           python scripts/sync_reviewers_from_supabase.py
           python scripts/sync_reviews_from_supabase.py
           python scripts/build_review_scores.py
@@ -75,6 +80,7 @@ jobs:
           cp data/review-scores.json _site/data/
           cp data/events.json _site/data/
           cp data/djs.json _site/data/
+          cp data/world-candidates.json _site/data/
           python scripts/build_static_pages.py _site
           python scripts/build_og_image.py _site
           touch _site/.nojekyll
