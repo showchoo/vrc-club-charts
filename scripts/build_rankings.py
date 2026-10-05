@@ -69,6 +69,7 @@ def main():
             'name': now.get('name') or seed.get('name'),
             'author': now.get('author') or seed.get('author'),
             'genres': seed.get('genres', []),
+            'source': seed.get('source'),
             'editorialStatus': editorial_status,
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
