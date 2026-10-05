@@ -108,14 +108,20 @@ jobs:
               const errors = [];
               const reviewerId = field("Reviewer ID").trim();
               const worldId = field("VRChat World ID").trim();
+              const githubLogin = String(context.payload.issue.user?.login || "").trim().toLowerCase();
               const reviewer = reviewers.find(r => r.id === reviewerId);
               const world = worlds.find(w => w.id === worldId);
 
               if (!reviewer) errors.push(`Reviewer ID \`${reviewerId || "(empty)"}\` is not registered.`);
               else if (reviewer.status !== "active") errors.push(`Reviewer \`${reviewerId}\` is not active.`);
+              else if (String(reviewer.github || "").trim().toLowerCase() !== githubLogin) {
+                errors.push("Reviewer ID does not belong to the GitHub account that submitted this Issue.");
+              }
 
               if (!/^wrld_[0-9a-fA-F-]{36}$/.test(worldId) || !world) {
                 errors.push(`World ID \`${worldId || "(empty)"}\` is not in the tracked World catalog.`);
+              } else if (world.chartEligible !== true) {
+                errors.push("This World is directory-only and is not eligible for the Craftsmanship Ranking.");
               }
 
               const scoreDefs = [
@@ -139,6 +145,12 @@ jobs:
               }
               if (total > 100) errors.push("Total score cannot exceed 100.");
 
+              const confirmations = field("Required confirmations");
+              const checkedCount = confirmations.split("\n").filter(line => /^- \[x\]/i.test(line)).length;
+              if (checkedCount < 3) errors.push("All required reviewer confirmations must be checked.");
+
+              if (!field("Review comment").trim()) errors.push("Review comment is required.");
+
               const conflict = field("Conflict of interest").trim();
               if (!/^(No|Yes\b)/i.test(conflict)) errors.push("Conflict of interest must explicitly be Yes or No.");
 
@@ -146,6 +158,13 @@ jobs:
               const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(reviewedAt);
               if (!reviewedAt || (!dateOnly && Number.isNaN(Date.parse(reviewedAt)))) {
                 errors.push("Review date must be YYYY-MM-DD or a valid ISO 8601 date/time.");
+              } else {
+                const parsed = dateOnly ? new Date(`${reviewedAt}T00:00:00Z`) : new Date(reviewedAt);
+                if (Number.isNaN(parsed.getTime()) || (dateOnly && parsed.toISOString().slice(0, 10) !== reviewedAt)) {
+                  errors.push("Review date is not a real calendar date.");
+                } else if (parsed.getTime() > Date.now() + 5 * 60 * 1000) {
+                  errors.push("Review date cannot be in the future.");
+                }
               }
 
               const prior = reviews.filter(r => r.reviewerId === reviewerId && r.worldId === worldId);
