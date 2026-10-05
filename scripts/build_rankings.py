@@ -64,6 +64,8 @@ def main():
             'author': now.get('author') or seed.get('author'),
             'genres': seed.get('genres', []),
             'editorialStatus': editorial_status,
+            'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
+            'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
             'weekly': {'visits': dv, 'favorites': df},
             '_craft': craft,
             '_visits': dv or 0,
