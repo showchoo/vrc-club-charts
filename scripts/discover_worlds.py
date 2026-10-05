@@ -108,10 +108,12 @@ def visible_lines(raw_html: str) -> list[str]:
 
 def parse_vrcw(raw_html: str, source_name: str, source_url: str, base_score: int) -> list[dict]:
     lines = visible_lines(raw_html)
+    world_positions = [i for i, line in enumerate(lines) if WORLD_ID_RE.fullmatch(line)]
     found: list[dict] = []
-    for i, line in enumerate(lines):
-        if not WORLD_ID_RE.fullmatch(line):
-            continue
+
+    for pos, i in enumerate(world_positions):
+        line = lines[i]
+        next_i = world_positions[pos + 1] if pos + 1 < len(world_positions) else len(lines)
 
         name = ""
         for j in range(i - 1, max(-1, i - 8), -1):
@@ -125,12 +127,14 @@ def parse_vrcw(raw_html: str, source_name: str, source_url: str, base_score: int
                 break
 
         author = ""
-        for j in range(i + 1, min(len(lines), i + 10)):
-            if lines[j] in {"制作", "Creator", "Author"} and j + 1 < len(lines):
+        for j in range(i + 1, min(next_i, i + 10)):
+            if lines[j] in {"制作", "Creator", "Author"} and j + 1 < next_i:
                 author = re.sub(r"\s*さん$", "", lines[j + 1]).strip()
                 break
 
-        context_lines = lines[max(0, i - 10): min(len(lines), i + 60)]
+        # Score only this World's own block. Avoid leaking keywords from adjacent entries.
+        block_end = max(i + 1, next_i - 2)
+        context_lines = lines[max(0, i - 4): block_end]
         context = " ".join(context_lines).lower()
 
         score = base_score
