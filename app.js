@@ -1,4 +1,4 @@
-const state = { view: 'overall', genre: 'ALL', query: '', lang: 'ja', data: null };
+const state = { view: 'overall', genre: 'ALL', query: '', lang: 'ja', data: null, discoverySort: 'popular' };
 
 const copy = {
   ja: {
@@ -76,13 +76,42 @@ function visibleScore(w) {
 }
 
 function discoveryCard(w) {
+  const visits = w.totals?.visits;
+  const favorites = w.totals?.favorites;
+  const stats = (visits != null || favorites != null)
+    ? `<div class="discovery-stats">
+        <span><strong>${visits == null ? '—' : fmt.format(visits)}</strong><small>VISITS</small></span>
+        <span><strong>${favorites == null ? '—' : fmt.format(favorites)}</strong><small>FAVS</small></span>
+      </div>`
+    : '<div class="discovery-stats discovery-stats-pending"><span>DATA COLLECTING</span></div>';
   return `<article class="discovery-card ${w.thumbnail ? 'has-thumb' : ''}">
     ${mediaHtml(w)}
     <div class="discovery-topline"><span>PENDING REVIEW</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
     <h3>${escapeHtml(w.name)}</h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
     <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+    ${stats}
   </article>`;
+}
+
+function discoverySortValue(w, key) {
+  if (key === 'visits') return Number(w.totals?.visits ?? -1);
+  if (key === 'favorites') return Number(w.totals?.favorites ?? -1);
+  if (key === 'popular') {
+    const favs = Number(w.totals?.favorites ?? 0);
+    const visits = Number(w.totals?.visits ?? 0);
+    return Math.log1p(favs) * 2 + Math.log1p(visits);
+  }
+  return 0;
+}
+
+function sortDiscovery(items) {
+  const arr = [...items];
+  if (state.discoverySort === 'name') return arr.sort((a,b) => a.name.localeCompare(b.name));
+  return arr.sort((a,b) => {
+    const delta = discoverySortValue(b, state.discoverySort) - discoverySortValue(a, state.discoverySort);
+    return delta || a.name.localeCompare(b.name);
+  });
 }
 
 function card(w, rank) {
@@ -138,10 +167,10 @@ function render() {
   const discoveryGrid = document.getElementById('discoveryGrid');
   if (discoverySection && discoveryGrid) {
     discoverySection.hidden = discovery.length === 0;
-    discoveryGrid.innerHTML = discovery
-      .sort((a,b) => a.name.localeCompare(b.name))
-      .map(discoveryCard)
-      .join('');
+    const sortedDiscovery = sortDiscovery(discovery);
+    discoveryGrid.innerHTML = sortedDiscovery.map(discoveryCard).join('');
+    const discoveryCount = document.getElementById('discoveryCount');
+    if (discoveryCount) discoveryCount.textContent = `${discovery.length} worlds`;
   }
 }
 
@@ -152,10 +181,19 @@ function applyLanguage() {
   document.getElementById('searchInput').placeholder = state.lang === 'ja' ? 'ワールド名・作者・ジャンル' : 'World, creator or genre';
   const discoveryTitle = document.getElementById('discoveryTitle');
   const discoveryNote = document.getElementById('discoveryNote');
+  const discoverySortLabel = document.getElementById('discoverySortLabel');
   if (discoveryTitle) discoveryTitle.textContent = state.lang === 'ja' ? '掲載候補 / 未レビュー' : 'Discovery / pending review';
   if (discoveryNote) discoveryNote.textContent = state.lang === 'ja'
     ? '公開情報でWorld IDを確認済み。作り込み評価は現地確認後にランキングへ反映します。'
     : 'World identity verified from public listings. Editorial craft scoring follows an in-world review.';
+  if (discoverySortLabel) discoverySortLabel.textContent = state.lang === 'ja' ? '並び順' : 'Sort';
+  const sort = document.getElementById('discoverySort');
+  if (sort) {
+    sort.options[0].textContent = state.lang === 'ja' ? '注目順' : 'Popular';
+    sort.options[1].textContent = 'Visits';
+    sort.options[2].textContent = 'Favorites';
+    sort.options[3].textContent = 'A–Z';
+  }
   setView(state.view);
 }
 
@@ -179,4 +217,8 @@ async function init() {
 document.querySelectorAll('[data-view]').forEach(el => el.addEventListener('click', () => setView(el.dataset.view)));
 document.getElementById('searchInput').addEventListener('input', e => { state.query = e.target.value; render(); });
 document.getElementById('langToggle').addEventListener('click', () => { state.lang = state.lang === 'ja' ? 'en' : 'ja'; applyLanguage(); });
+document.getElementById('discoverySort')?.addEventListener('change', e => {
+  state.discoverySort = e.target.value;
+  render();
+});
 init();
