@@ -1620,3 +1620,27 @@ main,
     justify-self: start;
   }
 }
+
+
+/* Event search controls */
+.events-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 0 8px;
+  border-top: 1px solid rgba(166,234,255,.10);
+}
+.events-controls .search-wrap {
+  flex: 0 1 360px;
+}
+@media (max-width: 760px) {
+  .events-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .events-controls .search-wrap {
+    flex-basis: auto;
+    width: 100%;
+  }
+}
