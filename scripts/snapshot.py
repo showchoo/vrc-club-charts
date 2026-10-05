@@ -42,14 +42,35 @@ def main() -> int:
         if not WORLD_ID_RE.fullmatch(wid):
             print(f"ERROR: invalid VRChat world id: {wid!r}", file=sys.stderr)
             return 2
+    day = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    out = ROOT / "data/snapshots" / f"{day}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+
+    captured = []
+    skipped = []
+    if out.exists():
+        try:
+            previous = json.loads(out.read_text(encoding="utf-8"))
+            captured = list(previous.get("worlds", []))
+            skipped = list(previous.get("skipped", []))
+            print(f"Resuming {day}: {len(captured)} worlds already captured")
+        except Exception as e:
+            print(f"WARN: could not read existing snapshot: {e}", file=sys.stderr)
+
+    captured_ids = {w.get("id") for w in captured}
+    permanent_skips = {w.get("id") for w in skipped if w.get("status") in {"http_403", "http_404"}}
+    pending = [seed for seed in worlds if seed["id"] not in captured_ids and seed["id"] not in permanent_skips]
+
+    if not pending:
+        print(f"Snapshot already complete for {day}")
+        return 0
+
     if not args.no_jitter:
         delay = random.randint(0, 900)
         print(f"Randomized start delay: {delay}s")
         time.sleep(delay)
 
-    captured = []
-    skipped = []
-    for i, seed in enumerate(worlds):
+    for i, seed in enumerate(pending):
         if i:
             time.sleep(max(args.interval, 1))
         try:
@@ -78,9 +99,11 @@ def main() -> int:
             print(f"ERROR {seed['id']}: {e}", file=sys.stderr)
             skipped.append({"id": seed["id"], "status": type(e).__name__})
 
-    day = dt.datetime.now(dt.timezone.utc).date().isoformat()
-    out = ROOT / "data/snapshots" / f"{day}.json"
-    out.parent.mkdir(parents=True, exist_ok=True)
+    # Deduplicate in case a resumed run retried a transient failure.
+    by_id = {w.get("id"): w for w in captured if w.get("id")}
+    captured = [by_id[k] for k in sorted(by_id)]
+    skip_by_id = {w.get("id"): w for w in skipped if w.get("id") and w.get("id") not in by_id}
+    skipped = [skip_by_id[k] for k in sorted(skip_by_id)]
     out.write_text(json.dumps({"capturedAt": day, "worlds": captured, "skipped": skipped}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {out}")
     return 0
