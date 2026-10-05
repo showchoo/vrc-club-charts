@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VRC Club Charts — VRChat Club World Ranking</title>
+  <meta name="description" content="VRChatのクラブ／DJワールドを、週間トレンドと作り込み度でランキング。毎週更新。" />
+  <meta name="theme-color" content="#090a10" />
+  <meta property="og:title" content="VRC Club Charts" />
+  <meta property="og:description" content="VRChat club worlds, ranked weekly." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="VRC Club Charts home">
+      <span class="brand-mark">VCC</span>
+      <span>VRC CLUB CHARTS</span>
+    </a>
+    <nav class="nav">
+      <button class="nav-link active" data-view="overall">総合</button>
+      <button class="nav-link" data-view="trending">急上昇</button>
+      <button class="nav-link" data-view="craftsmanship">作り込み</button>
+      <a class="nav-link" href="#methodology">算出方法</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+    <button id="langToggle" class="ghost-button" type="button">EN</button>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="eyebrow"><span class="pulse-dot"></span><span data-i18n="weekly">WEEKLY VR NIGHTLIFE INDEX</span></div>
+      <h1><span data-i18n="heroA">今週、行くべき</span><br><em data-i18n="heroB">VRChatクラブ。</em></h1>
+      <p class="hero-copy" data-i18n="heroCopy">来場の伸びと、お気に入り増加。そして空間・照明・音響・ギミックの作り込み。人気だけでは見つからないクラブを毎週ランキングします。</p>
+      <div class="hero-meta">
+        <span id="dataStatus" class="status-pill">LOADING</span>
+        <span id="updatedAt">—</span>
+        <span>•</span>
+        <span id="worldCount">— worlds</span>
+      </div>
+    </section>
+
+    <section class="shell controls" aria-label="filters">
+      <div id="genreFilters" class="chip-row"></div>
+      <label class="search-wrap">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="ワールド名・作者・ジャンル" aria-label="search worlds" />
+      </label>
+    </section>
+
+    <section class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="kicker" id="chartKicker">WEEKLY CHART</p>
+          <h2 id="chartTitle">総合ランキング</h2>
+        </div>
+        <p id="chartDescription" class="section-note">週間トレンドと編集部の作り込み評価を合成。</p>
+      </div>
+      <div id="podium" class="podium" aria-live="polite"></div>
+      <div id="ranking" class="ranking" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state" hidden>該当するワールドがありません。</div>
+    </section>
+
+    <section id="methodology" class="shell methodology">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">METHODOLOGY</p>
+          <h2 data-i18n="methodTitle">順位を「人気だけ」にしない。</h2>
+        </div>
+      </div>
+      <div class="method-grid">
+        <article class="method-card">
+          <span class="method-number">01</span>
+          <h3 data-i18n="trendTitle">Trending 55%</h3>
+          <p data-i18n="trendCopy">前週からのVisits増加とFavorites増加を中心に算出。古い定番だけが上位を独占しないよう、伸びを重視します。</p>
+        </article>
+        <article class="method-card">
+          <span class="method-number">02</span>
+          <h3 data-i18n="craftTitle">Craftsmanship 45%</h3>
+          <p data-i18n="craftCopy">Visual / Lighting / Sound / Spatial / Interaction / Originality / Optimizationを編集部評価。順位の購入は不可。</p>
+        </article>
+        <article class="method-card accent-card">
+          <span class="method-number">03</span>
+          <h3 data-i18n="updateTitle">Weekly refresh</h3>
+          <p data-i18n="updateCopy">公開ワールドIDを週1回スナップショット化し、差分だけを静的JSONへ反映。閲覧時にVRChat APIを呼ばない設計です。</p>
+        </article>
+      </div>
+      <p class="disclaimer">VRC Club Charts is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.</p>
+    </section>
+
+    <section class="shell pitch">
+      <div>
+        <p class="kicker">FOR CREATORS & EVENTS</p>
+        <h2 data-i18n="pitchTitle">クラブを登録する。</h2>
+        <p data-i18n="pitchCopy">MVPでは <code>data/worlds.json</code> にWorld IDを追加するだけ。将来はCreator submission、イベント予定、スポンサー枠へ拡張できます。</p>
+      </div>
+      <span class="primary-button muted-button" aria-disabled="true" data-i18n="submitSoon">Submission coming soon</span>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>VRC CLUB CHARTS / PUBLIC BETA</span>
+    <span class="footer-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
