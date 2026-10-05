@@ -5,7 +5,7 @@ import datetime as dt
 import html
 import json
 import re
-import urllib.parse
+import time
 import urllib.request
 from pathlib import Path
 
@@ -16,71 +16,81 @@ WORLDS = ROOT / "data" / "worlds.json"
 SUPABASE_URL = "https://ypqpgpetrriirywrzikj.supabase.co"
 SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 
-SOURCES = [
-    # The new VRCW homepage continuously exposes new / recently-public Worlds
-    # together with category tags, making it the primary discovery feed.
-    ("new_vrcw_recent", "https://newjp.vrcw.net/", 25),
-    # Legacy category pages remain useful when reachable.
-    ("club", "https://www.vrcw.net/category/detail/club", 80),
-    ("event_venue", "https://www.vrcw.net/category/detail/event_venue", 35),
+LISTING_SOURCES = [
+    ("vrcmap_music", "https://vrcmap.com/?category=music", 28),
+    ("vrcmap_new", "https://vrcmap.com/?category=new", 8),
 ]
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
-WORLD_ID_LINE_RE = re.compile(r"^(?:ID:\s*)?(wrld_[0-9a-fA-F-]{36})$")
+WORLD_LINK_RE = re.compile(r"/world/(wrld_[0-9a-fA-F-]{36})")
 TAG_RE = re.compile(r"<[^>]+>")
+H1_RE = re.compile(r"(?is)<h1[^>]*>(.*?)</h1>")
+MAX_DETAIL_FETCHES = 70
 
 POSITIVE = {
     "club": 30,
     "クラブ": 30,
-    "nightclub": 30,
-    "dj": 20,
-    "rave": 20,
-    "techno": 15,
-    "house music": 15,
-    "dance": 10,
-    "ダンス": 10,
-    "music": 10,
-    "音楽": 10,
-    "event": 8,
-    "イベント会場": 8,
+    "nightclub": 35,
+    "dj": 24,
+    "rave": 24,
+    "レイブ": 24,
+    "techno": 18,
+    "テクノ": 18,
+    "house music": 18,
+    "dancefloor": 18,
+    "dance floor": 18,
+    "party": 12,
+    "disco": 15,
+    "ディスコ": 15,
+    "audiolink": 8,
+    "ltcgi": 8,
+    "topazchat": 8,
     "stage": 5,
     "ステージ": 5,
-    "audiolink": 8,
-    "オーディオリンク": 8,
-    "disco": 12,
+    "music": 5,
+    "音楽": 5,
 }
 
 NEGATIVE = {
-    "avatar": 45,
-    "アバター": 45,
-    "mmd": 45,
+    "avatar": 50,
+    "アバター": 50,
+    "mmd": 55,
     "studio": 35,
     "スタジオ": 35,
-    "clubhouse": 25,
-    "sleep": 30,
-    "睡眠": 30,
-    "chill": 25,
+    "sleep": 35,
+    "睡眠": 35,
+    "chill": 22,
     "pool": 20,
     "プール": 20,
-    "home": 20,
-    "game": 15,
-    "ゲーム": 15,
+    "home": 18,
+    "game": 18,
+    "ゲーム": 18,
+    "karaoke": 25,
+    "カラオケ": 25,
+    "livehouse": 15,
+    "ライブハウス": 15,
 }
+
+STRONG_NIGHTLIFE = (
+    "club", "クラブ", "nightclub", "dj", "rave", "レイブ",
+    "techno", "テクノ", "dancefloor", "dance floor", "disco", "ディスコ",
+)
+
+HARD_EXCLUDE = (
+    "content_adult", "content_sex", "adult only", "18+",
+)
 
 
 def fetch_text(url: str) -> str:
     headers = {
-        "User-Agent": "VRCClubCharts/0.4 (+https://showchoo.github.io/vrc-club-charts/)",
+        "User-Agent": "VRCClubCharts/0.5 (+https://showchoo.github.io/vrc-club-charts/)",
         "Accept": "text/html,application/xhtml+xml,text/plain",
     }
     attempts = [url]
     if url.startswith("https://"):
-        # VRCW may block GitHub-hosted runners. Jina Reader is used only as a
-        # read-only text fallback so the source site still receives just one
-        # lightweight fetch per category per day.
         attempts.append("https://r.jina.ai/http://" + url.removeprefix("https://"))
 
-    last_error: Exception | None = None
+    errors: list[str] = []
     for candidate_url in attempts:
         try:
             req = urllib.request.Request(candidate_url, headers=headers)
@@ -90,13 +100,10 @@ def fetch_text(url: str) -> str:
                     if candidate_url != url:
                         print(f"INFO: using text fallback for {url}")
                     return text
+                errors.append(f"{candidate_url}: response contained no World IDs")
         except Exception as exc:
-            last_error = exc
-            print(f"WARN: fetch failed {candidate_url}: {exc}")
-
-    if last_error:
-        raise last_error
-    raise RuntimeError(f"no usable response for {url}")
+            errors.append(f"{candidate_url}: {exc}")
+    raise RuntimeError("; ".join(errors))
 
 
 def public_rest(path: str) -> list[dict]:
@@ -117,7 +124,7 @@ def public_rest(path: str) -> list[dict]:
         return []
 
 
-def visible_lines(raw_html: str) -> list[str]:
+def plain_text(raw_html: str) -> str:
     cleaned = re.sub(r"(?is)<script.*?>.*?</script>", "\n", raw_html)
     cleaned = re.sub(r"(?is)<style.*?>.*?</style>", "\n", cleaned)
     cleaned = TAG_RE.sub("\n", cleaned)
@@ -129,95 +136,96 @@ def visible_lines(raw_html: str) -> list[str]:
         line = re.sub(r"\s+", " ", line).strip()
         if line:
             lines.append(line)
-    return lines
+    return "\n".join(lines)
 
 
-def parse_vrcw(raw_html: str, source_name: str, source_url: str, base_score: int) -> list[dict]:
-    lines = visible_lines(raw_html)
+def listing_world_ids(raw_html: str) -> list[str]:
+    ids = []
+    seen = set()
+    for match in WORLD_LINK_RE.finditer(raw_html):
+        wid = match.group(1)
+        if wid not in seen:
+            seen.add(wid)
+            ids.append(wid)
+    # Reader-mode fallback can expose bare World IDs even if hrefs are normalized.
+    if not ids:
+        for wid in re.findall(r"wrld_[0-9a-fA-F-]{36}", raw_html):
+            if wid not in seen:
+                seen.add(wid)
+                ids.append(wid)
+    return ids
 
-    positions: list[tuple[int, str]] = []
-    for i, line in enumerate(lines):
-        match = WORLD_ID_LINE_RE.fullmatch(line)
-        if match:
-            positions.append((i, match.group(1)))
 
-    found: list[dict] = []
-    for pos, (i, world_id) in enumerate(positions):
-        next_i = positions[pos + 1][0] if pos + 1 < len(positions) else len(lines)
+def detail_candidate(world_id: str, source_name: str, source_url: str, base_score: int) -> dict | None:
+    detail_url = f"https://vrcmap.com/world/{world_id}"
+    raw = fetch_text(detail_url)
+    text = plain_text(raw)
 
-        name = ""
-        for j in range(i - 1, max(-1, i - 10), -1):
-            candidate = lines[j]
-            if candidate in {"ワールドID", "World ID", "ID"}:
-                continue
-            if WORLD_ID_LINE_RE.fullmatch(candidate):
+    # Similar-world blocks contain unrelated keywords; ignore them for classification.
+    lower_text = text.lower()
+    cut = len(text)
+    for marker in ("\nsimilar worlds", "\n似ている vrchat ワールド", "\nmore by", "\n作者の他のワールド"):
+        pos = lower_text.find(marker.lower())
+        if pos >= 0:
+            cut = min(cut, pos)
+    core = text[:cut]
+    context = core.lower()
+
+    if any(term in context for term in HARD_EXCLUDE):
+        return None
+
+    if not any(term in context for term in STRONG_NIGHTLIFE):
+        return None
+
+    score = base_score
+    reasons = [f"source:{source_name}", "+explicit-nightlife"]
+    for keyword, weight in POSITIVE.items():
+        if keyword.lower() in context:
+            score += weight
+            reasons.append(f"+{keyword}")
+    for keyword, weight in NEGATIVE.items():
+        if keyword.lower() in context:
+            score -= weight
+            reasons.append(f"-{keyword}")
+
+    score = max(0, min(100, score))
+    if score < 55:
+        return None
+
+    name = ""
+    h1 = H1_RE.search(raw)
+    if h1:
+        name = re.sub(r"\s+", " ", html.unescape(TAG_RE.sub("", h1.group(1)))).strip()
+    if not name:
+        lines = [x.strip() for x in core.splitlines() if x.strip()]
+        for line in lines[:20]:
+            if line != world_id and not line.lower().startswith(("vrcmap", "image:")):
+                name = line
                 break
-            if candidate.startswith(("ID:", "制作者:", "制作:", "Author:")):
-                continue
-            if len(candidate) > 1:
-                name = candidate
+
+    author = None
+    lines = [x.strip() for x in core.splitlines() if x.strip()]
+    for i, line in enumerate(lines[:40]):
+        m = re.match(r"^by:\s*(.+)$", line, re.I)
+        if m:
+            author = m.group(1).strip()
+            break
+        if name and line == name and i + 1 < len(lines):
+            nxt = lines[i + 1]
+            if nxt and not nxt.startswith(("#", "Image:")) and len(nxt) <= 120:
+                author = nxt
                 break
 
-        author = ""
-        for j in range(i + 1, min(next_i, i + 12)):
-            line = lines[j]
-            inline = re.match(r"^(?:制作者|制作|Creator|Author)\s*[:：]\s*(.+)$", line)
-            if inline:
-                author = re.sub(r"\s*さん$", "", inline.group(1)).strip()
-                break
-            if line in {"制作", "制作者", "Creator", "Author"} and j + 1 < next_i:
-                author = re.sub(r"\s*さん$", "", lines[j + 1]).strip()
-                break
-
-        # Score only this World's block to avoid borrowing tags from adjacent entries.
-        context_lines = lines[max(0, i - 6):next_i]
-        context = " ".join(context_lines).lower()
-
-        score = base_score
-        reasons = [f"source:{source_name}"]
-        for keyword, weight in POSITIVE.items():
-            if keyword.lower() in context:
-                score += weight
-                reasons.append(f"+{keyword}")
-        for keyword, weight in NEGATIVE.items():
-            if keyword.lower() in context:
-                score -= weight
-                reasons.append(f"-{keyword}")
-
-        if source_name == "event_venue":
-            has_strong = any(k in context for k in ["club", "クラブ", "dj", "rave", "techno"])
-            if not has_strong:
-                score -= 20
-                reasons.append("-weak-event-match")
-
-        if source_name == "new_vrcw_recent":
-            # Homepage contains many unrelated new Worlds. Require an explicit
-            # nightlife signal before a World can even become a candidate.
-            has_strong = any(
-                k in context
-                for k in ["club", "クラブ", "nightclub", "dj", "rave", "techno", "disco", "ディスコ"]
-            )
-            if not has_strong:
-                continue
-            reasons.append("+explicit-nightlife")
-
-        score = max(0, min(100, score))
-        if score < 55:
-            continue
-
-        found.append(
-            {
-                "id": world_id,
-                "name": name or world_id,
-                "authorHint": author or None,
-                "source": source_url,
-                "sourceCategories": [source_name],
-                "confidenceScore": score,
-                "confidence": "high" if score >= 80 else "medium",
-                "reasons": reasons[:12],
-            }
-        )
-    return found
+    return {
+        "id": world_id,
+        "name": name or world_id,
+        "authorHint": author,
+        "source": detail_url,
+        "sourceCategories": [source_name],
+        "confidenceScore": score,
+        "confidence": "high" if score >= 80 else "medium",
+        "reasons": reasons[:14],
+    }
 
 
 def main() -> int:
@@ -248,34 +256,49 @@ def main() -> int:
         except Exception:
             previous = []
 
-    by_id: dict[str, dict] = {}
+    source_membership: dict[str, list[tuple[str, str, int]]] = {}
     successful_sources = 0
 
-    for source_name, source_url, base_score in SOURCES:
+    for source_name, source_url, base_score in LISTING_SOURCES:
         try:
             raw = fetch_text(source_url)
-            parsed = parse_vrcw(raw, source_name, source_url, base_score)
+            ids = listing_world_ids(raw)
             successful_sources += 1
-            print(f"{source_name}: parsed {len(parsed)} candidate-like worlds")
-            for item in parsed:
-                wid = item["id"]
+            print(f"{source_name}: found {len(ids)} listed World IDs")
+            for wid in ids:
                 if wid in existing_ids or wid in decided_ids:
                     continue
-                old = by_id.get(wid)
-                if old:
-                    merged_sources = sorted(set(old.get("sourceCategories", [])) | set(item.get("sourceCategories", [])))
-                    old["sourceCategories"] = merged_sources
-                    if item["confidenceScore"] > old["confidenceScore"]:
-                        old.update({k: v for k, v in item.items() if k != "sourceCategories"})
-                        old["sourceCategories"] = merged_sources
-                else:
-                    by_id[wid] = item
+                source_membership.setdefault(wid, []).append((source_name, source_url, base_score))
         except Exception as exc:
             print(f"WARN: discovery source failed {source_url}: {exc}")
 
     if successful_sources == 0:
         print("ERROR: all discovery sources failed; preserving previous candidate file")
         return 2
+
+    # Prefer Worlds surfaced by Music first, then New. Cap daily detail fetches.
+    ordered = sorted(
+        source_membership.items(),
+        key=lambda item: (
+            0 if any(s[0] == "vrcmap_music" for s in item[1]) else 1,
+            item[0],
+        ),
+    )[:MAX_DETAIL_FETCHES]
+
+    by_id: dict[str, dict] = {}
+    for idx, (wid, memberships) in enumerate(ordered):
+        source_name, source_url, base_score = max(memberships, key=lambda x: x[2])
+        try:
+            item = detail_candidate(wid, source_name, source_url, base_score)
+            if item is None:
+                continue
+            item["sourceCategories"] = sorted({m[0] for m in memberships})
+            by_id[wid] = item
+            print(f"CANDIDATE {wid} {item['name']} score={item['confidenceScore']}")
+        except Exception as exc:
+            print(f"WARN: detail fetch failed {wid}: {exc}")
+        if idx < len(ordered) - 1:
+            time.sleep(0.15)
 
     previous_by_id = {
         str(item.get("id")): item
@@ -285,12 +308,9 @@ def main() -> int:
 
     for wid, item in list(by_id.items()):
         old = previous_by_id.get(wid)
-        item["firstDiscoveredAt"] = (
-            old.get("firstDiscoveredAt") if old else None
-        ) or today
+        item["firstDiscoveredAt"] = (old.get("firstDiscoveredAt") if old else None) or today
         item["lastSeenAt"] = today
 
-    # Preserve unresolved candidates briefly even if a source page rotates them off.
     cutoff = dt.date.fromisoformat(today) - dt.timedelta(days=30)
     for wid, old in previous_by_id.items():
         if wid in by_id or wid in existing_ids or wid in decided_ids:
