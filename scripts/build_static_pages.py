@@ -53,18 +53,19 @@ def merge_events(manual: list[dict], automatic: list[dict]) -> list[dict]:
     merged: list[dict] = []
     seen_ids: set[str] = set()
     seen_keys: set[tuple[str, str]] = set()
-    seen_urls: set[str] = set()
+    seen_url_starts: set[tuple[str, str]] = set()
 
     def add(event: dict) -> bool:
         eid = event_id(event)
         key = event_match_key(event)
         url = str(event.get("url") or "").strip().rstrip("/")
-        if eid in seen_ids or key in seen_keys or (url and url in seen_urls):
+        url_start = (url, key[1])
+        if eid in seen_ids or key in seen_keys or (url and url_start in seen_url_starts):
             return False
         seen_ids.add(eid)
         seen_keys.add(key)
         if url:
-            seen_urls.add(url)
+            seen_url_starts.add(url_start)
         merged.append(event)
         return True
 
@@ -77,6 +78,19 @@ def merge_events(manual: list[dict], automatic: list[dict]) -> list[dict]:
 
     merged.sort(key=lambda e: (str(e.get("start") or ""), str(e.get("name") or "").casefold()))
     return merged
+
+
+def display_event_time(value: str | None) -> str:
+    if not value:
+        return "—"
+    try:
+        parsed = dt.datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=dt.timezone.utc)
+        jst = dt.timezone(dt.timedelta(hours=9))
+        return parsed.astimezone(jst).strftime("%Y-%m-%d %H:%M JST")
+    except ValueError:
+        return str(value)
 
 
 def page_head(title: str, description: str, canonical: str, prefix: str = "") -> str:
@@ -292,8 +306,8 @@ def event_page(event: dict, djs: list[dict]) -> str:
     </section>
 
     <section class="world-detail-meta event-detail-meta">
-      <div><span>START</span><strong>{esc(start.replace("T", " ")[:16])}</strong></div>
-      <div><span>END</span><strong>{esc(end.replace("T", " ")[:16] if end else "—")}</strong></div>
+      <div><span>START</span><strong>{esc(display_event_time(start))}</strong></div>
+      <div><span>END</span><strong>{esc(display_event_time(end))}</strong></div>
       <div><span>WORLD / INSTANCE</span><strong>{esc(world_name)}</strong></div>
       <div><span>SOURCE</span><strong>{esc(event.get("source") or "Public organizer information")}</strong></div>
     </section>
@@ -350,7 +364,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
 
     event_rows = []
     for _, event in related_events[:6]:
-        when = str(event.get("start") or "").replace("T", " ")[:16]
+        when = display_event_time(event.get("start"))
         event_rows.append(
             f'<a class="relation-row" href="../events/{esc(event_id(event))}.html">'
             f'<span>{esc(when)}</span><strong>{esc(event.get("name"))}</strong>'
@@ -434,7 +448,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
     for event in sorted(events, key=lambda e: e.get("start", "")):
         if dj_id not in (event.get("djIds") or []):
             continue
-        when = str(event.get("start") or "").replace("T", " ")[:16]
+        when = display_event_time(event.get("start"))
         appearances.append(
             f'<a class="dj-event-row" href="../events/{esc(event_id(event))}.html"><span>{esc(when)}</span>'
             f'<strong>{esc(event.get("name"))}</strong><span>{esc(event.get("worldName") or "VRChat")}</span><span>↗</span></a>'
