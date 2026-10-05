@@ -8,7 +8,6 @@ CRAFT_MAX = {'visual':20, 'lighting':20, 'sound':15, 'spatial':15, 'interaction'
 
 
 def craft_score(e: dict) -> float:
-    # Category maxima encode the weights and sum to 100. Clamp malformed values.
     total = 0.0
     for key, maximum in CRAFT_MAX.items():
         value = float(e.get(key, 0) or 0)
@@ -57,13 +56,16 @@ def main():
         now, old = latest_map.get(wid, {}), prior_map.get(wid, {})
         dv = None if not (now and old) else max(0, (now.get('visits') or 0) - (old.get('visits') or 0))
         df = None if not (now and old) else max(0, (now.get('favorites') or 0) - (old.get('favorites') or 0))
+        editorial_status = seed.get('editorialStatus') or ('provisional' if seed.get('editorial') else 'unreviewed')
+        craft = craft_score(seed.get('editorial', {})) if editorial_status != 'unreviewed' else None
         rows.append({
             'id': wid,
             'name': now.get('name') or seed.get('name'),
             'author': now.get('author') or seed.get('author'),
             'genres': seed.get('genres', []),
+            'editorialStatus': editorial_status,
             'weekly': {'visits': dv, 'favorites': df},
-            '_craft': craft_score(seed.get('editorial', {})),
+            '_craft': craft,
             '_visits': dv or 0,
             '_favs': df or 0,
         })
@@ -73,15 +75,20 @@ def main():
     has_trend = prior is not None
     for i, r in enumerate(rows):
         trend = (nv[i]*0.65 + nf[i]*0.35) if has_trend else 0.0
-        overall = (trend*0.55 + r['_craft']*0.45) if has_trend else r['_craft']
-        r['scores'] = {'trending': round(trend,1), 'craftsmanship': round(r['_craft'],1), 'overall': round(overall,1)}
+        craft = r['_craft']
+        overall = (trend*0.55 + craft*0.45) if (has_trend and craft is not None) else (craft if craft is not None else None)
+        r['scores'] = {
+            'trending': round(trend,1),
+            'craftsmanship': round(craft,1) if craft is not None else None,
+            'overall': round(overall,1) if overall is not None else None,
+        }
         for k in ['_craft','_visits','_favs']: r.pop(k, None)
 
-    rows.sort(key=lambda r: r['scores']['overall'], reverse=True)
+    rows.sort(key=lambda r: (r['scores']['overall'] is not None, r['scores']['overall'] or -1), reverse=True)
     payload = {
         'status': 'live' if has_trend else 'seed',
         'updatedAt': latest[0].isoformat() if latest else 'MVP seed — weekly deltas begin after 2 snapshots',
-        'methodVersion': '0.2',
+        'methodVersion': '0.3',
         'worlds': rows,
     }
     (ROOT/'data/weekly-ranking.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
