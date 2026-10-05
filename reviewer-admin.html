@@ -312,7 +312,7 @@
           const reasons=(candidate.reasons||[]).slice(0,8).map(r=>`<span>${esc(r)}</span>`).join('');
           const cats=(candidate.sourceCategories||[]).map(r=>`<span>${esc(r)}</span>`).join('');
           const source=String(candidate.source||'');
-          const safeSource=(source.startsWith('https://www.vrcw.net/') || source.startsWith('https://newjp.vrcw.net/')) ? source : '';
+          const safeSource=(source.startsWith('https://www.vrcw.net/') || source.startsWith('https://newjp.vrcw.net/') || source.startsWith('https://vrcmap.com/')) ? source : '';
           card.innerHTML=`
             <div class="admin-card-head">
               <div>
