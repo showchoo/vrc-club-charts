@@ -71,6 +71,7 @@ def main():
             'genres': seed.get('genres', []),
             'source': seed.get('source'),
             'editorialStatus': editorial_status,
+            'chartEligible': bool(seed.get('chartEligible', True)),
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
             'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
