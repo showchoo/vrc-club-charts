@@ -182,9 +182,21 @@ function render() {
   if (discoverySection && discoveryGrid) {
     discoverySection.hidden = discovery.length === 0;
     const sortedDiscovery = sortDiscovery(discovery);
-    discoveryGrid.innerHTML = sortedDiscovery.map(discoveryCard).join('');
+    const isFiltering = state.genre !== 'ALL' || Boolean(state.query.trim());
+    const shownDiscovery = isFiltering ? sortedDiscovery : sortedDiscovery.slice(0, 12);
+    discoveryGrid.innerHTML = shownDiscovery.map(discoveryCard).join('');
     const discoveryVisibleCount = document.getElementById('discoveryVisibleCount');
-    if (discoveryVisibleCount) discoveryVisibleCount.textContent = `${discovery.length} worlds`;
+    if (discoveryVisibleCount) {
+      discoveryVisibleCount.textContent = isFiltering
+        ? `${shownDiscovery.length} matches`
+        : `${shownDiscovery.length} featured / ${discovery.length} discovery`;
+    }
+    const directoryLink = document.getElementById('discoveryDirectoryLink');
+    if (directoryLink) {
+      directoryLink.textContent = state.lang === 'ja'
+        ? `全${state.data.worlds.filter(w => w.availabilityStatus !== 'unavailable').length}ワールドを見る ↗`
+        : `VIEW ALL ${state.data.worlds.filter(w => w.availabilityStatus !== 'unavailable').length} WORLDS ↗`;
+    }
   }
 }
 
