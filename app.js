@@ -173,3 +173,43 @@ async function load() {
 }
 
 load();
+
+
+function initRankingScene() {
+  const hero = document.querySelector('.ranking-hero');
+  const scene = document.querySelector('.ranking-scene');
+  if (!hero || !scene || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let raf = 0;
+  let tx = 0;
+  let ty = 0;
+  let cx = 0;
+  let cy = 0;
+
+  function draw() {
+    cx += (tx - cx) * 0.075;
+    cy += (ty - cy) * 0.075;
+    scene.style.setProperty('--scene-x', cx.toFixed(3));
+    scene.style.setProperty('--scene-y', cy.toFixed(3));
+    if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) {
+      raf = requestAnimationFrame(draw);
+    } else {
+      raf = 0;
+    }
+  }
+
+  hero.addEventListener('pointermove', e => {
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    if (!raf) raf = requestAnimationFrame(draw);
+  }, {passive:true});
+
+  hero.addEventListener('pointerleave', () => {
+    tx = 0;
+    ty = 0;
+    if (!raf) raf = requestAnimationFrame(draw);
+  }, {passive:true});
+}
+
+initRankingScene();
