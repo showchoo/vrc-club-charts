@@ -1584,3 +1584,39 @@ main,
   .home-events-grid { grid-template-columns: 1fr; }
   .home-event-card { min-height: 220px; }
 }
+
+
+/* World directory controls */
+.world-directory-controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto auto;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.world-directory-search {
+  width: 100%;
+  min-width: 0;
+}
+.world-directory-controls .chip-row {
+  justify-content: center;
+}
+.world-directory-controls .discovery-count {
+  justify-self: end;
+  white-space: nowrap;
+}
+.world-catalog-row[hidden] {
+  display: none;
+}
+@media (max-width: 880px) {
+  .world-directory-controls {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .world-directory-controls .chip-row {
+    justify-content: flex-start;
+  }
+  .world-directory-controls .discovery-count {
+    justify-self: start;
+  }
+}
