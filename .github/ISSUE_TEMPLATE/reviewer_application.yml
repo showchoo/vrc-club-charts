@@ -1,0 +1,61 @@
+name: Apply as a reviewer
+description: Apply to join the future VRC Club Charts craftsmanship reviewer panel.
+title: "[Reviewer] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        VRC Club Charts is building a reviewer-based Craftsmanship Ranking.
+        The panel is not a popularity vote. Reviewers are expected to visit worlds and use the same scoring criteria.
+
+  - type: input
+    id: vrchat_name
+    attributes:
+      label: VRChat display name
+      placeholder: Your VRChat name
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: experience
+    attributes:
+      label: Relevant experience
+      options:
+        - label: Clubber / regular VRChat nightlife attendee
+        - label: DJ
+        - label: VJ / lighting
+        - label: World creator
+        - label: Event staff / organizer
+        - label: Other relevant experience
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Tell us about your VRChat nightlife experience
+      description: Clubs you visit, events you attend, worlds you know, or relevant creation / performance experience.
+    validations:
+      required: true
+
+  - type: textarea
+    id: conflicts
+    attributes:
+      label: Worlds / groups you are directly affiliated with
+      description: These can still be reviewed by the panel, but your own score would be excluded from those worlds.
+
+  - type: textarea
+    id: availability
+    attributes:
+      label: How often could you review a world?
+      placeholder: e.g. 2 worlds per month
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: Reviewer principles
+      options:
+        - label: I will visit a world before scoring it.
+          required: true
+        - label: I will disclose direct creator / staff / group conflicts.
+          required: true
+        - label: I understand that sponsorship or personal relationships must not affect scores.
+          required: true
