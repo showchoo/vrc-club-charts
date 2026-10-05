@@ -68,6 +68,8 @@ jobs:
           node --check djs.js
       - name: Sync approved reviewers
         run: python scripts/sync_reviewers_from_supabase.py
+      - name: Sync approved reviews
+        run: python scripts/sync_reviews_from_supabase.py
       - name: Build reviewer panel scores
         run: python scripts/build_review_scores.py
       - name: Validate catalog
