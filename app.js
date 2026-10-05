@@ -153,8 +153,8 @@ function applyLanguage() {
   const discoveryNote = document.getElementById('discoveryNote');
   if (discoveryTitle) discoveryTitle.textContent = state.lang === 'ja' ? '掲載候補 / 未レビュー' : 'Discovery / pending review';
   if (discoveryNote) discoveryNote.textContent = state.lang === 'ja'
-    ? 'World IDと公開状態を確認済み。作り込み評価は現地確認後にランキングへ反映します。'
-    : 'World identity and public status verified. Editorial craft scoring follows an in-world review.';
+    ? '公開情報でWorld IDを確認済み。作り込み評価は現地確認後にランキングへ反映します。'
+    : 'World identity verified from public listings. Editorial craft scoring follows an in-world review.';
   setView(state.view);
 }
 
