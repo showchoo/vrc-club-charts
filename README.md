@@ -102,3 +102,13 @@ Future monetization can include display ads, clearly labeled sponsored events / 
 ## Trademark
 
 This is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.
+
+
+### Submission automation
+
+- New World / Event / DJ Issue Forms are automatically labeled for verification.
+- World submissions are checked for duplicate `wrld_...` IDs.
+- Maintainers can apply the `verified` label after source verification.
+- Verified submissions can generate a catalog PR automatically.
+- World PRs update both `data/worlds.json` and the Discovery row in `data/weekly-ranking.json` so validation stays green.
+- 27 DJ profiles and 5 event records are currently connected to the World / Event / DJ portal structure.
