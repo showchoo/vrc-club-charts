@@ -26,14 +26,16 @@ body:
     id: world_id
     attributes:
       label: VRChat World ID
+      description: Optional for Group+ / changing-instance events.
       placeholder: wrld_...
     validations:
-      required: true
+      required: false
 
   - type: input
     id: world_name
     attributes:
-      label: World name
+      label: World / instance name
+      description: For Group+ events, write the group or instance name.
     validations:
       required: true
 
