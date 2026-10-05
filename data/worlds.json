@@ -1230,5 +1230,137 @@
     "editorialStatus": "unreviewed",
     "chartEligible": true,
     "source": "https://www.vrcw.net/world/detail/wrld_90ed9a1e-e0d3-44bb-8379-013797be1f8e"
+  },
+  {
+    "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+    "name": "Beach in a Bottle",
+    "author": "∗Lotus∗",
+    "genres": [
+      "MUSIC",
+      "NIGHT",
+      "AUDIOLINK",
+      "RAVE"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://www.vrcw.net/world/detail/wrld_4f015255-390a-44cb-9e81-bd2021eb970a"
+  },
+  {
+    "id": "wrld_29cc6261-866c-443b-a872-042b8993d39d",
+    "name": "Yokuraの海の家 beachside clubhouse",
+    "author": "Yokuraaaaa",
+    "genres": [
+      "MUSIC",
+      "DJ",
+      "BEACH",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": false,
+    "source": "https://www.vrcw.net/world/detail/wrld_29cc6261-866c-443b-a872-042b8993d39d"
+  },
+  {
+    "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+    "name": "どんのラウンジバー「BLACK GOLD」",
+    "author": "＝DonK＝",
+    "genres": [
+      "BAR",
+      "DJ",
+      "STAGE",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d"
+  },
+  {
+    "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+    "name": "Oh's Party Ballroom",
+    "author": "emymin",
+    "genres": [
+      "CLUB",
+      "STAGE",
+      "AUDIOLINK",
+      "PARTY"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://en.vrcw.net/world/detail/wrld_856c161d-b995-4349-8a72-d10ad498300a"
+  },
+  {
+    "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
+    "name": "Cyberpunk City Rave",
+    "author": "Coldcancer",
+    "genres": [
+      "CLUB",
+      "RAVE",
+      "EVENT",
+      "AUDIOLINK",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://en.vrcw.net/world/detail/wrld_492121dd-f7ea-46ab-aade-968e1a91899b"
+  },
+  {
+    "id": "wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
+    "name": "Deep Night BAR",
+    "author": "ゼグァール（Zeguar）",
+    "genres": [
+      "NIGHT",
+      "BAR",
+      "DJ",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://www.vrcw.net/world/detail/wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c"
+  },
+  {
+    "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+    "name": "The Deep Dusk - Magic Land Mod",
+    "author": "Lydia K",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "DJ",
+      "EVENT",
+      "AUDIOLINK"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://www.vrcw.net/world/detail/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d"
+  },
+  {
+    "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+    "name": "Brick House Night Club",
+    "author": "BadKarma8489",
+    "genres": [
+      "MUSIC",
+      "DANCE",
+      "CLUB",
+      "NIGHT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://en.vrcw.net/world/detail/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043"
+  },
+  {
+    "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+    "name": "Neptune Night Club",
+    "author": "Plutto2Times",
+    "genres": [
+      "DANCE",
+      "CLUB",
+      "STAGE",
+      "AUDIOLINK",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://en.vrcw.net/world/detail/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be"
   }
 ]
