@@ -1,4 +1,4 @@
-const state = { worlds: [], events: [], reviewScores: null };
+const state = { worlds: [], events: [], reviewScores: null, editorScores: [] };
 
 const fmt = new Intl.NumberFormat('en-US');
 
@@ -41,6 +41,48 @@ function worldCard(w) {
     </div>
     <b>↗</b>
   </a>`;
+}
+
+function editorScoreMap() {
+  return new Map((state.editorScores || []).map(row => [row.world_id, row]));
+}
+
+function renderEditorPicks() {
+  const section = document.getElementById('editorPicksSection');
+  const wrap = document.getElementById('editorPicks');
+  if (!section || !wrap) return;
+
+  const byId = new Map(state.worlds.map(w => [w.id, w]));
+  const editors = editorScoreMap();
+  const picks = (state.editorScores || [])
+    .filter(r => r.editor_pick === true && byId.has(r.world_id))
+    .sort((a,b) => Number(b.total_score || 0) - Number(a.total_score || 0))
+    .slice(0, 3);
+
+  if (!picks.length) {
+    section.hidden = true;
+    wrap.innerHTML = '';
+    return;
+  }
+
+  section.hidden = false;
+  wrap.innerHTML = picks.map((r,i) => {
+    const w = byId.get(r.world_id);
+    return `<a class="editor-pick-card" href="${worldDetailUrl(w.id)}">
+      <div class="editor-pick-top">
+        <span>EDITOR'S PICK ${String(i+1).padStart(2,'0')}</span>
+        <b>${Number(r.total_score || 0)}<small>/100</small></b>
+      </div>
+      <h3>${esc(w.name)}</h3>
+      <p class="editor-pick-author">by ${esc(w.author || '—')}</p>
+      ${r.note ? `<p class="editor-pick-note">${esc(r.note)}</p>` : ''}
+      <div class="editor-pick-breakdown">
+        <span>V ${r.visual}/20</span><span>L ${r.lighting}/20</span><span>S ${r.sound}/15</span>
+        <span>SP ${r.spatial}/15</span><span>I ${r.interaction}/10</span>
+        <span>O ${r.originality}/10</span><span>OPT ${r.optimization}/10</span>
+      </div>
+    </a>`;
+  }).join('');
 }
 
 function renderCraftRanking() {
@@ -86,10 +128,12 @@ function renderCraftRanking() {
       const w = r.world;
       const status = String(r.status || 'provisional').toUpperCase();
       const confidence = String(r.confidence || 'low').toUpperCase();
+      const editor = editors.get(w.id);
+      const editorMeta = editor ? ` · EDITOR ${Number(editor.total_score)}${editor.editor_pick ? " ★" : ""}` : '';
       return `<a class="panel-rank-row ${i === 0 ? 'rank-first' : ''}" href="${worldDetailUrl(w.id)}">
         <span class="panel-rank-no">${String(i+1).padStart(2,'0')}</span>
         <span class="panel-rank-world">
-          <small>${status} · ${r.reviewCount} REVIEWS · ${confidence} CONFIDENCE</small>
+          <small>${status} · ${r.reviewCount} REVIEWS · ${confidence} CONFIDENCE${editorMeta}</small>
           <strong>${esc(w.name)}</strong>
           <em>by ${esc(w.author || '—')}</em>
         </span>
@@ -154,15 +198,21 @@ function renderEvents() {
 
 async function load() {
   try {
-    const [worldRes,eventRes,reviewRes] = await Promise.all([
+    const [worldRes,eventRes,reviewRes,editorRes] = await Promise.all([
       fetch('data/weekly-ranking.json', {cache:'no-store'}),
       fetch('data/events.json', {cache:'no-store'}),
-      fetch('data/review-scores.json', {cache:'no-store'})
+      fetch('data/review-scores.json', {cache:'no-store'}),
+      fetch('https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/editor_world_scores?select=*', {
+        cache:'no-store',
+        headers:{'apikey':'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK'}
+      })
     ]);
     if (!worldRes.ok) throw new Error('World data unavailable');
     state.worlds = (await worldRes.json()).worlds || [];
     state.events = eventRes.ok ? await eventRes.json() : [];
     state.reviewScores = reviewRes.ok ? await reviewRes.json() : null;
+    state.editorScores = editorRes.ok ? await editorRes.json() : [];
+    renderEditorPicks();
     renderCraftRanking();
     renderWorlds();
     renderEvents();
