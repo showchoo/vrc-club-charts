@@ -1,7 +1,12 @@
-const fmtDate = new Intl.DateTimeFormat('ja-JP', {
+const fmtStart = new Intl.DateTimeFormat('ja-JP', {
   month: 'short',
   day: 'numeric',
   weekday: 'short',
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZoneName: 'short'
+});
+const fmtEndTime = new Intl.DateTimeFormat('ja-JP', {
   hour: '2-digit',
   minute: '2-digit',
   timeZoneName: 'short'
@@ -11,17 +16,31 @@ function esc(s='') {
   return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 
-function eventCard(e) {
+function eventStatus(e, now=Date.now()) {
+  const start = new Date(e.start).getTime();
+  const end = e.end ? new Date(e.end).getTime() : start + 4 * 60 * 60 * 1000;
+  if (now >= start && now <= end) return 'LIVE NOW';
+  if (start > now && start - now <= 24 * 60 * 60 * 1000) return 'NEXT 24H';
+  return 'UPCOMING';
+}
+
+function eventTime(e) {
   const start = new Date(e.start);
+  if (!e.end) return fmtStart.format(start);
+  return `${fmtStart.format(start)} — ${fmtEndTime.format(new Date(e.end))}`;
+}
+
+function eventCard(e) {
   const tags = (e.genres || []).slice(0,4).map(g => `<span class="tag">${esc(g)}</span>`).join('');
   const world = e.worldId
     ? `<a href="worlds/${esc(e.worldId)}.html">${esc(e.worldName || e.worldId)}</a>`
-    : esc(e.worldName || 'World TBA');
+    : esc(e.worldName || 'World / instance TBA');
   const link = e.url
-    ? `<a class="event-link" href="${esc(e.url)}" target="_blank" rel="noreferrer">DETAILS ↗</a>`
+    ? `<a class="event-link" href="${esc(e.url)}" target="_blank" rel="noreferrer">PUBLIC INFO ↗</a>`
     : '';
-  return `<article class="event-card">
-    <div class="event-date">${esc(fmtDate.format(start))}</div>
+  const status = eventStatus(e);
+  return `<article class="event-card ${status === 'LIVE NOW' ? 'event-live' : ''}">
+    <div class="event-card-top"><span class="event-date">${esc(eventTime(e))}</span><span class="event-status">${status}</span></div>
     <h3>${esc(e.name)}</h3>
     <div class="event-world">${world}</div>
     <div class="event-organizer">by ${esc(e.organizer || '—')}</div>
@@ -40,9 +59,14 @@ async function initEvents() {
     const events = await res.json();
     const now = Date.now();
     const upcoming = events
-      .filter(e => e && e.start && new Date(e.start).getTime() >= now - 6 * 60 * 60 * 1000)
+      .filter(e => {
+        if (!e || !e.start) return false;
+        const end = e.end ? new Date(e.end).getTime() : new Date(e.start).getTime() + 6 * 60 * 60 * 1000;
+        return end >= now;
+      })
       .sort((a,b) => new Date(a.start) - new Date(b.start));
-    count.textContent = `${upcoming.length} upcoming`;
+    const live = upcoming.filter(e => eventStatus(e, now) === 'LIVE NOW').length;
+    count.textContent = live ? `${upcoming.length} upcoming · ${live} live` : `${upcoming.length} upcoming`;
     grid.innerHTML = upcoming.map(eventCard).join('');
     empty.hidden = upcoming.length > 0;
   } catch (err) {
