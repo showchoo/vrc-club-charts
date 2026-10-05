@@ -1,0 +1,10 @@
+{
+  "name": "VRC Club Charts",
+  "short_name": "VRC Charts",
+  "description": "Weekly VRChat club-world rankings by momentum and craftsmanship.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090a10",
+  "theme_color": "#090a10",
+  "icons": []
+}
