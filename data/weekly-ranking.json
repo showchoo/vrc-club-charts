@@ -22,11 +22,12 @@
         "overall": 95
       },
       "editorialStatus": "provisional",
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
-      "name": "TUBE VR x Sly Fest - Official Afterparty",
+      "name": "TUBE VR - IN THE DANCE",
       "author": "Hadean",
       "genres": [
         "MUSIC",
@@ -44,7 +45,8 @@
         "overall": 94
       },
       "editorialStatus": "provisional",
-      "chartEligible": false
+      "chartEligible": false,
+      "source": null
     },
     {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
@@ -65,7 +67,8 @@
         "overall": 92
       },
       "editorialStatus": "provisional",
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
@@ -87,7 +90,8 @@
         "overall": 86
       },
       "editorialStatus": "provisional",
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
@@ -108,11 +112,12 @@
         "overall": 85
       },
       "editorialStatus": "provisional",
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
-      "name": "Club Catnip - V1․233",
+      "name": "Club Catnip - V1.222",
       "author": "TGCFabian",
       "genres": [
         "CLUB",
@@ -129,7 +134,8 @@
         "overall": 82
       },
       "editorialStatus": "provisional",
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
@@ -151,7 +157,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
@@ -173,7 +180,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
@@ -195,7 +203,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
@@ -217,7 +226,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_c41077d4-336d-4d83-9c29-75c3aa7d3aef",
@@ -238,7 +248,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
@@ -260,7 +271,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
@@ -282,7 +294,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
@@ -304,7 +317,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
@@ -326,7 +340,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
@@ -348,7 +363,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
@@ -370,7 +386,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
@@ -392,7 +409,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
@@ -414,7 +432,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
@@ -436,7 +455,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
@@ -458,7 +478,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_ce4feb59-8cf3-4119-988c-dbb1c317dee3",
@@ -478,7 +499,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
@@ -500,7 +522,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_556018f9-5e94-486c-b30d-aa294deb923b",
@@ -521,7 +544,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
@@ -541,7 +565,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_28f87118-050c-4d1f-a6b1-74a73f7a6b88",
@@ -562,7 +587,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
@@ -583,7 +609,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_c80885cb-561c-4a2a-becc-559709006fe9",
@@ -604,7 +631,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_16baa8ad-1395-4546-9670-771a7759b3c4",
@@ -625,7 +653,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
@@ -646,7 +675,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
@@ -667,7 +697,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_63039b3d-42e8-4f40-9825-cb51ba99a16d",
@@ -687,7 +718,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_06fdbbc8-21b0-41fd-85db-492fd087c950",
@@ -707,7 +739,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
@@ -728,7 +761,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_4a35e054-acdc-4504-a1a1-5c8f48856203",
@@ -749,7 +783,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_773cd358-ac92-49ad-8eb0-3f8c0ed139c9",
@@ -770,7 +805,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
@@ -792,7 +828,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350",
@@ -814,7 +851,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_0b42489a-dfb5-4bc5-821e-91a59f4aeee2",
@@ -835,7 +873,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_83d25bd7-5eb3-423d-b5b1-03708d4769da",
@@ -856,7 +895,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_5ab2330c-f507-42a4-9a46-4a0be0745d13",
@@ -878,7 +918,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_b3ab4099-30a8-45c8-bc7b-60c96c8c60c3",
@@ -901,7 +942,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
@@ -923,7 +965,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -945,7 +988,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_3e537d1b-0be6-4826-b3c2-4b20807d68bf",
@@ -968,7 +1012,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -990,7 +1035,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
@@ -1013,7 +1059,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
@@ -1035,7 +1082,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_d4e02d69-2d17-4972-9c7a-712b076039be",
@@ -1057,7 +1105,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
@@ -1079,7 +1128,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
@@ -1107,7 +1157,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -1135,7 +1186,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa",
@@ -1162,7 +1214,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_8dd8d168-509f-4191-98dc-844dbf4f9df3",
@@ -1189,7 +1242,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_980770fa-673c-41bd-86ac-5394fab2cc41",
@@ -1215,7 +1269,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",
@@ -1243,7 +1298,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_92ca3241-20fa-4805-9c17-41c475ce84be",
@@ -1271,7 +1327,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_1a13ec63-43ae-4616-bb80-f7c05f2a6d99",
@@ -1299,7 +1356,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_30412c54-724d-45d0-901b-ef832ab2f97f",
@@ -1325,7 +1383,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_786726d2-81c7-4356-8db8-7c29503c56ad",
@@ -1353,7 +1412,8 @@
         "craftsmanship": null,
         "overall": null
       },
-      "chartEligible": true
+      "chartEligible": true,
+      "source": null
     },
     {
       "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
@@ -2098,6 +2158,770 @@
       },
       "source": "https://www.vrcw.net/category/detail/music",
       "chartEligible": false
+    },
+    {
+      "id": "wrld_2e4d3fe6-3255-4e53-9905-6089bf141358",
+      "name": "Night Club ナイトクラブ",
+      "author": "Purabe（プラベ）",
+      "genres": [
+        "CLUB",
+        "NIGHT",
+        "PARTY"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_2e4d3fe6-3255-4e53-9905-6089bf141358",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
+      "name": "Udder Rave",
+      "author": "MøøƁerriღ",
+      "genres": [
+        "CLUB",
+        "RAVE",
+        "AUDIOLINK",
+        "BAR"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_bd8f9a44-0ceb-4712-b85c-c4084cba0a35",
+      "name": "The NEW Saturday Night Club",
+      "author": "CharlieGT",
+      "genres": [
+        "MUSIC",
+        "CLUB",
+        "NIGHT",
+        "QUEST"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_bd8f9a44-0ceb-4712-b85c-c4084cba0a35",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
+      "name": "LOST COLONY RAVE V2.5",
+      "author": "booploops",
+      "genres": [
+        "MUSIC",
+        "RAVE",
+        "EVENT",
+        "AUDIOLINK"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
+      "name": "CTRL Room Club",
+      "author": "CompuGeniusCode",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "RAVE",
+        "DANCE"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
+      "name": "Midnight Street Club",
+      "author": "nnnnnnなす",
+      "genres": [
+        "CLUB",
+        "DJ",
+        "NIGHT",
+        "AUDIOLINK"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
+      "name": "particle abyss 2.0",
+      "author": "Cyberƴ",
+      "genres": [
+        "MUSIC",
+        "RAVE",
+        "EDM",
+        "HARDSTYLE"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "genres": [
+        "MUSIC",
+        "DANCE",
+        "CLUB",
+        "NIGHT"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_966b600e-d851-430f-a2be-17b32dba8f2c",
+      "name": "DJ night club",
+      "author": "wardna",
+      "genres": [
+        "MUSIC",
+        "CLUB",
+        "DJ"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_966b600e-d851-430f-a2be-17b32dba8f2c",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
+      "name": "ANIMA CANVAS",
+      "author": "PudinKiller",
+      "genres": [
+        "MUSIC",
+        "CLUB",
+        "DJ",
+        "AUDIOLINK"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_90ed9a1e-e0d3-44bb-8379-013797be1f8e",
+      "name": "エクリプスシティ",
+      "author": "魔剣士フルクロス",
+      "genres": [
+        "MUSIC",
+        "CLUB",
+        "DJ",
+        "NIGHT"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_90ed9a1e-e0d3-44bb-8379-013797be1f8e",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+      "name": "Beach in a Bottle",
+      "author": "∗Lotus∗",
+      "genres": [
+        "MUSIC",
+        "NIGHT",
+        "AUDIOLINK",
+        "RAVE"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_29cc6261-866c-443b-a872-042b8993d39d",
+      "name": "Yokuraの海の家 beachside clubhouse",
+      "author": "Yokuraaaaa",
+      "genres": [
+        "MUSIC",
+        "DJ",
+        "BEACH",
+        "QUEST"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_29cc6261-866c-443b-a872-042b8993d39d",
+      "editorialStatus": "unreviewed",
+      "chartEligible": false,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+      "name": "どんのラウンジバー「BLACK GOLD」",
+      "author": "＝DonK＝",
+      "genres": [
+        "BAR",
+        "DJ",
+        "STAGE",
+        "EVENT",
+        "QUEST"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "genres": [
+        "CLUB",
+        "STAGE",
+        "AUDIOLINK",
+        "PARTY"
+      ],
+      "source": "https://en.vrcw.net/world/detail/wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
+      "name": "Cyberpunk City Rave",
+      "author": "Coldcancer",
+      "genres": [
+        "CLUB",
+        "RAVE",
+        "EVENT",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "source": "https://en.vrcw.net/world/detail/wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
+      "name": "Deep Night BAR",
+      "author": "ゼグァール（Zeguar）",
+      "genres": [
+        "NIGHT",
+        "BAR",
+        "DJ",
+        "EVENT",
+        "QUEST"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
+      "genres": [
+        "MUSIC",
+        "DANCE",
+        "DJ",
+        "EVENT",
+        "AUDIOLINK"
+      ],
+      "source": "https://www.vrcw.net/world/detail/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+      "name": "Brick House Night Club",
+      "author": "BadKarma8489",
+      "genres": [
+        "MUSIC",
+        "DANCE",
+        "CLUB",
+        "NIGHT",
+        "QUEST"
+      ],
+      "source": "https://en.vrcw.net/world/detail/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "genres": [
+        "DANCE",
+        "CLUB",
+        "STAGE",
+        "AUDIOLINK",
+        "QUEST"
+      ],
+      "source": "https://en.vrcw.net/world/detail/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "availabilityStatus": "available",
+      "releaseStatus": null,
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
     }
   ]
 }
