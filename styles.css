@@ -1171,3 +1171,115 @@ main,
   border-color: var(--accent);
 }
 .movement-flat { color: #718690; }
+
+
+/* DJ directory */
+.djs-page {
+  padding-top: 118px;
+  padding-bottom: 100px;
+}
+.djs-hero {
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 980px;
+  padding-bottom: 68px;
+}
+.djs-hero h1 {
+  margin: 12px 0 22px;
+  font-size: clamp(4rem, 9vw, 8.6rem);
+  line-height: .82;
+  letter-spacing: -.075em;
+}
+.djs-hero h1 em {
+  color: var(--accent);
+  font-style: normal;
+}
+.djs-hero .lead {
+  max-width: 700px;
+  margin: 0 0 28px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.dj-filters { margin-bottom: 24px; }
+.dj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.dj-card {
+  min-height: 300px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(166,234,255,.10);
+  background:
+    linear-gradient(160deg, rgba(20,35,42,.98), rgba(9,16,20,.98));
+  position: relative;
+  overflow: hidden;
+}
+.dj-card::after {
+  content: "DJ";
+  position: absolute;
+  right: -12px;
+  bottom: -30px;
+  color: rgba(63,217,255,.045);
+  font-size: 140px;
+  font-weight: 950;
+  letter-spacing: -.08em;
+  pointer-events: none;
+}
+.dj-card-index {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.dj-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 52px 0 6px;
+  font-size: 28px;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+.dj-role {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+.dj-affiliation {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.dj-card .tags {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  margin-bottom: 22px;
+}
+.dj-source {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(166,234,255,.09);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+.dj-source:hover { color: var(--accent); }
+@media (max-width: 900px) {
+  .dj-grid { grid-template-columns: repeat(2, 1fr); }
+  .djs-hero { min-height: 480px; }
+}
+@media (max-width: 560px) {
+  .djs-page { padding-top: 80px; }
+  .djs-hero { min-height: 420px; }
+  .dj-grid { grid-template-columns: 1fr; }
+  .dj-card { min-height: 260px; }
+}
