@@ -30,6 +30,7 @@ const scoreOf = (w) => {
 };
 
 function worldUrl(id) { return `https://vrchat.com/home/world/${id}`; }
+function worldDetailUrl(id) { return `worlds/${id}.html`; }
 function formatDelta(n) { return n == null ? 'collecting' : `${n >= 0 ? '+' : ''}${fmt.format(n)}`; }
 function mediaHtml(w) {
   if (!w.thumbnail) return '';
@@ -57,10 +58,12 @@ function setView(view) {
 }
 
 function buildGenres(worlds) {
-  const genres = ['ALL', ...new Set(worlds.flatMap(w => w.genres || []))];
+  const available = new Set(worlds.flatMap(w => w.genres || []));
+  const priority = ['ALL','CLUB','DJ','AUDIOLINK','QUEST','RAVE','EVENT','MUSIC','NIGHT','TRANCE','JAPAN'];
+  const genres = priority.filter(g => g === 'ALL' || available.has(g));
   const wrap = document.getElementById('genreFilters');
   wrap.innerHTML = '';
-  genres.slice(0, 10).forEach(g => {
+  genres.forEach(g => {
     const b = document.createElement('button');
     b.className = `chip${state.genre === g ? ' active' : ''}`;
     b.textContent = g;
@@ -87,7 +90,7 @@ function discoveryCard(w) {
   return `<article class="discovery-card ${w.thumbnail ? 'has-thumb' : ''}">
     ${mediaHtml(w)}
     <div class="discovery-topline"><span>PENDING REVIEW</span><a href="${worldUrl(w.id)}" target="_blank" rel="noreferrer">↗</a></div>
-    <h3>${escapeHtml(w.name)}</h3>
+    <h3><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></h3>
     <div class="author">by ${escapeHtml(w.author || '—')}</div>
     <div class="tags">${(w.genres || []).slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
     ${stats}
@@ -131,7 +134,7 @@ function card(w, rank) {
 function row(w, rank) {
   return `<article class="rank-row">
     <div class="rank-index">${String(rank).padStart(2,'0')}</div>
-    <div><div class="world-name">${escapeHtml(w.name)}</div><div class="world-meta">${escapeHtml(w.author || '—')} · ${(w.genres||[]).join(' / ')}</div></div>
+    <div><div class="world-name"><a class="world-title-link" href="${worldDetailUrl(w.id)}">${escapeHtml(w.name)}</a></div><div class="world-meta">${escapeHtml(w.author || '—')} · ${(w.genres||[]).join(' / ')}</div></div>
     <div class="metric"><strong>${visibleScore(w)}</strong><span>score</span></div>
     <div class="metric"><strong>${formatDelta(w.weekly?.visits)}</strong><span>7d visits</span></div>
     <div class="metric"><strong>${formatDelta(w.weekly?.favorites)}</strong><span>7d favs</span></div>
