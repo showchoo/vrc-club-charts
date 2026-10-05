@@ -116,6 +116,7 @@ function render() {
   if (!state.data) return;
   const q = state.query.trim().toLowerCase();
   const worlds = state.data.worlds.filter(w => {
+    if (w.availabilityStatus === 'unavailable') return false;
     const genreOk = state.genre === 'ALL' || (w.genres || []).includes(state.genre);
     const hay = `${w.name} ${w.author} ${(w.genres||[]).join(' ')}`.toLowerCase();
     return genreOk && (!q || hay.includes(q));
