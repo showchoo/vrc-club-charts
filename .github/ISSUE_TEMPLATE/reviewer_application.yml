@@ -1,11 +1,11 @@
 name: Apply as a reviewer
-description: Apply to join the future VRC Club Charts craftsmanship reviewer panel.
+description: Apply to join the VRC Club Charts craftsmanship reviewer panel.
 title: "[Reviewer] "
 body:
   - type: markdown
     attributes:
       value: |
-        VRC Club Charts is building a reviewer-based Craftsmanship Ranking.
+        VRC Club Charts is operating a public-beta reviewer-based Craftsmanship Ranking.
         The panel is not a popularity vote. Reviewers are expected to visit worlds and use the same scoring criteria.
 
   - type: input
