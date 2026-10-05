@@ -141,11 +141,11 @@ def main():
     polygon(buf, [(1015,90),(1150,100),(1190,550),(1035,568),(970,150)], DARK)
     polygon(buf, [(755,70),(770,72),(716,592),(702,594)], WHITE)
 
-    text(buf, 58, 48, "WEEKLY VR NIGHTLIFE INDEX", 3, CYAN)
+    text(buf, 58, 48, "VRCHAT CRAFTSMANSHIP RANKING", 3, CYAN)
     text(buf, 50, 120, "VRC", 14, WHITE)
     text(buf, 50, 230, "CLUB", 14, WHITE)
     text(buf, 50, 340, "CHARTS", 14, CYAN)
-    text(buf, 58, 494, "100 WORLDS / EVENTS / DJS", 5, WHITE)
+    text(buf, 58, 494, "REVIEWER-BASED / 100 WORLDS", 5, WHITE)
     text(buf, 58, 554, "PUBLIC BETA", 3, MUTED)
 
     (out / "og-image.png").write_bytes(png_bytes(buf))
