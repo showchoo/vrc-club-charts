@@ -17,11 +17,16 @@ SUPABASE_URL = "https://ypqpgpetrriirywrzikj.supabase.co"
 SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 
 SOURCES = [
+    # The new VRCW homepage continuously exposes new / recently-public Worlds
+    # together with category tags, making it the primary discovery feed.
+    ("new_vrcw_recent", "https://newjp.vrcw.net/", 25),
+    # Legacy category pages remain useful when reachable.
     ("club", "https://www.vrcw.net/category/detail/club", 80),
     ("event_venue", "https://www.vrcw.net/category/detail/event_venue", 35),
 ]
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
+WORLD_ID_LINE_RE = re.compile(r"^(?:ID:\s*)?(wrld_[0-9a-fA-F-]{36})$")
 TAG_RE = re.compile(r"<[^>]+>")
 
 POSITIVE = {
@@ -129,33 +134,43 @@ def visible_lines(raw_html: str) -> list[str]:
 
 def parse_vrcw(raw_html: str, source_name: str, source_url: str, base_score: int) -> list[dict]:
     lines = visible_lines(raw_html)
-    world_positions = [i for i, line in enumerate(lines) if WORLD_ID_RE.fullmatch(line)]
-    found: list[dict] = []
 
-    for pos, i in enumerate(world_positions):
-        line = lines[i]
-        next_i = world_positions[pos + 1] if pos + 1 < len(world_positions) else len(lines)
+    positions: list[tuple[int, str]] = []
+    for i, line in enumerate(lines):
+        match = WORLD_ID_LINE_RE.fullmatch(line)
+        if match:
+            positions.append((i, match.group(1)))
+
+    found: list[dict] = []
+    for pos, (i, world_id) in enumerate(positions):
+        next_i = positions[pos + 1][0] if pos + 1 < len(positions) else len(lines)
 
         name = ""
-        for j in range(i - 1, max(-1, i - 8), -1):
+        for j in range(i - 1, max(-1, i - 10), -1):
             candidate = lines[j]
-            if candidate in {"ワールドID", "World ID"}:
+            if candidate in {"ワールドID", "World ID", "ID"}:
                 continue
-            if WORLD_ID_RE.fullmatch(candidate):
+            if WORLD_ID_LINE_RE.fullmatch(candidate):
                 break
+            if candidate.startswith(("ID:", "制作者:", "制作:", "Author:")):
+                continue
             if len(candidate) > 1:
                 name = candidate
                 break
 
         author = ""
-        for j in range(i + 1, min(next_i, i + 10)):
-            if lines[j] in {"制作", "Creator", "Author"} and j + 1 < next_i:
+        for j in range(i + 1, min(next_i, i + 12)):
+            line = lines[j]
+            inline = re.match(r"^(?:制作者|制作|Creator|Author)\s*[:：]\s*(.+)$", line)
+            if inline:
+                author = re.sub(r"\s*さん$", "", inline.group(1)).strip()
+                break
+            if line in {"制作", "制作者", "Creator", "Author"} and j + 1 < next_i:
                 author = re.sub(r"\s*さん$", "", lines[j + 1]).strip()
                 break
 
-        # Score only this World's own block. Avoid leaking keywords from adjacent entries.
-        block_end = max(i + 1, next_i - 2)
-        context_lines = lines[max(0, i - 4): block_end]
+        # Score only this World's block to avoid borrowing tags from adjacent entries.
+        context_lines = lines[max(0, i - 6):next_i]
         context = " ".join(context_lines).lower()
 
         score = base_score
@@ -175,14 +190,25 @@ def parse_vrcw(raw_html: str, source_name: str, source_url: str, base_score: int
                 score -= 20
                 reasons.append("-weak-event-match")
 
+        if source_name == "new_vrcw_recent":
+            # Homepage contains many unrelated new Worlds. Require an explicit
+            # nightlife signal before a World can even become a candidate.
+            has_strong = any(
+                k in context
+                for k in ["club", "クラブ", "nightclub", "dj", "rave", "techno", "disco", "ディスコ"]
+            )
+            if not has_strong:
+                continue
+            reasons.append("+explicit-nightlife")
+
         score = max(0, min(100, score))
         if score < 55:
             continue
 
         found.append(
             {
-                "id": line,
-                "name": name or line,
+                "id": world_id,
+                "name": name or world_id,
                 "authorHint": author or None,
                 "source": source_url,
                 "sourceCategories": [source_name],
