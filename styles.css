@@ -1717,3 +1717,13 @@ main,
 .event-source-filters .chip:not(.active) {
   background: transparent;
 }
+
+
+.discovery-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 26px;
+}
+.discovery-footer .secondary-button {
+  min-width: 220px;
+}
