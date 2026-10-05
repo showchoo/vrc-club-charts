@@ -42,3 +42,15 @@ The following worlds were added as **unreviewed discovery entries**. Their ident
 - Club Jinja — https://www.vrcw.net/category/detail/dj
 
 Unreviewed entries are intentionally excluded from Craftsmanship and Overall editorial scoring until an in-world review is completed. Once weekly snapshots exist, they may participate in Trending.
+
+
+## 50-world catalog expansion — 2026-10-05
+
+Discovery expansion uses public listings from:
+- VRCW Club category: https://www.vrcw.net/category/detail/club
+- VRCW DJ category: https://www.vrcw.net/category/detail/dj
+- VRCW AudioLink category: https://www.vrcw.net/category/detail/audiolink
+
+Additional individual detail pages were checked for worlds such as Psychedelic Festival Dome, FBT Pulse Nighclub, LIQUID ˸ LAB, 13th Floor DJ, Channel 13, Club Neon pulse, Club Neon Lotus, Audiolinkバチバチワールド, オーディオリンク大聖堂, TMJ CLUB, ProBuilder BOX, and Zulfur's Smoking Lounge.
+
+The expanded catalog is discovery-only unless an editorial score is present. Being listed does not imply endorsement or an editorial ranking.
