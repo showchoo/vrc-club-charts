@@ -1,0 +1,44 @@
+[
+  {
+    "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
+    "name": "Club Deviate",
+    "author": "TOTC",
+    "genres": ["EXPERIMENTAL", "DJ", "IMMERSIVE"],
+    "editorial": {"visual": 20, "lighting": 18, "sound": 14, "spatial": 15, "interaction": 9, "originality": 10, "optimization": 9}
+  },
+  {
+    "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+    "name": "TUBE VR - IN THE DANCE",
+    "author": "Hadean",
+    "genres": ["MUSIC", "DANCE", "IMMERSIVE", "QUEST"],
+    "editorial": {"visual": 19, "lighting": 19, "sound": 15, "spatial": 14, "interaction": 8, "originality": 10, "optimization": 9}
+  },
+  {
+    "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+    "name": "Club Orion",
+    "author": "AcChosen",
+    "genres": ["CLUB", "STAGE LIGHTING", "AUDIOLINK"],
+    "editorial": {"visual": 18, "lighting": 20, "sound": 14, "spatial": 13, "interaction": 9, "originality": 9, "optimization": 9}
+  },
+  {
+    "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
+    "name": "SONAR_Spillways",
+    "author": "Llamahat",
+    "genres": ["MUSIC", "CLUB", "DJ", "QUEST"],
+    "editorial": {"visual": 17, "lighting": 17, "sound": 14, "spatial": 13, "interaction": 8, "originality": 8, "optimization": 9}
+  },
+  {
+    "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
+    "name": "CLUB IGLO",
+    "author": "EZKIMO_O'",
+    "genres": ["CLUB", "LIVE", "DJ"],
+    "editorial": {"visual": 16, "lighting": 17, "sound": 14, "spatial": 13, "interaction": 8, "originality": 8, "optimization": 9}
+  },
+  {
+    "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+    "name": "Club Catnip - V1.222",
+    "author": "TGCFabian",
+    "genres": ["CLUB", "AUDIOLINK", "QUEST"],
+    "editorial": {"visual": 16, "lighting": 17, "sound": 13, "spatial": 12, "interaction": 8, "originality": 7, "optimization": 9}
+  }
+]
