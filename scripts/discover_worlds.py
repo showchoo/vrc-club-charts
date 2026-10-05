@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 import datetime as dt
-import html
 import json
 import re
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -16,94 +16,107 @@ WORLDS = ROOT / "data" / "worlds.json"
 SUPABASE_URL = "https://ypqpgpetrriirywrzikj.supabase.co"
 SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 
-LISTING_SOURCES = [
-    ("vrcmap_music", "https://vrcmap.com/?category=music", 28),
-    ("vrcmap_new", "https://vrcmap.com/?category=new", 8),
-]
+BLUECAT_RAW = "https://raw.githubusercontent.com/BlueCatVRC/AdventureDailyLists/main"
+BLUECAT_WEB = "https://github.com/BlueCatVRC/AdventureDailyLists/blob/main"
+VRCHAT_WORLD_API = "https://api.vrchat.cloud/api/1/worlds"
 
-WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
-WORLD_LINK_RE = re.compile(r"/world/(wrld_[0-9a-fA-F-]{36})")
-TAG_RE = re.compile(r"<[^>]+>")
-H1_RE = re.compile(r"(?is)<h1[^>]*>(.*?)</h1>")
-MAX_DETAIL_FETCHES = 70
+WORLD_ID_RE = re.compile(r"wrld_[0-9a-fA-F-]{36}")
+
+# This is only a cheap prefilter. Every surviving ID is verified against
+# VRChat's official World-by-ID endpoint before it enters the moderation queue.
+NAME_PREFILTER = re.compile(
+    r"("
+    r"night\s*club|nightclub|club|クラブ|"
+    r"\bdj\b|rave|レイブ|techno|disco|ディスコ|"
+    r"party|dance|ダンス|music|音楽|ライブ|live\s*house|"
+    r"warehouse|underground|venue"
+    r")",
+    re.IGNORECASE,
+)
 
 POSITIVE = {
-    "club": 30,
-    "クラブ": 30,
-    "nightclub": 35,
-    "dj": 24,
-    "rave": 24,
-    "レイブ": 24,
-    "techno": 18,
-    "テクノ": 18,
-    "house music": 18,
-    "dancefloor": 18,
-    "dance floor": 18,
-    "party": 12,
-    "disco": 15,
-    "ディスコ": 15,
-    "audiolink": 8,
-    "ltcgi": 8,
-    "topazchat": 8,
-    "stage": 5,
-    "ステージ": 5,
-    "music": 5,
-    "音楽": 5,
+    "nightclub": 45,
+    "night club": 45,
+    "author_tag_nightclub": 45,
+    "dj": 30,
+    "author_tag_dj": 30,
+    "rave": 35,
+    "techno": 25,
+    "dancefloor": 25,
+    "dance floor": 25,
+    "live_music": 20,
+    "live music": 20,
+    "author_tag_live_music": 20,
+    "vrsl": 12,
+    "audiolink": 10,
+    "audio link": 10,
+    "dancing": 12,
+    "author_tag_dancing": 12,
+    "club": 20,
+    "クラブ": 20,
+    "disco": 18,
+    "ディスコ": 18,
+    "party": 10,
+    "music": 8,
+    "音楽": 8,
+    "dance": 8,
+    "ダンス": 8,
+    "stage": 6,
+    "venue": 6,
 }
 
 NEGATIVE = {
+    "comedy club": 60,
+    "golf club": 60,
+    "billiards club": 60,
+    "language practice club": 60,
+    "book club": 60,
+    "sports club": 60,
+    "fan club": 35,
+    "clubhouse": 30,
     "avatar": 50,
     "アバター": 50,
-    "mmd": 55,
-    "studio": 35,
-    "スタジオ": 35,
-    "sleep": 35,
-    "睡眠": 35,
-    "chill": 22,
-    "pool": 20,
-    "プール": 20,
-    "home": 18,
-    "game": 18,
-    "ゲーム": 18,
-    "karaoke": 25,
-    "カラオケ": 25,
-    "livehouse": 15,
-    "ライブハウス": 15,
+    "mmd": 50,
+    "studio": 30,
+    "スタジオ": 30,
+    "chill": 25,
+    "pool": 25,
+    "プール": 25,
+    "home": 25,
+    "game": 25,
+    "ゲーム": 25,
 }
 
-STRONG_NIGHTLIFE = (
-    "club", "クラブ", "nightclub", "dj", "rave", "レイブ",
-    "techno", "テクノ", "dancefloor", "dance floor", "disco", "ディスコ",
+STRONG_SIGNALS = (
+    "nightclub",
+    "night club",
+    "author_tag_nightclub",
+    "dj",
+    "author_tag_dj",
+    "rave",
+    "techno",
+    "dancefloor",
+    "dance floor",
+    "live_music",
+    "author_tag_live_music",
+    "vrsl",
 )
 
-HARD_EXCLUDE = (
-    "content_adult", "content_sex", "adult only", "18+",
-)
+
+def fetch_text(url: str, timeout: int = 30) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "VRCClubCharts/0.5 (+https://showchoo.github.io/vrc-club-charts/)",
+            "Accept": "text/plain,application/json,*/*",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+        return response.read().decode("utf-8", errors="replace")
 
 
-def fetch_text(url: str) -> str:
-    headers = {
-        "User-Agent": "VRCClubCharts/0.5 (+https://showchoo.github.io/vrc-club-charts/)",
-        "Accept": "text/html,application/xhtml+xml,text/plain",
-    }
-    attempts = [url]
-    if url.startswith("https://"):
-        attempts.append("https://r.jina.ai/http://" + url.removeprefix("https://"))
-
-    errors: list[str] = []
-    for candidate_url in attempts:
-        try:
-            req = urllib.request.Request(candidate_url, headers=headers)
-            with urllib.request.urlopen(req, timeout=45) as response:
-                text = response.read().decode("utf-8", errors="replace")
-                if "wrld_" in text:
-                    if candidate_url != url:
-                        print(f"INFO: using text fallback for {url}")
-                    return text
-                errors.append(f"{candidate_url}: response contained no World IDs")
-        except Exception as exc:
-            errors.append(f"{candidate_url}: {exc}")
-    raise RuntimeError("; ".join(errors))
+def fetch_json(url: str, timeout: int = 30) -> dict | list:
+    return json.loads(fetch_text(url, timeout=timeout))
 
 
 def public_rest(path: str) -> list[dict]:
@@ -124,112 +137,132 @@ def public_rest(path: str) -> list[dict]:
         return []
 
 
-def plain_text(raw_html: str) -> str:
-    cleaned = re.sub(r"(?is)<script.*?>.*?</script>", "\n", raw_html)
-    cleaned = re.sub(r"(?is)<style.*?>.*?</style>", "\n", cleaned)
-    cleaned = TAG_RE.sub("\n", cleaned)
-    cleaned = html.unescape(cleaned)
-    lines = []
-    for part in cleaned.splitlines():
-        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", part)
-        line = re.sub(r"^#{1,6}\s*", "", line)
-        line = re.sub(r"\s+", " ", line).strip()
-        if line:
-            lines.append(line)
-    return "\n".join(lines)
+def jst_today() -> dt.date:
+    return (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=9)).date()
 
 
-def listing_world_ids(raw_html: str) -> list[str]:
-    ids = []
-    seen = set()
-    for match in WORLD_LINK_RE.finditer(raw_html):
-        wid = match.group(1)
-        if wid not in seen:
-            seen.add(wid)
-            ids.append(wid)
-    # Reader-mode fallback can expose bare World IDs even if hrefs are normalized.
-    if not ids:
-        for wid in re.findall(r"wrld_[0-9a-fA-F-]{36}", raw_html):
-            if wid not in seen:
-                seen.add(wid)
-                ids.append(wid)
-    return ids
+def parse_daily_list(text: str, date: dt.date) -> list[dict]:
+    rows: list[dict] = []
+    for raw in text.splitlines():
+        line = raw.strip()
+        match = WORLD_ID_RE.search(line)
+        if not match:
+            continue
+        world_id = match.group(0)
+        if "https://" in line:
+            name = line.split("https://", 1)[0].rstrip(" :：").strip()
+        else:
+            name = line[: match.start()].rstrip(" :：-").strip()
+        if not name:
+            name = world_id
+        rows.append(
+            {
+                "id": world_id,
+                "sourceName": name,
+                "sourceDate": date.isoformat(),
+                "source": f"{BLUECAT_WEB}/{date.year}/{date.isoformat()}.txt",
+            }
+        )
+    return rows
 
 
-def detail_candidate(world_id: str, source_name: str, source_url: str, base_score: int) -> dict | None:
-    detail_url = f"https://vrcmap.com/world/{world_id}"
-    raw = fetch_text(detail_url)
-    text = plain_text(raw)
+def load_recent_source_worlds(days: int = 7) -> list[dict]:
+    today = jst_today()
+    by_id: dict[str, dict] = {}
+    successful_files = 0
 
-    # Similar-world blocks contain unrelated keywords; ignore them for classification.
-    lower_text = text.lower()
-    cut = len(text)
-    for marker in ("\nsimilar worlds", "\n似ている vrchat ワールド", "\nmore by", "\n作者の他のワールド"):
-        pos = lower_text.find(marker.lower())
-        if pos >= 0:
-            cut = min(cut, pos)
-    core = text[:cut]
-    context = core.lower()
+    for offset in range(days):
+        date = today - dt.timedelta(days=offset)
+        url = f"{BLUECAT_RAW}/{date.year}/{date.isoformat()}.txt"
+        try:
+            text = fetch_text(url)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                continue
+            print(f"WARN: source fetch failed {url}: HTTP {exc.code}")
+            continue
+        except Exception as exc:
+            print(f"WARN: source fetch failed {url}: {exc}")
+            continue
 
-    if any(term in context for term in HARD_EXCLUDE):
+        successful_files += 1
+        parsed = parse_daily_list(text, date)
+        print(f"BlueCat {date.isoformat()}: {len(parsed)} Worlds")
+        for item in parsed:
+            # Keep the newest occurrence of a repeated World ID.
+            by_id.setdefault(item["id"], item)
+
+    if successful_files == 0:
+        raise RuntimeError("no recent BlueCat daily files were reachable")
+
+    return list(by_id.values())
+
+
+def official_world(world_id: str) -> dict | None:
+    try:
+        data = fetch_json(f"{VRCHAT_WORLD_API}/{world_id}", timeout=30)
+    except urllib.error.HTTPError as exc:
+        print(f"WARN: VRChat {world_id}: HTTP {exc.code}")
         return None
-
-    if not any(term in context for term in STRONG_NIGHTLIFE):
+    except Exception as exc:
+        print(f"WARN: VRChat {world_id}: {exc}")
         return None
+    return data if isinstance(data, dict) else None
 
-    score = base_score
-    reasons = [f"source:{source_name}", "+explicit-nightlife"]
+
+def score_world(world: dict, source_name: str) -> tuple[int, list[str]]:
+    tags = [str(tag) for tag in world.get("tags", []) if isinstance(tag, str)]
+    text = " ".join(
+        [
+            str(world.get("name") or ""),
+            str(world.get("description") or ""),
+            " ".join(tags),
+            source_name,
+        ]
+    ).lower()
+
+    score = 0
+    reasons: list[str] = []
     for keyword, weight in POSITIVE.items():
-        if keyword.lower() in context:
+        if keyword.lower() in text:
             score += weight
             reasons.append(f"+{keyword}")
     for keyword, weight in NEGATIVE.items():
-        if keyword.lower() in context:
+        if keyword.lower() in text:
             score -= weight
             reasons.append(f"-{keyword}")
 
-    score = max(0, min(100, score))
-    if score < 55:
-        return None
+    strong = any(signal in text for signal in STRONG_SIGNALS)
+    name_has_club = bool(re.search(r"(^|\W)(club|クラブ)(\W|$)", str(world.get("name") or ""), re.IGNORECASE))
+    if strong:
+        score += 10
+        reasons.append("+strong-nightlife")
+    elif name_has_club:
+        score += 5
+        reasons.append("+club-name")
+    else:
+        # A weak name hit like "party" or "music" is not enough on its own.
+        score -= 20
+        reasons.append("-no-strong-nightlife")
 
-    name = ""
-    h1 = H1_RE.search(raw)
-    if h1:
-        name = re.sub(r"\s+", " ", html.unescape(TAG_RE.sub("", h1.group(1)))).strip()
-    if not name:
-        lines = [x.strip() for x in core.splitlines() if x.strip()]
-        for line in lines[:20]:
-            if line != world_id and not line.lower().startswith(("vrcmap", "image:")):
-                name = line
-                break
+    publication = str(world.get("publicationDate") or "")
+    try:
+        published = dt.datetime.fromisoformat(publication.replace("Z", "+00:00")).date()
+        age = (jst_today() - published).days
+        if 0 <= age <= 90:
+            score += 10
+            reasons.append("+published<=90d")
+        elif 0 <= age <= 365:
+            score += 5
+            reasons.append("+published<=365d")
+    except Exception:
+        pass
 
-    author = None
-    lines = [x.strip() for x in core.splitlines() if x.strip()]
-    for i, line in enumerate(lines[:40]):
-        m = re.match(r"^by:\s*(.+)$", line, re.I)
-        if m:
-            author = m.group(1).strip()
-            break
-        if name and line == name and i + 1 < len(lines):
-            nxt = lines[i + 1]
-            if nxt and not nxt.startswith(("#", "Image:")) and len(nxt) <= 120:
-                author = nxt
-                break
-
-    return {
-        "id": world_id,
-        "name": name or world_id,
-        "authorHint": author,
-        "source": detail_url,
-        "sourceCategories": [source_name],
-        "confidenceScore": score,
-        "confidence": "high" if score >= 80 else "medium",
-        "reasons": reasons[:14],
-    }
+    return max(0, min(100, score)), reasons[:16]
 
 
 def main() -> int:
-    today = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    today = jst_today().isoformat()
 
     existing_catalog = json.loads(WORLDS.read_text(encoding="utf-8"))
     existing_ids = {
@@ -256,49 +289,66 @@ def main() -> int:
         except Exception:
             previous = []
 
-    source_membership: dict[str, list[tuple[str, str, int]]] = {}
-    successful_sources = 0
-
-    for source_name, source_url, base_score in LISTING_SOURCES:
-        try:
-            raw = fetch_text(source_url)
-            ids = listing_world_ids(raw)
-            successful_sources += 1
-            print(f"{source_name}: found {len(ids)} listed World IDs")
-            for wid in ids:
-                if wid in existing_ids or wid in decided_ids:
-                    continue
-                source_membership.setdefault(wid, []).append((source_name, source_url, base_score))
-        except Exception as exc:
-            print(f"WARN: discovery source failed {source_url}: {exc}")
-
-    if successful_sources == 0:
-        print("ERROR: all discovery sources failed; preserving previous candidate file")
+    try:
+        source_worlds = load_recent_source_worlds(days=7)
+    except Exception as exc:
+        print(f"ERROR: discovery source unavailable: {exc}")
+        print("Preserving previous candidate file.")
         return 2
 
-    # Prefer Worlds surfaced by Music first, then New. Cap daily detail fetches.
-    ordered = sorted(
-        source_membership.items(),
-        key=lambda item: (
-            0 if any(s[0] == "vrcmap_music" for s in item[1]) else 1,
-            item[0],
-        ),
-    )[:MAX_DETAIL_FETCHES]
+    # Cheap name prefilter keeps VRChat API traffic conservative.
+    source_candidates = [
+        item for item in source_worlds
+        if item["id"] not in existing_ids
+        and item["id"] not in decided_ids
+        and NAME_PREFILTER.search(str(item.get("sourceName") or ""))
+    ]
+    source_candidates.sort(key=lambda x: (x["sourceDate"], x["sourceName"]), reverse=True)
+    source_candidates = source_candidates[:12]
+
+    print(
+        f"Recent source Worlds: {len(source_worlds)}; "
+        f"name-prefilter candidates: {len(source_candidates)}"
+    )
 
     by_id: dict[str, dict] = {}
-    for idx, (wid, memberships) in enumerate(ordered):
-        source_name, source_url, base_score = max(memberships, key=lambda x: x[2])
-        try:
-            item = detail_candidate(wid, source_name, source_url, base_score)
-            if item is None:
-                continue
-            item["sourceCategories"] = sorted({m[0] for m in memberships})
-            by_id[wid] = item
-            print(f"CANDIDATE {wid} {item['name']} score={item['confidenceScore']}")
-        except Exception as exc:
-            print(f"WARN: detail fetch failed {wid}: {exc}")
-        if idx < len(ordered) - 1:
-            time.sleep(0.15)
+    for index, source in enumerate(source_candidates):
+        if index:
+            # Keep automated traffic to the anonymous World-by-ID endpoint modest.
+            time.sleep(8)
+
+        world = official_world(source["id"])
+        if not world:
+            continue
+        if str(world.get("releaseStatus") or "").lower() != "public":
+            continue
+
+        score, reasons = score_world(world, source["sourceName"])
+        if score < 45:
+            print(f"Rejected by metadata score {score}: {world.get('name')} ({source['id']})")
+            continue
+
+        official_name = str(world.get("name") or source["sourceName"] or source["id"]).strip()
+        author = str(world.get("authorName") or "").strip() or None
+        description = str(world.get("description") or "").strip()
+        tags = [str(tag) for tag in world.get("tags", []) if isinstance(tag, str)]
+
+        by_id[source["id"]] = {
+            "id": source["id"],
+            "name": official_name,
+            "authorHint": author,
+            "descriptionHint": description[:500] or None,
+            "officialTags": tags[:24],
+            "source": source["source"],
+            "sourceCategories": ["bluecat-daily-new-worlds"],
+            "sourceDate": source["sourceDate"],
+            "confidenceScore": score,
+            "confidence": "high" if score >= 70 else "medium",
+            "reasons": ["source:bluecat-daily"] + reasons,
+            "publicationDate": world.get("publicationDate"),
+            "worldUpdatedAt": world.get("updated_at"),
+        }
+        print(f"Candidate {score}: {official_name} ({source['id']})")
 
     previous_by_id = {
         str(item.get("id")): item
@@ -306,17 +356,23 @@ def main() -> int:
         if isinstance(item, dict) and item.get("id")
     }
 
-    for wid, item in list(by_id.items()):
+    for wid, item in by_id.items():
         old = previous_by_id.get(wid)
-        item["firstDiscoveredAt"] = (old.get("firstDiscoveredAt") if old else None) or today
+        item["firstDiscoveredAt"] = (
+            old.get("firstDiscoveredAt") if old else None
+        ) or today
         item["lastSeenAt"] = today
 
+    # Preserve unresolved candidates for 30 days even after they rotate out of
+    # the recent source window.
     cutoff = dt.date.fromisoformat(today) - dt.timedelta(days=30)
     for wid, old in previous_by_id.items():
         if wid in by_id or wid in existing_ids or wid in decided_ids:
             continue
         try:
-            last_seen = dt.date.fromisoformat(str(old.get("lastSeenAt") or old.get("firstDiscoveredAt")))
+            last_seen = dt.date.fromisoformat(
+                str(old.get("lastSeenAt") or old.get("firstDiscoveredAt"))
+            )
         except Exception:
             continue
         if last_seen >= cutoff:
