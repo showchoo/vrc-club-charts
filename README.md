@@ -122,3 +122,12 @@ This is an independent project and is not affiliated with VRChat Inc. â€œVRChatâ
 - Curated events win when a matching public-feed variant exists.
 - The static build merges both sources into the public `data/events.json`, event detail pages, sitemap and ICS feed.
 - Events UI can switch between **ALL**, **CURATED**, and **PUBLIC FEED**.
+
+
+### Catalog scope at 100 worlds
+
+- 100 tracked worlds total
+- 92 chart-eligible nightlife worlds
+- 8 directory-only music / dance / DJ-adjacent worlds
+- 6 provisional editorial-scored worlds
+- Unreviewed worlds never receive a fabricated Craftsmanship score
