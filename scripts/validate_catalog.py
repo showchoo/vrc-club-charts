@@ -30,6 +30,7 @@ def main() -> int:
     worlds = json.loads((ROOT / "data/worlds.json").read_text(encoding="utf-8"))
     ranking = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
     events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    events_auto = json.loads((ROOT / "data/events-auto.json").read_text(encoding="utf-8"))
     djs = json.loads((ROOT / "data/djs.json").read_text(encoding="utf-8"))
 
     if not isinstance(worlds, list) or not worlds:
@@ -136,6 +137,46 @@ def main() -> int:
                 errors += 1
             seen_events.add(key)
 
+    if not isinstance(events_auto, list):
+        fail("data/events-auto.json must be an array")
+        errors += 1
+    else:
+        manual_ids = {str(e.get("id", "")).strip() for e in events if isinstance(e, dict)}
+        seen_auto_ids = set()
+        for i, event in enumerate(events_auto, start=1):
+            if not isinstance(event, dict):
+                fail(f"auto event #{i}: must be an object")
+                errors += 1
+                continue
+            eid = str(event.get("id", "")).strip()
+            if not eid or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{1,95}", eid):
+                fail(f"auto event #{i}: valid lowercase id is required")
+                errors += 1
+            elif eid in seen_auto_ids:
+                fail(f"duplicate auto event id: {eid}")
+                errors += 1
+            else:
+                seen_auto_ids.add(eid)
+            if eid in manual_ids:
+                fail(f"auto event collides with curated event id: {eid}")
+                errors += 1
+            name = str(event.get("name", "")).strip()
+            start = str(event.get("start", "")).strip()
+            organizer = str(event.get("organizer", "")).strip()
+            url = str(event.get("url", "")).strip()
+            source = str(event.get("source", "")).strip()
+            if not name or not start or not organizer or not url or not source:
+                fail(f"auto event #{i}: name, start, organizer, url and source are required")
+                errors += 1
+            try:
+                dt.datetime.fromisoformat(start.replace("Z", "+00:00"))
+            except ValueError:
+                fail(f"auto event #{i}: start must be ISO 8601 with timezone")
+                errors += 1
+            if event.get("autoImported") is not True:
+                fail(f"auto event #{i}: autoImported must be true")
+                errors += 1
+
     if not isinstance(djs, list):
         fail("data/djs.json must be an array")
         errors += 1
@@ -179,7 +220,7 @@ def main() -> int:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)
         return 1
 
-    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows, {len(events)} events, {len(djs)} DJs")
+    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows, {len(events)} curated events, {len(events_auto)} auto events, {len(djs)} DJs")
     return 0
 
 
