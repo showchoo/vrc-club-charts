@@ -47,6 +47,7 @@ jobs:
 
             await ensureLabel(match.name, match.color, match.description);
             await ensureLabel("needs-verification", "f0c36d", "Submission needs source and identity verification");
+            await ensureLabel("verified", "2da44e", "Verified and ready for an automated catalog PR");
 
             const labels = [match.name, "needs-verification"];
             let comment = [
