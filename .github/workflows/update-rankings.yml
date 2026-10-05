@@ -2,6 +2,12 @@ name: Update weekly rankings
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "data/worlds.json"
+      - "scripts/**"
+      - ".github/workflows/update-rankings.yml"
   schedule:
     # Weekly; snapshot.py also adds 0–15 min jitter before the first request.
     - cron: "23 18 * * 0"
@@ -20,7 +26,7 @@ jobs:
           python-version: "3.12"
       - name: Capture conservative VRChat snapshot
         env:
-          VRC_USER_AGENT: ${{ vars.VRC_USER_AGENT }}
+          VRC_USER_AGENT: VRCClubCharts/0.2 https://github.com/showchoo/vrc-club-charts
         run: python scripts/snapshot.py
       - name: Build weekly chart
         run: python scripts/build_rankings.py
