@@ -1704,3 +1704,16 @@ main,
   .home-event-badges { gap: 4px; }
   .home-event-badges i { display: none; }
 }
+
+
+.events-filter-stack {
+  display: grid;
+  gap: 9px;
+}
+.event-source-filters .chip {
+  font-size: 9px;
+  letter-spacing: .10em;
+}
+.event-source-filters .chip:not(.active) {
+  background: transparent;
+}
