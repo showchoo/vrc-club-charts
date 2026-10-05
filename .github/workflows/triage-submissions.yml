@@ -22,6 +22,7 @@ jobs:
               { prefix: "[World]", name: "world-submission", color: "17c6ef", description: "VRChat world listing submission" },
               { prefix: "[Event]", name: "event-submission", color: "8ceaff", description: "VRChat event calendar submission" },
               { prefix: "[DJ]", name: "dj-submission", color: "d8ff3e", description: "VRChat DJ directory submission" },
+              { prefix: "[Reviewer]", name: "reviewer-application", color: "b6f0ff", description: "Craftsmanship reviewer application" },
             ];
             const match = defs.find(d => title.startsWith(d.prefix));
             if (!match) return;
