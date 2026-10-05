@@ -175,7 +175,7 @@ def inject_event_json_ld(out: Path, events: list[dict]) -> None:
     path.write_text(doc, encoding="utf-8")
 
 
-def world_page(w: dict) -> str:
+def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
     author = w.get("author") or "—"
@@ -192,6 +192,46 @@ def world_page(w: dict) -> str:
     score_html = fmt_num(score) if score is not None else "—"
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
+
+    now = dt.datetime.now(dt.timezone.utc)
+    related_events = []
+    linked_dj_ids = set()
+    for event in events:
+        if event.get("worldId") != wid or not event.get("start"):
+            continue
+        try:
+            event_start = dt.datetime.fromisoformat(str(event["start"]).replace("Z", "+00:00"))
+            if event_start.tzinfo is None:
+                event_start = event_start.replace(tzinfo=dt.timezone.utc)
+        except ValueError:
+            continue
+        if event_start < now - dt.timedelta(hours=8):
+            continue
+        related_events.append((event_start, event))
+        linked_dj_ids.update(event.get("djIds") or [])
+    related_events.sort(key=lambda x: x[0])
+
+    dj_by_id = {str(d.get("id")): d for d in djs if d.get("id")}
+    related_djs = [dj_by_id[dj_id] for dj_id in sorted(linked_dj_ids) if dj_id in dj_by_id]
+
+    event_rows = []
+    for _, event in related_events[:6]:
+        when = str(event.get("start") or "").replace("T", " ")[:16]
+        event_rows.append(
+            f'<a class="relation-row" href="../events.html">'
+            f'<span>{esc(when)}</span><strong>{esc(event.get("name"))}</strong>'
+            f'<span>{esc(event.get("organizer") or "—")}</span><b>↗</b></a>'
+        )
+    events_html = "".join(event_rows) if event_rows else '<div class="relation-empty">Upcoming linked events are being collected.</div>'
+
+    dj_cards = []
+    for dj in related_djs[:12]:
+        genres_text = " / ".join((dj.get("genres") or [])[:3])
+        dj_cards.append(
+            f'<a class="relation-dj" href="../djs/{esc(dj.get("id"))}.html">'
+            f'<strong>{esc(dj.get("name"))}</strong><span>{esc(genres_text or dj.get("role") or "DJ")}</span><b>↗</b></a>'
+        )
+    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">Linked DJ profiles will appear when event lineups are connected.</div>'
 
     return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
@@ -222,6 +262,20 @@ def world_page(w: dict) -> str:
       <div><span>STATUS</span><strong>{esc(editorial_status.upper())}</strong></div>
       <div><span>CAPACITY</span><strong>{esc(fmt_num(w.get("capacity")))}</strong></div>
       <div><span>WORLD UPDATED</span><strong>{esc(w.get("worldUpdatedAt") or "—")}</strong></div>
+    </section>
+
+    <section class="world-relations">
+      <div class="section-heading">
+        <div><p class="kicker">UPCOMING HERE</p><h2>Events at this world</h2></div>
+      </div>
+      <div class="relation-list">{events_html}</div>
+    </section>
+
+    <section class="world-relations">
+      <div class="section-heading">
+        <div><p class="kicker">CONNECTED DJs</p><h2>People on the lineup</h2></div>
+      </div>
+      <div class="relation-dj-grid">{djs_html}</div>
     </section>
 
     <p class="disclaimer">Editorial scores marked provisional are public-beta placeholders. Unreviewed worlds are not assigned a Craftsmanship score until review.</p>
@@ -333,7 +387,7 @@ def main() -> int:
     world_dir = out / "worlds"
     world_dir.mkdir(parents=True, exist_ok=True)
     for w in worlds:
-        (world_dir / f"{w['id']}.html").write_text(world_page(w), encoding="utf-8")
+        (world_dir / f"{w['id']}.html").write_text(world_page(w, events, djs), encoding="utf-8")
     (world_dir / "index.html").write_text(index_page(worlds), encoding="utf-8")
 
     dj_dir = out / "djs"
