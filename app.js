@@ -209,6 +209,35 @@ function applyLanguage() {
   setView(state.view);
 }
 
+async function updateSceneCounts() {
+  const worldEl = document.getElementById('sceneWorldCount');
+  const eventEl = document.getElementById('sceneEventCount');
+  const djEl = document.getElementById('sceneDjCount');
+  if (worldEl && state.data) worldEl.textContent = `${state.data.worlds.filter(w => w.availabilityStatus !== 'unavailable').length} WORLDS`;
+  try {
+    const [eventsRes, djsRes] = await Promise.all([
+      fetch('data/events.json', {cache:'no-store'}),
+      fetch('data/djs.json', {cache:'no-store'})
+    ]);
+    if (eventsRes.ok && eventEl) {
+      const events = await eventsRes.json();
+      const now = Date.now();
+      const upcoming = events.filter(e => {
+        if (!e?.start) return false;
+        const end = e.end ? new Date(e.end).getTime() : new Date(e.start).getTime() + 6 * 60 * 60 * 1000;
+        return end >= now;
+      });
+      eventEl.textContent = `${upcoming.length} UPCOMING`;
+    }
+    if (djsRes.ok && djEl) {
+      const djs = await djsRes.json();
+      djEl.textContent = `${djs.length} PROFILES`;
+    }
+  } catch (err) {
+    console.warn('Scene counts unavailable', err);
+  }
+}
+
 async function init() {
   try {
     const res = await fetch('data/weekly-ranking.json', {cache:'no-store'});
@@ -219,6 +248,7 @@ async function init() {
     document.getElementById('worldCount').textContent = `${state.data.worlds.length} worlds`;
     buildGenres(state.data.worlds);
     render();
+    updateSceneCounts();
   } catch (e) {
     document.getElementById('dataStatus').textContent = 'DATA ERROR';
     document.getElementById('chartDescription').textContent = 'data/weekly-ranking.json を読み込めませんでした。ローカルではHTTPサーバー経由で開いてください。';
