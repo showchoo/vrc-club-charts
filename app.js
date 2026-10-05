@@ -209,6 +209,56 @@ function applyLanguage() {
   setView(state.view);
 }
 
+function homeEventStatus(event, now=Date.now()) {
+  const start = new Date(event.start).getTime();
+  const end = event.end ? new Date(event.end).getTime() : start + 4 * 60 * 60 * 1000;
+  if (now >= start && now <= end) return 'LIVE NOW';
+  if (start > now && start - now <= 24 * 60 * 60 * 1000) return 'NEXT 24H';
+  return 'UPCOMING';
+}
+
+function homeEventCard(event) {
+  const start = new Date(event.start);
+  const when = new Intl.DateTimeFormat(state.lang === 'ja' ? 'ja-JP' : 'en-US', {
+    month:'short', day:'numeric', weekday:'short', hour:'2-digit', minute:'2-digit'
+  }).format(start);
+  const status = homeEventStatus(event);
+  const detail = event.id ? `events/${event.id}.html` : 'events.html';
+  return `<a class="home-event-card ${status === 'LIVE NOW' ? 'is-live' : ''}" href="${detail}">
+    <div class="home-event-top"><span>${escapeHtml(when)}</span><b>${status}</b></div>
+    <h3>${escapeHtml(event.name)}</h3>
+    <p>${escapeHtml(event.worldName || 'VRChat event instance')}</p>
+    <div class="tags">${(event.genres || []).slice(0,3).map(g=>`<span class="tag">${escapeHtml(g)}</span>`).join('')}</div>
+    <strong>VIEW EVENT ↗</strong>
+  </a>`;
+}
+
+async function renderHomeEvents() {
+  const grid = document.getElementById('homeEventsGrid');
+  if (!grid) return;
+  try {
+    const res = await fetch('data/events.json', {cache:'no-store'});
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const events = await res.json();
+    const now = Date.now();
+    const upcoming = events
+      .filter(e => {
+        if (!e?.start) return false;
+        const start = new Date(e.start).getTime();
+        const end = e.end ? new Date(e.end).getTime() : start + 6 * 60 * 60 * 1000;
+        return end >= now;
+      })
+      .sort((a,b) => new Date(a.start) - new Date(b.start))
+      .slice(0,3);
+    grid.innerHTML = upcoming.length
+      ? upcoming.map(homeEventCard).join('')
+      : '<div class="event-empty"><strong>No upcoming events yet.</strong><span>Public submissions are open.</span></div>';
+  } catch (err) {
+    grid.innerHTML = '<div class="event-empty"><span>Event data unavailable.</span></div>';
+    console.warn('Home events unavailable', err);
+  }
+}
+
 async function updateSceneCounts() {
   const worldEl = document.getElementById('sceneWorldCount');
   const eventEl = document.getElementById('sceneEventCount');
@@ -260,6 +310,7 @@ async function init() {
     buildGenres(state.data.worlds);
     render();
     updateSceneCounts();
+    renderHomeEvents();
   } catch (e) {
     document.getElementById('dataStatus').textContent = 'DATA ERROR';
     document.getElementById('chartDescription').textContent = 'data/weekly-ranking.json を読み込めませんでした。ローカルではHTTPサーバー経由で開いてください。';
