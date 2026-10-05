@@ -35,6 +35,50 @@ def event_id(event: dict) -> str:
     return "event-" + hashlib.sha1(seed.encode("utf-8")).hexdigest()[:16]
 
 
+def event_match_key(event: dict) -> tuple[str, str]:
+    name = re.sub(r"[^a-z0-9ぁ-んァ-ヶ一-龯]+", "", str(event.get("name") or "").casefold())
+    raw_start = str(event.get("start") or "")
+    try:
+        parsed = dt.datetime.fromisoformat(raw_start.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=dt.timezone.utc)
+        start_key = parsed.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M")
+    except ValueError:
+        start_key = raw_start[:16]
+    return name, start_key
+
+
+def merge_events(manual: list[dict], automatic: list[dict]) -> list[dict]:
+    """Merge curated and imported events. Curated/manual records always win."""
+    merged: list[dict] = []
+    seen_ids: set[str] = set()
+    seen_keys: set[tuple[str, str]] = set()
+    seen_urls: set[str] = set()
+
+    def add(event: dict) -> bool:
+        eid = event_id(event)
+        key = event_match_key(event)
+        url = str(event.get("url") or "").strip().rstrip("/")
+        if eid in seen_ids or key in seen_keys or (url and url in seen_urls):
+            return False
+        seen_ids.add(eid)
+        seen_keys.add(key)
+        if url:
+            seen_urls.add(url)
+        merged.append(event)
+        return True
+
+    for event in manual:
+        if isinstance(event, dict):
+            add(event)
+    for event in automatic:
+        if isinstance(event, dict):
+            add(event)
+
+    merged.sort(key=lambda e: (str(e.get("start") or ""), str(e.get("name") or "").casefold()))
+    return merged
+
+
 def page_head(title: str, description: str, canonical: str, prefix: str = "") -> str:
     json_ld = {
         "@context": "https://schema.org",
@@ -514,8 +558,18 @@ def main() -> int:
     out = Path(sys.argv[1])
     data = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
     worlds = data.get("worlds", [])
-    events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    manual_events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
+    auto_events_path = ROOT / "data/events-auto.json"
+    auto_events = json.loads(auto_events_path.read_text(encoding="utf-8")) if auto_events_path.exists() else []
+    events = merge_events(manual_events, auto_events)
     djs = json.loads((ROOT / "data/djs.json").read_text(encoding="utf-8"))
+
+    public_data_dir = out / "data"
+    public_data_dir.mkdir(parents=True, exist_ok=True)
+    (public_data_dir / "events.json").write_text(
+        json.dumps(events, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     world_dir = out / "worlds"
     world_dir.mkdir(parents=True, exist_ok=True)
@@ -568,7 +622,7 @@ def main() -> int:
         sitemap += f"  <url><loc>{esc(url)}</loc><changefreq>{change}</changefreq><priority>{priority}</priority></url>\n"
     sitemap += "</urlset>\n"
     (out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-    print(f"Generated {len(worlds)} world pages, {len(djs)} DJ pages, {len(events)} event pages, ICS feed and sitemap")
+    print(f"Generated {len(worlds)} world pages, {len(djs)} DJ pages, {len(events)} merged event pages, ICS feed and sitemap")
     return 0
 
 
