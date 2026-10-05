@@ -168,24 +168,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-6923f2f9643dd8e05cde",
-    "name": "Tuesday Regular EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-06T21:00:00Z",
-    "end": "2026-10-06T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_ad8c03db-0119-4d36-8fc2-269bc83718e0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "6923f2f9643dd8e05cde",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-715f5bc4ed8b809dbed8",
     "name": "DESIRE AFTER DARK",
     "start": "2026-10-07T01:00:00Z",
@@ -349,42 +331,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-ee3aacf46cbae6ea81fd",
-    "name": "PARADISE Пятница в Mint Cat Club",
-    "start": "2026-10-09T19:00:00Z",
-    "end": "2026-10-09T20:30:00Z",
-    "organizer": "Mint Cat Club",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_3253362c-2619-48d7-b383-f5692603951e",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "ee3aacf46cbae6ea81fd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-5f89d3c6e7b77170480e",
-    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-09T21:00:00Z",
-    "end": "2026-10-09T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_8db12b63-1b0e-4a3e-ab15-9fc4e821e248",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5f89d3c6e7b77170480e",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-6eb8b3cfe483b3c5f95c",
     "name": "【おはようございます】 「爆裂溌剌」 at VRChat group + 2026年10月10日 OPEN 18:45〜 #BAKURETSU 最終回にお呼ばれしまして、ライブさせていただきま…",
     "start": "2026-10-10T09:45:00Z",
@@ -440,24 +386,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-d7e036fc447d6de1303f",
-    "name": "Sunday EVENT 10 PM CET 4 PM EST NSFW",
-    "start": "2026-10-11T20:00:00Z",
-    "end": "2026-10-11T21:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_530fa02b-3bbc-45a7-927f-bb8cf7383dee",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d7e036fc447d6de1303f",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-b3e1b4ceca8daa5a62ea",
     "name": "Dance Trance Tuesday - by Old Dragon",
     "start": "2026-10-13T19:00:00Z",
@@ -473,24 +401,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "b3e1b4ceca8daa5a62ea",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-5c7a52b0db7ef45a63b4",
-    "name": "Tuesday Regular EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-13T21:00:00Z",
-    "end": "2026-10-13T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_546315d5-8f77-42dc-834d-672a2c333d45",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5c7a52b0db7ef45a63b4",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -527,42 +437,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "c37518a8f382773041ca",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-770027acbf158e5ae10c",
-    "name": "PARADISE Пятница в Mint Cat Club",
-    "start": "2026-10-16T19:00:00Z",
-    "end": "2026-10-16T20:30:00Z",
-    "organizer": "Mint Cat Club",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_f1a4e5cd-338b-417b-b405-9efc98ec0193",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "770027acbf158e5ae10c",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-ff9c090753ffff18b52d",
-    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-16T21:00:00Z",
-    "end": "2026-10-16T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_c54b4477-7351-421a-b3f0-ef1adc0a26b3",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "ff9c090753ffff18b52d",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -618,78 +492,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "45990af5ef6a5bee4bf1",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9625e147b5149aaf2087",
-    "name": "Sunday EVENT 10 PM CET 4 PM EST NSFW",
-    "start": "2026-10-18T20:00:00Z",
-    "end": "2026-10-18T21:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_d6231176-2f5a-4db0-8056-073538b9a5f6",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9625e147b5149aaf2087",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-1bf9139748f344f8526d",
-    "name": "Tuesday Regular EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-20T21:00:00Z",
-    "end": "2026-10-20T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_6bb39d53-4cfc-4f08-ba6d-10e041e86302",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "1bf9139748f344f8526d",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9b48e6c5b6fbfaf577a5",
-    "name": "PARADISE Пятница в Mint Cat Club",
-    "start": "2026-10-23T19:00:00Z",
-    "end": "2026-10-23T20:30:00Z",
-    "organizer": "Mint Cat Club",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d09d6743-e84c-4ff8-9190-8e7a5babf4b2/calendar/cal_4a492d3f-f312-47fd-ae98-248e13e21d10",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9b48e6c5b6fbfaf577a5",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-c818276c58604e7858cd",
-    "name": "Friday FLOATING ONLY NSFW EVENT 11 PM CET 5 PM EST NSFW",
-    "start": "2026-10-23T21:00:00Z",
-    "end": "2026-10-23T22:30:00Z",
-    "organizer": "CLUB LMNTRIX",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_660f020a-6dcf-46ed-a59c-3bff3be48346/calendar/cal_1a47de4b-6eef-4f2f-92a4-96163deffa30",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "c818276c58604e7858cd",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
