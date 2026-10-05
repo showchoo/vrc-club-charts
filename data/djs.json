@@ -182,5 +182,41 @@
     ],
     "source": "https://psy-apple.club/",
     "id": "kohada"
+  },
+  {
+    "id": "yanagi",
+    "name": "ヤナギ",
+    "role": "DJ / Organizer",
+    "affiliations": [
+      "スタジオヤナギ"
+    ],
+    "genres": [
+      "IDOLM@STER"
+    ],
+    "source": "https://x.com/imasDJ_yanagi"
+  },
+  {
+    "id": "takuro3",
+    "name": "takuro3",
+    "role": "DJ",
+    "affiliations": [
+      "スタジオヤナギ guest"
+    ],
+    "genres": [
+      "IDOLM@STER"
+    ],
+    "source": "https://x.com/imasDJ_yanagi"
+  },
+  {
+    "id": "kaji",
+    "name": "加持さん",
+    "role": "DJ",
+    "affiliations": [
+      "スタジオヤナギ guest"
+    ],
+    "genres": [
+      "IDOLM@STER"
+    ],
+    "source": "https://x.com/imasDJ_yanagi"
   }
 ]
