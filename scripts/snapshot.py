@@ -48,6 +48,7 @@ def main() -> int:
         time.sleep(delay)
 
     captured = []
+    skipped = []
     for i, seed in enumerate(worlds):
         if i:
             time.sleep(max(args.interval, 1))
@@ -69,16 +70,18 @@ def main() -> int:
             print(f"OK {seed['id']} {captured[-1]['name']}")
         except HTTPError as e:
             print(f"HTTP {e.code} for {seed['id']}", file=sys.stderr)
+            skipped.append({"id": seed["id"], "status": f"http_{e.code}"})
             if e.code == 429:
                 print("Rate limited; stopping instead of retrying aggressively.", file=sys.stderr)
                 return 3
         except (URLError, TimeoutError, json.JSONDecodeError) as e:
             print(f"ERROR {seed['id']}: {e}", file=sys.stderr)
+            skipped.append({"id": seed["id"], "status": type(e).__name__})
 
     day = dt.datetime.now(dt.timezone.utc).date().isoformat()
     out = ROOT / "data/snapshots" / f"{day}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"capturedAt": day, "worlds": captured}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out.write_text(json.dumps({"capturedAt": day, "worlds": captured, "skipped": skipped}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {out}")
     return 0
 
