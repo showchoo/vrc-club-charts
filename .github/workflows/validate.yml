@@ -39,8 +39,13 @@ on:
       - "data/events.json"
       - "data/events-auto.json"
       - "data/djs.json"
+      - "data/reviews.json"
+      - "data/reviewers.json"
+      - "data/review-scores.json"
+      - "reviewer.html"
       - "scripts/**"
-      - ".github/workflows/validate.yml"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/**"
 
 permissions:
   contents: read
