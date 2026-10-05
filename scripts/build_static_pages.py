@@ -447,7 +447,13 @@ def index_page(worlds: list[dict]) -> str:
         if w.get("availabilityStatus") == "unavailable":
             continue
         genres = " / ".join((w.get("genres") or [])[:4])
-        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html">
+        status = "reviewed" if w.get("editorialStatus") != "unreviewed" else "discovery"
+        hay = " ".join([
+            str(w.get("name") or ""),
+            str(w.get("author") or ""),
+            " ".join(w.get("genres") or []),
+        ]).casefold()
+        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html" data-status="{esc(status)}" data-hay="{esc(hay)}">
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
           <span>{esc(genres)}</span>
@@ -458,7 +464,43 @@ def index_page(worlds: list[dict]) -> str:
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>VRChat club worlds.</h1>
     <p class="lead">{len(cards)} tracked worlds. Reviewed rankings and discovery candidates in one directory.</p>
-    <div class="world-catalog">{''.join(cards)}</div>
+    <div class="world-directory-controls">
+      <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World, creator, genre" /></label>
+      <div class="chip-row" id="worldDirectoryFilters">
+        <button class="chip active" type="button" data-status-filter="all">ALL</button>
+        <button class="chip" type="button" data-status-filter="reviewed">REVIEWED</button>
+        <button class="chip" type="button" data-status-filter="discovery">DISCOVERY</button>
+      </div>
+      <span id="worldDirectoryCount" class="discovery-count">{len(cards)} WORLDS</span>
+    </div>
+    <div id="worldCatalog" class="world-catalog">{''.join(cards)}</div>
+    <script>
+      (() => {{
+        const input = document.getElementById('worldDirectorySearch');
+        const rows = [...document.querySelectorAll('.world-catalog-row')];
+        const count = document.getElementById('worldDirectoryCount');
+        const buttons = [...document.querySelectorAll('[data-status-filter]')];
+        let status = 'all';
+        function apply() {{
+          const q = (input.value || '').trim().toLowerCase();
+          let visible = 0;
+          rows.forEach(row => {{
+            const okStatus = status === 'all' || row.dataset.status === status;
+            const okQuery = !q || (row.dataset.hay || '').includes(q);
+            const show = okStatus && okQuery;
+            row.hidden = !show;
+            if (show) visible += 1;
+          }});
+          count.textContent = visible + ' WORLDS';
+        }}
+        input.addEventListener('input', apply);
+        buttons.forEach(button => button.addEventListener('click', () => {{
+          status = button.dataset.statusFilter;
+          buttons.forEach(b => b.classList.toggle('active', b === button));
+          apply();
+        }}));
+      }})();
+    </script>
   </main>
 """ + footer("../")
 
