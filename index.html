@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=20261005-35" />
+  <link rel="stylesheet" href="styles.css?v=20261006-41" />
 </head>
 <body class="focus-home ranking-home">
   <div class="noise"></div>
@@ -74,6 +74,17 @@
           <div><strong id="metricReviews">0</strong><span>REVIEWS</span></div>
           <div><strong id="metricReviewers">0</strong><span>REVIEWERS</span></div>
         </div>
+
+        <section id="editorPicksSection" class="editor-picks-block" hidden>
+          <div class="editor-picks-head">
+            <div>
+              <p class="kicker">EDITOR'S PICKS</p>
+              <h2>運営が選ぶ、作り込みの強いクラブ。</h2>
+            </div>
+            <p>Editor Scoreは運営者による同じ7基準の評価です。Reviewerによる公式Craftsmanship Rankingの順位には影響しません。</p>
+          </div>
+          <div id="editorPicks" class="editor-picks-grid"></div>
+        </section>
 
         <div id="craftRanking" class="craft-ranking-board">
           <div class="ranking-loading">Loading panel ranking…</div>
@@ -137,6 +148,6 @@
     </span>
   </footer>
 
-  <script src="app.js?v=20261005-35" defer></script>
+  <script src="app.js?v=20261006-41" defer></script>
 </body>
 </html>

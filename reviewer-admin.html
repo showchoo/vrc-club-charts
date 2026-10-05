@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow,noarchive" />
   <title>VCC Admin — VRC Club Charts</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261006-38" />
+  <link rel="stylesheet" href="styles.css?v=20261006-41" />
   <style>
     body.admin-page{min-height:100vh}
     .admin-shell{width:min(1080px,calc(100% - 32px));margin:0 auto;padding:56px 0 80px}
@@ -79,6 +79,34 @@
 
     <section class="admin-panel hidden" id="adminPanel">
       <div class="admin-toolbar">
+        <strong>EDITOR CURATION</strong>
+        <span class="admin-auto-label">SEPARATE FROM PANEL RANKING</span>
+      </div>
+      <div class="admin-card">
+        <div class="editor-form">
+          <label>WORLD<select id="editorWorld"></select></label>
+          <label>VISUAL /20<input id="editorVisual" type="number" min="0" max="20" value="0"></label>
+          <label>LIGHT /20<input id="editorLighting" type="number" min="0" max="20" value="0"></label>
+          <label>SOUND /15<input id="editorSound" type="number" min="0" max="15" value="0"></label>
+          <label>SPATIAL /15<input id="editorSpatial" type="number" min="0" max="15" value="0"></label>
+          <label>INTERACT /10<input id="editorInteraction" type="number" min="0" max="10" value="0"></label>
+          <label>ORIGINAL /10<input id="editorOriginality" type="number" min="0" max="10" value="0"></label>
+          <label>OPT /10<input id="editorOptimization" type="number" min="0" max="10" value="0"></label>
+          <label class="editor-note">EDITOR NOTE<textarea id="editorNote" rows="3" maxlength="1000" placeholder="なぜ作り込まれていると感じるか（任意）"></textarea></label>
+          <label class="editor-pick-check"><input id="editorPick" type="checkbox"> EDITOR'S PICK</label>
+          <div class="editor-total"><b id="editorTotal">0</b><small>/100</small></div>
+        </div>
+        <div class="admin-actions">
+          <button class="approve" id="saveEditorScore" type="button">SAVE EDITOR SCORE</button>
+          <button class="reject" id="clearEditorScore" type="button">CLEAR</button>
+        </div>
+        <div class="admin-status" id="editorStatus"></div>
+        <div class="editor-existing" id="editorExisting"></div>
+      </div>
+
+      <div class="admin-queue-divider"></div>
+
+      <div class="admin-toolbar">
         <strong>REVIEWER APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
         <div>
           <button class="secondary-button" id="refreshButton" type="button">REFRESH</button>
@@ -122,6 +150,23 @@
       const worldCandidateList = document.getElementById('worldCandidateList');
       const worldCandidateCount = document.getElementById('worldCandidateCount');
       const loginStatus = document.getElementById('loginStatus');
+      const editorWorld = document.getElementById('editorWorld');
+      const editorVisual = document.getElementById('editorVisual');
+      const editorLighting = document.getElementById('editorLighting');
+      const editorSound = document.getElementById('editorSound');
+      const editorSpatial = document.getElementById('editorSpatial');
+      const editorInteraction = document.getElementById('editorInteraction');
+      const editorOriginality = document.getElementById('editorOriginality');
+      const editorOptimization = document.getElementById('editorOptimization');
+      const editorNote = document.getElementById('editorNote');
+      const editorPick = document.getElementById('editorPick');
+      const editorTotal = document.getElementById('editorTotal');
+      const saveEditorScore = document.getElementById('saveEditorScore');
+      const clearEditorScore = document.getElementById('clearEditorScore');
+      const editorStatus = document.getElementById('editorStatus');
+      const editorExisting = document.getElementById('editorExisting');
+      let editorWorlds=[];
+      let editorScores=[];
 
       const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const fmt = (iso) => {
@@ -376,19 +421,115 @@
         return Array.isArray(data) ? data : [];
       }
 
+
+      const editorInputs=[editorVisual,editorLighting,editorSound,editorSpatial,editorInteraction,editorOriginality,editorOptimization];
+      function updateEditorTotal(){
+        editorTotal.textContent=editorInputs.reduce((sum,input)=>sum+Number(input.value||0),0);
+      }
+      editorInputs.forEach(input=>input.addEventListener('input',updateEditorTotal));
+
+      function fillEditorForm(){
+        const current=editorScores.find(s=>s.world_id===editorWorld.value);
+        const values=current || {};
+        editorVisual.value=values.visual ?? 0;
+        editorLighting.value=values.lighting ?? 0;
+        editorSound.value=values.sound ?? 0;
+        editorSpatial.value=values.spatial ?? 0;
+        editorInteraction.value=values.interaction ?? 0;
+        editorOriginality.value=values.originality ?? 0;
+        editorOptimization.value=values.optimization ?? 0;
+        editorNote.value=values.note ?? '';
+        editorPick.checked=values.editor_pick === true;
+        updateEditorTotal();
+      }
+
+      function renderEditorScores(){
+        editorWorld.innerHTML=editorWorlds
+          .slice().sort((a,b)=>String(a.name).localeCompare(String(b.name),'ja'))
+          .map(w=>`<option value="${esc(w.id)}">${esc(w.name)} — ${esc(w.author||'')}</option>`).join('');
+        editorExisting.innerHTML=editorScores.length
+          ? editorScores.slice().sort((a,b)=>Number(b.editor_pick)-Number(a.editor_pick)||Number(b.total_score)-Number(a.total_score)).map(s=>{
+              const w=editorWorlds.find(x=>x.id===s.world_id);
+              return `<div class="editor-existing-row" data-world-id="${esc(s.world_id)}"><div><strong>${esc(w?.name||s.world_id)}</strong><br><span>${s.editor_pick?'EDITOR\'S PICK · ':''}updated ${esc(fmt(s.updated_at))}</span></div><b>${s.total_score}/100</b><button class="secondary-button" type="button">EDIT</button></div>`;
+            }).join('')
+          : '<div class="empty-admin">Editor Scoreはまだ登録されていません。</div>';
+        editorExisting.querySelectorAll('[data-world-id]').forEach(row=>row.querySelector('button').addEventListener('click',()=>{
+          editorWorld.value=row.dataset.worldId;
+          fillEditorForm();
+          editorWorld.scrollIntoView({behavior:'smooth',block:'center'});
+        }));
+        fillEditorForm();
+      }
+
+      editorWorld.addEventListener('change',fillEditorForm);
+
+      saveEditorScore.addEventListener('click',async()=>{
+        const worldId=editorWorld.value;
+        if(!worldId) return;
+        saveEditorScore.disabled=clearEditorScore.disabled=true;
+        editorStatus.textContent='保存中…';
+        try{
+          const data=await callAdmin('upsert_editor_score',worldId,{
+            scores:{
+              visual:Number(editorVisual.value), lighting:Number(editorLighting.value), sound:Number(editorSound.value),
+              spatial:Number(editorSpatial.value), interaction:Number(editorInteraction.value),
+              originality:Number(editorOriginality.value), optimization:Number(editorOptimization.value)
+            },
+            editorPick:editorPick.checked,
+            note:editorNote.value
+          });
+          const idx=editorScores.findIndex(s=>s.world_id===worldId);
+          if(idx>=0) editorScores[idx]=data.score; else editorScores.push(data.score);
+          renderEditorScores();
+          editorWorld.value=worldId;
+          fillEditorForm();
+          editorStatus.textContent='保存しました。トップページへ即時反映されます。';
+          editorStatus.dataset.state='success';
+        }catch(err){
+          editorStatus.textContent=err.message;editorStatus.dataset.state='error';
+        }finally{saveEditorScore.disabled=clearEditorScore.disabled=false;}
+      });
+
+      clearEditorScore.addEventListener('click',async()=>{
+        const worldId=editorWorld.value;
+        if(!worldId || !editorScores.some(s=>s.world_id===worldId)) return;
+        if(!confirm('このEditor Scoreを削除しますか？')) return;
+        saveEditorScore.disabled=clearEditorScore.disabled=true;
+        try{
+          await callAdmin('delete_editor_score',worldId);
+          editorScores=editorScores.filter(s=>s.world_id!==worldId);
+          renderEditorScores();
+          editorStatus.textContent='削除しました。';
+          editorStatus.dataset.state='success';
+        }catch(err){editorStatus.textContent=err.message;editorStatus.dataset.state='error';}
+        finally{saveEditorScore.disabled=clearEditorScore.disabled=false;}
+      });
+
+      async function loadEditorWorlds(){
+        const res=await fetch('data/weekly-ranking.json',{cache:'no-store'});
+        if(!res.ok) return [];
+        const data=await res.json();
+        return (data.worlds||[]).filter(w=>w.chartEligible===true && w.availabilityStatus!=='unavailable');
+      }
+
       async function load(){
         setLoginStatus('確認中…');
         try{
-          const [data,reviews,worldDecisions,candidates]=await Promise.all([
+          const [data,reviews,worldDecisions,candidates,worlds,editorData]=await Promise.all([
             callAdmin('list'),
             callAdmin('list_reviews'),
             callAdmin('list_world_candidate_decisions'),
-            loadWorldCandidates()
+            loadWorldCandidates(),
+            loadEditorWorlds(),
+            callAdmin('list_editor_scores')
           ]);
           showUnlocked();
           render(data.applications || []);
           renderReviews(reviews.reviews || []);
           renderWorldCandidates(candidates,worldDecisions.decisions || []);
+          editorWorlds=worlds || [];
+          editorScores=editorData.scores || [];
+          renderEditorScores();
           setLoginStatus('');
         }catch(err){
           showLocked();
