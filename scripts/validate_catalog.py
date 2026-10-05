@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 import sys
@@ -28,6 +29,7 @@ def main() -> int:
     errors = 0
     worlds = json.loads((ROOT / "data/worlds.json").read_text(encoding="utf-8"))
     ranking = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
+    events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
 
     if not isinstance(worlds, list) or not worlds:
         fail("data/worlds.json must be a non-empty array")
@@ -88,11 +90,39 @@ def main() -> int:
         fail("weekly-ranking contains duplicate ids")
         errors += 1
 
+    if not isinstance(events, list):
+        fail("data/events.json must be an array")
+        errors += 1
+    else:
+        seen_events = set()
+        for i, event in enumerate(events, start=1):
+            name = str(event.get("name", "")).strip()
+            start = str(event.get("start", "")).strip()
+            wid = str(event.get("worldId", "")).strip()
+            organizer = str(event.get("organizer", "")).strip()
+            if not name or not start or not wid or not organizer:
+                fail(f"event #{i}: name, start, worldId and organizer are required")
+                errors += 1
+                continue
+            if not WORLD_ID_RE.fullmatch(wid):
+                fail(f"event #{i}: invalid worldId {wid!r}")
+                errors += 1
+            try:
+                dt.datetime.fromisoformat(start.replace("Z", "+00:00"))
+            except ValueError:
+                fail(f"event #{i}: start must be ISO 8601 with timezone")
+                errors += 1
+            key = (name.casefold(), start, wid)
+            if key in seen_events:
+                fail(f"duplicate event: {name} at {start}")
+                errors += 1
+            seen_events.add(key)
+
     if errors:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)
         return 1
 
-    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows")
+    print(f"Catalog OK: {len(worlds)} worlds, {len(ranked_ids)} ranking rows, {len(events)} events")
     return 0
 
 
