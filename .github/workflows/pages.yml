@@ -61,6 +61,7 @@ jobs:
 
       - name: Prepare public artifact
         run: |
+          python scripts/sync_reviewers_from_supabase.py
           python scripts/build_review_scores.py
           mkdir _site
           cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
