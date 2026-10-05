@@ -40,4 +40,7 @@ jobs:
           cp styles.css favicon.svg /tmp/vcc-site/
           python scripts/build_static_pages.py /tmp/vcc-site
           test -f /tmp/vcc-site/worlds/index.html
+          test -d /tmp/vcc-site/events
+          test -d /tmp/vcc-site/djs
+          test -f /tmp/vcc-site/events.ics
           test -f /tmp/vcc-site/sitemap.xml
