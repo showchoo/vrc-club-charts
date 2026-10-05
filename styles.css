@@ -1400,3 +1400,90 @@ main,
   }
   .scene-card:last-child { border-bottom: 0; }
 }
+
+
+/* World → Event → DJ relationships */
+.world-relations {
+  padding-top: 64px;
+}
+.relation-list {
+  border-top: 1px solid rgba(166,234,255,.12);
+}
+.relation-row {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 180px 1.4fr 1fr 30px;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid rgba(166,234,255,.10);
+  color: var(--muted);
+  font-size: 11px;
+}
+.relation-row strong {
+  color: var(--text);
+  font-size: 15px;
+}
+.relation-row:hover strong,
+.relation-row:hover b {
+  color: var(--accent);
+}
+.relation-row b {
+  justify-self: end;
+  color: var(--text);
+}
+.relation-dj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(166,234,255,.12);
+  border-left: 1px solid rgba(166,234,255,.12);
+}
+.relation-dj {
+  min-height: 130px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(166,234,255,.12);
+  border-bottom: 1px solid rgba(166,234,255,.12);
+}
+.relation-dj strong {
+  font-size: 18px;
+  letter-spacing: -.025em;
+}
+.relation-dj span {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.relation-dj b {
+  margin-top: auto;
+  color: var(--accent);
+}
+.relation-empty {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(166,234,255,.10);
+  background: rgba(255,255,255,.015);
+  font-size: 12px;
+}
+.relation-dj-grid .relation-empty {
+  grid-column: 1 / -1;
+  border-right: 1px solid rgba(166,234,255,.12);
+}
+@media (max-width: 820px) {
+  .relation-row {
+    grid-template-columns: 1fr 28px;
+    gap: 5px 12px;
+    padding: 16px 0;
+  }
+  .relation-row span,
+  .relation-row strong { grid-column: 1; }
+  .relation-row b { grid-column: 2; grid-row: 1 / span 3; }
+  .relation-dj-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .relation-dj-grid { grid-template-columns: 1fr; }
+}
