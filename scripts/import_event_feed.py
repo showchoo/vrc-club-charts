@@ -16,10 +16,18 @@ JST = dt.timezone(dt.timedelta(hours=9))
 
 ALLOWED_CATEGORIES = {"音楽・ダンス", "公演・ショー", "music", "dance", "performance", "show"}
 STRONG_TERMS = (
-    "dj", "club", "rave", "party", "live", "music", "concert", "dance",
-    "trance", "techno", "house", "dnb", "drum", "bass", "garage",
-    "psy", "vocaloid", "mmd", "festival", "audio",
-    "音楽", "ライブ", "ダンス", "クラブ", "演奏", "歌", "ボカロ", "フェス",
+    " dj ", "dj event", "dj party", "djbar", "dj bar",
+    "club", "nightclub", "rave", "party", "live", "concert", "stage",
+    "trance", "techno", "house", "dnb", "drum & bass", "drum and bass",
+    "bass music", "garage", "psytrance", "psy-trance", "vocaloid", "mmd",
+    "festival", "audiolink", "vrmv", "dance party", "dance event",
+    "ライブ", "クラブ", "コンサート", "演奏", "ボカロ", "フェス", "レイブ",
+    "パーティ", "音楽イベント", "ダンスイベント",
+)
+
+EXCLUDE_TERMS = (
+    "karaoke", "カラオケ", "exercise", "fitness", "workout",
+    "エクササイズ", "フィットネス", "筋トレ", "yoga", "ヨガ",
 )
 GENRE_RULES = [
     ("PSYTRANCE", ("psytrance", "psy-trance", "psy trance", "サイケ")),
@@ -96,7 +104,8 @@ def is_music_event(event: dict, now: dt.datetime) -> bool:
     # test by itself, otherwise every generic "music/dance" calendar entry gets in.
     text = source_text(event, include_category=False)
     keyword_ok = any(term in text for term in STRONG_TERMS)
-    return category_ok and keyword_ok and bool(clean(event.get("url")))
+    excluded = any(term in text for term in EXCLUDE_TERMS)
+    return category_ok and keyword_ok and not excluded and bool(clean(event.get("url")))
 
 
 def stable_id(event: dict) -> str:
@@ -145,7 +154,7 @@ def main() -> int:
     # Stable ordering and hard cap keep the public site focused rather than mirroring
     # the entire upstream calendar.
     selected.sort(key=lambda e: (e["start"], e["name"].casefold()))
-    selected = selected[:90]
+    selected = selected[:100]
     OUT.write_text(json.dumps(selected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Imported {len(selected)} music/dance event candidates from {len(rows)} upstream events")
     return 0
