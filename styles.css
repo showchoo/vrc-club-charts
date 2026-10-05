@@ -1135,3 +1135,39 @@ main,
   background: var(--accent);
   color: #061014;
 }
+
+
+/* Weekly rank movement */
+.rank-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: auto;
+}
+.rank-heading .rank-badge { margin-bottom: 0; }
+.rank-index-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+.movement {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  padding: 4px 6px;
+  border: 1px solid rgba(166,234,255,.12);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+.movement-up { color: var(--accent); }
+.movement-down { color: #ff9f9f; }
+.movement-new {
+  color: #061014;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.movement-flat { color: #718690; }
