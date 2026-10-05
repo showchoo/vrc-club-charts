@@ -3881,3 +3881,28 @@ main,
     margin-top:20px;
   }
 }
+
+
+/* Reviewer submission actions */
+.reviewer-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.reviewer-action-note {
+  max-width:680px;
+  margin:16px 0 0;
+  color:#78929c;
+  font-size:10px;
+  line-height:1.7;
+}
+@media (max-width:560px) {
+  .reviewer-actions {
+    align-items:stretch;
+    flex-direction:column;
+  }
+  .reviewer-actions a {
+    text-align:center;
+  }
+}
