@@ -48,4 +48,4 @@ jobs:
           test -d /tmp/vcc-site/events
           test -d /tmp/vcc-site/djs
           test -f /tmp/vcc-site/events.ics
-          test -f /tmp/vcc-site/sitemap.xml
+          test -f /tmp/vcc-site/sitemap.xml\n          test -s /tmp/vcc-site/og-image.png
