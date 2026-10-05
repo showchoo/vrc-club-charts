@@ -43,10 +43,63 @@ function worldCard(w) {
   </a>`;
 }
 
+function renderCraftRanking() {
+  const board = document.getElementById('craftRanking');
+  if (!board) return;
+
+  const summary = state.reviewScores?.summary || {};
+  const rankedCount = Number(summary.rankedWorlds || 0);
+  const scoredCount = Number(summary.scoredWorlds || 0);
+  const reviewCount = Number(summary.reviews || 0);
+  const reviewerCount = Number(summary.reviewers || 0);
+
+  document.getElementById('metricRanked').textContent = fmt.format(rankedCount);
+  document.getElementById('metricPanel').textContent = fmt.format(scoredCount);
+  document.getElementById('metricReviews').textContent = fmt.format(reviewCount);
+  document.getElementById('metricReviewers').textContent = fmt.format(reviewerCount);
+
+  const byId = new Map(state.worlds.map(w => [w.id, w]));
+  const rows = (state.reviewScores?.worlds || [])
+    .filter(r => Number.isFinite(Number(r.score)))
+    .map(r => ({...r, world: byId.get(r.worldId)}))
+    .filter(r => r.world)
+    .sort((a,b) => Number(b.score) - Number(a.score));
+
+  if (!rows.length) {
+    board.innerHTML = `<div class="ranking-empty">
+      <div class="ranking-empty-mark">—</div>
+      <div>
+        <span>OFFICIAL PANEL RANKING</span>
+        <strong>まだ正式順位はありません。</strong>
+        <p>3人以上の独立したレビュアー評価が集まったワールドから、ここにCraftsmanship Rankingが表示されます。仮の点数や人気順で埋めることはしません。</p>
+      </div>
+      <a class="secondary-button" href="reviewer.html">HOW IT WORKS ↗</a>
+    </div>`;
+    return;
+  }
+
+  board.innerHTML = `<div class="ranking-table">
+    ${rows.slice(0,10).map((r,i) => {
+      const w = r.world;
+      const status = String(r.status || 'provisional').toUpperCase();
+      const confidence = String(r.confidence || 'low').toUpperCase();
+      return `<a class="panel-rank-row ${i === 0 ? 'rank-first' : ''}" href="${worldDetailUrl(w.id)}">
+        <span class="panel-rank-no">${String(i+1).padStart(2,'0')}</span>
+        <span class="panel-rank-world">
+          <small>${status} · ${r.reviewCount} REVIEWS · ${confidence} CONFIDENCE</small>
+          <strong>${esc(w.name)}</strong>
+          <em>by ${esc(w.author || '—')}</em>
+        </span>
+        <span class="panel-rank-score"><b>${Number(r.score).toFixed(1)}</b><small>/ 100</small></span>
+        <span class="panel-rank-arrow">↗</span>
+      </a>`;
+    }).join('')}
+  </div>`;
+}
+
 function renderWorlds() {
   const available = state.worlds.filter(w => w.availabilityStatus !== 'unavailable');
   document.getElementById('metricWorlds').textContent = fmt.format(available.length);
-  document.getElementById('metricPanel').textContent = fmt.format(state.reviewScores?.summary?.scoredWorlds || 0);
 
   const grid = document.getElementById('focusWorldGrid');
   const chosen = pickWorlds(available);
@@ -107,10 +160,13 @@ async function load() {
     state.worlds = (await worldRes.json()).worlds || [];
     state.events = eventRes.ok ? await eventRes.json() : [];
     state.reviewScores = reviewRes.ok ? await reviewRes.json() : null;
+    renderCraftRanking();
     renderWorlds();
     renderEvents();
   } catch (err) {
     console.error(err);
+    const ranking = document.getElementById('craftRanking');
+    if (ranking) ranking.innerHTML = '<div class="ranking-loading">Panel ranking unavailable.</div>';
     document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">Data unavailable.</div>';
     document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">Event data unavailable.</div>';
   }
