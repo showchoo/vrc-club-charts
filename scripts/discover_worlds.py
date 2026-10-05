@@ -18,7 +18,7 @@ SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 
 LISTING_SOURCES = [
     ("vrcmap_music", "https://vrcmap.com/?category=music", 28),
-    ("vrcmap_new", "https://vrcmap.com/?category=new", 8),
+    ("vrcmap_new", "https://vrcmap.com/?category=new", 25),
 ]
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
