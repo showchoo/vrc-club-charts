@@ -808,3 +808,170 @@ main,
   .discovery-toolbar { width: 100%; justify-content: space-between; }
   .sort-control span { display: none; }
 }
+
+
+/* Static world directory + detail pages */
+.world-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+.world-title-link:hover {
+  color: var(--accent);
+}
+.world-catalog-page,
+.world-detail-page {
+  padding-top: 110px;
+  padding-bottom: 100px;
+}
+.world-catalog-page h1,
+.world-detail-page h1 {
+  margin: 10px 0 24px;
+  font-size: clamp(3rem, 8vw, 7.2rem);
+  line-height: .88;
+  letter-spacing: -.065em;
+}
+.world-catalog-page .lead {
+  max-width: 700px;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.75;
+  margin-bottom: 50px;
+}
+.world-catalog {
+  border-top: 1px solid rgba(166,234,255,.12);
+}
+.world-catalog-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.35fr) minmax(150px, .65fr) minmax(220px, 1fr) 36px;
+  gap: 20px;
+  align-items: center;
+  min-height: 74px;
+  border-bottom: 1px solid rgba(166,234,255,.10);
+  color: var(--muted);
+  font-size: 12px;
+}
+.world-catalog-row:hover {
+  color: var(--text);
+  background: rgba(63,217,255,.035);
+}
+.world-catalog-name {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
+}
+.world-back {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.world-back:hover { color: var(--accent); }
+.world-detail-hero {
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 42px;
+  align-items: stretch;
+}
+.world-detail-copy {
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px 0;
+}
+.world-detail-author {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.world-detail-actions {
+  margin-top: 26px;
+}
+.world-detail-image {
+  width: 100%;
+  min-height: 520px;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(166,234,255,.12);
+  background: #101b21;
+}
+.world-detail-image-placeholder {
+  display: grid;
+  place-items: center;
+  color: rgba(63,217,255,.28);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 950;
+  letter-spacing: -.08em;
+}
+.world-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 30px;
+  border-top: 1px solid rgba(166,234,255,.12);
+  border-bottom: 1px solid rgba(166,234,255,.12);
+}
+.world-detail-stats article {
+  min-height: 120px;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(166,234,255,.10);
+}
+.world-detail-stats article:last-child { border-right: 0; }
+.world-detail-stats span,
+.world-detail-meta span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.world-detail-stats strong {
+  font-size: clamp(24px, 3vw, 42px);
+  letter-spacing: -.05em;
+}
+.world-detail-meta {
+  display: grid;
+  grid-template-columns: 1.5fr .7fr .6fr 1.2fr;
+  gap: 1px;
+  margin-top: 18px;
+  background: rgba(166,234,255,.08);
+}
+.world-detail-meta > div {
+  min-width: 0;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+  background: #0d171c;
+}
+.world-detail-meta code,
+.world-detail-meta strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+}
+@media (max-width: 900px) {
+  .world-detail-hero { grid-template-columns: 1fr; }
+  .world-detail-copy { min-height: 360px; }
+  .world-detail-image { min-height: 360px; max-height: 560px; }
+  .world-detail-stats { grid-template-columns: repeat(2, 1fr); }
+  .world-detail-stats article { border-bottom: 1px solid rgba(166,234,255,.10); }
+  .world-detail-meta { grid-template-columns: 1fr 1fr; }
+  .world-catalog-row { grid-template-columns: 1fr 120px 32px; }
+  .world-catalog-row span:nth-child(3) { display: none; }
+}
+@media (max-width: 560px) {
+  .world-catalog-page,
+  .world-detail-page { padding-top: 76px; }
+  .world-catalog-row { grid-template-columns: 1fr 32px; gap: 10px; }
+  .world-catalog-row span:nth-child(2) { display: none; }
+  .world-detail-copy { min-height: 300px; }
+  .world-detail-image { min-height: 280px; }
+  .world-detail-stats { grid-template-columns: 1fr 1fr; }
+  .world-detail-meta { grid-template-columns: 1fr; }
+}
