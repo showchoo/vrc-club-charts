@@ -2489,3 +2489,34 @@ main,
   .reviewer-hero h1 { font-size:48px; }
   .confidence-scale div { grid-template-columns:1fr; gap:6px; padding:16px 0; }
 }
+
+
+/* v0.31 — readability pass after visual verification */
+.focus-hero-copy {
+  width:min(650px,58vw);
+}
+.focus-hero-art {
+  right:-16%;
+  width:44%;
+  top:9%;
+  opacity:.92;
+}
+.focus-slab-a {
+  width:58%;
+  right:4%;
+}
+.focus-slab-b {
+  width:27%;
+  right:0;
+}
+.focus-cross {
+  right:62%;
+}
+@media (max-width: 980px) {
+  .focus-hero-copy { width:min(650px,68vw); }
+  .focus-hero-art { right:-24%; width:50%; opacity:.68; }
+}
+@media (max-width: 760px) {
+  .focus-hero-copy { width:100%; }
+  .focus-hero-art { right:-46%; width:78%; opacity:.24; }
+}
