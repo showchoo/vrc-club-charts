@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261005-36" />
+  <link rel="stylesheet" href="styles.css?v=20261006-37" />
 </head>
 <body class="reviewer-page">
   <div class="noise"></div>
@@ -92,9 +92,75 @@
       <div class="reviewer-tags">
         <span>CLUBBER</span><span>DJ</span><span>VJ</span><span>WORLD CREATOR</span><span>EVENT STAFF</span>
       </div>
-      <div class="reviewer-actions">
-        <a class="primary-button" href="https://github.com/showchoo/vrc-club-charts/issues/new?template=reviewer_application.yml" target="_blank" rel="noreferrer">APPLY AS REVIEWER ↗</a>
-        <a class="secondary-button" href="https://github.com/showchoo/vrc-club-charts/issues/new?template=review_submission.yml" target="_blank" rel="noreferrer">SUBMIT A REVIEW ↗</a>
+      <div class="reviewer-apply-card" id="apply">
+        <div class="reviewer-apply-head">
+          <div>
+            <p class="kicker">APPLY</p>
+            <h3>Reviewerに応募する</h3>
+          </div>
+          <span>約2分</span>
+        </div>
+
+        <form class="reviewer-apply-form" id="reviewerApplyForm">
+          <div class="reviewer-form-grid">
+            <label>
+              <span>VRChat表示名</span>
+              <input name="vrchat_name" maxlength="80" autocomplete="nickname" required />
+            </label>
+            <label>
+              <span>連絡先</span>
+              <input name="contact" maxlength="160" placeholder="Discord / X / Email など" required />
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>経験 <small>複数選択可</small></legend>
+            <div class="reviewer-chip-options">
+              <label><input type="checkbox" name="experience" value="clubber" /><span>CLUBBER</span></label>
+              <label><input type="checkbox" name="experience" value="dj" /><span>DJ</span></label>
+              <label><input type="checkbox" name="experience" value="vj-lighting" /><span>VJ / LIGHTING</span></label>
+              <label><input type="checkbox" name="experience" value="world-creator" /><span>WORLD CREATOR</span></label>
+              <label><input type="checkbox" name="experience" value="event-staff-organizer" /><span>EVENT STAFF</span></label>
+              <label><input type="checkbox" name="experience" value="other" /><span>OTHER</span></label>
+            </div>
+          </fieldset>
+
+          <label>
+            <span>VRChat nightlifeの経験</span>
+            <textarea name="background" minlength="10" maxlength="1200" rows="4" placeholder="よく行くClub、参加イベント、DJ/VJ/制作経験などを簡潔に。" required></textarea>
+          </label>
+
+          <div class="reviewer-form-grid">
+            <label>
+              <span>関係するWorld / Group <small>任意</small></span>
+              <input name="affiliations" maxlength="800" />
+            </label>
+            <label>
+              <span>レビューできる頻度 <small>任意</small></span>
+              <input name="availability" maxlength="200" placeholder="例: 月2〜3 Worlds" />
+            </label>
+          </div>
+
+          <div class="reviewer-principles">
+            <label><input type="checkbox" name="principle_visit" required /><span>実際にWorldへ入ってから採点します。</span></label>
+            <label><input type="checkbox" name="principle_conflict" required /><span>制作者・スタッフ等の利害関係を申告します。</span></label>
+            <label><input type="checkbox" name="principle_privacy" required /><span>申請情報がReviewer審査のため非公開で保存されることに同意します。</span></label>
+          </div>
+
+          <div class="reviewer-honeypot" aria-hidden="true">
+            <label>Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="reviewer-submit-row">
+            <button class="primary-button reviewer-submit" type="submit">APPLY AS REVIEWER →</button>
+            <p>申請内容は公開されません。<a href="privacy.html">Privacy</a></p>
+          </div>
+          <div class="reviewer-form-status" id="reviewerFormStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="reviewer-actions reviewer-actions-secondary">
+        <a class="secondary-button" href="https://github.com/showchoo/vrc-club-charts/issues/new?template=review_submission.yml" target="_blank" rel="noreferrer">APPROVED REVIEWER: SUBMIT A REVIEW ↗</a>
       </div>
       <p class="reviewer-action-note">レビュー投稿は承認済みReviewerのみ有効です。1 Reviewer × 1 Worldにつき最新の公開レビュー1件だけが集計されます。</p>
     </section>
@@ -106,5 +172,83 @@
     <span>VRC CLUB CHARTS / PUBLIC BETA</span>
     <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="about.html">About</a></span>
   </footer>
+  <script>
+    (() => {
+      const form = document.getElementById('reviewerApplyForm');
+      const status = document.getElementById('reviewerFormStatus');
+      if (!form || !status) return;
+
+      const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/reviewer_applications';
+      const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
+      const loadedAt = Date.now();
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.dataset.state = type || '';
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submit = form.querySelector('button[type="submit"]');
+        const data = new FormData(form);
+
+        if (data.get('website')) return;
+        if (Date.now() - loadedAt < 1500) {
+          setStatus('少し待ってからもう一度送信してください。', 'error');
+          return;
+        }
+
+        const experience = [...form.querySelectorAll('input[name="experience"]:checked')].map(el => el.value);
+        if (!experience.length) {
+          setStatus('経験を1つ以上選択してください。', 'error');
+          return;
+        }
+
+        const payload = {
+          vrchat_name: String(data.get('vrchat_name') || '').trim(),
+          contact: String(data.get('contact') || '').trim(),
+          experience,
+          background: String(data.get('background') || '').trim(),
+          affiliations: String(data.get('affiliations') || '').trim() || null,
+          availability: String(data.get('availability') || '').trim() || null
+        };
+
+        submit.disabled = true;
+        setStatus('送信中…', 'loading');
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'apikey': apiKey,
+              'Authorization': 'Bearer ' + apiKey,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            let detail = '';
+            try {
+              const error = await response.json();
+              detail = error.code || error.message || '';
+            } catch (_) {}
+            if (response.status === 409 || detail === '23505') {
+              throw new Error('このVRChat表示名では、すでに審査中の申請があります。');
+            }
+            throw new Error('送信できませんでした。時間を置いてもう一度お試しください。');
+          }
+
+          form.reset();
+          setStatus('申請を受け付けました。審査後、記入した連絡先へ案内します。', 'success');
+        } catch (error) {
+          setStatus(error instanceof Error ? error.message : '送信できませんでした。', 'error');
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
