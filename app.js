@@ -9,7 +9,7 @@ const copy = {
     trendCopy:'前週からのVisits増加とFavorites増加を中心に算出。古い定番だけが上位を独占しないよう、伸びを重視します。',
     craftTitle:'Craftsmanship 45%', craftCopy:'Visual / Lighting / Sound / Spatial / Interaction / Originality / Optimizationを編集部評価。順位の購入は不可。',
     updateTitle:'Weekly refresh', updateCopy:'公開ワールドIDを週1回スナップショット化し、差分だけを静的JSONへ反映。閲覧時にVRChat APIを呼ばない設計です。',
-    pitchTitle:'クラブを登録する。', pitchCopy:'Creator submission は公開ベータ後に受付予定です。ランキング順位そのものを販売することはありません。', submitSoon:'ワールドを登録 ↗'
+    pitchTitle:'クラブを登録する。', pitchCopy:'公開ワールドの推薦を受け付けています。掲載・編集評価・ランキング順位の保証はありません。', submitSoon:'ワールドを登録 ↗'
   },
   en: {
     weekly: 'WEEKLY VR NIGHTLIFE INDEX',
@@ -19,7 +19,7 @@ const copy = {
     trendCopy:'Weighted from weekly visit growth and favorite growth, so old classics do not automatically dominate the chart.',
     craftTitle:'Craftsmanship 45%', craftCopy:'Editorial scoring across Visual, Lighting, Sound, Spatial, Interaction, Originality and Optimization. Rankings are never for sale.',
     updateTitle:'Weekly refresh', updateCopy:'Public world IDs are snapshotted weekly and compiled to static JSON. Page views never call the VRChat API.',
-    pitchTitle:'Submit a club.', pitchCopy:'Creator submissions will open after public beta. Ranking positions will never be sold.', submitSoon:'Submit a world ↗'
+    pitchTitle:'Submit a club.', pitchCopy:'Public world submissions are open. Listing, editorial scoring and ranking positions are never guaranteed.', submitSoon:'Submit a world ↗'
   }
 };
 
@@ -181,8 +181,8 @@ function render() {
     discoverySection.hidden = discovery.length === 0;
     const sortedDiscovery = sortDiscovery(discovery);
     discoveryGrid.innerHTML = sortedDiscovery.map(discoveryCard).join('');
-    const discoveryCount = document.getElementById('discoveryCount');
-    if (discoveryCount) discoveryCount.textContent = `${discovery.length} worlds`;
+    const discoveryVisibleCount = document.getElementById('discoveryVisibleCount');
+    if (discoveryVisibleCount) discoveryVisibleCount.textContent = `${discovery.length} worlds`;
   }
 }
 
@@ -246,6 +246,17 @@ async function init() {
     document.getElementById('dataStatus').textContent = state.data.status === 'live' ? 'LIVE DATA' : 'MVP SEED';
     document.getElementById('updatedAt').textContent = state.data.updatedAt || '—';
     document.getElementById('worldCount').textContent = `${state.data.worlds.length} worlds`;
+    const availableWorlds = state.data.worlds.filter(w => w.availabilityStatus !== 'unavailable');
+    const reviewedWorlds = availableWorlds.filter(w => w.editorialStatus !== 'unreviewed');
+    const discoveryWorlds = availableWorlds.filter(w => w.editorialStatus === 'unreviewed');
+    const trackedCount = document.getElementById('trackedCount');
+    const reviewedCount = document.getElementById('reviewedCount');
+    const discoveryCount = document.getElementById('discoveryCount');
+    const lastRefresh = document.getElementById('lastRefresh');
+    if (trackedCount) trackedCount.textContent = availableWorlds.length;
+    if (reviewedCount) reviewedCount.textContent = reviewedWorlds.length;
+    if (discoveryCount) discoveryCount.textContent = discoveryWorlds.length;
+    if (lastRefresh) lastRefresh.textContent = state.data.updatedAt || '—';
     buildGenres(state.data.worlds);
     render();
     updateSceneCounts();
