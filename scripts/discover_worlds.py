@@ -64,15 +64,34 @@ NEGATIVE = {
 
 
 def fetch_text(url: str) -> str:
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "VRCClubCharts/0.4 (+https://showchoo.github.io/vrc-club-charts/)",
-            "Accept": "text/html,application/xhtml+xml",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=30) as response:
-        return response.read().decode("utf-8", errors="replace")
+    headers = {
+        "User-Agent": "VRCClubCharts/0.4 (+https://showchoo.github.io/vrc-club-charts/)",
+        "Accept": "text/html,application/xhtml+xml,text/plain",
+    }
+    attempts = [url]
+    if url.startswith("https://"):
+        # VRCW may block GitHub-hosted runners. Jina Reader is used only as a
+        # read-only text fallback so the source site still receives just one
+        # lightweight fetch per category per day.
+        attempts.append("https://r.jina.ai/http://" + url.removeprefix("https://"))
+
+    last_error: Exception | None = None
+    for candidate_url in attempts:
+        try:
+            req = urllib.request.Request(candidate_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=45) as response:
+                text = response.read().decode("utf-8", errors="replace")
+                if "wrld_" in text:
+                    if candidate_url != url:
+                        print(f"INFO: using text fallback for {url}")
+                    return text
+        except Exception as exc:
+            last_error = exc
+            print(f"WARN: fetch failed {candidate_url}: {exc}")
+
+    if last_error:
+        raise last_error
+    raise RuntimeError(f"no usable response for {url}")
 
 
 def public_rest(path: str) -> list[dict]:
@@ -100,7 +119,9 @@ def visible_lines(raw_html: str) -> list[str]:
     cleaned = html.unescape(cleaned)
     lines = []
     for part in cleaned.splitlines():
-        line = re.sub(r"\s+", " ", part).strip()
+        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", part)
+        line = re.sub(r"^#{1,6}\s*", "", line)
+        line = re.sub(r"\s+", " ", line).strip()
         if line:
             lines.append(line)
     return lines
