@@ -7,7 +7,7 @@
   <meta name="description" content="VRC Club Chartsの目的、ランキング算出方法、編集方針について。" />
   <meta name="theme-color" content="#0d171c" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261005-2" />
+  <link rel="stylesheet" href="styles.css?v=20261005-8" />
 </head>
 <body>
   <div class="noise"></div>
@@ -20,7 +20,7 @@
   </div>
   <header class="site-header">
     <a class="brand" href="index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
-    <nav class="nav"><a class="nav-link" href="index.html">Charts</a><a class="nav-link active" href="about.html">About</a><a class="nav-link" href="privacy.html">Privacy</a></nav>
+    <nav class="nav"><a class="nav-link" href="index.html">Charts</a><a class="nav-link" href="worlds/">Worlds</a><a class="nav-link active" href="about.html">About</a><a class="nav-link" href="privacy.html">Privacy</a></nav>
   </header>
   <main class="shell prose-page">
     <p class="kicker">ABOUT</p>
@@ -31,6 +31,12 @@
       <h2>ランキングの考え方</h2>
       <p><strong>Overall</strong> は、ライブデータが2週分揃った後、週間Momentum 55%とCraftsmanship 45%で計算します。Momentumは7日間のVisits増加とFavorites増加を正規化して算出します。</p>
       <p><strong>Craftsmanship</strong> はVisual 20、Lighting / VJ 20、Sound 15、Spatial design 15、Interaction 10、VR originality 10、Optimization 10の100点満点です。公開ベータ時点の編集スコアは暫定値で、実地確認後に更新します。</p>
+    </section>
+
+    <section class="prose-section">
+      <h2>Discovery</h2>
+      <p>公開情報でWorld IDとクラブ／DJ／音楽用途を確認できたワールドは、まず<strong>Discovery / 未レビュー</strong>として掲載します。未レビューの段階ではCraftsmanship点を付けず、編集ランキングには混ぜません。</p>
+      <p>週次データが揃えば、未レビューでも客観データだけを使うTrendingには参加できます。個別ワールドページは検索・共有の入口として自動生成します。</p>
     </section>
 
     <section class="prose-section">
@@ -46,6 +52,6 @@
 
     <p class="disclaimer">VRC Club Charts is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.</p>
   </main>
-  <footer class="site-footer shell"><span>VRC CLUB CHARTS / PUBLIC BETA</span><span class="footer-links"><a href="index.html">Charts</a><a href="privacy.html">Privacy</a></span></footer>
+  <footer class="site-footer shell"><span>VRC CLUB CHARTS / PUBLIC BETA</span><span class="footer-links"><a href="index.html">Charts</a><a href="worlds/">Worlds</a><a href="privacy.html">Privacy</a></span></footer>
 </body>
 </html>
