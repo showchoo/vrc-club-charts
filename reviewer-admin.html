@@ -44,7 +44,10 @@
     .credential-row{display:grid;grid-template-columns:130px 1fr auto;gap:8px;align-items:center;margin-top:6px}
     .credential-row span{color:#7b959e;font-size:9px}.credential-row code{overflow-wrap:anywhere;color:#d9fff0;font-size:10px}.credential-row button{padding:7px 9px;border-radius:8px;background:rgba(255,255,255,.08);color:#d7edf2}
     .danger-note{margin-top:8px;color:#9aaeb5;font-size:9px;line-height:1.5}
-    .hidden{display:none!important}
+    .admin-queue-divider{height:1px;margin:26px 0;background:linear-gradient(90deg,rgba(63,217,255,.18),transparent)}
+.review-scoreline{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.review-scoreline span{padding:5px 7px;border:1px solid rgba(172,239,255,.1);border-radius:8px;color:#a8c6ce;font-size:9px}
+.hidden{display:none!important}
     @media(max-width:700px){.admin-top,.admin-card-head{flex-direction:column}.admin-lock-row,.admin-actions{flex-direction:column}.admin-data{grid-template-columns:1fr}.credential-row{grid-template-columns:1fr}.admin-toolbar{align-items:flex-start;flex-direction:column}}
   </style>
 </head>
@@ -71,13 +74,20 @@
 
     <section class="admin-panel hidden" id="adminPanel">
       <div class="admin-toolbar">
-        <strong>PENDING APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
+        <strong>REVIEWER APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
         <div>
           <button class="secondary-button" id="refreshButton" type="button">REFRESH</button>
           <button class="secondary-button" id="lockButton" type="button">LOCK</button>
         </div>
       </div>
       <div class="admin-list" id="applicationList"></div>
+
+      <div class="admin-queue-divider"></div>
+
+      <div class="admin-toolbar">
+        <strong>PENDING REVIEWS <span class="admin-count" id="pendingReviewCount">0</span></strong>
+      </div>
+      <div class="admin-list" id="reviewList"></div>
     </section>
   </main>
 
@@ -94,6 +104,8 @@
       const lockButton = document.getElementById('lockButton');
       const list = document.getElementById('applicationList');
       const pendingCount = document.getElementById('pendingCount');
+      const reviewList = document.getElementById('reviewList');
+      const pendingReviewCount = document.getElementById('pendingReviewCount');
       const loginStatus = document.getElementById('loginStatus');
 
       const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -208,12 +220,71 @@
         }
       }
 
+
+      function renderReviews(reviews){
+        pendingReviewCount.textContent=reviews.length;
+        reviewList.innerHTML='';
+        if(!reviews.length){
+          reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
+          return;
+        }
+        for(const review of reviews){
+          const total=['visual','lighting','sound','spatial','interaction','originality','optimization']
+            .reduce((sum,key)=>sum+Number(review[key]||0),0);
+          const card=document.createElement('article');
+          card.className='admin-card';
+          card.innerHTML=`
+            <div class="admin-card-head">
+              <div><h2>${esc(review.reviewer_id)}</h2><div class="admin-meta"><span>${esc(review.world_id)}</span><span>${review.conflict ? 'CONFLICT' : 'INDEPENDENT'}</span><span>TOTAL ${total}/100</span></div></div>
+              <time>${esc(fmt(review.created_at))}</time>
+            </div>
+            <div class="review-scoreline">
+              <span>Visual ${review.visual}/20</span><span>Lighting ${review.lighting}/20</span><span>Sound ${review.sound}/15</span>
+              <span>Spatial ${review.spatial}/15</span><span>Interaction ${review.interaction}/10</span>
+              <span>Originality ${review.originality}/10</span><span>Optimization ${review.optimization}/10</span>
+            </div>
+            <div class="admin-data">
+              <div><b>REVIEW DATE</b><p>${esc(review.reviewed_at)}</p></div>
+              <div><b>COMMENT</b><p>${esc(review.comment)}</p></div>
+            </div>
+            <div class="admin-actions">
+              <button class="approve" type="button">APPROVE REVIEW</button>
+              <button class="reject" type="button">REJECT</button>
+            </div>`;
+          const approve=card.querySelector('.approve');
+          const reject=card.querySelector('.reject');
+          approve.addEventListener('click',async()=>{
+            if(!confirm('このレビューを公開しますか？')) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              const data=await callAdmin('approve_review',review.id);
+              card.remove();
+              pendingReviewCount.textContent=Math.max(0,Number(pendingReviewCount.textContent)-1);
+              if(!reviewList.querySelector('.admin-card')) reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
+              alert('公開しました: '+data.reviewId);
+            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
+          });
+          reject.addEventListener('click',async()=>{
+            if(!confirm('このレビューをRejectしますか？')) return;
+            approve.disabled=reject.disabled=true;
+            try{
+              await callAdmin('reject_review',review.id);
+              card.remove();
+              pendingReviewCount.textContent=Math.max(0,Number(pendingReviewCount.textContent)-1);
+              if(!reviewList.querySelector('.admin-card')) reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
+            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
+          });
+          reviewList.appendChild(card);
+        }
+      }
+
       async function load(){
         setLoginStatus('確認中…');
         try{
-          const data=await callAdmin('list');
+          const [data,reviews]=await Promise.all([callAdmin('list'),callAdmin('list_reviews')]);
           showUnlocked();
           render(data.applications || []);
+          renderReviews(reviews.reviews || []);
           setLoginStatus('');
         }catch(err){
           showLocked();
