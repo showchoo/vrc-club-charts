@@ -63,7 +63,7 @@ def main():
         dv = None if not (now and old) else max(0, (now.get('visits') or 0) - (old.get('visits') or 0))
         df = None if not (now and old) else max(0, (now.get('favorites') or 0) - (old.get('favorites') or 0))
         editorial_status = seed.get('editorialStatus') or ('provisional' if seed.get('editorial') else 'unreviewed')
-        craft = craft_score(seed.get('editorial', {})) if editorial_status != 'unreviewed' else None
+        craft = craft_score(seed.get('editorial', {})) if editorial_status == 'reviewed' else None
         rows.append({
             'id': wid,
             'name': now.get('name') or seed.get('name'),
