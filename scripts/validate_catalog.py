@@ -75,6 +75,9 @@ def main() -> int:
         if not isinstance(genres, list) or not all(isinstance(g, str) and g.strip() for g in genres):
             fail(f"{wid}: genres must be a non-empty-string array")
             errors += 1
+        if not isinstance(w.get("chartEligible"), bool):
+            fail(f"{wid}: chartEligible must be boolean")
+            errors += 1
 
     ranked_ids = [w.get("id") for w in ranking.get("worlds", [])]
     unknown = sorted(set(ranked_ids) - seen)
