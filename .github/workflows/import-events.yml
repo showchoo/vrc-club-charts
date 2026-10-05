@@ -1,0 +1,45 @@
+name: Import public music events
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/import_event_feed.py"
+      - ".github/workflows/import-events.yml"
+  schedule:
+    # Daily at 07:15 JST, after the upstream calendar's scheduled refresh.
+    - cron: "15 22 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-public-event-feed
+  cancel-in-progress: true
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Import curated music and nightlife candidates
+        run: python scripts/import_event_feed.py
+
+      - name: Validate catalog
+        run: python scripts/validate_catalog.py
+
+      - name: Commit changed feed
+        run: |
+          git config user.name "vrc-club-charts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/events-auto.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: refresh public music event feed"
+          git push
