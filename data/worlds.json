@@ -1137,7 +1137,7 @@
   {
     "id": "wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
     "name": "CTRL Room Club",
-    "author": "—",
+    "author": "CompuGeniusCode",
     "genres": [
       "CLUB",
       "DJ",
@@ -1151,7 +1151,7 @@
   {
     "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
     "name": "Midnight Street Club",
-    "author": "—",
+    "author": "nnnnnnなす",
     "genres": [
       "CLUB",
       "DJ",
@@ -1165,7 +1165,7 @@
   {
     "id": "wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
     "name": "particle abyss 2.0",
-    "author": "—",
+    "author": "Cyberƴ",
     "genres": [
       "MUSIC",
       "RAVE",
@@ -1179,7 +1179,7 @@
   {
     "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
     "name": "After Dark Night Club",
-    "author": "—",
+    "author": "₥₳J₳․₴Ø₥₥ɆR",
     "genres": [
       "MUSIC",
       "DANCE",
@@ -1216,20 +1216,6 @@
     "editorialStatus": "unreviewed",
     "chartEligible": true,
     "source": "https://www.vrcw.net/world/detail/wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c"
-  },
-  {
-    "id": "wrld_50df82db-1b78-48b7-a8d4-892cbb1925e3",
-    "name": "Neo Party Colosseum",
-    "author": "—",
-    "genres": [
-      "MUSIC",
-      "DJ",
-      "AUDIOLINK",
-      "EVENT"
-    ],
-    "editorialStatus": "unreviewed",
-    "chartEligible": true,
-    "source": "https://www.vrcw.net/world/detail/wrld_50df82db-1b78-48b7-a8d4-892cbb1925e3"
   },
   {
     "id": "wrld_90ed9a1e-e0d3-44bb-8379-013797be1f8e",
