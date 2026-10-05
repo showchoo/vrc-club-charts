@@ -282,7 +282,7 @@ def event_page(event: dict, djs: list[dict]) -> str:
     <a class="world-back" href="../events.html">← Event Calendar</a>
     <section class="world-detail-hero event-detail-hero">
       <div class="world-detail-copy">
-        <p class="kicker">VRCHAT EVENT</p>
+        <p class="kicker">{esc("PUBLIC FEED / VRCHAT EVENT" if event.get("autoImported") else "CURATED / VRCHAT EVENT")}</p>
         <h1>{esc(name)}</h1>
         <p class="world-detail-author">{esc(organizer)}</p>
         <div class="tags">{tags}</div>
