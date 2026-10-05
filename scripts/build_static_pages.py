@@ -281,6 +281,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     score_html = fmt_num(score) if score is not None else "—"
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
+    source_url = w.get("source")
 
     now = dt.datetime.now(dt.timezone.utc)
     related_events = []
@@ -333,6 +334,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
         <div class="tags">{tags}</div>
         <div class="world-detail-actions">
           <a class="primary-button" href="{esc(vrchat)}" target="_blank" rel="noreferrer">OPEN IN VRCHAT ↗</a>
+          {f'<a class="secondary-button" href="{esc(source_url)}" target="_blank" rel="noreferrer">PUBLIC SOURCE ↗</a>' if source_url else ""}
         </div>
       </div>
       {image}
