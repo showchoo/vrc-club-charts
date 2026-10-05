@@ -1,0 +1,47 @@
+name: Triage submissions
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label submission type
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = context.payload.issue.title || "";
+            const defs = [
+              { prefix: "[World]", name: "world-submission", color: "17c6ef", description: "VRChat world listing submission" },
+              { prefix: "[Event]", name: "event-submission", color: "8ceaff", description: "VRChat event calendar submission" },
+              { prefix: "[DJ]", name: "dj-submission", color: "d8ff3e", description: "VRChat DJ directory submission" },
+            ];
+            const match = defs.find(d => title.startsWith(d.prefix));
+            if (!match) return;
+            try {
+              await github.rest.issues.getLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: match.name,
+              });
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: match.name,
+                color: match.color,
+                description: match.description,
+              });
+            }
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [match.name],
+            });
