@@ -9,7 +9,7 @@ const copy = {
     trendCopy:'前週からのVisits増加とFavorites増加を中心に算出。古い定番だけが上位を独占しないよう、伸びを重視します。',
     craftTitle:'Craftsmanship 45%', craftCopy:'Visual / Lighting / Sound / Spatial / Interaction / Originality / Optimizationを編集部評価。順位の購入は不可。',
     updateTitle:'Weekly refresh', updateCopy:'公開ワールドIDを週1回スナップショット化し、差分だけを静的JSONへ反映。閲覧時にVRChat APIを呼ばない設計です。',
-    pitchTitle:'クラブを登録する。', pitchCopy:'Creator submission は公開ベータ後に受付予定です。ランキング順位そのものを販売することはありません。', submitSoon:'登録受付は準備中'
+    pitchTitle:'クラブを登録する。', pitchCopy:'Creator submission は公開ベータ後に受付予定です。ランキング順位そのものを販売することはありません。', submitSoon:'ワールドを登録 ↗'
   },
   en: {
     weekly: 'WEEKLY VR NIGHTLIFE INDEX',
@@ -19,7 +19,7 @@ const copy = {
     trendCopy:'Weighted from weekly visit growth and favorite growth, so old classics do not automatically dominate the chart.',
     craftTitle:'Craftsmanship 45%', craftCopy:'Editorial scoring across Visual, Lighting, Sound, Spatial, Interaction, Originality and Optimization. Rankings are never for sale.',
     updateTitle:'Weekly refresh', updateCopy:'Public world IDs are snapshotted weekly and compiled to static JSON. Page views never call the VRChat API.',
-    pitchTitle:'Submit a club.', pitchCopy:'Creator submissions will open after public beta. Ranking positions will never be sold.', submitSoon:'Submission coming soon'
+    pitchTitle:'Submit a club.', pitchCopy:'Creator submissions will open after public beta. Ranking positions will never be sold.', submitSoon:'Submit a world ↗'
   }
 };
 
