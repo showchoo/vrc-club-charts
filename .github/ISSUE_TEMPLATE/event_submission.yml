@@ -1,0 +1,77 @@
+name: Submit a VRChat event
+description: Suggest a public VRChat club / DJ / music event for the VRC Club Charts calendar
+title: "[Event] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Submit a public VRChat club, DJ, rave or music event. Event listings are separate from world ranking scores.
+
+  - type: input
+    id: event_name
+    attributes:
+      label: Event name
+    validations:
+      required: true
+
+  - type: input
+    id: start
+    attributes:
+      label: Start date and time
+      description: Include timezone, e.g. 2026-10-31 22:00 JST
+    validations:
+      required: true
+
+  - type: input
+    id: world_id
+    attributes:
+      label: VRChat World ID
+      placeholder: wrld_...
+    validations:
+      required: true
+
+  - type: input
+    id: world_name
+    attributes:
+      label: World name
+    validations:
+      required: true
+
+  - type: input
+    id: organizer
+    attributes:
+      label: Organizer / group
+    validations:
+      required: true
+
+  - type: input
+    id: public_link
+    attributes:
+      label: Public event link
+      description: X post, group page, event page, Discord invite page, etc.
+    validations:
+      required: true
+
+  - type: input
+    id: genres
+    attributes:
+      label: Genres / style
+      placeholder: Techno, House, Trance, Bass...
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Short public description, age/access notes, Quest support, etc.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I understand that an event listing does not affect world ranking scores.
+          required: true
