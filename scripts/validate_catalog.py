@@ -318,6 +318,15 @@ def main() -> int:
             if status in {"provisional", "ranked"} and not isinstance(score, (int, float)):
                 fail(f"review score #{i}: scored status requires numeric score")
                 errors += 1
+            if status == "collecting" and isinstance(count, int) and count >= 3:
+                fail(f"review score #{i}: collecting status requires fewer than 3 reviews")
+                errors += 1
+            if status == "provisional" and isinstance(count, int) and not 3 <= count <= 4:
+                fail(f"review score #{i}: provisional status requires 3 or 4 reviews")
+                errors += 1
+            if status == "ranked" and isinstance(count, int) and count < 5:
+                fail(f"review score #{i}: ranked status requires at least 5 reviews")
+                errors += 1
 
     if errors:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)
