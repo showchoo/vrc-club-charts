@@ -4,67 +4,77 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — VRC Club Charts</title>
-  <meta name="description" content="VRC Club Chartsの目的、ランキング算出方法、編集方針について。" />
+  <meta name="description" content="VRC Club Chartsの目的、編集方針、Craftsmanship Rankingへのロードマップ。" />
   <meta name="theme-color" content="#0d171c" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://showchoo.github.io/vrc-club-charts/about.html" />
+  <meta property="og:title" content="About — VRC Club Charts" />
+  <meta property="og:description" content="From VRChat nightlife directory to reviewer-based craftsmanship ranking." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261005-23" />
-  <meta property="og:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />\n  <meta property="og:image:width" content="1200" />\n  <meta property="og:image:height" content="630" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:image" content="https://showchoo.github.io/vrc-club-charts/og-image.png" />\n</head>
+  <link rel="stylesheet" href="styles.css?v=20261005-30" />
+</head>
 <body>
   <div class="noise"></div>
-  <div class="bg-objects" aria-hidden="true">
-    <div class="bg-object orb orb-a"></div>
-    <div class="bg-object orb orb-b"></div>
-    <div class="bg-object glass glass-a"></div>
-    <div class="bg-object glass glass-b"></div>
-    <div class="bg-object ring ring-a"></div>
-  </div>
-  <header class="site-header">
+  <header class="site-header focus-header">
     <a class="brand" href="index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
-    <nav class="nav"><a class="nav-link" href="index.html">Charts</a><a class="nav-link" href="worlds/">Worlds</a><a class="nav-link" href="events.html">Events</a><a class="nav-link" href="djs.html">DJs</a><a class="nav-link active" href="about.html">About</a><a class="nav-link" href="privacy.html">Privacy</a></nav>
+    <nav class="nav focus-nav">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="worlds/">Worlds</a>
+      <a class="nav-link" href="events.html">Events</a>
+      <a class="nav-link" href="reviewer.html">Reviewer</a>
+      <a class="nav-link active" href="about.html">About</a>
+    </nav>
   </header>
+
   <main class="shell prose-page">
     <p class="kicker">ABOUT</p>
-    <h1>VRChatのクラブを、<br><em>「いま」と「作り込み」で探す。</em></h1>
-    <p class="lead">VRC Club Chartsは、VRChatのクラブ／DJ／音楽ワールドに特化した独立ランキングです。累計Visitsだけでは埋もれてしまう新しいクラブや、空間・照明・音響の完成度が高いワールドを見つけやすくすることを目的としています。</p>
+    <h1>最終目的は、<br><em>作りこみランキング。</em></h1>
+    <p class="lead">VRC Club Chartsは、VRChatのクラブ／DJ／音楽シーンを整理しながら、最終的に「最も作り込まれたクラブはどこか」を複数レビュアーの実地評価で比較できるサイトを目指しています。</p>
 
     <section class="prose-section">
-      <h2>ランキングの考え方</h2>
-      <p><strong>Overall</strong> は、ライブデータが2週分揃った後、週間Momentum 55%とCraftsmanship 45%で計算します。Momentumは7日間のVisits増加とFavorites増加を正規化して算出します。</p>
-      <p><strong>Craftsmanship</strong> はVisual 20、Lighting / VJ 20、Sound 15、Spatial design 15、Interaction 10、VR originality 10、Optimization 10の100点満点です。公開ベータ時点の編集スコアは暫定値で、実地確認後に更新します。</p>
+      <h2>いまは、情報サイトの段階</h2>
+      <p>ランキングの信頼性を作るには、まず評価対象を知る必要があります。現在は100ワールドのディレクトリ、イベントカレンダー、DJ / Artist Directoryを整備し、世界中のVRChatナイトライフ情報を集めています。</p>
+      <p>VisitsやFavoritesなどのデータは参考情報として保存しますが、それだけで「作り込み」を決めることはありません。</p>
     </section>
 
     <section class="prose-section">
-      <h2>Discovery</h2>
-      <p>公開情報でWorld IDとクラブ／DJ／音楽用途を確認できたワールドは、まず<strong>Discovery / 未レビュー</strong>として掲載します。未レビューの段階ではCraftsmanship点を付けず、編集ランキングには混ぜません。</p>
-      <p>週次データが揃えば、未レビューでも客観データだけを使うTrendingには参加できます。個別ワールドページは検索・共有の入口として自動生成します。</p>
+      <h2>次に、Reviewer Panel</h2>
+      <p>正式なCraftsmanship Rankingでは、実際にワールドへ入った複数のレビュアーが、Visual / Lighting & VJ / Sound / Spatial / Interaction / VR Originality / Optimizationの共通基準で評価します。</p>
+      <p>1人の主観をランキングにせず、レビュー人数と信頼度も公開します。現在サイトに残っている初期の仮スコアは、正式なパネルランキングとしては扱いません。</p>
+      <p><a href="reviewer.html">Reviewer制度の設計を見る ↗</a></p>
     </section>
 
     <section class="prose-section">
-      <h2>Events</h2>
-      <p>ワールドの人気と、そこで開催されるイベントの人気は別物として扱います。Group+や期間限定会場もあるため、イベントはWorldランキングとは独立したカレンダーとして掲載します。</p>
-      <p>イベント掲載はランキング点に影響しません。公開情報を確認できるイベントを掲載し、主催者からの投稿もGitHub Issue Formで受け付けます。</p>
-      <p><strong>自動イベントフィード</strong>では、公開されているVRChat Event Calendarの正規化済みJSONから、DJ / Club / Rave / Live / Festivalなど音楽・ナイトライフ用途の根拠があるイベントだけを決定論的に抽出します。自動取得分は <strong>PUBLIC FEED</strong> と表示し、手動確認した <strong>CURATED</strong> と区別します。自動掲載は編集部による推薦や品質保証を意味しません。</p>
+      <h2>Craftsmanship Ranking</h2>
+      <p>十分なレビューが集まったワールドから暫定パネルスコアへ移行し、最終的にはレビュアー数・評価のばらつき・更新時期を含めた信頼できるランキングを主役にします。</p>
+      <p>人気投票にはしません。制作者本人や直接の関係者による自作品評価は集計から除外し、スポンサーや広告費も評価点へ影響させません。</p>
     </section>
 
     <section class="prose-section">
-      <h2>DJs</h2>
-      <p>DJ Directoryはランキングではありません。ジャンル、所属コミュニティ、出演イベントをつなぐための索引です。初期データは公開されたクルー情報から作成し、今後は複数コミュニティへ広げます。</p>
-      <p>Worldランキングの順位やイベント掲載数がDJプロフィールの優劣を意味することはありません。</p>
+      <h2>Worlds / Events / DJs</h2>
+      <p><strong>Worlds</strong> は評価対象を発見するためのディレクトリです。<strong>Events</strong> は今どこで何が起きているかを知る入口、<strong>DJs</strong> は出演者とシーンをつなぐ索引です。この3つは将来のCraftsmanship Rankingを支える情報基盤として残します。</p>
+    </section>
+
+    <section class="prose-section">
+      <h2>イベント情報</h2>
+      <p>手動確認したイベントはCURATED、公開イベントフィードから決定論的に抽出したイベントはPUBLIC FEEDとして区別します。自動掲載は編集部による推薦や品質保証を意味しません。</p>
     </section>
 
     <section class="prose-section">
       <h2>編集方針</h2>
-      <p>スポンサー枠や広告を将来導入しても、ランキング順位そのものは販売しません。有料掲載を行う場合はSponsored / Adなどと明示し、編集ランキングとは分離します。</p>
-      <p>削除済み・非公開化されたワールド、クラブ用途から大きく外れたワールド、データ品質に問題があるワールドは掲載対象から外すことがあります。</p>
-    </section>
-
-    <section class="prose-section">
-      <h2>データ更新</h2>
-      <p>公開World IDを定期スナップショット化し、週間差分を静的JSONへ反映します。通常のページ閲覧時にはVRChat APIへ問い合わせません。</p>
+      <p>ランキング順位そのものは販売しません。有料掲載やスポンサー枠を導入する場合もSponsored / Adと明示し、Reviewer評価とは分離します。</p>
+      <p>削除済み・非公開化されたワールド、用途が大きく変わったワールド、データ品質に問題がある項目は掲載対象から外すことがあります。</p>
     </section>
 
     <p class="disclaimer">VRC Club Charts is an independent project and is not affiliated with VRChat Inc. “VRChat” is a trademark of VRChat Inc.</p>
   </main>
-  <footer class="site-footer shell"><span>VRC CLUB CHARTS / PUBLIC BETA</span><span class="footer-links"><a href="index.html">Charts</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="privacy.html">Privacy</a></span></footer>
+
+  <footer class="site-footer shell">
+    <span>VRC CLUB CHARTS / PUBLIC BETA</span>
+    <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="reviewer.html">Reviewer</a><a href="privacy.html">Privacy</a></span>
+  </footer>
 </body>
 </html>
