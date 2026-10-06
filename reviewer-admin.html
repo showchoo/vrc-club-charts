@@ -65,6 +65,18 @@
 .analytics-self-visit-status[data-state="error"]{color:#ff9e9e}
 @media(max-width:800px){.analytics-metrics{grid-template-columns:1fr 1fr}.analytics-columns{grid-template-columns:1fr}}
 
+/* Anonymous unique-browser summary (no fingerprinting, limited retention). */
+.analytics-unique-block{margin:17px 0 18px;padding:16px 18px;border-radius:14px;border:1px solid rgba(91,211,211,.2);background:linear-gradient(120deg,rgba(31,79,83,.16),rgba(11,33,44,.25))}
+.analytics-unique-heading{font-size:12px;letter-spacing:.12em;font-weight:800;color:#9acfd3;margin:0 0 12px}
+.analytics-unique-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.analytics-unique-card{min-width:0;padding:12px;border-radius:10px;background:rgba(0,0,0,.19);border:1px solid rgba(173,230,235,.09)}
+.analytics-unique-card b{display:block;font-size:11px;letter-spacing:.09em;color:#95b6bf}
+.analytics-unique-card strong{display:block;font-size:clamp(24px,3vw,34px);line-height:1.35;color:#91e8d9;margin:3px 0;font-variant-numeric:tabular-nums}
+.analytics-unique-card span{font-size:11px;color:#b5cbd0}
+.analytics-unique-note{font-size:12px;line-height:1.65;color:#adc3c9;margin:12px 0 0}
+@media(max-width:620px){.analytics-unique-metrics{grid-template-columns:1fr 1fr 1fr;gap:6px}.analytics-unique-block{padding:12px}.analytics-unique-card{padding:10px}}
+
+
 /* Admin readability pass */
 body.admin-page{font-size:15px}
 .admin-page .kicker{font-size:11px;letter-spacing:.13em}
@@ -135,7 +147,7 @@ body.admin-page{font-size:15px}
     <section class="admin-panel hidden" id="adminPanel">
       <div class="admin-toolbar">
         <strong>SITE ANALYTICS</strong>
-        <span class="admin-auto-label">NO IP / NO COOKIE / NO DEVICE ID</span>
+        <span class="admin-auto-label">NO IP / NO FINGERPRINTING</span>
       </div>
       <div class="admin-card">
         <div class="analytics-self-visit">
@@ -149,6 +161,15 @@ body.admin-page{font-size:15px}
           <div class="analytics-metric"><b>30 DAYS</b><strong id="analytics30d">0</strong><span>PAGE VIEWS</span></div>
           <div class="analytics-metric"><b>ALL TIME</b><strong id="analyticsAll">0</strong><span>PAGE VIEWS</span></div>
         </div>
+        <section class="analytics-unique-block" aria-label="推定ユニーク訪問ブラウザ数">
+          <p class="analytics-unique-heading">EST. UNIQUE BROWSERS / 推定ユニーク訪問数</p>
+          <div class="analytics-unique-metrics">
+            <div class="analytics-unique-card"><b>TODAY</b><strong id="analyticsUniqueToday">0</strong><span>推定ブラウザ数</span></div>
+            <div class="analytics-unique-card"><b>7 DAYS</b><strong id="analyticsUnique7d">0</strong><span>推定ブラウザ数</span></div>
+            <div class="analytics-unique-card"><b>30 DAYS</b><strong id="analyticsUnique30d">0</strong><span>推定ブラウザ数</span></div>
+          </div>
+          <p class="analytics-unique-note" id="analyticsUniqueNote">新機能の計測開始後のみ集計します。1人が複数の端末・ブラウザを使う場合は別々に数えます。</p>
+        </section>
         <div class="analytics-columns">
           <div class="analytics-box"><b>TOP SOURCES / REFERRERS</b><div class="analytics-list" id="analyticsSources"></div></div>
           <div class="analytics-box"><b>TOP PAGES</b><div class="analytics-list" id="analyticsPages"></div></div>
@@ -247,6 +268,10 @@ body.admin-page{font-size:15px}
       const analytics7d = document.getElementById('analytics7d');
       const analytics30d = document.getElementById('analytics30d');
       const analyticsAll = document.getElementById('analyticsAll');
+      const analyticsUniqueToday = document.getElementById('analyticsUniqueToday');
+      const analyticsUnique7d = document.getElementById('analyticsUnique7d');
+      const analyticsUnique30d = document.getElementById('analyticsUnique30d');
+      const analyticsUniqueNote = document.getElementById('analyticsUniqueNote');
       const analyticsSources = document.getElementById('analyticsSources');
       const analyticsPages = document.getElementById('analyticsPages');
       const analyticsCampaigns = document.getElementById('analyticsCampaigns');
@@ -549,6 +574,13 @@ body.admin-page{font-size:15px}
         analytics7d.textContent=Number(summary.last7||0).toLocaleString('en-US');
         analytics30d.textContent=Number(summary.last30||0).toLocaleString('en-US');
         analyticsAll.textContent=Number(summary.allTime||0).toLocaleString('en-US');
+        const unique=data?.uniqueVisitors || {};
+        analyticsUniqueToday.textContent=Number(unique.today||0).toLocaleString('en-US');
+        analyticsUnique7d.textContent=Number(unique.last7||0).toLocaleString('en-US');
+        analyticsUnique30d.textContent=Number(unique.last30||0).toLocaleString('en-US');
+        analyticsUniqueNote.textContent=unique.truncated
+          ? '推定ユニーク数の集計件数が上限に達しました。実際のブラウザ数はこれより多い可能性があります。'
+          : '2026年10月6日以降の新しい計測のみ。過去のPVから人数は復元できません。同じブラウザは期間内に1件として数え、別の端末・ブラウザや別サイトURLでは別々になります。';
 
         const renderList=(el,rows,empty)=>{
           if(!Array.isArray(rows) || !rows.length){
