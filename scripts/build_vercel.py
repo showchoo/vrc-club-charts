@@ -23,7 +23,7 @@ PUBLIC_FILES = (
 )
 DATA_FILES = (
     "weekly-ranking.json", "review-scores.json", "ai-scout.json", "events.json",
-    "djs.json", "world-candidates.json", "discovery-report.json",
+    "djs.json", "world-candidates.json", "world-candidate-ai-decisions.json", "discovery-report.json",
 )
 BUILD_STEPS = (
     "sync_worlds_from_supabase.py",

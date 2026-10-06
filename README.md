@@ -106,6 +106,40 @@ Actions **secret** to enable the server-only mirror; without it, GitHub JSON
 remains authoritative and publishing continues. Never expose the key to
 browser JavaScript or commit it to source control.
 
+## Gemini screening for automatically discovered World candidates
+
+The automatic VRCmap / directory / official-search / event collector now
+**only proposes new candidate World IDs** in `data/world-candidates.json`.
+`confidenceScore` from the collector is keyword-based **discovery priority,
+not AI confidence or a craftsmanship/visual rating**. Legacy keyword-based
+direct auto-registration is disabled in `scripts/discover_worlds.py`.
+
+The existing hourly `review-submitted-worlds.yml` job now runs
+`scripts/review_discovery_candidates.py` alongside visitor-submitted URL
+reviews, capped at six automatically discovered candidates per run.
+Both paths reuse the **same Gemini classifier and admission criteria**:
+the current official VRChat World must be public, name/creator verified,
+Gemini verdict must be `club` with confidence at least 0.90, and its
+description/tags must independently support nightclub/DJ event use.
+Auto-approved Worlds are added to `data/worlds.json` and removed from the
+pending queue; they have no invented quality ratings.
+
+If the World metadata API is blocked (e.g., HTTP 401/403), no automatic
+admission happens and the candidate remains pending. Temporary verification
+and Gemini failures are retried no sooner than six hours after the last try.
+Ambiguous and non-club predictions are **not auto-rejected**: they remain for
+human moderation in VCC Admin, which shows the model's reason separately
+from the discovery priority. Classification decisions are retained in
+`data/world-candidate-ai-decisions.json`.
+
+Manual Admin candidate approvals and rejections take precedence over AI.
+Because `world_candidate_decisions` is a **private Supabase table** (not
+anonymous-SELECT readable), a new read-only Edge Function
+`world-candidate-status` returns **only World ID and approved/rejected
+status**. Both crawler and classifier abort their automatic decisions if
+moderation status cannot be verified. The function does not expose
+admin credentials, reasons, or contact data.
+
 ## URL-only community club submissions with AI approval
 
 The homepage's [Submit](https://vrc-club-charts.vercel.app/#submit-world) section
