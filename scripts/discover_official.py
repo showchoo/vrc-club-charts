@@ -10,7 +10,10 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-from discover_vrcw import (BLOCKED_NAME, CLUB_NAME, STATE, USER_AGENT, WORLD_ID, read_json)
+try:
+    from scripts.discover_vrcw import (BLOCKED_NAME, CLUB_NAME, STATE, USER_AGENT, WORLD_ID, read_json)
+except ModuleNotFoundError:
+    from discover_vrcw import (BLOCKED_NAME, CLUB_NAME, STATE, USER_AGENT, WORLD_ID, read_json)
 
 TERMS = ("club", "nightclub", "rave", "dj", "クラブ", "ディスコ")
 API = "https://api.vrchat.cloud/api/1/worlds"
