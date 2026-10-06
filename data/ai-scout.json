@@ -1,15 +1,38 @@
 {
-  "updatedAt": "2026-10-06T08:10:17+00:00",
+  "updatedAt": "2026-10-06T12:51:30+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 93,
-    "assessed": 3,
-    "newAssessments": 3,
-    "pending": 90
+    "assessed": 7,
+    "newAssessments": 4,
+    "pending": 86
   },
   "scored": [
+    {
+      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
+      "name": "13th Floor DJ",
+      "author": "SaintHaru",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92.html",
+      "visualPotential": 75,
+      "factors": {
+        "visual": 4,
+        "lighting": 4,
+        "spatial": 4,
+        "originality": 3
+      },
+      "reasonJa": "金色の装飾とゴシック風のアーチ窓が特徴的な空間で、中央のDJブースやトラスから伸びる多数の照明ビームがクラブらしい雰囲気を演出しています。",
+      "cautionsJa": "静止画のため、実際のライティングの動的演出やサウンド、イベント時の混雑感については判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T12:51:24+00:00"
+    },
     {
       "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
       "name": "Cyberpunk City Rave",
@@ -35,6 +58,52 @@
       "assessedAt": "2026-10-06T08:10:04+00:00"
     },
     {
+      "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
+      "name": "ANIMA CANVAS",
+      "author": "PudinKiller",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "コンクリート調の構造物とスリット状の照明がミニマルで落ち着いた空間を構成しています。",
+      "cautionsJa": "サムネイル画像のみの判断であり、実際の全体的な空間デザインや素材の質感が伝わらない可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T12:51:27+00:00"
+    },
+    {
+      "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
+      "name": "AudioLink ClubSystem",
+      "author": "JJavierPV",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "赤と青のネオン調のライトや大型スピーカーが配置され、典型的なクラブの雰囲気が表現されています。",
+      "cautionsJa": "プロモーション用の文字が大きく重ねられており、実際のワールド内のレイアウトや質感を正確に把握するのは困難です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T12:51:30+00:00"
+    },
+    {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
       "name": "Neptune Night Club",
       "author": "Plutto2Times",
@@ -57,6 +126,30 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T08:10:17+00:00"
+    },
+    {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "柱や吹き抜けのある豪奢なボールルームの構造に、スポットライトや色鮮やかなフロアが配置されています。",
+      "cautionsJa": "サムネイル全体に大きな文字やロゴが重ねられており、実際の空間のディテールや動線は確認できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T12:51:21+00:00"
     },
     {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
@@ -95,47 +188,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
-      "name": "Oh's Party Ballroom",
-      "author": "emymin",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
-    },
-    {
-      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
-      "name": "13th Floor DJ",
-      "author": "SaintHaru",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92.html"
-    },
-    {
-      "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
-      "name": "ANIMA CANVAS",
-      "author": "PudinKiller",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c.html"
-    },
-    {
-      "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
-      "name": "AudioLink ClubSystem",
-      "author": "JJavierPV",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9.html"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -326,6 +378,46 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+    },
+    {
+      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
+      "name": "stadium rave A （audiolink party world ）",
+      "author": "ALDUMGAMES",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
+    },
+    {
+      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
+      "name": "STRATA",
+      "author": "兎野しゃの／syano",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html"
+    },
+    {
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
+    },
+    {
+      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
+      "name": "The Ruiners Club Venue［BETA VERSION］",
+      "author": "Ａｒｔｉ",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
     }
   ],
   "attempts": {
@@ -343,6 +435,22 @@
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
       "checkedAt": "2026-10-06T08:10:17+00:00",
+      "status": "assessed"
+    },
+    "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
+      "checkedAt": "2026-10-06T12:51:21+00:00",
+      "status": "assessed"
+    },
+    "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92": {
+      "checkedAt": "2026-10-06T12:51:24+00:00",
+      "status": "assessed"
+    },
+    "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c": {
+      "checkedAt": "2026-10-06T12:51:27+00:00",
+      "status": "assessed"
+    },
+    "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9": {
+      "checkedAt": "2026-10-06T12:51:30+00:00",
       "status": "assessed"
     }
   }
