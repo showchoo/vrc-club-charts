@@ -842,10 +842,10 @@ main,
 }
 .world-catalog-row {
   display: grid;
-  grid-template-columns: minmax(260px, 1.35fr) minmax(150px, .65fr) minmax(220px, 1fr) 36px;
+  grid-template-columns: 124px minmax(220px, 1.35fr) minmax(150px, .65fr) minmax(220px, 1fr) 36px;
   gap: 20px;
   align-items: center;
-  min-height: 74px;
+  min-height: 92px;
   border-bottom: 1px solid rgba(166,234,255,.10);
   color: var(--muted);
   font-size: 12px;
@@ -853,6 +853,33 @@ main,
 .world-catalog-row:hover {
   color: var(--text);
   background: rgba(63,217,255,.035);
+}
+.world-catalog-thumb {
+  width: 124px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(166,234,255,.10);
+  border-radius: 10px;
+  background: linear-gradient(145deg,rgba(63,217,255,.07),rgba(255,255,255,.025));
+  display: grid;
+  place-items: center;
+}
+.world-catalog-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.world-catalog-row:hover .world-catalog-thumb img {
+  transform: scale(1.035);
+}
+.world-catalog-thumb i {
+  color: #5d7881;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .18em;
 }
 .world-catalog-name {
   color: var(--text);
@@ -962,14 +989,17 @@ main,
   .world-detail-stats { grid-template-columns: repeat(2, 1fr); }
   .world-detail-stats article { border-bottom: 1px solid rgba(166,234,255,.10); }
   .world-detail-meta { grid-template-columns: 1fr 1fr; }
-  .world-catalog-row { grid-template-columns: 1fr 120px 32px; }
-  .world-catalog-row span:nth-child(3) { display: none; }
+  .world-catalog-row { grid-template-columns: 108px 1fr 120px 32px; gap: 14px; }
+  .world-catalog-thumb { width: 108px; }
+  .world-catalog-row span:nth-child(4) { display: none; }
 }
 @media (max-width: 560px) {
   .world-catalog-page,
   .world-detail-page { padding-top: 76px; }
-  .world-catalog-row { grid-template-columns: 1fr 32px; gap: 10px; }
-  .world-catalog-row span:nth-child(2) { display: none; }
+  .world-catalog-row { grid-template-columns: 92px 1fr 28px; gap: 10px; min-height: 78px; }
+  .world-catalog-thumb { width: 92px; border-radius: 8px; }
+  .world-catalog-row span:nth-child(3),
+  .world-catalog-row span:nth-child(4) { display: none; }
   .world-detail-copy { min-height: 300px; }
   .world-detail-image { min-height: 280px; }
   .world-detail-stats { grid-template-columns: 1fr 1fr; }
