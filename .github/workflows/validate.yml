@@ -140,6 +140,7 @@ jobs:
         run: |
           python scripts/build_vercel.py
           test -s _site/worlds/index.html
+          test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
           test -s _site/index.html
           test -f _site/og-image.png
           test -s _site/sitemap.xml

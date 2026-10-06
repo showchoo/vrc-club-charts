@@ -13,6 +13,32 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
 
+# The catalog snapshots intentionally omit thumbnails. Serve cached, validated
+# public VRChat imagery through our existing read-only image proxy, so generated
+# pages do not depend on browser-side metadata fetches to show their cover art.
+WORLD_THUMB_ENDPOINT = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-thumb"
+WORLD_ID_RE = re.compile(r"^wrld_[a-fA-F0-9-]{36}$")
+
+
+def world_thumbnail_url(world: dict) -> str:
+    direct = str(world.get("thumbnail") or "").strip()
+    if direct.startswith("https://"):
+        return direct
+    wid = str(world.get("id") or "").strip()
+    if WORLD_ID_RE.fullmatch(wid):
+        return f"{WORLD_THUMB_ENDPOINT}?id={quote(wid)}"
+    return ""
+
+
+def thumbnail_fallback(tag: str = "i") -> str:
+    """Safe, image-only error handler: restore a legible placeholder on 404/502."""
+    if tag == "div":
+        js = ("this.replaceWith(Object.assign(document.createElement('div'),"
+              "{className:'world-detail-image world-detail-image-placeholder',textContent:'VRC'}))")
+    else:
+        js = "this.replaceWith(Object.assign(document.createElement('i'),{textContent:'VRC'}))"
+    return esc(js)
+
 
 def esc(value) -> str:
     return html.escape(str(value or ""), quote=True)
@@ -351,13 +377,14 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     image_scored = isinstance(image_score, int) and not isinstance(image_score, bool) and 0 <= image_score <= 100
     totals = w.get("totals") or {}
     weekly = w.get("weekly") or {}
-    thumbnail = w.get("thumbnail")
+    thumbnail = world_thumbnail_url(w)
     canonical = f"{BASE_URL}worlds/{quote(wid)}.html"
     description = f"{name} by {author} — VRChat club / DJ world profile on VRC Club Charts."
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
     status_text = "VISUAL IMPRESSION" if image_scored else "WORLD DIRECTORY / UNEVALUATED"
     score_html = str(image_score) if image_scored else "—"
-    image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
+    image = (f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" '
+             f'onerror="{thumbnail_fallback("div")}" />') if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
     source_url = w.get("source")
 
@@ -533,9 +560,10 @@ def index_page(worlds: list[dict]) -> str:
             str(w.get("author") or ""),
             " ".join(w.get("genres") or []),
         ]).casefold()
-        thumb = w.get("thumbnail") or ""
+        thumb = world_thumbnail_url(w)
         thumb_html = (
-            f'<img src="{esc(thumb)}" alt="" loading="lazy" decoding="async" />'
+            f'<img src="{esc(thumb)}" alt="" loading="lazy" decoding="async" '
+            f'onerror="{thumbnail_fallback()}" />'
             if thumb else '<i>VRC</i>'
         )
         thumb_ready = "true" if thumb else "false"
