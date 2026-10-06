@@ -1,0 +1,199 @@
+name: Monitor site and attempt Gemini self-repair
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/monitor_site_health.py"
+      - "scripts/gemini_site_repair.py"
+      - "scripts/notify_site_health.py"
+      - "tests/test_site_self_heal.py"
+      - ".github/workflows/site-self-heal.yml"
+  schedule:
+    # Hourly. Gemini runs only for new, reproducible incidents.
+    - cron: "41 * * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: vcc-gemini-site-self-heal
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test monitor and guardrails
+        run: python -m unittest discover -s tests -p "test_site_self_heal.py"
+
+      - name: Check public production routes, images and feeds
+        id: health
+        run: |
+          python scripts/monitor_site_health.py --report /tmp/vcc-site-health.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          data=json.load(open("/tmp/vcc-site-health.json", encoding="utf-8"))
+          print("unhealthy=" + ("false" if data["healthy"] else "true"))
+          PY
+
+      - name: Check existing incident to avoid repeated AI calls
+        id: existing
+        if: steps.health.outputs.unhealthy == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          count=$(gh api "repos/$GITHUB_REPOSITORY/issues?state=open&labels=vcc-site-health&per_page=50" \
+            --jq '[.[] | select(has("pull_request") | not)] | length')
+          if [ "$count" -gt 0 ]; then
+            echo "incident_open=true" >> "$GITHUB_OUTPUT"
+            echo "Incident already open: skip another Gemini call."
+          else
+            echo "incident_open=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ask Gemini for a tightly bounded repair
+        id: gemini
+        if: steps.health.outputs.unhealthy == 'true' && steps.existing.outputs.incident_open != 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VCC_REPAIR_MODEL: gemini-3.5-flash-lite
+        run: |
+          python scripts/gemini_site_repair.py \
+            --report /tmp/vcc-site-health.json \
+            --result /tmp/vcc-repair-result.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          data=json.load(open("/tmp/vcc-repair-result.json", encoding="utf-8"))
+          print("patch=" + ("true" if data["status"]=="patch_proposed" else "false"))
+          print("auto_merge=" + ("true" if data["auto_merge"] else "false"))
+          PY
+
+      - name: Validate AI changes without giving tests any secret
+        id: check_patch
+        if: steps.gemini.outputs.patch == 'true'
+        run: |
+          set -euo pipefail
+          git diff --check
+          python -m compileall -q scripts
+          node --check app.js
+          node --check ai-scout.js
+          node --check i18n.js
+          node --check events.js
+          node --check djs.js
+          node --check community-reviews.js
+          node --check world-submission.js
+          node --test tests/*.test.cjs
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/sync_worlds_from_supabase.py
+          python scripts/build_rankings.py
+          python scripts/sync_reviewers_from_supabase.py
+          python scripts/sync_reviews_from_supabase.py
+          python scripts/build_review_scores.py
+          python scripts/validate_catalog.py
+          python scripts/build_vercel.py
+          test -s _site/worlds/index.html
+          test -s _site/i18n.js
+          test "$(find _site/worlds -maxdepth 1 -name 'wrld_*.html' | wc -l)" -gt 0
+          test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
+          # The AI must not mutate secrets, tests, workflows or catalog data.
+          python - <<'PY'
+          import json, subprocess
+          from scripts.gemini_site_repair import ALLOW
+          plan=json.load(open("/tmp/vcc-repair-result.json", encoding="utf-8"))
+          changed=set(subprocess.check_output(["git","diff","--name-only"],text=True).splitlines())
+          expected=set(plan["edits"])
+          if changed!=expected or not changed.issubset(ALLOW):
+              raise SystemExit(f"Unexpected generated change: {changed ^ expected}")
+          print("Validated Gemini patch paths:", sorted(changed))
+          PY
+
+      - name: Create repair PR (auto-merge only for verified local links)
+        id: publish
+        if: steps.check_patch.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          branch="auto/vcc-gemini-repair-$GITHUB_RUN_ID"
+          git config user.name "vcc-health-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add -- index.html about.html events.html djs.html reviewer.html \
+            app.js ai-scout.js i18n.js styles.css \
+            scripts/build_static_pages.py scripts/build_vercel.py vercel.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fix: Gemini remediation for monitored site regression"
+          gh auth setup-git
+          git push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$branch"
+
+          diagnosis=$(python - <<'PY'
+          import json
+          data=json.load(open("/tmp/vcc-repair-result.json",encoding="utf-8"))
+          print(str(data.get("diagnosis",""))[:250].replace("\n"," "))
+          PY
+          )
+          pr_url=""
+          if pr_url=$(gh pr create \
+              --base main --head "$branch" \
+              --title "fix: Gemini repair for production site health alert" \
+              --body "Generated in an isolated runner after public monitoring detected an issue.
+
+          Diagnosis: $diagnosis
+
+          Only bounded replacements in approved site files are permitted; all repository tests and Vercel build passed.
+
+          IMPORTANT: Review code and actual browser behavior before merging unless this is an isolated internal-link correction."); then
+            printf '%s\n' "$pr_url" > /tmp/vcc-repair-pr.txt
+            echo "pr_url=$pr_url" >> "$GITHUB_OUTPUT"
+            if [ "${{ steps.gemini.outputs.auto_merge }}" = "true" ]; then
+              echo "Safe single-link replacement: attempting automatic squash merge."
+              if gh pr merge "$pr_url" --squash --delete-branch; then
+                echo "auto_merged=true" >> "$GITHUB_OUTPUT"
+              else
+                echo "Automated merge blocked by GitHub policy; PR remains for review."
+              fi
+            fi
+          else
+            echo "GitHub Actions PR creation is blocked; branch retained for owner."
+            python - <<'PY'
+          import json
+          p="/tmp/vcc-repair-result.json"
+          data=json.load(open(p,encoding="utf-8"))
+          data["status"]="pr_permission_blocked"
+          json.dump(data,open(p,"w",encoding="utf-8"))
+          PY
+          fi
+
+      - name: Notify owner once or close recovered issue
+        if: always() && steps.health.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          if [ "${{ steps.check_patch.outcome }}" = "failure" ]; then
+            python - <<'PY'
+          import json
+          p="/tmp/vcc-repair-result.json"
+          data=json.load(open(p, encoding="utf-8"))
+          data["status"]="repair_tests_failed"
+          json.dump(data,open(p,"w",encoding="utf-8"))
+          PY
+          fi
+          python scripts/notify_site_health.py \
+            --report /tmp/vcc-site-health.json \
+            --repair /tmp/vcc-repair-result.json \
+            --pr-url-file /tmp/vcc-repair-pr.txt
