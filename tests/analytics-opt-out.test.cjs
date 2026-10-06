@@ -17,6 +17,7 @@ function simulate({ excluded = null, doNotTrack = '0' } = {}) {
     document: { referrer: '' },
     localStorage: { getItem: key => key === 'vccAnalyticsExcludeMe' ? setting : null },
     window: { requestIdleCallback: cb => { callbacks.push(cb); } },
+    requestIdleCallback: cb => { callbacks.push(cb); },
     fetch: () => { sent++; return Promise.resolve({ ok: true }); }
   };
   runInNewContext(script, context, { timeout: 1500 });
