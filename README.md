@@ -8,7 +8,7 @@ Public site: https://vrc-club-charts.vercel.app/
 
 **CLUB DISCOVERY is the homepage's lead experience.** It automatically discovers public VRChat club Worlds, and uses Gemini image understanding to score *thumbnail visuals only*. This is a discovery signal, not an in-world craftsmanship verdict.
 
-Human field notes are supplementary: anyone can submit a visit review without applying for reviewer status or receiving an access code. Each contribution is a self-reported observation, moderated before appearing publicly. Community scores **never enter AI visual scores or the legacy reviewer panel ranking**.
+Human field notes are supplementary: anyone can submit a visit review without applying for reviewer status or receiving an access code. Each contribution is a self-reported observation, moderated before appearing publicly. Community scores **never alter Gemini visual scores or chart order**.
 
 A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
@@ -31,7 +31,7 @@ The public page `reviewer.html` accepts World experience reports from any visito
 - The existing `reviewer-admin` Edge Function, protected by the existing administrative key, supports `list_community_reviews`, `publish_community_review`, and `reject_community_review`.
 - Posting is bounded to one World per browser-generated visitor identifier per 30 days and three submissions per day per salted address identifier, with manual moderation to limit abuse. These controls are *not* proof of one human per review; spoofing and identity fraud remain possible.
 - Published cards show individual self-reported scores and comments. There is no automated aggregate visitor ranking.
-- Legacy approved-reviewer data, if any, is preserved but not presented as the site's primary ranking.
+- Legacy reviewer applications and panel review records are retained privately as historical data. The old applicant-approval UI is read-only and legacy GitHub Issue templates have been removed.
 
 The Edge Function implementation is tracked in `supabase/functions/community-reviews/index.ts`. It uses the `SUPABASE_SERVICE_ROLE_KEY` server-side only; never put privileged Supabase or Gemini keys into web assets.
 
@@ -39,7 +39,7 @@ The Edge Function implementation is tracked in `supabase/functions/community-rev
 
 - User statements about World visits and reviewer identity are **unverified**.
 - Moderation checks content suitability, not whether somebody genuinely visited the World.
-- Publishing a community note does not create or change the official ranking.
+- Publishing a community note does not affect the visual chart or create a validated in-world ranking.
 - World creator/staff relationships can be disclosed publicly.
 - Sponsors and advertising do not purchase ratings or change AI-scout scores.
 - Unverified visual, audio, interactive or performance metrics are never presented as confirmed in-world tests.
@@ -48,7 +48,7 @@ The Edge Function implementation is tracked in `supabase/functions/community-rev
 
 Visits / Favorites snapshots are still collected because they are useful context for discovery and momentum.
 
-They are **not** the source of truth for Craftsmanship.
+They are **not** craftsmanship scores and do not determine the visual chart order.
 
 The public site never calls the VRChat API during page views. A scheduled collector stores static snapshots under `data/snapshots/`.
 
@@ -72,7 +72,6 @@ GitHub Issue Forms are available for:
 - World submissions
 - Event submissions
 - DJ submissions
-- Reviewer applications
 
 World submissions are automatically checked for duplicate `wrld_...` IDs.
 
@@ -80,14 +79,14 @@ After manual verification, applying the `verified` label can generate a catalog 
 
 ## Key files
 
-- `index.html` — craftsmanship-first homepage
+- `index.html` — CLUB DISCOVERY visual-first homepage
 - `reviewer.html` — open community field notes
 - `worlds/` — generated World directory and profiles
 - `events.html` — event calendar
 - `djs.html` — DJ / artist directory
 - `data/worlds.json` — World registry
-- `data/reviewers.json` — approved reviewer registry
-- `data/reviews.json` — reviewer submissions used for aggregation
+- `data/reviewers.json` — archived legacy approved reviewer registry
+- `data/reviews.json` — archived panel reviewer submissions (not included in current ranking)
 - `data/review-scores.json` — legacy panel score output (not shown as AI visual ranking)
 - `community-reviews.js` — community field notes and open form
 - `scripts/snapshot.py` — conservative VRChat data collector
@@ -101,7 +100,7 @@ After manual verification, applying the `verified` label can generate a catalog 
 
 Future monetization can include display ads, clearly labeled sponsored events / featured clubs, or creator analytics.
 
-**Ranking positions and reviewer scores are never for sale.**
+**Visual chart positions and community scores are never for sale.**
 
 ## Trademark
 
