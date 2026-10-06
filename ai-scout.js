@@ -106,6 +106,15 @@
       }
       const byId = new Map(worlds.map(w => [w.id, w]));
       const thumbnails = new Map();
+      const drawRecords = () => {
+        grid.replaceChildren();
+        records.forEach((record, i) => {
+          const world = byId.get(record.id);
+          const thumbnail = thumbnails.get(record.id) || (world && (world.thumbnail || world.imageUrl)) || '';
+          grid.appendChild(drawCard(record, i, scoredIds.has(record.id), thumbnail));
+        });
+      };
+      drawRecords();
       const ids = records.filter(r => r.sourceType === 'catalog').map(r => r.id).slice(0, 12);
       if (ids.length) {
         try {
@@ -124,12 +133,7 @@
           }
         } catch (_) {}
       }
-      records.forEach((record, i) => {
-        const fromIndex = byId.get(record.id);
-        const thumbnail = thumbnails.get(record.id) ||
-          fromIndex?.thumbnail || fromIndex?.imageUrl || '';
-        grid.appendChild(drawCard(record, i, scoredIds.has(record.id), thumbnail));
-      });
+      if (thumbnails.size) drawRecords();
     } catch (_) {
       status.textContent = 'DISCOVERY DATA UNAVAILABLE';
       grid.replaceChildren(el('div', 'ai-scout-empty',
