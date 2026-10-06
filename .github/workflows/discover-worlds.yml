@@ -38,12 +38,10 @@ jobs:
           VRC_USER_AGENT: ${{ vars.VRC_USER_AGENT }}
           VCC_DISCOVERY_PAGES_PER_SOURCE: "12"
           VCC_DISCOVERY_VERIFY_PER_RUN: "16"
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           python scripts/discover_worlds.py
           python scripts/build_rankings.py
           python scripts/build_discovery_ledger.py
-          python scripts/sync_discovery_to_supabase.py
       - name: Commit candidate queue
         run: |
           git config user.name "vrc-club-charts-bot"
@@ -53,3 +51,10 @@ jobs:
           git commit -m "data: refresh World discovery candidates"
           git pull --rebase origin main
           git push
+
+      - name: Optional private Supabase evidence mirror
+        if: success()
+        continue-on-error: true
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/sync_discovery_to_supabase.py
