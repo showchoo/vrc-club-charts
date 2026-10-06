@@ -34,7 +34,7 @@ BLOCKED_NAME = re.compile(
     r"fight(?:ing)?[\s-]*club|avatar|アバター|clubhouse|クラブハウス|sleep|睡眠|"
     r"mmd|karaoke|カラオケ|training|sparring|格闘|ジム|gym", re.I
 )
-CLUB_NAME = re.compile(r"\bclub\b|nightclub|discotheque|disco|rave|dj[\s_-]?booth|"
+CLUB_NAME = re.compile(r"\bclub\b|club$|nightclub|discotheque|disco|rave|dj[\s_-]?booth|"
                        r"クラブ|ディスコ|レイブ|ナイトクラブ", re.I)
 
 
