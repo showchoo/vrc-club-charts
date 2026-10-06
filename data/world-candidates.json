@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+    "name": "Club VGL",
+    "authorHint": "by:",
+    "source": "https://vrcmap.com/world/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+    "sourceCategories": [
+      "vrcmap_cafe"
+    ],
+    "confidenceScore": 60,
+    "confidence": "medium",
+    "reasons": [
+      "source:vrcmap_cafe",
+      "+explicit-nightlife",
+      "+club",
+      "+nightclub",
+      "+dance floor",
+      "+party",
+      "+music",
+      "-sleep",
+      "-chill",
+      "-home",
+      "-game",
+      "+explicit-club-name"
+    ],
+    "firstDiscoveredAt": "2026-10-06",
+    "lastSeenAt": "2026-10-06"
+  }
+]

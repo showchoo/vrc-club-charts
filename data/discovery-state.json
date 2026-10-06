@@ -3,10 +3,18 @@
     "vrcw_club": 2,
     "vrcw_dj": 2
   },
-  "updatedAt": null,
+  "updatedAt": "2026-10-06",
   "verification": {
     "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346": {
       "date": "2026-10-06"
     }
+  },
+  "vrcmapNextIndex": {
+    "vrcmap_music": 12,
+    "vrcmap_new": 12,
+    "vrcmap_cafe": 12,
+    "vrcmap_japan": 12,
+    "vrcmap_trending": 12,
+    "vrcmap_chill": 12
   }
 }
