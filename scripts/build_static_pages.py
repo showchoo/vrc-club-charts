@@ -355,7 +355,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     canonical = f"{BASE_URL}worlds/{quote(wid)}.html"
     description = f"{name} by {author} — VRChat club / DJ world profile on VRC Club Charts."
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
-    status_text = "AI SCOUT / VISUAL ESTIMATE" if image_scored else "WORLD DIRECTORY / NOT YET SCORED"
+    status_text = "VISUAL IMPRESSION" if image_scored else "WORLD DIRECTORY / UNEVALUATED"
     score_html = str(image_score) if image_scored else "—"
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
@@ -403,7 +403,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
 
     return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
-    <a class="world-back" href="../index.html#aiScoutSection">← AI SCOUT</a>
+    <a class="world-back" href="../index.html#aiScoutSection">← CLUB DISCOVERY</a>
     <section class="world-detail-hero">
       <div class="world-detail-copy">
         <p class="kicker">{esc(status_text)}</p>
@@ -420,16 +420,16 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     </section>
 
     <section class="world-detail-stats">
-      <article><span>AI VISUAL</span><strong>{esc(score_html)}</strong></article>
-      <article><span>IMAGE BASIS</span><strong>{'THUMBNAIL' if image_scored else 'NOT SCORED'}</strong></article>
+      <article><span>ビジュアル評価</span><strong>{esc(score_html)}</strong></article>
+      <article><span>評価の根拠</span><strong>{'THUMBNAIL' if image_scored else 'NOT SCORED'}</strong></article>
       <article><span>TOTAL VISITS</span><strong>{esc(fmt_num(totals.get("visits")))}</strong></article>
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
     </section>
 
-    <p class="world-review-disclaimer">AI外観スコアはサムネイル画像1枚からの参考推定で、音響・ギミック・動作の軽さは未確認です。Worldを訪れた感想は別の体験レビューとして投稿できます。</p>
+    <p class="world-review-disclaimer">ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。音響・ギミック・動作性能は未確認です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
-      <div><span>AI VISUAL BASIS</span><strong>{'LOW CONFIDENCE / IMAGE ONLY' if image_scored else 'NOT YET ASSESSED'}</strong></div>
+      <div><span>評価範囲</span><strong>{'IMAGE ONLY / REFERENCE' if image_scored else 'NOT ASSESSED'}</strong></div>
       <div><span>CAPACITY</span><strong>{esc(fmt_num(w.get("capacity")))}</strong></div>
       <div><span>WORLD UPDATED</span><strong>{esc(w.get("worldUpdatedAt") or "—")}</strong></div>
     </section>
@@ -552,10 +552,10 @@ def index_page(worlds: list[dict]) -> str:
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">{len(cards)}のWorldを収録。クラブ・DJ・レイヴなど、まだ知らないWorldを探せます。画像の参考スコアはAI SCOUT、訪問した人の感想は体験レビューで紹介します。</p>
+    <p class="lead">{len(cards)}のWorldを収録。クラブ・DJ・レイヴなど、まだ知らないWorldを探せます。ビジュアルの参考スコアと、訪問した人の体験レビューを分けて紹介します。</p>
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
-      <div class="chip-row"><a class="chip" href="../index.html#aiScoutSection">AI SCOUT ↗</a></div>
+      <div class="chip-row"><a class="chip" href="../index.html#aiScoutSection">CLUB DISCOVERY ↗</a></div>
       <span id="worldDirectoryCount" class="discovery-count">{len(cards)} WORLDS</span>
     </div>
     <div id="worldCatalog" class="world-catalog">{''.join(cards)}</div>
