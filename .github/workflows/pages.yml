@@ -41,6 +41,9 @@ on:
       - "scripts/sync_worlds_from_supabase.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
+  workflow_run:
+    workflows: ["AI SCOUT automatic World discovery"]
+    types: [completed]
   schedule:
     - cron: "*/15 * * * *"
 
@@ -55,6 +58,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
