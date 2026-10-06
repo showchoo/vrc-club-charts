@@ -90,6 +90,41 @@ class SubmissionAITests(unittest.TestCase):
                 self.assertEqual(json.loads(worlds.read_text(encoding="utf-8")),[])
                 self.assertEqual(json.loads(decisions.read_text(encoding="utf-8"))[0]["status"],"needs_review")
 
+    def test_structured_gemini_fenced_json_with_safe_output_limit(self):
+        text = '```json\n' + json.dumps(GOOD) + '\n```'
+        result = {"candidates": [{"finishReason": "STOP",
+                 "content": {"parts": [{"text": text}]}}]}
+        raw = json.dumps(result).encode("utf-8")
+        class FakeResponse:
+            def __enter__(self): return self
+            def __exit__(self, *args): return None
+            def read(self, *args): return raw
+        requests=[]
+        def fake_open(req, **kwargs):
+            requests.append(json.loads(req.data))
+            return FakeResponse()
+        with patch.object(review, "image_part", return_value=None), patch.object(
+            review.urllib.request, "urlopen", side_effect=fake_open
+        ):
+            assessment=review.classify_world(META,"dummy-key")
+        self.assertEqual(assessment["verdict"], "club")
+        self.assertEqual(requests[0]["generationConfig"]["maxOutputTokens"], 1024)
+
+    def test_incomplete_gemini_output_is_never_accepted(self):
+        raw=json.dumps({"candidates":[{
+            "finishReason":"MAX_TOKENS",
+            "content":{"parts":[{"text":'{"verdict":"club"'}]}
+        }]}).encode("utf-8")
+        class FakeResponse:
+            def __enter__(self): return self
+            def __exit__(self,*args): return None
+            def read(self,*args): return raw
+        with patch.object(review,"image_part",return_value=None),patch.object(
+            review.urllib.request,"urlopen",return_value=FakeResponse()
+        ):
+            with self.assertRaisesRegex(ValueError,"incomplete"):
+                review.classify_world(META,"dummy-key")
+
     def test_empty_api_key_does_not_publish(self):
         with tempfile.TemporaryDirectory() as tmp:
             worlds=Path(tmp)/"worlds.json"

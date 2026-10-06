@@ -137,7 +137,8 @@ def classify_world(metadata: dict, key: str) -> dict:
         "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent",
         data=json.dumps({"contents":[{"parts":parts}],
                          "generationConfig":{"temperature":0,
-                                             "responseMimeType":"application/json"}}).encode("utf-8"),
+                                             "responseMimeType":"application/json",
+                                             "maxOutputTokens":1024}}).encode("utf-8"),
         headers={"Content-Type":"application/json","x-goog-api-key":key,
                  "User-Agent":"VRCClubCharts-AIClubClassifier/1.0"},method="POST")
     with urllib.request.urlopen(request,timeout=55) as response:
@@ -145,9 +146,22 @@ def classify_world(metadata: dict, key: str) -> dict:
     chunks = result.get("candidates") or []
     if not chunks:
         raise ValueError("Gemini returned no candidate")
+    finish=str(chunks[0].get("finishReason") or "")
+    if finish and finish!="STOP":
+        # MAX_TOKENS/safety-filtered content must never be partially approved.
+        raise ValueError("Gemini response incomplete: "+finish[:32])
     text = "".join(str(p.get("text") or "") for p in
-                   (chunks[0].get("content") or {}).get("parts",[]))
-    parsed=json.loads(text)
+                   (chunks[0].get("content") or {}).get("parts",[])).strip()
+    if text.startswith("```"):
+        lines=text.splitlines()
+        if len(lines)>=3 and lines[0].strip().lower() in ("```", "```json") and lines[-1].strip()=="```":
+            text="\n".join(lines[1:-1]).strip()
+    if not text:
+        raise ValueError("Gemini returned an empty JSON response")
+    try:
+        parsed=json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError("Gemini returned malformed JSON; safe retry required") from exc
     if not isinstance(parsed,dict):
         raise ValueError("Gemini JSON is not an object")
     verdict=parsed.get("verdict")

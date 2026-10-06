@@ -123,6 +123,13 @@ class DiscoveryAIReviewTests(unittest.TestCase):
         self.assertTrue(worker.retry_due(record,now+dt.timedelta(hours=7)))
         self.assertFalse(worker.retry_due({"status":"needs_review","reviewedAt":"bad"},now))
 
+    def test_old_broken_json_retries_once_after_decoder_revision(self):
+        now=dt.datetime.now(dt.timezone.utc)
+        old={"status":"classification_unavailable","reviewedAt":now.isoformat()}
+        self.assertTrue(worker.retry_due(old,now))
+        upgraded={**old,"classifierRevision":worker.CLASSIFIER_REVISION}
+        self.assertFalse(worker.retry_due(upgraded,now))
+
     def test_heuristic_score_100_without_ai_key_cannot_publish(self):
         with patch.dict(worker.os.environ,{"GEMINI_API_KEY":""}),patch.object(
             worker.classifier,"public_metadata"

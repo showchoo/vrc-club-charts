@@ -25,6 +25,7 @@ WORLDS = ROOT / "data" / "worlds.json"
 DECISIONS = ROOT / "data" / "world-candidate-ai-decisions.json"
 MODERATION = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-candidate-status"
 RETRY_HOURS = 6
+CLASSIFIER_REVISION = 'json-validation-20261007-v2'
 
 
 def moderation_decisions() -> dict[str, str]:
@@ -48,6 +49,11 @@ def moderation_decisions() -> dict[str, str]:
 def retry_due(record: dict, now: dt.datetime) -> bool:
     if record.get("status") not in {"verification_unavailable", "classification_unavailable"}:
         return False
+    # Reprocess an invalid Gemini response once when the JSON decoder is fixed.
+    # Successful/uncertain decisions and verification failures are unaffected.
+    if (record.get("status")=="classification_unavailable" and
+            record.get("classifierRevision")!=CLASSIFIER_REVISION):
+        return True
     try:
         last = dt.datetime.fromisoformat(str(record["reviewedAt"]).replace("Z","+00:00"))
         if last.tzinfo is None:
@@ -104,7 +110,7 @@ def review_candidates() -> dict:
             state="verification_unavailable" if exc.code in (401,403,429,500,502,503,504) else "needs_review"
             note="Official World lookup HTTP "+str(exc.code)
             history[wid]={**classifier.decide(wid,None,None,state,note),
-                          "source":"auto-discovery"}
+                          "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
             attempted+=1
             print(f"VERIFY_{state.upper()} {wid} HTTP {exc.code}")
             if exc.code==429:
@@ -115,7 +121,7 @@ def review_candidates() -> dict:
             state="needs_review" if isinstance(exc,ValueError) else "verification_unavailable"
             history[wid]={**classifier.decide(wid,None,None,state,
                           "Official World metadata unavailable: "+type(exc).__name__),
-                          "source":"auto-discovery"}
+                          "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
             attempted+=1
             print(f"VERIFY_{state.upper()} {wid} {type(exc).__name__}")
             continue
@@ -124,7 +130,7 @@ def review_candidates() -> dict:
         except (ValueError,urllib.error.HTTPError,urllib.error.URLError,OSError,TimeoutError) as exc:
             history[wid]={**classifier.decide(wid,meta,None,"classification_unavailable",
                           "Gemini classification temporarily unavailable: "+type(exc).__name__),
-                          "source":"auto-discovery"}
+                          "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
             attempted+=1
             print(f"CLASSIFICATION_UNAVAILABLE {wid} {type(exc).__name__}")
             # Avoid repeated failing paid API calls if the service is down.
@@ -148,7 +154,7 @@ def review_candidates() -> dict:
             note="Gemini verdict or independent evidence insufficient; human review required"
             print("NEEDS_REVIEW "+wid+" verdict="+assessment["verdict"])
         history[wid]={**classifier.decide(wid,meta,assessment,status,note),
-                      "source":"auto-discovery",
+                      "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION,
                       "discoverySources":candidate.get("sourceCategories",[])}
         attempted+=1
 
