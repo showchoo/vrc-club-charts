@@ -81,7 +81,7 @@ jobs:
           node --check djs.js
           node --test tests/analytics-opt-out.test.cjs
       - name: Test AI SCOUT catalog generation
-        run: python -m unittest discover -s tests -p "test_ai_scout.py"
+        run: python -m unittest discover -s tests -p "test_*.py"
       - name: Sync approved Worlds
         run: |
           python scripts/sync_worlds_from_supabase.py

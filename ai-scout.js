@@ -77,11 +77,12 @@
     try {
       const [scoutRes, worldRes] = await Promise.all([
         fetch('data/ai-scout.json', {cache: 'no-store'}),
-        fetch('data/weekly-ranking.json', {cache: 'no-store'})
+        fetch('data/weekly-ranking.json', {cache: 'no-store'}).catch(() => null)
       ]);
       if (!scoutRes.ok) throw new Error('Scout data unavailable');
       const data = await scoutRes.json();
-      const worlds = worldRes.ok ? (await worldRes.json()).worlds || [] : [];
+      const worldData = worldRes?.ok ? await worldRes.json().catch(() => ({})) : {};
+      const worlds = Array.isArray(worldData.worlds) ? worldData.worlds : [];
       const valid = item => item && allowedWorld.test(item.id) &&
         (item.sourceType === 'catalog' || item.sourceType === 'discovery');
       const scored = (Array.isArray(data.scored) ? data.scored : []).filter(item =>

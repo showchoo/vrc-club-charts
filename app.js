@@ -413,38 +413,58 @@ function renderEvents() {
 }
 
 async function load() {
-  try {
-    const [worldRes,eventRes,editorRes] = await Promise.all([
-      fetch('data/weekly-ranking.json', {cache:'no-store'}),
-      fetch('data/events.json', {cache:'no-store'}),
-      fetch('https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/editor_world_scores?select=*', {
-        cache:'no-store',
-        headers:{'apikey':'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK'}
-      })
-    ]);
-    if (!worldRes.ok) throw new Error('World data unavailable');
-    state.worlds = (await worldRes.json()).worlds || [];
-    state.events = eventRes.ok ? await eventRes.json() : [];
-    state.editorScores = editorRes.ok ? await editorRes.json() : [];
-    renderEditorPicks();
-    renderWorlds();
-    renderEvents();
+  // Each feed is independent: an editor API outage must not blank Worlds or Events.
+  async function safeJson(url, options) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return await response.json();
+    } catch (error) {
+      console.warn('Unable to load ' + url, error);
+      return null;
+    }
+  }
 
-    const byId = new Map(state.worlds.map(w => [w.id,w]));
-    const editorIds = (state.editorScores || []).filter(r => r.editor_pick === true).sort((a,b)=>Number(b.total_score||0)-Number(a.total_score||0)).slice(0,3).map(r=>r.world_id);
-    const targetIds = pickWorlds(state.worlds).map(w=>w.id);
-    const visualIds = [...new Set([...editorIds,...targetIds])].filter(id=>byId.has(id) && !worldImage(byId.get(id))).slice(0,20);
-    if (visualIds.length) {
+  const [worldData, eventData, editorData] = await Promise.all([
+    safeJson('data/weekly-ranking.json', {cache:'no-store'}),
+    safeJson('data/events.json', {cache:'no-store'}),
+    safeJson('https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/editor_world_scores?select=*', {
+      cache:'no-store',
+      headers:{'apikey':'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK'}
+    })
+  ]);
+
+  state.worlds = Array.isArray(worldData?.worlds) ? worldData.worlds : [];
+  state.events = Array.isArray(eventData) ? eventData : [];
+  state.editorScores = Array.isArray(editorData) ? editorData : [];
+  renderEditorPicks();
+  renderWorlds();
+  renderEvents();
+
+  if (!worldData) {
+    document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">ワールド情報を表示できません。</div>';
+  }
+  if (!eventData) {
+    document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">イベント情報を表示できません。</div>';
+  }
+
+  if (!state.worlds.length) return;
+  const byId = new Map(state.worlds.map(w => [w.id,w]));
+  const editorIds = state.editorScores.filter(r => r.editor_pick === true)
+    .sort((a,b)=>Number(b.total_score||0)-Number(a.total_score||0)).slice(0,3).map(r=>r.world_id);
+  const targetIds = pickWorlds(state.worlds).map(w=>w.id);
+  const visualIds = [...new Set([...editorIds,...targetIds])]
+    .filter(id=>byId.has(id) && !worldImage(byId.get(id))).slice(0,20);
+  if (visualIds.length) {
+    try {
       const visuals = await fetchWorldVisuals(visualIds);
       if (mergeWorldVisuals(visuals)) {
         renderEditorPicks();
-            renderWorlds();
+        renderWorlds();
       }
+    } catch (error) {
+      console.warn('World thumbnail enrichment unavailable', error);
     }
-  } catch (err) {
-    console.error(err);
-    document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">ワールド情報を表示できません。</div>';
-    document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">イベント情報を表示できません。</div>';
   }
 }
 

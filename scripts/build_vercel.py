@@ -18,7 +18,7 @@ VERCEL_BASE = os.environ.get(
 PUBLIC_FILES = (
     "index.html", "about.html", "privacy.html", "reviewer.html",
     "reviewer-admin.html", "events.html", "djs.html",
-    "app.js", "analytics.js", "ai-scout.js", "events.js", "djs.js",
+    "app.js", "analytics.js", "ai-scout.js", "community-reviews.js", "events.js", "djs.js",
     "styles.css", "favicon.svg", "site.webmanifest", "robots.txt",
 )
 DATA_FILES = (
