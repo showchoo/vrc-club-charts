@@ -37,5 +37,17 @@
         }
       ]
     }
+  ],
+  "buildCommand": "python3 scripts/build_vercel.py",
+  "outputDirectory": "_site",
+  "rewrites": [
+    {
+      "source": "/worlds",
+      "destination": "/worlds/index.html"
+    },
+    {
+      "source": "/worlds/",
+      "destination": "/worlds/index.html"
+    }
   ]
 }
