@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import os
 import re
@@ -88,14 +89,23 @@ def sync(report: dict, repair: dict, token: str, repo: str, owner: str, pr_url="
         print(f"Reusing open health incident #{current['number']}")
         return "existing"
 
-    # If a previous incident was manually closed while still broken, respect that
-    # decision rather than recreating the same notification every hour.
+    # A person may acknowledge an incident without fixing it. Limit repeats
+    # after manual closure for one day. Automated recovery closures must not
+    # suppress a separate later incident of the same type.
     recent = api("GET", base + "/issues?state=closed&labels=" + LABEL + "&per_page=20", token)
     codes = {str(x.get("code")) for x in report.get("issues") or []}
     for issue in recent:
+        closer = str((issue.get("closed_by") or {}).get("login") or "")
+        if closer.lower() in ("github-actions[bot]", "vcc-health-bot"):
+            continue
+        try:
+            closed = dt.datetime.fromisoformat(str(issue.get("closed_at")).replace("Z", "+00:00"))
+            recent_manual_closure = dt.datetime.now(dt.timezone.utc) - closed < dt.timedelta(hours=24)
+        except (ValueError, TypeError):
+            recent_manual_closure = False
         old = set(re.findall(r"\*\*([a-z0-9_]+)\*\*:", str(issue.get("body", ""))))
-        if codes and codes == old:
-            print("Incident already acknowledged by owner; not reopening an identical alert")
+        if recent_manual_closure and codes and codes == old:
+            print("Owner acknowledged this incident during the last 24 hours")
             return "acknowledged"
 
     try:
