@@ -64,16 +64,43 @@ class AiScoutTests(unittest.TestCase):
                 "reasonJa": "照明と構図に工夫が見られます。",
                 "cautionsJa": "World内での実際の見え方は未確認です。"}
         with patch.object(scout, "post_json", return_value={
-            "choices": [{"message": {"content": json.dumps(good)}}]
+            "candidates": [{"content": {"parts": [{"text": json.dumps(good)}]}}]
         }):
             result = scout.evaluate_image("Club", "Creator", "image/png", b"imagedata", "fake-key")
         self.assertEqual(result["visualPotential"], 80)
         self.assertEqual(result["confidence"], "low")
         self.assertEqual(result["method"], "single-thumbnail-ai-image-assessment")
 
+    def test_gemini_request_includes_image_and_json_mode(self):
+        good = {"canJudge": True, "visual": 5, "lighting": 3,
+                "spatial": 4, "originality": 4,
+                "reasonJa": "空間に工夫があります。",
+                "cautionsJa": "音響は判定できません。"}
+        called = {}
+
+        def fake_post(url, payload, headers, timeout):
+            called.update(url=url, payload=payload, headers=headers, timeout=timeout)
+            return {"candidates": [{"content": {"parts": [{"text": json.dumps(good)}]}}]}
+
+        with patch.object(scout, "post_json", side_effect=fake_post):
+            score = scout.evaluate_image("Club", "Creator", "image/png", b"imagebytes", "test-key")
+        self.assertEqual(score["visualPotential"], 80)
+        self.assertIn("generativelanguage.googleapis.com", called["url"])
+        self.assertTrue(called["url"].endswith(":generateContent"))
+        self.assertEqual(called["headers"], {"x-goog-api-key": "test-key"})
+        self.assertEqual(called["payload"]["generationConfig"]["responseMimeType"], "application/json")
+        image = called["payload"]["contents"][0]["parts"][1]["inlineData"]
+        self.assertEqual(image["mimeType"], "image/png")
+        self.assertEqual(image["data"], __import__("base64").b64encode(b"imagebytes").decode("ascii"))
+
+    def test_gemini_empty_response_fails_safely(self):
+        with patch.object(scout, "post_json", return_value={"candidates": []}):
+            with self.assertRaises(ValueError):
+                scout.evaluate_image("Club", "Creator", "image/png", b"imagebytes", "test-key")
+
     def test_image_that_is_not_a_world_gets_no_score(self):
         with patch.object(scout, "post_json", return_value={
-            "choices": [{"message": {"content": json.dumps({"canJudge": False})}}]
+            "candidates": [{"content": {"parts": [{"text": json.dumps({"canJudge": False})}]}}]
         }):
             result = scout.evaluate_image("Club", "Creator", "image/png", b"imagedata", "fake-key")
         self.assertIsNone(result)

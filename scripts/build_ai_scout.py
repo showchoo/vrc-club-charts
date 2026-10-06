@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """VCC AI SCOUT: automatic candidate discovery and optional, clearly limited image assessment.
 
-With no OPENAI_API_KEY, this builds a useful, unscored discovery queue.
+With no GEMINI_API_KEY, this builds a useful, unscored discovery queue.
 With a key, it analyzes up to VCC_SCOUT_MAX_PER_RUN approved World thumbnails
 per execution. Image impressions never enter the official reviewer ranking.
 """
@@ -22,7 +22,7 @@ OUTPUT = DATA / "ai-scout.json"
 URL = "https://ypqpgpetrriirywrzikj.supabase.co"
 PUBLIC_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 ORIGIN = "https://vrc-club-charts.vercel.app"
-MODEL = os.environ.get("VCC_SCOUT_MODEL", "gpt-4.1-mini")
+MODEL = os.environ.get("VCC_SCOUT_MODEL", "gemini-2.5-flash-lite")
 WORLD_ID = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
 IMAGE_MAX_BYTES = 4 * 1024 * 1024
 IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp"}
@@ -194,27 +194,37 @@ def evaluate_image(name: str, author: str, mime: str, image: bytes, key: str) ->
         "Use Japanese for prose."
     )
     result = post_json(
-        "https://api.openai.com/v1/chat/completions",
+        "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent",
         {
-            "model": MODEL,
-            "messages": [
-                {"role": "system", "content": instruction},
-                {"role": "user", "content": [
-                    {"type": "text", "text": "World name: " + name[:120] + "; author: " + author[:120]},
-                    {"type": "image_url", "image_url": {
-                        "url": "data:" + mime + ";base64," + base64.b64encode(image).decode("ascii"),
-                        "detail": "low"
-                    }}
-                ]}
-            ],
-            "response_format": {"type": "json_object"},
-            "max_tokens": 450,
-            "temperature": 0,
+            "systemInstruction": {"parts": [{"text": instruction}]},
+            "contents": [{
+                "role": "user",
+                "parts": [
+                    {"text": "World name: " + name[:120] + "; author: " + author[:120]},
+                    {"inlineData": {
+                        "mimeType": mime,
+                        "data": base64.b64encode(image).decode("ascii")
+                    }},
+                ]
+            }],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "maxOutputTokens": 640,
+                "temperature": 0,
+            },
         },
-        {"Authorization": "Bearer " + key},
+        {"x-goog-api-key": key},
         timeout=70,
     )
-    content = result["choices"][0]["message"]["content"]
+    candidates = result.get("candidates")
+    if not isinstance(candidates, list) or not candidates:
+        raise ValueError("Gemini returned no candidates")
+    parts = candidates[0].get("content", {}).get("parts", [])
+    if not isinstance(parts, list):
+        raise ValueError("Gemini returned invalid response parts")
+    content = "".join(part.get("text", "") for part in parts if isinstance(part, dict))
+    if not content.strip():
+        raise ValueError("Gemini returned no JSON text")
     parsed = json.loads(content)
     if not isinstance(parsed, dict) or parsed.get("canJudge") is not True:
         return None
@@ -275,21 +285,36 @@ def build_catalog(key: str = "") -> dict:
             visuals = {}
         for row in selected:
             wid = row["id"]
-            attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"), "status": "unavailable"}
+            # Only persist a cooldown after a genuine image/evaluation attempt.
+            # Temporary provider rate limits must not block these Worlds for 7 days.
             if wid not in visuals:
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "thumbnail-unavailable"}
                 continue
             try:
                 mime, image = fetch_image(wid)
                 assessment = evaluate_image(row["name"], row["author"], mime, image, key)
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "assessed" if assessment else "insufficient-image"}
                 if assessment is None:
                     attempts[wid]["status"] = "insufficient-image"
                     continue
                 scored[wid] = {**row, **assessment}
                 attempts[wid]["status"] = "assessed"
                 new_assessments += 1
+            except urllib.error.HTTPError as exc:
+                # Stop on quota/rate limits and authentication failures. Do not
+                # mark the remaining queue as evaluated or retry repeatedly.
+                if exc.code in (400, 401, 403, 429):
+                    print(f"WARN: Gemini request blocked (HTTP {exc.code}); stopping this run.")
+                    break
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "http-unavailable"}
+                print(f"WARN: AI assessment unavailable for {wid}: HTTP {exc.code}")
             except (OSError, ValueError, KeyError, IndexError, urllib.error.URLError) as exc:
                 # Never leak API keys, request bodies or fetched image contents to CI logs.
-                attempts[wid]["status"] = "unavailable"
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "unavailable"}
                 print(f"WARN: AI assessment unavailable for {wid}: {type(exc).__name__}")
 
     ranking = sorted(scored.values(), key=lambda row: (
@@ -312,14 +337,14 @@ def build_catalog(key: str = "") -> dict:
 
 
 def main() -> int:
-    key = os.environ.get("OPENAI_API_KEY", "")
+    key = os.environ.get("GEMINI_API_KEY", "")
     result = build_catalog(key)
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"AI SCOUT: {result['summary']['totalCandidates']} candidates, "
           f"{result['summary']['assessed']} AI image assessments, "
           f"{result['summary']['pending']} unassessed")
     if not key:
-        print("INFO: OPENAI_API_KEY is not configured; publishing an unscored discovery queue.")
+        print("INFO: GEMINI_API_KEY is not configured; publishing an unscored discovery queue.")
     return 0
 
 
