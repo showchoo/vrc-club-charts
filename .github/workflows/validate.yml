@@ -37,6 +37,8 @@ on:
       - "scripts/build_discovery_ledger.py"
       - "scripts/review_world_submissions.py"
       - "scripts/review_discovery_candidates.py"
+      - "scripts/notify_pending_reviews.py"
+      - ".github/workflows/notify-pending-reviews.yml"
       - "scripts/sync_discovery_to_supabase.py"
       - "scripts/sync_worlds_from_supabase.py"
       - "data/reviews.json"
