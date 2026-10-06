@@ -4334,3 +4334,173 @@ a.community-review-world:hover{text-decoration:underline}
 @media (max-width:620px){
   .ai-scout-primary .title-main{font-size:clamp(48px,9vw,65px);letter-spacing:-.08em;}
 }
+
+/* 2026-10-06: Club Discovery hero legibility and a real vertical ranking */
+.ai-scout-primary .ranking-hero-head {
+  display: block;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1060px;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+.ai-scout-primary .ranking-hero-head > div {
+  min-width: 0;
+}
+.ai-scout-primary .dimensional-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 1.8vw, 26px);
+  margin: 22px 0 0;
+  transform: none;
+}
+.ai-scout-primary .title-overline {
+  margin: 0;
+  line-height: 1.05;
+  flex: none;
+}
+.ai-scout-primary .title-main {
+  margin: 0;
+  font-size: clamp(56px, 7.7vw, 114px);
+  letter-spacing: -.065em;
+  line-height: 1.07;
+  flex: none;
+  white-space: nowrap;
+}
+.ai-scout-primary .title-jp {
+  display: inline-flex;
+  position: relative;
+  z-index: 5;
+  flex: none;
+  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1.5;
+  white-space: normal;
+  font-size: clamp(13px, 1.5vw, 18px);
+}
+.ai-scout-primary .ranking-intro {
+  margin: clamp(26px, 3vw, 38px) 0 0;
+  max-width: 650px;
+  padding: 20px 24px;
+  transform: none;
+}
+.ai-scout-primary .ai-scout-heading {
+  margin-bottom: 22px;
+}
+.ai-scout-primary .ai-scout-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+.ai-scout-primary .ai-scout-card {
+  width: 100%;
+  min-width: 0;
+}
+.ai-scout-primary .ai-scout-link {
+  display: grid;
+  grid-template-columns: minmax(190px, 27%) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 175px;
+}
+.ai-scout-primary .ai-scout-media {
+  height: 100%;
+  min-height: 175px;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.ai-scout-primary .ai-scout-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 20px clamp(19px, 3vw, 36px);
+}
+.ai-scout-primary .ai-scout-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 11px;
+}
+.ai-scout-primary .ai-scout-score {
+  font-size: clamp(28px, 3.1vw, 41px);
+}
+.ai-scout-primary .ai-scout-copy h3 {
+  font-size: clamp(20px, 2.35vw, 29px);
+  margin: 10px 0 5px;
+}
+.ai-scout-primary .ai-scout-reason {
+  margin: 11px 0 5px;
+  font-size: 12px;
+}
+.ai-scout-primary .ai-scout-caution {
+  font-size: 10px;
+}
+.ai-scout-primary .ai-scout-number {
+  z-index: 1;
+}
+@media (max-width: 800px) {
+  .ai-scout-primary .title-main {
+    font-size: clamp(49px, 9.2vw, 74px);
+  }
+  .ai-scout-primary .ranking-intro {
+    width: min(100%, 620px);
+  }
+  .ai-scout-primary .ai-scout-link {
+    grid-template-columns: minmax(150px, 31%) minmax(0, 1fr);
+    min-height: 155px;
+  }
+  .ai-scout-primary .ai-scout-media {
+    min-height: 155px;
+  }
+}
+@media (max-width: 540px) {
+  .ai-scout-primary .dimensional-title {
+    gap: 12px;
+  }
+  .ai-scout-primary .title-overline {
+    font-size: clamp(34px, 10vw, 50px);
+  }
+  .ai-scout-primary .title-main {
+    font-size: clamp(42px, 10vw, 54px);
+    letter-spacing: -.065em;
+  }
+  .ai-scout-primary .title-jp {
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  .ai-scout-primary .ranking-intro {
+    margin-top: 22px;
+    padding: 17px 18px;
+  }
+  .ai-scout-primary .ai-scout-link {
+    grid-template-columns: minmax(105px, 34%) minmax(0, 1fr);
+    min-height: 145px;
+  }
+  .ai-scout-primary .ai-scout-media {
+    min-height: 145px;
+  }
+  .ai-scout-primary .ai-scout-copy {
+    padding: 13px 14px;
+  }
+  .ai-scout-primary .ai-scout-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ai-scout-primary .ai-scout-score {
+    font-size: 30px;
+  }
+  .ai-scout-primary .ai-scout-copy h3 {
+    font-size: 18px;
+    margin: 8px 0 5px;
+  }
+  .ai-scout-primary .ai-scout-reason {
+    font-size: 11px;
+    margin: 9px 0 4px;
+  }
+  .ai-scout-primary .ai-scout-caution {
+    font-size: 10px;
+  }
+}
