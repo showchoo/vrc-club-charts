@@ -341,30 +341,22 @@ def event_page(event: dict, djs: list[dict]) -> str:
 """ + footer("../")
 
 
-def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
+def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | None = None) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
     author = w.get("author") or "—"
     genres = w.get("genres") or []
-    editorial_status = w.get("editorialStatus") or "unreviewed"
-    panel = w.get("panelReview") or {}
-    panel_status = panel.get("status") or "collecting"
-    panel_score = panel.get("score")
-    review_count = int(panel.get("reviewCount") or 0)
-    confidence = panel.get("confidence") or "low"
+    ai_visual = ai_visual or {}
+    image_score = ai_visual.get("visualPotential") if isinstance(ai_visual, dict) else None
+    image_scored = isinstance(image_score, int) and not isinstance(image_score, bool) and 0 <= image_score <= 100
     totals = w.get("totals") or {}
     weekly = w.get("weekly") or {}
     thumbnail = w.get("thumbnail")
     canonical = f"{BASE_URL}worlds/{quote(wid)}.html"
     description = f"{name} by {author} — VRChat club / DJ world profile on VRC Club Charts."
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
-    if panel_status == "ranked":
-        status_text = "PANEL RANKED"
-    elif panel_status == "provisional":
-        status_text = "PROVISIONAL PANEL"
-    else:
-        status_text = "PENDING PANEL REVIEW"
-    score_html = f"{float(panel_score):.1f}" if panel_score is not None else "—"
+    status_text = "AI SCOUT / VISUAL ESTIMATE" if image_scored else "WORLD DIRECTORY / NOT YET SCORED"
+    score_html = str(image_score) if image_scored else "—"
     image = f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" />' if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
     source_url = w.get("source")
@@ -411,7 +403,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
 
     return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
-    <a class="world-back" href="../index.html#discoverySection">← VRC Club Charts</a>
+    <a class="world-back" href="../index.html#aiScoutSection">← AI SCOUT</a>
     <section class="world-detail-hero">
       <div class="world-detail-copy">
         <p class="kicker">{esc(status_text)}</p>
@@ -420,6 +412,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
         <div class="tags">{tags}</div>
         <div class="world-detail-actions">
           <a class="primary-button" href="{esc(vrchat)}" target="_blank" rel="noreferrer">OPEN IN VRCHAT ↗</a>
+          <a class="secondary-button" href="../reviewer.html?world={esc(wid)}#write-review">体験レビューを投稿 ↗</a>
           {f'<a class="secondary-button" href="{esc(source_url)}" target="_blank" rel="noreferrer">PUBLIC SOURCE ↗</a>' if source_url else ""}
         </div>
       </div>
@@ -427,16 +420,16 @@ def world_page(w: dict, events: list[dict], djs: list[dict]) -> str:
     </section>
 
     <section class="world-detail-stats">
-      <article><span>PANEL SCORE</span><strong>{esc(score_html)}</strong></article>
-      <article><span>REVIEWS</span><strong>{esc(review_count)}</strong></article>
-      <article><span>CONFIDENCE</span><strong>{esc(confidence.upper())}</strong></article>
+      <article><span>AI VISUAL</span><strong>{esc(score_html)}</strong></article>
+      <article><span>IMAGE BASIS</span><strong>{'THUMBNAIL' if image_scored else 'NOT SCORED'}</strong></article>
       <article><span>TOTAL VISITS</span><strong>{esc(fmt_num(totals.get("visits")))}</strong></article>
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
     </section>
 
+    <p class="world-review-disclaimer">AI外観スコアはサムネイル画像1枚からの参考推定で、音響・ギミック・動作の軽さは未確認です。Worldを訪れた感想は別の体験レビューとして投稿できます。</p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
-      <div><span>REVIEW STATUS</span><strong>{esc(panel_status.upper())}</strong></div>
+      <div><span>AI VISUAL BASIS</span><strong>{'LOW CONFIDENCE / IMAGE ONLY' if image_scored else 'NOT YET ASSESSED'}</strong></div>
       <div><span>CAPACITY</span><strong>{esc(fmt_num(w.get("capacity")))}</strong></div>
       <div><span>WORLD UPDATED</span><strong>{esc(w.get("worldUpdatedAt") or "—")}</strong></div>
     </section>
@@ -559,14 +552,10 @@ def index_page(worlds: list[dict]) -> str:
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">{len(cards)}のWorldを収録。クラブ、DJ、レイヴなどのワールドを探せます。実地レビューが集まったWorldには、公式スコアを表示します。</p>
+    <p class="lead">{len(cards)}のWorldを収録。クラブ・DJ・レイヴなど、まだ知らないWorldを探せます。画像の参考スコアはAI SCOUT、訪問した人の感想は体験レビューで紹介します。</p>
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
-      <div class="chip-row" id="worldDirectoryFilters">
-        <button class="chip active" type="button" data-status-filter="all">ALL</button>
-        <button class="chip" type="button" data-status-filter="reviewed">PANEL REVIEWED</button>
-        <button class="chip" type="button" data-status-filter="discovery">DISCOVERY</button>
-      </div>
+      <div class="chip-row"><a class="chip" href="../index.html#aiScoutSection">AI SCOUT ↗</a></div>
       <span id="worldDirectoryCount" class="discovery-count">{len(cards)} WORLDS</span>
     </div>
     <div id="worldCatalog" class="world-catalog">{''.join(cards)}</div>
@@ -703,10 +692,15 @@ def main() -> int:
         encoding="utf-8",
     )
 
+    scout_path = ROOT / "data/ai-scout.json"
+    scout_data = json.loads(scout_path.read_text(encoding="utf-8")) if scout_path.exists() else {}
+    scout_by_world = {item.get("id"): item for item in scout_data.get("scored", [])
+                      if isinstance(item, dict) and item.get("id")}
     world_dir = out / "worlds"
     world_dir.mkdir(parents=True, exist_ok=True)
     for w in worlds:
-        (world_dir / f"{w['id']}.html").write_text(world_page(w, events, djs), encoding="utf-8")
+        (world_dir / f"{w['id']}.html").write_text(
+            world_page(w, events, djs, scout_by_world.get(w["id"])), encoding="utf-8")
     (world_dir / "index.html").write_text(index_page(worlds), encoding="utf-8")
 
     dj_dir = out / "djs"
