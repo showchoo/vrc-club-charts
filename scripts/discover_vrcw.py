@@ -217,10 +217,9 @@ def auto_register(candidates: list[dict], catalog: list[dict],
                   decided_ids: set[str]) -> list[str]:
     """Auto-register only public Worlds with verified name/author and strong club evidence."""
     known = {w.get("id") for w in catalog}
-    user_agent = os.environ.get("VRC_USER_AGENT", "").strip()
-    if not user_agent:
-        print("WARN: VRC_USER_AGENT missing: all auto-admissions deferred")
-        return []
+    user_agent = os.environ.get("VRC_USER_AGENT", "").strip() or (
+        "VRCClubCharts/1.0 (+https://github.com/showchoo/vrc-club-charts/issues)"
+    )
     max_checks = max(1, min(40, int(os.environ.get("VCC_DISCOVERY_VERIFY_PER_RUN", "16"))))
     ordered = sorted(candidates, key=lambda e: (
         0 if "direct-world-link" in e.get("sourceCategories", []) else 1,
