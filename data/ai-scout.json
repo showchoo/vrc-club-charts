@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-06T12:51:30+00:00",
+  "updatedAt": "2026-10-06T16:10:42+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 93,
-    "assessed": 7,
+    "totalCandidates": 101,
+    "assessed": 11,
     "newAssessments": 4,
-    "pending": 86
+    "pending": 90
   },
   "scored": [
     {
@@ -81,6 +81,52 @@
       "assessedAt": "2026-10-06T12:51:27+00:00"
     },
     {
+      "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+      "name": "Beach in a Bottle",
+      "author": "∗Lotus∗",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_4f015255-390a-44cb-9e81-bd2021eb970a.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "大きな月を背景に、ガラスドームの中に作られた小さな風景とタイトル文字が配置された夜間の情景が確認できます。",
+      "cautionsJa": "サムネイル画像であるため、実際のワールド内での質感やオブジェクトの詳細な作り込みについては判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T16:09:44+00:00"
+    },
+    {
+      "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
+      "name": "Club Earthquake 〖Night pool〗",
+      "author": "ro_tta",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_2acdf41c-4714-427b-98d7-4fee07ac6439.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "緑色のレーザーやネオンサインが配置されたナイトプール風のステージ空間が視認できます。",
+      "cautionsJa": "サムネイル画像には文字やエフェクトが合成されているため、実際のワールド内の見え方とは異なる可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T16:10:42+00:00"
+    },
+    {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
       "name": "AudioLink ClubSystem",
       "author": "JJavierPV",
@@ -102,6 +148,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:30+00:00"
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1.222",
+      "author": "TGCFabian",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "ステージ背面のサイケデリックな背景や床面の模様など、ネオンカラーを基調としたポップなクラブ空間が確認できます。",
+      "cautionsJa": "静止画のため、実際の照明の演出効果やダンスフロア周辺の実際の広さや構造については判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T16:10:39+00:00"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -152,6 +221,29 @@
       "assessedAt": "2026-10-06T12:51:21+00:00"
     },
     {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html",
+      "visualPotential": 40,
+      "factors": {
+        "visual": 2,
+        "lighting": 3,
+        "spatial": 1,
+        "originality": 2
+      },
+      "reasonJa": "黄金色の波状の背景と「AUDIOLINK」という文字が大きく配置されたシンプルなサムネイル画像です。",
+      "cautionsJa": "実際のワールド内の構造や空間デザインは画像からは一切確認できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T16:09:42+00:00"
+    },
+    {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
@@ -179,6 +271,17 @@
   ],
   "candidates": [
     {
+      "id": "wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
+      "name": "Cyberpunk Rooftop City",
+      "author": "Coldcancer",
+      "sourceType": "discovery",
+      "signals": [
+        "STAGE",
+        "CYBER"
+      ],
+      "url": "https://vrcmap.com/world/wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16"
+    },
+    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -188,46 +291,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
-      "name": "Audiolinkバチバチワールド",
-      "author": "しゃちょー",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
-    },
-    {
-      "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
-      "name": "Beach in a Bottle",
-      "author": "∗Lotus∗",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_4f015255-390a-44cb-9e81-bd2021eb970a.html"
-    },
-    {
-      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
-      "name": "Club Catnip - V1.222",
-      "author": "TGCFabian",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6.html"
-    },
-    {
-      "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
-      "name": "Club Earthquake 〖Night pool〗",
-      "author": "ro_tta",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_2acdf41c-4714-427b-98d7-4fee07ac6439.html"
     },
     {
       "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
@@ -418,6 +481,36 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
+    },
+    {
+      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+      "name": "TUBE VR - IN THE DANCE",
+      "author": "Hadean",
+      "sourceType": "catalog",
+      "signals": [
+        "IMMERSIVE"
+      ],
+      "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
+    },
+    {
+      "id": "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
+      "name": "Udder Rave",
+      "author": "MøøƁerriღ",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_1c01d4a5-521a-47bd-9172-f36a8c712384.html"
+    },
+    {
+      "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+      "name": "どんのラウンジバー「BLACK GOLD」",
+      "author": "＝DonK＝",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d.html"
     }
   ],
   "attempts": {
@@ -451,6 +544,22 @@
     },
     "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9": {
       "checkedAt": "2026-10-06T12:51:30+00:00",
+      "status": "assessed"
+    },
+    "wrld_099295a5-d221-4128-8f01-55cd81d71839": {
+      "checkedAt": "2026-10-06T16:09:42+00:00",
+      "status": "assessed"
+    },
+    "wrld_4f015255-390a-44cb-9e81-bd2021eb970a": {
+      "checkedAt": "2026-10-06T16:09:44+00:00",
+      "status": "assessed"
+    },
+    "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6": {
+      "checkedAt": "2026-10-06T16:10:39+00:00",
+      "status": "assessed"
+    },
+    "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439": {
+      "checkedAt": "2026-10-06T16:10:42+00:00",
       "status": "assessed"
     }
   }
