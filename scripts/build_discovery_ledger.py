@@ -89,6 +89,15 @@ def build_ledger(today: str | None = None):
     events_auto = load(DATA / "events-auto.json", [])
     events_curated = load(DATA / "events.json", [])
     state = load(DATA / "discovery-state.json", {})
+    decision_audit=load(DATA / "world-candidate-ai-decisions.json", [])
+    # Explicitly non-public Worlds do not appear even as historical leads in
+    # the public discovery ledger/report. Their IDs remain only in the
+    # internal suppression audit so crawlers cannot add them again.
+    excluded_ids={
+        str(row.get("id") or "").lower() for row in decision_audit
+        if isinstance(row, dict) and row.get("status")=="excluded_nonpublic"
+        and ids_in(row.get("id"))
+    } if isinstance(decision_audit,list) else set()
 
     if not isinstance(catalog, list) or not isinstance(pending, list):
         raise ValueError("World catalog and discovery queue must be arrays")
@@ -100,6 +109,8 @@ def build_ledger(today: str | None = None):
         if not isinstance(item, dict) or not ids_in(item.get("id")):
             continue
         wid = str(item["id"]).lower()
+        if wid in excluded_ids:
+            continue
         active_ids.add(wid)
         _record(observations, wid, today, kind="catalog",
                 ref=str(item.get("source") or "data/worlds.json"),
@@ -109,7 +120,7 @@ def build_ledger(today: str | None = None):
         if not isinstance(item, dict):
             continue
         wid = str(item.get("id", "")).lower()
-        if not ids_in(wid) or wid in active_ids:
+        if not ids_in(wid) or wid in active_ids or wid in excluded_ids:
             continue
         pending_ids.add(wid)
         categories = item.get("sourceCategories")
@@ -124,7 +135,7 @@ def build_ledger(today: str | None = None):
         if not isinstance(item, dict):
             continue
         wid = str(item.get("id") or "").lower()
-        if ids_in(wid):
+        if ids_in(wid) and wid not in excluded_ids:
             _record(observations, wid, today,
                     kind="nominated-url" if item.get("type") != "source-listed-club" else "source-reference",
                     ref=str(item.get("source") or ""),
@@ -137,6 +148,8 @@ def build_ledger(today: str | None = None):
             if not isinstance(item, dict):
                 continue
             for wid in event_ids(item):
+                if wid in excluded_ids:
+                    continue
                 _record(observations, wid, today, kind=source,
                         ref=str(item.get("url") or "")[:400],
                         name=str(item.get("worldName") or ""))
@@ -147,7 +160,7 @@ def build_ledger(today: str | None = None):
     } if isinstance(previous, list) else {}
 
     result = []
-    for wid in sorted(set(observations) | set(old_by_id)):
+    for wid in sorted((set(observations) | set(old_by_id)) - excluded_ids):
         obs = observations.get(wid, {})
         old = old_by_id.get(wid, {})
         known = {}
