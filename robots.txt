@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://showchoo.github.io/vrc-club-charts/sitemap.xml
+Sitemap: https://vrc-club-charts.vercel.app/sitemap.xml
