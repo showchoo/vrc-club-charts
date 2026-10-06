@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "id": "wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World metadata unavailable: ValueError",
+    "reviewedAt": "2026-10-06T15:24:03.680292+00:00",
+    "source": "auto-discovery"
+  },
+  {
+    "id": "wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
+    "name": "Cyberpunk Rooftop City",
+    "author": "Coldcancer",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "Description mentions running between rooftops of a neon city",
+        "Contains amenities like a basketball court and video player alongside a bar and stage",
+        "Thumbnail shows a city street scene rather than a dedicated dance club or rave venue"
+      ],
+      "reasonJa": "説明文に都市の屋上を駆け回る設計やバスケットボールコートが含まれており、専用のクラブやレイヴ会場ではなく一般的な都市探索・交流ワールドであるため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-06T15:24:06.420089+00:00",
+    "source": "auto-discovery",
+    "discoverySources": [
+      "vrcmap_cafe"
+    ]
+  },
+  {
+    "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+    "name": "Club VGL",
+    "author": "Varneon",
+    "status": "classification_unavailable",
+    "classification": {},
+    "note": "Gemini classification temporarily unavailable: JSONDecodeError",
+    "reviewedAt": "2026-10-06T15:24:08.914849+00:00",
+    "source": "auto-discovery"
+  }
+]
