@@ -170,6 +170,7 @@ jobs:
           git commit -m "fix: Gemini remediation for monitored site regression"
           gh auth setup-git
           git push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$branch"
+          printf 'https://github.com/%s/tree/%s\n' "$GITHUB_REPOSITORY" "$branch" > /tmp/vcc-repair-branch.txt
 
           diagnosis=$(python - <<'PY'
           import json
@@ -231,4 +232,5 @@ jobs:
           python scripts/notify_site_health.py \
             --report /tmp/vcc-site-health.json \
             --repair /tmp/vcc-repair-result.json \
-            --pr-url-file /tmp/vcc-repair-pr.txt
+            --pr-url-file /tmp/vcc-repair-pr.txt \
+            --branch-url-file /tmp/vcc-repair-branch.txt
