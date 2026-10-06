@@ -10,6 +10,7 @@ on:
       - "events.html"
       - "djs.html"
       - "app.js"
+      - "analytics.js"
       - "events.js"
       - "djs.js"
       - "styles.css"
@@ -69,6 +70,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check analytics.js
           node --check events.js
           node --check djs.js
       - name: Sync approved Worlds

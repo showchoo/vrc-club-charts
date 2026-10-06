@@ -52,6 +52,12 @@
 .candidate-score b{font-size:21px}.candidate-score small{font-size:8px;color:#718b94}
 .candidate-source{color:#8fd8e9;font-size:9px;text-decoration:none}
 .candidate-source:hover{text-decoration:underline}
+.analytics-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.analytics-metric{padding:14px;border:1px solid rgba(172,239,255,.08);border-radius:12px;background:rgba(255,255,255,.025)}
+.analytics-metric b{display:block;color:#6f8a94;font-size:8px;letter-spacing:.12em}.analytics-metric strong{display:block;margin-top:6px;font-size:25px;color:#dff9ff}.analytics-metric span{font-size:8px;color:#69828b}
+.analytics-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.analytics-box{padding:12px;border-radius:12px;background:rgba(255,255,255,.022)}.analytics-box>b{display:block;margin-bottom:9px;color:#6f8a94;font-size:8px;letter-spacing:.12em}
+.analytics-list{display:grid;gap:7px}.analytics-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:center}.analytics-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#a8c6ce;font-size:9px}.analytics-row strong{color:#dff9ff;font:700 10px/1 monospace}.analytics-bar{grid-column:1/-1;height:3px;border-radius:99px;background:rgba(255,255,255,.04);overflow:hidden}.analytics-bar i{display:block;height:100%;background:rgba(80,221,255,.55);border-radius:inherit}.analytics-foot{margin:11px 0 0;color:#657f88;font-size:8px;line-height:1.6}
+@media(max-width:800px){.analytics-metrics{grid-template-columns:1fr 1fr}.analytics-columns{grid-template-columns:1fr}}
 .hidden{display:none!important}
     @media(max-width:700px){.admin-top,.admin-card-head{flex-direction:column}.admin-lock-row,.admin-actions{flex-direction:column}.admin-data{grid-template-columns:1fr}.credential-row{grid-template-columns:1fr}.admin-toolbar{align-items:flex-start;flex-direction:column}}
   </style>
@@ -78,6 +84,27 @@
     </section>
 
     <section class="admin-panel hidden" id="adminPanel">
+      <div class="admin-toolbar">
+        <strong>SITE ANALYTICS</strong>
+        <span class="admin-auto-label">NO IP / NO COOKIE / NO DEVICE ID</span>
+      </div>
+      <div class="admin-card">
+        <div class="analytics-metrics">
+          <div class="analytics-metric"><b>TODAY</b><strong id="analyticsToday">0</strong><span>PAGE VIEWS</span></div>
+          <div class="analytics-metric"><b>7 DAYS</b><strong id="analytics7d">0</strong><span>PAGE VIEWS</span></div>
+          <div class="analytics-metric"><b>30 DAYS</b><strong id="analytics30d">0</strong><span>PAGE VIEWS</span></div>
+          <div class="analytics-metric"><b>ALL TIME</b><strong id="analyticsAll">0</strong><span>PAGE VIEWS</span></div>
+        </div>
+        <div class="analytics-columns">
+          <div class="analytics-box"><b>TOP SOURCES / REFERRERS</b><div class="analytics-list" id="analyticsSources"></div></div>
+          <div class="analytics-box"><b>TOP PAGES</b><div class="analytics-list" id="analyticsPages"></div></div>
+          <div class="analytics-box"><b>UTM CAMPAIGNS</b><div class="analytics-list" id="analyticsCampaigns"></div></div>
+        </div>
+        <p class="analytics-foot" id="analyticsFoot">公開ページのPVを集計します。外部サイトからクリック流入があれば参照元ドメインに表示されます。</p>
+      </div>
+
+      <div class="admin-queue-divider"></div>
+
       <div class="admin-toolbar">
         <strong>EDITOR CURATION</strong>
         <span class="admin-auto-label">SEPARATE FROM PANEL RANKING</span>
@@ -150,6 +177,14 @@
       const worldCandidateList = document.getElementById('worldCandidateList');
       const worldCandidateCount = document.getElementById('worldCandidateCount');
       const loginStatus = document.getElementById('loginStatus');
+      const analyticsToday = document.getElementById('analyticsToday');
+      const analytics7d = document.getElementById('analytics7d');
+      const analytics30d = document.getElementById('analytics30d');
+      const analyticsAll = document.getElementById('analyticsAll');
+      const analyticsSources = document.getElementById('analyticsSources');
+      const analyticsPages = document.getElementById('analyticsPages');
+      const analyticsCampaigns = document.getElementById('analyticsCampaigns');
+      const analyticsFoot = document.getElementById('analyticsFoot');
       const editorWorld = document.getElementById('editorWorld');
       const editorVisual = document.getElementById('editorVisual');
       const editorLighting = document.getElementById('editorLighting');
@@ -422,6 +457,33 @@
       }
 
 
+
+      function renderAnalytics(data){
+        const summary=data?.summary || {};
+        analyticsToday.textContent=Number(summary.today||0).toLocaleString('en-US');
+        analytics7d.textContent=Number(summary.last7||0).toLocaleString('en-US');
+        analytics30d.textContent=Number(summary.last30||0).toLocaleString('en-US');
+        analyticsAll.textContent=Number(summary.allTime||0).toLocaleString('en-US');
+
+        const renderList=(el,rows,empty)=>{
+          if(!Array.isArray(rows) || !rows.length){
+            el.innerHTML='<div class="empty-admin" style="padding:16px 4px">'+esc(empty)+'</div>';
+            return;
+          }
+          const max=Math.max(...rows.map(row=>Number(row.count||0)),1);
+          el.innerHTML=rows.map(row=>{
+            const pct=Math.max(3,Math.round(Number(row.count||0)/max*100));
+            return '<div class="analytics-row"><span title="'+esc(row.name)+'">'+esc(row.name)+'</span><strong>'+Number(row.count||0).toLocaleString('en-US')+'</strong><div class="analytics-bar"><i style="width:'+pct+'%"></i></div></div>';
+          }).join('');
+        };
+        renderList(analyticsSources,data?.topSources,'まだ流入データがありません。');
+        renderList(analyticsPages,data?.topPages,'まだ閲覧データがありません。');
+        renderList(analyticsCampaigns,data?.topCampaigns,'UTMキャンペーンはまだありません。');
+        analyticsFoot.textContent=summary.truncated
+          ? '直近30日の表示は10,000件までです。集計上限に達しています。'
+          : '外部サイトからクリック流入があると参照元が表示されます。Direct / unknown はURL直打ち、アプリ内ブラウザなど参照元を渡さない流入を含みます。';
+      }
+
       const editorInputs=[editorVisual,editorLighting,editorSound,editorSpatial,editorInteraction,editorOriginality,editorOptimization];
       function updateEditorTotal(){
         editorTotal.textContent=editorInputs.reduce((sum,input)=>sum+Number(input.value||0),0);
@@ -515,13 +577,14 @@
       async function load(){
         setLoginStatus('確認中…');
         try{
-          const [data,reviews,worldDecisions,candidates,worlds,editorData]=await Promise.all([
+          const [data,reviews,worldDecisions,candidates,worlds,editorData,analyticsData]=await Promise.all([
             callAdmin('list'),
             callAdmin('list_reviews'),
             callAdmin('list_world_candidate_decisions'),
             loadWorldCandidates(),
             loadEditorWorlds(),
-            callAdmin('list_editor_scores')
+            callAdmin('list_editor_scores'),
+            callAdmin('list_analytics')
           ]);
           showUnlocked();
           render(data.applications || []);
@@ -530,6 +593,7 @@
           editorWorlds=worlds || [];
           editorScores=editorData.scores || [];
           renderEditorScores();
+          renderAnalytics(analyticsData);
           setLoginStatus('');
         }catch(err){
           showLocked();
