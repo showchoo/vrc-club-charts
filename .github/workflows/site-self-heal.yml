@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   monitor:
-    if: ${{ (github.event_name != 'workflow_dispatch' || !inputs.rehearsal) && !(github.event_name == 'push' && contains(github.event.head_commit.message, '[vcc-one-time-rehearsal]')) }}
+    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.rehearsal }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -259,7 +259,7 @@ jobs:
 
   rehearsal:
     # Runs ONLY when a human explicitly requests the opt-in test mode.
-    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.rehearsal) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[vcc-one-time-rehearsal]')) }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.rehearsal }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -348,41 +348,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          for run in "$GITHUB_RUN_ID" 37513011233; do
+          for run in "$GITHUB_RUN_ID"; do
             for name in base safe manual; do
               branch="test/vcc-heal-$name-$run"
               gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$branch" >/dev/null 2>&1 || true
             done
           done
           echo "Disposable rehearsal branch cleanup attempted"
-
-      - name: Send and resolve one synthetic GitHub Issue alert
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-        run: |
-          python - <<'PY'
-          import os
-          from scripts import notify_site_health as n
-          repo=os.environ["GITHUB_REPOSITORY"]
-          token=os.environ["GITHUB_TOKEN"]
-          owner=os.environ["GITHUB_REPOSITORY_OWNER"]
-          existing=n.api("GET", f"/repos/{repo}/issues?state=open&labels={n.LABEL}&per_page=50", token)
-          if any(isinstance(x,dict) and "pull_request" not in x for x in existing):
-              raise SystemExit("Existing genuine incident present: no synthetic alert created")
-          incident={"healthy":False, "issues":[{
-              "code":"rehearsal_notification", "category":"test",
-              "detail":"Controlled notification proof test. Production site is healthy.",
-              "auto_fixable":False}]}
-          created=n.sync(incident, {"status":"external_problem"}, token, repo, owner)
-          try:
-              assert created=="created", f"expected newly created Issue, got {created}"
-          finally:
-              n.sync({"healthy":True, "issues":[]}, {}, token, repo, owner)
-          print("PASS: actual notifier created and closed test Issue; email delivery needs inbox verification")
-          PY
 
       - name: Require live Gemini test to have succeeded
         if: always()
