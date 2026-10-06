@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VRC Club Charts — VRChat Craftsmanship Ranking</title>
-  <meta name="description" content="VRChatクラブを、人気ではなく作り込みで評価するCraftsmanship Ranking。現在はレビュアーパネル準備中のPublic Beta。" />
+  <meta name="description" content="VRChatのクラブを、人気ではなく空間の完成度で見る。World探索、AI SCOUT、実地レビューによる作り込みランキング。" />
   <meta name="theme-color" content="#0d171c" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://vrc-club-charts.vercel.app/" />
   <meta property="og:title" content="VRC Club Charts — Craftsmanship Ranking" />
-  <meta property="og:description" content="Reviewer-based craftsmanship ranking for VRChat nightlife." />
+  <meta property="og:description" content="Discover VRChat club worlds, visual scouting and independent craftsmanship reviews." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://vrc-club-charts.vercel.app/" />
   <meta property="og:site_name" content="VRC Club Charts" />
@@ -56,16 +56,16 @@
       <div class="shell ranking-hero-inner">
         <div class="ranking-hero-head">
           <div>
-            <p class="focus-eyebrow"><span></span> VRCHAT NIGHTLIFE / PUBLIC BETA</p>
+            <p class="focus-eyebrow"><span></span> VRCHAT NIGHTLIFE / BEYOND POPULARITY</p>
             <h1 class="dimensional-title">
               <span class="title-overline" data-text="CRAFTSMANSHIP">CRAFTSMANSHIP</span>
               <span class="title-main" data-text="RANKING">RANKING</span>
-              <span class="title-jp">作りこみランキング</span>
+              <span class="title-jp">作り込みランキング</span>
             </h1>
           </div>
           <div class="ranking-intro">
-            <p>人気ではなく、空間・照明・音響・ギミックなどの<strong>作り込み</strong>を、複数レビュアーの実地評価で比べるランキングです。</p>
-            <a class="text-link" href="reviewer.html">評価基準を見る ↗</a>
+            <p>音、光、空間。そのすべてに宿る<strong>作り込み</strong>を、実際にワールドを訪れたレビュワーの評価で可視化します。</p>
+            <a class="text-link" href="reviewer.html">7つの評価基準 ↗</a>
           </div>
         </div>
 
@@ -80,20 +80,20 @@
           <div class="editor-picks-head">
             <div>
               <p class="kicker">EDITOR'S PICKS</p>
-              <h2>運営が選ぶ、作り込みの強いクラブ。</h2>
+              <h2>編集部が注目するクラブ。</h2>
             </div>
-            <p>Editor Scoreは運営者による同じ7基準の評価です。Reviewerによる公式Craftsmanship Rankingの順位には影響しません。</p>
+            <p>編集部独自の7項目評価でセレクト。公式ランキングの点数・順位とは別に掲載しています。</p>
           </div>
           <div id="editorPicks" class="editor-picks-grid"></div>
         </section>
 
         <div id="craftRanking" class="craft-ranking-board">
-          <div class="ranking-loading">Loading panel ranking…</div>
+          <div class="ranking-loading">ランキングを読み込み中…</div>
         </div>
 
         <div class="ranking-foot">
-          <span>3 reviews → PROVISIONAL / 5+ reviews → RANKED</span>
-          <a href="reviewer.html">REVIEWER SYSTEM ↗</a>
+          <span>3 REVIEWS · 暫定評価 / 5+ REVIEWS · 正式ランキング</span>
+          <a href="reviewer.html">評価の仕組み ↗</a>
         </div>
       </div>
     </section>
@@ -101,26 +101,26 @@
     <section id="aiScoutSection" class="shell ai-scout-section lower-section" aria-label="AI Scout World discovery">
       <div class="ai-scout-heading">
         <div>
-          <p class="kicker">AI SCOUT / AUTOMATED WORLD DISCOVERY</p>
-          <h2>知られていない、作り込み候補を探す。</h2>
-          <p>人気順とは別に、クラブWorldを自動発掘します。画像AIが評価した場合も<span>「外観の期待度」だけ</span>を表示します。</p>
+          <p class="kicker">AI SCOUT / WORLD RADAR</p>
+          <h2>次の注目クラブを、探し出す。</h2>
+          <p>公開情報からクラブWorldを探索。画像分析ができたWorldには、<span>外観の参考スコア</span>を表示します。</p>
         </div>
         <div class="ai-scout-heading-info">
-          <span id="aiScoutStatus">SCANNING PUBLIC WORLDS…</span>
-          <small>NO UNVERIFIED CRAFTSMANSHIP SCORES</small>
+          <span id="aiScoutStatus">WORLD RADAR / LOADING…</span>
+          <small>SINGLE IMAGE / LOW CONFIDENCE</small>
         </div>
       </div>
       <div id="aiScoutGrid" class="ai-scout-grid">
-        <div class="ai-scout-empty">Loading AI SCOUT discoveries…</div>
+        <div class="ai-scout-empty">クラブ情報を読み込み中…</div>
       </div>
-      <p class="ai-scout-disclaimer">AIによる画像分析は公開サムネイルの静止画に限定されます。音響、操作性、VR内の演出、最適化などは未測定です。公式Reviewer RankingやEditor Scoreには加算されません。</p>
+      <p class="ai-scout-disclaimer">AI評価は公開サムネイル1枚から推定した外観の参考値です。音響・ギミック・動作負荷などは未評価。公式の実地レビューランキングには反映されません。</p>
     </section>
 
     <section class="shell calm-section lower-section">
       <div class="calm-section-head">
         <div>
           <p class="kicker">WORLDS</p>
-          <h2>評価対象を探す。</h2>
+          <h2>まだ知らないフロアへ。</h2>
         </div>
         <a class="section-link" href="worlds/">ALL <span id="metricWorlds">100</span> WORLDS ↗</a>
       </div>
@@ -134,7 +134,7 @@
         <div class="calm-section-head">
           <div>
             <p class="kicker">EVENTS</p>
-            <h2>次に行けるイベント。</h2>
+            <h2>次の夜を、見つける。</h2>
           </div>
           <a class="section-link" href="events.html">ALL EVENTS ↗</a>
         </div>
@@ -147,15 +147,15 @@
     <section class="shell calm-reviewer-cta lower-section">
       <p class="kicker">REVIEWER PANEL</p>
       <div>
-        <h2>このランキングを、<br>信頼できるものにする。</h2>
-        <p>同じ7基準で実際にワールドを評価し、複数人のレビューが揃ったワールドだけをランキングに載せます。</p>
+        <h2>クラブの価値を、<br>体験から測る。</h2>
+        <p>レビュワーが実際にワールドを訪れ、7つの共通基準で評価。独立したレビューが集まったWorldから公式スコアを公開します。</p>
       </div>
-      <a class="primary-button" href="reviewer.html">REVIEWER SYSTEM ↗</a>
+      <a class="primary-button" href="reviewer.html#apply">レビューに参加する ↗</a>
     </section>
   </main>
 
   <footer class="site-footer shell calm-footer">
-    <span>VRC CLUB CHARTS / PUBLIC BETA</span>
+    <span>VRC CLUB CHARTS / INDEPENDENT</span>
     <span class="footer-links">
       <a href="#craft-ranking">Ranking</a>
       <a href="worlds/">Worlds</a>
@@ -167,7 +167,7 @@
     </span>
   </footer>
 
-  <script src="app.js?v=20261006-44" defer></script>
-  <script src="ai-scout.js?v=20261006-01" defer></script>
+  <script src="app.js?v=20261006-46" defer></script>
+  <script src="ai-scout.js?v=20261006-02" defer></script>
 </body>
 </html>

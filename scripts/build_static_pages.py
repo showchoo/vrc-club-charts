@@ -167,7 +167,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
 
 def footer(prefix: str = "") -> str:
     return f"""  <footer class="site-footer shell">
-    <span>VRC CLUB CHARTS / PUBLIC BETA</span>
+    <span>VRC CLUB CHARTS / INDEPENDENT</span>
     <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviewer</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
   </footer>
 </body>
@@ -502,7 +502,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
     <a class="world-back" href="../djs.html">← DJ Directory</a>
     <section class="world-detail-hero dj-detail-hero">
       <div class="world-detail-copy">
-        <p class="kicker">NON-RANKED DJ PROFILE</p>
+        <p class="kicker">DJ / ARTIST PROFILE</p>
         <h1>{esc(name)}</h1>
         <p class="world-detail-author">{esc(role)}</p>
         <div class="tags">{tags}</div>
@@ -513,7 +513,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
 
     <section class="world-detail-meta dj-detail-meta">
       <div><span>AFFILIATION</span><strong>{esc(crews)}</strong></div>
-      <div><span>PROFILE TYPE</span><strong>DIRECTORY / NON-RANKED</strong></div>
+      <div><span>PROFILE TYPE</span><strong>ARTIST DIRECTORY</strong></div>
     </section>
 
     <section class="dj-appearances">
@@ -558,10 +558,10 @@ def index_page(worlds: list[dict]) -> str:
     return page_head("Worlds — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
-    <h1>VRChat nightlife worlds.</h1>
-    <p class="lead">{len(cards)} tracked worlds. Browse the directory now; panel-reviewed craftsmanship scores will appear as reviewer coverage grows.</p>
+    <h1>まだ知らない、次のフロアへ。</h1>
+    <p class="lead">{len(cards)}のWorldを収録。クラブ、DJ、レイヴなどのワールドを探せます。実地レビューが集まったWorldには、公式スコアを表示します。</p>
     <div class="world-directory-controls">
-      <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World, creator, genre" /></label>
+      <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
       <div class="chip-row" id="worldDirectoryFilters">
         <button class="chip active" type="button" data-status-filter="all">ALL</button>
         <button class="chip" type="button" data-status-filter="reviewed">PANEL REVIEWED</button>

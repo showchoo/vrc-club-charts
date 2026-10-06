@@ -386,15 +386,15 @@ function renderCraftRanking() {
   if (!rows.length) {
     board.innerHTML = `<div class="ranking-empty">
       <div class="ranking-empty-visual" aria-hidden="true">
-        <span data-text="00">00</span>
-        <b>AWAITING REVIEWS</b>
+        <span data-text="—">—</span>
+        <b>INDEPENDENT REVIEWS</b>
       </div>
       <div class="ranking-empty-copy">
         <span>OFFICIAL PANEL RANKING</span>
-        <strong>正式ランキング準備中</strong>
-        <p>3人以上の独立レビューが揃ったワールドから順位を公開します。人気順や仮点数では埋めません。</p>
+        <strong>評価が揃ったクラブから、公開。</strong>
+        <p>独立レビュー3件で暫定評価、5件で正式ランキングへ。人気や推測だけで順位を決めることはありません。</p>
       </div>
-      <a class="secondary-button" href="reviewer.html">HOW IT WORKS ↗</a>
+      <a class="secondary-button" href="reviewer.html">評価基準を見る ↗</a>
     </div>`;
     return;
   }
@@ -430,7 +430,7 @@ function renderWorlds() {
   const chosen = pickWorlds(available);
   grid.innerHTML = chosen.length
     ? chosen.map(worldCard).join('')
-    : '<div class="focus-loading">World data unavailable.</div>';
+    : '<div class="focus-loading">ワールド情報を表示できません。</div>';
 }
 
 function eventStatus(e, now=Date.now()) {
@@ -511,9 +511,9 @@ async function load() {
   } catch (err) {
     console.error(err);
     const ranking = document.getElementById('craftRanking');
-    if (ranking) ranking.innerHTML = '<div class="ranking-loading">Panel ranking unavailable.</div>';
-    document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">Data unavailable.</div>';
-    document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">Event data unavailable.</div>';
+    if (ranking) ranking.innerHTML = '<div class="ranking-loading">ランキングを表示できません。</div>';
+    document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">ワールド情報を表示できません。</div>';
+    document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">イベント情報を表示できません。</div>';
   }
 }
 
