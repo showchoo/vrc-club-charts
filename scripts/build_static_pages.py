@@ -158,7 +158,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
       <a class="{cls('home')}" href="{prefix}index.html">Home</a>
       <a class="{cls('worlds')}" href="{prefix}worlds/index.html">Worlds</a>
       <a class="{cls('events')}" href="{prefix}events.html">Events</a>
-      <a class="{cls('reviewer')}" href="{prefix}reviewer.html">Reviewer</a>
+      <a class="{cls('reviewer')}" href="{prefix}reviewer.html">Reviews</a>
       <a class="{cls('about')}" href="{prefix}about.html">About</a>
     </nav>
   </header>
@@ -168,7 +168,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
 def footer(prefix: str = "") -> str:
     return f"""  <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
-    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviewer</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
+    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviews</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
   </footer>
 </body>
 </html>
