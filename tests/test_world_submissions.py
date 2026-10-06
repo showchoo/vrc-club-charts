@@ -28,7 +28,7 @@ class SubmissionAITests(unittest.TestCase):
         with patch.object(review, "get_json", return_value={
             **META, "releaseStatus": "private"
         }):
-            with self.assertRaisesRegex(ValueError,"Not a public"):
+            with self.assertRaises(review.NonPublicWorldError):
                 review.public_metadata(ID)
 
     def test_confirmed_private_world_has_specific_exclusion_exception(self):
