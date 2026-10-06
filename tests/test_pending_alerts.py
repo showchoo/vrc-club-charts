@@ -97,6 +97,12 @@ class PendingAlertsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"unavailable"):
                 alerts.pending_review_tokens()
 
+    def test_edge_hmac_uses_valid_subtle_crypto_import_key_signature(self):
+        src=(Path(__file__).resolve().parents[1] /
+             "supabase/functions/pending-review-signals/index.ts").read_text(encoding="utf-8")
+        self.assertIn('importKey("raw",encoder.encode(service),{name:"HMAC",hash:"SHA-256"},false,["sign"])',src)
+        self.assertNotIn('importKey("raw",encoder.encode(service),"HMAC",{',src)
+
     def test_github_issue_marker_extracts_from_older_closed_issues(self):
         issues=[{"number":19,"state":"closed",
                  "body":"old\n<!-- vcc-review-alert:review:"+DIGEST+" -->"}]
