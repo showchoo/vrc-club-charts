@@ -4309,3 +4309,11 @@ a.community-review-world:hover{text-decoration:underline}
   .community-review-grid{grid-template-columns:1fr}
   .community-review-page .reviewer-section{padding-top:58px}
 }
+
+
+.world-review-disclaimer{
+  padding:16px 18px;margin:22px 0;
+  border-left:2px solid rgba(99,225,248,.55);
+  background:rgba(12,41,50,.38);
+  color:#9dbec8;font-size:11px;line-height:1.85;
+}
