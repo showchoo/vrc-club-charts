@@ -4317,3 +4317,20 @@ a.community-review-world:hover{text-decoration:underline}
   background:rgba(12,41,50,.38);
   color:#9dbec8;font-size:11px;line-height:1.85;
 }
+
+/* CLUB DISCOVERY — an editorial title that fits the viewport */
+.ai-scout-primary .title-main {
+  font-size: clamp(58px, 8vw, 120px);
+  letter-spacing: -.07em;
+}
+.ai-scout-primary .ai-scout-disclaimer a,
+.world-review-disclaimer a {
+  color:#91e3f0;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.ai-scout-primary .ai-scout-disclaimer a:hover,
+.world-review-disclaimer a:hover {color:#dcfbff;}
+@media (max-width:620px){
+  .ai-scout-primary .title-main{font-size:clamp(48px,9vw,65px);letter-spacing:-.08em;}
+}
