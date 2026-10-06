@@ -63,5 +63,35 @@
     "type": "source-listed-club",
     "nameHint": "Clubroom",
     "source": "https://www.vrcw.net/category/detail/club"
+  },
+  {
+    "id": "wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+    "type": "source-listed-club",
+    "nameHint": "Lost in a Vortex ［Club］",
+    "source": "https://vrcmap.com/world/wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241"
+  },
+  {
+    "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+    "type": "source-listed-club",
+    "nameHint": "CARROT CLUB",
+    "source": "https://vrcmap.com/world/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9"
+  },
+  {
+    "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+    "type": "source-listed-club",
+    "nameHint": "Club Astra",
+    "source": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528"
+  },
+  {
+    "id": "wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
+    "type": "source-listed-club",
+    "nameHint": "Mamacitas Spanish Night Club",
+    "source": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed"
+  },
+  {
+    "id": "wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
+    "type": "source-listed-club",
+    "nameHint": "Club Misery",
+    "source": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57"
   }
 ]
