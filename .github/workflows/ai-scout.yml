@@ -32,7 +32,7 @@ jobs:
       - name: Discover Worlds and assess available thumbnails
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          VCC_SCOUT_MODEL: gemini-2.5-flash-lite
+          VCC_SCOUT_MODEL: gemini-3.5-flash-lite
           VCC_SCOUT_MAX_PER_RUN: "4"
         run: python scripts/build_ai_scout.py
       - name: Commit AI SCOUT result
