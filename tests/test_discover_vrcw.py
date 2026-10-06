@@ -115,6 +115,16 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(items[0]["sourceCategories"], ["vrcmap_reference", "directory-seed"])
         self.assertTrue(discovery.eligible_for_admission(items[0]))
 
+    def test_reported_world_id_is_deduplicated_and_scheduled_for_verification(self):
+        reported = "wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7"
+        seeds = json.loads(discovery.SEEDS.read_text(encoding="utf-8"))
+        self.assertEqual(sum(row.get("id") == reported for row in seeds), 1)
+        items = discovery.priority_seeds("2026-10-06")
+        match = next(item for item in items if item["id"] == reported)
+        self.assertEqual(match["sourceCategories"], ["direct-world-link"])
+        self.assertTrue(discovery.eligible_for_admission(match))
+        self.assertNotIn("visualPotential", match)
+
     def test_private_world_cannot_be_autopromoted(self):
         with patch.object(discovery.urllib.request, "urlopen") as op:
             class FakeResponse:
