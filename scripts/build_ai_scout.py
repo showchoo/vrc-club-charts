@@ -22,7 +22,7 @@ OUTPUT = DATA / "ai-scout.json"
 URL = "https://ypqpgpetrriirywrzikj.supabase.co"
 PUBLIC_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 ORIGIN = "https://vrc-club-charts.vercel.app"
-MODEL = os.environ.get("VCC_SCOUT_MODEL", "gemini-2.5-flash-lite")
+MODEL = os.environ.get("VCC_SCOUT_MODEL", "gemini-3.5-flash-lite")
 WORLD_ID = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
 IMAGE_MAX_BYTES = 4 * 1024 * 1024
 IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp"}
@@ -209,7 +209,7 @@ def evaluate_image(name: str, author: str, mime: str, image: bytes, key: str) ->
             }],
             "generationConfig": {
                 "responseMimeType": "application/json",
-                "maxOutputTokens": 640,
+                "maxOutputTokens": 1600,
                 "temperature": 0,
             },
         },
@@ -274,8 +274,10 @@ def build_catalog(key: str = "") -> dict:
     new_assessments = 0
     if key.strip():
         remaining = [row for row in pool if row["sourceType"] == "catalog"
-                     and row["id"] not in scored and not recent(
-                         attempts.get(row["id"], {}).get("checkedAt"), 7)]
+                     and row["id"] not in scored and (
+                         attempts.get(row["id"], {}).get("status") in
+                         {"http-unavailable", "provider-unavailable"} or not recent(
+                             attempts.get(row["id"], {}).get("checkedAt"), 7))]
         max_assess = max(1, min(8, int(os.environ.get("VCC_SCOUT_MAX_PER_RUN", "4"))))
         selected = remaining[:max_assess]
         try:
@@ -293,29 +295,44 @@ def build_catalog(key: str = "") -> dict:
                 continue
             try:
                 mime, image = fetch_image(wid)
-                assessment = evaluate_image(row["name"], row["author"], mime, image, key)
-                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
-                                 "status": "assessed" if assessment else "insufficient-image"}
-                if assessment is None:
-                    attempts[wid]["status"] = "insufficient-image"
-                    continue
-                scored[wid] = {**row, **assessment}
-                attempts[wid]["status"] = "assessed"
-                new_assessments += 1
             except urllib.error.HTTPError as exc:
-                # Stop on quota/rate limits and authentication failures. Do not
-                # mark the remaining queue as evaluated or retry repeatedly.
-                if exc.code in (400, 401, 403, 429):
-                    print(f"WARN: Gemini request blocked (HTTP {exc.code}); stopping this run.")
-                    break
                 attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
-                                 "status": "http-unavailable"}
-                print(f"WARN: AI assessment unavailable for {wid}: HTTP {exc.code}")
+                                 "status": "thumbnail-unavailable"}
+                print(f"WARN: thumbnail unavailable for {wid} (HTTP {exc.code})")
+                continue
+            except (OSError, ValueError, urllib.error.URLError) as exc:
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "thumbnail-unavailable"}
+                print(f"WARN: thumbnail unavailable for {wid}: {type(exc).__name__}")
+                continue
+
+            try:
+                assessment = evaluate_image(row["name"], row["author"], mime, image, key)
+            except urllib.error.HTTPError as exc:
+                # A model-access 404, auth issue or quota limit is not a World
+                # quality assessment. Fail the job visibly and do not introduce
+                # a 7-day per-World cooldown.
+                if exc.code in (400, 401, 403, 404, 429):
+                    raise RuntimeError(
+                        f"Gemini API rejected model {MODEL}: HTTP {exc.code}. "
+                        "Check model availability, key access and free quota."
+                    ) from None
+                attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                                 "status": "provider-unavailable"}
+                print(f"WARN: Gemini temporarily unavailable (HTTP {exc.code})")
+                break
             except (OSError, ValueError, KeyError, IndexError, urllib.error.URLError) as exc:
-                # Never leak API keys, request bodies or fetched image contents to CI logs.
                 attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
-                                 "status": "unavailable"}
-                print(f"WARN: AI assessment unavailable for {wid}: {type(exc).__name__}")
+                                 "status": "provider-unavailable"}
+                print(f"WARN: Gemini evaluation error: {type(exc).__name__}")
+                break
+
+            attempts[wid] = {"checkedAt": utc_now().isoformat(timespec="seconds"),
+                             "status": "assessed" if assessment else "insufficient-image"}
+            if assessment is None:
+                continue
+            scored[wid] = {**row, **assessment}
+            new_assessments += 1
 
     ranking = sorted(scored.values(), key=lambda row: (
         -row["visualPotential"], row["name"].casefold(), row["id"]
