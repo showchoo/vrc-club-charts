@@ -70,7 +70,7 @@ function shareWorldUrl(w) {
 
 function shareOnX(score, w) {
   const text = `VRC Club Charts EDITOR'S PICK\n${w.name} — ${Number(score.total_score || 0)}/100\n人気ではなく、作り込みで評価。`;
-  const intent = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareWorldUrl(w));
+  const intent = 'https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareWorldUrl(w));
   window.open(intent, '_blank', 'noopener,noreferrer');
 }
 
