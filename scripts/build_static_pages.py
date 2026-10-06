@@ -168,6 +168,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="{prefix}styles.css?v=20261005-30" />
   <script src="{prefix}analytics.js?v=20261006-03" defer></script>
+  <script src="{prefix}i18n.js?v=20261007-bilingual-01" defer></script>
   <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
 </head>
 <body>
