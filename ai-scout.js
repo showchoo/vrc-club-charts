@@ -44,13 +44,13 @@
 
     const copy = el('div', 'ai-scout-copy');
     const meta = el('div', 'ai-scout-meta');
-    meta.appendChild(el('span', '', isAssessed ? 'AI VISUAL IMPRESSION' : 'AUTOMATED DISCOVERY'));
+    meta.appendChild(el('span', '', isAssessed ? 'AI VISUAL SCORE' : 'AUTOMATED DISCOVERY'));
     if (isAssessed && Number.isInteger(item.visualPotential)) {
       const score = el('strong', 'ai-scout-score', item.visualPotential);
       score.appendChild(el('small', '', '/100'));
       meta.appendChild(score);
     } else {
-      meta.appendChild(el('span', 'ai-scout-wait', 'TO INSPECT'));
+      meta.appendChild(el('span', 'ai-scout-wait', 'NOT YET SCORED'));
     }
     copy.appendChild(meta);
     copy.appendChild(el('h3', '', item.name || 'World'));
@@ -60,13 +60,13 @@
       item.signals.slice(0, 5).join(' / ') : 'NIGHTLIFE WORLD';
     copy.appendChild(el('p', 'ai-scout-reason', isAssessed ?
       (item.reasonJa || '公開画像の見た目から推定した暫定評価です。') :
-      '探索シグナル: ' + signals));
+      '発見の手がかり · ' + signals));
 
     const caution = isAssessed ?
       (item.cautionsJa || '内部の音響・操作性・動作性能は未評価です。') :
       item.sourceType === 'discovery' ?
-        '未承認の探索候補です。掲載は確定していません。' :
-        '作り込みは未評価です。タグは品質の証明ではありません。';
+        '探索中のWorldです。公式ディレクトリへの掲載は未確定です。' :
+        '画像評価は未実施。表示タグは探索の手がかりです。';
     copy.appendChild(el('p', 'ai-scout-caution', caution));
     link.appendChild(copy);
     card.appendChild(link);
@@ -95,13 +95,13 @@
       const records = [...scored, ...pending.filter(item => !scoredIds.has(item.id))].slice(0, 6);
       const count = Number(data.summary?.totalCandidates ?? pending.length);
       status.textContent = isAssessed ?
-        scored.length + ' WORLDS IMAGE-ASSESSED / CONFIDENCE: LOW' :
-        count + ' WORLDS DETECTED / AI IMAGE ASSESSMENT ' +
-        (data.modelConfigured ? 'IN PROGRESS' : 'NOT CONFIGURED');
+        scored.length + ' VISUAL SCORES / SINGLE-IMAGE ESTIMATES' :
+        count + ' WORLDS TRACKED / ' +
+        (data.modelConfigured ? 'IMAGE REVIEWS PENDING' : 'IMAGE REVIEWS UNAVAILABLE');
       grid.replaceChildren();
       if (!records.length) {
         grid.appendChild(el('div', 'ai-scout-empty',
-          'Club Worldを自動探索中です。公開画像に基づく推定結果が集まるまでは作り込み点数を付けません。'));
+          'クラブWorldを探索しています。画像の評価ができたWorldから参考スコアを掲載します。'));
         return;
       }
       const byId = new Map(worlds.map(w => [w.id, w]));
@@ -135,9 +135,9 @@
       }
       if (thumbnails.size) drawRecords();
     } catch (_) {
-      status.textContent = 'DISCOVERY DATA UNAVAILABLE';
+      status.textContent = 'SCOUT DATA UNAVAILABLE';
       grid.replaceChildren(el('div', 'ai-scout-empty',
-        'AI SCOUTのデータを読み込めませんでした。公式ランキングには影響しません。'));
+        'AI SCOUTの情報を表示できません。公式ランキングのデータには影響しません。'));
     }
   }
 
