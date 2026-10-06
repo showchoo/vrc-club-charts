@@ -46,6 +46,13 @@
       <p>気になるクラブを探し、イベントの予定をチェックし、出演するアーティストに出会う。シーンを横断して楽しめるよう、情報を整理しています。</p>
     </section>
 
+    <section class="prose-section" id="discovery-coverage">
+      <h2>クラブ収集の進捗</h2>
+      <p id="discovery-coverage-summary" aria-live="polite">直近の収集結果を確認中…</p>
+      <p>複数の公開情報源からWorld IDを収集し、発見元と確認履歴を保存しています。この数字はVRChat全クラブに対する網羅率ではありません。非公開Worldや外部サイトに掲載されないクラブは発見できない場合があります。</p>
+      <p><a href="data/discovery-report.json">情報源別の収集状況を見る ↗</a></p>
+    </section>
+
     <section class="prose-section">
       <h2 id="evaluation-method">ビジュアル評価について</h2>
       <p>CLUB DISCOVERYは公開されているクラブWorld情報をもとに候補を発見します。ビジュアル評価にはGoogle Geminiの画像解析AIを使用し、公開サムネイルのデザイン・照明の見え方・構図・独創性から0〜100点の参考スコアを推定しています。</p>
@@ -74,5 +81,22 @@
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
     <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="reviewer.html">Reviews</a><a href="privacy.html">Privacy</a></span>
   </footer>
+  <script>
+    fetch('data/discovery-report.json', { cache: 'no-store' })
+      .then(response => { if (!response.ok) throw new Error('coverage unavailable'); return response.json(); })
+      .then(data => {
+        const integer = value => Number.isSafeInteger(value) && value >= 0 ? value.toLocaleString('ja-JP') : '—';
+        const node = document.getElementById('discovery-coverage-summary');
+        if (node) node.textContent =
+          '掲載 ' + integer(data.registeredWorlds) + '件 / 確認待ち ' +
+          integer(data.pendingCandidates) + '件 / 履歴保存 ' +
+          integer(data.totalTrackedWorlds) + '件（最終集計 ' +
+          String(data.updatedAt || '未確認') + '）';
+      })
+      .catch(() => {
+        const node = document.getElementById('discovery-coverage-summary');
+        if (node) node.textContent = '集計データを現在取得できません。';
+      });
+  </script>
 </body>
 </html>
