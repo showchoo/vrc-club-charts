@@ -211,6 +211,11 @@ def eligible_for_admission(item: dict) -> bool:
     if "vrchat_search" in item.get("sourceCategories", []):
         return (item.get("confidenceScore", 0) >= 85
                 and "+explicit-club-name" in item.get("reasons", []))
+    if any(str(source).startswith("vrcmap_")
+           for source in item.get("sourceCategories", [])):
+        return (item.get("confidenceScore", 0) >= 75
+                and "+explicit-club-name" in item.get("reasons", [])
+                and not BLOCKED_NAME.search(str(item.get("name", ""))))
     return (item.get("confidenceScore", 0) >= 85
             and "+explicit-club-name" in item.get("reasons", [])
             and "vrcw_club" in item.get("sourceCategories", []))
