@@ -292,6 +292,26 @@ def main() -> int:
     approved_extra = public_rest("worlds_public?select=id")
     existing_ids.update(str(item.get("id")) for item in approved_extra if item.get("id"))
 
+    # Durable suppression: explicitly non-public Worlds should not return to
+    # the candidate queue when VRCmap, seed links or event scans see them.
+    ai_decisions_path=ROOT / "data" / "world-candidate-ai-decisions.json"
+    if ai_decisions_path.exists():
+        try:
+            ai_decisions=json.loads(ai_decisions_path.read_text(encoding="utf-8"))
+            if not isinstance(ai_decisions,list):
+                raise ValueError("Invalid AI discovery decisions JSON")
+            excluded_ids={
+                str(record["id"]) for record in ai_decisions
+                if isinstance(record,dict)
+                and record.get("status")=="excluded_nonpublic"
+                and WORLD_ID_RE.fullmatch(str(record.get("id") or ""))
+            }
+            existing_ids.update(excluded_ids)
+        except (OSError,ValueError,KeyError) as exc:
+            print(f"ERROR: unable to load non-public World exclusions: {type(exc).__name__}")
+            return 2
+
+
     # The private decisions table is NOT anon-readable. Use the dedicated
     # safe read-only endpoint rather than silently treating 401 as no decisions.
     try:
