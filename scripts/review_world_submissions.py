@@ -79,9 +79,13 @@ def nightlife_signals(metadata: dict) -> tuple[list[str], list[str]]:
     tags = " ".join(str(t) for t in metadata.get("tags") or [] if isinstance(t,str)).casefold()
     whole = " ".join((title,description,tags))
     outside_title = description + " " + tags
-    found_strong = [term for term in STRONG if term in whole]
+    # Overlapping tokens like 'nightclub' and 'club' describe one clue,
+    # not two independent facts.
+    found_strong = [term for term in STRONG if term in whole
+                    and not any(term != long and term in long and long in whole
+                                for long in STRONG)]
     found_support = [term for term in SUPPORT if term in whole]
-    detailed = [term for term in STRONG if term in outside_title]
+    detailed = [term for term in found_strong if term in outside_title]
     return list(dict.fromkeys(found_strong + found_support)), detailed
 
 
