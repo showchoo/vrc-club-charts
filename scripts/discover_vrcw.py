@@ -181,15 +181,24 @@ def priority_seeds(today: str) -> list[dict]:
         wid = str(item.get("id", "")) if isinstance(item, dict) else ""
         if not WORLD_ID.fullmatch(wid):
             continue
+        # Directory nominations are not equivalent to owner-provided club links.
+        # These require explicit nightclub-like names *and* official World lookup.
+        directory = item.get("type") == "source-listed-club"
+        hint = str(item.get("nameHint") or "").strip()[:120]
+        club_named = bool(CLUB_NAME.search(hint)) and not BLOCKED_NAME.search(hint)
+        categories = ["vrcw_club", "directory-seed"] if directory else ["direct-world-link"]
         out.append({
             "id": wid,
-            "name": "調査中のクラブWorld",
+            "name": hint or "調査中のクラブWorld",
             "authorHint": "Unverified",
-            "source": "https://vrchat.com/home/world/" + wid + "/info",
-            "sourceCategories": ["direct-world-link"],
-            "confidenceScore": 100,
+            "source": str(item.get("source") or
+                          "https://vrchat.com/home/world/" + wid + "/info"),
+            "sourceCategories": categories,
+            "confidenceScore": (95 if club_named else 65) if directory else 100,
             "confidence": "awaiting-public-metadata",
-            "reasons": ["user-supplied-world-link"],
+            "reasons": (["source:directory-seed", "+explicit-club-name"] if club_named
+                        else ["source:directory-seed"]) if directory
+                       else ["user-supplied-world-link"],
             "firstDiscoveredAt": today,
             "lastSeenAt": today,
         })
