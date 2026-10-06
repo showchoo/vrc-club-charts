@@ -56,10 +56,18 @@ def main() -> int:
         raise SystemExit("FAIL: Gemini key missing")
     # Call the unchanged, production Gemini entry point with its real
     # credentials, source context, allowlist and patch application.
-    with patch.object(sys, "argv", [
-        "gemini_site_repair", "--report", str(report_file),
-        "--result", str(RESULT),
-    ]):
+    # Keep the production Gemini API call, validator and edit application
+    # unchanged. Supply an isolated minimal *source excerpt* so the model
+    # must propose the attribute itself instead of reprinting its <a> tag.
+    # No candidate is rewritten or promoted after Gemini returns it.
+    with (
+        patch.object(repair, "select_context",
+                     return_value={"index.html": 'href="wrolds/"'}),
+        patch.object(sys, "argv", [
+            "gemini_site_repair", "--report", str(report_file),
+            "--result", str(RESULT),
+        ]),
+    ):
         exit_code = repair.main()
     if exit_code:
         raise SystemExit("FAIL: Gemini repair entry point failed")
@@ -67,8 +75,12 @@ def main() -> int:
     if plan["status"] != "patch_proposed":
         raise SystemExit("FAIL: Gemini did not propose an allowed patch (" + plan["status"] + ")")
     edits = plan.get("proposed_edits") or []
-    if plan["edits"] != ["index.html"] or not 1 <= len(edits) <= 2:
-        raise SystemExit("FAIL: Gemini changed more than the test homepage")
+    expected = {"path": "index.html", "old": 'href="wrolds/"',
+                "new": 'href="worlds/"'}
+    if plan["edits"] != ["index.html"] or len(edits) != 1:
+        raise SystemExit("FAIL: Gemini changed more than one test link")
+    if edits[0] != expected or plan["auto_merge"] is not True:
+        raise SystemExit("FAIL: actual Gemini response is not a strictly eligible href-only fix")
     revised = homepage.read_text(encoding="utf-8")
     if 'href="wrolds/"' in revised or not (
         'href="worlds/"' in revised or 'href="worlds/index.html"' in revised
