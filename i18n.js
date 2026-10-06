@@ -281,9 +281,12 @@
     while (walker.nextNode()) visitText(walker.currentNode);
     document.body.querySelectorAll('[placeholder], [aria-label]').forEach(visitAttributes);
     if (button) {
-      button.textContent = language === 'ja' ? 'EN' : '日本語';
-      button.setAttribute('aria-label', language === 'ja' ? 'Switch to English' : '日本語に切り替える');
-      button.setAttribute('title', language === 'ja' ? 'English' : '日本語');
+      const label = language === 'ja' ? 'EN' : '日本語';
+      if (button.textContent !== label) button.textContent = label;
+      const aria = language === 'ja' ? 'Switch to English' : '日本語に切り替える';
+      if (button.getAttribute('aria-label') !== aria) button.setAttribute('aria-label', aria);
+      const title = language === 'ja' ? 'English' : '日本語';
+      if (button.getAttribute('title') !== title) button.setAttribute('title', title);
     }
   }
 
