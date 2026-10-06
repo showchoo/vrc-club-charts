@@ -133,6 +133,18 @@
     "source": "https://en.vrcw.net/world/detail/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043"
   },
   {
+    "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+    "name": "CARROT CLUB",
+    "author": "BEBE CARROT",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrcmap.com/world/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+    "discoveredBy": "auto-discovery"
+  },
+  {
     "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
     "name": "Channel 13",
     "author": "Zulfur_",
@@ -145,6 +157,18 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+    "name": "Club Astra",
+    "author": "ZIPPY251",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+    "discoveredBy": "auto-discovery"
   },
   {
     "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
@@ -573,6 +597,18 @@
     "source": "https://www.vrcw.net/world/detail/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6"
   },
   {
+    "id": "wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+    "name": "Lost in a Vortex ［Club］",
+    "author": "ZIPPY251",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrcmap.com/world/wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+    "discoveredBy": "auto-discovery"
+  },
+  {
     "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
     "name": "Lunar Night Club",
     "author": "NeonSkittlesPup",
@@ -583,6 +619,18 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
+    "name": "Mamacitas Spanish Night Club",
+    "author": "Golis22",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
+    "discoveredBy": "auto-discovery"
   },
   {
     "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",

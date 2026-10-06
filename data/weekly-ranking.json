@@ -383,6 +383,41 @@
       }
     },
     {
+      "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+      "name": "CARROT CLUB",
+      "author": "BEBE CARROT",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrcmap.com/world/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
       "name": "Channel 13",
       "author": "Zulfur_",
@@ -394,6 +429,41 @@
         "QUEST"
       ],
       "source": null,
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+      "name": "Club Astra",
+      "author": "ZIPPY251",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "releaseStatus": null,
@@ -1555,6 +1625,41 @@
       }
     },
     {
+      "id": "wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+      "name": "Lost in a Vortex ［Club］",
+      "author": "ZIPPY251",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrcmap.com/world/wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
       "name": "Lunar Night Club",
       "author": "NeonSkittlesPup",
@@ -1564,6 +1669,41 @@
         "QUEST"
       ],
       "source": null,
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
+      "name": "Mamacitas Spanish Night Club",
+      "author": "Golis22",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "releaseStatus": null,

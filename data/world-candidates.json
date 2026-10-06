@@ -1,5 +1,44 @@
 [
   {
+    "id": "wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
+    "name": "Club Misery",
+    "authorHint": "Unverified",
+    "source": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
+    "sourceCategories": [
+      "vrcmap_reference",
+      "directory-seed"
+    ],
+    "confidenceScore": 95,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:directory-seed",
+      "+explicit-club-name"
+    ],
+    "firstDiscoveredAt": "2026-10-06",
+    "lastSeenAt": "2026-10-06"
+  },
+  {
+    "id": "wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
+    "name": "Cyberpunk Rooftop City",
+    "authorHint": "Coldcancer",
+    "source": "https://vrcmap.com/world/wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
+    "sourceCategories": [
+      "vrcmap_cafe"
+    ],
+    "confidenceScore": 69,
+    "confidence": "medium",
+    "reasons": [
+      "source:vrcmap_cafe",
+      "+explicit-nightlife",
+      "+club",
+      "+rave",
+      "+stage",
+      "-home"
+    ],
+    "firstDiscoveredAt": "2026-10-06",
+    "lastSeenAt": "2026-10-06"
+  },
+  {
     "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
     "name": "Club VGL",
     "authorHint": "by:",
