@@ -132,6 +132,37 @@ def safe_auto_merge(edits: list[dict]) -> bool:
     return bool(link.fullmatch(old) and link.fullmatch(new))
 
 
+
+def verified_built_link_fix(edits: list[dict], site_root: Path) -> bool:
+    """Fail closed: only auto-merge if old URL is absent and new URL is present in the built site.
+
+    This runs AFTER the full static build; a syntactically valid href alone is
+    not evidence that the target is a real published page.
+    """
+    if not safe_auto_merge(edits):
+        return False
+    edit = edits[0]
+    root = site_root.resolve()
+    if not root.is_dir():
+        return False
+
+    def local_target(attribute: str) -> Path | None:
+        href = attribute[len('href="'):-1]
+        # Never infer safety for queries, fragments, encodings or path traversal.
+        if not href or any(char in href for char in ("?", "#", "%", "\\\\")):
+            return None
+        if ".." in Path(href).parts:
+            return None
+        candidate = (root / Path(edit["path"]).parent / href).resolve()
+        if not candidate.is_relative_to(root):
+            return None
+        return candidate / "index.html" if candidate.is_dir() else candidate
+
+    old_target = local_target(edit["old"])
+    new_target = local_target(edit["new"])
+    return bool(old_target and new_target and not old_target.is_file() and new_target.is_file())
+
+
 def validate_edits(plan: dict, issues: list[dict]) -> tuple[list[dict], bool]:
     if not isinstance(plan.get("edits"), list) or not isinstance(plan.get("confidence"), (int, float)):
         raise ValueError("Malformed Gemini plan")
