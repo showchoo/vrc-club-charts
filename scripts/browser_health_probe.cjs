@@ -21,6 +21,9 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   try {
     const page = await browser.newPage({viewport: {width: 1365, height: 880},
       locale: 'ja-JP', reducedMotion: 'reduce'});
+    // Do not count automated health probes as real visitors or page views.
+    await page.route('**/functions/v1/analytics-track',
+      route => route.fulfill({status: 204, body: ''}));
     const errors = [];
     page.on('pageerror', e => errors.push(String(e.message || e).slice(0, 120)));
 
@@ -77,6 +80,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const world = await browser.newPage({viewport: {width: 1365, height: 880},
       locale: 'ja-JP'});
+    await world.route('**/functions/v1/analytics-track',
+      route => route.fulfill({status: 204, body: ''}));
     const list = await world.goto(BASE + '/worlds/', {
       waitUntil: 'domcontentloaded', timeout: 30000
     });
