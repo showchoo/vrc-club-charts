@@ -550,7 +550,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
 
 def index_page(worlds: list[dict]) -> str:
     canonical = f"{BASE_URL}worlds/"
-    description = "Browse VRChat club, DJ, rave and AudioLink worlds tracked by VRC Club Charts."
+    description = "VRChatのクラブワールド一覧。DJ・レイヴ・AudioLink対応の公開ワールドを探し、ビジュアルの参考評価、制作者情報、体験レビューをチェックできます。"
     cards = []
     for w in sorted(worlds, key=lambda x: (x.get("name") or "").casefold()):
         if w.get("availabilityStatus") == "unavailable":
@@ -575,7 +575,7 @@ def index_page(worlds: list[dict]) -> str:
           <span>{esc(genres)}</span>
           <span>↗</span>
         </a>""")
-    return page_head("Worlds — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
+    return page_head("VRChat クラブワールド一覧・DJイベント会場 | VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
