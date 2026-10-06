@@ -4662,3 +4662,305 @@ body.ranking-home .site-footer { font-size:13px; line-height:1.6; }
 .world-suggestion-status.error{color:#ffd9d6;background:rgba(200,59,59,.11);border-color:rgba(230,130,130,.3);}
 .world-suggestion-trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 @media(max-width:800px){.world-suggestion-block{grid-template-columns:1fr;gap:20px;}.world-suggestion-intro h2{margin-top:.5em;}}
+
+
+/* Review page typography: body copy and controls are intentionally readable,
+   not tiny captions. Scoped to the public community-review page only. */
+body.community-review-page .reviewer-main {
+  padding-top:clamp(68px,8vw,108px);
+  padding-bottom:clamp(55px,7vw,85px);
+}
+body.community-review-page .kicker {
+  font-size:12px;
+  line-height:1.55;
+  letter-spacing:.12em;
+}
+body.community-review-page .reviewer-hero h1 {
+  font-size:clamp(40px,5.6vw,78px);
+  line-height:1.15;
+  letter-spacing:-.045em;
+  overflow-wrap:anywhere;
+}
+body.community-review-page .reviewer-hero .lead {
+  max-width:760px;
+  font-size:clamp(17px,1.6vw,20px);
+  line-height:1.85;
+  color:#d2e1e6;
+}
+body.community-review-page .reviewer-status {
+  flex-wrap:wrap;
+  gap:10px 14px;
+}
+body.community-review-page .reviewer-status span {
+  font-size:12px;
+  letter-spacing:.06em;
+  padding:8px 11px;
+}
+body.community-review-page .reviewer-status strong {
+  font-size:15px;
+  line-height:1.6;
+  letter-spacing:.02em;
+  color:#c0d6dd;
+}
+body.community-review-page .reviewer-section {
+  padding-top:clamp(55px,7vw,85px);
+}
+body.community-review-page .reviewer-section h2 {
+  font-size:clamp(30px,3.7vw,48px);
+  line-height:1.22;
+  letter-spacing:-.035em;
+  overflow-wrap:anywhere;
+}
+body.community-review-page .reviewer-section-head {
+  max-width:840px;
+}
+body.community-review-page .reviewer-section-head > p:last-child {
+  color:#ccdee3;
+  font-size:16px;
+  line-height:1.85;
+  margin-top:17px;
+}
+body.community-review-page .reviewer-criteria {
+  margin-top:28px;
+}
+body.community-review-page .reviewer-criteria article {
+  padding:23px 22px;
+  min-height:186px;
+  background:rgba(255,255,255,.018);
+}
+body.community-review-page .reviewer-criteria b {
+  font-size:14px;
+  letter-spacing:.07em;
+}
+body.community-review-page .reviewer-criteria h3 {
+  margin:30px 0 9px;
+  font-size:clamp(19px,1.8vw,23px);
+  line-height:1.3;
+}
+body.community-review-page .reviewer-criteria p {
+  font-size:15px;
+  line-height:1.75;
+  color:#c1d3d9;
+}
+body.community-review-page .community-review-grid {
+  gap:18px;
+}
+body.community-review-page .community-review-item {
+  padding:23px;
+}
+body.community-review-page .community-review-header {
+  flex-wrap:wrap;
+}
+body.community-review-page .community-review-header strong {
+  font-size:18px;
+  line-height:1.5;
+}
+body.community-review-page .community-review-header time {
+  font-size:13px;
+  line-height:1.6;
+  color:#b4cad2;
+}
+body.community-review-page .community-review-world {
+  font-size:16px;
+  line-height:1.55;
+}
+body.community-review-page .community-review-score {
+  font-size:14px;
+  line-height:1.65;
+  color:#c1d8df;
+}
+body.community-review-page .community-review-comment {
+  font-size:16px;
+  line-height:1.85;
+  color:#e1edf0;
+}
+body.community-review-page .community-review-conflict {
+  font-size:13px;
+  line-height:1.6;
+}
+body.community-review-page .community-review-empty {
+  font-size:16px;
+  line-height:1.8;
+  padding:27px 24px;
+  color:#c6dbe1;
+}
+body.community-review-page .reviewer-apply-card {
+  padding:clamp(22px,3.3vw,35px);
+}
+body.community-review-page .reviewer-apply-head {
+  flex-wrap:wrap;
+  align-items:center;
+}
+body.community-review-page .reviewer-apply-head h3 {
+  font-size:clamp(27px,3vw,37px);
+  line-height:1.2;
+}
+body.community-review-page .reviewer-apply-head > span {
+  font-size:12px;
+  line-height:1.45;
+  color:#c5dbe2;
+}
+body.community-review-page .reviewer-apply-form {
+  gap:24px;
+}
+body.community-review-page .reviewer-form-grid {
+  gap:20px;
+}
+body.community-review-page .reviewer-apply-form label > span,
+body.community-review-page .reviewer-apply-form legend {
+  font-size:15px;
+  line-height:1.55;
+  letter-spacing:.02em;
+  color:#e2f1f5;
+  margin-bottom:10px;
+}
+body.community-review-page .reviewer-apply-form small {
+  font-size:13px;
+  line-height:1.5;
+  color:#b6cad1;
+}
+body.community-review-page .reviewer-apply-form :is(input:not([type="checkbox"]),select,textarea) {
+  min-height:48px;
+  padding:13px 14px;
+  font-size:16px;
+  line-height:1.5;
+  border:1px solid rgba(172,239,255,.28);
+  border-radius:12px;
+  background:rgba(3,11,15,.62);
+  color:#eefcff;
+  width:100%;
+  max-width:100%;
+}
+body.community-review-page .reviewer-apply-form textarea {
+  min-height:155px;
+  resize:vertical;
+}
+body.community-review-page .reviewer-apply-form :is(input,textarea)::placeholder {
+  color:#a2b8c0;
+  opacity:1;
+}
+body.community-review-page .reviewer-apply-form :is(input,select,textarea):focus-visible {
+  outline:2px solid #79d9ed;
+  outline-offset:2px;
+}
+body.community-review-page .reviewer-principles {
+  padding:20px;
+  gap:16px;
+}
+body.community-review-page .reviewer-principles label {
+  font-size:15px;
+  line-height:1.7;
+  gap:12px;
+  color:#d3e2e8;
+}
+body.community-review-page .reviewer-principles label span {
+  font-size:15px;
+  line-height:1.7;
+}
+body.community-review-page .reviewer-principles input[type="checkbox"] {
+  width:20px;
+  height:20px;
+  flex:none;
+  margin-top:3px;
+}
+body.community-review-page .review-total span {
+  font-size:12px;
+  color:#bfd5dc;
+}
+body.community-review-page .review-total b {
+  font-size:13px;
+  color:#bdcdd3;
+}
+body.community-review-page .review-world-preview-copy small {
+  font-size:12px;
+}
+body.community-review-page .review-world-preview-copy strong {
+  font-size:clamp(20px,2.4vw,28px);
+  line-height:1.35;
+}
+body.community-review-page .review-world-preview-copy > span {
+  font-size:14px;
+  color:#bed2d9;
+}
+body.community-review-page .reviewer-submit {
+  min-height:50px;
+  padding:13px 24px;
+  font-size:16px;
+  line-height:1.5;
+}
+body.community-review-page .reviewer-submit-row p,
+body.community-review-page .reviewer-action-note {
+  font-size:14px;
+  line-height:1.75;
+  color:#bdcfd6;
+}
+body.community-review-page .reviewer-form-status {
+  font-size:15px;
+  line-height:1.75;
+}
+body.community-review-page .site-footer {
+  font-size:13px;
+  line-height:1.7;
+}
+@media (max-width:980px) {
+  body.community-review-page .community-review-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width:700px) {
+  body.community-review-page .reviewer-main {
+    padding-top:62px;
+  }
+  body.community-review-page .reviewer-hero h1 {
+    font-size:clamp(35px,8vw,49px);
+    line-height:1.22;
+  }
+  body.community-review-page .reviewer-hero .lead {
+    margin-top:20px;
+    font-size:17px;
+  }
+  body.community-review-page .reviewer-section {
+    padding-top:55px;
+  }
+  body.community-review-page .reviewer-criteria {
+    grid-template-columns:1fr;
+  }
+  body.community-review-page .reviewer-criteria article,
+  body.community-review-page .reviewer-criteria article:last-child {
+    grid-column:auto;
+    min-height:0;
+  }
+  body.community-review-page .reviewer-criteria h3 {
+    margin-top:18px;
+  }
+  body.community-review-page .community-review-grid {
+    grid-template-columns:1fr;
+  }
+  body.community-review-page .reviewer-apply-card {
+    padding:20px;
+  }
+  body.community-review-page .reviewer-apply-head > span {
+    max-width:100%;
+  }
+}
+@media (max-width:420px) {
+  body.community-review-page .reviewer-main {
+    padding-top:55px;
+  }
+  body.community-review-page .reviewer-hero h1 {
+    font-size:clamp(31px,8.4vw,38px);
+    letter-spacing:-.04em;
+  }
+  body.community-review-page .reviewer-apply-card {
+    padding:16px;
+  }
+  body.community-review-page .reviewer-criteria article {
+    padding:20px;
+  }
+  body.community-review-page .review-score-grid {
+    gap:9px;
+  }
+  body.community-review-page .reviewer-principles {
+    padding:15px;
+  }
+}
