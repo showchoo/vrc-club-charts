@@ -24,8 +24,12 @@ A World needs actual in-world measurement before claiming validated sound, dynam
 ## Automated World coverage
 
 The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.
-A daily scheduled collector combines VRCmap Music/New with best-effort searches of
-the public VRChat World API. VRCW **Club** / **DJ** paging code is retained but disabled:
+A daily scheduled collector rotates across VRCmap Music, New, Cafe, Japan,
+Trending and Chill listings, plus best-effort searches of the public VRChat
+World API. A persistent `vrcmapNextIndex` cursor rotates which unknown IDs
+receive detail checks (up to 70 per day), instead of rescanning the same
+first 70 every day. Strong nightlife names are independently verified
+against the official public World detail endpoint before admission. VRCW **Club** / **DJ** paging code is retained but disabled:
 its website currently returns HTTP 403 to unattended GitHub Actions requests. We do not
 attempt to evade that access restriction. When an owner-approved access path is available,
 `VCC_ENABLE_VRCW=1` permits a newest-page-plus-rotating-historical-page scan (cursor

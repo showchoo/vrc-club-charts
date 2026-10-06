@@ -4,6 +4,7 @@ from __future__ import annotations
 import datetime as dt
 import html
 import json
+import os
 import re
 import time
 import urllib.request
@@ -19,6 +20,10 @@ SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK"
 LISTING_SOURCES = [
     ("vrcmap_music", "https://vrcmap.com/?category=music", 28),
     ("vrcmap_new", "https://vrcmap.com/?category=new", 25),
+    ("vrcmap_cafe", "https://vrcmap.com/?category=cafe", 28),
+    ("vrcmap_japan", "https://vrcmap.com/?category=japan", 27),
+    ("vrcmap_trending", "https://vrcmap.com/?category=trending", 26),
+    ("vrcmap_chill", "https://vrcmap.com/?category=chill", 24),
 ]
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
@@ -189,8 +194,6 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
             reasons.append(f"-{keyword}")
 
     score = max(0, min(100, score))
-    if score < 55:
-        return None
 
     name = ""
     h1 = H1_RE.search(raw)
@@ -215,6 +218,16 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
             if nxt and not nxt.startswith(("#", "Image:")) and len(nxt) <= 120:
                 author = nxt
                 break
+
+    # A title naming a nightlife venue is stronger evidence than a broad
+    # Music/Japan/Bar category. Reject non-nightlife 'clubs' such as fight clubs.
+    if re.search(r"fight(?:ing)?[\s-]*club|avatar|アバター|mmd|karaoke|カラオケ|clubhouse|club house|ゴルフ", name, re.I):
+        return None
+    if re.search(r"club|クラブ|disco|ディスコ|nightclub|rave|レイブ", name, re.I):
+        score = min(100, score + 25)
+        reasons.append("+explicit-club-name")
+    if score < 55:
+        return None
 
     return {
         "id": world_id,
@@ -275,14 +288,37 @@ def main() -> int:
     if successful_sources == 0:
         print("WARN: VRCmap sources unavailable; checking independent club directories")
 
-    # Prefer Worlds surfaced by Music first, then New. Cap daily detail fetches.
-    ordered = sorted(
-        source_membership.items(),
-        key=lambda item: (
-            0 if any(s[0] == "vrcmap_music" for s in item[1]) else 1,
-            item[0],
-        ),
-    )[:MAX_DETAIL_FETCHES]
+    # Rotate a bounded sample through each category. The old deterministic
+    # first-70 selection rechecked the same Worlds every day forever.
+    from discover_vrcw import STATE, read_json
+    discovery_state = read_json(STATE, {})
+    discovery_state = discovery_state if isinstance(discovery_state, dict) else {}
+    saved_positions = discovery_state.get("vrcmapNextIndex", {})
+    saved_positions = saved_positions if isinstance(saved_positions, dict) else {}
+    next_positions = dict(saved_positions)
+    selected_ids = []
+    seen_ids = set()
+    per_source = max(5, min(24, int(os.environ.get("VCC_VRCMAP_DETAILS_PER_SOURCE", "12"))))
+    for source_name, _, _ in LISTING_SOURCES:
+        pool = sorted(wid for wid, memberships in source_membership.items()
+                      if any(member[0] == source_name for member in memberships))
+        if not pool:
+            continue
+        start = max(0, int(saved_positions.get(source_name, 0))) % len(pool)
+        cycle = pool[start:] + pool[:start]
+        for wid in cycle[:per_source]:
+            if wid not in seen_ids and len(selected_ids) < MAX_DETAIL_FETCHES:
+                selected_ids.append(wid)
+                seen_ids.add(wid)
+        next_positions[source_name] = (start + per_source) % len(pool)
+        print(f"{source_name}: rotating detail index {start} -> {next_positions[source_name]} "
+              f"from {len(pool)} unregistered IDs")
+    ordered = [(wid, source_membership[wid]) for wid in selected_ids]
+    if successful_sources:
+        discovery_state["vrcmapNextIndex"] = next_positions
+        discovery_state["updatedAt"] = today
+        STATE.write_text(json.dumps(discovery_state, ensure_ascii=False, indent=2)
+                         + "\n", encoding="utf-8")
 
     by_id: dict[str, dict] = {}
     for idx, (wid, memberships) in enumerate(ordered):
