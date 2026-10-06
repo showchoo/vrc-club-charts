@@ -21,6 +21,7 @@ on:
       - "favicon.svg"
       - "site.webmanifest"
       - "robots.txt"
+      - "google19b2b044fc820283.html"
       - "sitemap.xml"
       - "scripts/build_static_pages.py"
       - "scripts/build_og_image.py"
@@ -89,7 +90,7 @@ jobs:
           python scripts/sync_reviews_from_supabase.py
           python scripts/build_review_scores.py
           mkdir _site
-          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js i18n.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js i18n.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt google19b2b044fc820283.html _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/review-scores.json data/ai-scout.json _site/data/
