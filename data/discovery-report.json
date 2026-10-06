@@ -1,17 +1,15 @@
 {
   "updatedAt": "2026-10-06",
   "registeredWorlds": 100,
-  "pendingCandidates": 2,
-  "totalTrackedWorlds": 102,
+  "pendingCandidates": 1,
+  "totalTrackedWorlds": 101,
   "historicalOnly": 0,
   "bySource": {
     "catalog": 100,
-    "directory-seed": 1,
     "event-curated": 1,
     "nominated-url": 2,
-    "source-reference": 15,
-    "vrcmap_cafe": 2,
-    "vrcmap_reference": 1
+    "source-reference": 14,
+    "vrcmap_cafe": 2
   },
   "sourceHealth": {
     "vrcmap_music": {
