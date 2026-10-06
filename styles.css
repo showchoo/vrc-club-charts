@@ -4162,3 +4162,26 @@ main,
 .editor-pick-note{min-height:42px;margin:14px 0 0;color:#bacbd0;font-size:10px;line-height:1.6}
 .editor-pick-breakdown{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}.editor-pick-breakdown span{padding:4px 6px;border-radius:7px;background:rgba(255,255,255,.035);color:#81959b;font-size:7px}
 @media(max-width:800px){.editor-picks-head{display:block}.editor-picks-head>p{margin-top:12px}.editor-picks-grid{grid-template-columns:1fr}}
+
+
+/* World thumbnails */
+.panel-rank-thumb{width:92px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:linear-gradient(145deg,rgba(64,218,255,.08),rgba(255,255,255,.025));border:1px solid rgba(172,239,255,.09);display:flex;align-items:center;justify-content:center;flex:none}
+.panel-rank-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.panel-rank-thumb i{font-style:normal;font-size:9px;letter-spacing:.18em;color:#5d7881}
+.editor-pick-media{aspect-ratio:16/9;margin:-18px -18px 16px;overflow:hidden;border-radius:15px 15px 10px 10px;background:linear-gradient(145deg,rgba(255,213,119,.08),rgba(4,13,17,.8))}
+.editor-pick-media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}
+.editor-pick-card:hover .editor-pick-media img{transform:scale(1.025)}
+.editor-pick-placeholder{height:100%;display:grid;place-items:center;color:#7b704f;font-size:11px;letter-spacing:.2em}
+.editor-pick-body{min-width:0}
+.review-world-preview{display:grid;grid-template-columns:minmax(180px,32%) 1fr;gap:18px;align-items:center;margin:2px 0 4px;padding:12px;border:1px solid rgba(172,239,255,.11);border-radius:15px;background:rgba(2,10,14,.45)}
+.review-world-preview-media{aspect-ratio:16/9;overflow:hidden;border-radius:11px;background:linear-gradient(145deg,rgba(64,218,255,.09),rgba(255,255,255,.025));display:grid;place-items:center}
+.review-world-preview-media img{width:100%;height:100%;display:block;object-fit:cover}
+.review-world-preview-media span{color:#68838c;font-size:10px;letter-spacing:.2em}
+.review-world-preview-copy{display:grid;gap:6px;min-width:0}
+.review-world-preview-copy small{font-size:8px;letter-spacing:.14em;color:#67dff9}
+.review-world-preview-copy strong{font-size:clamp(18px,3vw,27px);line-height:1.1;overflow-wrap:anywhere}
+.review-world-preview-copy span{font-size:10px;color:#7f9aa4}
+@media(max-width:720px){
+  .panel-rank-thumb{width:70px}
+  .review-world-preview{grid-template-columns:1fr}
+}
