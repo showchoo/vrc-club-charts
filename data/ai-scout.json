@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-06T16:10:42+00:00",
+  "updatedAt": "2026-10-06T23:03:13+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 101,
-    "assessed": 11,
+    "totalCandidates": 100,
+    "assessed": 15,
     "newAssessments": 4,
-    "pending": 90
+    "pending": 85
   },
   "scored": [
     {
@@ -173,6 +173,52 @@
       "assessedAt": "2026-10-06T16:10:39+00:00"
     },
     {
+      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
+      "name": "Club Neon Spin",
+      "author": "Andron827",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "緑のネオンラインや近未来的なロボットアバターが配置されたサイバーパンク調の空間が確認できます。",
+      "cautionsJa": "サムネイル画像上の文字装飾が大きく、実際の空間レイアウトやインタラクティブ要素の詳細は判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T23:03:08+00:00"
+    },
+    {
+      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
+      "name": "Consilium",
+      "author": "Tsuβaki",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "木目を基調とした落ち着いた内装に大きめのソファが配置された、モダンでシックなラウンジ空間が確認できます。",
+      "cautionsJa": "サムライ全体にタイトルロゴが大きく重なっており、実際の室内の細部や照明の効果を正確に把握することは難しいです。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T23:03:13+00:00"
+    },
+    {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
       "name": "Neptune Night Club",
       "author": "Plutto2Times",
@@ -219,6 +265,52 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:21+00:00"
+    },
+    {
+      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
+      "name": "Club Rayne",
+      "author": "Candy Rayne",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html",
+      "visualPotential": 50,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 2,
+        "originality": 2
+      },
+      "reasonJa": "紫と青のネオン風の装飾的な文字が大きく配置され、背後に暗めの空間と縦型の照明が確認できます。",
+      "cautionsJa": "サムネイル全体がロゴグラフィックの宣伝用画像となっており、実際のワールド内の空間デザインや構造は判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T23:03:11+00:00"
+    },
+    {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html",
+      "visualPotential": 45,
+      "factors": {
+        "visual": 2,
+        "lighting": 2,
+        "spatial": 2,
+        "originality": 3
+      },
+      "reasonJa": "鳥居や灯籠が並ぶ神社風の空間にDJブースが配置されており、和風とクラブ要素の組み合わせが確認できます。",
+      "cautionsJa": "サムネイル画像のみの判断であり、実際の空間の広さやアニメーション演出の詳細は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T23:03:06+00:00"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -271,17 +363,6 @@
   ],
   "candidates": [
     {
-      "id": "wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
-      "name": "Cyberpunk Rooftop City",
-      "author": "Coldcancer",
-      "sourceType": "discovery",
-      "signals": [
-        "STAGE",
-        "CYBER"
-      ],
-      "url": "https://vrcmap.com/world/wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16"
-    },
-    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -291,46 +372,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
-      "name": "Club Jinja",
-      "author": "はるみやにき",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html"
-    },
-    {
-      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
-      "name": "Club Neon Spin",
-      "author": "Andron827",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a.html"
-    },
-    {
-      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
-      "name": "Club Rayne",
-      "author": "Candy Rayne",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
-    },
-    {
-      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
-      "name": "Consilium",
-      "author": "Tsuβaki",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -511,6 +552,50 @@
         "STAGE"
       ],
       "url": "worlds/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d.html"
+    },
+    {
+      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+      "name": "アストロビーチ",
+      "author": "チョス_Thoth",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
+    },
+    {
+      "id": "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350",
+      "name": "オーディオリンク大聖堂",
+      "author": "COMA․",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350.html"
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
+    },
+    {
+      "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
+      "name": "BlackMoonLinCLUB",
+      "author": "BlackMoonLin",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
+    },
+    {
+      "id": "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa",
+      "name": "BMF SHARKCITY CLUB",
+      "author": "ҠąɾէìҽrĎøƐ",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa.html"
     }
   ],
   "attempts": {
@@ -560,6 +645,22 @@
     },
     "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439": {
       "checkedAt": "2026-10-06T16:10:42+00:00",
+      "status": "assessed"
+    },
+    "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe": {
+      "checkedAt": "2026-10-06T23:03:06+00:00",
+      "status": "assessed"
+    },
+    "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a": {
+      "checkedAt": "2026-10-06T23:03:08+00:00",
+      "status": "assessed"
+    },
+    "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
+      "checkedAt": "2026-10-06T23:03:11+00:00",
+      "status": "assessed"
+    },
+    "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
+      "checkedAt": "2026-10-06T23:03:13+00:00",
       "status": "assessed"
     }
   }
