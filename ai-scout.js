@@ -6,9 +6,18 @@
   const grid = document.getElementById('aiScoutGrid');
   if (!root || !status || !grid) return;
 
-  const metaEndpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
-  const publicKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
+  const thumbEndpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-thumb';
   const allowedWorld = /^wrld_[0-9a-fA-F-]{36}$/;
+
+  // The cached image proxy works for catalog Worlds even when the ranking feed
+  // has no thumbnail field. Only show discovery images if they are trusted VRChat URLs.
+  function coverSource(item, suppliedThumbnail) {
+    if (item.sourceType === 'catalog' && allowedWorld.test(item.id)) {
+      return thumbEndpoint + '?id=' + encodeURIComponent(item.id);
+    }
+    return typeof suppliedThumbnail === 'string' &&
+      /^https:\/\/api\.vrchat\.cloud\//i.test(suppliedThumbnail) ? suppliedThumbnail : '';
+  }
 
   const el = (name, cls, value) => {
     const node = document.createElement(name);
@@ -29,12 +38,16 @@
     }
 
     const media = el('div', 'ai-scout-media');
-    if (thumbnail && /^https:\/\/api\.vrchat\.cloud\//i.test(thumbnail)) {
+    const source = coverSource(item, thumbnail);
+    if (source) {
       const image = document.createElement('img');
-      image.src = thumbnail;
+      image.src = source;
       image.alt = '';
-      image.loading = 'lazy';
+      image.loading = index < 2 ? 'eager' : 'lazy';
       image.decoding = 'async';
+      image.addEventListener('error', () => {
+        image.replaceWith(el('span', 'ai-scout-placeholder', 'VCC / DISCOVERY'));
+      });
       media.appendChild(image);
     } else {
       media.appendChild(el('span', 'ai-scout-placeholder', 'VCC / DISCOVERY'));
@@ -106,35 +119,12 @@
         return;
       }
       const byId = new Map(worlds.map(w => [w.id, w]));
-      const thumbnails = new Map();
-      const drawRecords = () => {
-        grid.replaceChildren();
-        records.forEach((record, i) => {
-          const world = byId.get(record.id);
-          const thumbnail = thumbnails.get(record.id) || (world && (world.thumbnail || world.imageUrl)) || '';
-          grid.appendChild(drawCard(record, i, scoredIds.has(record.id), thumbnail));
-        });
-      };
-      drawRecords();
-      const ids = records.filter(r => r.sourceType === 'catalog').map(r => r.id).slice(0, 12);
-      if (ids.length) {
-        try {
-          const reply = await fetch(metaEndpoint, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', apikey: publicKey},
-            body: JSON.stringify({ids})
-          });
-          if (reply.ok) {
-            const payload = await reply.json();
-            for (const item of payload.items || []) {
-              if (ids.includes(item.world_id)) {
-                thumbnails.set(item.world_id, item.thumbnail_url || item.image_url || '');
-              }
-            }
-          }
-        } catch (_) {}
-      }
-      if (thumbnails.size) drawRecords();
+      grid.replaceChildren();
+      records.forEach((record, i) => {
+        const world = byId.get(record.id);
+        const thumbnail = (world && (world.thumbnail || world.imageUrl)) || '';
+        grid.appendChild(drawCard(record, i, scoredIds.has(record.id), thumbnail));
+      });
     } catch (_) {
       status.textContent = 'DISCOVERY DATA UNAVAILABLE';
       grid.replaceChildren(el('div', 'ai-scout-empty',
