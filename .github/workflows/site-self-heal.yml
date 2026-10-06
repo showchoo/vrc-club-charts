@@ -2,6 +2,12 @@ name: Monitor site and attempt Gemini self-repair
 
 on:
   workflow_dispatch:
+    inputs:
+      rehearsal:
+        description: "Isolated Gemini/PR/email proof test (no production changes)"
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [main]
     paths:
@@ -25,6 +31,7 @@ concurrency:
 
 jobs:
   monitor:
+    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.rehearsal }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -152,9 +159,24 @@ jobs:
           print("Validated Gemini patch paths:", sorted(changed))
           PY
 
+      - name: Confirm old link is broken and new target exists in built site
+        id: link_guard
+        if: steps.check_patch.outcome == 'success'
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          from scripts.gemini_site_repair import verified_built_link_fix
+          result = json.load(open("/tmp/vcc-repair-result.json", encoding="utf-8"))
+          verified = verified_built_link_fix(
+              result.get("proposed_edits", []), Path("_site")
+          )
+          print("verified=" + ("true" if verified else "false"))
+          PY
+
       - name: Create repair PR (auto-merge only for verified local links)
         id: publish
-        if: steps.check_patch.outcome == 'success'
+        if: steps.check_patch.outcome == 'success' && steps.link_guard.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -191,7 +213,7 @@ jobs:
           IMPORTANT: Review code and actual browser behavior before merging unless this is an isolated internal-link correction."); then
             printf '%s\n' "$pr_url" > /tmp/vcc-repair-pr.txt
             echo "pr_url=$pr_url" >> "$GITHUB_OUTPUT"
-            if [ "${{ steps.gemini.outputs.auto_merge }}" = "true" ]; then
+            if [ "${{ steps.gemini.outputs.auto_merge }}" = "true" ] && [ "${{ steps.link_guard.outputs.verified }}" = "true" ]; then
               echo "Safe single-link replacement: attempting automatic squash merge."
               if gh pr merge "$pr_url" --squash --delete-branch; then
                 echo "auto_merged=true" >> "$GITHUB_OUTPUT"
@@ -234,3 +256,120 @@ jobs:
             --repair /tmp/vcc-repair-result.json \
             --pr-url-file /tmp/vcc-repair-pr.txt \
             --branch-url-file /tmp/vcc-repair-branch.txt
+
+rehearsal:
+    # Runs ONLY when a human explicitly requests the opt-in test mode.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.rehearsal }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test existing safety regression suite
+        run: python -m unittest discover -s tests -p 'test_site_self_heal.py'
+
+      - name: Real Gemini call on an isolated HTML fixture
+        id: live_model
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VCC_REPAIR_MODEL: gemini-3.5-flash-lite
+        run: python -m scripts.rehearse_site_self_heal_live
+
+      - name: Create and merge a test PR into a disposable branch only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "vcc-health-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          gh auth setup-git
+          base="test/vcc-heal-base-$GITHUB_RUN_ID"
+          safe="test/vcc-heal-safe-$GITHUB_RUN_ID"
+          manual="test/vcc-heal-manual-$GITHUB_RUN_ID"
+
+          # Only the disposable base branch has the deliberate 404 link.
+          git switch -c "$base"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("index.html")
+          s=p.read_text(encoding="utf-8")
+          a='class="nav-link" href="worlds/"'
+          assert s.count(a)==1, "expected exactly one navigation link"
+          p.write_text(s.replace(a, 'class="nav-link" href="wrolds/"', 1), encoding="utf-8")
+          PY
+          git add index.html
+          git commit -m "test: reproduce typo exclusively on disposable branch"
+          git push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$base"
+
+          # Repair the typo; PR target is emphatically not main.
+          git switch -c "$safe"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("index.html")
+          s=p.read_text(encoding="utf-8")
+          a='class="nav-link" href="wrolds/"'
+          assert s.count(a)==1
+          p.write_text(s.replace(a, 'class="nav-link" href="worlds/"', 1), encoding="utf-8")
+          PY
+          git add index.html
+          git commit -m "test: fix disposable homepage link"
+          git push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$safe"
+          safe_pr=$(gh pr create --base "$base" --head "$safe"             --title "[TEST] Safe internal-link self-heal rehearsal"             --body "Isolated Actions permission/merge test. Never merge to main.")
+          gh pr merge "$safe_pr" --squash --delete-branch
+          test "$(gh pr view "$safe_pr" --json state --jq .state)" = "MERGED"
+          echo "PASS: disposable repair PR created and merged into test branch only: $safe_pr"
+
+          # A non-link change must stay unmerged, requiring human approval.
+          git fetch origin "$base"
+          git switch --detach "origin/$base"
+          git switch -c "$manual"
+          printf '\n/* isolated self-heal rehearsal; not for production */\n' >> styles.css
+          git add styles.css
+          git commit -m "test: manual approval required for CSS repair"
+          git push "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$manual"
+          manual_pr=$(gh pr create --base "$base" --head "$manual"             --title "[TEST] Non-link repair must require approval"             --body "Simulated CSS repair on disposable branch; intentionally NOT merged.")
+          test "$(gh pr view "$manual_pr" --json state --jq .state)" = "OPEN"
+          echo "PASS: non-link PR left unmerged for verification: $manual_pr"
+          gh pr close "$manual_pr" --delete-branch
+          gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$base"
+          echo "PASS: disposable branches cleaned; main untouched."
+
+      - name: Send and resolve one synthetic GitHub Issue alert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          python - <<'PY'
+          import os
+          from scripts import notify_site_health as n
+          repo=os.environ["GITHUB_REPOSITORY"]
+          token=os.environ["GITHUB_TOKEN"]
+          owner=os.environ["GITHUB_REPOSITORY_OWNER"]
+          existing=n.api("GET", f"/repos/{repo}/issues?state=open&labels={n.LABEL}&per_page=50", token)
+          if any(isinstance(x,dict) and "pull_request" not in x for x in existing):
+              raise SystemExit("Existing genuine incident present: no synthetic alert created")
+          incident={"healthy":False, "issues":[{
+              "code":"rehearsal_notification", "category":"test",
+              "detail":"Controlled notification proof test. Production site is healthy.",
+              "auto_fixable":False}]}
+          created=n.sync(incident, {"status":"external_problem"}, token, repo, owner)
+          try:
+              assert created=="created", f"expected newly created Issue, got {created}"
+          finally:
+              n.sync({"healthy":True, "issues":[]}, {}, token, repo, owner)
+          print("PASS: actual notifier created and closed test Issue; email delivery needs inbox verification")
+          PY
+
+      - name: Require live Gemini test to have succeeded
+        if: always()
+        run: test "${{ steps.live_model.outcome }}" = "success"
