@@ -362,6 +362,8 @@ function renderEditorPicks() {
 
 function renderCraftRanking() {
   const board = document.getElementById('craftRanking');
+  // Legacy panel scores remain archived; the public home now leads with AI Scout.
+  if (!board) return;
   if (!board) return;
 
   const summary = state.reviewScores?.summary || {};

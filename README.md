@@ -1,100 +1,48 @@
-# VRC Club Charts — Public Beta
+# VRC Club Charts — AI-first World Discovery
 
-A VRChat nightlife directory evolving into a reviewer-based **Craftsmanship Ranking** for club / DJ / music worlds.
+An AI-first visual discovery guide for VRChat club Worlds, with open community field notes and event/DJ directories.
 
 Public site: https://vrc-club-charts.vercel.app/
 
 ## Product direction
 
-The long-term question is simple:
+**AI SCOUT is the homepage's lead experience.** It automatically discovers public VRChat club Worlds, and uses Gemini image understanding to score *thumbnail visuals only*. This is a discovery signal, not an in-world craftsmanship verdict.
 
-> Which VRChat clubs are the most carefully crafted?
+Human field notes are supplementary: anyone can submit a visit review without applying for reviewer status or receiving an access code. Each contribution is a self-reported observation, moderated before appearing publicly. Community scores **never enter AI visual scores or the legacy reviewer panel ranking**.
 
-Popularity data alone cannot answer that. VRC Club Charts is therefore being built in three stages:
+A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
-1. **Nightlife Directory** — collect Worlds, Events and DJs so the scene is discoverable.
-2. **Reviewer Panel** — independent reviewers visit worlds and score the same seven craftsmanship criteria.
-3. **Craftsmanship Ranking** — publish scores only after enough independent reviews exist, with review count and confidence shown alongside the score.
+## AI SCOUT — automated discovery and visual estimates
 
-The homepage intentionally does **not** publish the old placeholder Craftsmanship ranking anymore.
+- `scripts/build_ai_scout.py` refreshes approved catalog candidates, preserving a separate unapproved discovery queue.
+- A GitHub Actions secret named `GEMINI_API_KEY` enables up to four visual assessments each scheduled run with `gemini-3.5-flash-lite`, subject to provider account/free-tier limits.
+- The scheduled workflow runs daily; the site publishes its resulting `data/ai-scout.json` after successful completion.
+- Each scored result is a **single public thumbnail estimate** with explicitly low confidence; unassessed Worlds are never assigned invented scores.
+- The image scores are visually ordered and labelled differently from unscored exploration candidates.
+- Independent editor picks, if present, are likewise separate from Gemini and community feedback.
 
-## Current build
+## Community field notes (open submission)
 
-- 100 tracked VRChat nightlife / music worlds
-- 92 chart-eligible nightlife worlds
-- 8 directory-only adjacent worlds
-- 0 panel-scored worlds at launch of the reviewer system
-- 34 DJ / artist profiles
-- 8 manually curated event records
-- daily filtered public event feed
-- searchable World / Event / DJ directories
-- static World, Event and DJ detail pages
-- reviewer application form
-- reviewer / review data schema and panel-score aggregator
-- GitHub Pages hosting with no database required
+The public page `reviewer.html` accepts World experience reports from any visitor. There is **no reviewer application, approval process, or special code** required to submit.
 
-## Craftsmanship review model
+- `community-reviews.js` runs the public form and shows approved community notes on the homepage and the review page.
+- Supabase Edge Function `community-reviews` handles `GET` for published reviews and `POST` for new submissions.
+- Submissions enter the dedicated `public.community_reviews` table as `pending`; direct anonymous table read/write access is denied by RLS and privileges.
+- The existing `reviewer-admin` Edge Function, protected by the existing administrative key, supports `list_community_reviews`, `publish_community_review`, and `reject_community_review`.
+- Posting is bounded to one World per browser-generated visitor identifier per 30 days and three submissions per day per salted address identifier, with manual moderation to limit abuse. These controls are *not* proof of one human per review; spoofing and identity fraud remain possible.
+- Published cards show individual self-reported scores and comments. There is no automated aggregate visitor ranking.
+- Legacy approved-reviewer data, if any, is preserved but not presented as the site's primary ranking.
 
-Seven criteria, 100 points total:
-
-- Visual — 20
-- Lighting & VJ — 20
-- Sound — 15
-- Spatial — 15
-- Interaction — 10
-- VR Originality — 10
-- Optimization — 10
-
-Panel publication thresholds currently planned:
-
-- **0–2 independent reviews:** Collecting — no public score
-- **3–4 independent reviews:** Provisional panel score
-- **5+ independent reviews:** Ranked
-
-The public score is based only on valid, published panel reviews. Reviews marked with a direct conflict of interest are excluded from aggregation.
-
-The public output is generated by `scripts/build_review_scores.py` into `data/review-scores.json`.
+The Edge Function implementation is tracked in `supabase/functions/community-reviews/index.ts`. It uses the `SUPABASE_SERVICE_ROLE_KEY` server-side only; never put privileged Supabase or Gemini keys into web assets.
 
 ## Trust policy
 
-- Reviewers must visit the world before scoring.
-- Creator / staff / direct group conflicts must be disclosed.
-- Self-review scores are excluded from ranking aggregation.
-- Sponsor or advertising spend never affects review scores.
-- Review count and confidence are displayed with panel scores.
-- Major world updates can trigger re-review.
-- The old six placeholder editorial scores have been retired from the public ranking.
-
-
-## AI SCOUT (automated discovery)
-
-A separate AI SCOUT area below the official reviewer ranking automatically publishes
-a shortlist of public VRChat club Worlds. This does **not** alter the reviewer
-ranking or the editor's manual scores.
-
-- No API key: `scripts/build_ai_scout.py` builds a metadata/tag-based discovery
-  queue. The ordering is an **inspection priority, not a craftsmanship score**.
-- To enable visual evaluations, create a Google AI Studio API key and
-  save it as the GitHub Actions repository secret **`GEMINI_API_KEY`**.
-  The scheduled Action then analyzes up to four available public thumbnails
-  per day with `gemini-3.5-flash-lite`. Google's free API tier supports this
-  image-understanding model subject to your account's rate limits. Never
-  enter keys in source code, the website, or GitHub issue comments.
-- This uses Gemini's **image understanding** endpoint, NOT an image-generation
-  service. Keep API billing disabled if you want to remain on the free tier.
-  In the free tier, submitted data may be used by Google to improve its products.
-  Do not send private or unpublished images.
-- AI output is labeled **AI VISUAL IMPRESSION** and **LOW CONFIDENCE**;
-  a single public thumbnail cannot validate sound, actual in-world lighting
-  effects, interactivity, or performance. No quality score is fabricated for
-  unassessed Worlds.
-- `data/ai-scout.json` is refreshed by
-  `.github/workflows/ai-scout.yml` (daily 04:13 JST or manually).
-- Unapproved discoveries, if any, link to their public discovery page and
-  never enter the official catalog or receive automatic thumbnail scores
-  merely by being found.
-- The model request is bounded to four candidate images per run by default;
-  previously assessed results are reused for up to 120 days.
+- User statements about World visits and reviewer identity are **unverified**.
+- Moderation checks content suitability, not whether somebody genuinely visited the World.
+- Publishing a community note does not create or change the official ranking.
+- World creator/staff relationships can be disclosed publicly.
+- Sponsors and advertising do not purchase ratings or change AI-scout scores.
+- Unverified visual, audio, interactive or performance metrics are never presented as confirmed in-world tests.
 
 ## Popularity data
 
@@ -133,15 +81,15 @@ After manual verification, applying the `verified` label can generate a catalog 
 ## Key files
 
 - `index.html` — craftsmanship-first homepage
-- `reviewer.html` — reviewer system / ranking rules
+- `reviewer.html` — open community field notes
 - `worlds/` — generated World directory and profiles
 - `events.html` — event calendar
 - `djs.html` — DJ / artist directory
 - `data/worlds.json` — World registry
 - `data/reviewers.json` — approved reviewer registry
 - `data/reviews.json` — reviewer submissions used for aggregation
-- `data/review-scores.json` — generated public panel score output
-- `scripts/build_review_scores.py` — reviewer panel aggregator
+- `data/review-scores.json` — legacy panel score output (not shown as AI visual ranking)
+- `community-reviews.js` — community field notes and open form
 - `scripts/snapshot.py` — conservative VRChat data collector
 - `scripts/build_rankings.py` — popularity / momentum data builder
 - `scripts/build_static_pages.py` — static detail pages, sitemap and ICS generator

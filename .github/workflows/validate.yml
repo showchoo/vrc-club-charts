@@ -12,6 +12,7 @@ on:
       - "app.js"
       - "analytics.js"
       - "ai-scout.js"
+      - "community-reviews.js"
       - "data/ai-scout.json"
       - "scripts/build_ai_scout.py"
       - "events.js"
@@ -75,6 +76,7 @@ jobs:
           node --check app.js
           node --check analytics.js
           node --check ai-scout.js
+          node --check community-reviews.js
           node --check events.js
           node --check djs.js
           node --test tests/analytics-opt-out.test.cjs

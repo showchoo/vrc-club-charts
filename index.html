@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VRC Club Charts — VRChat Craftsmanship Ranking</title>
-  <meta name="description" content="VRChatのクラブを、人気ではなく空間の完成度で見る。World探索、AI SCOUT、実地レビューによる作り込みランキング。" />
+  <title>VRC Club Charts — AI SCOUT / VRChat Club Discovery</title>
+  <meta name="description" content="VRChatクラブWorldを自動発掘。AIによる外観スコアと現地での体験レビューを分けて紹介する、クラブカルチャーの発見サイト。" />
   <meta name="theme-color" content="#0d171c" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://vrc-club-charts.vercel.app/" />
-  <meta property="og:title" content="VRC Club Charts — Craftsmanship Ranking" />
-  <meta property="og:description" content="Discover VRChat club worlds, visual scouting and independent craftsmanship reviews." />
+  <meta property="og:title" content="VRC Club Charts — AI SCOUT / World Discovery" />
+  <meta property="og:description" content="Discover VRChat club worlds through AI visual scouting and community field notes." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://vrc-club-charts.vercel.app/" />
   <meta property="og:site_name" content="VRC Club Charts" />
@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://vrc-club-charts.vercel.app/og-image.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=20261006-45" />
+  <link rel="stylesheet" href="styles.css?v=20261006-50" />
   <script src="analytics.js?v=20261006-02" defer></script>
 </head>
 <body class="focus-home ranking-home">
@@ -32,16 +32,16 @@
       <span>VRC CLUB CHARTS</span>
     </a>
     <nav class="nav focus-nav calm-nav">
-      <a class="nav-link active" href="#craft-ranking">Ranking</a>
+      <a class="nav-link active" href="#aiScoutSection">AI SCOUT</a>
       <a class="nav-link" href="worlds/">Worlds</a>
       <a class="nav-link" href="events.html">Events</a>
-      <a class="nav-link" href="reviewer.html">Reviewer</a>
+      <a class="nav-link" href="reviewer.html">Reviews</a>
       <a class="nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main id="top">
-    <section id="craft-ranking" class="ranking-hero">
+    <section id="aiScoutSection" class="ranking-hero ai-scout-primary" aria-label="AI SCOUT visual World discovery">
       <div class="ranking-scene" aria-hidden="true">
         <div class="scene-glow scene-glow-a"></div>
         <div class="scene-glow scene-glow-b"></div>
@@ -56,64 +56,57 @@
       <div class="shell ranking-hero-inner">
         <div class="ranking-hero-head">
           <div>
-            <p class="focus-eyebrow"><span></span> VRCHAT NIGHTLIFE / BEYOND POPULARITY</p>
+            <p class="focus-eyebrow"><span></span> VRCHAT NIGHTLIFE / AI WORLD RADAR</p>
             <h1 class="dimensional-title">
-              <span class="title-overline" data-text="CRAFTSMANSHIP">CRAFTSMANSHIP</span>
-              <span class="title-main" data-text="RANKING">RANKING</span>
-              <span class="title-jp">作り込みランキング</span>
+              <span class="title-overline" data-text="AI">AI</span>
+              <span class="title-main" data-text="SCOUT">SCOUT</span>
+              <span class="title-jp">クラブを発掘する、ビジュアルレーダー。</span>
             </h1>
           </div>
           <div class="ranking-intro">
-            <p>音、光、空間。そのすべてに宿る<strong>作り込み</strong>を、実際にワールドを訪れたレビュワーの評価で可視化します。</p>
-            <a class="text-link" href="reviewer.html">7つの評価基準 ↗</a>
+            <p>次に訪れたいクラブを、自動で発見。公開画像から<strong>外観の魅力</strong>を分析し、未知のWorldへの入口をつくります。</p>
+            <a class="text-link" href="about.html">AI SCOUTについて ↗</a>
           </div>
         </div>
-
-        <div class="ranking-summary" aria-label="ranking status">
-          <div><strong id="metricRanked">0</strong><span>RANKED</span></div>
-          <div><strong id="metricPanel">0</strong><span>SCORED WORLDS</span></div>
-          <div><strong id="metricReviews">0</strong><span>REVIEWS</span></div>
-          <div><strong id="metricReviewers">0</strong><span>REVIEWERS</span></div>
-        </div>
-
-        <section id="editorPicksSection" class="editor-picks-block" hidden>
-          <div class="editor-picks-head">
-            <div>
-              <p class="kicker">EDITOR'S PICKS</p>
-              <h2>編集部が注目するクラブ。</h2>
-            </div>
-            <p>編集部独自の7項目評価でセレクト。公式ランキングの点数・順位とは別に掲載しています。</p>
+        <div class="ai-scout-heading">
+          <div>
+            <p class="kicker">VISUAL DISCOVERY / IMAGE-ONLY SCORING</p>
+            <h2>外観スコアで探す。</h2>
+            <p>分析済みのWorldを外観の参考スコア順に紹介。未評価のWorldは発見候補として表示します。</p>
           </div>
-          <div id="editorPicks" class="editor-picks-grid"></div>
-        </section>
-
-        <div id="craftRanking" class="craft-ranking-board">
-          <div class="ranking-loading">ランキングを読み込み中…</div>
+          <div class="ai-scout-heading-info">
+            <span id="aiScoutStatus">SCOUT DATA / LOADING…</span>
+            <small>AI VISUAL ESTIMATE · LOW CONFIDENCE</small>
+          </div>
         </div>
-
-        <div class="ranking-foot">
-          <span>3 REVIEWS · 暫定評価 / 5+ REVIEWS · 正式ランキング</span>
-          <a href="reviewer.html">評価の仕組み ↗</a>
+        <div id="aiScoutGrid" class="ai-scout-grid">
+          <div class="ai-scout-empty">Worldを読み込み中…</div>
         </div>
+        <p class="ai-scout-disclaimer">AIスコアは公開サムネイル1枚をもとにした外観の参考値です。実際の音響、ギミック、VR内演出、快適さは評価していません。スコアが付かないWorldにも順位はありません。</p>
       </div>
     </section>
 
-    <section id="aiScoutSection" class="shell ai-scout-section lower-section" aria-label="AI Scout World discovery">
-      <div class="ai-scout-heading">
+    <section id="editorPicksSection" class="shell editor-picks-block editor-picks-lower lower-section" hidden>
+      <div class="editor-picks-head">
+        <div><p class="kicker">EDITOR'S PICKS</p><h2>編集部が注目するクラブ。</h2></div>
+        <p>運営者の独立した評価です。AI SCOUTの外観スコアやコミュニティレビューと混合しません。</p>
+      </div>
+      <div id="editorPicks" class="editor-picks-grid"></div>
+    </section>
+
+    <section id="craft-ranking" class="shell field-notes-section lower-section">
+      <div class="calm-section-head">
         <div>
-          <p class="kicker">AI SCOUT / WORLD RADAR</p>
-          <h2>次の注目クラブを、探し出す。</h2>
-          <p>公開情報からクラブWorldを探索。画像分析ができたWorldには、<span>外観の参考スコア</span>を表示します。</p>
+          <p class="kicker">FIELD NOTES / COMMUNITY VOICES</p>
+          <h2>画像の先にある、体験。</h2>
+          <p class="field-notes-intro">音・光・ギミック・居心地。ワールドを訪れた人の感想は、AIが測れない部分を知るための手がかりです。誰でも投稿でき、掲載前に内容を確認します。</p>
         </div>
-        <div class="ai-scout-heading-info">
-          <span id="aiScoutStatus">WORLD RADAR / LOADING…</span>
-          <small>SINGLE IMAGE / LOW CONFIDENCE</small>
-        </div>
+        <a class="section-link" href="reviewer.html#write-review">レビューを投稿 ↗</a>
       </div>
-      <div id="aiScoutGrid" class="ai-scout-grid">
-        <div class="ai-scout-empty">クラブ情報を読み込み中…</div>
+      <div id="communityReviewPreview" class="community-review-grid">
+        <p class="community-review-empty">現地レポートを読み込み中…</p>
       </div>
-      <p class="ai-scout-disclaimer">AI評価は公開サムネイル1枚から推定した外観の参考値です。音響・ギミック・動作負荷などは未評価。公式の実地レビューランキングには反映されません。</p>
+      <p class="field-notes-disclaimer">訪問・本人情報は自己申告です。個人の評価はAIスコアや公式ランキングへ加算しません。</p>
     </section>
 
     <section class="shell calm-section lower-section">
@@ -144,30 +137,23 @@
       </div>
     </section>
 
-    <section class="shell calm-reviewer-cta lower-section">
-      <p class="kicker">REVIEWER PANEL</p>
-      <div>
-        <h2>クラブの価値を、<br>体験から測る。</h2>
-        <p>レビュワーが実際にワールドを訪れ、7つの共通基準で評価。独立したレビューが集まったWorldから公式スコアを公開します。</p>
-      </div>
-      <a class="primary-button" href="reviewer.html#apply">レビューに参加する ↗</a>
-    </section>
   </main>
 
   <footer class="site-footer shell calm-footer">
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
     <span class="footer-links">
-      <a href="#craft-ranking">Ranking</a>
+      <a href="#aiScoutSection">AI SCOUT</a>
       <a href="worlds/">Worlds</a>
       <a href="events.html">Events</a>
       <a href="djs.html">DJs</a>
-      <a href="reviewer.html">Reviewer</a>
+      <a href="reviewer.html">Reviews</a>
       <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
     </span>
   </footer>
 
-  <script src="app.js?v=20261006-46" defer></script>
-  <script src="ai-scout.js?v=20261006-02" defer></script>
+  <script src="app.js?v=20261006-47" defer></script>
+  <script src="ai-scout.js?v=20261006-03" defer></script>
+  <script src="community-reviews.js?v=20261006-01" defer></script>
 </body>
 </html>

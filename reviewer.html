@@ -3,197 +3,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reviewer System — VRC Club Charts</title>
-  <meta name="description" content="VRC Club Chartsのレビュアー制度とCraftsmanship Rankingの評価基準。" />
+  <title>体験レビュー — VRC Club Charts</title>
+  <meta name="description" content="VRChatのクラブWorldを訪れた感想を、承認申請なしで投稿。AIによる外観スコアとは別の現地レポートです。" />
   <meta name="theme-color" content="#0d171c" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://vrc-club-charts.vercel.app/reviewer.html" />
-  <meta property="og:title" content="Reviewer System — VRC Club Charts" />
-  <meta property="og:description" content="Independent field reviews and seven craftsmanship criteria for VRChat club worlds." />
+  <meta property="og:title" content="体験レビュー — VRC Club Charts" />
+  <meta property="og:description" content="Real-world impressions from people who have visited VRChat club worlds. Open submissions; no reviewer approval required." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://vrc-club-charts.vercel.app/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261006-42" />
+  <link rel="stylesheet" href="styles.css?v=20261006-50" />
   <script src="analytics.js?v=20261006-02" defer></script>
+  <script src="community-reviews.js?v=20261006-01" defer></script>
 </head>
-<body class="reviewer-page">
+<body class="reviewer-page community-review-page">
   <div class="noise"></div>
   <header class="site-header focus-header">
     <a class="brand" href="index.html"><span class="brand-mark">VCC</span><span>VRC CLUB CHARTS</span></a>
     <nav class="nav focus-nav">
-      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="index.html#aiScoutSection">AI SCOUT</a>
       <a class="nav-link" href="worlds/">Worlds</a>
       <a class="nav-link" href="events.html">Events</a>
-      <a class="nav-link active" href="reviewer.html">Reviewer</a>
+      <a class="nav-link active" href="reviewer.html">Reviews</a>
       <a class="nav-link" href="about.html">About</a>
     </nav>
   </header>
 
   <main class="shell reviewer-main">
     <section class="reviewer-hero">
-      <p class="kicker">REVIEWER PANEL / 7 CRITERIA</p>
-      <h1>いいクラブを、<br><em>体験から評価する。</em></h1>
-      <p class="lead">写真だけでは伝わらない、音・光・空間の完成度。ワールドを訪れたレビュワーが共通の7基準で評価し、複数の声から公式スコアをつくります。</p>
+      <p class="kicker">FIELD NOTES / OPEN COMMUNITY REVIEWS</p>
+      <h1>クラブの本当の魅力は、<br><em>中に入るとわかる。</em></h1>
+      <p class="lead">画像だけでは伝わらない音響・ギミック・空間の使いやすさ。訪問した人の体験を、AI SCOUTの補足情報として集めています。</p>
       <div class="reviewer-status">
-        <span>REVIEWER APPLICATIONS</span>
-        <strong>応募受付中 · レビュー投稿受付中</strong>
+        <span>OPEN TO EVERYONE</span>
+        <strong>レビュワー登録・承認・専用コードは不要です</strong>
+      </div>
+    </section>
+
+    <section class="reviewer-section" id="published-reviews">
+      <div class="reviewer-section-head">
+        <p class="kicker">COMMUNITY / FIELD NOTES</p>
+        <h2>訪れた人の、リアルな声。</h2>
+        <p>一般の投稿者による感想です。本人確認や訪問の事実確認が完了しているわけではなく、AIの外観スコアやランキング順位には加算されません。</p>
+      </div>
+      <div id="communityReviewFeed" class="community-review-grid">
+        <div class="community-review-empty">現地レポートを読み込み中…</div>
       </div>
     </section>
 
     <section class="reviewer-section">
       <div class="reviewer-section-head">
         <p class="kicker">THE 7 CRITERIA</p>
-        <h2>完成度を、7つの視点で。</h2>
+        <h2>体験を、7つの視点で。</h2>
+        <p>より具体的なレビューにするための共通項目です。スコアは投稿者個人の参考値であり、総合ランキングには使われません。</p>
       </div>
       <div class="reviewer-criteria">
-        <article><b>20</b><h3>Visual</h3><p>モデリング、素材、質感、空間全体のデザイン統一感。</p></article>
-        <article><b>20</b><h3>Lighting & VJ</h3><p>照明、レーザー、VJ、曲との連動、演出の完成度。</p></article>
-        <article><b>15</b><h3>Sound</h3><p>音響設計、DJ用途、AudioLink、フロアでの聴こえ方。</p></article>
-        <article><b>15</b><h3>Spatial</h3><p>フロア、DJブース、客席、導線、空間スケール。</p></article>
-        <article><b>10</b><h3>Interaction</h3><p>操作可能な演出、ギミック、参加性、触って楽しめる要素。</p></article>
-        <article><b>10</b><h3>VR Originality</h3><p>現実の再現だけではない、VRだから成立する表現。</p></article>
-        <article><b>10</b><h3>Optimization</h3><p>負荷、安定性、視認性、イベント会場としての実用性。</p></article>
+        <article><b>20</b><h3>Visual</h3><p>モデリング、素材、空間のデザイン。</p></article>
+        <article><b>20</b><h3>Lighting &amp; VJ</h3><p>照明、レーザー、映像演出、曲との連動。</p></article>
+        <article><b>15</b><h3>Sound</h3><p>音響の聴こえ方、DJ用途での使いやすさ。</p></article>
+        <article><b>15</b><h3>Spatial</h3><p>フロア、DJブース、動線、空間の広がり。</p></article>
+        <article><b>10</b><h3>Interaction</h3><p>操作できる演出、ギミック、参加体験。</p></article>
+        <article><b>10</b><h3>VR Originality</h3><p>VRならではの表現や独自性。</p></article>
+        <article><b>10</b><h3>Optimization</h3><p>動作の軽さ、安定性、視認性。</p></article>
       </div>
     </section>
 
-    <section class="reviewer-section">
+    <section class="reviewer-section" id="write-review">
       <div class="reviewer-section-head">
-        <p class="kicker">RANKING RULES</p>
-        <h2>一人の好みでは、決めない。</h2>
+        <p class="kicker">SHARE YOUR EXPERIENCE</p>
+        <h2>訪問レビューを投稿する。</h2>
+        <p>アカウントや審査は不要です。スパム対策のため、同じブラウザから同一Worldへの投稿は30日に1回、投稿数は1日最大3件を目安に制限しています。内容は掲載前に確認します。</p>
       </div>
-      <div class="review-rule-grid">
-        <article><span>01</span><strong>実地レビュー</strong><p>公開情報だけでは採点しません。レビュアーが実際にワールドへ入り評価します。</p></article>
-        <article><span>02</span><strong>最低3レビュー</strong><p>暫定スコアの公開には独立した3件、正式ランキングには5件以上のレビューが必要です。</p></article>
-        <article><span>03</span><strong>レビュー数を公開</strong><p>平均点だけでなく、何人が評価した点数なのかを同時に表示します。</p></article>
-        <article><span>04</span><strong>利害関係を除外</strong><p>制作者本人や直接の関係者による自作品評価はランキング集計から除外します。</p></article>
-        <article><span>05</span><strong>広告と点数を分離</strong><p>スポンサー掲載や広告費は評価点とランキング順位に一切影響させません。</p></article>
-        <article><span>06</span><strong>更新後は再評価</strong><p>大規模アップデート後は古い評価を固定せず、再レビュー対象にします。</p></article>
-      </div>
-    </section>
-
-    <section class="reviewer-section reviewer-confidence">
-      <div>
-        <p class="kicker">CONFIDENCE</p>
-        <h2>点数だけでなく、<br>信頼度も見せる。</h2>
-      </div>
-      <div class="confidence-scale">
-        <div><b>0–2</b><strong>NOT RANKED</strong><span>レビュー不足。ランキング対象外。</span></div>
-        <div><b>3–4</b><strong>PROVISIONAL</strong><span>暫定パネルスコアとして表示。</span></div>
-        <div><b>5+</b><strong>RANKED</strong><span>正式ランキング対象。レビュー人数も表示。</span></div>
-      </div>
-    </section>
-
-    <section class="reviewer-section reviewer-who">
-      <div class="reviewer-section-head">
-        <p class="kicker">WHO REVIEWS?</p>
-        <h2>シーンを知る人が、レビューする。</h2>
-        <p>クラバー、DJ、VJ、ワールド制作者、イベントスタッフなど、クラブ文化を知る方から応募を受け付けています。承認されたレビュワーは共通の基準で評価に参加できます。</p>
-      </div>
-      <div class="reviewer-tags">
-        <span>CLUBBER</span><span>DJ</span><span>VJ</span><span>WORLD CREATOR</span><span>EVENT STAFF</span>
-      </div>
-      <div class="reviewer-apply-card" id="apply">
+      <div class="reviewer-apply-card reviewer-review-card">
         <div class="reviewer-apply-head">
-          <div>
-            <p class="kicker">APPLY</p>
-            <h3>レビュワーに応募する</h3>
-          </div>
-          <span>約2分</span>
+          <div><p class="kicker">OPEN SUBMISSION</p><h3>World Experience</h3></div>
+          <span>NO APPLICATION REQUIRED</span>
         </div>
-
-        <form class="reviewer-apply-form" id="reviewerApplyForm">
-          <div class="reviewer-form-grid">
-            <label>
-              <span>VRChat表示名</span>
-              <input name="vrchat_name" maxlength="80" autocomplete="nickname" required />
-            </label>
-            <label>
-              <span>連絡先</span>
-              <input name="contact" maxlength="160" placeholder="Discord / X / Email など" required />
-            </label>
-          </div>
-
-          <fieldset>
-            <legend>経験 <small>複数選択可</small></legend>
-            <div class="reviewer-chip-options">
-              <label><input type="checkbox" name="experience" value="clubber" /><span>CLUBBER</span></label>
-              <label><input type="checkbox" name="experience" value="dj" /><span>DJ</span></label>
-              <label><input type="checkbox" name="experience" value="vj-lighting" /><span>VJ / LIGHTING</span></label>
-              <label><input type="checkbox" name="experience" value="world-creator" /><span>WORLD CREATOR</span></label>
-              <label><input type="checkbox" name="experience" value="event-staff-organizer" /><span>EVENT STAFF</span></label>
-              <label><input type="checkbox" name="experience" value="other" /><span>OTHER</span></label>
-            </div>
-          </fieldset>
-
-          <label>
-            <span>VRChat nightlifeの経験</span>
-            <textarea name="background" minlength="10" maxlength="1200" rows="4" placeholder="よく行くClub、参加イベント、DJ/VJ/制作経験などを簡潔に。" required></textarea>
-          </label>
-
-          <div class="reviewer-form-grid">
-            <label>
-              <span>関係するWorld / Group <small>任意</small></span>
-              <input name="affiliations" maxlength="800" />
-            </label>
-            <label>
-              <span>レビューできる頻度 <small>任意</small></span>
-              <input name="availability" maxlength="200" placeholder="例: 月2〜3 Worlds" />
-            </label>
-          </div>
-
-          <div class="reviewer-principles">
-            <label><input type="checkbox" name="principle_visit" required /><span>実際にWorldへ入ってから採点します。</span></label>
-            <label><input type="checkbox" name="principle_conflict" required /><span>制作者・スタッフ等の利害関係を申告します。</span></label>
-            <label><input type="checkbox" name="principle_privacy" required /><span>申請情報がReviewer審査のため非公開で保存されることに同意します。</span></label>
-          </div>
-
-          <div class="reviewer-honeypot" aria-hidden="true">
-            <label>Website<input name="website" tabindex="-1" autocomplete="off" /></label>
-          </div>
-
-          <div class="reviewer-submit-row">
-            <button class="primary-button reviewer-submit" type="submit">応募を送信 →</button>
-            <p>申請内容は公開されません。<a href="privacy.html">Privacy</a></p>
-          </div>
-          <div class="reviewer-form-status" id="reviewerFormStatus" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-
-      <div class="reviewer-apply-card reviewer-review-card" id="submit-review">
-        <div class="reviewer-apply-head">
-          <div>
-            <p class="kicker">SUBMIT A REVIEW</p>
-            <h3>Craftsmanship Review</h3>
-          </div>
-          <span>APPROVED REVIEWERS</span>
-        </div>
-
         <form class="reviewer-apply-form" id="reviewSubmitForm">
           <div class="reviewer-form-grid">
-            <label><span>Reviewer ID</span><input name="reviewer_id" maxlength="64" placeholder="reviewer-..." required /></label>
-            <label><span>Access Code</span><input name="access_code" type="password" autocomplete="off" placeholder="vcc_rev_..." required /></label>
+            <label><span>表示名 <small>公開されます／本人確認なし</small></span><input name="display_name" minlength="2" maxlength="60" autocomplete="nickname" required placeholder="VRChat名やニックネーム" /></label>
+            <label><span>訪問日</span><input name="reviewed_at" type="date" required /></label>
           </div>
-
           <div class="reviewer-form-grid">
-            <label><span>World <small>ランキング対象のみ</small></span><select name="world_id" id="reviewWorldSelect" required><option value="">Worldを選択</option></select></label>
-            <label><span>Review date</span><input name="reviewed_at" type="date" required /></label>
+            <label><span>訪問したWorld</span><select name="world_id" id="reviewWorldSelect" required><option value="">Worldを選択</option></select></label>
           </div>
-
           <div class="review-world-preview" id="reviewWorldPreview" hidden>
             <div class="review-world-preview-media" id="reviewWorldPreviewMedia"><span>VRC</span></div>
             <div class="review-world-preview-copy">
-              <small>SELECTED WORLD</small>
-              <strong id="reviewWorldPreviewName">—</strong>
+              <small>SELECTED WORLD</small><strong id="reviewWorldPreviewName">—</strong>
               <span id="reviewWorldPreviewAuthor">—</span>
             </div>
           </div>
-
           <fieldset>
-            <legend>7 criteria <small>合計100点</small></legend>
+            <legend>7 criteria <small>合計100点／個人の参考評価</small></legend>
             <div class="review-score-grid">
               <label><span>Visual /20</span><input type="number" name="visual" min="0" max="20" step="1" required /></label>
-              <label><span>Lighting & VJ /20</span><input type="number" name="lighting" min="0" max="20" step="1" required /></label>
+              <label><span>Lighting &amp; VJ /20</span><input type="number" name="lighting" min="0" max="20" step="1" required /></label>
               <label><span>Sound /15</span><input type="number" name="sound" min="0" max="15" step="1" required /></label>
               <label><span>Spatial /15</span><input type="number" name="spatial" min="0" max="15" step="1" required /></label>
               <label><span>Interaction /10</span><input type="number" name="interaction" min="0" max="10" step="1" required /></label>
@@ -202,249 +109,29 @@
               <div class="review-total"><span>TOTAL</span><strong id="reviewTotal">0</strong><b>/100</b></div>
             </div>
           </fieldset>
-
-          <label>
-            <span>Review comment</span>
-            <textarea name="comment" minlength="10" maxlength="2000" rows="4" placeholder="点数の根拠や印象を簡潔に。" required></textarea>
+          <label><span>具体的な感想 <small>30〜1800文字</small></span>
+            <textarea name="comment" minlength="30" maxlength="1800" rows="5" placeholder="良かった演出や、気になった点など。訪問して感じたことを具体的に教えてください。" required></textarea>
           </label>
-
           <div class="reviewer-principles">
-            <label><input type="checkbox" name="conflict" /><span>このWorld / Groupの制作者・スタッフ等、直接の利害関係があります。</span></label>
-            <label><input type="checkbox" name="visited" required /><span>実際にこのWorldへ入り、共通の7項目基準で採点しました。</span></label>
+            <label><input type="checkbox" name="conflict" /><span>このWorldの制作者・スタッフなど、直接の利害関係があります。</span></label>
+            <label><input type="checkbox" name="visited" required /><span>実際にWorldへ訪問して評価しました。投稿は内容確認後に掲載されることに同意します。</span></label>
+            <label><input type="checkbox" name="privacy" required /><span><a href="privacy.html">プライバシーポリシー</a>を確認しました。</span></label>
           </div>
-
+          <div class="reviewer-honeypot" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
           <div class="reviewer-submit-row">
-            <button class="primary-button reviewer-submit" type="submit">SUBMIT REVIEW →</button>
-            <p>送信後は管理者確認を経て公開されます。</p>
+            <button class="primary-button reviewer-submit" type="submit">訪問レビューを送信 →</button>
+            <p>掲載後もAI SCOUTのスコアや順位には影響しません。</p>
           </div>
           <div class="reviewer-form-status" id="reviewSubmitStatus" role="status" aria-live="polite"></div>
         </form>
       </div>
-      <p class="reviewer-action-note">承認済みReviewerのみ投稿できます。1 Reviewer × 1 Worldでは、公開済みレビューのうち最新のものだけがランキング集計に使われます。</p>
+      <p class="reviewer-action-note">表示名は自己申告であり、Worldへの訪問や利害関係の申告を独立に検証したものではありません。誹謗中傷・宣伝・重複投稿などは掲載しません。</p>
     </section>
-
-    <p class="disclaimer">The reviewer system is in public beta. Reviewer approval is manual; valid reviews from approved reviewers are ingested and ranked automatically. Thresholds may be refined as real review data accumulates.</p>
   </main>
 
   <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
-    <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="about.html">About</a></span>
+    <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
   </footer>
-  <script>
-    (() => {
-      const form = document.getElementById('reviewerApplyForm');
-      const status = document.getElementById('reviewerFormStatus');
-      if (!form || !status) return;
-
-      const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/reviewer_applications';
-      const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
-      const loadedAt = Date.now();
-
-      function setStatus(message, type) {
-        status.textContent = message;
-        status.dataset.state = type || '';
-      }
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const submit = form.querySelector('button[type="submit"]');
-        const data = new FormData(form);
-
-        if (data.get('website')) return;
-        if (Date.now() - loadedAt < 1500) {
-          setStatus('少し待ってからもう一度送信してください。', 'error');
-          return;
-        }
-
-        const experience = [...form.querySelectorAll('input[name="experience"]:checked')].map(el => el.value);
-        if (!experience.length) {
-          setStatus('経験を1つ以上選択してください。', 'error');
-          return;
-        }
-
-        const payload = {
-          vrchat_name: String(data.get('vrchat_name') || '').trim(),
-          contact: String(data.get('contact') || '').trim(),
-          experience,
-          background: String(data.get('background') || '').trim(),
-          affiliations: String(data.get('affiliations') || '').trim() || null,
-          availability: String(data.get('availability') || '').trim() || null
-        };
-
-        submit.disabled = true;
-        setStatus('送信中…', 'loading');
-
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'apikey': apiKey,
-              'Authorization': 'Bearer ' + apiKey,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            let detail = '';
-            try {
-              const error = await response.json();
-              detail = error.code || error.message || '';
-            } catch (_) {}
-            if (response.status === 409 || detail === '23505') {
-              throw new Error('このVRChat表示名では、すでに審査中の申請があります。');
-            }
-            throw new Error('送信できませんでした。時間を置いてもう一度お試しください。');
-          }
-
-          form.reset();
-          setStatus('申請を受け付けました。審査後、記入した連絡先へ案内します。', 'success');
-        } catch (error) {
-          setStatus(error instanceof Error ? error.message : '送信できませんでした。', 'error');
-        } finally {
-          submit.disabled = false;
-        }
-      });
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const form = document.getElementById('reviewSubmitForm');
-      if (!form) return;
-      const status = document.getElementById('reviewSubmitStatus');
-      const totalEl = document.getElementById('reviewTotal');
-      const worldSelect = document.getElementById('reviewWorldSelect');
-      const worldPreview = document.getElementById('reviewWorldPreview');
-      const worldPreviewMedia = document.getElementById('reviewWorldPreviewMedia');
-      const worldPreviewName = document.getElementById('reviewWorldPreviewName');
-      const worldPreviewAuthor = document.getElementById('reviewWorldPreviewAuthor');
-      const endpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/review-submit';
-      const worldMetaEndpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
-      const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
-      const scoreNames = ['visual','lighting','sound','spatial','interaction','originality','optimization'];
-      let reviewWorlds = [];
-      const visualCache = new Map();
-
-      const today = new Date();
-      const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0,10);
-      form.elements.reviewed_at.value = localToday;
-      form.elements.reviewer_id.value = localStorage.getItem('vccReviewerId') || '';
-
-      fetch('data/weekly-ranking.json')
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then(data => {
-          const worlds = Array.isArray(data?.worlds) ? data.worlds : [];
-          const eligible = worlds.filter(w => w.chartEligible === true && w.id);
-          eligible.sort((a,b) => String(a.name || '').localeCompare(String(b.name || ''), 'ja'));
-          reviewWorlds = eligible;
-          worldSelect.innerHTML = '<option value="">Worldを選択</option>' + eligible
-            .map(w => '<option value="' + String(w.id).replace(/"/g,'&quot;') + '">' + String(w.name || w.id).replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</option>')
-            .join('');
-        }).catch(() => {});
-
-
-      function escHtml(value='') {
-        return String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-      }
-
-      function renderWorldPreview(world,image='') {
-        if (!world) {
-          worldPreview.hidden = true;
-          return;
-        }
-        worldPreview.hidden = false;
-        worldPreviewName.textContent = world.name || world.id;
-        worldPreviewAuthor.textContent = 'by ' + (world.author || '—');
-        worldPreviewMedia.innerHTML = image
-          ? '<img src="' + escHtml(image) + '" alt="" loading="lazy" decoding="async">'
-          : '<span>VRC</span>';
-      }
-
-      async function loadSelectedWorldPreview() {
-        const id = worldSelect.value;
-        const world = reviewWorlds.find(w => w.id === id);
-        if (!world) {
-          renderWorldPreview(null);
-          return;
-        }
-        const known = world.thumbnail || world.imageUrl || visualCache.get(id) || '';
-        renderWorldPreview(world, known);
-        if (known) return;
-
-        try {
-          const response = await fetch(worldMetaEndpoint, {
-            method:'POST',
-            headers:{'apikey':apiKey,'Content-Type':'application/json'},
-            body:JSON.stringify({ids:[id]})
-          });
-          if (!response.ok || worldSelect.value !== id) return;
-          const data = await response.json();
-          const item = Array.isArray(data?.items) ? data.items.find(row => row.world_id === id) : null;
-          const image = item?.thumbnail_url || item?.image_url || '';
-          if (image) {
-            visualCache.set(id,image);
-            if (worldSelect.value === id) renderWorldPreview(world,image);
-          }
-        } catch (_) {}
-      }
-
-      worldSelect.addEventListener('change', loadSelectedWorldPreview);
-
-      function updateTotal() {
-        const total = scoreNames.reduce((sum,name) => sum + (Number(form.elements[name].value) || 0), 0);
-        totalEl.textContent = String(total);
-        totalEl.dataset.over = total > 100 ? 'true' : 'false';
-      }
-      scoreNames.forEach(name => form.elements[name].addEventListener('input', updateTotal));
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const submit = form.querySelector('button[type="submit"]');
-        const total = scoreNames.reduce((sum,name) => sum + Number(form.elements[name].value), 0);
-        if (total > 100) {
-          status.textContent = '合計点が100点を超えています。';
-          status.dataset.state = 'error';
-          return;
-        }
-        const reviewerId = form.elements.reviewer_id.value.trim();
-        const payload = {
-          reviewerId,
-          accessCode: form.elements.access_code.value.trim(),
-          worldId: form.elements.world_id.value.trim(),
-          reviewedAt: form.elements.reviewed_at.value,
-          conflict: form.elements.conflict.checked,
-          scores: Object.fromEntries(scoreNames.map(name => [name, Number(form.elements[name].value)])),
-          comment: form.elements.comment.value.trim()
-        };
-        submit.disabled = true;
-        status.textContent = '送信中…';
-        status.dataset.state = 'loading';
-        try {
-          const response = await fetch(endpoint, {
-            method:'POST',
-            headers:{'apikey':apiKey,'Content-Type':'application/json'},
-            body:JSON.stringify(payload)
-          });
-          const data = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(data.error || 'レビューを送信できませんでした。');
-          localStorage.setItem('vccReviewerId', reviewerId);
-          const keepReviewer = reviewerId;
-          form.reset();
-          form.elements.reviewer_id.value = keepReviewer;
-          form.elements.reviewed_at.value = localToday;
-          updateTotal();
-          status.textContent = 'レビューを受け付けました。管理者確認後に公開されます。';
-          status.dataset.state = 'success';
-        } catch (error) {
-          status.textContent = error instanceof Error ? error.message : 'レビューを送信できませんでした。';
-          status.dataset.state = 'error';
-        } finally {
-          submit.disabled = false;
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

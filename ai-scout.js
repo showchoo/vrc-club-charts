@@ -39,7 +39,7 @@
     } else {
       media.appendChild(el('span', 'ai-scout-placeholder', 'VCC / SCOUT'));
     }
-    media.appendChild(el('span', 'ai-scout-number', '#' + String(index + 1).padStart(2, '0')));
+    media.appendChild(el('span', 'ai-scout-number', isAssessed ? ('VISUAL ' + String(index + 1).padStart(2, '0')) : 'DISCOVERY'));
     link.appendChild(media);
 
     const copy = el('div', 'ai-scout-copy');
@@ -95,7 +95,7 @@
       const records = [...scored, ...pending.filter(item => !scoredIds.has(item.id))].slice(0, 6);
       const count = Number(data.summary?.totalCandidates ?? pending.length);
       status.textContent = isAssessed ?
-        scored.length + ' VISUAL SCORES / SINGLE-IMAGE ESTIMATES' :
+        scored.length + ' IMAGES ASSESSED / LOW CONFIDENCE' :
         count + ' WORLDS TRACKED / ' +
         (data.modelConfigured ? 'IMAGE REVIEWS PENDING' : 'IMAGE REVIEWS UNAVAILABLE');
       grid.replaceChildren();

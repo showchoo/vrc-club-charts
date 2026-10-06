@@ -4253,3 +4253,67 @@ main,
 .ai-scout-empty{grid-column:1/-1;padding:30px 20px;border:1px dashed rgba(85,211,230,.24);border-radius:14px;color:#97bbc4;text-align:center;font-size:13px;line-height:1.75}
 @media(max-width:960px){.ai-scout-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ai-scout-heading{align-items:flex-start;flex-direction:column}.ai-scout-heading-info{text-align:left;align-items:flex-start}}
 @media(max-width:640px){.ai-scout-grid{grid-template-columns:1fr}.ai-scout-section{padding-top:38px;padding-bottom:34px}.ai-scout-heading p:not(.kicker){font-size:12px}.ai-scout-copy h3{font-size:20px}}
+
+
+/* AI-first homepage and opt-in community field notes */
+.ai-scout-primary{
+  padding-top:clamp(65px,8vw,118px);
+  padding-bottom:clamp(45px,6vw,86px);
+}
+.ai-scout-primary .ranking-hero-inner{position:relative;z-index:2}
+.ai-scout-primary .ranking-hero-head{margin-bottom:clamp(40px,6vw,74px)}
+.ai-scout-primary .title-main{letter-spacing:-.055em}
+.ai-scout-primary .title-jp{font-size:clamp(15px,1.8vw,23px);letter-spacing:.1em}
+.ai-scout-primary .ranking-intro{max-width:350px}
+.ai-scout-primary .ai-scout-heading{
+  padding-top:23px;
+  border-top:1px solid rgba(99,225,248,.22);
+}
+.ai-scout-primary .ai-scout-heading h2{font-size:clamp(27px,3.5vw,42px)}
+.ai-scout-primary .ai-scout-heading p:not(.kicker){max-width:660px}
+.ai-scout-primary .ai-scout-grid{position:relative;z-index:3}
+.ai-scout-primary .ai-scout-card{background:linear-gradient(150deg,rgba(13,36,46,.90),rgba(5,13,17,.93))}
+.ai-scout-primary .ai-scout-disclaimer{max-width:970px;margin-top:24px}
+.editor-picks-lower{margin-top:55px;margin-bottom:44px}
+.field-notes-section{padding-top:70px;padding-bottom:65px;border-top:1px solid rgba(172,239,255,.12)}
+.field-notes-section .calm-section-head{align-items:flex-start}
+.field-notes-intro{max-width:730px;color:#9fb9c0;font-size:13px;line-height:1.9}
+.field-notes-disclaimer{margin:19px 0 0;color:#79939b;font-size:11px;line-height:1.8}
+.community-review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.community-review-item{
+  min-width:0;padding:19px;border:1px solid rgba(140,218,237,.18);
+  border-radius:16px;background:linear-gradient(145deg,rgba(19,43,52,.65),rgba(4,14,20,.76));
+}
+.community-review-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}
+.community-review-header strong{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+.community-review-header time{flex:none;font:500 10px/1.5 ui-monospace,monospace;color:#7d9ba4}
+.community-review-world{display:inline-block;font-size:12px;color:#78d5e8;font-weight:750;line-height:1.5}
+a.community-review-world:hover{text-decoration:underline}
+.community-review-score{font:600 11px/1.5 ui-monospace,monospace;color:#9cbbca}
+.community-review-comment{font-size:13px;line-height:1.85;color:#c8d9dc;white-space:pre-wrap;overflow-wrap:anywhere}
+.community-review-conflict{display:inline-block;font-size:10px;color:#e8c18a}
+.community-review-empty{grid-column:1/-1;padding:23px 15px;color:#9fb9c0;font-size:12px;border:1px dashed rgba(140,218,237,.2);border-radius:13px}
+.community-review-page .reviewer-hero{padding-bottom:55px}
+.community-review-page .reviewer-section{padding-top:75px}
+.community-review-page .reviewer-apply-card{margin-top:16px}
+.community-review-page .reviewer-principles a{color:#78d5e8;text-decoration:underline}
+@media(max-width:960px){
+  .community-review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-scout-primary .ranking-hero-head{gap:22px}
+}
+@media(max-width:640px){
+  .ai-scout-primary{padding-top:52px;padding-bottom:44px}
+  .ai-scout-primary .ranking-hero-head{margin-bottom:32px}
+  .ai-scout-primary .ai-scout-heading{gap:15px}
+  .field-notes-section{padding-top:47px;padding-bottom:45px}
+  .community-review-grid{grid-template-columns:1fr}
+  .community-review-page .reviewer-section{padding-top:58px}
+}
+
+
+.world-review-disclaimer{
+  padding:16px 18px;margin:22px 0;
+  border-left:2px solid rgba(99,225,248,.55);
+  background:rgba(12,41,50,.38);
+  color:#9dbec8;font-size:11px;line-height:1.85;
+}
