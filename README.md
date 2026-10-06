@@ -76,6 +76,38 @@ Actions **secret** to enable the server-only mirror; without it, GitHub JSON
 remains authoritative and publishing continues. Never expose the key to
 browser JavaScript or commit it to source control.
 
+## URL-only community club submissions with AI approval
+
+The homepage's [Submit](https://vrc-club-charts.vercel.app/#submit-world) section
+accepts public VRChat World links without requiring a login. Its POST target
+is the deployed `world-submit` Supabase Edge Function, which:
+- validates the exact `vrchat.com/home/world/wrld_...` URL;
+- independently checks VRChat World ID, public status, official name and creator;
+- deduplicates already submitted or listed Worlds;
+- accepts at most three new suggestions per day per salted connection-derived
+  identifier, plus a honeypot field;
+- stores only official World metadata in private RLS-protected tables; no
+  raw IP address is written to the database.
+
+GET `world-submit?queue=1&limit=75&offset=0` intentionally returns **only
+official, public World metadata** (no visitor identifier, IP hash, or personal
+submission records) for the scheduled GitHub AI classifier.
+
+`.github/workflows/review-submitted-worlds.yml` uses the existing
+`GEMINI_API_KEY` GitHub Actions secret to classify up to eight unreviewed
+Worlds hourly with `scripts/review_world_submissions.py`. The processor
+rechecks official public World status and constrains auto-admission to a
+Gemini 'club' verdict at >=0.90 confidence **and independent textual nightclub
+evidence** (including supporting details beyond the title). Accepted Worlds
+enter `data/worlds.json`, the ranking is rebuilt, and Pages republishes.
+Ambiguous classifications remain in `data/world-submission-decisions.json`
+with status `needs_review`; neither a quality score nor manual approval is
+fabricated. If Gemini is unavailable, nothing is approved automatically.
+
+Provider-key secrets live in GitHub Actions, not the browser. Existing
+human review, visual quality evaluation and World discovery are separate
+from the yes/no nightlife-use classifier.
+
 ## Community field notes (open submission)
 
 The public page `reviewer.html` accepts World experience reports from any visitor. There is **no reviewer application, approval process, or special code** required to submit.
