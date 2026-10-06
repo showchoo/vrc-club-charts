@@ -4359,7 +4359,8 @@ a.community-review-world:hover{text-decoration:underline}
   flex: none;
 }
 .ai-scout-primary .title-main {
-  margin: 0;
+  /* Pull DISCOVERY nearer to CLUB without shrinking the subtitle spacing. */
+  margin: -8px 0 0;
   font-size: clamp(56px, 7.7vw, 114px);
   letter-spacing: -.065em;
   line-height: 1.07;
@@ -4458,6 +4459,9 @@ a.community-review-world:hover{text-decoration:underline}
 @media (max-width: 540px) {
   .ai-scout-primary .dimensional-title {
     gap: 12px;
+  }
+  .ai-scout-primary .title-main {
+    margin-top: -4px;
   }
   .ai-scout-primary .title-overline {
     font-size: clamp(34px, 10vw, 50px);
