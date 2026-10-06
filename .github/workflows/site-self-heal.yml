@@ -108,6 +108,9 @@ jobs:
           test -s _site/i18n.js
           test "$(find _site/worlds -maxdepth 1 -name 'wrld_*.html' | wc -l)" -gt 0
           test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
+          # Build inputs are reconstructed from Supabase and can legitimately
+          # update local data files. These are never part of a repair proposal.
+          git restore -- data
           # The AI must not mutate secrets, tests, workflows or catalog data.
           python - <<'PY'
           import json, subprocess
@@ -162,6 +165,9 @@ jobs:
               echo "Safe single-link replacement: attempting automatic squash merge."
               if gh pr merge "$pr_url" --squash --delete-branch; then
                 echo "auto_merged=true" >> "$GITHUB_OUTPUT"
+                # GITHUB_TOKEN commits do not automatically trigger other Actions.
+                # Explicit dispatch keeps GitHub Pages synchronized with Vercel.
+                gh workflow run pages.yml --ref main || echo "Pages dispatch unavailable; check deployment."
               else
                 echo "Automated merge blocked by GitHub policy; PR remains for review."
               fi
