@@ -44,9 +44,15 @@
     const target = feed || preview;
     if (!target) return;
     try {
-      const response = await fetch(endpoint + '?limit=' + (feed ? '12' : '3'), { cache: 'no-store' });
+      const [response, worldResponse] = await Promise.all([
+        fetch(endpoint + '?limit=' + (feed ? '12' : '3'), { cache: 'no-store' }),
+        fetch('data/weekly-ranking.json', { cache: 'no-store' }).catch(() => null)
+      ]);
       if (!response.ok) throw new Error('feed');
       const data = await response.json();
+      const worldData = worldResponse?.ok ? await worldResponse.json().catch(() => ({})) : {};
+      const worldNames = new Map((Array.isArray(worldData.worlds) ? worldData.worlds : [])
+        .map(w => [w.id, w.name]));
       const reviews = Array.isArray(data.reviews) ? data.reviews : [];
       target.replaceChildren();
       if (!reviews.length) {
@@ -54,7 +60,7 @@
           '掲載中の体験レビューはまだありません。最初の現地レポートをお待ちしています。'));
         return;
       }
-      for (const review of reviews) target.append(renderReview(review));
+      for (const review of reviews) target.append(renderReview({ ...review, world_name: worldNames.get(review.world_id) || review.world_id }));
     } catch (_) {
       target.replaceChildren(node('p', 'community-review-empty', '体験レビューを読み込めませんでした。'));
     }
