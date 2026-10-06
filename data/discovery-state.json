@@ -28,12 +28,12 @@
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 23,
-    "vrcmap_new": 22,
-    "vrcmap_cafe": 22,
-    "vrcmap_japan": 22,
-    "vrcmap_trending": 22,
-    "vrcmap_chill": 22
+    "vrcmap_music": 35,
+    "vrcmap_new": 34,
+    "vrcmap_cafe": 34,
+    "vrcmap_japan": 34,
+    "vrcmap_trending": 34,
+    "vrcmap_chill": 34
   },
   "sourceHealth": {
     "vrcmap_music": {

@@ -715,7 +715,7 @@
     "authorHint": "Coldcancer",
     "firstSeenAt": "2026-10-06",
     "lastSeenAt": "2026-10-06",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "vrcmap_cafe",

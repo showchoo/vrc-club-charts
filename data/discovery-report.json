@@ -1,9 +1,9 @@
 {
   "updatedAt": "2026-10-06",
   "registeredWorlds": 100,
-  "pendingCandidates": 1,
+  "pendingCandidates": 0,
   "totalTrackedWorlds": 101,
-  "historicalOnly": 0,
+  "historicalOnly": 1,
   "bySource": {
     "catalog": 100,
     "event-curated": 1,
