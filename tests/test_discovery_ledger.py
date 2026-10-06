@@ -103,7 +103,9 @@ class DiscoveryLedgerTests(unittest.TestCase):
             }
             for path,data in payloads.items():
                 (folder/path).write_text(json.dumps(data),encoding="utf-8")
-            with patch.object(ledger,"DATA",folder):
+            with patch.object(ledger,"DATA",folder), patch.object(
+                ledger,"LEDGER",folder/"world-discovery-ledger.json"
+            ):
                 rows,summary=ledger.build_ledger("2026-10-07")
             self.assertEqual(rows,[])
             self.assertEqual(summary["pendingCandidates"],0)
