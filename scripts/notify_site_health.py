@@ -37,7 +37,7 @@ def api(method: str, path: str, token: str, payload=None):
         raise RuntimeError(f"GitHub REST {method} {path.split('?')[0]}: HTTP {exc.code}") from None
 
 
-def format_incident(report: dict, repair: dict, pr_url="") -> str:
+def format_incident(report: dict, repair: dict, pr_url="", branch_url="") -> str:
     issues = report.get("issues") or []
     rows = []
     for item in issues[:12]:
@@ -59,6 +59,10 @@ def format_incident(report: dict, repair: dict, pr_url="") -> str:
     ]
     if pr_url and re.fullmatch(r"https://github\.com/[\w.-]+/[\w.-]+/pull/\d+", pr_url):
         description += ["", f"**Proposed repair:** {pr_url}"]
+    elif branch_url and re.fullmatch(r"https://github\.com/[\w.-]+/[\w.-]+/tree/auto/vcc-gemini-repair-\d+", branch_url):
+        description += ["", f"**Repair branch (PR permission is blocked):** {branch_url}",
+                        "Enable GitHub Actions PR creation in Settings → Actions → General, "
+                        "then open a PR for this branch."]
     else:
         description += ["", "Check the GitHub Actions run and the repository for next steps."]
     description += [
@@ -69,7 +73,7 @@ def format_incident(report: dict, repair: dict, pr_url="") -> str:
     return "\n".join(description)
 
 
-def sync(report: dict, repair: dict, token: str, repo: str, owner: str, pr_url=""):
+def sync(report: dict, repair: dict, token: str, repo: str, owner: str, pr_url="", branch_url=""):
     base = "/repos/" + repo
     issues = api("GET", base + "/issues?state=open&labels=" + LABEL + "&per_page=50", token)
     existing = [x for x in issues if isinstance(x, dict) and "pull_request" not in x]
@@ -80,7 +84,7 @@ def sync(report: dict, repair: dict, token: str, repo: str, owner: str, pr_url="
         print(f"Health incidents resolved: {len(existing)}")
         return "healthy"
 
-    body = format_incident(report, repair, pr_url)
+    body = format_incident(report, repair, pr_url, branch_url)
     if existing:
         # Avoid repeated comments and notification email storms on every hourly run.
         current = existing[0]
@@ -131,6 +135,7 @@ def main():
     parser.add_argument("--report", default="/tmp/vcc-site-health.json")
     parser.add_argument("--repair", default="/tmp/vcc-repair-result.json")
     parser.add_argument("--pr-url-file", default="/tmp/vcc-repair-pr.txt")
+    parser.add_argument("--branch-url-file", default="/tmp/vcc-repair-branch.txt")
     args = parser.parse_args()
     token = os.environ.get("GITHUB_TOKEN", "")
     repo = os.environ.get("GITHUB_REPOSITORY", "")
@@ -141,7 +146,8 @@ def main():
     repair = (json.loads(Path(args.repair).read_text(encoding="utf-8"))
               if Path(args.repair).exists() else {"status": "not_attempted"})
     pr_url = Path(args.pr_url_file).read_text(encoding="utf-8").strip() if Path(args.pr_url_file).exists() else ""
-    sync(report, repair, token, repo, owner, pr_url)
+    branch_url = Path(args.branch_url_file).read_text(encoding="utf-8").strip() if Path(args.branch_url_file).exists() else ""
+    sync(report, repair, token, repo, owner, pr_url, branch_url)
     return 0
 
 
