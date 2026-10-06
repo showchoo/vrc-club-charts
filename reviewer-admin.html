@@ -118,7 +118,7 @@ body.admin-page{font-size:15px}
       <div>
         <p class="kicker">PRIVATE MODERATION CONSOLE</p>
         <h1>VCC Admin</h1>
-        <p>Reviewer申請、レビュー、新規Club World候補を確認する管理画面です。自動探索したWorldは承認するまで公開カタログへ入りません。</p>
+        <p>一般レビューの掲載確認、過去のレビュワー申請、AIのWorld候補を管理する画面です。一般レビューは投稿者承認なしで受け付け、掲載内容だけを確認します。</p>
       </div>
       <a class="secondary-button" href="reviewer.html">← Reviewer page</a>
     </div>
@@ -188,7 +188,7 @@ body.admin-page{font-size:15px}
       <div class="admin-queue-divider"></div>
 
       <div class="admin-toolbar">
-        <strong>REVIEWER APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
+        <strong>LEGACY REVIEWER APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
         <div>
           <button class="secondary-button" id="refreshButton" type="button">REFRESH</button>
           <button class="secondary-button" id="lockButton" type="button">LOCK</button>
@@ -203,6 +203,13 @@ body.admin-page{font-size:15px}
       </div>
       <div class="admin-list" id="reviewList"></div>
 
+      <div class="admin-queue-divider"></div>
+
+      <div class="admin-toolbar">
+        <strong>OPEN COMMUNITY REVIEWS <span class="admin-count" id="pendingCommunityCount">0</span></strong>
+        <span class="admin-auto-label">NO REVIEWER APPROVAL NEEDED / CONTENT MODERATION ONLY</span>
+      </div>
+      <div class="admin-list" id="communityReviewList"></div>
       <div class="admin-queue-divider"></div>
 
       <div class="admin-toolbar">
@@ -229,6 +236,8 @@ body.admin-page{font-size:15px}
       const pendingCount = document.getElementById('pendingCount');
       const reviewList = document.getElementById('reviewList');
       const pendingReviewCount = document.getElementById('pendingReviewCount');
+      const communityReviewList = document.getElementById('communityReviewList');
+      const pendingCommunityCount = document.getElementById('pendingCommunityCount');
       const worldCandidateList = document.getElementById('worldCandidateList');
       const worldCandidateCount = document.getElementById('worldCandidateCount');
       const loginStatus = document.getElementById('loginStatus');
@@ -468,6 +477,63 @@ body.admin-page{font-size:15px}
       }
 
 
+      function renderCommunityReviews(reviews){
+        pendingCommunityCount.textContent=reviews.length;
+        communityReviewList.replaceChildren();
+        if(!reviews.length){
+          communityReviewList.innerHTML='<div class="empty-admin">掲載待ちの一般レビューはありません。</div>';
+          return;
+        }
+        for(const review of reviews){
+          const score=['visual','lighting','sound','spatial','interaction','originality','optimization']
+            .reduce((sum,key)=>sum+Number(review[key]||0),0);
+          const card=document.createElement('article');
+          card.className='admin-card';
+          card.innerHTML=`
+            <div class="admin-card-head">
+              <div><h2>${esc(review.display_name)}</h2>
+              <div class="admin-meta">
+                <span>${esc(review.world_id)}</span>
+                <span>${review.conflict ? '関係者' : '一般投稿'}</span>
+                <span>個人評価 ${score}/100</span>
+              </div></div>
+              <time>${esc(fmt(review.created_at))}</time>
+            </div>
+            <div class="review-scoreline">
+              <span>Visual ${review.visual}/20</span><span>Lighting ${review.lighting}/20</span>
+              <span>Sound ${review.sound}/15</span><span>Spatial ${review.spatial}/15</span>
+              <span>Interaction ${review.interaction}/10</span><span>Originality ${review.originality}/10</span>
+              <span>Optimization ${review.optimization}/10</span>
+            </div>
+            <div class="admin-data">
+              <div><b>VISIT DATE</b><p>${esc(review.reviewed_at)}</p></div>
+              <div><b>COMMENT</b><p>${esc(review.comment)}</p></div>
+            </div>
+            <div class="admin-actions">
+              <button class="approve" type="button">掲載する</button>
+              <button class="reject" type="button">見送る</button>
+            </div>`;
+          const publish=card.querySelector('.approve');
+          const reject=card.querySelector('.reject');
+          const act=async(action)=>{
+            const message=action==='publish_community_review'?'この一般レビューを公開しますか？':'このレビューの掲載を見送りますか？';
+            if(!confirm(message)) return;
+            publish.disabled=reject.disabled=true;
+            try{
+              await callAdmin(action,review.id);
+              card.remove();
+              pendingCommunityCount.textContent=String(Math.max(0,Number(pendingCommunityCount.textContent)-1));
+              if(!communityReviewList.querySelector('.admin-card')){
+                communityReviewList.innerHTML='<div class="empty-admin">掲載待ちの一般レビューはありません。</div>';
+              }
+            }catch(err){alert(err.message);publish.disabled=reject.disabled=false;}
+          };
+          publish.addEventListener('click',()=>act('publish_community_review'));
+          reject.addEventListener('click',()=>act('reject_community_review'));
+          communityReviewList.appendChild(card);
+        }
+      }
+
       function renderWorldCandidates(candidates,decisions){
         const decided=new Map((decisions||[]).map(d=>[d.world_id,d.status]));
         const pending=(candidates||[]).filter(c=>!decided.has(c.id));
@@ -669,9 +735,10 @@ body.admin-page{font-size:15px}
       async function load(){
         setLoginStatus('確認中…');
         try{
-          const [data,reviews,worldDecisions,candidates,worlds,editorData,analyticsData]=await Promise.all([
+          const [data,reviews,communityReviews,worldDecisions,candidates,worlds,editorData,analyticsData]=await Promise.all([
             callAdmin('list'),
             callAdmin('list_reviews'),
+            callAdmin('list_community_reviews'),
             callAdmin('list_world_candidate_decisions'),
             loadWorldCandidates(),
             loadEditorWorlds(),
@@ -681,6 +748,7 @@ body.admin-page{font-size:15px}
           showUnlocked();
           render(data.applications || []);
           renderReviews(reviews.reviews || []);
+          renderCommunityReviews(communityReviews.reviews || []);
           renderWorldCandidates(candidates,worldDecisions.decisions || []);
           editorWorlds=worlds || [];
           editorScores=editorData.scores || [];
