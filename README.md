@@ -51,6 +51,31 @@ that all Worlds have been scanned. World discovery uses no paid Gemini calls; on
 is in the catalog, the existing Gemini batch image assessment continues separately.
 The catalog and public ranking are rebuilt together after automatic additions.
 
+## Durable World evidence and coverage
+
+Discovery evidence is no longer limited to a 30-day candidate queue.
+`scripts/build_discovery_ledger.py` combines the approved catalog, unresolved
+candidates, explicit World URLs from curated/imported public events, and owner
+nominations into `data/world-discovery-ledger.json`. Each World retains
+first/last observation dates and bounded source references even if a source later
+stops listing it. The separate `data/discovery-report.json` records how many
+IDs are registered, pending or historical plus per-source availability. **These
+counts are not an estimate of total VRChat clubs.**
+
+Only a literal `wrld_...` World ID in an event's public metadata can create
+an event venue candidate. A plausible club name, group link, or event organizer
+is never automatically converted into a World ID. Event-derived IDs remain
+unapproved until independently checked, and never receive fabricated visual
+scores. This first phase intentionally does **not** claim to discover all
+Worlds by creator: VRChat's aggregate search needs authorization.
+
+Optional persistence in Supabase uses the private `world_discovery_records`
+and `world_discovery_runs` tables with RLS enabled and no anonymous or
+authenticated Data API grants. Add `SUPABASE_SERVICE_ROLE_KEY` as a GitHub
+Actions **secret** to enable the server-only mirror; without it, GitHub JSON
+remains authoritative and publishing continues. Never expose the key to
+browser JavaScript or commit it to source control.
+
 ## Community field notes (open submission)
 
 The public page `reviewer.html` accepts World experience reports from any visitor. There is **no reviewer application, approval process, or special code** required to submit.

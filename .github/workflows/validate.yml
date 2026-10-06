@@ -27,8 +27,12 @@ on:
       - "data/world-candidates.json"
       - "data/discovery-seeds.json"
       - "data/discovery-state.json"
+      - "data/world-discovery-ledger.json"
+      - "data/discovery-report.json"
       - "tests/**"
       - "scripts/discover_worlds.py"
+      - "scripts/build_discovery_ledger.py"
+      - "scripts/sync_discovery_to_supabase.py"
       - "scripts/sync_worlds_from_supabase.py"
       - "data/reviews.json"
       - "data/reviewers.json"
@@ -52,6 +56,8 @@ on:
       - "data/weekly-ranking.json"
       - "data/discovery-seeds.json"
       - "data/discovery-state.json"
+      - "data/world-discovery-ledger.json"
+      - "data/discovery-report.json"
       - "tests/**"
       - "data/events.json"
       - "data/events-auto.json"
@@ -88,6 +94,8 @@ jobs:
           node --test tests/analytics-opt-out.test.cjs
       - name: Test AI SCOUT catalog generation
         run: python -m unittest discover -s tests -p "test_*.py"
+      - name: Build discovery evidence snapshot
+        run: python scripts/build_discovery_ledger.py
       - name: Sync approved Worlds
         run: |
           python scripts/sync_worlds_from_supabase.py

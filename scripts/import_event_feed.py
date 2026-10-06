@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_URL = "https://kafka2306.github.io/cast_event_cal/events.json"
 OUT = ROOT / "data/events-auto.json"
 USER_AGENT = "VRCClubCharts/0.4 (+https://github.com/showchoo/vrc-club-charts)"
+WORLD_ID = re.compile(r"wrld_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
+
 JST = dt.timezone(dt.timedelta(hours=9))
 
 ALLOWED_CATEGORIES = {"音楽・ダンス", "公演・ショー", "music", "dance", "performance", "show"}
@@ -109,6 +111,19 @@ def is_music_event(event: dict, now: dt.datetime) -> bool:
     return category_ok and keyword_ok and not excluded and bool(clean(event.get("url")))
 
 
+def explicit_venue_world_id(event: dict) -> str | None:
+    """Only extract literal World IDs from event-owned public metadata."""
+    for field in ("worldId", "world_id", "worldUrl", "world_url",
+                  "location", "description", "url"):
+        value = event.get(field)
+        if not isinstance(value, str):
+            continue
+        match = WORLD_ID.search(value[:5000])
+        if match:
+            return match.group(0).lower()
+    return None
+
+
 def stable_id(event: dict) -> str:
     upstream = clean(event.get("id"))
     if upstream:
@@ -135,6 +150,7 @@ def main() -> int:
     for event in rows:
         if not isinstance(event, dict) or not is_music_event(event, now):
             continue
+        venue_id = explicit_venue_world_id(event)
         selected.append({
             "id": stable_id(event),
             "name": clean(event.get("title")),
@@ -142,6 +158,7 @@ def main() -> int:
             "end": clean(event.get("ends_at")) or None,
             "organizer": clean(event.get("organizer")) or "VRChat community organizer",
             "worldName": clean(event.get("location")) or "VRChat / event instance",
+            **({"worldId": venue_id} if venue_id else {}),
             "genres": classify_genres(event),
             "url": clean(event.get("url")),
             "source": "KAFKA2306/cast_event_cal public event feed",
