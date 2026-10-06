@@ -16,6 +16,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20261006-53" />
   <script src="analytics.js?v=20261006-03" defer></script>
+  <script src="i18n.js?v=20261007-bilingual-01" defer></script>
 </head>
 <body>
   <div class="noise"></div>
@@ -63,6 +64,8 @@
       <p>体験レビュー機能では、投稿頻度の制限に用いるランダムなブラウザ識別子と、表示名の入力補助用データをブラウザの <code>localStorage</code> に保存します。ブラウザ側の保存データは、ブラウザのサイトデータ削除機能から消去できます。ただし、ブラウザの保存データを消しても、すでに送信・公開されたレビューは削除されません。</p>
       <p>アクセス解析ではCookie・端末指紋（フィンガープリンティング）を使いません。推定ユニーク訪問ブラウザ数のため、ランダム生成したブラウザ識別子を <code>localStorage</code> に保存します。同一ブラウザからの複数閲覧を数え直さない目的に限り使用し、サーバーは識別子の元データを保存せず、秘密鍵でハッシュ化した値を保存します。管理者向けの解析除外設定も <code>localStorage</code> に保存します。外部サービス側のCookie・技術的な保存処理については、各サービスの方針が適用される場合があります。</p>
     </section>
+
+    <p class="disclaimer">表示言語（英語／日本語）の選択は、このブラウザのlocalStorageに保存され、サイト内でのみ利用します。</p>
 
     <section class="prose-section">
       <h2>5. アクセス解析</h2>

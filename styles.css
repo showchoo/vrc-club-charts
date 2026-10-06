@@ -4968,3 +4968,44 @@ body.community-review-page .site-footer {
     padding:15px;
   }
 }
+
+
+/* Shared EN / 日本語 switch. Kept visible even when mobile navigation collapses. */
+.site-header:has(.vcc-language-toggle) {
+  grid-template-columns: minmax(0,1fr) auto auto;
+  column-gap: 12px;
+}
+.vcc-language-toggle {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  min-width: 54px;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid rgba(166,234,255,.24);
+  border-radius: 11px;
+  background: rgba(63,217,255,.07);
+  color: #cdeaf2;
+  font: 700 12px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.vcc-language-toggle:hover,
+.vcc-language-toggle:focus-visible {
+  background: rgba(63,217,255,.17);
+  color: #fff;
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .site-header:has(.vcc-language-toggle) {
+    grid-template-columns: minmax(0,1fr) auto;
+  }
+  .site-header .vcc-language-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .site-header .nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+}
