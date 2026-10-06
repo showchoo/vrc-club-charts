@@ -39,6 +39,7 @@ on:
       - "data/reviews.json"
       - "data/reviewers.json"
       - "data/world-candidates.json"
+      - "data/discovery-report.json"
       - "scripts/discover_worlds.py"
       - "scripts/sync_worlds_from_supabase.py"
       - ".github/workflows/pages.yml"
@@ -91,6 +92,7 @@ jobs:
           cp data/events.json _site/data/
           cp data/djs.json _site/data/
           cp data/world-candidates.json _site/data/
+          cp data/discovery-report.json _site/data/
           python scripts/build_static_pages.py _site
           python scripts/build_og_image.py _site
           touch _site/.nojekyll
