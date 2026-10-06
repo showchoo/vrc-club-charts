@@ -278,12 +278,15 @@ def main() -> int:
 
     source_membership: dict[str, list[tuple[str, str, int]]] = {}
     successful_sources = 0
+    source_health: dict[str, dict] = {}
 
     for source_name, source_url, base_score in LISTING_SOURCES:
         try:
             raw = fetch_text(source_url)
             ids = listing_world_ids(raw)
             successful_sources += 1
+            source_health[source_name] = {"lastAttemptAt": today, "status": "ok",
+                                          "listedWorldIds": len(ids)}
             print(f"{source_name}: found {len(ids)} listed World IDs")
             # Probe ordinary pagination only when it yields new World IDs;
             # stop immediately if the site ignores the page query parameter.
@@ -310,6 +313,9 @@ def main() -> int:
                     continue
                 source_membership.setdefault(wid, []).append((source_name, source_url, base_score))
         except Exception as exc:
+            source_health[source_name] = {"lastAttemptAt": today,
+                                          "status": "unavailable",
+                                          "errorType": type(exc).__name__}
             print(f"WARN: discovery source failed {source_url}: {exc}")
 
     if successful_sources == 0:
@@ -341,11 +347,16 @@ def main() -> int:
         print(f"{source_name}: rotating detail index {start} -> {next_positions[source_name]} "
               f"from {len(pool)} unregistered IDs")
     ordered = [(wid, source_membership[wid]) for wid in selected_ids]
+    discovery_state["sourceHealth"] = {
+        **(discovery_state.get("sourceHealth", {})
+           if isinstance(discovery_state.get("sourceHealth"), dict) else {}),
+        **source_health,
+    }
     if successful_sources:
         discovery_state["vrcmapNextIndex"] = next_positions
         discovery_state["updatedAt"] = today
-        STATE.write_text(json.dumps(discovery_state, ensure_ascii=False, indent=2)
-                         + "\n", encoding="utf-8")
+    STATE.write_text(json.dumps(discovery_state, ensure_ascii=False, indent=2)
+                     + "\n", encoding="utf-8")
 
     by_id: dict[str, dict] = {}
     for idx, (wid, memberships) in enumerate(ordered):
@@ -368,7 +379,14 @@ def main() -> int:
     vrcw_items, vrcw_ok = discover_candidates(today)
     from discover_official import collect_candidates
     official_items, official_ok = collect_candidates(today)
-    for item in vrcw_items + official_items + priority_seeds(today):
+    # Public events occasionally include a literal wrld_ ID even where
+    # the venue name itself does not contain Club/DJ. Preserve those leads.
+    from build_discovery_ledger import event_leads, load
+    auto_events = event_leads(load(ROOT / "data" / "events-auto.json", []),
+                              "event-feed", today)
+    curated_events = event_leads(load(ROOT / "data" / "events.json", []),
+                                 "event-curated", today)
+    for item in vrcw_items + official_items + priority_seeds(today) + auto_events + curated_events:
         wid = item["id"]
         if wid in existing_ids or wid in decided_ids:
             continue
