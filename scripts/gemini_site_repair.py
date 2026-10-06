@@ -228,6 +228,7 @@ def main() -> int:
                 apply_edits(edits)
                 result["status"] = "patch_proposed"
                 result["edits"] = [i["path"] for i in edits]
+                result["proposed_edits"] = edits
                 result["auto_merge"] = can_merge
             else:
                 result["status"] = "no_safe_patch"
