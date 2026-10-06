@@ -11,6 +11,7 @@ on:
       - "world-submission.js"
       - "reviewer-admin.html"
       - "app.js"
+      - "i18n.js"
       - "analytics.js"
       - "ai-scout.js"
       - "community-reviews.js"
@@ -88,7 +89,7 @@ jobs:
           python scripts/sync_reviews_from_supabase.py
           python scripts/build_review_scores.py
           mkdir _site
-          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js i18n.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/review-scores.json data/ai-scout.json _site/data/
