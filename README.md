@@ -272,6 +272,53 @@ World submissions are automatically checked for duplicate `wrld_...` IDs.
 
 After manual verification, applying the `verified` label can generate a catalog PR automatically.
 
+## Gemini self-healing site monitor
+
+`.github/workflows/site-self-heal.yml` checks the live Vercel production URL **hourly**.
+It verifies public routes, generated World profiles, images, published feeds,
+JavaScript assets and the bilingual toggle. Every six hours (and on initial
+deployment/manual runs), a Playwright Chromium probe checks *rendered* World
+images, AI SCOUT cards, and the EN/日本語 button. The monitor is read-only.
+
+If it finds a new reproducible incident, it makes **one** bounded request to
+the existing `GEMINI_API_KEY` using `gemini-3.5-flash-lite`. Healthy hours
+cost no Gemini API tokens. Gemini may suggest up to two unique text
+replacements in a small allowlist of public-facing source files. It cannot
+modify GitHub Actions, secrets, tests, World/review data, Supabase, moderation
+or the official scoring policy. Prompts treat site/World content as untrusted.
+
+Suggested changes run Python/Node tests and the actual Vercel static build in
+a separate no-secret step. The bot then creates a repair branch and a GitHub
+PR. **Only an isolated, relative internal HTML link correction may be merged
+automatically.** JavaScript, Python generator, styling and config changes
+require manual review and merge. Auto-merge never means the bot is free to
+redesign, alter rankings or modify privacy/security.
+
+For automatic PR creation, the repository owner must enable:
+
+**GitHub → Settings → Actions → General → Workflow permissions →
+"Allow GitHub Actions to create and approve pull requests".**
+
+If the setting is disabled, the workflow retains a branch and creates an
+assigned GitHub Issue linking to that branch instead. Ensure GitHub's **Email
+notifications for assigned Issues** are enabled to receive Gmail alerts.
+GitHub notification delivery should be tested with a real incident.
+The Issue is not duplicated hourly and closes after a successful health check.
+
+The existing `GEMINI_API_KEY` repository secret is reused; no new credential
+is needed. The API may have quotas or charges under Google's current pricing.
+The monitor and model are **best-effort**, not a guarantee of autonomous
+recovery. External VRChat/Supabase outages trigger notification rather than
+speculative code changes, and layout bugs beyond current browser assertions
+may go undetected.
+
+Local smoke tests:
+
+```bash
+python -m unittest discover -s tests -p "test_site_self_heal.py"
+python scripts/monitor_site_health.py --report /tmp/vcc-site-health.json
+```
+
 ## Key files
 
 - `index.html` — CLUB DISCOVERY visual-first homepage
