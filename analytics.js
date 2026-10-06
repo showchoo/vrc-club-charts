@@ -22,6 +22,20 @@
     }
   } catch (_) {}
 
+  // Random, browser-local token. No IP fingerprinting or actual user identity.
+  // If storage is blocked, keep tracking PV only rather than inventing a UID.
+  const visitorStorageKey = 'vccAnonymousVisitorV1';
+  function anonymousVisitorId() {
+    try {
+      let id = localStorage.getItem(visitorStorageKey);
+      if (id && /^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(id)) return id;
+      if (typeof crypto === 'undefined' || typeof crypto.randomUUID !== 'function') return null;
+      id = crypto.randomUUID();
+      localStorage.setItem(visitorStorageKey, id);
+      return id;
+    } catch (_) { return null; }
+  }
+
   const payload = {
     path,
     referrerHost,
@@ -40,7 +54,7 @@
       'apikey': apiKey,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify({...payload, visitorId: anonymousVisitorId()})
     }).catch(() => {});
   };
 

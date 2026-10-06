@@ -141,7 +141,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <meta property="og:site_name" content="VRC Club Charts" />\n  <meta property="og:image" content="{esc(BASE_URL)}og-image.png" />\n  <meta property="og:image:width" content="1200" />\n  <meta property="og:image:height" content="630" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:image" content="{esc(BASE_URL)}og-image.png" />
   <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="{prefix}styles.css?v=20261005-30" />
-  <script src="{prefix}analytics.js?v=20261006-02" defer></script>
+  <script src="{prefix}analytics.js?v=20261006-03" defer></script>
   <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
 </head>
 <body>

@@ -21,6 +21,36 @@ A World needs actual in-world measurement before claiming validated sound, dynam
 - The image scores are visually ordered and labelled differently from unscored exploration candidates.
 - Independent editor picks, if present, are likewise separate from Gemini and community feedback.
 
+## Privacy-minimized visitor estimates
+
+The site retains existing page view (PV) reporting and now offers separate
+**estimated unique browser** counters for Today / 7 days / 30 days in
+`reviewer-admin.html`. These are **not unique identified people** and are
+not a census of all visitors. Different devices/browsers and the two site
+origins are counted separately. Do Not Track and owner opt-out prevent both
+PV collection and assignment of an analytics ID.
+
+Implementation:
+- `analytics.js` issues a random UUID in origin-specific `localStorage`
+  only during non-excluded pageview reporting; no IP/UA fingerprinting.
+- `supabase/functions/analytics-track/index.ts` validates the UUID and
+  stores only a server-secret-salted SHA-256 hash grouped by JST calendar day,
+  updating the last-seen time for the day. The raw UUID is not retained by
+  Supabase.
+- `public.site_analytics_unique_visits` has RLS and service_role-only
+  privileges. Old daily hash entries older than 40 days are purged during
+  subsequent pageviews. The original pageview table is unchanged.
+- The secured `reviewer-admin` Edge Function fetches recent visitor
+  hashes, deduplicates them for 1/7/30-day windows, and returns **only three
+  aggregate integers**, not the hashes.
+- Historical PVs predating rollout **do not** contribute to visitor counts.
+  The all-time PV number is maintained without inventing an all-time unique
+  count. More than 10,000 recent anonymous browser-day rows triggers an
+  explicit partial-count warning.
+
+Run the existing Node analytics test to verify opt-out, Do Not Track, and
+stable browser pseudonyms: `node --test tests/analytics-opt-out.test.cjs`.
+
 ## Automated World coverage
 
 The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.
