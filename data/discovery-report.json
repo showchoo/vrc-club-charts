@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-10-06",
+  "registeredWorlds": 99,
+  "pendingCandidates": 3,
+  "totalTrackedWorlds": 102,
+  "historicalOnly": 0,
+  "bySource": {
+    "catalog": 99,
+    "directory-seed": 1,
+    "event-curated": 1,
+    "nominated-url": 2,
+    "source-reference": 15,
+    "vrcmap_cafe": 2,
+    "vrcmap_reference": 1
+  },
+  "sourceHealth": {},
+  "disclaimer": "Observed public World IDs, not a census of every VRChat club."
+}
