@@ -39,9 +39,38 @@ jobs:
         run: python -m unittest discover -s tests -p "test_site_self_heal.py"
 
       - name: Check public production routes, images and feeds
+        id: inspect_http
+        run: python scripts/monitor_site_health.py --report /tmp/vcc-site-health.json
+
+      - name: Decide whether to run browser visual smoke check
+        id: browser_schedule
+        run: |
+          hour=$(date -u +%H)
+          hour=$((10#$hour))
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ] || [ $((hour % 6)) -eq 0 ]; then
+            echo "probe=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "probe=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepare headless browser (every 6 hours and manual runs)
+        id: browser_setup
+        if: steps.inspect_http.outcome == 'success' && steps.browser_schedule.outputs.probe == 'true'
+        continue-on-error: true
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+
+      - name: Check rendered images JavaScript and EN/JA switch
+        if: steps.browser_setup.outcome == 'success'
+        continue-on-error: true
+        env:
+          VCC_HEALTH_REPORT: /tmp/vcc-site-health.json
+        run: node scripts/browser_health_probe.cjs
+
+      - name: Read combined site health report
         id: health
         run: |
-          python scripts/monitor_site_health.py --report /tmp/vcc-site-health.json
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           data=json.load(open("/tmp/vcc-site-health.json", encoding="utf-8"))
