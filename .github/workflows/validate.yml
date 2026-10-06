@@ -10,6 +10,7 @@ on:
       - "events.html"
       - "djs.html"
       - "app.js"
+      - "i18n.js"
       - "analytics.js"
       - "ai-scout.js"
       - "community-reviews.js"
@@ -98,6 +99,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check i18n.js
+          node --test tests/language-switch.test.cjs
           node --check analytics.js
           node --check ai-scout.js
           node --check community-reviews.js
@@ -141,6 +144,8 @@ jobs:
         run: |
           python scripts/build_vercel.py
           test -s _site/worlds/index.html
+          test -s _site/i18n.js
+          grep -q '../i18n.js' _site/worlds/index.html
           test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
           test -s _site/index.html
           test -f _site/og-image.png
