@@ -101,7 +101,9 @@ def candidate_pool(worlds: list, discoveries: list) -> list[dict]:
         by_id[wid] = {
             "id": wid, "name": name, "author": safe_text(item.get("authorHint"), 120) or "Unknown",
             "sourceType": "discovery", "signals": signals,
-            "url": f"https://vrcmap.com/world/{wid}",
+            "url": (f"https://vrchat.com/home/world/{wid}/info"
+                    if "direct-world-link" in item.get("sourceCategories", [])
+                    else f"https://vrcmap.com/world/{wid}"),
             "_priority": len(signals) + 2,
         }
 
