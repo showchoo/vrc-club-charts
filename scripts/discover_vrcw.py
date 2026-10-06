@@ -186,7 +186,10 @@ def priority_seeds(today: str) -> list[dict]:
         directory = item.get("type") == "source-listed-club"
         hint = str(item.get("nameHint") or "").strip()[:120]
         club_named = bool(CLUB_NAME.search(hint)) and not BLOCKED_NAME.search(hint)
-        categories = ["vrcw_club", "directory-seed"] if directory else ["direct-world-link"]
+        source_url = str(item.get("source") or "")
+        vrcmap_reference = directory and source_url.startswith("https://vrcmap.com/world/")
+        categories = (["vrcmap_reference", "directory-seed"] if vrcmap_reference else
+                      ["vrcw_club", "directory-seed"]) if directory else ["direct-world-link"]
         out.append({
             "id": wid,
             "name": hint or "調査中のクラブWorld",
