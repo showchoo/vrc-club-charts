@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-06T07:48:52+00:00",
+  "updatedAt": "2026-10-06T08:03:25+00:00",
   "methodVersion": "1.0",
-  "modelConfigured": false,
+  "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 93,
@@ -258,5 +258,22 @@
       "url": "worlds/wrld_7da653ea-7eab-432a-90ba-fa158398d47e.html"
     }
   ],
-  "attempts": {}
+  "attempts": {
+    "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
+      "checkedAt": "2026-10-06T08:03:22+00:00",
+      "status": "http-unavailable"
+    },
+    "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
+      "checkedAt": "2026-10-06T08:03:23+00:00",
+      "status": "http-unavailable"
+    },
+    "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
+      "checkedAt": "2026-10-06T08:03:24+00:00",
+      "status": "http-unavailable"
+    },
+    "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
+      "checkedAt": "2026-10-06T08:03:25+00:00",
+      "status": "http-unavailable"
+    }
+  }
 }
