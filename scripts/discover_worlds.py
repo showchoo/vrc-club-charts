@@ -27,6 +27,36 @@ LISTING_SOURCES = [
 ]
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
+
+# Read-only Edge endpoint lists operator-approved/rejected World IDs without
+# exposing private management data or requiring a GitHub secret.
+MODERATION_STATUS_URL = (
+    "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-candidate-status"
+)
+
+def moderation_status_ids() -> set[str]:
+    """Abort discovery if Admin decisions cannot be verified (never undo rejection)."""
+    request = urllib.request.Request(
+        MODERATION_STATUS_URL,
+        headers={"Accept":"application/json","User-Agent":"VRCClubCharts-Discovery/1.0"},
+    )
+    with urllib.request.urlopen(request,timeout=20) as response:
+        state=json.loads(response.read(250_000).decode("utf-8"))
+    if not isinstance(state,dict) or state.get("complete") is not True:
+        raise RuntimeError("Moderation status response incomplete")
+    rows=state.get("decisions")
+    if not isinstance(rows,list):
+        raise RuntimeError("Moderation status response invalid")
+    ids=set()
+    for row in rows:
+        if (not isinstance(row,dict) or
+            not WORLD_ID_RE.fullmatch(str(row.get("world_id") or "")) or
+            row.get("status") not in {"approved","rejected"}):
+            raise RuntimeError("Invalid moderator decision; aborting discovery")
+        ids.add(row["world_id"])
+    return ids
+
+
 WORLD_LINK_RE = re.compile(r"/world/(wrld_[0-9a-fA-F-]{36})")
 TAG_RE = re.compile(r"<[^>]+>")
 H1_RE = re.compile(r"(?is)<h1[^>]*>(.*?)</h1>")
@@ -261,12 +291,13 @@ def main() -> int:
     approved_extra = public_rest("worlds_public?select=id")
     existing_ids.update(str(item.get("id")) for item in approved_extra if item.get("id"))
 
-    decisions = public_rest("world_candidate_decisions?select=world_id,status")
-    decided_ids = {
-        str(item.get("world_id"))
-        for item in decisions
-        if item.get("world_id") and item.get("status") in {"approved", "rejected"}
-    }
+    # The private decisions table is NOT anon-readable. Use the dedicated
+    # safe read-only endpoint rather than silently treating 401 as no decisions.
+    try:
+        decided_ids = moderation_status_ids()
+    except (OSError,ValueError,RuntimeError,urllib.error.URLError) as exc:
+        print(f"ERROR: unable to verify Admin candidate decisions: {type(exc).__name__}")
+        return 2
 
     previous: list[dict] = []
     if OUT.exists():
@@ -375,7 +406,7 @@ def main() -> int:
 
     # Independently crawl verified club/DJ category listings with resumable paging.
     # A VRCmap outage must not block this source, and vice versa.
-    from discover_vrcw import discover_candidates, priority_seeds, auto_register
+    from discover_vrcw import discover_candidates, priority_seeds
     vrcw_items, vrcw_ok = discover_candidates(today)
     from discover_official import collect_candidates
     official_items, official_ok = collect_candidates(today)
@@ -447,14 +478,9 @@ def main() -> int:
         print("ERROR: all discovery sources failed; preserving previous candidate file")
         return 2
 
-    # Incremental promotion does not require manual approval for independently
-    # verified, public club Worlds. No legacy data or decisions are deleted.
-    new_ids = auto_register(list(by_id.values()), existing_catalog, decided_ids)
-    if new_ids:
-        existing_catalog.sort(key=lambda w: str(w.get("name", "")).casefold())
-        WORLDS.write_text(json.dumps(existing_catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        for wid in new_ids:
-            by_id.pop(wid, None)
+    # Discovery only collects leads. The separate Gemini classifier verifies
+    # official public VRChat metadata before any automatic catalog admission.
+    # Never promote using the keyword confidenceScore alone.
 
     candidates = sorted(
         by_id.values(),
