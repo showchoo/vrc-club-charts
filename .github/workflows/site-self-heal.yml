@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   monitor:
-    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.rehearsal }}
+    if: ${{ (github.event_name != 'workflow_dispatch' || !inputs.rehearsal) && !(github.event_name == 'push' && contains(github.event.head_commit.message, '[vcc-one-time-rehearsal]')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -259,7 +259,7 @@ jobs:
 
   rehearsal:
     # Runs ONLY when a human explicitly requests the opt-in test mode.
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.rehearsal }}
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.rehearsal) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[vcc-one-time-rehearsal]')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
