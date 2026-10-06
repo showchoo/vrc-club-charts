@@ -170,8 +170,12 @@ def discover_candidates(today: str) -> tuple[list[dict], bool]:
                 time.sleep(0.35)
 
     if successful:
-        STATE.write_text(json.dumps({"nextPage": next_pages, "updatedAt": today},
-                                    ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        saved = read_json(STATE, {})
+        saved = saved if isinstance(saved, dict) else {}
+        saved["nextPage"] = next_pages
+        saved["updatedAt"] = today
+        STATE.write_text(json.dumps(saved, ensure_ascii=False, indent=2) + "\n",
+                         encoding="utf-8")
     return list(unique.values()), successful
 
 
