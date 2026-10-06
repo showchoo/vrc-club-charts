@@ -221,6 +221,11 @@ def auto_register(candidates: list[dict], catalog: list[dict],
         "VRCClubCharts/1.0 (+https://github.com/showchoo/vrc-club-charts/issues)"
     )
     max_checks = max(1, min(40, int(os.environ.get("VCC_DISCOVERY_VERIFY_PER_RUN", "16"))))
+    state = read_json(STATE, {})
+    state = state if isinstance(state, dict) else {}
+    checked = state.get("verification", {})
+    checked = checked if isinstance(checked, dict) else {}
+    today = dt.datetime.now(dt.timezone.utc).date()
     ordered = sorted(candidates, key=lambda e: (
         0 if "direct-world-link" in e.get("sourceCategories", []) else 1,
         -int(e.get("confidenceScore", 0)), e.get("id", "")
@@ -231,9 +236,19 @@ def auto_register(candidates: list[dict], catalog: list[dict],
         if (wid in known or wid in decided_ids or not WORLD_ID.fullmatch(str(wid))
                 or not eligible_for_admission(candidate)):
             continue
+        last = checked.get(wid, {})
+        try:
+            last_day = dt.date.fromisoformat(str(last.get("date", "")))
+            # Failed or inaccessible Worlds are retried after a cooldown instead
+            # of starving all other candidates in each daily 16-check batch.
+            if (today - last_day).days < 3:
+                continue
+        except (ValueError, TypeError, AttributeError):
+            pass
         if attempts >= max_checks:
             break
         attempts += 1
+        checked[wid] = {"date": today.isoformat()}
         if attempts > 1:
             time.sleep(1.0)
         try:
@@ -270,6 +285,11 @@ def auto_register(candidates: list[dict], catalog: list[dict],
         known.add(wid)
         added.append(wid)
         print(f"REGISTERED {wid} {actual['name']}")
+    if attempts:
+        state = read_json(STATE, {})
+        state = state if isinstance(state, dict) else {}
+        state["verification"] = checked
+        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return added
 
 
