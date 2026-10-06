@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy — VRC Club Charts</title>
-  <meta name="description" content="VRC Club Chartsのプライバシーポリシー。" />
+  <title>プライバシーポリシー — VRC Club Charts</title>
+  <meta name="description" content="VRC Club Chartsの情報の取得・利用・公開範囲、アクセス解析、レビュー投稿とブラウザ保存について。" />
   <meta name="theme-color" content="#0d171c" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://vrc-club-charts.vercel.app/privacy.html" />
-  <meta property="og:title" content="Privacy — VRC Club Charts" />
+  <meta property="og:title" content="プライバシーポリシー — VRC Club Charts" />
+  <meta property="og:description" content="VRC Club Chartsが取り扱う情報とその利用方法について。" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://vrc-club-charts.vercel.app/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css?v=20261006-37" />
+  <link rel="stylesheet" href="styles.css?v=20261006-53" />
   <script src="analytics.js?v=20261006-02" defer></script>
 </head>
 <body>
@@ -30,49 +31,66 @@
   </header>
 
   <main class="shell prose-page">
-    <p class="kicker">PRIVACY</p>
-    <h1>Privacy policy</h1>
-    <p class="lead">VRC Club Chartsでは、レビュワー申請とサイト改善に必要な情報を取り扱います。VRChatのログイン情報や位置情報は収集しません。</p>
+    <p class="kicker">PRIVACY / DATA HANDLING</p>
+    <h1>Privacy Policy</h1>
+    <p class="lead">VRC Club Chartsは、VRChatのクラブWorldやイベントを探し、訪問者の感想を共有する独立したサイトです。サイト運営・レビュー投稿・不正利用防止に必要な情報と、その取り扱いについて説明します。</p>
 
     <section class="prose-section">
-      <h2>レビュワー申請と公開レビュー</h2>
-      <p>一般レビューでは表示名、対象World、訪問日、7つの評価点、感想、利害関係の申告を受け付けます。投稿者の承認は必要ありません。過去に受け付けたレビュワー申請情報は既存データとして引き続き非公開で管理します。</p>
-      <p>レビューはSupabaseに保存され、掲載前に内容を確認します。公開する際は表示名、訪問日、対象World、評価点、感想、関係者の申告を表示します。承認待ちや不掲載のレビューは公開しません。</p>
-      <p>迷惑投稿対策として、ブラウザのランダムな投稿識別子と接続元アドレス由来の当日限定ハッシュを用い、送信頻度を制限します。生のIPアドレスはレビュー用データベースに保存せず、ハッシュ値も一般公開しません。表示名には他人の個人情報を含めないでください。</p>
+      <h2>1. 取得する情報</h2>
+      <p><strong>サイト閲覧時：</strong>閲覧ページのパス、閲覧日時、外部からの参照元ドメイン、UTMパラメータ（source・medium・campaign）を、独自のアクセス解析に記録します。</p>
+      <p><strong>体験レビュー投稿時：</strong>投稿者が入力した表示名、対象World、訪問日、7項目の評価、コメント、制作・運営への関係の有無を保存します。投稿にアカウント登録や事前承認は必要ありません。</p>
+      <p><strong>迷惑投稿防止：</strong>ブラウザで作成したランダムな投稿識別子と、接続元IPアドレス等からサーバー側で生成したハッシュ値を利用します。レビュー用データベースには生のIPアドレスを保存せず、ハッシュ値は一般公開しません。ただし、利用するホスティング・API基盤が接続に伴う技術情報を処理する場合があります。</p>
+      <p><strong>過去の申請：</strong>旧レビュワー承認制度で受け付けた表示名、連絡先、活動経験等は、既存の非公開データとして管理しています。現在の一般レビュー投稿にレビュワー申請は不要です。</p>
     </section>
 
     <section class="prose-section">
-      <h2>Other submissions</h2>
-      <p>World・Event・DJ推薦や従来のレビュー投稿ではGitHubを利用する場合があります。その場合、送信内容とGitHubアカウント名が公開リポジトリ上で閲覧できることがあります。</p>
+      <h2>2. 利用目的</h2>
+      <p>収集した情報は、サイト利用状況の把握、情報掲載・サイト改善、体験レビューの受付と表示、重複・迷惑投稿の抑制、セキュリティ確保、不具合対応、お問い合わせへの対応に利用します。</p>
+      <p>CLUB DISCOVERYのビジュアル評価では、公開されているWorld名やサムネイル画像等を画像解析サービス（Google Gemini）で処理します。一般利用者の体験レビューや投稿識別子をGeminiの採点用入力として送信する設計ではありません。<a href="about.html#evaluation-method">評価方法について ↗</a></p>
     </section>
 
     <section class="prose-section">
-      <h2>アクセスログ</h2>
-      <p>ホスティング事業者がセキュリティや障害対応のため、技術的なアクセス情報を処理する場合があります。独自の解析ツールや広告を導入する場合は、このページを更新します。</p>
+      <h2>3. レビューの公開範囲</h2>
+      <p>投稿されたレビューは、内容を確認したうえで掲載します。公開時は表示名、World、訪問日、評価点、コメント、関係者である旨の申告をサイト上に表示します。本人確認やWorldへの訪問確認を行ったことを意味するものではありません。</p>
+      <p>審査待ち・不掲載のレビューや、投稿識別子・ハッシュ値は一般公開しません。公開後のレビューは検索エンジン等に記録・転載される可能性があり、サイト上で削除しても外部の記録が直ちに消えるとは限りません。表示名やコメントに、第三者の個人情報を入力しないでください。</p>
     </section>
 
     <section class="prose-section">
-      <h2>外部リンク</h2>
-      <p>VRChat、GitHub、イベント主催者ページなど外部サイトへ移動した後は、移動先サービスのポリシーが適用されます。</p>
+      <h2>4. ブラウザ保存とCookie</h2>
+      <p>体験レビュー機能では、投稿頻度の制限に用いるランダムなブラウザ識別子と、表示名の入力補助用データをブラウザの <code>localStorage</code> に保存します。ブラウザ側の保存データは、ブラウザのサイトデータ削除機能から消去できます。ただし、ブラウザの保存データを消しても、すでに送信・公開されたレビューは削除されません。</p>
+      <p>サイト独自のページ閲覧解析では、個人を識別するためのCookieや端末IDは使用しません。サイト運営者向けの解析除外設定も、対象ブラウザの <code>localStorage</code> に保存します。外部サービス側のCookie・技術的な保存処理については、各サービスの方針が適用される場合があります。</p>
     </section>
 
     <section class="prose-section">
-      <h2>広告・スポンサー</h2>
-      <p>将来広告やスポンサー枠を導入する場合も、Reviewer評価とランキング点から分離します。Cookie等を利用するサービスを導入する場合は必要な開示を追加します。</p>
+      <h2>5. アクセス解析</h2>
+      <p>独自アクセス解析では、閲覧ページのパス・閲覧時刻・外部の参照元ドメイン・指定されたUTMパラメータをSupabaseに記録し、管理者向けに集計します。解析用の記録項目にIPアドレス、User-Agent、ブラウザ固有ID、VRChatのアカウント情報は含めていません。</p>
+      <p>ブラウザで <code>Do Not Track</code> が有効になっている場合、サイト独自のアクセス解析は送信しません。ただし、ホスティング等の外部基盤が行うセキュリティ・障害対応用のアクセス記録を停止する設定ではありません。</p>
     </section>
 
     <section class="prose-section">
-      <h2>アクセス解析について</h2>
-      <p>サイト改善のため、閲覧したページのパス、閲覧時刻、外部サイトから来た場合の参照元ドメイン、UTMパラメータ（source / medium / campaign）を記録します。</p>
-      <p>この独自解析では、IPアドレス、User-Agent、端末ID、氏名、VRChatアカウント、Cookieによる個人識別情報は保存しません。ブラウザのDo Not Trackが有効な場合は記録しません。解析結果は管理者向けに集計して利用します。</p>
+      <h2>6. 外部サービス・投稿窓口</h2>
+      <p>サイトの公開、データ保存、画像やWorld情報の取得等に、Vercel、GitHub、Supabase、VRChat関連サービスを利用しています。World画像の表示時や外部リンクを開く際には、接続先へIPアドレス等の技術的情報が送信される場合があります。</p>
+      <p>World・イベント・DJの推薦はGitHubのIssueフォームから受け付ける場合があります。その場合、送信した内容やGitHubアカウント名は公開され得ます。GitHubのフォームにパスワード、非公開の連絡先、本人確認書類などを入力しないでください。</p>
     </section>
 
-    <p class="disclaimer">Last updated: 2026-10-06</p>
+    <section class="prose-section">
+      <h2>7. 保存・管理・削除</h2>
+      <p>データは利用目的に必要な範囲で管理し、一般利用者からレビュー投稿データや旧申請情報を直接閲覧できないよう、アクセス権限を制限しています。現状、すべての情報に共通する一律の自動削除期限は設定していません。</p>
+      <p>ご自身に関する情報の確認・訂正・削除、公開レビューの取り下げについては、下記窓口にお問い合わせください。対象情報と申出内容を確認し、対応可能な範囲で個別にご案内します。</p>
+    </section>
+
+    <section class="prose-section">
+      <h2>8. お問い合わせ・改定</h2>
+      <p>サイト運営や情報の取り扱いに関するお問い合わせは、<a href="https://github.com/showchoo/vrc-club-charts/issues" target="_blank" rel="noopener noreferrer">VRC Club ChartsのGitHub Issues ↗</a> から受け付けています。Issuesは公開されるため、個人情報や秘密情報は記入せず、非公開の連絡方法が必要な場合はその旨のみをお知らせください。</p>
+      <p>機能や外部サービスの変更に合わせて、本ポリシーを更新することがあります。広告・計測サービス等を追加する場合も、実際の取り扱いに応じて説明を更新します。</p>
+    </section>
+
+    <p class="disclaimer">最終更新：2026年10月6日 / VRC Club Charts（独立運営サイト）</p>
   </main>
 
   <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
-    <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="reviewer.html">Reviews</a><a href="about.html">About</a></span>
+    <span class="footer-links"><a href="index.html">Home</a><a href="worlds/">Worlds</a><a href="events.html">Events</a><a href="djs.html">DJs</a><a href="reviewer.html">Reviews</a><a href="about.html">About</a><a href="privacy.html">Privacy</a></span>
   </footer>
 </body>
 </html>
