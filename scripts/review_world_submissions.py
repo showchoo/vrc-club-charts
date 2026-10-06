@@ -236,6 +236,12 @@ def main() -> None:
         wid=item["world_id"]
         try:
             meta=public_metadata(wid)
+        except NonPublicWorldError as exc:
+            # User-submitted Worlds also follow public-only membership rules.
+            decisions.append(decide(wid,None,None,"excluded_nonpublic",
+                                    "Official VRChat releaseStatus: "+exc.release_status))
+            print("EXCLUDED_NONPUBLIC_SUBMISSION "+wid)
+            continue
         except (ValueError,urllib.error.HTTPError,urllib.error.URLError) as exc:
             decisions.append(decide(wid,None,None,"needs_review",
                                     "Official public World metadata could not be independently verified: "
