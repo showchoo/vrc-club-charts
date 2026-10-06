@@ -105,6 +105,10 @@
         option.value = world.id;
         select.append(option);
       }
+      const requestedWorld = new URLSearchParams(window.location.search).get('world') || '';
+      if (worldIdPattern.test(requestedWorld) && available.some(w => w.id === requestedWorld)) {
+        select.value = requestedWorld;
+      }
     } catch (_) {
       status.textContent = 'World一覧を読み込めませんでした。再読み込みしてください。';
       status.dataset.state = 'error';
@@ -147,6 +151,7 @@
     }
 
     select.addEventListener('change', showWorld);
+    if (select.value) showWorld();
     function updateTotal() {
       totalNode.textContent = String(categories.reduce((sum, key) =>
         sum + (Number(form.elements[key].value) || 0), 0));
