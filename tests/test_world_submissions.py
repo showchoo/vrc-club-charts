@@ -1,0 +1,108 @@
+"""Tests for conservative, source-grounded AI admission of submitted Worlds."""
+from __future__ import annotations
+
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+from scripts import review_world_submissions as review
+
+ID = "wrld_aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+META = {
+    "id": ID,
+    "name": "Encode Night",
+    "authorName": "DJ Maker",
+    "releaseStatus": "public",
+    "description": "Nightclub with DJ booth and dance floor for dance music events",
+    "tags": ["club", "audiolink"],
+}
+GOOD = {"verdict": "club", "confidence": 0.96,
+        "evidence": ["DJ booth", "dance floor"],
+        "reasonJa": "DJ用会場の説明あり", "imageConsidered": False}
+
+
+class SubmissionAITests(unittest.TestCase):
+    def test_official_nonpublic_world_never_passes_verification(self):
+        with patch.object(review, "get_json", return_value={
+            **META, "releaseStatus": "private"
+        }):
+            with self.assertRaisesRegex(ValueError,"Not a public"):
+                review.public_metadata(ID)
+
+    def test_confident_club_with_independent_evidence_can_approve(self):
+        self.assertTrue(review.may_auto_approve(GOOD, META))
+
+    def test_ai_confidence_alone_never_auto_approves(self):
+        self.assertFalse(review.may_auto_approve(GOOD, {
+            **META, "name": "Some world", "description": "Just a lounge", "tags": []
+        }))
+        self.assertFalse(review.may_auto_approve(
+            {**GOOD, "confidence": 0.89}, META))
+        self.assertFalse(review.may_auto_approve(
+            {**GOOD, "evidence": []}, META))
+        self.assertFalse(review.may_auto_approve(
+            {**GOOD, "verdict": "uncertain"}, META))
+
+    def test_unrelated_club_name_is_insufficient(self):
+        self.assertFalse(review.may_auto_approve(GOOD, {
+            **META, "name": "Chess Club",
+            "description": "Board games and puzzles in a relaxing lounge",
+            "tags": ["games"],
+        }))
+
+    def test_official_high_confidence_approval_writes_no_visual_scores(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds = Path(tmp) / "worlds.json"
+            decisions = Path(tmp) / "decisions.json"
+            worlds.write_text("[]", encoding="utf-8")
+            decisions.write_text("[]", encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id": ID}]
+            ), patch.object(review,"public_metadata",return_value=META), patch.object(
+                review,"classify_world",return_value=GOOD
+            ), patch.dict(review.os.environ,{"GEMINI_API_KEY":"mock-test-key"}):
+                review.main()
+                result=json.loads(worlds.read_text(encoding="utf-8"))
+                pending=json.loads(decisions.read_text(encoding="utf-8"))
+                self.assertEqual(len(result),1)
+                self.assertEqual(result[0]["id"], ID)
+                self.assertTrue(result[0]["chartEligible"])
+                self.assertEqual(result[0]["editorialStatus"], "unreviewed")
+                self.assertNotIn("scores", result[0])
+                self.assertEqual(pending[0]["status"],"approved")
+
+    def test_ambiguous_world_is_review_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds = Path(tmp) / "worlds.json"
+            decisions = Path(tmp) / "decisions.json"
+            worlds.write_text("[]", encoding="utf-8")
+            decisions.write_text("[]", encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id":ID}]
+            ), patch.object(review,"public_metadata",return_value=META), patch.object(
+                review,"classify_world",return_value={**GOOD,"confidence":0.65}
+            ), patch.dict(review.os.environ,{"GEMINI_API_KEY":"mock-test-key"}):
+                review.main()
+                self.assertEqual(json.loads(worlds.read_text(encoding="utf-8")),[])
+                self.assertEqual(json.loads(decisions.read_text(encoding="utf-8"))[0]["status"],"needs_review")
+
+    def test_empty_api_key_does_not_publish(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds=Path(tmp)/"worlds.json"
+            decisions=Path(tmp)/"decisions.json"
+            worlds.write_text("[]",encoding="utf-8")
+            decisions.write_text("[]",encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id":ID}]
+            ), patch.dict(review.os.environ,{"GEMINI_API_KEY":""}):
+                review.main()
+                self.assertEqual(worlds.read_text(encoding="utf-8"),"[]")
+
+
+if __name__=="__main__":
+    unittest.main()
