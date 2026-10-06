@@ -8,6 +8,7 @@ import os
 import re
 import time
 import urllib.request
+import urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
