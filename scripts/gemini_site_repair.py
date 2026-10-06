@@ -163,6 +163,126 @@ def verified_built_link_fix(edits: list[dict], site_root: Path) -> bool:
     return bool(old_target and new_target and not old_target.is_file() and new_target.is_file())
 
 
+def verified_local_link_repair(edits: list[dict], site_root: Path) -> bool:
+    """Fail closed: a lone HTML href fix may merge only if its built target exists.
+
+    This must be called AFTER the production-equivalent static build. Never
+    use this function to auto-merge JavaScript, code, or data edits.
+    """
+    if not safe_auto_merge(edits):
+        return False
+    change = edits[0]
+    # Unattended merges exclude fragments, query strings, URL escapes,
+    # traversal and schemes. Approved source HTML files are root-level.
+    matcher = re.compile(r'^href="([A-Za-z0-9][A-Za-z0-9._/-]{0,129})"
+    if not isinstance(plan.get("edits"), list) or not isinstance(plan.get("confidence"), (int, float)):
+        raise ValueError("Malformed Gemini plan")
+    if not 0 <= plan["confidence"] <= 1:
+        raise ValueError("Out-of-range plan confidence")
+    edits = plan["edits"]
+    if not 0 < len(edits) <= MAX_EDITS:
+        return [], False
+    if plan["confidence"] < 0.84:
+        return [], False
+    if not any(i.get("auto_fixable") is True for i in issues):
+        return [], False
+    paths_seen = set()
+    for item in edits:
+        if not isinstance(item, dict):
+            raise ValueError("Invalid edit")
+        path, old, new = item.get("path"), item.get("old"), item.get("new")
+        if path not in ALLOW or not isinstance(old, str) or not isinstance(new, str):
+            raise ValueError("Disallowed edit path/type")
+        if not old or old == new or len(old) > MAX_OLD or len(new) > MAX_NEW:
+            raise ValueError("Invalid replacement length")
+        if FORBIDDEN.search(new):
+            raise ValueError("Disallowed code in replacement")
+        if path in paths_seen:
+            raise ValueError("Only one edit per file")
+        paths_seen.add(path)
+        source = (ROOT / path).read_text(encoding="utf-8")
+        if source.count(old) != 1:
+            raise ValueError(f"Original snippet not unique in {path}")
+    if sum(len(x["old"]) + len(x["new"]) for x in edits) > MAX_CHANGED:
+        raise ValueError("Total repair too large")
+    return edits, safe_auto_merge(edits)
+
+
+def apply_edits(edits: list[dict]) -> None:
+    for item in edits:
+        path = ROOT / item["path"]
+        source = path.read_text(encoding="utf-8")
+        path.write_text(source.replace(item["old"], item["new"], 1), encoding="utf-8")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", default="/tmp/vcc-site-health.json")
+    parser.add_argument("--result", default="/tmp/vcc-repair-result.json")
+    args = parser.parse_args()
+    report = json.loads(Path(args.report).read_text(encoding="utf-8"))
+    issues = report.get("issues") or []
+    result = {"status": "no_issue", "auto_merge": False, "edits": [], "diagnosis": ""}
+    key = os.environ.get("GEMINI_API_KEY") or ""
+    if not issues:
+        pass
+    elif not any(x.get("auto_fixable") for x in issues):
+        result["status"] = "external_problem"
+    elif not key:
+        result["status"] = "missing_gemini_key"
+    else:
+        try:
+            proposal = query_gemini(issues, select_context(issues), key)
+            edits, can_merge = validate_edits(proposal, issues)
+            result["diagnosis"] = str(proposal.get("diagnosis") or "")[:300]
+            if edits:
+                apply_edits(edits)
+                result["status"] = "patch_proposed"
+                result["edits"] = [i["path"] for i in edits]
+                result["proposed_edits"] = edits
+                result["auto_merge"] = can_merge
+            else:
+                result["status"] = "no_safe_patch"
+        except (ValueError, KeyError, TypeError, urllib.error.URLError, OSError) as exc:
+            result["status"] = "gemini_unavailable_or_invalid"
+            result["diagnosis"] = type(exc).__name__
+    Path(args.result).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n",
+                                 encoding="utf-8")
+    print("Gemini site repair:", result["status"], "files=", result["edits"],
+          "auto_merge=", result["auto_merge"])
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+)
+    old_match = matcher.fullmatch(change["old"])
+    new_match = matcher.fullmatch(change["new"])
+    if not old_match or not new_match:
+        return False
+
+    def target(link: str) -> Path | None:
+        if any(part in (".", "..") for part in link.split("/")):
+            return None
+        root = site_root.resolve()
+        resolved = (root / link).resolve()
+        if not resolved.is_relative_to(root):
+            return None
+        if link.endswith("/"):
+            resolved = resolved / "index.html"
+        return resolved
+
+    original = target(old_match.group(1))
+    proposed = target(new_match.group(1))
+    if original is None or proposed is None:
+        return False
+    # The old destination must actually be missing. Monitor observations
+    # alone cannot establish that changing a working link is harmless.
+    if original.exists():
+        return False
+    return proposed.is_file()
+
+
 def validate_edits(plan: dict, issues: list[dict]) -> tuple[list[dict], bool]:
     if not isinstance(plan.get("edits"), list) or not isinstance(plan.get("confidence"), (int, float)):
         raise ValueError("Malformed Gemini plan")
