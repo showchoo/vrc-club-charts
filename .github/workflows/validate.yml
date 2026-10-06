@@ -43,6 +43,7 @@ on:
       - "scripts/review_discovery_candidates.py"
       - "scripts/notify_pending_reviews.py"
       - "scripts/monitor_site_health.py"
+      - "scripts/browser_health_probe.cjs"
       - "scripts/gemini_site_repair.py"
       - "scripts/notify_site_health.py"
       - ".github/workflows/site-self-heal.yml"
@@ -103,6 +104,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check scripts/browser_health_probe.cjs
           node --check i18n.js
           node --test tests/language-switch.test.cjs
           node --check analytics.js
