@@ -1,4 +1,4 @@
-# VRC Club Charts — AI-first World Discovery
+# VRC Club Charts — CLUB DISCOVERY
 
 An AI-first visual discovery guide for VRChat club Worlds, with open community field notes and event/DJ directories.
 
@@ -6,7 +6,7 @@ Public site: https://vrc-club-charts.vercel.app/
 
 ## Product direction
 
-**AI SCOUT is the homepage's lead experience.** It automatically discovers public VRChat club Worlds, and uses Gemini image understanding to score *thumbnail visuals only*. This is a discovery signal, not an in-world craftsmanship verdict.
+**CLUB DISCOVERY is the homepage's lead experience.** It automatically discovers public VRChat club Worlds, and uses Gemini image understanding to score *thumbnail visuals only*. This is a discovery signal, not an in-world craftsmanship verdict.
 
 Human field notes are supplementary: anyone can submit a visit review without applying for reviewer status or receiving an access code. Each contribution is a self-reported observation, moderated before appearing publicly. Community scores **never enter AI visual scores or the legacy reviewer panel ranking**.
 
