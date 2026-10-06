@@ -1406,34 +1406,6 @@
     ]
   },
   {
-    "id": "wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
-    "name": "Club Misery",
-    "authorHint": "Unverified",
-    "firstSeenAt": "2026-10-06",
-    "lastSeenAt": "2026-10-06",
-    "status": "pending",
-    "evidence": [
-      {
-        "source": "vrcmap_reference",
-        "ref": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
-        "firstSeenAt": "2026-10-06",
-        "lastSeenAt": "2026-10-06"
-      },
-      {
-        "source": "source-reference",
-        "ref": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
-        "firstSeenAt": "2026-10-06",
-        "lastSeenAt": "2026-10-06"
-      },
-      {
-        "source": "directory-seed",
-        "ref": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
-        "firstSeenAt": "2026-10-06",
-        "lastSeenAt": "2026-10-06"
-      }
-    ]
-  },
-  {
     "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
     "name": "PLASMA Reactive Club",
     "authorHint": "TheCocasio",

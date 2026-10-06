@@ -34,6 +34,14 @@ IMAGE_MIME = {"image/png","image/jpeg","image/webp"}
 MAX_IMAGE = 1_300_000
 
 
+class NonPublicWorldError(ValueError):
+    """Official VRChat explicitly reports a World as not publicly released."""
+
+    def __init__(self, release_status: str):
+        self.release_status = release_status
+        super().__init__("Official VRChat releaseStatus is " + release_status)
+
+
 def read_json(path: Path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -65,11 +73,18 @@ def queue_items(max_items=400):
 
 def public_metadata(wid: str) -> dict:
     info = get_json("https://api.vrchat.cloud/api/1/worlds/" + wid, timeout=23)
-    if (not isinstance(info, dict) or info.get("id") != wid
-            or str(info.get("releaseStatus") or "").lower() != "public"
+    if not isinstance(info, dict) or info.get("id") != wid:
+        raise ValueError("Official VRChat World metadata missing or mismatched")
+    release_status = info.get("releaseStatus")
+    # Only a concrete, authoritative non-public value justifies deletion.
+    # Missing status/invalid metadata and HTTP errors are NOT proof of privacy.
+    if isinstance(release_status, str) and release_status.strip():
+        if release_status.strip().casefold() != "public":
+            raise NonPublicWorldError(release_status.strip())
+    if (release_status != "public"
             or not str(info.get("name") or "").strip()
             or not str(info.get("authorName") or "").strip()):
-        raise ValueError("Not a public, verified World with official metadata")
+        raise ValueError("Official public World metadata incomplete")
     return info
 
 
@@ -221,6 +236,12 @@ def main() -> None:
         wid=item["world_id"]
         try:
             meta=public_metadata(wid)
+        except NonPublicWorldError as exc:
+            # User-submitted Worlds also follow public-only membership rules.
+            decisions.append(decide(wid,None,None,"excluded_nonpublic",
+                                    "Official VRChat releaseStatus: "+exc.release_status))
+            print("EXCLUDED_NONPUBLIC_SUBMISSION "+wid)
+            continue
         except (ValueError,urllib.error.HTTPError,urllib.error.URLError) as exc:
             decisions.append(decide(wid,None,None,"needs_review",
                                     "Official public World metadata could not be independently verified: "

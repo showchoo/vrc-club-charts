@@ -83,6 +83,34 @@ class DiscoveryLedgerTests(unittest.TestCase):
         self.assertEqual(report["bySource"]["event-curated"], 1)
         self.assertEqual(report["sourceHealth"]["vrcmap_music"]["status"], "ok")
 
+    def test_confirmed_nonpublic_world_is_absent_from_public_history(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            payloads={
+                "worlds.json":[],
+                "world-candidates.json":[{"id":W1,"name":"Private DJ venue",
+                                          "sourceCategories":["vrcmap_music"],
+                                          "source":"https://vrcmap.com/world/"+W1}],
+                "discovery-seeds.json":[{"id":W1,"nameHint":"Private DJ venue",
+                                         "source":"https://vrcmap.com/world/"+W1}],
+                "events-auto.json":[{"worldId":W1,"url":"https://example.com/show"}],
+                "events.json":[],
+                "world-discovery-ledger.json":[{"id":W1,"name":"Private DJ venue",
+                    "firstSeenAt":"2026-10-06","lastSeenAt":"2026-10-06",
+                    "evidence":[{"source":"vrcmap_music","ref":"https://vrcmap.com",
+                                 "firstSeenAt":"2026-10-06","lastSeenAt":"2026-10-06"}]}],
+                "world-candidate-ai-decisions.json":[{"id":W1,"status":"excluded_nonpublic"}],
+            }
+            for path,data in payloads.items():
+                (folder/path).write_text(json.dumps(data),encoding="utf-8")
+            with patch.object(ledger,"DATA",folder), patch.object(
+                ledger,"LEDGER",folder/"world-discovery-ledger.json"
+            ):
+                rows,summary=ledger.build_ledger("2026-10-07")
+            self.assertEqual(rows,[])
+            self.assertEqual(summary["pendingCandidates"],0)
+            self.assertEqual(summary["totalTrackedWorlds"],0)
+
     def test_public_event_import_retains_explicit_world_id_only(self):
         self.assertEqual(feed.explicit_venue_world_id({
             "description": "Stage world: " + W1

@@ -98,12 +98,24 @@ def review_candidates() -> dict:
         return {"checked":0,"approved":0,"unresolved":len(pending),"skipped":"gemini_key_missing"}
 
     approved=[]
+    excluded_nonpublic=[]
     attempted=0
     for candidate in to_check:
         wid=candidate["id"]
         # Full public status, name and author MUST be sourced from VRChat itself.
         try:
             meta=classifier.public_metadata(wid)
+        except classifier.NonPublicWorldError as exc:
+            # Only an explicit releaseStatus from official VRChat metadata
+            # means the World is non-public. Remove it from the candidate
+            # queue, and retain the ID in the audit to prevent rediscovery.
+            history[wid]={**classifier.decide(wid,None,None,"excluded_nonpublic",
+                          "Official VRChat releaseStatus: "+exc.release_status),
+                          "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
+            excluded_nonpublic.append(wid)
+            attempted+=1
+            print("EXCLUDED_NONPUBLIC "+wid+" status="+exc.release_status)
+            continue
         except urllib.error.HTTPError as exc:
             # Anonymous API can refuse GitHub runners (401) or rate-limit.
             # Never label a temporarily inaccessible World as non-club.
@@ -161,13 +173,19 @@ def review_candidates() -> dict:
     if approved:
         catalog.sort(key=lambda x:str(x.get("name") or "").casefold())
         WORLDS.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-        # Do not leave AI-approved catalog Worlds in the Admin pending queue.
-        pending=[row for row in pending if row.get("id") not in known]
+    if approved or excluded_nonpublic:
+        # Non-public World IDs stay in the AI audit but never in the visible
+        # discovery candidate queue. Previously approved catalog entries
+        # are also removed from that queue as before.
+        blocked=set(excluded_nonpublic)
+        pending=[row for row in pending if row.get("id") not in known
+                 and row.get("id") not in blocked]
         CANDIDATES.write_text(json.dumps(pending,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     updated=sorted(history.values(),key=lambda x:(str(x.get("reviewedAt") or ""),str(x["id"])))
     if updated!=prior:
         DECISIONS.write_text(json.dumps(updated,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    outcome={"checked":attempted,"approved":len(approved),"unresolved":len(pending)}
+    outcome={"checked":attempted,"approved":len(approved),
+             "excluded_nonpublic":len(excluded_nonpublic),"unresolved":len(pending)}
     print("AI discovery candidate review: "+json.dumps(outcome,sort_keys=True))
     return outcome
 

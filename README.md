@@ -110,6 +110,17 @@ browser JavaScript or commit it to source control.
 
 The automatic VRCmap / directory / official-search / event collector now
 **only proposes new candidate World IDs** in `data/world-candidates.json`.
+Worlds whose official VRChat metadata explicitly reports a releaseStatus other
+than `public` are now **removed**, not left pending. The exclusion is saved
+as `excluded_nonpublic` in `data/world-candidate-ai-decisions.json` to block
+rediscovery (including from stale VRCmap/seed links); private IDs are also
+omitted from the public discovery ledger. Network failures, HTTP 401/403,
+and missing releaseStatus are **not** proof of privacy and do not trigger
+deletion. Non-public visitor-submitted Worlds are likewise excluded rather than
+awaiting human moderation. Club Misery was specifically removed after the
+site operator reported VRChat's "private; direct links only" notice; its
+suppression record is tagged as operator-reported, not API-verified.
+
 `confidenceScore` from the collector is keyword-based **discovery priority,
 not AI confidence or a craftsmanship/visual rating**. Legacy keyword-based
 direct auto-registration is disabled in `scripts/discover_worlds.py`.

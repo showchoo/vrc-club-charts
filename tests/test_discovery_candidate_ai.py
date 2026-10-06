@@ -75,6 +75,29 @@ class DiscoveryAIReviewTests(unittest.TestCase):
         self.assertEqual(self.read(self.candidates),[])
         self.assertEqual(self.read(self.decisions)[0]["status"],"approved")
 
+    def test_confirmed_nonpublic_world_is_excluded_and_logged(self):
+        with patch.object(worker.classifier, "public_metadata",
+            side_effect=worker.classifier.NonPublicWorldError("private")), patch.object(
+            worker.classifier,"classify_world") as gemini:
+            result=worker.review_candidates()
+        self.assertEqual(result["approved"],0)
+        self.assertEqual(result["excluded_nonpublic"],1)
+        self.assertEqual(result["unresolved"],0)
+        self.assertEqual(self.read(self.candidates),[])
+        self.assertEqual(self.read(self.worlds),[])
+        self.assertEqual(self.read(self.decisions)[0]["status"],"excluded_nonpublic")
+        gemini.assert_not_called()
+
+    def test_malformed_official_metadata_does_not_delete_candidate(self):
+        with patch.object(worker.classifier,"public_metadata",
+            side_effect=ValueError("missing release status")), patch.object(
+            worker.classifier,"classify_world") as gemini:
+            result=worker.review_candidates()
+        self.assertEqual(result["excluded_nonpublic"],0)
+        self.assertEqual(len(self.read(self.candidates)),1)
+        self.assertEqual(self.read(self.decisions)[0]["status"],"needs_review")
+        gemini.assert_not_called()
+
     def test_uncertain_stays_in_admin_candidate_queue(self):
         with patch.object(worker.classifier,"public_metadata",return_value=OFFICIAL),patch.object(
             worker.classifier,"classify_world",return_value={**ASSESS,"confidence":0.62}
