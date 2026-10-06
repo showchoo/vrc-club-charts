@@ -1,4 +1,4 @@
-# Sources used while designing the public beta
+# Source research and historical verification notes
 
 - VRChat Creator Guidelines — API usage / bots: https://hello.vrchat.com/creator-guidelines
 - Community VRChat API docs — Worlds API: https://github.com/vrchatapi/vrchatapi-python/blob/main/docs/WorldsApi.md
@@ -8,7 +8,7 @@
 - Club Deviate listing: https://www.vrcw.net/world/author?page=1146
 - AudioLink/laser tag listing containing CLUB IGLO, SONAR_Spillways and Club Catnip: https://www.vrcw.net/world/tag/detail/author_tag_laser
 
-The starter editorial scores in `data/worlds.json` are **not** sourced rankings. They are provisional MVP placeholders and should be reviewed in-world before a public commercial launch.
+**Historical note:** early editorial scores were prototype inputs, not independently verified rankings. The current public CLUB DISCOVERY chart uses separate Gemini-derived thumbnail impression scores. These listed sources support World identity and public metadata only; they do not validate visual scores or in-World craftsmanship.
 
 ## 2026-10-05 verification notes
 
