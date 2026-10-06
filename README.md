@@ -77,7 +77,7 @@ ranking or the editor's manual scores.
 - To enable visual evaluations, create a Google AI Studio API key and
   save it as the GitHub Actions repository secret **`GEMINI_API_KEY`**.
   The scheduled Action then analyzes up to four available public thumbnails
-  per day with `gemini-2.5-flash-lite`. Google's free API tier supports this
+  per day with `gemini-3.5-flash-lite`. Google's free API tier supports this
   image-understanding model subject to your account's rate limits. Never
   enter keys in source code, the website, or GitHub issue comments.
 - This uses Gemini's **image understanding** endpoint, NOT an image-generation
