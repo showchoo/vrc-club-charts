@@ -1,0 +1,46 @@
+name: AI SCOUT automatic World discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/build_ai_scout.py"
+      - "data/worlds.json"
+      - "data/world-candidates.json"
+      - ".github/workflows/ai-scout.yml"
+  schedule:
+    # 04:13 JST; the optional vision API is capped per run.
+    - cron: "13 19 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-scout-discovery
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover Worlds and assess available thumbnails
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          VCC_SCOUT_MODEL: gpt-4.1-mini
+          VCC_SCOUT_MAX_PER_RUN: "4"
+        run: python scripts/build_ai_scout.py
+      - name: Commit AI SCOUT result
+        run: |
+          git config user.name "vrc-club-charts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ai-scout.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: refresh AI SCOUT world discoveries"
+          git pull --rebase origin main
+          git push

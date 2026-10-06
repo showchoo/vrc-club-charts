@@ -1,0 +1,262 @@
+{
+  "updatedAt": "2026-10-06T06:10:41.676Z",
+  "methodVersion": "1.0",
+  "modelConfigured": false,
+  "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
+  "summary": {
+    "totalCandidates": 93,
+    "assessed": 0,
+    "newAssessments": 0,
+    "pending": 93
+  },
+  "scored": [],
+  "candidates": [
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "LIGHTING",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
+    },
+    {
+      "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
+      "name": "Club Deviate",
+      "author": "TOTC",
+      "sourceType": "catalog",
+      "signals": [
+        "IMMERSIVE",
+        "EXPERIMENTAL"
+      ],
+      "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
+      "name": "Cyberpunk City Rave",
+      "author": "Coldcancer",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "CYBER"
+      ],
+      "url": "worlds/wrld_492121dd-f7ea-46ab-aade-968e1a91899b.html"
+    },
+    {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
+    },
+    {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
+    },
+    {
+      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
+      "name": "13th Floor DJ",
+      "author": "SaintHaru",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92.html"
+    },
+    {
+      "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
+      "name": "ANIMA CANVAS",
+      "author": "PudinKiller",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c.html"
+    },
+    {
+      "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
+      "name": "AudioLink ClubSystem",
+      "author": "JJavierPV",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9.html"
+    },
+    {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+    },
+    {
+      "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+      "name": "Beach in a Bottle",
+      "author": "∗Lotus∗",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_4f015255-390a-44cb-9e81-bd2021eb970a.html"
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1.222",
+      "author": "TGCFabian",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6.html"
+    },
+    {
+      "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
+      "name": "Club Earthquake 〖Night pool〗",
+      "author": "ro_tta",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_2acdf41c-4714-427b-98d7-4fee07ac6439.html"
+    },
+    {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html"
+    },
+    {
+      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
+      "name": "Club Neon Spin",
+      "author": "Andron827",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a.html"
+    },
+    {
+      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
+      "name": "Club Rayne",
+      "author": "Candy Rayne",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
+    },
+    {
+      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
+      "name": "Consilium",
+      "author": "Tsuβaki",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html"
+    },
+    {
+      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+      "name": "Decibel Vault VR Event Center",
+      "author": "SoundInVolumes",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
+    },
+    {
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
+    },
+    {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
+    },
+    {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
+    },
+    {
+      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
+      "name": "Lights Out Night Club",
+      "author": "Lights Out Host",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
+    },
+    {
+      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
+      "name": "LIQUID ˸ LAB",
+      "author": "Italiandogs",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
+    },
+    {
+      "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
+      "name": "LOST COLONY RAVE V2.5",
+      "author": "booploops",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
+    },
+    {
+      "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
+      "name": "Midnight Street Club",
+      "author": "nnnnnnなす",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7da653ea-7eab-432a-90ba-fa158398d47e.html"
+    }
+  ],
+  "attempts": {}
+}

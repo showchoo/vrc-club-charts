@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://vrc-club-charts.vercel.app/og-image.png" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=20261006-43" />
+  <link rel="stylesheet" href="styles.css?v=20261006-45" />
   <script src="analytics.js?v=20261006-02" defer></script>
 </head>
 <body class="focus-home ranking-home">
@@ -98,6 +98,24 @@
       </div>
     </section>
 
+    <section id="aiScoutSection" class="shell ai-scout-section lower-section" aria-label="AI Scout World discovery">
+      <div class="ai-scout-heading">
+        <div>
+          <p class="kicker">AI SCOUT / AUTOMATED WORLD DISCOVERY</p>
+          <h2>知られていない、作り込み候補を探す。</h2>
+          <p>人気順とは別に、クラブWorldを自動発掘します。画像AIが評価した場合も<span>「外観の期待度」だけ</span>を表示します。</p>
+        </div>
+        <div class="ai-scout-heading-info">
+          <span id="aiScoutStatus">SCANNING PUBLIC WORLDS…</span>
+          <small>NO UNVERIFIED CRAFTSMANSHIP SCORES</small>
+        </div>
+      </div>
+      <div id="aiScoutGrid" class="ai-scout-grid">
+        <div class="ai-scout-empty">Loading AI SCOUT discoveries…</div>
+      </div>
+      <p class="ai-scout-disclaimer">AIによる画像分析は公開サムネイルの静止画に限定されます。音響、操作性、VR内の演出、最適化などは未測定です。公式Reviewer RankingやEditor Scoreには加算されません。</p>
+    </section>
+
     <section class="shell calm-section lower-section">
       <div class="calm-section-head">
         <div>
@@ -150,5 +168,6 @@
   </footer>
 
   <script src="app.js?v=20261006-44" defer></script>
+  <script src="ai-scout.js?v=20261006-01" defer></script>
 </body>
 </html>

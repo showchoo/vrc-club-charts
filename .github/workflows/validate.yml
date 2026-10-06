@@ -11,6 +11,9 @@ on:
       - "djs.html"
       - "app.js"
       - "analytics.js"
+      - "ai-scout.js"
+      - "data/ai-scout.json"
+      - "scripts/build_ai_scout.py"
       - "events.js"
       - "djs.js"
       - "styles.css"
@@ -71,9 +74,12 @@ jobs:
         run: |
           node --check app.js
           node --check analytics.js
+          node --check ai-scout.js
           node --check events.js
           node --check djs.js
           node --test tests/analytics-opt-out.test.cjs
+      - name: Test AI SCOUT catalog generation
+        run: python -m unittest discover -s tests -p "test_ai_scout.py"
       - name: Sync approved Worlds
         run: |
           python scripts/sync_worlds_from_supabase.py
