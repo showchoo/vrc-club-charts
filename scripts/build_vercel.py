@@ -20,6 +20,7 @@ PUBLIC_FILES = (
     "reviewer-admin.html", "events.html", "djs.html",
     "app.js", "analytics.js", "i18n.js", "ai-scout.js", "community-reviews.js", "world-submission.js", "events.js", "djs.js",
     "styles.css", "favicon.svg", "site.webmanifest", "robots.txt",
+    "google19b2b044fc820283.html",
 )
 DATA_FILES = (
     "weekly-ranking.json", "review-scores.json", "ai-scout.json", "events.json",
