@@ -213,8 +213,15 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
         if m:
             author = m.group(1).strip()
             break
+        if line.casefold() == "by:" and i + 1 < len(lines):
+            nxt = lines[i + 1]
+            if nxt.casefold() != "by:" and len(nxt) <= 120:
+                author = nxt
+                break
         if name and line == name and i + 1 < len(lines):
             nxt = lines[i + 1]
+            if nxt.casefold() == "by:" and i + 2 < len(lines):
+                nxt = lines[i + 2]
             if nxt and not nxt.startswith(("#", "Image:")) and len(nxt) <= 120:
                 author = nxt
                 break
@@ -278,6 +285,26 @@ def main() -> int:
             ids = listing_world_ids(raw)
             successful_sources += 1
             print(f"{source_name}: found {len(ids)} listed World IDs")
+            # Probe ordinary pagination only when it yields new World IDs;
+            # stop immediately if the site ignores the page query parameter.
+            if source_name in {"vrcmap_music", "vrcmap_new"}:
+                seen_listings = set(ids)
+                page_cap = max(1, min(5, int(os.environ.get("VCC_VRCMAP_PAGE_PROBE", "3"))))
+                for page in range(2, page_cap + 1):
+                    try:
+                        page_ids = listing_world_ids(
+                            fetch_text(source_url + "&page=" + str(page))
+                        )
+                    except Exception as exc:
+                        print(f"INFO: {source_name} page {page} unavailable: {type(exc).__name__}")
+                        break
+                    unique = [wid for wid in page_ids if wid not in seen_listings]
+                    if len(unique) < 3:
+                        print(f"INFO: {source_name} page {page} yielded no pagination")
+                        break
+                    ids.extend(unique)
+                    seen_listings.update(unique)
+                    print(f"{source_name} page={page}: {len(unique)} new World IDs")
             for wid in ids:
                 if wid in existing_ids or wid in decided_ids:
                     continue
