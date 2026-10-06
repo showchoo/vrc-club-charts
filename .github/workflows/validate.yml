@@ -73,6 +73,7 @@ jobs:
           node --check analytics.js
           node --check events.js
           node --check djs.js
+          node --test tests/analytics-opt-out.test.cjs
       - name: Sync approved Worlds
         run: |
           python scripts/sync_worlds_from_supabase.py
