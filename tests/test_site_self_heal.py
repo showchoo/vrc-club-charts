@@ -49,6 +49,14 @@ def fake_site(path_status=None, world_thumb=True):
     return lambda url: responses.get(url, (404, "text/plain", b""))
 
 
+class BrowserMonitorPrivacyTests(unittest.TestCase):
+    def test_probes_never_increment_visitor_metrics(self):
+        code = (Path(__file__).resolve().parents[1] /
+                "scripts/browser_health_probe.cjs").read_text(encoding="utf-8")
+        self.assertEqual(code.count("route('**/functions/v1/analytics-track'"), 2)
+        self.assertEqual(code.count("route.fulfill({status: 204"), 2)
+
+
 class SiteMonitoringTests(unittest.TestCase):
     def test_healthy_route_and_thumbnail_feed(self):
         report = monitor.validate_site(fake_site())
