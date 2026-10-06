@@ -47,6 +47,25 @@ class SubmissionAITests(unittest.TestCase):
                 review.public_metadata(ID)
             self.assertNotIsInstance(error.exception,review.NonPublicWorldError)
 
+    def test_user_submitted_private_world_is_excluded_not_held_for_review(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds=Path(tmp)/"worlds.json"
+            decisions=Path(tmp)/"decisions.json"
+            worlds.write_text("[]",encoding="utf-8")
+            decisions.write_text("[]",encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds),patch.object(
+                review,"DECISIONS",decisions),patch.object(
+                review,"queue_items",return_value=[{"world_id":ID}]),patch.object(
+                review,"public_metadata",
+                side_effect=review.NonPublicWorldError("private")),patch.object(
+                review,"classify_world") as classify,patch.dict(
+                review.os.environ,{"GEMINI_API_KEY":"fake-test-key"}):
+                review.main()
+            self.assertEqual(json.loads(worlds.read_text(encoding="utf-8")),[])
+            self.assertEqual(json.loads(decisions.read_text(encoding="utf-8"))[0]["status"],
+                             "excluded_nonpublic")
+            classify.assert_not_called()
+
     def test_confident_club_with_independent_evidence_can_approve(self):
         self.assertTrue(review.may_auto_approve(GOOD, META))
 
