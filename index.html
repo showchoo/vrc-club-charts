@@ -34,6 +34,7 @@
     <nav class="nav focus-nav calm-nav">
       <a class="nav-link active" href="#aiScoutSection">Discover</a>
       <a class="nav-link" href="worlds/">Worlds</a>
+      <a class="nav-link" href="#submit-world">Submit</a>
       <a class="nav-link" href="events.html">Events</a>
       <a class="nav-link" href="reviewer.html">Reviews</a>
       <a class="nav-link" href="about.html">About</a>
@@ -84,6 +85,30 @@
         </div>
         <p class="ai-scout-disclaimer">※ビジュアル評価は公開サムネイル1枚をAIで分析した参考スコアです。実地調査ではなく、音響・ギミック・動作性能は含みません。<a href="about.html#evaluation-method">評価方法と限界 ↗</a></p>
       </div>
+    </section>
+
+
+    <section class="shell world-suggestion-block lower-section" id="submit-world">
+      <div class="world-suggestion-intro">
+        <p class="kicker">COMMUNITY / HELP US DISCOVER</p>
+        <h2>掲載されていないクラブを、教えてください。</h2>
+        <p>VRChatのWorld URLを貼るだけ。公開情報を確認したうえでAIがクラブ用途を判定し、条件に合えば自動掲載します。</p>
+      </div>
+      <form class="world-suggestion-form" id="worldSuggestionForm">
+        <label for="worldSuggestionUrl">VRChat World URL</label>
+        <div class="world-suggestion-controls">
+          <input type="url" id="worldSuggestionUrl" name="world_url" required
+            inputmode="url" autocomplete="url"
+            placeholder="https://vrchat.com/home/world/wrld_.../info" maxlength="350" />
+          <button type="submit" id="worldSuggestionButton">Worldを投稿する →</button>
+        </div>
+        <div class="world-suggestion-trap" aria-hidden="true">
+          <label for="worldSuggestionWebsite">Website</label>
+          <input id="worldSuggestionWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <p id="worldSuggestionStatus" class="world-suggestion-status" role="status" aria-live="polite" hidden></p>
+        <p class="world-suggestion-disclaimer">公開Worldのみ／同じWorldは重複登録しません。1日3件まで。AI判定が曖昧なものは確認待ちとなり、ランキングの点数は自動生成しません。</p>
+      </form>
     </section>
 
     <section id="editorPicksSection" class="shell editor-picks-block editor-picks-lower lower-section" hidden>
@@ -155,5 +180,6 @@
   <script src="app.js?v=20261006-48" defer></script>
   <script src="ai-scout.js?v=20261006-04" defer></script>
   <script src="community-reviews.js?v=20261006-01" defer></script>
+  <script src="world-submission.js?v=20261006-01" defer></script>
 </body>
 </html>
