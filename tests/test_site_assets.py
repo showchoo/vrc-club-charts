@@ -15,7 +15,7 @@ class SiteAssetTests(unittest.TestCase):
                      "reviewer.html", "reviewer-admin.html",
                      "events.html", "djs.html"):
             text = (ROOT / page).read_text(encoding="utf-8")
-            for ref in re.findall(r'<script\\b[^>]*\\bsrc=["\\\']([^"\\\']+)["\\\']', text):
+            for ref in re.findall(r'<script\b[^>]*\bsrc="([^"]+)"', text):
                 local = ref.split("?", 1)[0]
                 if local.startswith(("https:", "http:", "//")):
                     continue
