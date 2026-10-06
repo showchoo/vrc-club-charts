@@ -53,7 +53,7 @@ class DiscoveryTests(unittest.TestCase):
                 discovery, "fetch_listing", side_effect=fetch
             ), patch.object(discovery.time, "sleep"):
                 with patch.dict(discovery.os.environ,
-                                {"VCC_DISCOVERY_PAGES_PER_SOURCE": "2"}):
+                                {"VCC_DISCOVERY_PAGES_PER_SOURCE": "2", "VCC_ENABLE_VRCW": "1"}):
                     result, succeeded = discovery.discover_candidates("2026-10-06")
             self.assertTrue(succeeded)
             self.assertEqual(len(result), 1)
@@ -68,7 +68,7 @@ class DiscoveryTests(unittest.TestCase):
             state = Path(tmp) / "state.json"
             with patch.object(discovery, "STATE", state), patch.object(
                 discovery, "fetch_listing", side_effect=OSError("blocked")
-            ), patch.dict(discovery.os.environ, {"VCC_DISCOVERY_PAGES_PER_SOURCE": "2"}):
+            ), patch.dict(discovery.os.environ, {"VCC_DISCOVERY_PAGES_PER_SOURCE": "2", "VCC_ENABLE_VRCW": "1"}):
                 rows, success = discovery.discover_candidates("2026-10-06")
             self.assertEqual(rows, [])
             self.assertFalse(success)

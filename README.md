@@ -24,11 +24,15 @@ A World needs actual in-world measurement before claiming validated sound, dynam
 ## Automated World coverage
 
 The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.
-A daily scheduled collector combines VRCmap Music/New with the public VRCW **Club** and **DJ**
-directories. VRCW crawling includes the newest page and 11 rotating historical pages per
-category each run (adjustable with `VCC_DISCOVERY_PAGES_PER_SOURCE`), storing persistent
-pagination positions in `data/discovery-state.json`. Newly found Worlds are deduplicated by
-VRChat World ID and kept in `data/world-candidates.json`.
+A daily scheduled collector combines VRCmap Music/New with best-effort searches of
+the public VRChat World API. VRCW **Club** / **DJ** paging code is retained but disabled:
+its website currently returns HTTP 403 to unattended GitHub Actions requests. We do not
+attempt to evade that access restriction. When an owner-approved access path is available,
+`VCC_ENABLE_VRCW=1` permits a newest-page-plus-rotating-historical-page scan (cursor
+stored in `data/discovery-state.json`). Search results and supplied World links are
+deduplicated by World ID; unapproved matches stay in `data/world-candidates.json`.
+The public VRChat search endpoint may also reject anonymous search requests; these
+failures are logged without aborting other sources.
 
 Strong club-name matches from the club category are **only added automatically** after the
 public VRChat World API independently confirms that the World is public and provides its

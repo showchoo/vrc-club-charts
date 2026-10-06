@@ -7,6 +7,7 @@ on:
     paths:
       - "scripts/discover_worlds.py"
       - "scripts/discover_vrcw.py"
+      - "scripts/discover_official.py"
       - "data/discovery-seeds.json"
       - ".github/workflows/discover-worlds.yml"
   schedule:
@@ -44,4 +45,5 @@ jobs:
           git add data/world-candidates.json data/discovery-state.json data/worlds.json data/weekly-ranking.json
           git diff --cached --quiet && exit 0
           git commit -m "data: refresh World discovery candidates"
+          git pull --rebase origin main
           git push

@@ -303,7 +303,9 @@ def main() -> int:
     # A VRCmap outage must not block this source, and vice versa.
     from discover_vrcw import discover_candidates, priority_seeds, auto_register
     vrcw_items, vrcw_ok = discover_candidates(today)
-    for item in vrcw_items + priority_seeds(today):
+    from discover_official import collect_candidates
+    official_items, official_ok = collect_candidates(today)
+    for item in vrcw_items + official_items + priority_seeds(today):
         wid = item["id"]
         if wid in existing_ids or wid in decided_ids:
             continue
@@ -344,7 +346,7 @@ def main() -> int:
         if last_seen >= cutoff:
             by_id[wid] = old
 
-    if not successful_sources and not vrcw_ok and not by_id:
+    if not successful_sources and not vrcw_ok and not official_ok and not by_id:
         print("ERROR: all discovery sources failed; preserving previous candidate file")
         return 2
 

@@ -34,7 +34,7 @@ BLOCKED_NAME = re.compile(
     r"fight(?:ing)?[\s-]*club|avatar|アバター|clubhouse|クラブハウス|sleep|睡眠|"
     r"mmd|karaoke|カラオケ|training|sparring|格闘|ジム|gym", re.I
 )
-CLUB_NAME = re.compile(r"\bclub\b|nightclub|discotheque|disco|rave|dj[\s_-]?booth|"
+CLUB_NAME = re.compile(r"\bclub\b|club$|nightclub|discotheque|disco|rave|dj[\s_-]?booth|"
                        r"クラブ|ディスコ|レイブ|ナイトクラブ", re.I)
 
 
@@ -121,6 +121,12 @@ def discover_candidates(today: str) -> tuple[list[dict], bool]:
     unique: dict[str, dict] = {}
     successful = False
 
+    # The public directory currently returns HTTP 403 to GitHub Actions.
+    # Respect that access restriction instead of retrying it every day.
+    if os.environ.get("VCC_ENABLE_VRCW", "0") != "1":
+        print("INFO: VRCW crawling disabled after HTTP 403; using other sources")
+        return [], False
+
     for name, base in PAGES.items():
         start = max(2, int(cursors.get(name, 2)))
         pages = [1] + list(range(start, start + count - 1))
@@ -175,15 +181,24 @@ def priority_seeds(today: str) -> list[dict]:
         wid = str(item.get("id", "")) if isinstance(item, dict) else ""
         if not WORLD_ID.fullmatch(wid):
             continue
+        # Directory nominations are not equivalent to owner-provided club links.
+        # These require explicit nightclub-like names *and* official World lookup.
+        directory = item.get("type") == "source-listed-club"
+        hint = str(item.get("nameHint") or "").strip()[:120]
+        club_named = bool(CLUB_NAME.search(hint)) and not BLOCKED_NAME.search(hint)
+        categories = ["vrcw_club", "directory-seed"] if directory else ["direct-world-link"]
         out.append({
             "id": wid,
-            "name": "調査中のクラブWorld",
+            "name": hint or "調査中のクラブWorld",
             "authorHint": "Unverified",
-            "source": "https://vrchat.com/home/world/" + wid + "/info",
-            "sourceCategories": ["direct-world-link"],
-            "confidenceScore": 100,
+            "source": str(item.get("source") or
+                          "https://vrchat.com/home/world/" + wid + "/info"),
+            "sourceCategories": categories,
+            "confidenceScore": (95 if club_named else 65) if directory else 100,
             "confidence": "awaiting-public-metadata",
-            "reasons": ["user-supplied-world-link"],
+            "reasons": (["source:directory-seed", "+explicit-club-name"] if club_named
+                        else ["source:directory-seed"]) if directory
+                       else ["user-supplied-world-link"],
             "firstDiscoveredAt": today,
             "lastSeenAt": today,
         })
@@ -193,6 +208,9 @@ def priority_seeds(today: str) -> list[dict]:
 def eligible_for_admission(item: dict) -> bool:
     if "direct-world-link" in item.get("sourceCategories", []):
         return True  # Only after authoritative metadata is retrieved below.
+    if "vrchat_search" in item.get("sourceCategories", []):
+        return (item.get("confidenceScore", 0) >= 85
+                and "+explicit-club-name" in item.get("reasons", []))
     return (item.get("confidenceScore", 0) >= 85
             and "+explicit-club-name" in item.get("reasons", [])
             and "vrcw_club" in item.get("sourceCategories", []))
