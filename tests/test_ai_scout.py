@@ -98,6 +98,46 @@ class AiScoutTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 scout.evaluate_image("Club", "Creator", "image/png", b"imagebytes", "test-key")
 
+    def test_old_http_404_attempts_are_retried_after_model_switch(self):
+        with tempfile.TemporaryDirectory() as td:
+            data_dir = Path(td)
+            (data_dir / "worlds.json").write_text(json.dumps([
+                {"id": W1, "name": "Club Immersive", "author": "Maker",
+                 "chartEligible": True, "genres": ["IMMERSIVE"]}
+            ]))
+            (data_dir / "world-candidates.json").write_text("[]")
+            (data_dir / "ai-scout.json").write_text(json.dumps({
+                "scored": [], "attempts": {W1: {
+                    "checkedAt": scout.utc_now().isoformat(),
+                    "status": "http-unavailable"
+                }}
+            }))
+            with patch.object(scout, "DATA", data_dir), patch.object(
+                scout, "OUTPUT", data_dir / "ai-scout.json"
+            ), patch.object(scout, "fetch_world_visuals", return_value={} ) as fetch:
+                result = scout.build_catalog("test-key")
+            fetch.assert_called_once_with([W1])
+            self.assertEqual(result["summary"]["assessed"], 0)
+
+    def test_gemini_model_http_404_fails_job_visibly(self):
+        from urllib.error import HTTPError
+        with tempfile.TemporaryDirectory() as td:
+            data_dir = Path(td)
+            (data_dir / "worlds.json").write_text(json.dumps([
+                {"id": W1, "name": "Club Immersive", "author": "Maker",
+                 "chartEligible": True, "genres": ["IMMERSIVE"]}
+            ]))
+            (data_dir / "world-candidates.json").write_text("[]")
+            with patch.object(scout, "DATA", data_dir), patch.object(
+                scout, "OUTPUT", data_dir / "ai-scout.json"
+            ), patch.object(scout, "fetch_world_visuals", return_value={W1: {}}), patch.object(
+                scout, "fetch_image", return_value=("image/png", b"imagebytes")
+            ), patch.object(scout, "evaluate_image", side_effect=HTTPError(
+                "https://generativelanguage.googleapis.com", 404, "Not Found", {}, None
+            )):
+                with self.assertRaisesRegex(RuntimeError, "Gemini API rejected model"):
+                    scout.build_catalog("test-key")
+
     def test_image_that_is_not_a_world_gets_no_score(self):
         with patch.object(scout, "post_json", return_value={
             "candidates": [{"content": {"parts": [{"text": json.dumps({"canJudge": False})}]}}]
