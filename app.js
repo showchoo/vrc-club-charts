@@ -386,8 +386,8 @@ function renderCraftRanking() {
   if (!rows.length) {
     board.innerHTML = `<div class="ranking-empty">
       <div class="ranking-empty-visual" aria-hidden="true">
-        <span data-text="00">00</span>
-        <b>AWAITING FIELD REVIEWS</b>
+        <span data-text="—">—</span>
+        <b>INDEPENDENT REVIEWS</b>
       </div>
       <div class="ranking-empty-copy">
         <span>OFFICIAL PANEL RANKING</span>
