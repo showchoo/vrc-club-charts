@@ -44,7 +44,7 @@ on:
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   workflow_run:
-    workflows: ["AI SCOUT automatic World discovery"]
+    workflows: ["AI SCOUT automatic World discovery", "Discover new club Worlds"]
     types: [completed]
   schedule:
     - cron: "*/15 * * * *"
