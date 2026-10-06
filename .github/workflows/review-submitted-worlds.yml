@@ -1,0 +1,49 @@
+name: Review submitted club Worlds
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/review_world_submissions.py"
+      - "data/world-submission-decisions.json"
+      - ".github/workflows/review-submitted-worlds.yml"
+  schedule:
+    # Once per hour; bounded to eight AI assessments per run.
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: review-submitted-club-worlds
+  cancel-in-progress: false
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify public Worlds and classify club use
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VCC_SUBMISSION_MODEL: "gemini-3.5-flash-lite"
+          VCC_SUBMISSION_MAX_PER_RUN: "8"
+        run: |
+          python scripts/review_world_submissions.py
+          python scripts/build_rankings.py
+          python scripts/build_discovery_ledger.py
+          python scripts/validate_catalog.py
+      - name: Commit AI decisions and approved Worlds
+        run: |
+          git config user.name "vrc-club-charts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/world-submission-decisions.json data/worlds.json data/weekly-ranking.json data/world-discovery-ledger.json data/discovery-report.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: review user-submitted VRChat clubs"
+          git pull --rebase origin main
+          git push
