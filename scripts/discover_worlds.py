@@ -386,6 +386,22 @@ def main() -> int:
                               "event-feed", today)
     curated_events = event_leads(load(ROOT / "data" / "events.json", []),
                                  "event-curated", today)
+    # Record source availability without claiming unavailable sources were scanned.
+    latest_state = read_json(STATE, {})
+    latest_state = latest_state if isinstance(latest_state, dict) else {}
+    health = latest_state.get("sourceHealth", {})
+    health = health if isinstance(health, dict) else {}
+    health.update({
+        "vrcw_directory": {"lastAttemptAt": today,
+                          "status": ("ok" if vrcw_ok else
+                                     "disabled" if os.environ.get("VCC_ENABLE_VRCW", "0") != "1"
+                                     else "unavailable")},
+        "vrchat_world_search": {"lastAttemptAt": today,
+                                "status": "ok" if official_ok else "unavailable"},
+    })
+    latest_state["sourceHealth"] = health
+    STATE.write_text(json.dumps(latest_state, ensure_ascii=False, indent=2)
+                     + "\n", encoding="utf-8")
     for item in vrcw_items + official_items + priority_seeds(today) + auto_events + curated_events:
         wid = item["id"]
         if wid in existing_ids or wid in decided_ids:
