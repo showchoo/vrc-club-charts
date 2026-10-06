@@ -221,7 +221,7 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
 
     # A title naming a nightlife venue is stronger evidence than a broad
     # Music/Japan/Bar category. Reject non-nightlife 'clubs' such as fight clubs.
-    if re.search(r"fight(?:ing)?[\\s-]*club|avatar|アバター|mmd|karaoke|カラオケ", name, re.I):
+    if re.search(r"fight(?:ing)?[\s-]*club|avatar|アバター|mmd|karaoke|カラオケ|clubhouse|club house|ゴルフ", name, re.I):
         return None
     if re.search(r"club|クラブ|disco|ディスコ|nightclub|rave|レイブ", name, re.I):
         score = min(100, score + 25)
@@ -318,7 +318,7 @@ def main() -> int:
         discovery_state["vrcmapNextIndex"] = next_positions
         discovery_state["updatedAt"] = today
         STATE.write_text(json.dumps(discovery_state, ensure_ascii=False, indent=2)
-                         + "\\n", encoding="utf-8")
+                         + "\n", encoding="utf-8")
 
     by_id: dict[str, dict] = {}
     for idx, (wid, memberships) in enumerate(ordered):
