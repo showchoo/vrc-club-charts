@@ -103,6 +103,18 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(discovery.auto_register([item], [], set()), [])
             lookup.assert_called_once()
 
+    def test_vrcmap_reference_seed_requires_club_name(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            seeds = Path(tmp) / "seeds.json"
+            seeds.write_text(json.dumps([
+                {"id": W1, "nameHint": "Aurora Nightclub", "type": "source-listed-club",
+                 "source": "https://vrcmap.com/world/" + W1},
+            ]))
+            with patch.object(discovery, "SEEDS", seeds):
+                items = discovery.priority_seeds("2026-10-06")
+        self.assertEqual(items[0]["sourceCategories"], ["vrcmap_reference", "directory-seed"])
+        self.assertTrue(discovery.eligible_for_admission(items[0]))
+
     def test_private_world_cannot_be_autopromoted(self):
         with patch.object(discovery.urllib.request, "urlopen") as op:
             class FakeResponse:
