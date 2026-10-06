@@ -91,7 +91,8 @@
       );
       const pending = (Array.isArray(data.candidates) ? data.candidates : []).filter(valid);
       const isAssessed = scored.length > 0;
-      const records = (isAssessed ? scored : pending).slice(0, 6);
+      const scoredIds = new Set(scored.map(item => item.id));
+      const records = [...scored, ...pending.filter(item => !scoredIds.has(item.id))].slice(0, 6);
       const count = Number(data.summary?.totalCandidates ?? pending.length);
       status.textContent = isAssessed ?
         scored.length + ' WORLDS IMAGE-ASSESSED / CONFIDENCE: LOW' :
@@ -127,7 +128,7 @@
         const fromIndex = byId.get(record.id);
         const thumbnail = thumbnails.get(record.id) ||
           fromIndex?.thumbnail || fromIndex?.imageUrl || '';
-        grid.appendChild(drawCard(record, i, isAssessed, thumbnail));
+        grid.appendChild(drawCard(record, i, scoredIds.has(record.id), thumbnail));
       });
     } catch (_) {
       status.textContent = 'DISCOVERY DATA UNAVAILABLE';
