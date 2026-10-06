@@ -249,6 +249,11 @@ def auto_register(candidates: list[dict], catalog: list[dict],
         if not actual:
             print(f"INFO: not a currently public World: {wid}")
             continue
+        if ("direct-world-link" not in candidate.get("sourceCategories", [])
+                and (BLOCKED_NAME.search(actual["name"]) or
+                     not CLUB_NAME.search(actual["name"]))):
+            print(f"INFO: official World name does not confirm club venue: {wid}")
+            continue
         # A direct URL explicitly submitted by the site owner is treated as a
         # club nomination; other automatic listings require trusted category.
         catalog.append({
