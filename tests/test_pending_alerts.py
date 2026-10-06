@@ -77,6 +77,12 @@ class PendingAlertsTests(unittest.TestCase):
             self.assertEqual(completed["resolved"],2)
             self.assertEqual(api.call_count,2)
 
+    def test_existing_candidate_alert_marker_is_parsed_to_prevent_duplicate_mail(self):
+        body="Pending club\\n<!-- vcc-review-alert:candidate:"+W1+" -->"
+        match=alerts.MARKER.search(body)
+        self.assertIsNotNone(match)
+        self.assertEqual(match.group(1),"candidate:"+W1)
+
     def test_private_review_token_has_no_content_or_original_uuid(self):
         self.write("world-candidates.json",[])
         self.write("world-candidate-ai-decisions.json",[])
