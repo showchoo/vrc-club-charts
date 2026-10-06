@@ -28,11 +28,51 @@
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 36,
-    "vrcmap_new": 36,
-    "vrcmap_cafe": 36,
-    "vrcmap_japan": 36,
-    "vrcmap_trending": 36,
-    "vrcmap_chill": 36
+    "vrcmap_music": 48,
+    "vrcmap_new": 48,
+    "vrcmap_cafe": 48,
+    "vrcmap_japan": 48,
+    "vrcmap_trending": 48,
+    "vrcmap_chill": 48
+  },
+  "sourceHealth": {
+    "vrcmap_music": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcmap_new": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcmap_cafe": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcmap_japan": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcmap_trending": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcmap_chill": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "ok",
+      "listedWorldIds": 50
+    },
+    "vrcw_directory": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "disabled"
+    },
+    "vrchat_world_search": {
+      "lastAttemptAt": "2026-10-06",
+      "status": "unavailable"
+    }
   }
 }

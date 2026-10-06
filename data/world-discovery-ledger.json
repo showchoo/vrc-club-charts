@@ -56,14 +56,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -142,14 +142,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -404,14 +404,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -442,13 +442,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "nominated-url",
         "ref": "https://vrchat.com/home/world/wrld_3c876c92-c72e-4e0a-9ad0-37109affc346/info",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "nominated-url",
+        "source": "catalog",
         "ref": "https://vrchat.com/home/world/wrld_3c876c92-c72e-4e0a-9ad0-37109affc346/info",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -576,14 +576,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -614,13 +614,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "source-reference",
         "ref": "https://vrcmap.com/world/wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
+        "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -652,14 +652,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "event-curated",
+        "ref": "https://psy-apple.club/",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "event-curated",
-        "ref": "https://psy-apple.club/",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -690,14 +690,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -776,13 +776,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "source-reference",
         "ref": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
+        "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -798,13 +798,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "nominated-url",
         "ref": "https://vrchat.com/home/world/wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7/info",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "nominated-url",
+        "source": "catalog",
         "ref": "https://vrchat.com/home/world/wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7/info",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -1188,13 +1188,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "source-reference",
         "ref": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
+        "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -1258,14 +1258,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -1408,7 +1408,7 @@
     "status": "pending",
     "evidence": [
       {
-        "source": "directory-seed",
+        "source": "vrcmap_reference",
         "ref": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -1420,7 +1420,7 @@
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "vrcmap_reference",
+        "source": "directory-seed",
         "ref": "https://vrcmap.com/world/wrld_bf59a9b2-73ce-4751-a677-d593b0db9f57",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -1468,14 +1468,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -1506,13 +1506,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "source-reference",
         "ref": "https://vrcmap.com/world/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
+        "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
@@ -1528,14 +1528,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -1582,14 +1582,14 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
-        "ref": "data/worlds.json",
+        "source": "source-reference",
+        "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
-        "ref": "https://www.vrcw.net/category/detail/club",
+        "source": "catalog",
+        "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
@@ -1620,13 +1620,13 @@
     "status": "published",
     "evidence": [
       {
-        "source": "catalog",
+        "source": "source-reference",
         "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       },
       {
-        "source": "source-reference",
+        "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
