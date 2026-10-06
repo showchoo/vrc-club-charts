@@ -1,4 +1,6 @@
 const state = { worlds: [], events: [], reviewScores: null, editorScores: [] };
+const WORLD_META_ENDPOINT = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
+const SUPABASE_PUBLIC_KEY = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
 
 const fmt = new Intl.NumberFormat('en-US');
 
@@ -10,6 +12,47 @@ function esc(value='') {
 
 function worldDetailUrl(id) { return `worlds/${id}.html`; }
 function eventDetailUrl(id) { return id ? `events/${id}.html` : 'events.html'; }
+
+function worldImage(w) {
+  return w?.thumbnail || w?.imageUrl || '';
+}
+
+async function fetchWorldVisuals(ids) {
+  const unique = [...new Set((ids || []).filter(Boolean))].slice(0, 20);
+  if (!unique.length) return [];
+  try {
+    const response = await fetch(WORLD_META_ENDPOINT, {
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_PUBLIC_KEY,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({ids:unique})
+    });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data?.items) ? data.items : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function mergeWorldVisuals(items) {
+  if (!Array.isArray(items) || !items.length) return false;
+  const byId = new Map(state.worlds.map(w => [w.id, w]));
+  let changed = false;
+  for (const row of items) {
+    const w = byId.get(row.world_id);
+    if (!w) continue;
+    const image = row.thumbnail_url || row.image_url || '';
+    if (image && w.thumbnail !== image) {
+      w.thumbnail = image;
+      w.imageUrl = row.image_url || w.imageUrl;
+      changed = true;
+    }
+  }
+  return changed;
+}
 
 function pickWorlds(worlds) {
   return worlds
@@ -27,8 +70,9 @@ function pickWorlds(worlds) {
 }
 
 function worldCard(w) {
-  const image = w.thumbnail
-    ? `<img src="${esc(w.thumbnail)}" alt="" loading="lazy" decoding="async" />`
+  const imageSrc = worldImage(w);
+  const image = imageSrc
+    ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />`
     : '<div class="focus-world-placeholder">VRC</div>';
   const tags = (w.genres || []).slice(0,3).map(g=>`<span>${esc(g)}</span>`).join('');
   return `<a class="focus-world-card" href="${worldDetailUrl(w.id)}">
@@ -68,7 +112,10 @@ function renderEditorPicks() {
   section.hidden = false;
   wrap.innerHTML = picks.map((r,i) => {
     const w = byId.get(r.world_id);
+    const imageSrc = worldImage(w);
     return `<a class="editor-pick-card" href="${worldDetailUrl(w.id)}">
+      <div class="editor-pick-media">${imageSrc ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />` : '<div class="editor-pick-placeholder">VRC</div>'}</div>
+      <div class="editor-pick-body">
       <div class="editor-pick-top">
         <span>EDITOR'S PICK ${String(i+1).padStart(2,'0')}</span>
         <b>${Number(r.total_score || 0)}<small>/100</small></b>
@@ -80,6 +127,7 @@ function renderEditorPicks() {
         <span>V ${r.visual}/20</span><span>L ${r.lighting}/20</span><span>S ${r.sound}/15</span>
         <span>SP ${r.spatial}/15</span><span>I ${r.interaction}/10</span>
         <span>O ${r.originality}/10</span><span>OPT ${r.optimization}/10</span>
+      </div>
       </div>
     </a>`;
   }).join('');
@@ -131,8 +179,10 @@ function renderCraftRanking() {
       const confidence = String(r.confidence || 'low').toUpperCase();
       const editor = editors.get(w.id);
       const editorMeta = editor ? ` · EDITOR ${Number(editor.total_score)}${editor.editor_pick ? " ★" : ""}` : '';
+      const imageSrc = worldImage(w);
       return `<a class="panel-rank-row ${i === 0 ? 'rank-first' : ''}" href="${worldDetailUrl(w.id)}">
         <span class="panel-rank-no">${String(i+1).padStart(2,'0')}</span>
+        <span class="panel-rank-thumb">${imageSrc ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />` : '<i>VRC</i>'}</span>
         <span class="panel-rank-world">
           <small>${status} · ${r.reviewCount} REVIEWS · ${confidence} CONFIDENCE${editorMeta}</small>
           <strong>${esc(w.name)}</strong>
@@ -217,6 +267,20 @@ async function load() {
     renderCraftRanking();
     renderWorlds();
     renderEvents();
+
+    const byId = new Map(state.worlds.map(w => [w.id,w]));
+    const editorIds = (state.editorScores || []).filter(r => r.editor_pick === true).sort((a,b)=>Number(b.total_score||0)-Number(a.total_score||0)).slice(0,3).map(r=>r.world_id);
+    const rankIds = (state.reviewScores?.worlds || []).filter(r=>Number.isFinite(Number(r.score))).sort((a,b)=>Number(b.score)-Number(a.score)).slice(0,10).map(r=>r.worldId);
+    const targetIds = pickWorlds(state.worlds).map(w=>w.id);
+    const visualIds = [...new Set([...editorIds,...rankIds,...targetIds])].filter(id=>byId.has(id) && !worldImage(byId.get(id))).slice(0,20);
+    if (visualIds.length) {
+      const visuals = await fetchWorldVisuals(visualIds);
+      if (mergeWorldVisuals(visuals)) {
+        renderEditorPicks();
+        renderCraftRanking();
+        renderWorlds();
+      }
+    }
   } catch (err) {
     console.error(err);
     const ranking = document.getElementById('craftRanking');
