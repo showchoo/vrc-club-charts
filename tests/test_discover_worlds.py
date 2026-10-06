@@ -14,11 +14,12 @@ class VrcmapRotationTests(unittest.TestCase):
                          "vrcmap_japan", "vrcmap_trending", "vrcmap_chill"} <= sources)
 
     def test_strong_club_title_can_be_verified(self):
-        raw = "<h1>Neon Club</h1><p>DJ stage dancefloor techno club nightlife</p>"
+        raw = "<h1>Neon Club</h1><p>by:</p><p>Maker</p><p>DJ stage dancefloor techno club nightlife</p>"
         with patch.object(worlds, "fetch_text", return_value=raw):
             item = worlds.detail_candidate(WORLD, "vrcmap_cafe",
                                           "https://vrcmap.com", 28)
         self.assertIsNotNone(item)
+        self.assertEqual(item["authorHint"], "Maker")
         self.assertGreaterEqual(item["confidenceScore"], 75)
         self.assertIn("+explicit-club-name", item["reasons"])
 
