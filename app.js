@@ -14,9 +14,29 @@ function esc(value='') {
 function worldDetailUrl(id) { return `worlds/${id}.html`; }
 function eventDetailUrl(id) { return id ? `events/${id}.html` : 'events.html'; }
 
+// Catalog ranking snapshots intentionally omit all image URLs. The public
+// world-thumb Edge Function already proxies verified, cached VRChat images;
+// use it on first render rather than waiting for a separate metadata POST.
 function worldImage(w) {
+  const id = String(w?.id || '');
+  if (/^wrld_[0-9a-fA-F-]{36}$/.test(id)) {
+    return WORLD_THUMB_ENDPOINT + '?id=' + encodeURIComponent(id);
+  }
   return w?.thumbnail || w?.imageUrl || '';
 }
+
+function handleWorldImageError(event) {
+  const img = event.target;
+  if (!(img instanceof HTMLImageElement)) return;
+  const fallbackClass = img.dataset.worldImageFallback;
+  if (!['focus-world-placeholder', 'editor-pick-placeholder'].includes(fallbackClass)) return;
+  const placeholder = document.createElement('div');
+  placeholder.className = fallbackClass;
+  placeholder.textContent = 'VRC';
+  img.replaceWith(placeholder);
+}
+
+document.addEventListener('error', handleWorldImageError, true);
 
 async function fetchWorldVisuals(ids) {
   const unique = [...new Set((ids || []).filter(Boolean))].slice(0, 20);
@@ -276,7 +296,7 @@ function pickWorlds(worlds) {
 function worldCard(w) {
   const imageSrc = worldImage(w);
   const image = imageSrc
-    ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />`
+    ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" data-world-image-fallback="focus-world-placeholder" />`
     : '<div class="focus-world-placeholder">VRC</div>';
   const tags = (w.genres || []).slice(0,3).map(g=>`<span>${esc(g)}</span>`).join('');
   return `<a class="focus-world-card" href="${worldDetailUrl(w.id)}">
@@ -319,7 +339,7 @@ function renderEditorPicks() {
     const imageSrc = worldImage(w);
     return `<article class="editor-pick-card">
       <a class="editor-pick-main" href="${worldDetailUrl(w.id)}">
-        <div class="editor-pick-media">${imageSrc ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />` : '<div class="editor-pick-placeholder">VRC</div>'}</div>
+        <div class="editor-pick-media">${imageSrc ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" data-world-image-fallback="editor-pick-placeholder" />` : '<div class="editor-pick-placeholder">VRC</div>'}</div>
         <div class="editor-pick-body">
           <div class="editor-pick-top">
             <span>EDITOR'S PICK ${String(i+1).padStart(2,'0')}</span>
