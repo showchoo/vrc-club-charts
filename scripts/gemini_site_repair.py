@@ -41,6 +41,8 @@ def select_context(issues: list[dict]) -> dict[str, str]:
         wanted.update(("scripts/build_static_pages.py", "scripts/build_vercel.py", "vercel.json"))
     if categories & {"language", "asset_i18n_js"}:
         wanted.add("i18n.js")
+    if "browser" in categories:
+        wanted.update(("app.js", "ai-scout.js", "i18n.js", "scripts/build_static_pages.py"))
     if categories & {"events", "djs", "reviews", "about", "privacy"}:
         wanted.update((x + ".html" for x in ("events", "djs", "reviewer", "about", "privacy")
                        if x in categories or x == "reviewer" and "reviews" in categories))
