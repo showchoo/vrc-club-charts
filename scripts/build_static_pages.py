@@ -541,7 +541,14 @@ def index_page(worlds: list[dict]) -> str:
             str(w.get("author") or ""),
             " ".join(w.get("genres") or []),
         ]).casefold()
-        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html" data-status="{esc(status)}" data-hay="{esc(hay)}">
+        thumb = w.get("thumbnail") or ""
+        thumb_html = (
+            f'<img src="{esc(thumb)}" alt="" loading="lazy" decoding="async" />'
+            if thumb else '<i>VRC</i>'
+        )
+        thumb_ready = "true" if thumb else "false"
+        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html" data-world-id="{esc(w.get('id'))}" data-thumb-ready="{thumb_ready}" data-status="{esc(status)}" data-hay="{esc(hay)}">
+          <span class="world-catalog-thumb">{thumb_html}</span>
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
           <span>{esc(genres)}</span>
@@ -568,7 +575,76 @@ def index_page(worlds: list[dict]) -> str:
         const rows = [...document.querySelectorAll('.world-catalog-row')];
         const count = document.getElementById('worldDirectoryCount');
         const buttons = [...document.querySelectorAll('[data-status-filter]')];
+        const mediaEndpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
+        const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
+        const pending = new Set();
+        let mediaTimer = 0;
+        let mediaBusy = false;
         let status = 'all';
+
+        function escAttr(value='') {{
+          return String(value).replace(/[&<>"']/g, ch => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[ch]));
+        }}
+
+        function showThumbnail(worldId, image) {{
+          if (!image) return;
+          const row = rows.find(item => item.dataset.worldId === worldId);
+          if (!row) return;
+          const thumb = row.querySelector('.world-catalog-thumb');
+          if (!thumb) return;
+          thumb.innerHTML = '<img src="' + escAttr(image) + '" alt="" loading="lazy" decoding="async" />';
+          row.dataset.thumbReady = 'true';
+        }}
+
+        async function flushMediaQueue() {{
+          if (mediaBusy || !pending.size) return;
+          mediaBusy = true;
+          const ids = [...pending].slice(0, 20);
+          ids.forEach(id => pending.delete(id));
+          try {{
+            const response = await fetch(mediaEndpoint, {{
+              method: 'POST',
+              headers: {{'apikey': apiKey, 'Content-Type': 'application/json'}},
+              body: JSON.stringify({{ids}})
+            }});
+            if (response.ok) {{
+              const data = await response.json();
+              (Array.isArray(data?.items) ? data.items : []).forEach(item => {{
+                showThumbnail(item.world_id, item.thumbnail_url || item.image_url || '');
+              }});
+            }}
+          }} catch (_) {{}}
+          finally {{
+            mediaBusy = false;
+            if (pending.size) mediaTimer = window.setTimeout(flushMediaQueue, 120);
+          }}
+        }}
+
+        function queueThumbnail(row) {{
+          if (!row || row.dataset.thumbReady === 'true' || row.dataset.thumbRequested === 'true') return;
+          const id = row.dataset.worldId;
+          if (!id) return;
+          row.dataset.thumbRequested = 'true';
+          pending.add(id);
+          window.clearTimeout(mediaTimer);
+          mediaTimer = window.setTimeout(flushMediaQueue, 80);
+        }}
+
+        if ('IntersectionObserver' in window) {{
+          const observer = new IntersectionObserver(entries => {{
+            entries.forEach(entry => {{
+              if (!entry.isIntersecting) return;
+              queueThumbnail(entry.target);
+              observer.unobserve(entry.target);
+            }});
+          }}, {{rootMargin: '700px 0px'}});
+          rows.forEach(row => {{
+            if (row.dataset.thumbReady !== 'true') observer.observe(row);
+          }});
+        }} else {{
+          rows.forEach(queueThumbnail);
+        }}
+
         function apply() {{
           const q = (input.value || '').trim().toLowerCase();
           let visible = 0;
@@ -577,7 +653,10 @@ def index_page(worlds: list[dict]) -> str:
             const okQuery = !q || (row.dataset.hay || '').includes(q);
             const show = okStatus && okQuery;
             row.hidden = !show;
-            if (show) visible += 1;
+            if (show) {{
+              visible += 1;
+              if (row.getBoundingClientRect().top < window.innerHeight + 700) queueThumbnail(row);
+            }}
           }});
           count.textContent = visible + ' WORLDS';
         }}
