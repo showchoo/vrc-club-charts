@@ -104,7 +104,9 @@ def candidate_pool(worlds: list, discoveries: list) -> list[dict]:
             "url": (f"https://vrchat.com/home/world/{wid}/info"
                     if "direct-world-link" in item.get("sourceCategories", [])
                     else f"https://vrcmap.com/world/{wid}"),
-            "_priority": len(signals) + 2,
+            "_priority": len(signals) + (
+                8 if "direct-world-link" in item.get("sourceCategories", []) else 2
+            ),
         }
 
     ordered = sorted(by_id.values(), key=lambda w: (
