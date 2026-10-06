@@ -1,4 +1,4 @@
-const state = { worlds: [], events: [], reviewScores: null, editorScores: [] };
+const state = { worlds: [], events: [], editorScores: [] };
 const WORLD_META_ENDPOINT = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
 const WORLD_THUMB_ENDPOINT = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-thumb';
 const SUPABASE_PUBLIC_KEY = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
@@ -360,70 +360,6 @@ function renderEditorPicks() {
   });
 }
 
-function renderCraftRanking() {
-  const board = document.getElementById('craftRanking');
-  // Legacy panel scores remain archived; the public home now leads with AI Scout.
-  if (!board) return;
-  if (!board) return;
-
-  const summary = state.reviewScores?.summary || {};
-  const rankedCount = Number(summary.rankedWorlds || 0);
-  const scoredCount = Number(summary.scoredWorlds || 0);
-  const reviewCount = Number(summary.reviews || 0);
-  const reviewerCount = Number(summary.reviewers || 0);
-
-  document.getElementById('metricRanked').textContent = fmt.format(rankedCount);
-  document.getElementById('metricPanel').textContent = fmt.format(scoredCount);
-  document.getElementById('metricReviews').textContent = fmt.format(reviewCount);
-  document.getElementById('metricReviewers').textContent = fmt.format(reviewerCount);
-
-  const byId = new Map(state.worlds.map(w => [w.id, w]));
-  const editors = editorScoreMap();
-  const rows = (state.reviewScores?.worlds || [])
-    .filter(r => Number.isFinite(Number(r.score)))
-    .map(r => ({...r, world: byId.get(r.worldId)}))
-    .filter(r => r.world)
-    .sort((a,b) => Number(b.score) - Number(a.score));
-
-  if (!rows.length) {
-    board.innerHTML = `<div class="ranking-empty">
-      <div class="ranking-empty-visual" aria-hidden="true">
-        <span data-text="—">—</span>
-        <b>INDEPENDENT REVIEWS</b>
-      </div>
-      <div class="ranking-empty-copy">
-        <span>OFFICIAL PANEL RANKING</span>
-        <strong>評価が揃ったクラブから、公開。</strong>
-        <p>独立レビュー3件で暫定評価、5件で正式ランキングへ。人気や推測だけで順位を決めることはありません。</p>
-      </div>
-      <a class="secondary-button" href="reviewer.html">評価基準を見る ↗</a>
-    </div>`;
-    return;
-  }
-
-  board.innerHTML = `<div class="ranking-table">
-    ${rows.slice(0,10).map((r,i) => {
-      const w = r.world;
-      const status = String(r.status || 'provisional').toUpperCase();
-      const confidence = String(r.confidence || 'low').toUpperCase();
-      const editor = editors.get(w.id);
-      const editorMeta = editor ? ` · EDITOR ${Number(editor.total_score)}${editor.editor_pick ? " ★" : ""}` : '';
-      const imageSrc = worldImage(w);
-      return `<a class="panel-rank-row ${i === 0 ? 'rank-first' : ''}" href="${worldDetailUrl(w.id)}">
-        <span class="panel-rank-no">${String(i+1).padStart(2,'0')}</span>
-        <span class="panel-rank-thumb">${imageSrc ? `<img src="${esc(imageSrc)}" alt="" loading="lazy" decoding="async" />` : '<i>VRC</i>'}</span>
-        <span class="panel-rank-world">
-          <small>${status} · ${r.reviewCount} REVIEWS · ${confidence} CONFIDENCE${editorMeta}</small>
-          <strong>${esc(w.name)}</strong>
-          <em>by ${esc(w.author || '—')}</em>
-        </span>
-        <span class="panel-rank-score"><b>${Number(r.score).toFixed(1)}</b><small>/ 100</small></span>
-        <span class="panel-rank-arrow">↗</span>
-      </a>`;
-    }).join('')}
-  </div>`;
-}
-
 function renderWorlds() {
   const available = state.worlds.filter(w => w.availabilityStatus !== 'unavailable');
   document.getElementById('metricWorlds').textContent = fmt.format(available.length);
@@ -478,10 +414,9 @@ function renderEvents() {
 
 async function load() {
   try {
-    const [worldRes,eventRes,reviewRes,editorRes] = await Promise.all([
+    const [worldRes,eventRes,editorRes] = await Promise.all([
       fetch('data/weekly-ranking.json', {cache:'no-store'}),
       fetch('data/events.json', {cache:'no-store'}),
-      fetch('data/review-scores.json', {cache:'no-store'}),
       fetch('https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/editor_world_scores?select=*', {
         cache:'no-store',
         headers:{'apikey':'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK'}
@@ -490,30 +425,24 @@ async function load() {
     if (!worldRes.ok) throw new Error('World data unavailable');
     state.worlds = (await worldRes.json()).worlds || [];
     state.events = eventRes.ok ? await eventRes.json() : [];
-    state.reviewScores = reviewRes.ok ? await reviewRes.json() : null;
     state.editorScores = editorRes.ok ? await editorRes.json() : [];
     renderEditorPicks();
-    renderCraftRanking();
     renderWorlds();
     renderEvents();
 
     const byId = new Map(state.worlds.map(w => [w.id,w]));
     const editorIds = (state.editorScores || []).filter(r => r.editor_pick === true).sort((a,b)=>Number(b.total_score||0)-Number(a.total_score||0)).slice(0,3).map(r=>r.world_id);
-    const rankIds = (state.reviewScores?.worlds || []).filter(r=>Number.isFinite(Number(r.score))).sort((a,b)=>Number(b.score)-Number(a.score)).slice(0,10).map(r=>r.worldId);
     const targetIds = pickWorlds(state.worlds).map(w=>w.id);
-    const visualIds = [...new Set([...editorIds,...rankIds,...targetIds])].filter(id=>byId.has(id) && !worldImage(byId.get(id))).slice(0,20);
+    const visualIds = [...new Set([...editorIds,...targetIds])].filter(id=>byId.has(id) && !worldImage(byId.get(id))).slice(0,20);
     if (visualIds.length) {
       const visuals = await fetchWorldVisuals(visualIds);
       if (mergeWorldVisuals(visuals)) {
         renderEditorPicks();
-        renderCraftRanking();
-        renderWorlds();
+            renderWorlds();
       }
     }
   } catch (err) {
     console.error(err);
-    const ranking = document.getElementById('craftRanking');
-    if (ranking) ranking.innerHTML = '<div class="ranking-loading">ランキングを表示できません。</div>';
     document.getElementById('focusWorldGrid').innerHTML = '<div class="focus-loading">ワールド情報を表示できません。</div>';
     document.getElementById('focusEvents').innerHTML = '<div class="focus-loading">イベント情報を表示できません。</div>';
   }

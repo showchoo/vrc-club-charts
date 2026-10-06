@@ -118,9 +118,9 @@ body.admin-page{font-size:15px}
       <div>
         <p class="kicker">PRIVATE MODERATION CONSOLE</p>
         <h1>VCC Admin</h1>
-        <p>一般レビューの掲載確認、過去のレビュワー申請、AIのWorld候補を管理する画面です。一般レビューは投稿者承認なしで受け付け、掲載内容だけを確認します。</p>
+        <p>一般レビューの掲載確認とWorld候補の管理を行います。旧レビュワー申請・旧レビューは履歴確認専用です。新規レビュワーの承認や専用コード発行は行いません。</p>
       </div>
-      <a class="secondary-button" href="reviewer.html">← Reviewer page</a>
+      <a class="secondary-button" href="reviewer.html">← Reviews</a>
     </div>
 
     <section class="admin-lock" id="lockPanel">
@@ -188,7 +188,7 @@ body.admin-page{font-size:15px}
       <div class="admin-queue-divider"></div>
 
       <div class="admin-toolbar">
-        <strong>LEGACY REVIEWER APPLICATIONS <span class="admin-count" id="pendingCount">0</span></strong>
+        <strong>LEGACY APPLICATIONS / READ ONLY <span class="admin-count" id="pendingCount">0</span></strong>
         <div>
           <button class="secondary-button" id="refreshButton" type="button">REFRESH</button>
           <button class="secondary-button" id="lockButton" type="button">LOCK</button>
@@ -199,7 +199,7 @@ body.admin-page{font-size:15px}
       <div class="admin-queue-divider"></div>
 
       <div class="admin-toolbar">
-        <strong>PENDING REVIEWS <span class="admin-count" id="pendingReviewCount">0</span></strong>
+        <strong>LEGACY PANEL REVIEWS / READ ONLY <span class="admin-count" id="pendingReviewCount">0</span></strong>
       </div>
       <div class="admin-list" id="reviewList"></div>
 
@@ -349,26 +349,15 @@ body.admin-page{font-size:15px}
         enableAnalyticsExcludeForAdmin();
       }
 
-      function credentialBox(reviewerId,code){
-        const box=document.createElement('div');
-        box.className='credential-box';
-        box.innerHTML=`
-          <strong>APPROVED — この情報は今ここで保存してください</strong>
-          <div class="credential-row"><span>Reviewer ID</span><code>${esc(reviewerId)}</code><button type="button" data-copy="${esc(reviewerId)}">COPY</button></div>
-          <div class="credential-row"><span>Access Code</span><code>${esc(code)}</code><button type="button" data-copy="${esc(code)}">COPY</button></div>
-          <div class="danger-note">Access Codeは平文では保存されません。この画面を閉じる前にReviewer本人へ安全に伝えてください。</div>`;
-        box.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{await navigator.clipboard.writeText(btn.dataset.copy);btn.textContent='COPIED';}));
-        return box;
-      }
-
+      // Legacy records are retained for audit only. New contributions use open
+      // community reviews and do not require applicant or panel approval.
       function render(applications){
         pendingCount.textContent=applications.length;
-        list.innerHTML='';
+        list.replaceChildren();
         if(!applications.length){
-          list.innerHTML='<div class="empty-admin">現在、審査待ちの申請はありません。</div>';
+          list.innerHTML='<div class="empty-admin">旧申請データはありません。</div>';
           return;
         }
-
         for(const app of applications){
           const card=document.createElement('article');
           card.className='admin-card';
@@ -384,46 +373,16 @@ body.admin-page{font-size:15px}
               <div><b>BACKGROUND</b><p>${esc(app.background)}</p></div>
               <div><b>AFFILIATIONS</b><p>${esc(app.affiliations || '—')}</p></div>
             </div>
-            <div class="admin-actions">
-              <button class="approve" type="button">APPROVE</button>
-              <button class="reject" type="button">REJECT</button>
-            </div>`;
-
-          const approve=card.querySelector('.approve');
-          const reject=card.querySelector('.reject');
-
-          approve.addEventListener('click',async()=>{
-            if(!confirm(`${app.vrchat_name} をReviewerとして承認しますか？`)) return;
-            approve.disabled=reject.disabled=true;
-            try{
-              const data=await callAdmin('approve',app.id);
-              card.querySelector('.admin-actions').remove();
-              card.appendChild(credentialBox(data.reviewerId,data.reviewerAccessCode));
-              pendingCount.textContent=Math.max(0,Number(pendingCount.textContent)-1);
-            }catch(err){ alert(err.message);approve.disabled=reject.disabled=false; }
-          });
-
-          reject.addEventListener('click',async()=>{
-            if(!confirm(`${app.vrchat_name} の申請をRejectしますか？`)) return;
-            approve.disabled=reject.disabled=true;
-            try{
-              await callAdmin('reject',app.id);
-              card.remove();
-              pendingCount.textContent=Math.max(0,Number(pendingCount.textContent)-1);
-              if(!list.querySelector('.admin-card')) list.innerHTML='<div class="empty-admin">現在、審査待ちの申請はありません。</div>';
-            }catch(err){ alert(err.message);approve.disabled=reject.disabled=false; }
-          });
-
+            <div class="admin-meta"><span>ARCHIVED RECORD · NO NEW APPROVALS</span></div>`;
           list.appendChild(card);
         }
       }
 
-
       function renderReviews(reviews){
         pendingReviewCount.textContent=reviews.length;
-        reviewList.innerHTML='';
+        reviewList.replaceChildren();
         if(!reviews.length){
-          reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
+          reviewList.innerHTML='<div class="empty-admin">旧パネルレビューのデータはありません。</div>';
           return;
         }
         for(const review of reviews){
@@ -433,49 +392,17 @@ body.admin-page{font-size:15px}
           card.className='admin-card';
           card.innerHTML=`
             <div class="admin-card-head">
-              <div><h2>${esc(review.reviewer_id)}</h2><div class="admin-meta"><span>${esc(review.world_id)}</span><span>${review.conflict ? 'CONFLICT' : 'INDEPENDENT'}</span><span>TOTAL ${total}/100</span></div></div>
+              <div><h2>${esc(review.reviewer_id)}</h2><div class="admin-meta"><span>${esc(review.world_id)}</span><span>TOTAL ${total}/100</span></div></div>
               <time>${esc(fmt(review.created_at))}</time>
-            </div>
-            <div class="review-scoreline">
-              <span>Visual ${review.visual}/20</span><span>Lighting ${review.lighting}/20</span><span>Sound ${review.sound}/15</span>
-              <span>Spatial ${review.spatial}/15</span><span>Interaction ${review.interaction}/10</span>
-              <span>Originality ${review.originality}/10</span><span>Optimization ${review.optimization}/10</span>
             </div>
             <div class="admin-data">
               <div><b>REVIEW DATE</b><p>${esc(review.reviewed_at)}</p></div>
               <div><b>COMMENT</b><p>${esc(review.comment)}</p></div>
             </div>
-            <div class="admin-actions">
-              <button class="approve" type="button">APPROVE REVIEW</button>
-              <button class="reject" type="button">REJECT</button>
-            </div>`;
-          const approve=card.querySelector('.approve');
-          const reject=card.querySelector('.reject');
-          approve.addEventListener('click',async()=>{
-            if(!confirm('このレビューを公開しますか？')) return;
-            approve.disabled=reject.disabled=true;
-            try{
-              const data=await callAdmin('approve_review',review.id);
-              card.remove();
-              pendingReviewCount.textContent=Math.max(0,Number(pendingReviewCount.textContent)-1);
-              if(!reviewList.querySelector('.admin-card')) reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
-              alert('公開しました: '+data.reviewId);
-            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
-          });
-          reject.addEventListener('click',async()=>{
-            if(!confirm('このレビューをRejectしますか？')) return;
-            approve.disabled=reject.disabled=true;
-            try{
-              await callAdmin('reject_review',review.id);
-              card.remove();
-              pendingReviewCount.textContent=Math.max(0,Number(pendingReviewCount.textContent)-1);
-              if(!reviewList.querySelector('.admin-card')) reviewList.innerHTML='<div class="empty-admin">現在、審査待ちのレビューはありません。</div>';
-            }catch(err){alert(err.message);approve.disabled=reject.disabled=false;}
-          });
+            <div class="admin-meta"><span>ARCHIVED RECORD · NOT PUBLISHED TO CURRENT CHART</span></div>`;
           reviewList.appendChild(card);
         }
       }
-
 
       function renderCommunityReviews(reviews){
         pendingCommunityCount.textContent=reviews.length;
