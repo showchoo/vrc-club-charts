@@ -91,7 +91,7 @@ class SubmissionAITests(unittest.TestCase):
                 self.assertEqual(json.loads(decisions.read_text(encoding="utf-8"))[0]["status"],"needs_review")
 
     def test_structured_gemini_fenced_json_with_safe_output_limit(self):
-        text = '```json\\n' + json.dumps(GOOD) + '\\n```'
+        text = '```json\n' + json.dumps(GOOD) + '\n```'
         result = {"candidates": [{"finishReason": "STOP",
                  "content": {"parts": [{"text": text}]}}]}
         raw = json.dumps(result).encode("utf-8")
