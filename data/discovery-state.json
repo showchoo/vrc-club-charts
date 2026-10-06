@@ -3,5 +3,10 @@
     "vrcw_club": 2,
     "vrcw_dj": 2
   },
-  "updatedAt": null
+  "updatedAt": null,
+  "verification": {
+    "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346": {
+      "date": "2026-10-06"
+    }
+  }
 }
