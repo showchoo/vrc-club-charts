@@ -904,6 +904,41 @@
       }
     },
     {
+      "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+      "name": "Club VGL",
+      "author": "Varneon",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
       "name": "Clubroom",
       "author": "Gssam",

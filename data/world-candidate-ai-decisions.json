@@ -36,10 +36,25 @@
     "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
     "name": "Club VGL",
     "author": "Varneon",
-    "status": "classification_unavailable",
-    "classification": {},
-    "note": "Gemini classification temporarily unavailable: JSONDecodeError",
-    "reviewedAt": "2026-10-06T15:24:08.914849+00:00",
-    "source": "auto-discovery"
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "World name includes 'Club'",
+        "Description mentions nightclub functionality with dance floor lighting and drinks",
+        "Tags include 'party' and 'bar'",
+        "Thumbnail displays a club-style venue with stage lighting and fog"
+      ],
+      "reasonJa": "説明文にナイトクラブとしての機能やダンスフロアの照明、ドリンクに関する記載があり、タグやサムネイル画像もクラブの要素を示しています。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-06T15:29:05.114854+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "vrcmap_cafe"
+    ]
   }
 ]

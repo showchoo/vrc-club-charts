@@ -344,6 +344,18 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+    "name": "Club VGL",
+    "author": "Varneon",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f/info",
+    "discoveredBy": "automatic-discovery-gemini-reviewed"
+  },
+  {
     "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
     "name": "Clubroom",
     "author": "Gssam",

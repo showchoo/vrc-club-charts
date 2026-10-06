@@ -5,11 +5,17 @@
     "authorHint": "Varneon",
     "firstSeenAt": "2026-10-06",
     "lastSeenAt": "2026-10-06",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "vrcmap_cafe",
         "ref": "https://vrcmap.com/world/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+        "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-06"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f/info",
         "firstSeenAt": "2026-10-06",
         "lastSeenAt": "2026-10-06"
       }
