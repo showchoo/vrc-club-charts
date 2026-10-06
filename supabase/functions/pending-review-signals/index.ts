@@ -20,7 +20,7 @@ Deno.serve(async(req:Request)=>{
   if(!url || !service) return json({error:"Not configured"},503);
   try {
     const db=createClient(url,service,{auth:{persistSession:false,autoRefreshToken:false}});
-    const key=await crypto.subtle.importKey("raw",encoder.encode(service),"HMAC",{hash:"SHA-256"},false,["sign"]);
+    const key=await crypto.subtle.importKey("raw",encoder.encode(service),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
     const pending:string[]=[];
     const pageSize=300;
     for(let offset=0;offset<3000;offset+=pageSize){
