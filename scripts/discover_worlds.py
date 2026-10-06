@@ -273,8 +273,7 @@ def main() -> int:
             print(f"WARN: discovery source failed {source_url}: {exc}")
 
     if successful_sources == 0:
-        print("ERROR: all discovery sources failed; preserving previous candidate file")
-        return 2
+        print("WARN: VRCmap sources unavailable; checking independent club directories")
 
     # Prefer Worlds surfaced by Music first, then New. Cap daily detail fetches.
     ordered = sorted(
@@ -300,6 +299,29 @@ def main() -> int:
         if idx < len(ordered) - 1:
             time.sleep(0.15)
 
+    # Independently crawl verified club/DJ category listings with resumable paging.
+    # A VRCmap outage must not block this source, and vice versa.
+    from discover_vrcw import discover_candidates, priority_seeds, auto_register
+    vrcw_items, vrcw_ok = discover_candidates(today)
+    for item in vrcw_items + priority_seeds(today):
+        wid = item["id"]
+        if wid in existing_ids or wid in decided_ids:
+            continue
+        prior = by_id.get(wid)
+        if prior:
+            prior["sourceCategories"] = sorted(set(
+                prior.get("sourceCategories", []) + item.get("sourceCategories", [])
+            ))
+            prior["reasons"] = list(dict.fromkeys(
+                prior.get("reasons", []) + item.get("reasons", [])
+            ))
+            if item["confidenceScore"] > prior.get("confidenceScore", 0):
+                by_id[wid] = {**prior, **item,
+                              "sourceCategories": prior["sourceCategories"],
+                              "reasons": prior["reasons"]}
+        else:
+            by_id[wid] = item
+
     previous_by_id = {
         str(item.get("id")): item
         for item in previous
@@ -321,6 +343,19 @@ def main() -> int:
             continue
         if last_seen >= cutoff:
             by_id[wid] = old
+
+    if not successful_sources and not vrcw_ok and not by_id:
+        print("ERROR: all discovery sources failed; preserving previous candidate file")
+        return 2
+
+    # Incremental promotion does not require manual approval for independently
+    # verified, public club Worlds. No legacy data or decisions are deleted.
+    new_ids = auto_register(list(by_id.values()), existing_catalog, decided_ids)
+    if new_ids:
+        existing_catalog.sort(key=lambda w: str(w.get("name", "")).casefold())
+        WORLDS.write_text(json.dumps(existing_catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        for wid in new_ids:
+            by_id.pop(wid, None)
 
     candidates = sorted(
         by_id.values(),
