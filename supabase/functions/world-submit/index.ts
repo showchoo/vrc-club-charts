@@ -90,6 +90,8 @@ async function handle(req: Request): Promise<Response> {
   const {data: existing,error:existingError} = await db.from("world_submissions")
     .select("status").eq("world_id",id).maybeSingle();
   if (existingError) return respond({error:"投稿状態を確認できません。"},503);
+  if (existing && await isPublished(id,db))
+    return respond({ok:true,status:"already_listed",worldId:id},200);
   if (existing) return respond({ok:true,status:existing.status,worldId:id,alreadySubmitted:true},200);
   if (await isPublished(id,db))
     return respond({ok:true,status:"already_listed",worldId:id},200);
