@@ -1,0 +1,42 @@
+name: Notify site owner of pending moderation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/notify_pending_reviews.py"
+      - "data/world-candidates.json"
+      - "data/world-candidate-ai-decisions.json"
+      - "data/world-submission-decisions.json"
+      - "supabase/functions/pending-review-signals/index.ts"
+      - ".github/workflows/notify-pending-reviews.yml"
+  schedule:
+    # Hourly: includes private community-review status, exposed only as opaque tokens.
+    - cron: "27 * * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: vcc-pending-review-alerts
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify notification logic
+        run: python -m unittest discover -s tests -p "test_pending_alerts.py"
+      - name: Create new alerts and resolve completed ones
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: python scripts/notify_pending_reviews.py

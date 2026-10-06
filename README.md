@@ -183,6 +183,39 @@ Provider-key secrets live in GitHub Actions, not the browser. Existing
 human review, visual quality evaluation and World discovery are separate
 from the yes/no nightlife-use classifier.
 
+## Gmail notifications for moderation needed
+
+VCC's scheduled [Notify site owner of pending moderation](.github/workflows/notify-pending-reviews.yml)
+GitHub Action runs hourly, and also after changes to the local candidate/AI-decision
+queues. It detects:
+
+- Auto-discovered Worlds that Gemini could not approve, or whose official
+  public metadata/AI response requires an operator check;
+- Submitted Worlds marked as needing human review;
+- Newly submitted pending community reviews (no content exposed).
+
+For each newly actionable item, it creates one GitHub Issue with label
+`vcc-needs-attention`, assigns the repo owner (`showchoo`) and links to
+[VCC Admin](https://vrc-club-charts.vercel.app/reviewer-admin.html).
+Duplicate Issues/emails are prevented using a persistent idempotency marker,
+including if an Issue is manually closed. Resolved tasks close automatically
+when their pending status clears. Browser users' review texts, submitter IDs,
+contacts, UUIDs and IP information never enter the Issue.
+
+To receive these GitHub Issues **in Gmail**, the owner must confirm GitHub
+[Settings → Notifications](https://github.com/settings/notifications) has
+email notifications for participating/assigned Issues enabled, and that the
+GitHub account's notification address is their intended Gmail address.
+There are **no SMTP or Gmail password secrets** in the repository. GitHub
+notification settings control whether/where email is actually delivered; the
+Action cannot override the owner's preferences.
+
+The lightweight Supabase Edge Function `pending-review-signals` exposes only
+HMAC-pseudonymized pending review tokens (no actual review IDs or contents).
+The GitHub worker combines those tokens with public-safe candidate records and
+the existing read-only moderator-decision status feed, then creates actionable
+Issues. It fails closed if a feed is unavailable or incomplete.
+
 ## Community field notes (open submission)
 
 The public page `reviewer.html` accepts World experience reports from any visitor. There is **no reviewer application, approval process, or special code** required to submit.
