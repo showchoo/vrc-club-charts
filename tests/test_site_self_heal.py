@@ -133,6 +133,60 @@ class GeminiBoundariesTests(unittest.TestCase):
                 ]), ([], False))
 
 
+
+class SelfHealRehearsalTests(unittest.TestCase):
+    def test_published_link_verification_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            site = Path(temp)
+            (site / "index.html").write_text("<html></html>")
+            (site / "worlds").mkdir()
+            (site / "worlds" / "index.html").write_text("<html>Worlds</html>")
+            edit = [{"path": "index.html", "old": 'href="wrolds/"',
+                     "new": 'href="worlds/"'}]
+            self.assertTrue(repair.verified_built_link_fix(edit, site))
+            self.assertFalse(repair.verified_built_link_fix([
+                {"path": "index.html", "old": 'href="wrolds/"',
+                 "new": 'href="missing/"'}], site))
+            self.assertFalse(repair.verified_built_link_fix([
+                {"path": "index.html", "old": 'href="index.html"',
+                 "new": 'href="worlds/"'}], site))
+            self.assertFalse(repair.verified_built_link_fix([
+                {"path": "index.html", "old": 'href="wrolds/"',
+                 "new": 'href="../worlds/"'}], site))
+            self.assertFalse(repair.verified_built_link_fix([
+                {"path": "index.html", "old": 'href="wrolds/"',
+                 "new": 'href="worlds/#top"'}], site))
+            self.assertFalse(repair.verified_built_link_fix(edit, site / "not-built"))
+
+    def test_main_runs_fake_incident_to_patch_without_network(self):
+        # Exercises report -> AI proposal -> guardrail -> modified working tree
+        # -> machine-readable result, without relying on real credentials.
+        import sys
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "index.html").write_text('<a href="wrolds/">Worlds</a>')
+            (root / "app.js").write_text("// world-thumb")
+            (root / "ai-scout.js").write_text("// AI SCOUT")
+            report = root / "report.json"
+            result = root / "result.json"
+            report.write_text(json.dumps({"issues": FIXABLE}))
+            proposal = {"confidence": 0.99, "diagnosis": "Simulated typo",
+                        "edits": [{"path": "index.html",
+                                   "old": 'href="wrolds/"',
+                                   "new": 'href="worlds/"'}]}
+            with (
+                patch.object(repair, "ROOT", root),
+                patch.object(repair, "query_gemini", return_value=proposal) as model,
+                patch.dict("os.environ", {"GEMINI_API_KEY": "test-only-not-real"}),
+                patch.object(sys, "argv", ["repair", "--report", str(report),
+                                           "--result", str(result)]),
+            ):
+                self.assertEqual(repair.main(), 0)
+                self.assertEqual(model.call_count, 1)
+            self.assertEqual(json.loads(result.read_text())["status"], "patch_proposed")
+            self.assertIn('href="worlds/"', (root / "index.html").read_text())
+
+
 class HealthAlertTests(unittest.TestCase):
     def test_alert_displays_only_monitor_summary_and_optional_pr(self):
         text = notify.format_incident(
