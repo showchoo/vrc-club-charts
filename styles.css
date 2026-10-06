@@ -4504,3 +4504,141 @@ a.community-review-world:hover{text-decoration:underline}
     font-size: 10px;
   }
 }
+
+/* 2026-10-06: readable typography on DISCOVERY home only.
+   Other pages intentionally keep their existing font sizes. */
+body.ranking-home .brand { font-size:15px; }
+body.ranking-home .focus-header .nav-link { font-size:15px; padding:10px 13px; }
+body.ranking-home .focus-eyebrow,
+body.ranking-home .kicker { font-size:13px; line-height:1.55; letter-spacing:.11em; }
+
+body.ranking-home .ai-scout-primary .title-jp {
+  font-size:clamp(16px,1.65vw,21px);
+  line-height:1.55;
+}
+body.ranking-home .ai-scout-primary .ranking-intro p {
+  font-size:18px;
+  line-height:1.9;
+  color:#c5d9e0;
+}
+body.ranking-home .ai-scout-primary .ranking-intro .text-link {
+  font-size:15px;
+  line-height:1.6;
+  letter-spacing:.04em;
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading p:not(.kicker) {
+  font-size:17px;
+  line-height:1.8;
+  color:#acc6ce;
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading-info > span {
+  font-size:13px;
+  line-height:1.6;
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading-info > small {
+  font-size:12px;
+  line-height:1.6;
+  color:#93aeb7;
+}
+body.ranking-home .ai-scout-primary .ai-scout-link { min-height:200px; }
+body.ranking-home .ai-scout-primary .ai-scout-media { min-height:200px; }
+body.ranking-home .ai-scout-primary .ai-scout-copy {
+  padding:22px clamp(20px,3vw,38px);
+}
+body.ranking-home .ai-scout-primary .ai-scout-meta {
+  font-size:14px;
+  line-height:1.45;
+}
+body.ranking-home .ai-scout-primary .ai-scout-score {
+  font-size:clamp(34px,3.2vw,46px);
+}
+body.ranking-home .ai-scout-primary .ai-scout-score small { font-size:14px; }
+body.ranking-home .ai-scout-primary .ai-scout-copy h3 {
+  font-size:clamp(23px,2.55vw,33px);
+  line-height:1.3;
+}
+body.ranking-home .ai-scout-primary .ai-scout-author {
+  font-size:14px;
+  line-height:1.55;
+  color:#acc3cc;
+}
+body.ranking-home .ai-scout-primary .ai-scout-reason {
+  font-size:16px;
+  line-height:1.8;
+  color:#cee2e7;
+}
+body.ranking-home .ai-scout-primary .ai-scout-caution {
+  font-size:14px;
+  line-height:1.7;
+  color:#9db8c1;
+}
+body.ranking-home .ai-scout-primary .ai-scout-wait {
+  font-size:13px;
+  line-height:1.4;
+}
+body.ranking-home .ai-scout-primary .ai-scout-number {
+  font-size:13px;
+  line-height:1.2;
+  padding:7px 10px;
+}
+body.ranking-home .ai-scout-primary .ai-scout-disclaimer {
+  font-size:14px;
+  line-height:1.9;
+  color:#a9c1c9;
+}
+body.ranking-home .ai-scout-primary .ai-scout-empty { font-size:16px; }
+
+body.ranking-home .section-link {
+  font-size:14px;
+  line-height:1.55;
+  letter-spacing:.06em;
+}
+body.ranking-home .field-notes-intro { font-size:17px; line-height:1.85; color:#b4cbd2; }
+body.ranking-home .field-notes-disclaimer { font-size:14px; line-height:1.8; color:#a3bac3; }
+body.ranking-home .community-review-header strong { font-size:16px; line-height:1.5; }
+body.ranking-home .community-review-header time { font-size:12px; }
+body.ranking-home .community-review-world { font-size:15px; }
+body.ranking-home .community-review-score { font-size:14px; }
+body.ranking-home .community-review-comment { font-size:16px; line-height:1.8; }
+body.ranking-home .community-review-conflict { font-size:13px; }
+body.ranking-home .community-review-empty { font-size:15px; line-height:1.75; }
+
+body.ranking-home .editor-picks-head > p { font-size:15px; line-height:1.75; }
+body.ranking-home .editor-pick-top { font-size:12px; }
+body.ranking-home .editor-pick-top small { font-size:12px; }
+body.ranking-home .editor-pick-card h3 { font-size:23px; line-height:1.3; }
+body.ranking-home .editor-pick-author { font-size:14px; }
+body.ranking-home .editor-pick-note { font-size:15px; line-height:1.7; }
+body.ranking-home .editor-pick-breakdown span { font-size:12px; }
+
+body.ranking-home .focus-world-label { font-size:12px; }
+body.ranking-home .focus-world-copy h3 { font-size:24px; line-height:1.2; }
+body.ranking-home .focus-world-copy p { font-size:15px; line-height:1.65; color:#afc3cb; }
+body.ranking-home .focus-world-tags span { font-size:12px; line-height:1.4; padding:6px 8px; }
+body.ranking-home .focus-event-time span { font-size:15px; }
+body.ranking-home .focus-event-time b { font-size:12px; }
+body.ranking-home .focus-event-name small { font-size:12px; line-height:1.4; }
+body.ranking-home .focus-event-name strong { font-size:22px; line-height:1.35; }
+body.ranking-home .focus-event-name span { font-size:15px; line-height:1.5; color:#aac2ca; }
+body.ranking-home .focus-loading { font-size:15px; }
+body.ranking-home .site-footer { font-size:13px; line-height:1.6; }
+
+@media (max-width:640px) {
+  body.ranking-home .ai-scout-primary .title-jp { font-size:15px; }
+  body.ranking-home .ai-scout-primary .ranking-intro p { font-size:16px; }
+  body.ranking-home .ai-scout-primary .ai-scout-heading p:not(.kicker) { font-size:16px; }
+  body.ranking-home .ai-scout-primary .ai-scout-link { min-height:180px; }
+  body.ranking-home .ai-scout-primary .ai-scout-media { min-height:180px; }
+  body.ranking-home .ai-scout-primary .ai-scout-copy { padding:15px 16px; }
+  body.ranking-home .ai-scout-primary .ai-scout-meta { font-size:13px; gap:7px; }
+  body.ranking-home .ai-scout-primary .ai-scout-score { font-size:35px; }
+  body.ranking-home .ai-scout-primary .ai-scout-copy h3 { font-size:21px; line-height:1.3; }
+  body.ranking-home .ai-scout-primary .ai-scout-author { font-size:13px; }
+  body.ranking-home .ai-scout-primary .ai-scout-reason { font-size:15px; line-height:1.65; }
+  body.ranking-home .ai-scout-primary .ai-scout-caution { font-size:13px; line-height:1.6; }
+  body.ranking-home .ai-scout-primary .ai-scout-disclaimer { font-size:13px; }
+  body.ranking-home .ai-scout-primary .ai-scout-number { font-size:12px; }
+  body.ranking-home .field-notes-intro { font-size:16px; }
+  body.ranking-home .focus-world-copy h3 { font-size:22px; }
+  body.ranking-home .focus-event-name strong { font-size:19px; }
+}
