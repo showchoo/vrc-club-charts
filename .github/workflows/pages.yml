@@ -30,6 +30,7 @@ on:
       - "djs.js"
       - "djs.html"
       - "events.html"
+      - "data/worlds.json"
       - "data/weekly-ranking.json"
       - "scripts/build_review_scores.py"
       - "scripts/sync_reviewers_from_supabase.py"
