@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths:
       - "scripts/discover_worlds.py"
+      - "scripts/build_discovery_ledger.py"
+      - "data/events.json"
+      - "data/events-auto.json"
       - "scripts/discover_vrcw.py"
       - "scripts/discover_official.py"
       - "data/discovery-seeds.json"
@@ -35,14 +38,17 @@ jobs:
           VRC_USER_AGENT: ${{ vars.VRC_USER_AGENT }}
           VCC_DISCOVERY_PAGES_PER_SOURCE: "12"
           VCC_DISCOVERY_VERIFY_PER_RUN: "16"
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           python scripts/discover_worlds.py
           python scripts/build_rankings.py
+          python scripts/build_discovery_ledger.py
+          python scripts/sync_discovery_to_supabase.py
       - name: Commit candidate queue
         run: |
           git config user.name "vrc-club-charts-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/world-candidates.json data/discovery-state.json data/worlds.json data/weekly-ranking.json
+          git add data/world-candidates.json data/discovery-state.json data/worlds.json data/weekly-ranking.json data/world-discovery-ledger.json data/discovery-report.json
           git diff --cached --quiet && exit 0
           git commit -m "data: refresh World discovery candidates"
           git pull --rebase origin main
