@@ -13,6 +13,7 @@ on:
       - "analytics.js"
       - "ai-scout.js"
       - "community-reviews.js"
+      - "world-submission.js"
       - "data/ai-scout.json"
       - "scripts/build_ai_scout.py"
       - "events.js"
@@ -27,11 +28,13 @@ on:
       - "data/world-candidates.json"
       - "data/discovery-seeds.json"
       - "data/discovery-state.json"
+      - "data/world-submission-decisions.json"
       - "data/world-discovery-ledger.json"
       - "data/discovery-report.json"
       - "tests/**"
       - "scripts/discover_worlds.py"
       - "scripts/build_discovery_ledger.py"
+      - "scripts/review_world_submissions.py"
       - "scripts/sync_discovery_to_supabase.py"
       - "scripts/sync_worlds_from_supabase.py"
       - "data/reviews.json"
@@ -89,6 +92,7 @@ jobs:
           node --check analytics.js
           node --check ai-scout.js
           node --check community-reviews.js
+          node --check world-submission.js
           node --check events.js
           node --check djs.js
           node --test tests/analytics-opt-out.test.cjs

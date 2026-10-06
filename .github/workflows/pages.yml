@@ -8,6 +8,7 @@ on:
       - "about.html"
       - "privacy.html"
       - "reviewer.html"
+      - "world-submission.js"
       - "reviewer-admin.html"
       - "app.js"
       - "analytics.js"
@@ -39,13 +40,14 @@ on:
       - "data/reviews.json"
       - "data/reviewers.json"
       - "data/world-candidates.json"
+      - "data/world-submission-decisions.json"
       - "data/discovery-report.json"
       - "scripts/discover_worlds.py"
       - "scripts/sync_worlds_from_supabase.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   workflow_run:
-    workflows: ["AI SCOUT automatic World discovery", "Discover new club Worlds"]
+    workflows: ["AI SCOUT automatic World discovery", "Discover new club Worlds", "Review submitted club Worlds"]
     types: [completed]
   schedule:
     - cron: "*/15 * * * *"
@@ -85,7 +87,7 @@ jobs:
           python scripts/sync_reviews_from_supabase.py
           python scripts/build_review_scores.py
           mkdir _site
-          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js ai-scout.js community-reviews.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
+          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/review-scores.json data/ai-scout.json _site/data/
