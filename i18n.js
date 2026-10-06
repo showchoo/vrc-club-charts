@@ -7,6 +7,17 @@
   'use strict';
   const STORE = 'vcc-site-language';
   const translations = {
+    // Public page titles and browser search descriptions
+    'VRC Club Charts — CLUB DISCOVERY | VRChatクラブを発見': 'VRC Club Charts — CLUB DISCOVERY | Discover VRChat Clubs',
+    '体験レビュー — VRC Club Charts': 'Field Notes & Reviews — VRC Club Charts',
+    'プライバシーポリシー — VRC Club Charts': 'Privacy Policy — VRC Club Charts',
+    'VRChatで個性が光るクラブを探す。ビジュアル評価と訪問者の体験レビューで、次のフロアを見つけよう。': 'Explore standout VRChat clubs through visual impressions and visitor field notes.',
+    'VRChatのクラブを探し、その魅力を深く知る。VRC Club Chartsのコンセプト、ビジュアル評価の方法、訪問者レビューの掲載方針。': 'Discover VRChat clubs and how they are evaluated, reviewed and presented.',
+    'VRChatのクラブWorldを訪れた感想を、承認申請なしで投稿。AIによる外観スコアとは別の現地レポートです。': 'Share VRChat club experiences openly as moderated field notes, separate from AI visual impressions.',
+    'VRChatクラブ／DJ／音楽イベントの予定を探すVRC Club Chartsイベントカレンダー。': 'Find upcoming VRChat club events, DJ sets and music-community nights.',
+    'VRChatクラブ／音楽コミュニティで活動するDJのディレクトリ。ランキングではなく、ジャンルと所属から探せます。': 'Browse VRChat DJs, their genres and crews in a non-ranked directory.',
+    'VRC Club Chartsの情報の取得・利用・公開範囲、アクセス解析、レビュー投稿とブラウザ保存について。': 'How VRC Club Charts collects, uses and publishes data, including reviews and browser storage.',
+    '表示言語（英語／日本語）の選択は、このブラウザのlocalStorageに保存され、サイト内でのみ利用します。': 'Your English/Japanese language preference is stored only in this browser’s localStorage and is used only on this site.',
     // Home / discovery
     '個性が光る、クラブを探す。': 'Discover clubs with character.',
     '話題性だけでは見つからない、個性的なVRChatクラブへ。': 'Beyond the popular picks: discover distinctive VRChat clubs.',
@@ -225,6 +236,8 @@
   let language = 'ja';
   let button;
   let scheduled = false;
+  let originalTitle = '';
+  let originalMetaDescription = '';
 
   function translate(original, lang) {
     if (lang === 'ja') return original;
@@ -277,6 +290,15 @@
     if (!document.body) return;
     document.documentElement.lang = language;
     document.documentElement.dataset.vccLang = language;
+    if (originalTitle) {
+      const title = translate(originalTitle, language);
+      if (document.title !== title) document.title = title;
+    }
+    const description = document.querySelector('meta[name="description"]');
+    if (description && originalMetaDescription) {
+      const value = translate(originalMetaDescription, language);
+      if (description.getAttribute('content') !== value) description.setAttribute('content', value);
+    }
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) visitText(walker.currentNode);
     document.body.querySelectorAll('[placeholder], [aria-label]').forEach(visitAttributes);
@@ -308,6 +330,8 @@
   }
 
   function init() {
+    originalTitle = document.title;
+    originalMetaDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
     const header = document.querySelector('.site-header');
     if (header && !document.getElementById('vccLanguageToggle')) {
       button = document.createElement('button');
