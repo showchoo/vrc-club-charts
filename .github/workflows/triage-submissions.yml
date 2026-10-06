@@ -22,8 +22,6 @@ jobs:
               { prefix: "[World]", name: "world-submission", color: "17c6ef", description: "VRChat world listing submission" },
               { prefix: "[Event]", name: "event-submission", color: "8ceaff", description: "VRChat event calendar submission" },
               { prefix: "[DJ]", name: "dj-submission", color: "d8ff3e", description: "VRChat DJ directory submission" },
-              { prefix: "[Reviewer]", name: "reviewer-application", color: "b6f0ff", description: "Craftsmanship reviewer application" },
-              { prefix: "[Review]", name: "craftsmanship-review", color: "a371f7", description: "Craftsmanship score submission" },
             ];
             const match = defs.find(d => title.startsWith(d.prefix));
             if (!match) return;
@@ -69,7 +67,7 @@ jobs:
               "- Confirm identity / source",
               "- Check catalog relationships and duplicates",
               "- Confirm conflicts where applicable",
-              "- Ranking scores are never changed by sponsorship",
+              "- World listings and visual evaluation are independent of sponsorship",
             ].join("\n");
 
             if (match.name === "world-submission") {
@@ -92,96 +90,6 @@ jobs:
                 }
               } else {
                 comment += "\n\n⚠️ No valid `wrld_...` ID was detected automatically.";
-              }
-            }
-
-            if (match.name === "craftsmanship-review") {
-              const [reviewersFile, worldsFile, reviewsFile] = await Promise.all([
-                github.rest.repos.getContent({ owner: context.repo.owner, repo: context.repo.repo, path: "data/reviewers.json" }),
-                github.rest.repos.getContent({ owner: context.repo.owner, repo: context.repo.repo, path: "data/worlds.json" }),
-                github.rest.repos.getContent({ owner: context.repo.owner, repo: context.repo.repo, path: "data/reviews.json" }),
-              ]);
-              const reviewers = JSON.parse(Buffer.from(reviewersFile.data.content, "base64").toString("utf8"));
-              const worlds = JSON.parse(Buffer.from(worldsFile.data.content, "base64").toString("utf8"));
-              const reviews = JSON.parse(Buffer.from(reviewsFile.data.content, "base64").toString("utf8"));
-
-              const errors = [];
-              const reviewerId = field("Reviewer ID").trim();
-              const worldId = field("VRChat World ID").trim();
-              const githubLogin = String(context.payload.issue.user?.login || "").trim().toLowerCase();
-              const reviewer = reviewers.find(r => r.id === reviewerId);
-              const world = worlds.find(w => w.id === worldId);
-
-              if (!reviewer) errors.push(`Reviewer ID \`${reviewerId || "(empty)"}\` is not registered.`);
-              else if (reviewer.status !== "active") errors.push(`Reviewer \`${reviewerId}\` is not active.`);
-              else if (String(reviewer.github || "").trim().toLowerCase() !== githubLogin) {
-                errors.push("Reviewer ID does not belong to the GitHub account that submitted this Issue.");
-              }
-
-              if (!/^wrld_[0-9a-fA-F-]{36}$/.test(worldId) || !world) {
-                errors.push(`World ID \`${worldId || "(empty)"}\` is not in the tracked World catalog.`);
-              } else if (world.chartEligible !== true) {
-                errors.push("This World is directory-only and is not eligible for the Craftsmanship Ranking.");
-              }
-
-              const scoreDefs = [
-                ["Visual score (0-20)", 20],
-                ["Lighting & VJ score (0-20)", 20],
-                ["Sound score (0-15)", 15],
-                ["Spatial score (0-15)", 15],
-                ["Interaction score (0-10)", 10],
-                ["VR Originality score (0-10)", 10],
-                ["Optimization score (0-10)", 10],
-              ];
-              let total = 0;
-              for (const [label, maximum] of scoreDefs) {
-                const raw = field(label).trim();
-                const value = Number(raw);
-                if (!raw || !Number.isFinite(value) || value < 0 || value > maximum) {
-                  errors.push(`${label} must be a number from 0 to ${maximum}.`);
-                } else {
-                  total += value;
-                }
-              }
-              if (total > 100) errors.push("Total score cannot exceed 100.");
-
-              const confirmations = field("Required confirmations");
-              const checkedCount = confirmations.split("\n").filter(line => /^- \[x\]/i.test(line)).length;
-              if (checkedCount < 3) errors.push("All required reviewer confirmations must be checked.");
-
-              if (!field("Review comment").trim()) errors.push("Review comment is required.");
-
-              const conflict = field("Conflict of interest").trim();
-              if (!/^(No|Yes\b)/i.test(conflict)) errors.push("Conflict of interest must explicitly be Yes or No.");
-
-              const reviewedAt = field("Review date").trim();
-              const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(reviewedAt);
-              if (!reviewedAt || (!dateOnly && Number.isNaN(Date.parse(reviewedAt)))) {
-                errors.push("Review date must be YYYY-MM-DD or a valid ISO 8601 date/time.");
-              } else {
-                const parsed = dateOnly ? new Date(`${reviewedAt}T00:00:00Z`) : new Date(reviewedAt);
-                if (Number.isNaN(parsed.getTime()) || (dateOnly && parsed.toISOString().slice(0, 10) !== reviewedAt)) {
-                  errors.push("Review date is not a real calendar date.");
-                } else if (parsed.getTime() > Date.now() + 5 * 60 * 1000) {
-                  errors.push("Review date cannot be in the future.");
-                }
-              }
-
-              const prior = reviews.filter(r => r.reviewerId === reviewerId && r.worldId === worldId);
-              if (prior.length) {
-                await ensureLabel("repeat-review", "6e7781", "Reviewer has previously reviewed this World");
-                labels.push("repeat-review");
-                comment += `\n\nℹ️ **Repeat review:** ${prior.length} previous review(s) found. The newest published review will be used for ranking aggregation.`;
-              }
-
-              if (errors.length) {
-                await ensureLabel("validation-failed", "d1242f", "Automated submission validation failed");
-                labels.push("validation-failed");
-                comment += "\n\n❌ **Automated review validation failed**\n" + errors.map(e => `- ${e}`).join("\n");
-              } else {
-                await ensureLabel("validation-passed", "2da44e", "Automated submission validation passed");
-                labels.push("validation-passed");
-                comment += `\n\n✅ **Automated review validation passed**\n- Reviewer: \`${reviewerId}\`\n- World: **${world.name}**\n- Submitted total: **${total}/100**\n\nManual verification is still required before adding the \`verified\` label.`;
               }
             }
 
