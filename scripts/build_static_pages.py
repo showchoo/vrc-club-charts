@@ -168,7 +168,7 @@ def site_header(prefix: str = "", active: str = "") -> str:
 def footer(prefix: str = "") -> str:
     return f"""  <footer class="site-footer shell">
     <span>VRC CLUB CHARTS / INDEPENDENT</span>
-    <span class="footer-links"><a href="{prefix}index.html">Charts</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviews</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
+    <span class="footer-links"><a href="{prefix}index.html">Home</a><a href="{prefix}worlds/index.html">Worlds</a><a href="{prefix}events.html">Events</a><a href="{prefix}djs.html">DJs</a><a href="{prefix}reviewer.html">Reviews</a><a href="{prefix}about.html">About</a><a href="{prefix}privacy.html">Privacy</a></span>
   </footer>
 </body>
 </html>
@@ -287,7 +287,7 @@ def event_page(event: dict, djs: list[dict]) -> str:
             f'<a class="relation-dj" href="../djs/{esc(dj_id)}.html">'
             f'<strong>{esc(dj.get("name"))}</strong><span>{esc(genres_text or dj.get("role") or "DJ")}</span><b>↗</b></a>'
         )
-    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">Lineup profiles are being connected.</div>'
+    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">出演DJの情報は、まだ登録されていません。</div>'
 
     buttons = []
     if public_url:
@@ -390,7 +390,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
             f'<span>{esc(when)}</span><strong>{esc(event.get("name"))}</strong>'
             f'<span>{esc(event.get("organizer") or "—")}</span><b>↗</b></a>'
         )
-    events_html = "".join(event_rows) if event_rows else '<div class="relation-empty">Upcoming linked events are being collected.</div>'
+    events_html = "".join(event_rows) if event_rows else '<div class="relation-empty">このWorldに関連する今後のイベントは、まだ登録されていません。</div>'
 
     dj_cards = []
     for dj in related_djs[:12]:
@@ -399,7 +399,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
             f'<a class="relation-dj" href="../djs/{esc(dj.get("id"))}.html">'
             f'<strong>{esc(dj.get("name"))}</strong><span>{esc(genres_text or dj.get("role") or "DJ")}</span><b>↗</b></a>'
         )
-    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">Linked DJ profiles will appear when event lineups are connected.</div>'
+    djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">関連するDJの情報は、まだ登録されていません。</div>'
 
     return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
@@ -448,7 +448,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
       <div class="relation-dj-grid">{djs_html}</div>
     </section>
 
-    <p class="disclaimer">Craftsmanship scores are published only from the reviewer panel. Fewer than 3 independent reviews means no public score. <a href="../reviewer.html">Review methodology ↗</a></p>
+    <p class="disclaimer">ビジュアル評価は公開画像のみを参考にした推定値です。現地体験レビューは投稿者の自己申告であり、ビジュアル評価の点数・順位に合算されません。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
   </main>
 """ + footer("../")
 
@@ -528,8 +528,6 @@ def index_page(worlds: list[dict]) -> str:
         if w.get("availabilityStatus") == "unavailable":
             continue
         genres = " / ".join((w.get("genres") or [])[:4])
-        panel_status = (w.get("panelReview") or {}).get("status")
-        status = "reviewed" if panel_status in {"provisional", "ranked"} else "discovery"
         hay = " ".join([
             str(w.get("name") or ""),
             str(w.get("author") or ""),
@@ -541,7 +539,7 @@ def index_page(worlds: list[dict]) -> str:
             if thumb else '<i>VRC</i>'
         )
         thumb_ready = "true" if thumb else "false"
-        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html" data-world-id="{esc(w.get('id'))}" data-thumb-ready="{thumb_ready}" data-status="{esc(status)}" data-hay="{esc(hay)}">
+        cards.append(f"""<a class="world-catalog-row" href="{esc(w.get('id'))}.html" data-world-id="{esc(w.get('id'))}" data-thumb-ready="{thumb_ready}" data-hay="{esc(hay)}">
           <span class="world-catalog-thumb">{thumb_html}</span>
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
@@ -564,13 +562,11 @@ def index_page(worlds: list[dict]) -> str:
         const input = document.getElementById('worldDirectorySearch');
         const rows = [...document.querySelectorAll('.world-catalog-row')];
         const count = document.getElementById('worldDirectoryCount');
-        const buttons = [...document.querySelectorAll('[data-status-filter]')];
         const mediaEndpoint = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-meta';
         const apiKey = 'sb_publishable_sP01_V4fqjJYHM80xxkDqg_P8h9ccYK';
         const pending = new Set();
         let mediaTimer = 0;
         let mediaBusy = false;
-        let status = 'all';
 
         function escAttr(value='') {{
           return String(value).replace(/[&<>"']/g, ch => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[ch]));
@@ -639,9 +635,8 @@ def index_page(worlds: list[dict]) -> str:
           const q = (input.value || '').trim().toLowerCase();
           let visible = 0;
           rows.forEach(row => {{
-            const okStatus = status === 'all' || row.dataset.status === status;
             const okQuery = !q || (row.dataset.hay || '').includes(q);
-            const show = okStatus && okQuery;
+            const show = okQuery;
             row.hidden = !show;
             if (show) {{
               visible += 1;
@@ -651,11 +646,6 @@ def index_page(worlds: list[dict]) -> str:
           count.textContent = visible + ' WORLDS';
         }}
         input.addEventListener('input', apply);
-        buttons.forEach(button => button.addEventListener('click', () => {{
-          status = button.dataset.statusFilter;
-          buttons.forEach(b => b.classList.toggle('active', b === button));
-          apply();
-        }}));
       }})();
     </script>
   </main>
