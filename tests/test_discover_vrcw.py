@@ -77,19 +77,31 @@ class DiscoveryTests(unittest.TestCase):
     def test_autopromotion_uses_public_vrchat_metadata_and_de_dupes(self):
         item = discovery.parse_listing(card("AURORA CLUB", W1), "vrcw_club", "source", "2026-10-06")[0]
         catalog = []
-        with patch.object(discovery, "verify_public_world", return_value={
-            "name": "Official Aurora Club", "author": "Official Creator"
-        }) as verify, patch.object(discovery.time, "sleep"):
-            ids = discovery.auto_register([item, item], catalog, set())
-        self.assertEqual(ids, [W1])
-        verify.assert_called_once()
-        self.assertEqual(catalog[0]["name"], "Official Aurora Club")
-        self.assertEqual(catalog[0]["author"], "Official Creator")
-        self.assertEqual(catalog[0]["editorialStatus"], "unreviewed")
-        self.assertEqual(catalog[0]["chartEligible"], True)
-        with patch.object(discovery, "verify_public_world") as verify:
-            self.assertEqual(discovery.auto_register([item], catalog, set()), [])
-            verify.assert_not_called()
+        with tempfile.TemporaryDirectory() as tmp, patch.object(
+            discovery, "STATE", Path(tmp) / "state.json"
+        ):
+            with patch.object(discovery, "verify_public_world", return_value={
+                "name": "Official Aurora Club", "author": "Official Creator"
+            }) as verify, patch.object(discovery.time, "sleep"):
+                ids = discovery.auto_register([item, item], catalog, set())
+            self.assertEqual(ids, [W1])
+            verify.assert_called_once()
+            self.assertEqual(catalog[0]["name"], "Official Aurora Club")
+            self.assertEqual(catalog[0]["author"], "Official Creator")
+            self.assertEqual(catalog[0]["editorialStatus"], "unreviewed")
+            self.assertEqual(catalog[0]["chartEligible"], True)
+            with patch.object(discovery, "verify_public_world") as verify:
+                self.assertEqual(discovery.auto_register([item], catalog, set()), [])
+                verify.assert_not_called()
+
+    def test_failed_verification_waits_before_retry(self):
+        item = discovery.parse_listing(card("AURORA CLUB", W1), "vrcw_club", "source", "2026-10-06")[0]
+        with tempfile.TemporaryDirectory() as tmp, patch.object(
+            discovery, "STATE", Path(tmp) / "state.json"
+        ), patch.object(discovery, "verify_public_world", return_value=None) as lookup:
+            self.assertEqual(discovery.auto_register([item], [], set()), [])
+            self.assertEqual(discovery.auto_register([item], [], set()), [])
+            lookup.assert_called_once()
 
     def test_private_world_cannot_be_autopromoted(self):
         with patch.object(discovery.urllib.request, "urlopen") as op:
