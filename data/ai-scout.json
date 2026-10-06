@@ -1,39 +1,15 @@
 {
-  "updatedAt": "2026-10-06T08:03:25+00:00",
+  "updatedAt": "2026-10-06T08:10:17+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 93,
-    "assessed": 0,
-    "newAssessments": 0,
-    "pending": 93
+    "assessed": 3,
+    "newAssessments": 3,
+    "pending": 90
   },
-  "scored": [],
-  "candidates": [
-    {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
-    },
-    {
-      "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
-      "name": "Club Deviate",
-      "author": "TOTC",
-      "sourceType": "catalog",
-      "signals": [
-        "IMMERSIVE",
-        "EXPERIMENTAL"
-      ],
-      "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
+  "scored": [
     {
       "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
       "name": "Cyberpunk City Rave",
@@ -43,7 +19,20 @@
         "AUDIOLINK",
         "CYBER"
       ],
-      "url": "worlds/wrld_492121dd-f7ea-46ab-aade-968e1a91899b.html"
+      "url": "worlds/wrld_492121dd-f7ea-46ab-aade-968e1a91899b.html",
+      "visualPotential": 75,
+      "factors": {
+        "visual": 4,
+        "lighting": 4,
+        "spatial": 4,
+        "originality": 3
+      },
+      "reasonJa": "サイバーパンク調の高層ビル街とネオンサインが鮮やかに描かれています。",
+      "cautionsJa": "プロモーション用の文字が重なっており、実際のゲーム内視界や細部の質感が確認できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T08:10:04+00:00"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -54,7 +43,58 @@
         "AUDIOLINK",
         "STAGE"
       ],
-      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
+      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "紫と白の照明で統一されたモダンな内装のナイトクラブが確認できます。",
+      "cautionsJa": "画像は静止した視点のみであり、実際のライティングの動的な演出や音響効果は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T08:10:17+00:00"
+    },
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "LIGHTING",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html",
+      "visualPotential": 30,
+      "factors": {
+        "visual": 2,
+        "lighting": 2,
+        "spatial": 1,
+        "originality": 1
+      },
+      "reasonJa": "青いネオン調のロゴとライン装飾が配置された、シンプルなクラブの壁面が確認できます。",
+      "cautionsJa": "ロゴと照明のグラフィックのみで構成されており、ワールド全体の構造や空間の広がりは判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-06T08:09:52+00:00"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
+      "name": "Club Deviate",
+      "author": "TOTC",
+      "sourceType": "catalog",
+      "signals": [
+        "IMMERSIVE",
+        "EXPERIMENTAL"
+      ],
+      "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
@@ -256,24 +296,54 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_7da653ea-7eab-432a-90ba-fa158398d47e.html"
+    },
+    {
+      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
+      "name": "Neon Catnip - Customizable DJ Venue",
+      "author": "DJ Megu",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
+    },
+    {
+      "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
+      "name": "PLASMA Reactive Club",
+      "author": "TheCocasio",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_c292785c-0700-449a-9963-2dd97dc3fa83.html"
+    },
+    {
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
     }
   ],
   "attempts": {
     "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
-      "checkedAt": "2026-10-06T08:03:22+00:00",
-      "status": "http-unavailable"
+      "checkedAt": "2026-10-06T08:09:52+00:00",
+      "status": "assessed"
     },
     "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
-      "checkedAt": "2026-10-06T08:03:23+00:00",
-      "status": "http-unavailable"
+      "checkedAt": "2026-10-06T08:10:01+00:00",
+      "status": "insufficient-image"
     },
     "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
-      "checkedAt": "2026-10-06T08:03:24+00:00",
-      "status": "http-unavailable"
+      "checkedAt": "2026-10-06T08:10:04+00:00",
+      "status": "assessed"
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
-      "checkedAt": "2026-10-06T08:03:25+00:00",
-      "status": "http-unavailable"
+      "checkedAt": "2026-10-06T08:10:17+00:00",
+      "status": "assessed"
     }
   }
 }
