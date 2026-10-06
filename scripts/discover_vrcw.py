@@ -121,6 +121,12 @@ def discover_candidates(today: str) -> tuple[list[dict], bool]:
     unique: dict[str, dict] = {}
     successful = False
 
+    # The public directory currently returns HTTP 403 to GitHub Actions.
+    # Respect that access restriction instead of retrying it every day.
+    if os.environ.get("VCC_ENABLE_VRCW", "0") != "1":
+        print("INFO: VRCW crawling disabled after HTTP 403; using other sources")
+        return [], False
+
     for name, base in PAGES.items():
         start = max(2, int(cursors.get(name, 2)))
         pages = [1] + list(range(start, start + count - 1))
@@ -193,6 +199,9 @@ def priority_seeds(today: str) -> list[dict]:
 def eligible_for_admission(item: dict) -> bool:
     if "direct-world-link" in item.get("sourceCategories", []):
         return True  # Only after authoritative metadata is retrieved below.
+    if "vrchat_search" in item.get("sourceCategories", []):
+        return (item.get("confidenceScore", 0) >= 85
+                and "+explicit-club-name" in item.get("reasons", []))
     return (item.get("confidenceScore", 0) >= 85
             and "+explicit-club-name" in item.get("reasons", [])
             and "vrcw_club" in item.get("sourceCategories", []))
