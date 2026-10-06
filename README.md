@@ -21,6 +21,28 @@ A World needs actual in-world measurement before claiming validated sound, dynam
 - The image scores are visually ordered and labelled differently from unscored exploration candidates.
 - Independent editor picks, if present, are likewise separate from Gemini and community feedback.
 
+## Automated World coverage
+
+The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.
+A daily scheduled collector combines VRCmap Music/New with the public VRCW **Club** and **DJ**
+directories. VRCW crawling includes the newest page and 11 rotating historical pages per
+category each run (adjustable with `VCC_DISCOVERY_PAGES_PER_SOURCE`), storing persistent
+pagination positions in `data/discovery-state.json`. Newly found Worlds are deduplicated by
+VRChat World ID and kept in `data/world-candidates.json`.
+
+Strong club-name matches from the club category are **only added automatically** after the
+public VRChat World API independently confirms that the World is public and provides its
+official name and creator; rejected/previously registered Worlds are excluded. Verification
+is rate-limited (default 16 attempts per run). Other discoveries remain unapproved and are
+not assigned visual scores. A World link can be prioritized for verification using
+`data/discovery-seeds.json`, without granting it an unverified image score.
+
+Historical coverage builds gradually rather than instantaneously. Crawl failures are logged;
+the persistent queue and pagination cursors are preserved rather than falsely reporting
+that all Worlds have been scanned. World discovery uses no paid Gemini calls; once a World
+is in the catalog, the existing Gemini batch image assessment continues separately.
+The catalog and public ranking are rebuilt together after automatic additions.
+
 ## Community field notes (open submission)
 
 The public page `reviewer.html` accepts World experience reports from any visitor. There is **no reviewer application, approval process, or special code** required to submit.
