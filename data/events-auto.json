@@ -1,98 +1,5 @@
 [
   {
-    "id": "feed-82860e99b4d59768b550",
-    "name": "DESIRE AFTER DARK",
-    "start": "2026-10-06T01:00:00Z",
-    "end": "2026-10-08T23:09:00Z",
-    "organizer": "CLUB SIREN",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ",
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_667e43cc-962d-44e7-bb9f-e40a62bf6ace/calendar/cal_3c711572-27cd-475d-a7d9-995d6096a487",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "82860e99b4d59768b550",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-86e9e03ddbdf5dac2577",
-    "name": "Mellow Monday - Melodic Social Open Decks",
-    "start": "2026-10-06T01:00:00Z",
-    "end": "2026-10-06T07:00:00Z",
-    "organizer": "Rizumu Rave Community",
-    "worldName": "VRChat",
-    "genres": [
-      "RAVE",
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_4eb5da7a-a11d-407a-99a9-e5f17bd7abbc/calendar/cal_a456fdaf-1982-49d8-b5dd-2bef0de8606e",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "86e9e03ddbdf5dac2577",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-3a016ffcfe5feab4017d",
-    "name": "Open stage at B Clubǃ accept full body⁄toggle dance",
-    "start": "2026-10-06T02:35:00Z",
-    "end": "2026-10-06T11:30:00Z",
-    "organizer": "Cosmic succu-Babe",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d5411d04-45b8-4d68-a1d6-4bdec75bb314/calendar/cal_0b604533-157b-461a-8bf3-78130e1bf421",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "3a016ffcfe5feab4017d",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-1768eb2242ac5c9a26ca",
-    "name": "Cariñosas Spanish",
-    "start": "2026-10-06T03:00:00Z",
-    "end": "2026-10-06T08:00:00Z",
-    "organizer": "AXIS CORE",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_61d2e6fb-39ca-48f8-a6e8-ea968e5deefa/calendar/cal_65c1a2ee-d4c4-442b-90e3-722afe9d95c0",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "1768eb2242ac5c9a26ca",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-09378a218966bde2f453",
-    "name": "Naku's Acoustic Session",
-    "start": "2026-10-06T03:45:00Z",
-    "end": "2026-10-06T06:00:00Z",
-    "organizer": "im_naku",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_c7cf8b2b-85b8-433f-bb07-0913062282a2/calendar/cal_851e5d74-e27b-4694-84fb-09f20f5360bf",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "09378a218966bde2f453",
-    "upstreamCategory": "performance",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-216e99de394b35628fe4",
     "name": "OPEN MIC",
     "start": "2026-10-06T07:00:00Z",
@@ -932,6 +839,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "1004b13c9c1115f5397e",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-cc3944d3e9decffc7e52",
+    "name": "🌟 VRChatライブ開催 のお知らせ🌟 10月26日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期 ライブイベント です✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オリジ…",
+    "start": "2026-10-26T12:30:00Z",
+    "end": null,
+    "organizer": "@o_ChinaAi_o",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/o_ChinaAi_o/status/2107300704599867531?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "cc3944d3e9decffc7e52",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
