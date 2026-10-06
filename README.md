@@ -74,10 +74,16 @@ ranking or the editor's manual scores.
 
 - No API key: `scripts/build_ai_scout.py` builds a metadata/tag-based discovery
   queue. The ordering is an **inspection priority, not a craftsmanship score**.
-- When a repository **Actions secret named `OPENAI_API_KEY`** is configured,
-  the scheduled GitHub Action may analyze up to four available official World
-  thumbnails per day with `gpt-4.1-mini`. API usage can incur charges to
-  the key owner. Do not place API keys in source code or in the website.
+- To enable visual evaluations, create a Google AI Studio API key and
+  save it as the GitHub Actions repository secret **`GEMINI_API_KEY`**.
+  The scheduled Action then analyzes up to four available public thumbnails
+  per day with `gemini-2.5-flash-lite`. Google's free API tier supports this
+  image-understanding model subject to your account's rate limits. Never
+  enter keys in source code, the website, or GitHub issue comments.
+- This uses Gemini's **image understanding** endpoint, NOT an image-generation
+  service. Keep API billing disabled if you want to remain on the free tier.
+  In the free tier, submitted data may be used by Google to improve its products.
+  Do not send private or unpublished images.
 - AI output is labeled **AI VISUAL IMPRESSION** and **LOW CONFIDENCE**;
   a single public thumbnail cannot validate sound, actual in-world lighting
   effects, interactivity, or performance. No quality score is fabricated for
