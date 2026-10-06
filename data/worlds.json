@@ -492,6 +492,18 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7",
+    "name": "Encode2․0",
+    "author": "iron biscuit",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7/info",
+    "discoveredBy": "auto-discovery"
+  },
+  {
     "id": "wrld_b3ab4099-30a8-45c8-bc7b-60c96c8c60c3",
     "name": "FBT Pulse Nighclub",
     "author": "LegendRaver",

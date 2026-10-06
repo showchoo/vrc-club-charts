@@ -22,14 +22,17 @@
     },
     "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9": {
       "date": "2026-10-06"
+    },
+    "wrld_6f6a12e4-9d48-4f89-b7fb-37e00df62be7": {
+      "date": "2026-10-06"
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 24,
-    "vrcmap_new": 24,
-    "vrcmap_cafe": 24,
-    "vrcmap_japan": 24,
-    "vrcmap_trending": 24,
-    "vrcmap_chill": 24
+    "vrcmap_music": 36,
+    "vrcmap_new": 36,
+    "vrcmap_cafe": 36,
+    "vrcmap_japan": 36,
+    "vrcmap_trending": 36,
+    "vrcmap_chill": 36
   }
 }
