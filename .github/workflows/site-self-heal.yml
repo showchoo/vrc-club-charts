@@ -257,7 +257,7 @@ jobs:
             --pr-url-file /tmp/vcc-repair-pr.txt \
             --branch-url-file /tmp/vcc-repair-branch.txt
 
-rehearsal:
+  rehearsal:
     # Runs ONLY when a human explicitly requests the opt-in test mode.
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.rehearsal }}
     runs-on: ubuntu-latest
