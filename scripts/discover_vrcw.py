@@ -31,7 +31,7 @@ PAGES = {
 }
 USER_AGENT = "VRCClubCharts-Discovery/1.0 (+https://vrc-club-charts.vercel.app/about.html)"
 BLOCKED_NAME = re.compile(
-    r"fight[\s-]*club|avatar|アバター|clubhouse|クラブハウス|sleep|睡眠|"
+    r"fight(?:ing)?[\s-]*club|avatar|アバター|clubhouse|クラブハウス|sleep|睡眠|"
     r"mmd|karaoke|カラオケ|training|sparring|格闘|ジム|gym", re.I
 )
 CLUB_NAME = re.compile(r"\bclub\b|nightclub|discotheque|disco|rave|dj[\s_-]?booth|"
