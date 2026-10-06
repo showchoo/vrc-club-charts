@@ -174,11 +174,13 @@ class SelfHealRehearsalTests(unittest.TestCase):
                         "edits": [{"path": "index.html",
                                    "old": 'href="wrolds/"',
                                    "new": 'href="worlds/"'}]}
-            with patch.object(repair, "ROOT", root), \\
-                 patch.object(repair, "query_gemini", return_value=proposal) as model, \\
-                 patch.dict("os.environ", {"GEMINI_API_KEY": "test-only-not-real"}), \\
-                 patch.object(sys, "argv", ["repair", "--report", str(report),
-                                            "--result", str(result)]):
+            with (
+                patch.object(repair, "ROOT", root),
+                patch.object(repair, "query_gemini", return_value=proposal) as model,
+                patch.dict("os.environ", {"GEMINI_API_KEY": "test-only-not-real"}),
+                patch.object(sys, "argv", ["repair", "--report", str(report),
+                                           "--result", str(result)]),
+            ):
                 self.assertEqual(repair.main(), 0)
                 self.assertEqual(model.call_count, 1)
             self.assertEqual(json.loads(result.read_text())["status"], "patch_proposed")
