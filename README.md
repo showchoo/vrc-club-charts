@@ -2,7 +2,7 @@
 
 A VRChat nightlife directory evolving into a reviewer-based **Craftsmanship Ranking** for club / DJ / music worlds.
 
-Public site: https://showchoo.github.io/vrc-club-charts/
+Public site: https://vrc-club-charts.vercel.app/
 
 ## Product direction
 

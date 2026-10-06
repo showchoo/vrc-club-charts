@@ -11,7 +11,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE_URL = "https://showchoo.github.io/vrc-club-charts/"
+BASE_URL = "https://vrc-club-charts.vercel.app/"
 
 
 def esc(value) -> str:

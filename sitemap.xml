@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://showchoo.github.io/vrc-club-charts/</loc>
+    <loc>https://vrc-club-charts.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://showchoo.github.io/vrc-club-charts/about.html</loc>
+    <loc>https://vrc-club-charts.vercel.app/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://showchoo.github.io/vrc-club-charts/privacy.html</loc>
+    <loc>https://vrc-club-charts.vercel.app/privacy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

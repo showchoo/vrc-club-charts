@@ -234,7 +234,7 @@ async function saveEditorShareCard(score, w, button) {
     ctx.fillText('CRAFTSMANSHIP, NOT POPULARITY', 64, 618);
     ctx.textAlign = 'right';
     ctx.fillStyle = '#e9c477';
-    ctx.fillText('showchoo.github.io/vrc-club-charts', 1136, 618);
+    ctx.fillText('vrc-club-charts.vercel.app', 1136, 618);
     ctx.textAlign = 'left';
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', .94));
