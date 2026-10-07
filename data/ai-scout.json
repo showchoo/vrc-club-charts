@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-06T23:03:13+00:00",
+  "updatedAt": "2026-10-07T23:34:55+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
-    "assessed": 15,
-    "newAssessments": 4,
-    "pending": 85
+    "assessed": 18,
+    "newAssessments": 3,
+    "pending": 82
   },
   "scored": [
     {
@@ -219,6 +219,75 @@
       "assessedAt": "2026-10-06T23:03:13+00:00"
     },
     {
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "紫色のスポットライトとネオン調の照明が特徴的な、モダンで落ち着いた雰囲気のクラブ空間が描かれています。",
+      "cautionsJa": "画像は静止画であり、実際の音楽や演出、インタラクティブ要素の動作は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-07T23:34:49+00:00"
+    },
+    {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "青を基調としたステージ背景や手前のミキサー風の卓が映されており、シンプルなクラブ空間の構成が伺えます。",
+      "cautionsJa": "サムネイル画像に大きなロゴテキストや線画デザインが重なっており、実際のワールド内の視覚的ディテールや質感を正確に判断することは難しいです。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-07T23:34:52+00:00"
+    },
+    {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "中央に大きく配置されたロゴと放射状のレーザー演出がサイバーなクラブ空間の雰囲気を伝えています。",
+      "cautionsJa": "静止画であるため実際の空間の広がりやレーザーの動的な演出効果は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-07T23:34:55+00:00"
+    },
+    {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
       "name": "Neptune Night Club",
       "author": "Plutto2Times",
@@ -382,36 +451,6 @@
         "STAGE"
       ],
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
-    },
-    {
-      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
-      "name": "Girl's night",
-      "author": "Ame୨୧",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
-    },
-    {
-      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
-      "name": "IOLITE",
-      "author": "わヴぇふぃる",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
-    },
-    {
-      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
-      "name": "kakuhira's club house",
-      "author": "kakuhira",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
@@ -596,6 +635,30 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa.html"
+    },
+    {
+      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
+      "name": "BNE˸ Underground",
+      "author": "BooneDoggy",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
+    },
+    {
+      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+      "name": "Brick House Night Club",
+      "author": "BadKarma8489",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043.html"
+    },
+    {
+      "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+      "name": "CARROT CLUB",
+      "author": "BEBE CARROT",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9.html"
     }
   ],
   "attempts": {
@@ -661,6 +724,22 @@
     },
     "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
       "checkedAt": "2026-10-06T23:03:13+00:00",
+      "status": "assessed"
+    },
+    "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f": {
+      "checkedAt": "2026-10-07T23:34:47+00:00",
+      "status": "insufficient-image"
+    },
+    "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
+      "checkedAt": "2026-10-07T23:34:49+00:00",
+      "status": "assessed"
+    },
+    "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6": {
+      "checkedAt": "2026-10-07T23:34:52+00:00",
+      "status": "assessed"
+    },
+    "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
+      "checkedAt": "2026-10-07T23:34:55+00:00",
       "status": "assessed"
     }
   }
