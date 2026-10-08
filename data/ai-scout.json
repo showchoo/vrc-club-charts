@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-07T23:34:55+00:00",
+  "updatedAt": "2026-10-08T23:45:29+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
-    "assessed": 18,
+    "assessed": 21,
     "newAssessments": 3,
-    "pending": 82
+    "pending": 79
   },
   "scored": [
     {
@@ -125,6 +125,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T16:10:42+00:00"
+    },
+    {
+      "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
+      "name": "Midnight Street Club",
+      "author": "nnnnnnなす",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7da653ea-7eab-432a-90ba-fa158398d47e.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "深夜の日本の街並みを背景に、手前にDJ機材が配置されたユニークな構図が確認できます。",
+      "cautionsJa": "静止画であるため、実際の照明の点滅や音楽演出、夜間の全体的な雰囲気は体験してみないとわかりません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-08T23:45:29+00:00"
     },
     {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
@@ -405,6 +428,52 @@
       "assessedAt": "2026-10-06T16:09:42+00:00"
     },
     {
+      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
+      "name": "Lights Out Night Club",
+      "author": "Lights Out Host",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html",
+      "visualPotential": 40,
+      "factors": {
+        "visual": 2,
+        "lighting": 2,
+        "spatial": 2,
+        "originality": 2
+      },
+      "reasonJa": "中央に金色のロゴが配置され、緑色の発光するラインが奥へ続くシンプルなグラフィックデザインです。",
+      "cautionsJa": "これはワールドの実際の空間を示すものではなく、宣伝用のグラフィックアートである可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-08T23:44:45+00:00"
+    },
+    {
+      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
+      "name": "LIQUID ˸ LAB",
+      "author": "Italiandogs",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html",
+      "visualPotential": 40,
+      "factors": {
+        "visual": 2,
+        "lighting": 2,
+        "spatial": 2,
+        "originality": 2
+      },
+      "reasonJa": "赤色ネオンの看板やローポリゴン調の地形、手前のキャラクターイラストが特徴的なビジュアルです。",
+      "cautionsJa": "サムネイル画像はイラスト風の宣伝美術の可能性があり、実際のワールド内の構造とは異なる場合があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-08T23:45:03+00:00"
+    },
+    {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
@@ -453,26 +522,6 @@
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     },
     {
-      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
-      "name": "Lights Out Night Club",
-      "author": "Lights Out Host",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
-    },
-    {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -481,16 +530,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
-      "name": "Midnight Street Club",
-      "author": "nnnnnnなす",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_7da653ea-7eab-432a-90ba-fa158398d47e.html"
     },
     {
       "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
@@ -659,6 +698,30 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9.html"
+    },
+    {
+      "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
+      "name": "Channel 13",
+      "author": "Zulfur_",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4.html"
+    },
+    {
+      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+      "name": "Club Astra",
+      "author": "ZIPPY251",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528.html"
+    },
+    {
+      "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
+      "name": "CLUB IGLO",
+      "author": "EZKIMO_O'",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf.html"
     }
   ],
   "attempts": {
@@ -740,6 +803,22 @@
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
       "checkedAt": "2026-10-07T23:34:55+00:00",
+      "status": "assessed"
+    },
+    "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
+      "checkedAt": "2026-10-08T23:44:45+00:00",
+      "status": "assessed"
+    },
+    "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
+      "checkedAt": "2026-10-08T23:45:03+00:00",
+      "status": "assessed"
+    },
+    "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
+      "checkedAt": "2026-10-08T23:45:18+00:00",
+      "status": "insufficient-image"
+    },
+    "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
+      "checkedAt": "2026-10-08T23:45:29+00:00",
       "status": "assessed"
     }
   }
