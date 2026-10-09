@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-08T23:45:29+00:00",
+  "updatedAt": "2026-10-09T23:15:18+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
-    "assessed": 21,
-    "newAssessments": 3,
-    "pending": 79
+    "assessed": 23,
+    "newAssessments": 2,
+    "pending": 77
   },
   "scored": [
     {
@@ -148,6 +148,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-08T23:45:29+00:00"
+    },
+    {
+      "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
+      "name": "PLASMA Reactive Club",
+      "author": "TheCocasio",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_c292785c-0700-449a-9963-2dd97dc3fa83.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "中央の光源から放射状に伸びる光の演出や円形のトラス構造が俯瞰で確認できます。",
+      "cautionsJa": "静止画であるため実際の空間の広がりやインタラクティブな演出の動作は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-09T23:15:12+00:00"
     },
     {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
@@ -405,6 +428,29 @@
       "assessedAt": "2026-10-06T23:03:06+00:00"
     },
     {
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html",
+      "visualPotential": 45,
+      "factors": {
+        "visual": 3,
+        "lighting": 2,
+        "spatial": 2,
+        "originality": 2
+      },
+      "reasonJa": "DJコントローラーのクローズアップが鮮明に写っており、クラブセットの雰囲気を感じさせます。",
+      "cautionsJa": "サムネイルはUIやテキストが重なったプロモーション用画像であり、実際のワールド内の広がりや空間設計は確認できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-09T23:15:15+00:00"
+    },
+    {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
       "name": "Audiolinkバチバチワールド",
       "author": "しゃちょー",
@@ -540,26 +586,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
-    },
-    {
-      "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
-      "name": "PLASMA Reactive Club",
-      "author": "TheCocasio",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_c292785c-0700-449a-9963-2dd97dc3fa83.html"
-    },
-    {
-      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
-      "name": "Solitude （Club Set）",
-      "author": "Atom_ilalia",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
     },
     {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
@@ -722,6 +748,22 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf.html"
+    },
+    {
+      "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
+      "name": "Club Morningstar",
+      "author": "Insomniamoon_va",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
+    },
+    {
+      "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
+      "name": "Club Neon Lotus",
+      "author": "Thrice369",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
     }
   ],
   "attempts": {
@@ -820,6 +862,22 @@
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
       "checkedAt": "2026-10-08T23:45:29+00:00",
       "status": "assessed"
+    },
+    "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682": {
+      "checkedAt": "2026-10-09T23:15:09+00:00",
+      "status": "insufficient-image"
+    },
+    "wrld_c292785c-0700-449a-9963-2dd97dc3fa83": {
+      "checkedAt": "2026-10-09T23:15:12+00:00",
+      "status": "assessed"
+    },
+    "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f": {
+      "checkedAt": "2026-10-09T23:15:15+00:00",
+      "status": "assessed"
+    },
+    "wrld_5927be27-1e70-4f4a-98fb-439d343933ed": {
+      "checkedAt": "2026-10-09T23:15:18+00:00",
+      "status": "insufficient-image"
     }
   }
 }
