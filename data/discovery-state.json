@@ -3,7 +3,7 @@
     "vrcw_club": 2,
     "vrcw_dj": 2
   },
-  "updatedAt": "2026-10-08",
+  "updatedAt": "2026-10-09",
   "verification": {
     "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346": {
       "date": "2026-10-06"
@@ -28,50 +28,50 @@
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 47,
-    "vrcmap_new": 8,
-    "vrcmap_cafe": 10,
-    "vrcmap_japan": 8,
-    "vrcmap_trending": 8,
-    "vrcmap_chill": 8
+    "vrcmap_music": 10,
+    "vrcmap_new": 20,
+    "vrcmap_cafe": 22,
+    "vrcmap_japan": 20,
+    "vrcmap_trending": 20,
+    "vrcmap_chill": 20
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-10-08",
-      "status": "unavailable",
-      "errorType": "RuntimeError"
+      "lastAttemptAt": "2026-10-09",
+      "status": "ok",
+      "listedWorldIds": 50
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-10-08",
+      "lastAttemptAt": "2026-10-09",
       "status": "unavailable"
     }
   }
