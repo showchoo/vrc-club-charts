@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-09T23:15:18+00:00",
+  "updatedAt": "2026-10-10T22:29:49+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
-    "assessed": 23,
-    "newAssessments": 2,
-    "pending": 77
+    "assessed": 24,
+    "newAssessments": 3,
+    "pending": 74
   },
   "scored": [
     {
@@ -382,6 +382,29 @@
       "assessedAt": "2026-10-06T12:51:21+00:00"
     },
     {
+      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
+      "name": "STRATA",
+      "author": "兎野しゃの／syano",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "DJブースやトラス構造のステージが描かれており、クラブらしい空間が構成されています。",
+      "cautionsJa": "ロゴやUIが大きく重ねられており、実際の空間全体のディテールや質感を正確に把握することは難しいです。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-10T22:29:42+00:00"
+    },
+    {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
       "name": "Club Rayne",
       "author": "Candy Rayne",
@@ -520,29 +543,27 @@
       "assessedAt": "2026-10-08T23:45:03+00:00"
     },
     {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
       "sourceType": "catalog",
       "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
+        "AUDIOLINK"
       ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html",
-      "visualPotential": 30,
+      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html",
+      "visualPotential": 40,
       "factors": {
         "visual": 2,
         "lighting": 2,
-        "spatial": 1,
-        "originality": 1
+        "spatial": 2,
+        "originality": 2
       },
-      "reasonJa": "青いネオン調のロゴとライン装飾が配置された、シンプルなクラブの壁面が確認できます。",
-      "cautionsJa": "ロゴと照明のグラフィックのみで構成されており、ワールド全体の構造や空間の広がりは判断できません。",
+      "reasonJa": "木製の壁や装飾品、DJ機材などが配置されたラウンジ風の空間が確認できます。",
+      "cautionsJa": "サムネイル画像のみの判断であり、実際のワールド全体の広さや照明の動的な変化は不明です。",
       "confidence": "low",
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T08:09:52+00:00"
+      "assessedAt": "2026-10-10T22:29:44+00:00"
     }
   ],
   "candidates": [
@@ -596,36 +617,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
-    },
-    {
-      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
-      "name": "STRATA",
-      "author": "兎野しゃの／syano",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html"
-    },
-    {
-      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
-      "name": "The Deep Dusk - Magic Land Mod",
-      "author": "Lydia K",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
-    },
-    {
-      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
-      "name": "The Ruiners Club Venue［BETA VERSION］",
-      "author": "Ａｒｔｉ",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
     },
     {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
@@ -764,6 +755,30 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
+    },
+    {
+      "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
+      "name": "Club Neon pulse",
+      "author": "soseanon",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1.html"
+    },
+    {
+      "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+      "name": "Club VGL",
+      "author": "Varneon",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f.html"
+    },
+    {
+      "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
+      "name": "Clubroom",
+      "author": "Gssam",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e.html"
     }
   ],
   "attempts": {
@@ -877,6 +892,22 @@
     },
     "wrld_5927be27-1e70-4f4a-98fb-439d343933ed": {
       "checkedAt": "2026-10-09T23:15:18+00:00",
+      "status": "insufficient-image"
+    },
+    "wrld_715a8c61-6558-4818-a938-50bbd5bced1b": {
+      "checkedAt": "2026-10-10T22:29:42+00:00",
+      "status": "assessed"
+    },
+    "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d": {
+      "checkedAt": "2026-10-10T22:29:44+00:00",
+      "status": "assessed"
+    },
+    "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
+      "checkedAt": "2026-10-10T22:29:47+00:00",
+      "status": "assessed"
+    },
+    "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
+      "checkedAt": "2026-10-10T22:29:49+00:00",
       "status": "insufficient-image"
     }
   }
