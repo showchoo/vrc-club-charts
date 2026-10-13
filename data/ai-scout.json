@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T01:19:23+00:00",
+  "updatedAt": "2026-10-13T23:16:31+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -309,6 +309,29 @@
       "assessedAt": "2026-10-06T16:10:39+00:00"
     },
     {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 2,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "神社の境内を背景に、手前にDJブースとレーザー光線が配置された和風クラブの空間が確認できます。",
+      "cautionsJa": "スクリーンショットにタイトルロゴが重んでおり、実際の襫内や照明の動作は出入りせん。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-13T23:16:31+00:00"
+    },
+    {
       "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
       "name": "Club Neon Spin",
       "author": "Andron827",
@@ -518,52 +541,6 @@
       "assessedAt": "2026-10-11T22:52:54+00:00"
     },
     {
-      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
-      "name": "Club Rayne",
-      "author": "Candy Rayne",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html",
-      "visualPotential": 50,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 2,
-        "originality": 2
-      },
-      "reasonJa": "紫と青のネオン風の装飾的な文字が大きく配置され、背後に暗めの空間と縦型の照明が確認できます。",
-      "cautionsJa": "サムネイル全体がロゴグラフィックの宣伝用画像となっており、実際のワールド内の空間デザインや構造は判断できません。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T23:03:11+00:00"
-    },
-    {
-      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
-      "name": "BNE˸ Underground",
-      "author": "BooneDoggy",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html",
-      "visualPotential": 45,
-      "factors": {
-        "visual": 2,
-        "lighting": 3,
-        "spatial": 2,
-        "originality": 2
-      },
-      "reasonJa": "中央に大きなタイトルロゴが配置され、黄色や青のスポットライトが交差するクラブ風の空間が描かれています。",
-      "cautionsJa": "画像はプロモーション用のグラフィック加工が強く、実際のワールド内のレイアウトや質感を正確に判断するのは困難です。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-13T01:19:23+00:00"
-    }
-  ],
-  "candidates": [
-    {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
@@ -573,8 +550,23 @@
         "LIGHTING",
         "STAGE"
       ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
-    },
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html",
+      "visualPotential": 50,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 2,
+        "originality": 2
+      },
+      "reasonJa": "青いネオン調のロゴとライン装飾がシンプルに配置された現代的なデザインです。",
+      "cautionsJa": "ロゴのクローズアップ画像であるため、実際のフロア全体の構造や空間の広がりは不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-13T23:16:22+00:00"
+    }
+  ],
+  "candidates": [
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
@@ -585,16 +577,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
-      "name": "Audiolinkバチバチワールド",
-      "author": "しゃちょー",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -647,6 +629,16 @@
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+    },
+    {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
       "name": "stadium rave A （audiolink party world ）",
       "author": "ALDUMGAMES",
@@ -685,6 +677,14 @@
         "IMMERSIVE"
       ],
       "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
     },
     {
       "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
@@ -785,11 +785,11 @@
   ],
   "attempts": {
     "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
-      "checkedAt": "2026-10-06T08:09:52+00:00",
+      "checkedAt": "2026-10-13T23:16:22+00:00",
       "status": "assessed"
     },
     "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
-      "checkedAt": "2026-10-06T08:10:01+00:00",
+      "checkedAt": "2026-10-13T23:16:25+00:00",
       "status": "insufficient-image"
     },
     "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
@@ -817,7 +817,7 @@
       "status": "assessed"
     },
     "wrld_099295a5-d221-4128-8f01-55cd81d71839": {
-      "checkedAt": "2026-10-06T16:09:42+00:00",
+      "checkedAt": "2026-10-13T23:16:27+00:00",
       "status": "assessed"
     },
     "wrld_4f015255-390a-44cb-9e81-bd2021eb970a": {
@@ -833,7 +833,7 @@
       "status": "assessed"
     },
     "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe": {
-      "checkedAt": "2026-10-06T23:03:06+00:00",
+      "checkedAt": "2026-10-13T23:16:31+00:00",
       "status": "assessed"
     },
     "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a": {
