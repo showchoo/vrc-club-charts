@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-13T23:16:31+00:00",
+  "updatedAt": "2026-10-14T22:17:47+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 73
+    "newAssessments": 4,
+    "pending": 72
   },
   "scored": [
     {
@@ -55,6 +55,27 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:24+00:00"
+    },
+    {
+      "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+      "name": "CARROT CLUB",
+      "author": "BEBE CARROT",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9.html",
+      "visualPotential": 75,
+      "factors": {
+        "visual": 4,
+        "lighting": 3,
+        "spatial": 4,
+        "originality": 4
+      },
+      "reasonJa": "ニンジンやウサギをモチーフにした装飾や赤みがかった照明が統一感のある空間を作り出しています。",
+      "cautionsJa": "画像は静的なプレビューであり、実際のワールド内の歩行感やアニメーションの挙動は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-14T22:17:41+00:00"
     },
     {
       "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
@@ -171,6 +192,27 @@
       "assessedAt": "2026-10-13T01:19:21+00:00"
     },
     {
+      "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
+      "name": "Channel 13",
+      "author": "Zulfur_",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "緑がかった照明とステージのトラス構造がクラブの雰囲気を演出しています。",
+      "cautionsJa": "中央に大きなロゴが配置されているため、空間全体の詳細なレイアウトや実際の奥行きは不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-14T22:17:47+00:00"
+    },
+    {
       "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
       "name": "Club Earthquake 〖Night pool〗",
       "author": "ro_tta",
@@ -284,6 +326,27 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:30+00:00"
+    },
+    {
+      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+      "name": "Brick House Night Club",
+      "author": "BadKarma8489",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "ステージ上の大型スクリーンやDJブース、色とりどりのフロアライトが配置された一般的なナイトクラブの空間が確認できます。",
+      "cautionsJa": "静止画であるため、実際の照明の点滅パターンや音響演出、インタラクティブな要素は判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-14T22:17:36+00:00"
     },
     {
       "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
@@ -493,77 +556,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:21+00:00"
-    },
-    {
-      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
-      "name": "STRATA",
-      "author": "兎野しゃの／syano",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "DJブースやトラス構造のステージが描かれており、クラブらしい空間が構成されています。",
-      "cautionsJa": "ロゴやUIが大きく重ねられており、実際の空間全体のディテールや質感を正確に把握することは難しいです。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-10T22:29:42+00:00"
-    },
-    {
-      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
-      "name": "アストロビーチ",
-      "author": "チョス_Thoth",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 2,
-        "spatial": 2,
-        "originality": 4
-      },
-      "reasonJa": "レトロポップな色使いのキャラクターイラストが描かれており、背景にはビーチが広がっています。",
-      "cautionsJa": "これはマーケティング用のイラストであり、実際のワールド内の3D空間や視覚効果を正確に反映しているかは不明です。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-11T22:52:54+00:00"
-    },
-    {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html",
-      "visualPotential": 50,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 2,
-        "originality": 2
-      },
-      "reasonJa": "青いネオン調のロゴとライン装飾がシンプルに配置された現代的なデザインです。",
-      "cautionsJa": "ロゴのクローズアップ画像であるため、実際のフロア全体の構造や空間の広がりは不明です。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-13T23:16:22+00:00"
     }
   ],
   "candidates": [
@@ -577,6 +569,16 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -695,28 +697,12 @@
       "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
     },
     {
-      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
-      "name": "Brick House Night Club",
-      "author": "BadKarma8489",
+      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
+      "name": "BNE˸ Underground",
+      "author": "BooneDoggy",
       "sourceType": "catalog",
       "signals": [],
-      "url": "worlds/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043.html"
-    },
-    {
-      "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
-      "name": "CARROT CLUB",
-      "author": "BEBE CARROT",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9.html"
-    },
-    {
-      "id": "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4",
-      "name": "Channel 13",
-      "author": "Zulfur_",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4.html"
+      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
     },
     {
       "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
@@ -781,6 +767,14 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e.html"
+    },
+    {
+      "id": "wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5",
+      "name": "Daft Punk Alive 2007（BETA）",
+      "author": "Daft Pυnk",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5.html"
     }
   ],
   "attempts": {
@@ -841,7 +835,7 @@
       "status": "assessed"
     },
     "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
-      "checkedAt": "2026-10-06T23:03:11+00:00",
+      "checkedAt": "2026-10-14T22:17:28+00:00",
       "status": "assessed"
     },
     "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
@@ -942,6 +936,18 @@
     },
     "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1": {
       "checkedAt": "2026-10-13T01:19:23+00:00",
+      "status": "assessed"
+    },
+    "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043": {
+      "checkedAt": "2026-10-14T22:17:36+00:00",
+      "status": "assessed"
+    },
+    "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9": {
+      "checkedAt": "2026-10-14T22:17:41+00:00",
+      "status": "assessed"
+    },
+    "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4": {
+      "checkedAt": "2026-10-14T22:17:47+00:00",
       "status": "assessed"
     }
   }
