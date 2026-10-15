@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-14T22:17:47+00:00",
+  "updatedAt": "2026-10-15T22:15:00+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
     "assessed": 24,
-    "newAssessments": 4,
-    "pending": 72
+    "newAssessments": 2,
+    "pending": 74
   },
   "scored": [
     {
@@ -349,6 +349,27 @@
       "assessedAt": "2026-10-14T22:17:36+00:00"
     },
     {
+      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+      "name": "Club Astra",
+      "author": "ZIPPY251",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "青と黄色のネオンライトが配置されたクラブ風の空間が確認できます。",
+      "cautionsJa": "マーケティング用画像が含まれており、実際のワールドの質感や立体感は異なる可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-15T22:14:54+00:00"
+    },
+    {
       "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
       "name": "Club Catnip - V1.222",
       "author": "TGCFabian",
@@ -532,33 +553,21 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T08:10:17+00:00"
-    },
-    {
-      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
-      "name": "Oh's Party Ballroom",
-      "author": "emymin",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "柱や吹き抜けのある豪奢なボールルームの構造に、スポットライトや色鮮やかなフロアが配置されています。",
-      "cautionsJa": "サムネイル全体に大きな文字やロゴが重ねられており、実際の空間のディテールや動線は確認できません。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T12:51:21+00:00"
     }
   ],
   "candidates": [
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "LIGHTING",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
+    },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
@@ -579,6 +588,16 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+    },
+    {
+      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
+      "name": "Club Rayne",
+      "author": "Candy Rayne",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -651,6 +670,16 @@
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
     },
     {
+      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
+      "name": "STRATA",
+      "author": "兎野しゃの／syano",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html"
+    },
+    {
       "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
       "name": "The Deep Dusk - Magic Land Mod",
       "author": "Lydia K",
@@ -681,6 +710,16 @@
       "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
     },
     {
+      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+      "name": "アストロビーチ",
+      "author": "チョス_Thoth",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
+    },
+    {
       "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
       "name": "After Dark Night Club",
       "author": "₥₳J₳․₴Ø₥₥ɆR",
@@ -705,28 +744,12 @@
       "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
     },
     {
-      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
-      "name": "Club Astra",
-      "author": "ZIPPY251",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528.html"
-    },
-    {
       "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
       "name": "CLUB IGLO",
       "author": "EZKIMO_O'",
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf.html"
-    },
-    {
-      "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
-      "name": "Club Morningstar",
-      "author": "Insomniamoon_va",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
     },
     {
       "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
@@ -759,22 +782,6 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e.html"
-    },
-    {
-      "id": "wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
-      "name": "CTRL Room Club",
-      "author": "CompuGeniusCode",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e.html"
-    },
-    {
-      "id": "wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5",
-      "name": "Daft Punk Alive 2007（BETA）",
-      "author": "Daft Pυnk",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5.html"
     }
   ],
   "attempts": {
@@ -843,7 +850,7 @@
       "status": "assessed"
     },
     "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f": {
-      "checkedAt": "2026-10-07T23:34:47+00:00",
+      "checkedAt": "2026-10-15T22:14:45+00:00",
       "status": "insufficient-image"
     },
     "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
@@ -948,6 +955,18 @@
     },
     "wrld_2f5b9f9b-2bd7-44fc-bee4-96ae206b73b4": {
       "checkedAt": "2026-10-14T22:17:47+00:00",
+      "status": "assessed"
+    },
+    "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528": {
+      "checkedAt": "2026-10-15T22:14:54+00:00",
+      "status": "assessed"
+    },
+    "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf": {
+      "checkedAt": "2026-10-15T22:14:57+00:00",
+      "status": "insufficient-image"
+    },
+    "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b": {
+      "checkedAt": "2026-10-15T22:15:00+00:00",
       "status": "assessed"
     }
   }
