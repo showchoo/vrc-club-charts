@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T22:15:00+00:00",
+  "updatedAt": "2026-10-16T22:05:26+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -620,16 +620,6 @@
       "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -752,6 +742,14 @@
       "url": "worlds/wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf.html"
     },
     {
+      "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
+      "name": "Club Morningstar",
+      "author": "Insomniamoon_va",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
+    },
+    {
       "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
       "name": "Club Neon Lotus",
       "author": "Thrice369",
@@ -802,7 +800,7 @@
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
-      "checkedAt": "2026-10-06T12:51:21+00:00",
+      "checkedAt": "2026-10-16T22:05:10+00:00",
       "status": "assessed"
     },
     "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92": {
@@ -866,15 +864,15 @@
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
-      "checkedAt": "2026-10-08T23:44:45+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-10-16T22:05:15+00:00",
+      "status": "insufficient-image"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-10-08T23:45:03+00:00",
+      "checkedAt": "2026-10-16T22:05:20+00:00",
       "status": "assessed"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
-      "checkedAt": "2026-10-08T23:45:18+00:00",
+      "checkedAt": "2026-10-16T22:05:26+00:00",
       "status": "insufficient-image"
     },
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
