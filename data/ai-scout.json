@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T22:05:26+00:00",
+  "updatedAt": "2026-10-17T21:26:37+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -580,6 +580,17 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
+    },
+    {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
       "name": "Audiolinkバチバチワールド",
       "author": "しゃちょー",
@@ -620,6 +631,16 @@
       "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
+      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
+      "name": "LIQUID ˸ LAB",
+      "author": "Italiandogs",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
+    },
+    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -638,16 +659,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
-    },
-    {
-      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
-      "name": "Solitude （Club Set）",
-      "author": "Atom_ilalia",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
     },
     {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
@@ -748,14 +759,6 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
-    },
-    {
-      "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
-      "name": "Club Neon Lotus",
-      "author": "Thrice369",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
     },
     {
       "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
@@ -880,7 +883,7 @@
       "status": "assessed"
     },
     "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682": {
-      "checkedAt": "2026-10-09T23:15:09+00:00",
+      "checkedAt": "2026-10-17T21:26:29+00:00",
       "status": "insufficient-image"
     },
     "wrld_c292785c-0700-449a-9963-2dd97dc3fa83": {
@@ -888,11 +891,11 @@
       "status": "assessed"
     },
     "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f": {
-      "checkedAt": "2026-10-09T23:15:15+00:00",
+      "checkedAt": "2026-10-17T21:26:32+00:00",
       "status": "assessed"
     },
     "wrld_5927be27-1e70-4f4a-98fb-439d343933ed": {
-      "checkedAt": "2026-10-09T23:15:18+00:00",
+      "checkedAt": "2026-10-17T21:26:35+00:00",
       "status": "insufficient-image"
     },
     "wrld_715a8c61-6558-4818-a938-50bbd5bced1b": {
@@ -965,6 +968,10 @@
     },
     "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b": {
       "checkedAt": "2026-10-15T22:15:00+00:00",
+      "status": "assessed"
+    },
+    "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08": {
+      "checkedAt": "2026-10-17T21:26:37+00:00",
       "status": "assessed"
     }
   }
