@@ -1,438 +1,18 @@
 [
   {
-    "id": "feed-37c9169bcfc74ae1c74f",
-    "name": "RADEXIS OVERCORE",
-    "start": "2026-10-16T18:00:00Z",
-    "end": "2026-10-16T23:00:00Z",
-    "organizer": "CHAOTIX ARMY",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_640e9bca-48e0-409a-87ad-bbd54d2c3a23/calendar/cal_41b9ae7a-00a4-474c-9c94-db7df93a5da6",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "37c9169bcfc74ae1c74f",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-efcb3ae32155fbee8134",
-    "name": "Thank God It's Friday",
-    "start": "2026-10-16T20:00:00Z",
-    "end": "2026-10-16T23:00:00Z",
-    "organizer": "The 80s Club",
+    "id": "feed-8d7a91116730e5836e96",
+    "name": "Just Dance Placeholder",
+    "start": "2026-10-17T17:00:00Z",
+    "end": "2026-10-17T18:00:00Z",
+    "organizer": "~ VR Wellness Center ~",
     "worldName": "VRChat",
     "genres": [
       "DANCE"
     ],
-    "url": "https://vrchat.com/home/group/grp_886cda97-9d25-48c4-b3ab-52aa7daf5b45/calendar/cal_b1d42930-0552-4d62-b0ba-60b78b407b09",
+    "url": "https://vrchat.com/home/group/grp_f85c739e-5980-4d5c-832c-20d2d5362049/calendar/cal_412867fd-3596-47f7-80c9-b4bfe1147cc0",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "efcb3ae32155fbee8134",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-52d1e182a98ffda4c3f7",
-    "name": "Looking for a Halloween World ?",
-    "start": "2026-10-16T20:10:00Z",
-    "end": "2026-11-16T20:03:00Z",
-    "organizer": "CLUB SIREN",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ",
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_667e43cc-962d-44e7-bb9f-e40a62bf6ace/calendar/cal_4b0d7ef8-6fcb-4065-a894-baaa976df670",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "52d1e182a98ffda4c3f7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-b2b55baf18a74367b98c",
-    "name": "The Temple of Sacchara Dance Event",
-    "start": "2026-10-16T20:30:00Z",
-    "end": "2026-10-16T23:00:00Z",
-    "organizer": "0di's Candy Kingdom",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_3979247d-8246-4426-ae60-a1f920426cd4/calendar/cal_0e72dd7a-651f-4b6a-87da-7971ebccedf3",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "b2b55baf18a74367b98c",
-    "upstreamCategory": "performance",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-917eb372506b1889bc7b",
-    "name": "Prime Dance Event",
-    "start": "2026-10-16T21:15:00Z",
-    "end": "2026-10-16T23:15:00Z",
-    "organizer": "Club Prime",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_88b6e1ec-434d-4faa-8dbc-91f8a2415a89/calendar/cal_4f5307d9-311d-4870-8365-5c7fa9d12343",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "917eb372506b1889bc7b",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7062086219f9c3568c28",
-    "name": "Finally Friday Rave 4",
-    "start": "2026-10-16T21:30:00Z",
-    "end": "2026-10-17T03:00:00Z",
-    "organizer": "ECLION",
-    "worldName": "VRChat",
-    "genres": [
-      "TECHNO",
-      "RAVE",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_190a9e43-dbf5-49c8-85e7-e9c4599dff37/calendar/cal_2b79e5e1-b404-4bbc-b8a8-b9bdf1a3ecc2",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7062086219f9c3568c28",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-955689ebdb39e9bda09e",
-    "name": "Hatsune Miku Concert",
-    "start": "2026-10-16T22:30:00Z",
-    "end": "2026-10-17T01:00:00Z",
-    "organizer": "Birb vibes",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d747d0c1-4f1c-49eb-b74d-275db81e90dc/calendar/cal_f3f34fd7-d3f2-4f26-b09b-db9d5ac81291",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "955689ebdb39e9bda09e",
-    "upstreamCategory": "performance",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-05fea68202e1b0551fc3",
-    "name": "ǃ KATSEYE CONCERT ǃ HALLOWEEN EDITION",
-    "start": "2026-10-16T22:30:00Z",
-    "end": "2026-10-17T00:03:00Z",
-    "organizer": "KATSEYE",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b18c09ff-693a-4792-9b82-c8647873b346/calendar/cal_567e9447-d4ef-4d7e-96f4-4a486f2f8695",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "05fea68202e1b0551fc3",
-    "upstreamCategory": "performance",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-90313bc092ea0faddba5",
-    "name": "Improv Night w⁄ Stevie and Sho",
-    "start": "2026-10-16T23:00:00Z",
-    "end": "2026-10-17T00:00:00Z",
-    "organizer": "ImproVR",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_37701405-6a22-4c75-8337-0d8cbaeb5e51/calendar/cal_3af9983e-5f9f-4c64-a21c-23b8e90679b9",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "90313bc092ea0faddba5",
-    "upstreamCategory": "performance",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-9f3bf47facd86930269c",
-    "name": "【 VRChat DJ イベント告知 】 |◤ PSY-APPLE : 5th Anniversary ◢| 🍍2026/10/17 (Sat) 🍍20:00-08:00 (JST) 🎵LIN…",
-    "start": "2026-10-16T23:00:00Z",
-    "end": null,
-    "organizer": "@yossy222_VRC",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/yossy222_VRC/status/2106694545840955611?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "9f3bf47facd86930269c",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-458337839defbbf88555",
-    "name": "DESIRE AFTER DARK",
-    "start": "2026-10-17T01:00:00Z",
-    "end": "2026-10-19T23:09:00Z",
-    "organizer": "CLUB SIREN",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ",
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_667e43cc-962d-44e7-bb9f-e40a62bf6ace/calendar/cal_8072cbd5-937e-4aa1-9547-eb35b1be1dae",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "458337839defbbf88555",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7a9672a382d053bce7c1",
-    "name": "Show Sin Filtros",
-    "start": "2026-10-17T01:00:00Z",
-    "end": "2026-10-17T04:00:00Z",
-    "organizer": "Sin Filtros",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_e064dfa5-ad6b-4361-aa73-b2e7763e038e/calendar/cal_fe78f3ee-2552-46f2-8fe7-9d789e02ef14",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7a9672a382d053bce7c1",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-bf8ef7f89644e1fa02cc",
-    "name": "Video Log 02 of 03˸ Blair Witch Collab Eventǃ",
-    "start": "2026-10-17T02:00:00Z",
-    "end": "2026-10-17T03:00:00Z",
-    "organizer": "Club Hex Bloom",
-    "worldName": "VRChat",
-    "genres": [
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_cdcba7ab-289d-44f6-8d09-f25563ce28e5/calendar/cal_508fbfe0-3d63-4ff3-bd59-a0f8511bfb2b",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "bf8ef7f89644e1fa02cc",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d0dcbd54124138161ce7",
-    "name": "CASINO NIGHT",
-    "start": "2026-10-17T03:00:00Z",
-    "end": "2026-10-17T06:00:00Z",
-    "organizer": "Chaotic Rose",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_d259f8b1-8d0f-459a-bab9-609f75db15ac/calendar/cal_69c55645-f920-4f6f-b18c-1913fb7a9ce2",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d0dcbd54124138161ce7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-07a61b83e5071a8724e9",
-    "name": "爆裂楓-BAKURETU KAEDE-",
-    "start": "2026-10-17T09:30:00Z",
-    "end": "2026-10-17T14:59:00Z",
-    "organizer": "Cipher Communication Circle",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_b1da41ef-0ccd-4642-9b50-3e90b064d35f/calendar/cal_50ace574-0e48-4068-8a09-e09fa88e3106",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "07a61b83e5071a8724e9",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-1d919c51d92388ec5e3f",
-    "name": "いよいよ 明日 !! 爆裂シリーズ最終回「爆裂楓 #BAKURETSU」18:45 Open ,19:00～Start VRChat で 開催 します!! 自分は19：00から ライブ です!…",
-    "start": "2026-10-17T09:45:00Z",
-    "end": null,
-    "organizer": "@MC_tyawan",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/MC_tyawan/status/2111060299856101389?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "1d919c51d92388ec5e3f",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-395545b6fd0c06d4c341",
-    "name": "【 明日開催 】 VRChat 音楽 ライブ 🗓️2026.10.17(土) 21:00 OPEN ！ 🎸ロックバンドLIVE 🌐 #TrinityTails Group + 重なり合う音と熱…",
-    "start": "2026-10-17T12:00:00Z",
-    "end": null,
-    "organizer": "@trinitytails_vr",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/trinitytails_vr/status/2111034425920356556?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "395545b6fd0c06d4c341",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-5c034f039205517972c6",
-    "name": "【1日目】BANGER ROOM × CLUBSERA",
-    "start": "2026-10-17T12:00:00Z",
-    "end": "2026-10-17T14:59:00Z",
-    "organizer": "CLUB SERA",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://vrchat.com/home/group/grp_1d624028-8f77-4cc0-ad76-3e4c3dfd373b/calendar/cal_66a95419-4a11-4761-9e60-a2a937c04149",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "5c034f039205517972c6",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-fdf43e772e52a4f63085",
-    "name": "パフォーマンスBAR「アクアマリン」",
-    "start": "2026-10-17T12:00:00Z",
-    "end": "2026-10-17T13:30:00Z",
-    "organizer": "パフォーマンスBAR「AQUA MARINE」",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE",
-      "DANCE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_626ecc10-415a-4ff9-92ae-3af1fdf63fad/calendar/cal_6a2b8f59-81f1-410b-8ad0-89e5a55e1472",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "fdf43e772e52a4f63085",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-3282d3e24fe01b6f0c38",
-    "name": "【LIVE】LIVE TOUR ＂THIS IS WAR＂ DAY2",
-    "start": "2026-10-17T12:30:00Z",
-    "end": "2026-10-17T14:00:00Z",
-    "organizer": "HiToNaMi",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_61e30b1d-b138-4c2e-be32-8475c3e0f1d9/calendar/cal_976ef880-2bff-439b-91c7-09bb90b573de",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "3282d3e24fe01b6f0c38",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d923c23941e189e94d64",
-    "name": "🔥 VRChat Music Live⚡️ 𝐒𝐭𝐫𝐨𝐥𝐥𝐙 vs 𝗛𝗶𝗧𝗼𝗡𝗮𝗠𝗶 Live Tour \"THIS IS WAR\" Day2 - あなたの部屋をライブハウスに - 🗓️2026…",
-    "start": "2026-10-17T12:30:00Z",
-    "end": null,
-    "organizer": "@ClubColumn",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/ClubColumn/status/2105656233097417211?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d923c23941e189e94d64",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-c3ecf0a33b1e27026dce",
-    "name": "スタコレVIPイベント",
-    "start": "2026-10-17T12:50:00Z",
-    "end": "2026-10-17T15:00:00Z",
-    "organizer": "STAR Collection",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_8c57bafb-a1f6-49d5-8e8a-73dc306f08ab/calendar/cal_38cd553c-06b6-4482-b158-99b0fd745ae9",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "c3ecf0a33b1e27026dce",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-494bd03c1dfffc87f679",
-    "name": "84th ＃和菓子BAR_ぼたもちくん with Daigororin様",
-    "start": "2026-10-17T13:00:00Z",
-    "end": "2026-10-17T14:59:00Z",
-    "organizer": "ぼたもちくん Friends",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://vrchat.com/home/group/grp_ac6ccc65-29e0-4074-8707-6262e2738d82/calendar/cal_a6b6740c-7c8d-42a4-b20e-b00ba2c5f346",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "494bd03c1dfffc87f679",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-8e4e144b98840619509a",
-    "name": "【🔥いよいよ 明日開催 🔥】 10月17日（土）22時から「見聞録 -Alternoise Solo Concert- 2026」 ライブ 映像の同時視聴会を 開催 します！ VRChat の…",
-    "start": "2026-10-17T13:00:00Z",
-    "end": null,
-    "organizer": "@Alternoise_VRB",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/Alternoise_VRB/status/2111063031140532589?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "8e4e144b98840619509a",
+    "upstreamId": "8d7a91116730e5836e96",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -493,6 +73,25 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-ef635ad99d4f4a421a00",
+    "name": "Looking for a Halloween World ?",
+    "start": "2026-10-17T20:10:00Z",
+    "end": "2026-11-17T20:03:00Z",
+    "organizer": "CLUB SIREN",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ",
+      "LIVE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_667e43cc-962d-44e7-bb9f-e40a62bf6ace/calendar/cal_24a85510-f2df-4acb-bd87-9968b393d4d3",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "ef635ad99d4f4a421a00",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-b8d0bc5ede8f2035ef2b",
     "name": "BΛSS ⁄⁄ BØUNCΞ ⁄⁄ R1ØT",
     "start": "2026-10-17T20:20:00Z",
@@ -530,6 +129,155 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-782a928f10bb4a357051",
+    "name": "ライブDJパーティー！ ~~ Live DJ Partyǃ",
+    "start": "2026-10-17T22:30:00Z",
+    "end": "2026-10-18T01:00:00Z",
+    "organizer": "ピンキー・パイ",
+    "worldName": "VRChat",
+    "genres": [
+      "DRUM & BASS",
+      "DJ",
+      "LIVE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_3233db0b-8f8a-4f39-97d8-87fbfb17d738/calendar/cal_4c70b687-c69a-4da3-9021-2e156b5c0e8d",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "782a928f10bb4a357051",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-075370354442d65fcd05",
+    "name": "Benediction Na Event",
+    "start": "2026-10-18T00:00:00Z",
+    "end": "2026-10-18T02:00:00Z",
+    "organizer": "Benediction",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_3d342895-3a16-44ee-afd4-ffdeda855c0d/calendar/cal_324346c2-debc-4cf0-a9d2-b9c5eff8f7d6",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "075370354442d65fcd05",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-afd36e14937209f1fb8f",
+    "name": "Club Complex Lap event",
+    "start": "2026-10-18T01:00:00Z",
+    "end": "2026-10-18T03:00:00Z",
+    "organizer": "Club Cumplex Homie Victims",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_163fb967-6eb3-4b72-a24f-f08743b12dcf/calendar/cal_8b177da6-12c1-4d09-822d-22e2385a3ec0",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "afd36e14937209f1fb8f",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-f770e7a9668e38dc3d1a",
+    "name": "DESIRE AFTER DARK",
+    "start": "2026-10-18T01:00:00Z",
+    "end": "2026-10-20T23:09:00Z",
+    "organizer": "CLUB SIREN",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ",
+      "LIVE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_667e43cc-962d-44e7-bb9f-e40a62bf6ace/calendar/cal_a26b2c10-70ec-44bd-8ef4-7d1d70de2b14",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "f770e7a9668e38dc3d1a",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-8106e3170edd70f4c459",
+    "name": "次の日曜日、10月18日は16:30 開場 、17:00開演で VRC 星空コンサートに 参加 します！٩(ˊᗜˋ*)و お琴弾くよ！ みなさんのご来場をお待ちしておりま〜す♪ #VRアンサン…",
+    "start": "2026-10-18T07:30:00Z",
+    "end": null,
+    "organizer": "@C0Y6A145",
+    "worldName": "VRChat",
+    "genres": [
+      "MUSIC"
+    ],
+    "url": "https://x.com/C0Y6A145/status/2109602787751502265?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "8106e3170edd70f4c459",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-e3e477abfff83be28228",
+    "name": "響奏ライブ in the HOUSE",
+    "start": "2026-10-18T11:50:00Z",
+    "end": "2026-10-18T15:00:00Z",
+    "organizer": "響奏ライブ",
+    "worldName": "VRChat",
+    "genres": [
+      "HOUSE",
+      "DJ",
+      "LIVE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_8e436502-4b36-491d-954b-66d83a1620f2/calendar/cal_2436b068-7988-4148-8eae-5cd63e5b196e",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "e3e477abfff83be28228",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-d57d913393b6895b9d7a",
+    "name": "BORT 44 - TECHNO",
+    "start": "2026-10-18T12:00:00Z",
+    "end": "2026-10-18T15:30:00Z",
+    "organizer": "BORT",
+    "worldName": "VRChat",
+    "genres": [
+      "TECHNO"
+    ],
+    "url": "https://vrchat.com/home/group/grp_e1a0a7f0-b4ed-4339-a637-7a2a5e19bf83/calendar/cal_a9c93f29-fb5c-48df-bba5-268330f690ef",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "d57d913393b6895b9d7a",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-349f89ae3484aea2162c",
+    "name": "ClubMorceau ＃41",
+    "start": "2026-10-18T12:00:00Z",
+    "end": "2026-10-18T14:00:00Z",
+    "organizer": "Club Morceau",
+    "worldName": "VRChat",
+    "genres": [
+      "MUSIC"
+    ],
+    "url": "https://vrchat.com/home/group/grp_97a6cc9a-f709-458e-bbbd-0f2085eb3dbf/calendar/cal_49ed8791-a928-4fa8-b8a4-bf0b053622ac",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "349f89ae3484aea2162c",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-e30fd195b95c9c3c2497",
     "name": "NEON Club Chill Beats",
     "start": "2026-10-18T17:45:00Z",
@@ -543,6 +291,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "e30fd195b95c9c3c2497",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-d12f7685367fcb59f1b0",
+    "name": "#Club_GoH Vol.16 2026/10/19(MON)20:50~ Group + Guest DJ 苔原( @DKNK141 ) 今回のClub_GoHはZaag Kickをブン回…",
+    "start": "2026-10-19T11:50:00Z",
+    "end": null,
+    "organizer": "@gohofficial_jp",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/gohofficial_jp/status/2109630165374681218?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "d12f7685367fcb59f1b0",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -623,6 +389,24 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-f67460f13077ac5d8906",
+    "name": "Beach Party",
+    "start": "2026-10-21T02:00:00Z",
+    "end": "2026-10-21T15:00:00Z",
+    "organizer": "AXIS CORE",
+    "worldName": "VRChat",
+    "genres": [
+      "DANCE"
+    ],
+    "url": "https://vrchat.com/home/group/grp_61d2e6fb-39ca-48f8-a6e8-ea968e5deefa/calendar/cal_a56dc11d-7880-4ece-91ed-6cd2bfdfc104",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "f67460f13077ac5d8906",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-4e6dd2f60edd4b871cdc",
     "name": "9/19 #JPTOWN夏祭り（ VRC ） 9/21 🆕 #トリモチライブ感謝祭 （秋葉原） 9/23 #らいVおん vol.26（大阪） 10/31 （大阪） 12/19 （江古田） 12…",
     "start": "2026-10-22T13:00:00Z",
@@ -696,7 +480,7 @@
   },
   {
     "id": "feed-5af286a57c1015fdb961",
-    "name": "路上声劇 ライブ開催 のお知らせ📢 久しぶりに、やります！ 【きけや VRChat 路上 ライブ 】 🕐10月24日(土)25:00~ 🌎新宿 ライブ ストリート(GroupPublic) イ…",
+    "name": "路上声劇ライブ 開催 のお知らせ📢 久しぶりに、やります！ 【きけや VRChat 路上ライブ】 🕐10月24日(土)25:00~ 🌎新宿ライブストリート(GroupPublic) インスタン…",
     "start": "2026-10-23T20:00:00Z",
     "end": null,
     "organizer": "@_KIKEYA",
@@ -708,6 +492,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5af286a57c1015fdb961",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-e6d4b24b83afe7880982",
+    "name": "【 イベント告知 ！】 今年もやってきた！ 第2回ソーラン節部 大型 ライブイベント VRC ソーラン節部 『ソーラン フェス 2026 in VRChat 』 2026年10月24日(土) …",
+    "start": "2026-10-24T11:50:00Z",
+    "end": null,
+    "organizer": "@VRC_soranbushi",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/VRC_soranbushi/status/2111475104144314827?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "e6d4b24b83afe7880982",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -750,19 +552,21 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-cc3944d3e9decffc7e52",
-    "name": "🌟 VRChat ライブ 開催 のお知らせ🌟 10月26日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期 ライブイベント です✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オ…",
-    "start": "2026-10-26T12:30:00Z",
-    "end": null,
-    "organizer": "@o_ChinaAi_o",
+    "id": "feed-6940a3ee738561f77b21",
+    "name": "Dance Trance Tuesday - by Old Dragon",
+    "start": "2026-10-27T20:00:00Z",
+    "end": "2026-10-27T23:00:00Z",
+    "organizer": "old_Dragon Sets",
     "worldName": "VRChat",
     "genres": [
-      "LIVE"
+      "TRANCE",
+      "LIVE",
+      "DANCE"
     ],
-    "url": "https://x.com/o_ChinaAi_o/status/2107300704599867531?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://vrchat.com/home/group/grp_ecce1ec9-191d-4444-a5ba-63926933e164/calendar/cal_87fd174f-776f-4830-b961-1436d348d230",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "cc3944d3e9decffc7e52",
+    "upstreamId": "6940a3ee738561f77b21",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
