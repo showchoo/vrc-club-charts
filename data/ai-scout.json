@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-17T21:26:37+00:00",
+  "updatedAt": "2026-10-18T21:30:27+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
     "assessed": 24,
-    "newAssessments": 2,
-    "pending": 74
+    "newAssessments": 3,
+    "pending": 73
   },
   "scored": [
     {
@@ -282,6 +282,29 @@
       "assessedAt": "2026-10-09T23:15:12+00:00"
     },
     {
+      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
+      "name": "STRATA",
+      "author": "兎野しゃの／syano",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "DJブースやトラス構造の照明が描かれており、クラブらしい空間が表現されています。",
+      "cautionsJa": "サムネイル画像であるため、実際のワールドの質感やインタラクティブな要素は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-18T21:30:20+00:00"
+    },
+    {
       "id": "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
       "name": "Udder Rave",
       "author": "MøøƁerriღ",
@@ -529,30 +552,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-07T23:34:55+00:00"
-    },
-    {
-      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
-      "name": "Neptune Night Club",
-      "author": "Plutto2Times",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "紫と白の照明で統一されたモダンな内装のナイトクラブが確認できます。",
-      "cautionsJa": "画像は静止した視点のみであり、実際のライティングの動的な演出や音響効果は不明です。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T08:10:17+00:00"
     }
   ],
   "candidates": [
@@ -661,6 +660,16 @@
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+    },
+    {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
       "name": "stadium rave A （audiolink party world ）",
       "author": "ALDUMGAMES",
@@ -669,36 +678,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
-    },
-    {
-      "id": "wrld_715a8c61-6558-4818-a938-50bbd5bced1b",
-      "name": "STRATA",
-      "author": "兎野しゃの／syano",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_715a8c61-6558-4818-a938-50bbd5bced1b.html"
-    },
-    {
-      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
-      "name": "The Deep Dusk - Magic Land Mod",
-      "author": "Lydia K",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
-    },
-    {
-      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
-      "name": "The Ruiners Club Venue［BETA VERSION］",
-      "author": "Ａｒｔｉ",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
     },
     {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
@@ -761,6 +740,14 @@
       "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
     },
     {
+      "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
+      "name": "Club Neon Lotus",
+      "author": "Thrice369",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
+    },
+    {
       "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
       "name": "Club Neon pulse",
       "author": "soseanon",
@@ -783,6 +770,14 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e.html"
+    },
+    {
+      "id": "wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
+      "name": "CTRL Room Club",
+      "author": "CompuGeniusCode",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e.html"
     }
   ],
   "attempts": {
@@ -899,19 +894,19 @@
       "status": "insufficient-image"
     },
     "wrld_715a8c61-6558-4818-a938-50bbd5bced1b": {
-      "checkedAt": "2026-10-10T22:29:42+00:00",
+      "checkedAt": "2026-10-18T21:30:20+00:00",
       "status": "assessed"
     },
     "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d": {
-      "checkedAt": "2026-10-10T22:29:44+00:00",
+      "checkedAt": "2026-10-18T21:30:22+00:00",
       "status": "assessed"
     },
     "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
-      "checkedAt": "2026-10-10T22:29:47+00:00",
+      "checkedAt": "2026-10-18T21:30:25+00:00",
       "status": "assessed"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
-      "checkedAt": "2026-10-10T22:29:49+00:00",
+      "checkedAt": "2026-10-18T21:30:27+00:00",
       "status": "insufficient-image"
     },
     "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384": {
