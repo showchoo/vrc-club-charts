@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-18T21:30:27+00:00",
+  "updatedAt": "2026-10-19T22:54:19+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 100,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 73
+    "newAssessments": 4,
+    "pending": 72
   },
   "scored": [
     {
@@ -439,6 +439,27 @@
       "assessedAt": "2026-10-13T23:16:31+00:00"
     },
     {
+      "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
+      "name": "Club Neon pulse",
+      "author": "soseanon",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "色鮮やかなネオンカラーの床面やステージ照明が配置され、典型的なクラブの雰囲気が視覚的に表現されています。",
+      "cautionsJa": "ロゴ文字が大きく配置されているため、実際の空間構成や細部の造形が隠れて確認しづらいです。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-19T22:54:17+00:00"
+    },
+    {
       "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
       "name": "Club Neon Spin",
       "author": "Andron827",
@@ -529,29 +550,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-07T23:34:52+00:00"
-    },
-    {
-      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
-      "name": "kakuhira's club house",
-      "author": "kakuhira",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "中央に大きく配置されたロゴと放射状のレーザー演出がサイバーなクラブ空間の雰囲気を伝えています。",
-      "cautionsJa": "静止画であるため実際の空間の広がりやレーザーの動的な演出効果は不明です。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-07T23:34:55+00:00"
     }
   ],
   "candidates": [
@@ -680,6 +678,26 @@
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
     },
     {
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
+    },
+    {
+      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
+      "name": "The Ruiners Club Venue［BETA VERSION］",
+      "author": "Ａｒｔｉ",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
+    },
+    {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
       "name": "TUBE VR - IN THE DANCE",
       "author": "Hadean",
@@ -688,16 +706,6 @@
         "IMMERSIVE"
       ],
       "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
-    },
-    {
-      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
-      "name": "アストロビーチ",
-      "author": "チョス_Thoth",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
     },
     {
       "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
@@ -748,22 +756,6 @@
       "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
     },
     {
-      "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
-      "name": "Club Neon pulse",
-      "author": "soseanon",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1.html"
-    },
-    {
-      "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
-      "name": "Club VGL",
-      "author": "Varneon",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f.html"
-    },
-    {
       "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
       "name": "Clubroom",
       "author": "Gssam",
@@ -778,6 +770,14 @@
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e.html"
+    },
+    {
+      "id": "wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5",
+      "name": "Daft Punk Alive 2007（BETA）",
+      "author": "Daft Pυnk",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_f03749ae-2826-4d9f-801a-895ba2a4a8a5.html"
     }
   ],
   "attempts": {
@@ -794,7 +794,7 @@
       "status": "assessed"
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
-      "checkedAt": "2026-10-06T08:10:17+00:00",
+      "checkedAt": "2026-10-19T22:54:11+00:00",
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
@@ -918,7 +918,7 @@
       "status": "assessed"
     },
     "wrld_0508f15f-869b-44d4-b538-1f6615fd5273": {
-      "checkedAt": "2026-10-11T22:52:54+00:00",
+      "checkedAt": "2026-10-19T22:54:14+00:00",
       "status": "assessed"
     },
     "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350": {
@@ -967,6 +967,14 @@
     },
     "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08": {
       "checkedAt": "2026-10-17T21:26:37+00:00",
+      "status": "assessed"
+    },
+    "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1": {
+      "checkedAt": "2026-10-19T22:54:17+00:00",
+      "status": "assessed"
+    },
+    "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f": {
+      "checkedAt": "2026-10-19T22:54:19+00:00",
       "status": "assessed"
     }
   }
