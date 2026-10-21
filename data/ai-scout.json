@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T22:17:16+00:00",
+  "updatedAt": "2026-10-21T22:19:08+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -554,18 +554,6 @@
   ],
   "candidates": [
     {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
-    },
-    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -599,26 +587,6 @@
       "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
     },
     {
-      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
-      "name": "Audiolinkバチバチワールド",
-      "author": "しゃちょー",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
-    },
-    {
-      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
-      "name": "Club Rayne",
-      "author": "Candy Rayne",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
-    },
-    {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
       "name": "Decibel Vault VR Event Center",
       "author": "SoundInVolumes",
@@ -627,6 +595,16 @@
         "STAGE"
       ],
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
+    },
+    {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
@@ -729,12 +707,28 @@
       "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
     },
     {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
+    },
+    {
       "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
       "name": "BlackMoonLinCLUB",
       "author": "BlackMoonLin",
       "sourceType": "catalog",
       "signals": [],
       "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
+    },
+    {
+      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
+      "name": "BNE˸ Underground",
+      "author": "BooneDoggy",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
     },
     {
       "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
@@ -787,11 +781,11 @@
   ],
   "attempts": {
     "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
-      "checkedAt": "2026-10-13T23:16:22+00:00",
+      "checkedAt": "2026-10-21T22:19:00+00:00",
       "status": "assessed"
     },
     "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
-      "checkedAt": "2026-10-13T23:16:25+00:00",
+      "checkedAt": "2026-10-21T22:19:03+00:00",
       "status": "insufficient-image"
     },
     "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
@@ -819,7 +813,7 @@
       "status": "assessed"
     },
     "wrld_099295a5-d221-4128-8f01-55cd81d71839": {
-      "checkedAt": "2026-10-13T23:16:27+00:00",
+      "checkedAt": "2026-10-21T22:19:05+00:00",
       "status": "assessed"
     },
     "wrld_4f015255-390a-44cb-9e81-bd2021eb970a": {
@@ -843,7 +837,7 @@
       "status": "assessed"
     },
     "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
-      "checkedAt": "2026-10-14T22:17:28+00:00",
+      "checkedAt": "2026-10-21T22:19:08+00:00",
       "status": "assessed"
     },
     "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
