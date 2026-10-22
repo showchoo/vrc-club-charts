@@ -58,5 +58,124 @@
     "discoverySources": [
       "vrcmap_cafe"
     ]
+  },
+  {
+    "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
+    "name": "Connecting ․․․",
+    "author": "NIIINY",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.85,
+      "evidence": [
+        "Tags include author_tag_Club",
+        "Tags include author_tag_Cyberpunk",
+        "Tags include author_tag_AudioLink"
+      ],
+      "reasonJa": "公式タグにClubやAudioLinkが含まれており、サイバーパンクなクラブ空間として設計されているため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T18:37:42.132204+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
+    "name": "Forgotten Terminal",
+    "author": "とかげ／Tokage",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.85,
+      "evidence": [
+        "Description mentions DJ and performance readiness",
+        "Tags include author_tag_DJ and author_tag_Music",
+        "Thumbnail shows underground station layout equipped with video screen and performance setup"
+      ],
+      "reasonJa": "DJ演奏や動画再生に対応した設備や音楽関連のタグが記載されており、DJイベント等の会場として利用される空間であるため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T18:37:48.294651+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
+    "name": "The Mush Pit",
+    "author": "Bella Strange~",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "Tags include author_tag_club, author_tag_dj, author_tag_rave, and author_tag_music",
+        "Description mentions it is a Club Strange World",
+        "Thumbnail prominently features the text CLUB and Mush Pit"
+      ],
+      "reasonJa": "公式タグにクラブやDJ、レイブが含まれており、説明文やサムネイルでもクラブとして紹介されているため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-22T18:37:53.941441+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
+    "name": "Virtual Dystopia",
+    "author": "Fame",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.85,
+      "evidence": [
+        "Tags include author_tag_club, author_tag_dj, and author_tag_music",
+        "World name suggests an electronic music or nightlife environment"
+      ],
+      "reasonJa": "タグにクラブやDJ、音楽といった要素が含まれており、クラブやイベント会場として設計されていると判断できます。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T18:37:58.113034+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
+    "name": "ケモミ高校バレー部 -部室-",
+    "author": "みんま_",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "ワールド名は「ケモミ高校バレー部 -部室-」である",
+        "タグに「author_tag_school」が含まれている",
+        "サムネイル画像には学校の部室のインテリアが写っている"
+      ],
+      "reasonJa": "ワールド名やサムネイル、タグから学校の部室をテーマにした空間であることが示されており、クラブやレイヴ会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T18:38:00.220432+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

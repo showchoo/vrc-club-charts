@@ -722,14 +722,20 @@
   {
     "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
     "name": "The Mush Pit",
-    "authorHint": "",
+    "authorHint": "Bella Strange~",
     "firstSeenAt": "2026-10-22",
     "lastSeenAt": "2026-10-22",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-260480",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc/info",
         "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }

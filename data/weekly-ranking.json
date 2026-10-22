@@ -3001,6 +3001,41 @@
       }
     },
     {
+      "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
+      "name": "The Mush Pit",
+      "author": "Bella Strange~",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_bd8f9a44-0ceb-4712-b85c-c4084cba0a35",
       "name": "The NEW Saturday Night Club",
       "author": "CharlieGT",

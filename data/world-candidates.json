@@ -32,22 +32,6 @@
     "lastSeenAt": "2026-10-22"
   },
   {
-    "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
-    "name": "The Mush Pit",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-260480",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
-  },
-  {
     "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
     "name": "Virtual Dystopia",
     "authorHint": "",
