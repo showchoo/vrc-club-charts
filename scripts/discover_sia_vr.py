@@ -7,6 +7,7 @@ published catalog, or imports article text/images into the site.
 from __future__ import annotations
 
 import datetime as dt
+import json
 import os
 import re
 import urllib.parse
@@ -22,7 +23,7 @@ except ModuleNotFoundError:
 BASE = "https://sia-vr.com"
 INDEX = BASE + "/category/building/club"
 UA = "VRCClubCharts/1.0 (+https://vrc-club-charts.vercel.app/about.html)"
-ARTICLE_PATH = re.compile(r"^/vrchat-world-\\d+/?$")
+ARTICLE_PATH = re.compile(r"^/vrchat-world-\d+/?$")
 WORLD_PATH = re.compile(r"^/home/world/(wrld_[0-9a-fA-F-]{36})(?:/info)?/?$")
 PAGE_LIMIT = 2
 
@@ -52,7 +53,7 @@ class LinkParser(HTMLParser):
 
     @property
     def title(self) -> str:
-        return re.sub(r"\\s+", " ", " ".join(self._title)).strip()[:120]
+        return re.sub(r"\s+", " ", " ".join(self._title)).strip()[:120]
 
 
 def article_urls(page_html: str) -> list[str]:
@@ -165,6 +166,6 @@ def collect_candidates(today: str | None = None) -> tuple[list[dict], dict]:
         state = read_json(STATE, {})
         state = state if isinstance(state, dict) else {}
         state["siaVrNextIndex"] = (start + len(chosen)) % len(links)
-        STATE.write_text(__import__("json").dumps(state, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Sia VR leads: {len(found)} from {report['articlesChecked']} permitted articles")
     return list(found.values()), report
