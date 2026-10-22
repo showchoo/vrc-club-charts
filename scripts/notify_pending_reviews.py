@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Notify the site owner once per actionable moderation task through GitHub Issues.
+"""Track each actionable moderation task in GitHub Issues without auto-assigning.
 
-Assigned GitHub issues can generate Gmail notifications when GitHub email
-notifications are enabled. Community review bodies, authors, database UUIDs
-and other private fields NEVER leave Supabase.
+Automatically assigning the owner generates unwanted assignment emails. Keep
+unassigned, labeled issues as an audit trail and allow optional dashboard
+review. Community review bodies, authors, database UUIDs and other private
+fields NEVER leave Supabase.
 """
 from __future__ import annotations
 
@@ -182,7 +183,8 @@ def sync_alerts(*, repository, owner, token, desired, existing, max_new=15):
         request_json(f"{API}/repos/{repository}/issues", method="POST", token=token,
             payload={
                 "title": title[:180], "body": description + "\n\n" + marker,
-                "assignees": [owner], "labels": [LABEL],
+                # Never auto-assign: assignment emails bypass Watch preferences.
+                "labels": [LABEL],
             })
         new_count += 1
         print(f"CREATED {key.split(':', 1)[0]} alert")
