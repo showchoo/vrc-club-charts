@@ -56,7 +56,7 @@ class PendingAlertsTests(unittest.TestCase):
             result=alerts.sync_alerts(repository="showchoo/vrc-club-charts",
                 owner="showchoo",token="test",desired=wanted,existing={})
         self.assertEqual(result["created"],2)
-        self.assertTrue(all(entry[1]["payload"]["assignees"]==["showchoo"] for entry in created))
+        self.assertTrue(all("assignees" not in entry[1]["payload"] for entry in created))
         self.assertTrue(all(entry[1]["payload"]["labels"]==[alerts.LABEL] for entry in created))
         self.assertTrue(all("<!-- vcc-review-alert:" in entry[1]["payload"]["body"] for entry in created))
 
