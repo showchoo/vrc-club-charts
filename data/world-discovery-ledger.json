@@ -34,6 +34,12 @@
         "ref": "https://sia-vr.com/vrchat-world-250750",
         "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
+      },
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-250693",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
       }
     ]
   },
@@ -301,6 +307,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
+    "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
+    "name": "Mitsurin Club",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241698",
+        "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }
     ]
@@ -904,6 +926,22 @@
     ]
   },
   {
+    "id": "wrld_722a9779-db0d-479f-813f-8b62193685ce",
+    "name": "Frolic Lounge",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241408",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
     "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
     "name": "ケモミ高校バレー部 -部室-",
     "authorHint": "",
@@ -1160,6 +1198,22 @@
     ]
   },
   {
+    "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+    "name": "Cafe＆Club CYBERIA",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241730",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
     "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
     "name": "Club Deviate",
     "authorHint": "TOTC",
@@ -1235,6 +1289,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
+    "id": "wrld_a11898da-bbcd-467b-adb0-5e76152c9be4",
+    "name": "For the curse of life is the curse of want․",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241673",
+        "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }
     ]
