@@ -192,6 +192,15 @@ def listing_world_ids(raw_html: str) -> list[str]:
     return ids
 
 
+def related_world_ids(raw_html: str) -> list[str]:
+    """Extract public VRCmap's Similar Worlds links, not unrelated author links."""
+    markup = html.unescape(raw_html)
+    heading = re.search(r"(?i)similar\\s+worlds|似ている(?:VRChat)?ワールド", markup)
+    if not heading:
+        return []
+    return listing_world_ids(markup[heading.end():])[:24]
+
+
 def detail_candidate(world_id: str, source_name: str, source_url: str, base_score: int) -> dict | None:
     detail_url = f"https://vrcmap.com/world/{world_id}"
     raw = fetch_text(detail_url)
@@ -378,13 +387,55 @@ def main() -> int:
     from discover_vrcw import STATE, read_json
     discovery_state = read_json(STATE, {})
     discovery_state = discovery_state if isinstance(discovery_state, dict) else {}
+
+    # Explore links from known club pages as a bounded, independent lead source.
+    # This expands the search frontier; it never bypasses official public-World
+    # verification or the Gemini/admission safeguards in the review workflow.
+    related_seeds = sorted(
+        str(item["id"]) for item in existing_catalog
+        if isinstance(item, dict)
+        and WORLD_ID_RE.fullmatch(str(item.get("id") or ""))
+        and re.search(r"(?i)\\b(?:club|nightclub|rave|dj)\\b|クラブ|ディスコ|レイブ",
+                      str(item.get("name") or ""))
+    )
+    related_checked = 0
+    related_new_links: set[str] = set()
+    if related_seeds:
+        related_start = max(0, int(discovery_state.get("vrcmapRelatedSeedIndex", 0))) % len(related_seeds)
+        per_run = max(1, min(8, int(os.environ.get("VCC_RELATED_SEEDS_PER_RUN", "4"))))
+        chosen_seeds = (related_seeds[related_start:] + related_seeds[:related_start])[:per_run]
+        for seed_id in chosen_seeds:
+            try:
+                raw = fetch_text(f"https://vrcmap.com/world/{seed_id}")
+                related_checked += 1
+                for wid in related_world_ids(raw):
+                    if wid == seed_id or wid in existing_ids or wid in decided_ids:
+                        continue
+                    related_new_links.add(wid)
+                    source_membership.setdefault(wid, []).append((
+                        "vrcmap_related", f"https://vrcmap.com/world/{seed_id}", 20
+                    ))
+            except Exception as exc:
+                print(f"WARN: VRCmap related links unavailable for {seed_id}: {type(exc).__name__}")
+        discovery_state["vrcmapRelatedSeedIndex"] = (
+            related_start + len(chosen_seeds)
+        ) % len(related_seeds)
+    source_health["vrcmap_related"] = {
+        "lastAttemptAt": today,
+        "status": "ok" if related_checked else "unavailable",
+        "seedsChecked": related_checked,
+        "unregisteredLinks": len(related_new_links),
+    }
+    print(f"VRCmap related discovery: {related_checked} seeds, "
+          f"{len(related_new_links)} unregistered links")
+
     saved_positions = discovery_state.get("vrcmapNextIndex", {})
     saved_positions = saved_positions if isinstance(saved_positions, dict) else {}
     next_positions = dict(saved_positions)
     selected_ids = []
     seen_ids = set()
     per_source = max(5, min(24, int(os.environ.get("VCC_VRCMAP_DETAILS_PER_SOURCE", "12"))))
-    for source_name, _, _ in LISTING_SOURCES:
+    for source_name in [name for name, _, _ in LISTING_SOURCES] + ["vrcmap_related"]:
         pool = sorted(wid for wid, memberships in source_membership.items()
                       if any(member[0] == source_name for member in memberships))
         if not pool:
