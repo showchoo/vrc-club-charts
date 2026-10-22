@@ -195,7 +195,7 @@ def listing_world_ids(raw_html: str) -> list[str]:
 def related_world_ids(raw_html: str) -> list[str]:
     """Extract public VRCmap's Similar Worlds links, not unrelated author links."""
     markup = html.unescape(raw_html)
-    heading = re.search(r"(?i)similar\\s+worlds|似ている(?:VRChat)?ワールド", markup)
+    heading = re.search(r"(?i)similar\s+worlds|似ている(?:VRChat)?ワールド", markup)
     if not heading:
         return []
     return listing_world_ids(markup[heading.end():])[:24]
@@ -395,7 +395,7 @@ def main() -> int:
         str(item["id"]) for item in existing_catalog
         if isinstance(item, dict)
         and WORLD_ID_RE.fullmatch(str(item.get("id") or ""))
-        and re.search(r"(?i)\\b(?:club|nightclub|rave|dj)\\b|クラブ|ディスコ|レイブ",
+        and re.search(r"(?i)\b(?:club|nightclub|rave|dj)\b|クラブ|ディスコ|レイブ",
                       str(item.get("name") or ""))
     )
     related_checked = 0
