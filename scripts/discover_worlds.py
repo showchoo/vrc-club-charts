@@ -498,6 +498,8 @@ def main() -> int:
     vrcw_items, vrcw_ok = discover_candidates(today)
     from discover_official import collect_candidates
     official_items, official_ok = collect_candidates(today)
+    from discover_sia_vr import collect_candidates as collect_sia_vr
+    sia_items, sia_health = collect_sia_vr(today)
     # Public events occasionally include a literal wrld_ ID even where
     # the venue name itself does not contain Club/DJ. Preserve those leads.
     from build_discovery_ledger import event_leads, load
@@ -510,6 +512,7 @@ def main() -> int:
     latest_state = latest_state if isinstance(latest_state, dict) else {}
     health = latest_state.get("sourceHealth", {})
     health = health if isinstance(health, dict) else {}
+    health["sia_vr_club"] = sia_health
     health.update({
         "vrcw_directory": {"lastAttemptAt": today,
                           "status": ("ok" if vrcw_ok else
@@ -521,7 +524,7 @@ def main() -> int:
     latest_state["sourceHealth"] = health
     STATE.write_text(json.dumps(latest_state, ensure_ascii=False, indent=2)
                      + "\n", encoding="utf-8")
-    for item in vrcw_items + official_items + priority_seeds(today) + auto_events + curated_events:
+    for item in vrcw_items + official_items + sia_items + priority_seeds(today) + auto_events + curated_events:
         wid = item["id"]
         if wid in existing_ids or wid in decided_ids:
             continue
