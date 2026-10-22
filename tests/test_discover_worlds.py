@@ -13,6 +13,24 @@ class VrcmapRotationTests(unittest.TestCase):
         self.assertTrue({"vrcmap_music", "vrcmap_new", "vrcmap_cafe",
                          "vrcmap_japan", "vrcmap_trending", "vrcmap_chill"} <= sources)
 
+    def test_related_links_only_follow_similar_section(self):
+        source = (
+            '<a href="/world/wrld_aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa">More by author</a>'
+            '<h2>Similar Worlds</h2>'
+            '<a href="/world/wrld_bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb">Club Two</a>'
+            '<a href="/world/wrld_bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb">Duplicate</a>'
+            '<a href="/world/wrld_cccccccc-cccc-cccc-cccc-cccccccccccc">Night Club</a>'
+        )
+        self.assertEqual(worlds.related_world_ids(source), [
+            "wrld_bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+            "wrld_cccccccc-cccc-cccc-cccc-cccccccccccc",
+        ])
+
+    def test_related_links_require_similar_worlds_heading(self):
+        self.assertEqual(worlds.related_world_ids(
+            '<a href="/world/wrld_aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa">More author</a>'
+        ), [])
+
     def test_strong_club_title_can_be_verified(self):
         raw = "<h1>Neon Club</h1><p>by:</p><p>Maker</p><p>DJ stage dancefloor techno club nightlife</p>"
         with patch.object(worlds, "fetch_text", return_value=raw):
