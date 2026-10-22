@@ -41,6 +41,23 @@ class VrcmapRotationTests(unittest.TestCase):
         self.assertGreaterEqual(item["confidenceScore"], 75)
         self.assertIn("+explicit-club-name", item["reasons"])
 
+    def test_diagnostic_counters_do_not_relax_admission(self):
+        stats = {}
+        raw = "<h1>Art Gallery</h1><p>Paintings and sculpture</p>"
+        with patch.object(worlds, "fetch_text", return_value=raw):
+            self.assertIsNone(worlds.detail_candidate(
+                WORLD, "vrcmap_music", "https://vrcmap.com", 28, stats
+            ))
+        self.assertEqual(stats, {"no_nightlife_signal": 1})
+
+        raw = "<h1>Fighting Club</h1><p>DJ dancefloor club</p>"
+        with patch.object(worlds, "fetch_text", return_value=raw):
+            self.assertIsNone(worlds.detail_candidate(
+                WORLD, "vrcmap_music", "https://vrcmap.com", 28, stats
+            ))
+        self.assertEqual(stats.get("excluded_title"), 1)
+        self.assertNotIn("qualified", stats)
+
     def test_fight_club_not_treated_as_nightlife(self):
         raw = "<h1>Fighting Club</h1><p>club DJ party music</p>"
         with patch.object(worlds, "fetch_text", return_value=raw):

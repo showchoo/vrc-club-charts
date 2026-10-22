@@ -201,7 +201,13 @@ def related_world_ids(raw_html: str) -> list[str]:
     return listing_world_ids(markup[heading.end():])[:24]
 
 
-def detail_candidate(world_id: str, source_name: str, source_url: str, base_score: int) -> dict | None:
+def increment_counter(stats: dict[str, int] | None, reason: str) -> None:
+    if stats is not None:
+        stats[reason] = stats.get(reason, 0) + 1
+
+
+def detail_candidate(world_id: str, source_name: str, source_url: str,
+                     base_score: int, stats: dict[str, int] | None = None) -> dict | None:
     detail_url = f"https://vrcmap.com/world/{world_id}"
     raw = fetch_text(detail_url)
     text = plain_text(raw)
@@ -217,9 +223,11 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
     context = core.lower()
 
     if any(term in context for term in HARD_EXCLUDE):
+        increment_counter(stats, "excluded_content")
         return None
 
     if not any(term in context for term in STRONG_NIGHTLIFE):
+        increment_counter(stats, "no_nightlife_signal")
         return None
 
     score = base_score
@@ -269,13 +277,16 @@ def detail_candidate(world_id: str, source_name: str, source_url: str, base_scor
     # A title naming a nightlife venue is stronger evidence than a broad
     # Music/Japan/Bar category. Reject non-nightlife 'clubs' such as fight clubs.
     if re.search(r"fight(?:ing)?[\s-]*club|avatar|アバター|mmd|karaoke|カラオケ|clubhouse|club house|ゴルフ", name, re.I):
+        increment_counter(stats, "excluded_title")
         return None
     if re.search(r"club|クラブ|disco|ディスコ|nightclub|rave|レイブ", name, re.I):
         score = min(100, score + 25)
         reasons.append("+explicit-club-name")
     if score < 55:
+        increment_counter(stats, "below_score_threshold")
         return None
 
+    increment_counter(stats, "qualified")
     return {
         "id": world_id,
         "name": name or world_id,
@@ -462,19 +473,24 @@ def main() -> int:
                      + "\n", encoding="utf-8")
 
     by_id: dict[str, dict] = {}
+    detail_stats: dict[str, int] = {"selected": len(ordered), "eligible_ids": len(source_membership)}
     for idx, (wid, memberships) in enumerate(ordered):
         source_name, source_url, base_score = max(memberships, key=lambda x: x[2])
         try:
-            item = detail_candidate(wid, source_name, source_url, base_score)
+            item = detail_candidate(wid, source_name, source_url, base_score, detail_stats)
             if item is None:
                 continue
             item["sourceCategories"] = sorted({m[0] for m in memberships})
             by_id[wid] = item
             print(f"CANDIDATE {wid} {item['name']} score={item['confidenceScore']}")
         except Exception as exc:
+            increment_counter(detail_stats, "detail_fetch_failed")
             print(f"WARN: detail fetch failed {wid}: {exc}")
         if idx < len(ordered) - 1:
             time.sleep(0.15)
+
+    source_health["vrcmap_detail_scan"] = {"lastAttemptAt": today, **detail_stats}
+    print("VRCmap candidate funnel: " + json.dumps(detail_stats, sort_keys=True))
 
     # Independently crawl verified club/DJ category listings with resumable paging.
     # A VRCmap outage must not block this source, and vice versa.
