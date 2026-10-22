@@ -133,6 +133,18 @@
     "source": "https://en.vrcw.net/world/detail/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043"
   },
   {
+    "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+    "name": "Cafe＆Club CYBERIA",
+    "author": "PhysisKITE",
+    "genres": [
+      "CLUB"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6/info",
+    "discoveredBy": "automatic-discovery-gemini-reviewed"
+  },
+  {
     "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
     "name": "CARROT CLUB",
     "author": "BEBE CARROT",

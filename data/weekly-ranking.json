@@ -383,6 +383,41 @@
       }
     },
     {
+      "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+      "name": "Cafe＆Club CYBERIA",
+      "author": "PhysisKITE",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
       "name": "CARROT CLUB",
       "author": "BEBE CARROT",

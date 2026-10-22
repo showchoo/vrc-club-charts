@@ -1,22 +1,5 @@
 [
   {
-    "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
-    "name": "Cafe＆Club CYBERIA",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241730",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
-  },
-  {
     "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
     "name": "Mitsurin Club",
     "authorHint": "",

@@ -177,5 +177,89 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+    "name": "Cafe＆Club CYBERIA",
+    "author": "PhysisKITE",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "World name includes 'Club CYBERIA'",
+        "Description mentions event organization contact and AudioLink",
+        "Tags include 'author_tag_club' and 'author_tag_dj'"
+      ],
+      "reasonJa": "説明文にイベント開催の案内やAudioLinkの有効化が記載されており、クラブやDJイベントの会場として設計されているため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-22T22:26:26.755131+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
+    "name": "Mitsurin Club",
+    "author": "Fetal Erorr",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "uncertain",
+      "confidence": 0.4,
+      "evidence": [
+        "World name includes 'Club'",
+        "Description does not mention music, DJ, or dancing",
+        "Thumbnail shows a whale silhouette in a dark setting, lacking club features"
+      ],
+      "reasonJa": "名前に「Club」が含まれていますが、説明文やサムネイル画像にはクラブや音楽イベントを示す明確な要素が確認できないため不確定です。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T22:26:29.765300+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_a11898da-bbcd-467b-adb0-5e76152c9be4",
+    "name": "For the curse of life is the curse of want․",
+    "author": "Tundra Salix",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "ワールド名は「呪い」や「霧の中の探求」をテーマにしている",
+        "サムネイルは暗いトンネルと通路を示しており、クラブのフロアやDJステージではない",
+        "説明文はミステリアスな雰囲気の探索を示唆している",
+        "タグには「club」が含まれるが、外観やテーマ性から実際のクラブ用途とは異なる可能性が高い"
+      ],
+      "reasonJa": "ワールド名や説明、サムネイルが示すのはミステリアスな探索や雰囲気重視の空間であり、ナイトクラブやレイブ会場としての目的は見受けられません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-22T22:26:32.631244+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_722a9779-db0d-479f-813f-8b62193685ce",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-10-22T22:26:32.748802+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
   }
 ]

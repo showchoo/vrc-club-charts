@@ -1200,14 +1200,20 @@
   {
     "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
     "name": "Cafe＆Club CYBERIA",
-    "authorHint": "",
+    "authorHint": "PhysisKITE",
     "firstSeenAt": "2026-10-22",
     "lastSeenAt": "2026-10-22",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241730",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6/info",
         "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }
