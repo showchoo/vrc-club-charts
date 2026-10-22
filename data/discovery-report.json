@@ -13,42 +13,48 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-10-21",
+      "lastAttemptAt": "2026-10-22",
       "status": "unavailable"
+    },
+    "vrcmap_related": {
+      "lastAttemptAt": "2026-10-22",
+      "status": "ok",
+      "seedsChecked": 4,
+      "unregisteredLinks": 0
     }
   },
   "disclaimer": "Observed public World IDs, not a census of every VRChat club."
