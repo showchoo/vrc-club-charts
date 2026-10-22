@@ -435,7 +435,7 @@ def main() -> int:
     selected_ids = []
     seen_ids = set()
     per_source = max(5, min(24, int(os.environ.get("VCC_VRCMAP_DETAILS_PER_SOURCE", "12"))))
-    for source_name in [name for name, _, _ in LISTING_SOURCES] + ["vrcmap_related"]:
+    for source_name in ["vrcmap_related"] + [name for name, _, _ in LISTING_SOURCES]:
         pool = sorted(wid for wid, memberships in source_membership.items()
                       if any(member[0] == source_name for member in memberships))
         if not pool:
