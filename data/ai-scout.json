@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-21T22:19:08+00:00",
+  "updatedAt": "2026-10-22T22:18:19+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 100,
+    "totalCandidates": 109,
     "assessed": 24,
     "newAssessments": 3,
-    "pending": 73
+    "pending": 82
   },
   "scored": [
     {
@@ -123,6 +123,27 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-11T22:52:52+00:00"
+    },
+    {
+      "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
+      "name": "Clubroom",
+      "author": "Gssam",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e.html",
+      "visualPotential": 65,
+      "factors": {
+        "visual": 4,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "オレンジ色のソファや壁面のポスター、ネオンサインが配置されたレトロで親しみやすい空間が描かれています。",
+      "cautionsJa": "サムネイル画像であるため、実際のワールド内での質感やオブジェクトの配置バランスは異なる可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-22T22:18:19+00:00"
     },
     {
       "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
@@ -506,53 +527,52 @@
       "assessedAt": "2026-10-06T23:03:13+00:00"
     },
     {
-      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
-      "name": "Girl's night",
-      "author": "Ame୨୧",
+      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+      "name": "Decibel Vault VR Event Center",
+      "author": "SoundInVolumes",
       "sourceType": "catalog",
       "signals": [
-        "AUDIOLINK"
+        "STAGE"
       ],
-      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html",
+      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html",
       "visualPotential": 55,
       "factors": {
         "visual": 3,
         "lighting": 3,
-        "spatial": 3,
-        "originality": 2
+        "spatial": 2,
+        "originality": 3
       },
-      "reasonJa": "紫色のスポットライトとネオン調の照明が特徴的な、モダンで落ち着いた雰囲気のクラブ空間が描かれています。",
-      "cautionsJa": "画像は静止画であり、実際の音楽や演出、インタラクティブ要素の動作は不明です。",
+      "reasonJa": "金庫の扉とスピーカーをモチーフにしたサイバーパンク風のグラフィックが描かれています。",
+      "cautionsJa": "これはプロモーション用のイメージアートであり、実際のワールド内の空間デザインや照明を正確に表しているとは限りません。",
       "confidence": "low",
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-07T23:34:49+00:00"
-    },
-    {
-      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
-      "name": "IOLITE",
-      "author": "わヴぇふぃる",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "青を基調としたステージ背景や手前のミキサー風の卓が映されており、シンプルなクラブ空間の構成が伺えます。",
-      "cautionsJa": "サムネイル画像に大きなロゴテキストや線画デザインが重なっており、実際のワールド内の視覚的ディテールや質感を正確に判断することは難しいです。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-07T23:34:52+00:00"
+      "assessedAt": "2026-10-22T22:18:11+00:00"
     }
   ],
   "candidates": [
+    {
+      "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+      "name": "Cafe＆Club CYBERIA",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [
+        "CYBER"
+      ],
+      "url": "https://vrcmap.com/world/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6"
+    },
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "LIGHTING",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
+    },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
@@ -563,6 +583,46 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
+      "name": "Connecting ․․․",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_043affb0-0dd7-44f9-badf-bfb85374afad"
+    },
+    {
+      "id": "wrld_a11898da-bbcd-467b-adb0-5e76152c9be4",
+      "name": "For the curse of life is the curse of want․",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_a11898da-bbcd-467b-adb0-5e76152c9be4"
+    },
+    {
+      "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
+      "name": "Forgotten Terminal",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9"
+    },
+    {
+      "id": "wrld_722a9779-db0d-479f-813f-8b62193685ce",
+      "name": "Frolic Lounge",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_722a9779-db0d-479f-813f-8b62193685ce"
+    },
+    {
+      "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
+      "name": "Mitsurin Club",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -587,14 +647,40 @@
       "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
     },
     {
-      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
-      "name": "Decibel Vault VR Event Center",
-      "author": "SoundInVolumes",
+      "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
+      "name": "Virtual Dystopia",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92"
+    },
+    {
+      "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
+      "name": "ケモミ高校バレー部 -部室-",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_76678288-40f1-462a-b9cf-8b492214a1bd"
+    },
+    {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
       "sourceType": "catalog",
       "signals": [
-        "STAGE"
+        "AUDIOLINK"
       ],
-      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
+      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+    },
+    {
+      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
+      "name": "Club Rayne",
+      "author": "Candy Rayne",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
@@ -695,88 +781,6 @@
         "IMMERSIVE"
       ],
       "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
-    },
-    {
-      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
-      "name": "アストロビーチ",
-      "author": "チョス_Thoth",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
-    },
-    {
-      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
-      "name": "After Dark Night Club",
-      "author": "₥₳J₳․₴Ø₥₥ɆR",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
-    },
-    {
-      "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
-      "name": "BlackMoonLinCLUB",
-      "author": "BlackMoonLin",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
-    },
-    {
-      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
-      "name": "BNE˸ Underground",
-      "author": "BooneDoggy",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
-    },
-    {
-      "id": "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf",
-      "name": "CLUB IGLO",
-      "author": "EZKIMO_O'",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf.html"
-    },
-    {
-      "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
-      "name": "Club Morningstar",
-      "author": "Insomniamoon_va",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_5ee1d511-d640-41ed-9e64-436c9e50781b.html"
-    },
-    {
-      "id": "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08",
-      "name": "Club Neon Lotus",
-      "author": "Thrice369",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08.html"
-    },
-    {
-      "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
-      "name": "Club VGL",
-      "author": "Varneon",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_03183583-fbbf-4c6d-a874-457499e2fd3f.html"
-    },
-    {
-      "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
-      "name": "Clubroom",
-      "author": "Gssam",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e.html"
-    },
-    {
-      "id": "wrld_155f0899-38b8-41f9-9a87-ad91a076b45e",
-      "name": "CTRL Room Club",
-      "author": "CompuGeniusCode",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_155f0899-38b8-41f9-9a87-ad91a076b45e.html"
     }
   ],
   "attempts": {
@@ -845,8 +849,8 @@
       "status": "assessed"
     },
     "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f": {
-      "checkedAt": "2026-10-15T22:14:45+00:00",
-      "status": "insufficient-image"
+      "checkedAt": "2026-10-22T22:18:11+00:00",
+      "status": "assessed"
     },
     "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
       "checkedAt": "2026-10-07T23:34:49+00:00",
@@ -957,11 +961,11 @@
       "status": "assessed"
     },
     "wrld_94d6163c-83f0-4db6-bbc7-a920fb64becf": {
-      "checkedAt": "2026-10-15T22:14:57+00:00",
+      "checkedAt": "2026-10-22T22:18:14+00:00",
       "status": "insufficient-image"
     },
     "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b": {
-      "checkedAt": "2026-10-15T22:15:00+00:00",
+      "checkedAt": "2026-10-22T22:18:16+00:00",
       "status": "assessed"
     },
     "wrld_fca0af80-bf10-4bbe-9fc8-1098cbd32d08": {
@@ -974,6 +978,10 @@
     },
     "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f": {
       "checkedAt": "2026-10-19T22:54:19+00:00",
+      "status": "assessed"
+    },
+    "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e": {
+      "checkedAt": "2026-10-22T22:18:19+00:00",
       "status": "assessed"
     }
   }
