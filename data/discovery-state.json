@@ -28,12 +28,12 @@
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 31,
-    "vrcmap_new": 38,
-    "vrcmap_cafe": 46,
-    "vrcmap_japan": 38,
-    "vrcmap_trending": 38,
-    "vrcmap_chill": 38
+    "vrcmap_music": 43,
+    "vrcmap_new": 0,
+    "vrcmap_cafe": 10,
+    "vrcmap_japan": 0,
+    "vrcmap_trending": 0,
+    "vrcmap_chill": 0
   },
   "sourceHealth": {
     "vrcmap_music": {
@@ -79,7 +79,15 @@
       "status": "ok",
       "seedsChecked": 4,
       "unregisteredLinks": 0
+    },
+    "sia_vr_club": {
+      "lastAttemptAt": "2026-10-22",
+      "status": "ok",
+      "articlesChecked": 5,
+      "leads": 5,
+      "articlesListed": 77
     }
   },
-  "vrcmapRelatedSeedIndex": 8
+  "vrcmapRelatedSeedIndex": 12,
+  "siaVrNextIndex": 5
 }

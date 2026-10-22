@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
+    "name": "Connecting ․․․",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-250750",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22"
+  },
+  {
+    "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
+    "name": "Forgotten Terminal",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-250746",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22"
+  },
+  {
+    "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
+    "name": "The Mush Pit",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260480",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22"
+  },
+  {
+    "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
+    "name": "Virtual Dystopia",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-230387",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22"
+  },
+  {
+    "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
+    "name": "ケモミ高校バレー部 -部室-",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260079",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22"
+  }
+]

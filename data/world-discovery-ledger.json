@@ -22,6 +22,22 @@
     ]
   },
   {
+    "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
+    "name": "Connecting ․․․",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-250750",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
     "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
     "name": "アストロビーチ",
     "authorHint": "チョス_Thoth",
@@ -510,6 +526,22 @@
     ]
   },
   {
+    "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
+    "name": "Virtual Dystopia",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230387",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
     "id": "wrld_4a35e054-acdc-4504-a1a1-5c8f48856203",
     "name": "Neon Viper",
     "authorHint": "BadKarma8489",
@@ -688,6 +720,22 @@
     ]
   },
   {
+    "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
+    "name": "The Mush Pit",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260480",
+        "firstSeenAt": "2026-10-22",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
     "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
     "name": "Club Morningstar",
     "authorHint": "Insomniamoon_va",
@@ -845,6 +893,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
+    "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
+    "name": "ケモミ高校バレー部 -部室-",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260079",
+        "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }
     ]
@@ -1607,6 +1671,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
+    "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
+    "name": "Forgotten Terminal",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-22",
+    "lastSeenAt": "2026-10-22",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-250746",
+        "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
       }
     ]
