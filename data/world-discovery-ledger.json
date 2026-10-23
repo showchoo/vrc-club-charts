@@ -426,14 +426,20 @@
   {
     "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
     "name": "ORBITER 9",
-    "authorHint": "",
+    "authorHint": "Cloma",
     "firstSeenAt": "2026-10-23",
     "lastSeenAt": "2026-10-23",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241618",
+        "firstSeenAt": "2026-10-23",
+        "lastSeenAt": "2026-10-23"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af/info",
         "firstSeenAt": "2026-10-23",
         "lastSeenAt": "2026-10-23"
       }
@@ -700,14 +706,20 @@
   {
     "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
     "name": "爆音大聖堂",
-    "authorHint": "",
+    "authorHint": "COMA․",
     "firstSeenAt": "2026-10-23",
     "lastSeenAt": "2026-10-23",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241638",
+        "firstSeenAt": "2026-10-23",
+        "lastSeenAt": "2026-10-23"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_5631758f-5975-487f-a15d-efa39385ca9b/info",
         "firstSeenAt": "2026-10-23",
         "lastSeenAt": "2026-10-23"
       }
@@ -1888,14 +1900,20 @@
   {
     "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
     "name": "Project Vertigo",
-    "authorHint": "",
+    "authorHint": "NinaV2",
     "firstSeenAt": "2026-10-23",
     "lastSeenAt": "2026-10-23",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241597",
+        "firstSeenAt": "2026-10-23",
+        "lastSeenAt": "2026-10-23"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90/info",
         "firstSeenAt": "2026-10-23",
         "lastSeenAt": "2026-10-23"
       }

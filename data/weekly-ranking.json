@@ -2138,6 +2138,41 @@
       }
     },
     {
+      "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
+      "name": "ORBITER 9",
+      "author": "Cloma",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_24ad9d9c-1489-406d-af2f-aeb938831280",
       "name": "padded boiler room",
       "author": "KER 3271",
@@ -2408,6 +2443,41 @@
         "EVENT"
       ],
       "source": null,
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
+      "name": "Project Vertigo",
+      "author": "NinaV2",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "releaseStatus": null,
@@ -3762,6 +3832,41 @@
         "CLUB"
       ],
       "source": "https://vrchat.com/home/world/wrld_3c876c92-c72e-4e0a-9ad0-37109affc346/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
+      "name": "爆音大聖堂",
+      "author": "COMA․",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_5631758f-5975-487f-a15d-efa39385ca9b/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "releaseStatus": null,

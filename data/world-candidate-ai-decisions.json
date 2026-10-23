@@ -261,5 +261,99 @@
     "reviewedAt": "2026-10-22T22:26:32.748802+00:00",
     "source": "auto-discovery",
     "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
+    "name": "Alter Sound Wave Club",
+    "author": "mikka-bouzu",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.85,
+      "evidence": [
+        "World name includes 'Club'",
+        "Thumbnail shows stage-like lighting and audio-visual elements suitable for a venue"
+      ],
+      "reasonJa": "ワールド名に「Club」が含まれており、サムネイル画像も音楽イベントやライブ会場のような演出を示しているため、クラブの目的を持つ空間と判断されます。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-23T22:19:11.888182+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
+    "name": "ORBITER 9",
+    "author": "Cloma",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "Tags include 'author_tag_dj', 'author_tag_club', and 'author_tag_iwasync'",
+        "Description mentions use for DJ practice and events"
+      ],
+      "reasonJa": "公式のタグにクラブやDJが含まれており、説明文にもDJの練習やイベントの場としての利用が記載されているため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-23T22:19:15.865669+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
+    "name": "Project Vertigo",
+    "author": "NinaV2",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "Description mentions exploring the mood and lore of the club",
+        "Tags include author_tag_club and author_tag_techno",
+        "Description references a music event group"
+      ],
+      "reasonJa": "説明文やタグにクラブやテクノミュージックイベントに関する記述が含まれており、クラブとしての目的が示されています。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-23T22:19:17.650798+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
+    "name": "爆音大聖堂",
+    "author": "COMA․",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "Tags include author_tag_dj and author_tag_club",
+        "Description mentions music and rhythms",
+        "Thumbnail shows a large event venue with speaker setups"
+      ],
+      "reasonJa": "タグや説明文にDJやクラブ、音楽に関するキーワードが含まれており、内装もスピーカーが配置されたイベント会場風であるためクラブと判定しました。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-23T22:19:31.975815+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
