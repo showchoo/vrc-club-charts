@@ -52,6 +52,10 @@
 .candidate-score b{font-size:21px}.candidate-score small{font-size:8px;color:#718b94}
 .candidate-source{color:#8fd8e9;font-size:9px;text-decoration:none}
 .candidate-source:hover{text-decoration:underline}
+.candidate-world-link{color:#dffaff;text-decoration:underline;text-decoration-color:rgba(95,222,255,.5);text-underline-offset:4px}
+.candidate-world-link:hover,.candidate-world-link:focus-visible{color:#5edcf9;text-decoration-color:currentColor}
+.candidate-visit{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;border:1px solid rgba(94,220,249,.35);border-radius:10px;color:#b5eeff;background:rgba(94,220,249,.06);font-size:12px;font-weight:800;text-decoration:none}
+.candidate-visit:hover,.candidate-visit:focus-visible{background:rgba(94,220,249,.15);color:#e6fbff}
     .candidate-ai-note{margin:10px 0 2px;padding:11px 13px;border-left:3px solid #6faab4;border-radius:6px;background:rgba(90,202,216,.065);color:#d0e3e7;font-size:13px;line-height:1.7}
     .candidate-ai-note.pending{border-color:#b1a06c}
     .candidate-ai-note.uncertain{border-color:#9d849b}
@@ -525,10 +529,17 @@ body.admin-page{font-size:15px}
           const cats=(candidate.sourceCategories||[]).map(r=>`<span>${esc(r)}</span>`).join('');
           const source=String(candidate.source||'');
           const safeSource=(source.startsWith('https://www.vrcw.net/') || source.startsWith('https://newjp.vrcw.net/') || source.startsWith('https://vrcmap.com/')) ? source : '';
+          // Build links only from a validated World ID, never from untrusted source URLs.
+          const worldId=String(candidate.id||'');
+          const validWorldId=/^wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(worldId);
+          const worldUrl=validWorldId ? 'https://vrchat.com/home/world/'+worldId : '';
+          const worldTitle=worldUrl
+            ? `<a class="candidate-world-link" href="${worldUrl}" target="_blank" rel="noopener noreferrer" title="VRChat公式Worldページを開く">${esc(candidate.name || worldId)} <span aria-hidden="true">↗</span></a>`
+            : esc(candidate.name || worldId);
           card.innerHTML=`
             <div class="admin-card-head">
               <div>
-                <h2>${esc(candidate.name || candidate.id)}</h2>
+                <h2>${worldTitle}</h2>
                 <div class="admin-meta">${cats}<span>${esc(candidate.confidence || 'candidate').toUpperCase()}</span></div>
               </div>
               <div class="candidate-score"><b>${Number(candidate.confidenceScore||0)}</b><small>DISCOVERY /100（AI評価ではありません）</small></div>
@@ -542,6 +553,7 @@ body.admin-page{font-size:15px}
             <div class="admin-meta">${reasons}</div>
             ${aiHtml}
             <div class="admin-actions">
+              ${worldUrl ? `<a class="candidate-visit" href="${worldUrl}" target="_blank" rel="noopener noreferrer">VRChatで確認 ↗</a>` : ''}
               <button class="approve" type="button">APPROVE WORLD</button>
               <button class="reject" type="button">REJECT</button>
             </div>`;

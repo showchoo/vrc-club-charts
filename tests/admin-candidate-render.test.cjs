@@ -90,3 +90,33 @@ test('Gemini supplied reason is HTML-escaped', () => {
   assert.doesNotMatch(admin.worldCandidateList.children[0].innerHTML, /<script>/);
   assert.match(admin.worldCandidateList.children[0].innerHTML, /&lt;script&gt;/);
 });
+
+test('world candidate links open the exact official VRChat World page without approving', () => {
+  const admin = panel();
+  const id = 'wrld_12345678-1234-1234-1234-123456789abc';
+  admin.renderCandidates([{
+    id, name: 'Nightclub <img onerror="alert(1)">',
+    confidenceScore:88,sourceCategories:['sia_vr_club'],reasons:[]
+  }], [], []);
+  const markup = admin.worldCandidateList.children[0].innerHTML;
+  const destination = 'https://vrchat.com/home/world/' + id;
+  assert.match(markup, /class="candidate-world-link"/);
+  assert.match(markup, /class="candidate-visit"/);
+  assert.equal(markup.split('href="' + destination + '"').length - 1, 2);
+  assert.equal(markup.split('target="_blank" rel="noopener noreferrer"').length - 1, 2);
+  assert.match(markup, /Nightclub &lt;img onerror=&quot;alert\(1\)&quot;&gt;/);
+  assert.doesNotMatch(markup, /<img onerror/);
+  assert.match(markup, /APPROVE WORLD/);
+  assert.match(markup, /REJECT/);
+});
+
+test('invalid World IDs do not create links or untrusted redirects', () => {
+  const admin = panel();
+  admin.renderCandidates([{
+    id:'wrld_invalid" onclick="alert(1)',name:'Bad ID',
+    confidenceScore:72,sourceCategories:[],reasons:[]
+  }], [], []);
+  const markup = admin.worldCandidateList.children[0].innerHTML;
+  assert.doesNotMatch(markup, /candidate-world-link|candidate-visit|https:\/\/vrchat.com\/home\/world\//);
+  assert.match(markup, /APPROVE WORLD/);
+});
