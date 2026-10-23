@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-22T22:18:19+00:00",
+  "updatedAt": "2026-10-23T22:08:21+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 109,
+    "totalCandidates": 106,
     "assessed": 24,
     "newAssessments": 3,
-    "pending": 82
+    "pending": 79
   },
   "scored": [
     {
@@ -552,16 +552,6 @@
   ],
   "candidates": [
     {
-      "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
-      "name": "Cafe＆Club CYBERIA",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [
-        "CYBER"
-      ],
-      "url": "https://vrcmap.com/world/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6"
-    },
-    {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
@@ -572,6 +562,14 @@
         "STAGE"
       ],
       "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
+    },
+    {
+      "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
+      "name": "Alter Sound Wave Club",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_3dea1b90-93e1-45f3-9988-c43b2f614300"
     },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
@@ -585,46 +583,6 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
-      "name": "Connecting ․․․",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_043affb0-0dd7-44f9-badf-bfb85374afad"
-    },
-    {
-      "id": "wrld_a11898da-bbcd-467b-adb0-5e76152c9be4",
-      "name": "For the curse of life is the curse of want․",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_a11898da-bbcd-467b-adb0-5e76152c9be4"
-    },
-    {
-      "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
-      "name": "Forgotten Terminal",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9"
-    },
-    {
-      "id": "wrld_722a9779-db0d-479f-813f-8b62193685ce",
-      "name": "Frolic Lounge",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_722a9779-db0d-479f-813f-8b62193685ce"
-    },
-    {
-      "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
-      "name": "Mitsurin Club",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8"
-    },
-    {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
       "name": "Neptune Night Club",
       "author": "Plutto2Times",
@@ -636,31 +594,28 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
-      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
-      "name": "Oh's Party Ballroom",
-      "author": "emymin",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
-    },
-    {
-      "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
-      "name": "Virtual Dystopia",
+      "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
+      "name": "ORBITER 9",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92"
+      "url": "https://vrcmap.com/world/wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af"
     },
     {
-      "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
-      "name": "ケモミ高校バレー部 -部室-",
+      "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
+      "name": "Project Vertigo",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_76678288-40f1-462a-b9cf-8b492214a1bd"
+      "url": "https://vrcmap.com/world/wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90"
+    },
+    {
+      "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
+      "name": "爆音大聖堂",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_5631758f-5975-487f-a15d-efa39385ca9b"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -671,6 +626,16 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+    },
+    {
+      "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+      "name": "Cafe＆Club CYBERIA",
+      "author": "PhysisKITE",
+      "sourceType": "catalog",
+      "signals": [
+        "CYBER"
+      ],
+      "url": "worlds/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6.html"
     },
     {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
@@ -781,6 +746,40 @@
         "IMMERSIVE"
       ],
       "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
+    },
+    {
+      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+      "name": "アストロビーチ",
+      "author": "チョス_Thoth",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
+    },
+    {
+      "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
+      "name": "BlackMoonLinCLUB",
+      "author": "BlackMoonLin",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
+    },
+    {
+      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
+      "name": "BNE˸ Underground",
+      "author": "BooneDoggy",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
     }
   ],
   "attempts": {
@@ -801,7 +800,7 @@
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
-      "checkedAt": "2026-10-16T22:05:10+00:00",
+      "checkedAt": "2026-10-23T22:08:13+00:00",
       "status": "assessed"
     },
     "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92": {
@@ -853,11 +852,11 @@
       "status": "assessed"
     },
     "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
-      "checkedAt": "2026-10-07T23:34:49+00:00",
+      "checkedAt": "2026-10-23T22:08:19+00:00",
       "status": "assessed"
     },
     "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6": {
-      "checkedAt": "2026-10-07T23:34:52+00:00",
+      "checkedAt": "2026-10-23T22:08:21+00:00",
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
@@ -983,6 +982,10 @@
     "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e": {
       "checkedAt": "2026-10-22T22:18:19+00:00",
       "status": "assessed"
+    },
+    "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6": {
+      "checkedAt": "2026-10-23T22:08:16+00:00",
+      "status": "insufficient-image"
     }
   }
 }
