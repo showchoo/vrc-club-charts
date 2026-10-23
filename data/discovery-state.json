@@ -3,7 +3,7 @@
     "vrcw_club": 2,
     "vrcw_dj": 2
   },
-  "updatedAt": "2026-10-22",
+  "updatedAt": "2026-10-23",
   "verification": {
     "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346": {
       "date": "2026-10-06"
@@ -28,66 +28,66 @@
     }
   },
   "vrcmapNextIndex": {
-    "vrcmap_music": 6,
-    "vrcmap_new": 12,
-    "vrcmap_cafe": 22,
-    "vrcmap_japan": 12,
-    "vrcmap_trending": 12,
-    "vrcmap_chill": 12
+    "vrcmap_music": 18,
+    "vrcmap_new": 24,
+    "vrcmap_cafe": 34,
+    "vrcmap_japan": 24,
+    "vrcmap_trending": 24,
+    "vrcmap_chill": 24
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "seedsChecked": 4,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-10-22",
+      "lastAttemptAt": "2026-10-23",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
       "articlesListed": 77
     }
   },
-  "vrcmapRelatedSeedIndex": 16,
-  "siaVrNextIndex": 10
+  "vrcmapRelatedSeedIndex": 20,
+  "siaVrNextIndex": 15
 }

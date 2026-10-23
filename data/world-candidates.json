@@ -1,9 +1,9 @@
 [
   {
-    "id": "wrld_2666ea76-2fd0-43de-8986-e5ab02cdb6f8",
-    "name": "Mitsurin Club",
+    "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
+    "name": "Alter Sound Wave Club",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241698",
+    "source": "https://sia-vr.com/vrchat-world-241448",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -13,14 +13,14 @@
       "source:sia-vr-club",
       "+explicit-club-name"
     ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
+    "firstDiscoveredAt": "2026-10-23",
+    "lastSeenAt": "2026-10-23"
   },
   {
-    "id": "wrld_043affb0-0dd7-44f9-badf-bfb85374afad",
-    "name": "Connecting ․․․",
+    "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
+    "name": "ORBITER 9",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-250693",
+    "source": "https://sia-vr.com/vrchat-world-241618",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -29,14 +29,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
+    "firstDiscoveredAt": "2026-10-23",
+    "lastSeenAt": "2026-10-23"
   },
   {
-    "id": "wrld_a11898da-bbcd-467b-adb0-5e76152c9be4",
-    "name": "For the curse of life is the curse of want․",
+    "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
+    "name": "Project Vertigo",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241673",
+    "source": "https://sia-vr.com/vrchat-world-241597",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -45,14 +45,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
+    "firstDiscoveredAt": "2026-10-23",
+    "lastSeenAt": "2026-10-23"
   },
   {
-    "id": "wrld_e0a9ea30-5c5a-4b3a-a0fe-802564f953d9",
-    "name": "Forgotten Terminal",
+    "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
+    "name": "爆音大聖堂",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-250746",
+    "source": "https://sia-vr.com/vrchat-world-241638",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -61,55 +61,7 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
-  },
-  {
-    "id": "wrld_722a9779-db0d-479f-813f-8b62193685ce",
-    "name": "Frolic Lounge",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241408",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
-  },
-  {
-    "id": "wrld_49ee04c2-ed50-44e5-87f5-587d6c869c92",
-    "name": "Virtual Dystopia",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230387",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
-  },
-  {
-    "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
-    "name": "ケモミ高校バレー部 -部室-",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-260079",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-22",
-    "lastSeenAt": "2026-10-22"
+    "firstDiscoveredAt": "2026-10-23",
+    "lastSeenAt": "2026-10-23"
   }
 ]
