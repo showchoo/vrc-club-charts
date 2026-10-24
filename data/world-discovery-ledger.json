@@ -114,6 +114,22 @@
     ]
   },
   {
+    "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+    "name": "BLANK SPACE",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241438",
+        "firstSeenAt": "2026-10-24",
+        "lastSeenAt": "2026-10-24"
+      }
+    ]
+  },
+  {
     "id": "wrld_0b42489a-dfb5-4bc5-821e-91a59f4aeee2",
     "name": "TMJ CLUB",
     "authorHint": "tumujin",
@@ -360,6 +376,22 @@
     ]
   },
   {
+    "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
+    "name": "Looking Glass",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230926",
+        "firstSeenAt": "2026-10-24",
+        "lastSeenAt": "2026-10-24"
+      }
+    ]
+  },
+  {
     "id": "wrld_2d646ce9-253f-4f96-802b-a22824247d07",
     "name": "SONAR_Spillways",
     "authorHint": "Llamahat",
@@ -565,6 +597,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-24"
+      }
+    ]
+  },
+  {
+    "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
+    "name": "Unshattered Destination",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241277",
+        "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-24"
       }
     ]
@@ -846,6 +894,22 @@
     ]
   },
   {
+    "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
+    "name": "Olympus Lounge – Texas Hold’Em",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241225",
+        "firstSeenAt": "2026-10-24",
+        "lastSeenAt": "2026-10-24"
+      }
+    ]
+  },
+  {
     "id": "wrld_61724ff1-ebee-4c9d-b16e-97f3faf00d16",
     "name": "Cyberpunk Rooftop City",
     "authorHint": "Coldcancer",
@@ -1093,6 +1157,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-24"
+      }
+    ]
+  },
+  {
+    "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
+    "name": "vrc_living_quarters",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241303",
+        "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-24"
       }
     ]

@@ -15,5 +15,85 @@
     ],
     "firstDiscoveredAt": "2026-10-23",
     "lastSeenAt": "2026-10-23"
+  },
+  {
+    "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+    "name": "BLANK SPACE",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241438",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24"
+  },
+  {
+    "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
+    "name": "Looking Glass",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-230926",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24"
+  },
+  {
+    "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
+    "name": "Olympus Lounge – Texas Hold’Em",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241225",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24"
+  },
+  {
+    "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
+    "name": "Unshattered Destination",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241277",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24"
+  },
+  {
+    "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
+    "name": "vrc_living_quarters",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241303",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-24",
+    "lastSeenAt": "2026-10-24"
   }
 ]
