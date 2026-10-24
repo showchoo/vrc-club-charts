@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-23T22:08:21+00:00",
+  "updatedAt": "2026-10-24T21:35:57+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 106,
+    "totalCandidates": 111,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 79
+    "newAssessments": 2,
+    "pending": 85
   },
   "scored": [
     {
@@ -572,6 +572,14 @@
       "url": "https://vrcmap.com/world/wrld_3dea1b90-93e1-45f3-9988-c43b2f614300"
     },
     {
+      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+      "name": "BLANK SPACE",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808"
+    },
+    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -581,6 +589,14 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
+      "name": "Looking Glass",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -594,28 +610,39 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
-      "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
-      "name": "ORBITER 9",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af"
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
     },
     {
-      "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
-      "name": "Project Vertigo",
+      "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
+      "name": "Olympus Lounge – Texas Hold’Em",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90"
+      "url": "https://vrcmap.com/world/wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e"
     },
     {
-      "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
-      "name": "爆音大聖堂",
+      "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
+      "name": "Unshattered Destination",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_5631758f-5975-487f-a15d-efa39385ca9b"
+      "url": "https://vrcmap.com/world/wrld_43064a14-aa8a-4882-850e-7fb37469eb43"
+    },
+    {
+      "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
+      "name": "vrc_living_quarters",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_7ed67946-3514-48f1-971e-32162b0a73db"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -648,6 +675,26 @@
       "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
+    },
+    {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
+    },
+    {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
       "name": "kakuhira's club house",
       "author": "kakuhira",
@@ -668,16 +715,6 @@
       "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -686,16 +723,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
-      "name": "Neon Catnip - Customizable DJ Venue",
-      "author": "DJ Megu",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
       "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
@@ -756,30 +783,6 @@
         "STAGE"
       ],
       "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
-    },
-    {
-      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
-      "name": "After Dark Night Club",
-      "author": "₥₳J₳․₴Ø₥₥ɆR",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
-    },
-    {
-      "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
-      "name": "BlackMoonLinCLUB",
-      "author": "BlackMoonLin",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc.html"
-    },
-    {
-      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
-      "name": "BNE˸ Underground",
-      "author": "BooneDoggy",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_924d8065-2203-4cb2-9697-37ccb68cceb1.html"
     }
   ],
   "attempts": {
@@ -864,15 +867,15 @@
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
-      "checkedAt": "2026-10-16T22:05:15+00:00",
+      "checkedAt": "2026-10-24T21:35:49+00:00",
       "status": "insufficient-image"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-10-16T22:05:20+00:00",
+      "checkedAt": "2026-10-24T21:35:51+00:00",
       "status": "assessed"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
-      "checkedAt": "2026-10-16T22:05:26+00:00",
+      "checkedAt": "2026-10-24T21:35:55+00:00",
       "status": "insufficient-image"
     },
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
@@ -880,8 +883,8 @@
       "status": "assessed"
     },
     "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682": {
-      "checkedAt": "2026-10-17T21:26:29+00:00",
-      "status": "insufficient-image"
+      "checkedAt": "2026-10-24T21:35:57+00:00",
+      "status": "assessed"
     },
     "wrld_c292785c-0700-449a-9963-2dd97dc3fa83": {
       "checkedAt": "2026-10-09T23:15:12+00:00",
