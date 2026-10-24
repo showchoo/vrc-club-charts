@@ -269,6 +269,41 @@
       }
     },
     {
+      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+      "name": "BLANK SPACE",
+      "author": "ChaikaRaven",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa",
       "name": "BMF SHARKCITY CLUB",
       "author": "ҠąɾէìҽrĎøƐ",

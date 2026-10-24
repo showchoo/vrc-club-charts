@@ -116,14 +116,20 @@
   {
     "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
     "name": "BLANK SPACE",
-    "authorHint": "",
+    "authorHint": "ChaikaRaven",
     "firstSeenAt": "2026-10-24",
     "lastSeenAt": "2026-10-24",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241438",
+        "firstSeenAt": "2026-10-24",
+        "lastSeenAt": "2026-10-24"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808/info",
         "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-24"
       }
@@ -371,22 +377,6 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
-        "lastSeenAt": "2026-10-24"
-      }
-    ]
-  },
-  {
-    "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
-    "name": "Looking Glass",
-    "authorHint": "",
-    "firstSeenAt": "2026-10-24",
-    "lastSeenAt": "2026-10-24",
-    "status": "pending",
-    "evidence": [
-      {
-        "source": "sia_vr_club",
-        "ref": "https://sia-vr.com/vrchat-world-230926",
-        "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-24"
       }
     ]

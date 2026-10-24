@@ -355,5 +355,114 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+    "name": "BLANK SPACE",
+    "author": "ChaikaRaven",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "Tags include author_tag_club, author_tag_dj, author_tag_rave, and author_tag_venue",
+        "Description explicitly states the world is made for DJing and events",
+        "Thumbnail shows a DJ booth setup and lighting suitable for a venue"
+      ],
+      "reasonJa": "公式タグや説明文にDJやクラブ、レイブ向けの会場であることが明記されており、サムネイルにもDJブースが確認できるため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-24T22:33:58.855049+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-10-24T22:33:58.959578+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
+    "name": "Olympus Lounge - Texas Hold'Em",
+    "author": "Sayuyu",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description focuses entirely on hosting Texas Hold'Em poker games",
+        "Contains poker table prefabs for players to use",
+        "Thumbnail prominently displays playing cards and 'Deluxe Texas Hold'Em'",
+        "Tags include poker and game"
+      ],
+      "reasonJa": "ポーカーのプレイを主目的として設計されたゲームワールドであり、ダンスクラブやレイヴスペースではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-24T22:34:02.054332+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
+    "name": "Unshattered Destination",
+    "author": "Officialsayon",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description states it is a horror adventure game",
+        "Tags include content_violence and content_gore",
+        "Tags include author_tag_game and author_tag_horror"
+      ],
+      "reasonJa": "このワールドはホラーアドベンチャーゲームとして説明されており、クラブや音楽イベントの会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-24T22:34:04.128155+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
+    "name": "vrc_living_quarters",
+    "author": "vbm_",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "World name is vrc_living_quarters",
+        "Description mentions residence and living quarters",
+        "Tags include home and liminal",
+        "Thumbnail shows a dim indoor interior space resembling a personal living area"
+      ],
+      "reasonJa": "このワールドは居住スペースやプライベートな空間として設計されており、ナイトクラブやDJイベントの会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-24T22:34:06.450019+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
