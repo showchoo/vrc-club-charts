@@ -464,5 +464,110 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_5e8adb56-e91f-4e92-93e4-df04a5398395",
+    "name": "_REALITY",
+    "author": "_kye",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "Author tag contains 'club' but description and context suggest a narrative or reality-themed world.",
+        "Thumbnail depicts a dark, dirty alleyway with trash cans rather than a nightclub or dance floor."
+      ],
+      "reasonJa": "ワールドの説明やサムネイル画像から、ナイトクラブやレイヴ会場としての要素が見当たらないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-25T22:38:54.493076+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9",
+    "name": "Barclay Tower",
+    "author": "TheAlaskanJew",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description mentions it is a comedy club and theater venue for standup comedy events",
+        "Tags include 'author_tag_Punchline_Comedy' and 'author_tag_Bar'"
+      ],
+      "reasonJa": "スタンドアップコメディのイベントやバー・劇場として作られており、電子音楽のクラブやレイブスペースではないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-25T22:38:56.174181+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
+    "name": "Furdu Furbidden Planet 2024 Portal",
+    "author": "PammeMatth",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description indicates it is a portal world for an event",
+        "World name references a convention or event portal (Furdu 2024)",
+        "Thumbnail shows a themed interior with a rocket model rather than a nightclub or dance floor"
+      ],
+      "reasonJa": "説明文にイベントのポータルワールドであることが明記されており、ナイトクラブやダンスイベントの会場としては機能していません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-25T22:38:58.174351+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400",
+    "name": "MISTRAL",
+    "author": "SLI__",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "Description highlights luxurious lounge areas, recreation zones, and quiet corners for socializing and relaxation",
+        "Tags include 'Cozy' and 'Bedroom', suggesting a residential or social space rather than a dance venue",
+        "Thumbnail shows a comfortable indoor lounge with sofas and a pool table rather than a dance floor or DJ booth"
+      ],
+      "reasonJa": "説明文や画像から、ダンスフロアやDJブースを持つクラブではなく、談話やリラクゼーション向けのラウンジスペースであると判断しました。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-25T22:39:00.117151+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_da0bc9da-ed3a-4b22-9374-14ee25097edf",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-10-25T22:39:00.174761+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
   }
 ]
