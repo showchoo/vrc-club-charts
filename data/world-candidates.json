@@ -63,5 +63,85 @@
     ],
     "firstDiscoveredAt": "2026-10-24",
     "lastSeenAt": "2026-10-24"
+  },
+  {
+    "id": "wrld_5e8adb56-e91f-4e92-93e4-df04a5398395",
+    "name": "_REALITY",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241104",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-25",
+    "lastSeenAt": "2026-10-25"
+  },
+  {
+    "id": "wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9",
+    "name": "Barclay Tower",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241203",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-25",
+    "lastSeenAt": "2026-10-25"
+  },
+  {
+    "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
+    "name": "Furdu Furbidden Planet 2024 Portal",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241043",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-25",
+    "lastSeenAt": "2026-10-25"
+  },
+  {
+    "id": "wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400",
+    "name": "MISTRAL",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241053",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-25",
+    "lastSeenAt": "2026-10-25"
+  },
+  {
+    "id": "wrld_da0bc9da-ed3a-4b22-9374-14ee25097edf",
+    "name": "牛马俱乐部V3",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241117",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-25",
+    "lastSeenAt": "2026-10-25"
   }
 ]
