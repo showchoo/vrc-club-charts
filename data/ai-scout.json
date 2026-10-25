@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-24T21:35:57+00:00",
+  "updatedAt": "2026-10-25T21:45:37+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 111,
+    "totalCandidates": 115,
     "assessed": 24,
-    "newAssessments": 2,
-    "pending": 85
+    "newAssessments": 3,
+    "pending": 88
   },
   "scored": [
     {
@@ -564,6 +564,14 @@
       "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
     },
     {
+      "id": "wrld_5e8adb56-e91f-4e92-93e4-df04a5398395",
+      "name": "_REALITY",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_5e8adb56-e91f-4e92-93e4-df04a5398395"
+    },
+    {
       "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
       "name": "Alter Sound Wave Club",
       "author": "Unknown",
@@ -572,12 +580,12 @@
       "url": "https://vrcmap.com/world/wrld_3dea1b90-93e1-45f3-9988-c43b2f614300"
     },
     {
-      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
-      "name": "BLANK SPACE",
+      "id": "wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9",
+      "name": "Barclay Tower",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808"
+      "url": "https://vrcmap.com/world/wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9"
     },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
@@ -591,12 +599,20 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2",
-      "name": "Looking Glass",
+      "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
+      "name": "Furdu Furbidden Planet 2024 Portal",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_2bf870d9-eeb8-47ed-a860-36ef63df37c2"
+      "url": "https://vrcmap.com/world/wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43"
+    },
+    {
+      "id": "wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400",
+      "name": "MISTRAL",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -643,6 +659,14 @@
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_7ed67946-3514-48f1-971e-32162b0a73db"
+    },
+    {
+      "id": "wrld_da0bc9da-ed3a-4b22-9374-14ee25097edf",
+      "name": "牛马俱乐部V3",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_da0bc9da-ed3a-4b22-9374-14ee25097edf"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -715,6 +739,16 @@
       "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
+      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
+      "name": "LIQUID ˸ LAB",
+      "author": "Italiandogs",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
+    },
+    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -725,14 +759,14 @@
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
     },
     {
-      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
-      "name": "Solitude （Club Set）",
-      "author": "Atom_ilalia",
+      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
+      "name": "Neon Catnip - Customizable DJ Venue",
+      "author": "DJ Megu",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
@@ -743,46 +777,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
-    },
-    {
-      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
-      "name": "The Deep Dusk - Magic Land Mod",
-      "author": "Lydia K",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
-    },
-    {
-      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
-      "name": "The Ruiners Club Venue［BETA VERSION］",
-      "author": "Ａｒｔｉ",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
-    },
-    {
-      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
-      "name": "TUBE VR - IN THE DANCE",
-      "author": "Hadean",
-      "sourceType": "catalog",
-      "signals": [
-        "IMMERSIVE"
-      ],
-      "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
-    },
-    {
-      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
-      "name": "アストロビーチ",
-      "author": "チョス_Thoth",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
     }
   ],
   "attempts": {
@@ -891,11 +885,11 @@
       "status": "assessed"
     },
     "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f": {
-      "checkedAt": "2026-10-17T21:26:32+00:00",
+      "checkedAt": "2026-10-25T21:45:27+00:00",
       "status": "assessed"
     },
     "wrld_5927be27-1e70-4f4a-98fb-439d343933ed": {
-      "checkedAt": "2026-10-17T21:26:35+00:00",
+      "checkedAt": "2026-10-25T21:45:31+00:00",
       "status": "insufficient-image"
     },
     "wrld_715a8c61-6558-4818-a938-50bbd5bced1b": {
@@ -903,11 +897,11 @@
       "status": "assessed"
     },
     "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d": {
-      "checkedAt": "2026-10-18T21:30:22+00:00",
+      "checkedAt": "2026-10-25T21:45:34+00:00",
       "status": "assessed"
     },
     "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
-      "checkedAt": "2026-10-18T21:30:25+00:00",
+      "checkedAt": "2026-10-25T21:45:37+00:00",
       "status": "assessed"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
