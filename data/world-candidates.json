@@ -17,6 +17,40 @@
     "lastSeenAt": "2026-10-23"
   },
   {
+    "id": "wrld_643c92c1-0415-4490-a621-6e2c73e5a74a",
+    "name": "Club Eru",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241013",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 88,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club",
+      "+explicit-club-name"
+    ],
+    "firstDiscoveredAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26"
+  },
+  {
+    "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
+    "name": "Club Nebula",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240978",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 88,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club",
+      "+explicit-club-name"
+    ],
+    "firstDiscoveredAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26"
+  },
+  {
     "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
     "name": "Olympus Lounge – Texas Hold’Em",
     "authorHint": "",
@@ -143,5 +177,53 @@
     ],
     "firstDiscoveredAt": "2026-10-25",
     "lastSeenAt": "2026-10-25"
+  },
+  {
+    "id": "wrld_b2792090-fac2-4e14-8ae6-32bb853c282c",
+    "name": "Bebe Dance studio",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240888",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26"
+  },
+  {
+    "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+    "name": "PREY",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241031",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26"
+  },
+  {
+    "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+    "name": "Subway",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240744",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26"
   }
 ]

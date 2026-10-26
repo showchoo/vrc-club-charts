@@ -980,6 +980,22 @@
     ]
   },
   {
+    "id": "wrld_643c92c1-0415-4490-a621-6e2c73e5a74a",
+    "name": "Club Eru",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241013",
+        "firstSeenAt": "2026-10-26",
+        "lastSeenAt": "2026-10-26"
+      }
+    ]
+  },
+  {
     "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
     "name": "NOIR X ECLIPSE",
     "authorHint": "Dustyᵀᴹ",
@@ -1184,6 +1200,22 @@
     ]
   },
   {
+    "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
+    "name": "Club Nebula",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240978",
+        "firstSeenAt": "2026-10-26",
+        "lastSeenAt": "2026-10-26"
+      }
+    ]
+  },
+  {
     "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
     "name": "Midnight Street Club",
     "authorHint": "nnnnnnなす",
@@ -1211,6 +1243,22 @@
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-241303",
         "firstSeenAt": "2026-10-24",
+        "lastSeenAt": "2026-10-26"
+      }
+    ]
+  },
+  {
+    "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+    "name": "Subway",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240744",
+        "firstSeenAt": "2026-10-26",
         "lastSeenAt": "2026-10-26"
       }
     ]
@@ -1634,6 +1682,22 @@
     ]
   },
   {
+    "id": "wrld_b2792090-fac2-4e14-8ae6-32bb853c282c",
+    "name": "Bebe Dance studio",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240888",
+        "firstSeenAt": "2026-10-26",
+        "lastSeenAt": "2026-10-26"
+      }
+    ]
+  },
+  {
     "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
     "name": "Club Orion",
     "authorHint": "AcChosen",
@@ -1709,6 +1773,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dj",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-26"
+      }
+    ]
+  },
+  {
+    "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+    "name": "PREY",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-26",
+    "lastSeenAt": "2026-10-26",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-241031",
+        "firstSeenAt": "2026-10-26",
         "lastSeenAt": "2026-10-26"
       }
     ]
