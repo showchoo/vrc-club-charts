@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-25T21:45:37+00:00",
+  "updatedAt": "2026-10-26T23:07:03+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 115,
+    "totalCandidates": 120,
     "assessed": 24,
     "newAssessments": 3,
-    "pending": 88
+    "pending": 93
   },
   "scored": [
     {
@@ -372,6 +372,27 @@
       "assessedAt": "2026-10-06T12:51:30+00:00"
     },
     {
+      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+      "name": "BLANK SPACE",
+      "author": "ChaikaRaven",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808.html",
+      "visualPotential": 55,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 2
+      },
+      "reasonJa": "赤く怪しい光を放つ壁面や天井の照明、散らばる破片が退廃的なクラブ空間を演出しています。",
+      "cautionsJa": "サムネイル全体に大きなロゴが配置されているため、実際の空間デザインの詳細や視認性については不鮮明な部分があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-10-26T23:07:03+00:00"
+    },
+    {
       "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
       "name": "Brick House Night Club",
       "author": "BadKarma8489",
@@ -525,29 +546,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T23:03:13+00:00"
-    },
-    {
-      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
-      "name": "Decibel Vault VR Event Center",
-      "author": "SoundInVolumes",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 2,
-        "originality": 3
-      },
-      "reasonJa": "金庫の扉とスピーカーをモチーフにしたサイバーパンク風のグラフィックが描かれています。",
-      "cautionsJa": "これはプロモーション用のイメージアートであり、実際のワールド内の空間デザインや照明を正確に表しているとは限りません。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-22T22:18:11+00:00"
     }
   ],
   "candidates": [
@@ -588,6 +586,14 @@
       "url": "https://vrcmap.com/world/wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9"
     },
     {
+      "id": "wrld_b2792090-fac2-4e14-8ae6-32bb853c282c",
+      "name": "Bebe Dance studio",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_b2792090-fac2-4e14-8ae6-32bb853c282c"
+    },
+    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -597,6 +603,22 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_643c92c1-0415-4490-a621-6e2c73e5a74a",
+      "name": "Club Eru",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_643c92c1-0415-4490-a621-6e2c73e5a74a"
+    },
+    {
+      "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
+      "name": "Club Nebula",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a"
     },
     {
       "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
@@ -613,17 +635,6 @@
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400"
-    },
-    {
-      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
-      "name": "Neptune Night Club",
-      "author": "Plutto2Times",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
@@ -643,6 +654,22 @@
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e"
+    },
+    {
+      "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+      "name": "PREY",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_ba037688-5248-4b4a-bdea-070ace1a2b85"
+    },
+    {
+      "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+      "name": "Subway",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa"
     },
     {
       "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
@@ -737,46 +764,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
-    },
-    {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
-      "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
-      "name": "LOST COLONY RAVE V2.5",
-      "author": "booploops",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
-      "name": "Neon Catnip - Customizable DJ Venue",
-      "author": "DJ Megu",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
-    },
-    {
-      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
-      "name": "stadium rave A （audiolink party world ）",
-      "author": "ALDUMGAMES",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
     }
   ],
   "attempts": {
@@ -793,7 +780,7 @@
       "status": "assessed"
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
-      "checkedAt": "2026-10-19T22:54:11+00:00",
+      "checkedAt": "2026-10-26T23:06:55+00:00",
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
@@ -905,7 +892,7 @@
       "status": "assessed"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
-      "checkedAt": "2026-10-18T21:30:27+00:00",
+      "checkedAt": "2026-10-26T23:06:58+00:00",
       "status": "insufficient-image"
     },
     "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384": {
@@ -917,7 +904,7 @@
       "status": "assessed"
     },
     "wrld_0508f15f-869b-44d4-b538-1f6615fd5273": {
-      "checkedAt": "2026-10-19T22:54:14+00:00",
+      "checkedAt": "2026-10-26T23:07:00+00:00",
       "status": "assessed"
     },
     "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350": {
@@ -983,6 +970,10 @@
     "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6": {
       "checkedAt": "2026-10-23T22:08:16+00:00",
       "status": "insufficient-image"
+    },
+    "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808": {
+      "checkedAt": "2026-10-26T23:07:03+00:00",
+      "status": "assessed"
     }
   }
 }
