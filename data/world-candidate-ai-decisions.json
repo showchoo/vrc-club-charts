@@ -677,5 +677,112 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_5ff8498c-85d6-4607-9bd1-10eff88bcdd5",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-10-27T23:50:17.319747+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_05da9a75-947a-4e7c-bccd-8f822969abc1",
+    "name": "DEADLIGHT",
+    "author": "Bombae",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description explicitly states it is a survival horror co-op game",
+        "Tags include horror, game, and survival",
+        "Thumbnail indicates a sci-fi or industrial survival horror setting"
+      ],
+      "reasonJa": "このワールドはサバイバルホラーゲームとして説明されており、クラブや音楽イベントの会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T23:50:20.309024+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_cfc94d63-c28f-4529-b483-f419f5ee8c44",
+    "name": "VRC Hogwarts",
+    "author": "~Robert",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "World name references Hogwarts from Harry Potter",
+        "Description mentions choosing a house, dueling, and exploring film locations",
+        "Tags include hogwarts, harry, potter, school, and wizard"
+      ],
+      "reasonJa": "ハリーポッターのホグワーツをテーマにした魔法学校の再現ワールドであり、ナイトクラブやレイブスペースではないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T23:50:22.332177+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b",
+    "name": "NIGHTIDEv2․2․0_放置育成RPG",
+    "author": "もこみる",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "World description explicitly states it is an idle RPG game",
+        "Tags include author_tag_game and author_tag_idle",
+        "Description mentions auto-battles, character collection, and raid features"
+      ],
+      "reasonJa": "放置育成RPGゲームとして設計されており、ナイトクラブやDJイベント用の空間ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T23:50:25.032409+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_99907368-1097-4a1e-a847-947bb12854cb",
+    "name": "slayTheUdon",
+    "author": "-帕休-",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Tags contain author_tag_game",
+        "Thumbnail shows anime-style characters holding cards",
+        "World name references deckbuilding game concepts"
+      ],
+      "reasonJa": "このワールドはゲームタグが付与されており、サムネイルにもカードゲームを想起させる要素が描かれているため、クラブではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T23:50:29.013246+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
