@@ -176,5 +176,85 @@
     ],
     "firstDiscoveredAt": "2026-10-26",
     "lastSeenAt": "2026-10-26"
+  },
+  {
+    "id": "wrld_5ff8498c-85d6-4607-9bd1-10eff88bcdd5",
+    "name": "Cu",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-241545",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-27",
+    "lastSeenAt": "2026-10-27"
+  },
+  {
+    "id": "wrld_05da9a75-947a-4e7c-bccd-8f822969abc1",
+    "name": "DEADLIGHT",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260479",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-27",
+    "lastSeenAt": "2026-10-27"
+  },
+  {
+    "id": "wrld_cfc94d63-c28f-4529-b483-f419f5ee8c44",
+    "name": "Hogwarts Great Hall",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-230523",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-27",
+    "lastSeenAt": "2026-10-27"
+  },
+  {
+    "id": "wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b",
+    "name": "NIGHTIDEv1.2.4_放置育成RPG",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260399",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-27",
+    "lastSeenAt": "2026-10-27"
+  },
+  {
+    "id": "wrld_99907368-1097-4a1e-a847-947bb12854cb",
+    "name": "slayTheUdon",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260407",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-27",
+    "lastSeenAt": "2026-10-27"
   }
 ]
