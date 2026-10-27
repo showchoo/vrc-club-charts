@@ -569,5 +569,113 @@
     "reviewedAt": "2026-10-25T22:39:00.174761+00:00",
     "source": "auto-discovery",
     "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_643c92c1-0415-4490-a621-6e2c73e5a74a",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-10-27T00:33:36.291371+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
+    "name": "Club Nebula",
+    "author": "Hayase Asakura",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.85,
+      "evidence": [
+        "Description mentions chilling, chatting, and hanging out rather than dancing or DJ events.",
+        "Description explicitly states it is a place to relax and features a bar and video player.",
+        "Tags include 'bar' and 'Cyberpunk', lacking explicit electronic music or rave focus."
+      ],
+      "reasonJa": "説明文に雑談やリラックスするための場所として紹介されており、ダンスイベントやレイブ特化型のクラブとしての主旨が明確ではないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T00:33:39.426493+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_b2792090-fac2-4e14-8ae6-32bb853c282c",
+    "name": "Bebe Dance studio",
+    "author": "BEBE CARROT",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "World name indicates it is a dance studio",
+        "Description mentions dance practice room and pole/airhoop",
+        "Tags include studio and dance rather than primary club elements"
+      ],
+      "reasonJa": "ダンス練習室やステージとして作られたスタジオであり、ナイトクラブやレイブスペースとしては設計されていないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-27T00:33:42.138610+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+    "name": "PREY",
+    "author": "Lightning4D",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "tags contain author_tag_club and author_tag_rave",
+        "tags contain author_tag_dj and author_tag_audiolink",
+        "description mentions rave",
+        "thumbnail shows neon lighting and stage-like atmosphere"
+      ],
+      "reasonJa": "タグにクラブやレイブ、DJが含まれ、説明文でもレイブ空間であることが示されているため、クラブと判定しました。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-27T00:33:45.185727+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+    "name": "Subway",
+    "author": "AyahuyA l あやふや",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "Tags include author_tag_club",
+        "Thumbnail text explicitly states Underground nightclub",
+        "World name is Subway"
+      ],
+      "reasonJa": "サムネイルに「Underground nightclub」と記載されており、タグにもクラブを示すものが含まれているため、クラブ目的のワールドと判定しました。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-10-27T00:33:49.035348+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

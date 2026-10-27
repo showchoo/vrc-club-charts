@@ -2432,6 +2432,41 @@
       }
     },
     {
+      "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+      "name": "PREY",
+      "author": "Lightning4D",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_ba037688-5248-4b4a-bdea-070ace1a2b85/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_83d25bd7-5eb3-423d-b5b1-03708d4769da",
       "name": "ProBuilder BOX",
       "author": "Nekomugi7se",
@@ -2889,6 +2924,41 @@
         "LIVE"
       ],
       "source": null,
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+      "name": "Subway",
+      "author": "AyahuyA l あやふや",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "releaseStatus": null,
