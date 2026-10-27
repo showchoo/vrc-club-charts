@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-26T23:07:03+00:00",
+  "updatedAt": "2026-10-27T22:56:43+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 120,
+    "totalCandidates": 124,
     "assessed": 24,
     "newAssessments": 3,
-    "pending": 93
+    "pending": 97
   },
   "scored": [
     {
@@ -605,20 +605,28 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_643c92c1-0415-4490-a621-6e2c73e5a74a",
-      "name": "Club Eru",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_643c92c1-0415-4490-a621-6e2c73e5a74a"
-    },
-    {
       "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
       "name": "Club Nebula",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a"
+    },
+    {
+      "id": "wrld_5ff8498c-85d6-4607-9bd1-10eff88bcdd5",
+      "name": "Cu",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_5ff8498c-85d6-4607-9bd1-10eff88bcdd5"
+    },
+    {
+      "id": "wrld_05da9a75-947a-4e7c-bccd-8f822969abc1",
+      "name": "DEADLIGHT",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_05da9a75-947a-4e7c-bccd-8f822969abc1"
     },
     {
       "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
@@ -629,12 +637,39 @@
       "url": "https://vrcmap.com/world/wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43"
     },
     {
+      "id": "wrld_cfc94d63-c28f-4529-b483-f419f5ee8c44",
+      "name": "Hogwarts Great Hall",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_cfc94d63-c28f-4529-b483-f419f5ee8c44"
+    },
+    {
       "id": "wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400",
       "name": "MISTRAL",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400"
+    },
+    {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
+    },
+    {
+      "id": "wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b",
+      "name": "NIGHTIDEv1.2.4_放置育成RPG",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b"
     },
     {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
@@ -656,20 +691,12 @@
       "url": "https://vrcmap.com/world/wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e"
     },
     {
-      "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
-      "name": "PREY",
+      "id": "wrld_99907368-1097-4a1e-a847-947bb12854cb",
+      "name": "slayTheUdon",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_ba037688-5248-4b4a-bdea-070ace1a2b85"
-    },
-    {
-      "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
-      "name": "Subway",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa"
+      "url": "https://vrcmap.com/world/wrld_99907368-1097-4a1e-a847-947bb12854cb"
     },
     {
       "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
@@ -726,44 +753,14 @@
       "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
-      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
-      "name": "Girl's night",
-      "author": "Ame୨୧",
+      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+      "name": "Decibel Vault VR Event Center",
+      "author": "SoundInVolumes",
       "sourceType": "catalog",
       "signals": [
-        "AUDIOLINK"
+        "STAGE"
       ],
-      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
-    },
-    {
-      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
-      "name": "IOLITE",
-      "author": "わヴぇふぃる",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
-    },
-    {
-      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
-      "name": "kakuhira's club house",
-      "author": "kakuhira",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
-    },
-    {
-      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
-      "name": "Lights Out Night Club",
-      "author": "Lights Out Host",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
+      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     }
   ],
   "attempts": {
@@ -844,7 +841,7 @@
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
-      "checkedAt": "2026-10-20T22:16:48+00:00",
+      "checkedAt": "2026-10-27T22:56:38+00:00",
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
@@ -912,11 +909,11 @@
       "status": "assessed"
     },
     "wrld_252e3107-9ae4-4513-a17a-321909162e21": {
-      "checkedAt": "2026-10-20T22:17:14+00:00",
+      "checkedAt": "2026-10-27T22:56:40+00:00",
       "status": "assessed"
     },
     "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc": {
-      "checkedAt": "2026-10-20T22:17:14+00:00",
+      "checkedAt": "2026-10-27T22:56:40+00:00",
       "status": "thumbnail-unavailable"
     },
     "wrld_06096e87-50c0-4fcd-b8ad-c7ed3aed96aa": {
@@ -924,7 +921,7 @@
       "status": "assessed"
     },
     "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1": {
-      "checkedAt": "2026-10-20T22:17:16+00:00",
+      "checkedAt": "2026-10-27T22:56:43+00:00",
       "status": "assessed"
     },
     "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043": {
