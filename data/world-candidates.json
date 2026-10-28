@@ -16,22 +16,6 @@
     "lastSeenAt": "2026-10-28"
   },
   {
-    "id": "wrld_33b397dc-5381-4bbd-af52-1122114e2d07",
-    "name": "VORELAB",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240948",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-28",
-    "lastSeenAt": "2026-10-28"
-  },
-  {
     "id": "wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd",
     "name": "アンジェリカ・サルヴァティオ教会",
     "authorHint": "",

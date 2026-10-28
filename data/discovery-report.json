@@ -1,14 +1,14 @@
 {
   "updatedAt": "2026-10-28",
   "registeredWorlds": 108,
-  "pendingCandidates": 5,
-  "totalTrackedWorlds": 136,
+  "pendingCandidates": 4,
+  "totalTrackedWorlds": 135,
   "historicalOnly": 23,
   "bySource": {
     "catalog": 108,
     "event-curated": 1,
     "nominated-url": 2,
-    "sia_vr_club": 35,
+    "sia_vr_club": 34,
     "source-reference": 14,
     "vrcmap_cafe": 2
   },

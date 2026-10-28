@@ -494,22 +494,6 @@
     ]
   },
   {
-    "id": "wrld_33b397dc-5381-4bbd-af52-1122114e2d07",
-    "name": "VORELAB",
-    "authorHint": "",
-    "firstSeenAt": "2026-10-28",
-    "lastSeenAt": "2026-10-28",
-    "status": "pending",
-    "evidence": [
-      {
-        "source": "sia_vr_club",
-        "ref": "https://sia-vr.com/vrchat-world-240948",
-        "firstSeenAt": "2026-10-28",
-        "lastSeenAt": "2026-10-28"
-      }
-    ]
-  },
-  {
     "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
     "name": "ORBITER 9",
     "authorHint": "Cloma",

@@ -784,5 +784,86 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_52a84f8f-a1c3-4073-a1f4-f7e6cb417e85",
+    "name": "Aqua School",
+    "author": "Berryベリー",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "World name and description indicate a school theme",
+        "Tags include school and aquarium",
+        "Thumbnail shows an indoor hallway resembling a school"
+      ],
+      "reasonJa": "ワールド名やタグから学校をテーマにした目的であることがあり、クラブやイベント会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-28T23:18:47.649578+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_33b397dc-5381-4bbd-af52-1122114e2d07",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-10-28T23:18:47.726342+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-10-28T23:18:47.799848+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
+  },
+  {
+    "id": "wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7",
+    "name": "木犀環 ~Osmanthus Halo~",
+    "author": "yo-guruto",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "金木犀の花を眺めてリラックスするためのワールドである",
+        "説明文にミラーのみ設置されていると記載されている",
+        "タグにchillやrelaxが含まれている"
+      ],
+      "reasonJa": "金木犀の花を眺めてリラックスするための鑑賞・休息用ワールドであり、ナイトクラブやDJイベント向けの施設ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-28T23:18:49.916387+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_4ff971d5-652c-4199-857c-2482ce054d83",
+    "name": "白瀬団地4",
+    "author": "ottotto_おっとっと",
+    "status": "classification_unavailable",
+    "classification": {},
+    "note": "Gemini classification temporarily unavailable: ValueError",
+    "reviewedAt": "2026-10-28T23:18:52.669720+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
   }
 ]
