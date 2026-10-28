@@ -1,43 +1,9 @@
 [
   {
-    "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
-    "name": "Alter Sound Wave Club",
+    "id": "wrld_52a84f8f-a1c3-4073-a1f4-f7e6cb417e85",
+    "name": "Aqua School",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241448",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-10-23",
-    "lastSeenAt": "2026-10-23"
-  },
-  {
-    "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
-    "name": "Club Nebula",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240978",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-10-26",
-    "lastSeenAt": "2026-10-26"
-  },
-  {
-    "id": "wrld_602c3f66-4c18-4f7a-ac28-de165f19be9e",
-    "name": "Olympus Lounge – Texas Hold’Em",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241225",
+    "source": "https://sia-vr.com/vrchat-world-230103",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -46,14 +12,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-24",
-    "lastSeenAt": "2026-10-24"
+    "firstDiscoveredAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28"
   },
   {
-    "id": "wrld_43064a14-aa8a-4882-850e-7fb37469eb43",
-    "name": "Unshattered Destination",
+    "id": "wrld_33b397dc-5381-4bbd-af52-1122114e2d07",
+    "name": "VORELAB",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241277",
+    "source": "https://sia-vr.com/vrchat-world-240948",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -62,14 +28,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-24",
-    "lastSeenAt": "2026-10-24"
+    "firstDiscoveredAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28"
   },
   {
-    "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
-    "name": "vrc_living_quarters",
+    "id": "wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd",
+    "name": "アンジェリカ・サルヴァティオ教会",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241303",
+    "source": "https://sia-vr.com/vrchat-world-250021",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -78,14 +44,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-24",
-    "lastSeenAt": "2026-10-24"
+    "firstDiscoveredAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28"
   },
   {
-    "id": "wrld_5e8adb56-e91f-4e92-93e4-df04a5398395",
-    "name": "_REALITY",
+    "id": "wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7",
+    "name": "木犀環 ~Osmanthus Halo~",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241104",
+    "source": "https://sia-vr.com/vrchat-world-260498",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -94,14 +60,14 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-25",
-    "lastSeenAt": "2026-10-25"
+    "firstDiscoveredAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28"
   },
   {
-    "id": "wrld_a26fe9f9-f3d6-4d8c-b2e1-069391f1cfc9",
-    "name": "Barclay Tower",
+    "id": "wrld_4ff971d5-652c-4199-857c-2482ce054d83",
+    "name": "白瀬団地4",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241203",
+    "source": "https://sia-vr.com/vrchat-world-260366",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -110,135 +76,7 @@
     "reasons": [
       "source:sia-vr-club"
     ],
-    "firstDiscoveredAt": "2026-10-25",
-    "lastSeenAt": "2026-10-25"
-  },
-  {
-    "id": "wrld_09cea6d8-31a2-4942-94c4-8d2c8cbcaa43",
-    "name": "Furdu Furbidden Planet 2024 Portal",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241043",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-25",
-    "lastSeenAt": "2026-10-25"
-  },
-  {
-    "id": "wrld_2d4d86c6-f7e9-47ed-849b-854eb4748400",
-    "name": "MISTRAL",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241053",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-25",
-    "lastSeenAt": "2026-10-25"
-  },
-  {
-    "id": "wrld_da0bc9da-ed3a-4b22-9374-14ee25097edf",
-    "name": "牛马俱乐部V3",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-241117",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-25",
-    "lastSeenAt": "2026-10-25"
-  },
-  {
-    "id": "wrld_b2792090-fac2-4e14-8ae6-32bb853c282c",
-    "name": "Bebe Dance studio",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240888",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-26",
-    "lastSeenAt": "2026-10-26"
-  },
-  {
-    "id": "wrld_05da9a75-947a-4e7c-bccd-8f822969abc1",
-    "name": "DEADLIGHT",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-260479",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-27",
-    "lastSeenAt": "2026-10-27"
-  },
-  {
-    "id": "wrld_cfc94d63-c28f-4529-b483-f419f5ee8c44",
-    "name": "Hogwarts Great Hall",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230523",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-27",
-    "lastSeenAt": "2026-10-27"
-  },
-  {
-    "id": "wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b",
-    "name": "NIGHTIDEv1.2.4_放置育成RPG",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-260399",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-27",
-    "lastSeenAt": "2026-10-27"
-  },
-  {
-    "id": "wrld_99907368-1097-4a1e-a847-947bb12854cb",
-    "name": "slayTheUdon",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-260407",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-10-27",
-    "lastSeenAt": "2026-10-27"
+    "firstDiscoveredAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28"
   }
 ]

@@ -65,7 +65,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-27",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -135,7 +135,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-25",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -419,7 +419,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-25",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -489,6 +489,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
+    "id": "wrld_33b397dc-5381-4bbd-af52-1122114e2d07",
+    "name": "VORELAB",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240948",
+        "firstSeenAt": "2026-10-28",
         "lastSeenAt": "2026-10-28"
       }
     ]
@@ -570,6 +586,22 @@
     ]
   },
   {
+    "id": "wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd",
+    "name": "アンジェリカ・サルヴァティオ教会",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-250021",
+        "firstSeenAt": "2026-10-28",
+        "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
     "id": "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346",
     "name": "水八咫電気",
     "authorHint": "COMA․",
@@ -597,7 +629,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-23",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -645,7 +677,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-24",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -720,6 +752,22 @@
     ]
   },
   {
+    "id": "wrld_4ff971d5-652c-4199-857c-2482ce054d83",
+    "name": "白瀬団地4",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260366",
+        "firstSeenAt": "2026-10-28",
+        "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
     "id": "wrld_501c9f08-cd8c-4b77-94d9-69e631ff5374",
     "name": "中文歌友会-体育场EMF舞台旧",
     "authorHint": "小杨又失利了",
@@ -731,6 +779,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/event_venue",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
+    "id": "wrld_52a84f8f-a1c3-4073-a1f4-f7e6cb417e85",
+    "name": "Aqua School",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230103",
+        "firstSeenAt": "2026-10-28",
         "lastSeenAt": "2026-10-28"
       }
     ]
@@ -915,7 +979,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-25",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -953,7 +1017,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-24",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1205,7 +1269,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-26",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1237,7 +1301,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-24",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1521,7 +1585,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-27",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1569,7 +1633,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-25",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1709,7 +1773,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-26",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1854,6 +1918,22 @@
     ]
   },
   {
+    "id": "wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7",
+    "name": "木犀環 ~Osmanthus Halo~",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-28",
+    "lastSeenAt": "2026-10-28",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260498",
+        "firstSeenAt": "2026-10-28",
+        "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
     "id": "wrld_c292785c-0700-449a-9963-2dd97dc3fa83",
     "name": "PLASMA Reactive Club",
     "authorHint": "TheCocasio",
@@ -1973,7 +2053,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-27",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2043,7 +2123,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-25",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2215,7 +2295,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-27",
     "lastSeenAt": "2026-10-28",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",

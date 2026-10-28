@@ -1,64 +1,64 @@
 {
   "updatedAt": "2026-10-28",
   "registeredWorlds": 108,
-  "pendingCandidates": 15,
-  "totalTrackedWorlds": 131,
-  "historicalOnly": 8,
+  "pendingCandidates": 5,
+  "totalTrackedWorlds": 136,
+  "historicalOnly": 23,
   "bySource": {
     "catalog": 108,
     "event-curated": 1,
     "nominated-url": 2,
-    "sia_vr_club": 30,
+    "sia_vr_club": 35,
     "source-reference": 14,
     "vrcmap_cafe": 2
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 48
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "listedWorldIds": 50
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "seedsChecked": 4,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-10-27",
+      "lastAttemptAt": "2026-10-28",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
