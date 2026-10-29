@@ -1232,6 +1232,22 @@
     ]
   },
   {
+    "id": "wrld_7b49b124-a144-4048-80a4-35276b72d738",
+    "name": "退勤",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260486",
+        "firstSeenAt": "2026-10-29",
+        "lastSeenAt": "2026-10-29"
+      }
+    ]
+  },
+  {
     "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
     "name": "The Deep Dusk - Magic Land Mod",
     "authorHint": "Lydia K",
@@ -1350,6 +1366,22 @@
     ]
   },
   {
+    "id": "wrld_8618b8ff-c3e7-4146-91d0-0ad1adfeef9c",
+    "name": "微瀾 – Nocturne",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260503",
+        "firstSeenAt": "2026-10-29",
+        "lastSeenAt": "2026-10-29"
+      }
+    ]
+  },
+  {
     "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
     "name": "Lunar Night Club",
     "authorHint": "NeonSkittlesPup",
@@ -1361,6 +1393,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-29"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde",
+    "name": "No Reason ⁄ 理由もなく",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260499",
+        "firstSeenAt": "2026-10-29",
         "lastSeenAt": "2026-10-29"
       }
     ]
@@ -1747,6 +1795,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-29"
+      }
+    ]
+  },
+  {
+    "id": "wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69",
+    "name": "星の入り江 – Liminal Cove",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260501",
+        "firstSeenAt": "2026-10-29",
         "lastSeenAt": "2026-10-29"
       }
     ]

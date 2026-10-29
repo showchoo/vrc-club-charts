@@ -29,7 +29,7 @@
       "source:sia-vr-club"
     ],
     "firstDiscoveredAt": "2026-10-28",
-    "lastSeenAt": "2026-10-28"
+    "lastSeenAt": "2026-10-29"
   },
   {
     "id": "wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7",
@@ -62,5 +62,69 @@
     ],
     "firstDiscoveredAt": "2026-10-28",
     "lastSeenAt": "2026-10-28"
+  },
+  {
+    "id": "wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde",
+    "name": "No Reason ⁄ 理由もなく",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260499",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29"
+  },
+  {
+    "id": "wrld_8618b8ff-c3e7-4146-91d0-0ad1adfeef9c",
+    "name": "微瀾 – Nocturne",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260503",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29"
+  },
+  {
+    "id": "wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69",
+    "name": "星の入り江 – Liminal Cove",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260501",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29"
+  },
+  {
+    "id": "wrld_7b49b124-a144-4048-80a4-35276b72d738",
+    "name": "退勤",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260486",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-10-29",
+    "lastSeenAt": "2026-10-29"
   }
 ]
