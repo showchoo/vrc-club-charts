@@ -859,11 +859,24 @@
     "id": "wrld_4ff971d5-652c-4199-857c-2482ce054d83",
     "name": "白瀬団地4",
     "author": "ottotto_おっとっと",
-    "status": "classification_unavailable",
-    "classification": {},
-    "note": "Gemini classification temporarily unavailable: ValueError",
-    "reviewedAt": "2026-10-28T23:18:52.669720+00:00",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "タグに mystery と horror が含まれている",
+        "説明文が団地をテーマにした怪異やホラーを示唆している",
+        "サムネイルに団地のアイコンが表示されている"
+      ],
+      "reasonJa": "団地をテーマにしたホラーやミステリー要素を持つワールドであり、ナイトクラブやDJイベント用の空間ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-29T05:58:31.028289+00:00",
     "source": "auto-discovery",
-    "classifierRevision": "json-validation-20261007-v2"
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
