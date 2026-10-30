@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-29T23:17:18+00:00",
+  "updatedAt": "2026-10-30T22:58:25+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 116,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 89
+    "newAssessments": 0,
+    "pending": 92
   },
   "scored": [
     {
@@ -689,6 +689,16 @@
       "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
+      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+      "name": "Decibel Vault VR Event Center",
+      "author": "SoundInVolumes",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
+    },
+    {
       "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
       "name": "Girl's night",
       "author": "Ame୨୧",
@@ -767,16 +777,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
-    },
-    {
-      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
-      "name": "stadium rave A （audiolink party world ）",
-      "author": "ALDUMGAMES",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
     }
   ],
   "attempts": {
@@ -797,8 +797,8 @@
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
-      "checkedAt": "2026-10-23T22:08:13+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-10-30T22:58:25+00:00",
+      "status": "provider-unavailable"
     },
     "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92": {
       "checkedAt": "2026-10-06T12:51:24+00:00",
