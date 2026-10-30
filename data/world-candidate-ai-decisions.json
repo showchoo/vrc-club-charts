@@ -878,5 +878,102 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde",
+    "name": "No Reason ⁄ 理由もなく",
+    "author": "_Harim",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Tags include 'author_tag_home', 'author_tag_chill', and 'author_tag_nostalgic'.",
+        "Description mentions a personal sentiment about finding happiness.",
+        "Thumbnail shows a cozy indoor desk setup and personal room environment."
+      ],
+      "reasonJa": "ホームやチル向けのタグが付与されており、説明文やサムネイル画像からもクラブではなくプライベートな空間や鑑賞用ワールドであるため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-29T23:59:37.721192+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_8618b8ff-c3e7-4146-91d0-0ad1adfeef9c",
+    "name": "微瀾 - Nocturne",
+    "author": "安秋UNCHO",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "Tags include calm, relax, atmosphere, starfield",
+        "Thumbnail shows a calm night sky with a moon and water reflection",
+        "No nightclub or DJ event tags present"
+      ],
+      "reasonJa": "星空や水面をモチーフにしたリラックス向けの環境であり、ナイトクラブやDJイベント向けの空間ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-29T23:59:39.744980+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69",
+    "name": "星の入り江 - Liminal Cove",
+    "author": "- Shigure -",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "World name implies a natural cove setting",
+        "Description mentions avatar lighting adjustments",
+        "Tag includes chill",
+        "Thumbnail shows a nocturnal beach with bioluminescent water"
+      ],
+      "reasonJa": "星が輝く入り江と発光する波打ち際が描かれた静穏な景観であり、ナイトクラブやレイブスペースの要素は見当たりません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-30T00:00:03.531574+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_7b49b124-a144-4048-80a4-35276b72d738",
+    "name": "退勤",
+    "author": "よけいっ",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description indicates a J-horror experience set in an office",
+        "Tags include horror, spooky, office, and game",
+        "Thumbnail shows title text with a glitch effect typical of horror games"
+      ],
+      "reasonJa": "オフィスを舞台にしたJホラーゲームであり、ナイトクラブやDJイベント向けの空間ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-30T00:00:05.199936+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
