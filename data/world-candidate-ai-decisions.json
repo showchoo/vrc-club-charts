@@ -975,5 +975,125 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
+    "name": "Endless Suburbia",
+    "author": "Onioncod",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description states it is a Backrooms-inspired scenic world for exploration and photography.",
+        "Tags include liminal, chill, and relax.",
+        "No mention of nightclub, DJ events, or rave space in the metadata."
+      ],
+      "reasonJa": "このワールドは探索や写真撮影を目的としたリムナールスペースであり、ナイトクラブやレイヴ会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-31T23:27:53.765448+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_8edab379-d5de-4d05-8605-31b4fd4709f4",
+    "name": "La Fille Pink Pool Lounge",
+    "author": "テンコ・モリ",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description states it is an official world of a 3D interior store promoting products available on BOOTH",
+        "Description describes the space as a lounge with a pink sandy beach style pool",
+        "Tags include 'bar', 'chill', 'party', but lack any club, DJ, or rave identifiers"
+      ],
+      "reasonJa": "3Dインテリアショップの公式ワールドであり、ピンクの砂浜風プール付きラウンジとして紹介されているため、クラブではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-31T23:27:58.066131+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
+    "name": "RS COASTER SECTOR",
+    "author": "あーるえす",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "3種類のジェットコースターと観覧車に乗れる遊園地ワールド",
+        "author_tag_RollerCoaster",
+        "author_tag_Ride"
+      ],
+      "reasonJa": "ワールドの内容がジェットコースターや観覽車を楽しむ遊出地であり、クラブやイベント会場ではないため。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-31T23:28:03.522048+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db",
+    "name": "ネルフランド（α）",
+    "author": "セヴンズキル",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description mentions a fan-made game world with pachinko and mini-games",
+        "Tags include author_tag_game, author_tag_paclinko, author_tag_slot",
+        "Thumbnail shows pachinko and slot machines"
+      ],
+      "reasonJa": "エヴァンゲリオンのパチンコやミニゲームで遊ぶためのゲームワールドであり、クラブやDJイベントの会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-31T23:28:10.327194+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e",
+    "name": "秋の並木道-autumn street-",
+    "author": "kun_hiro",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "説明文に紅葉の並木道を歩く散策用ワールドであることが明記されている",
+        "タグにphotographyやchillが含まれており、写真撮影やリラックスが目的である",
+        "サムネイル画像にはベンチのある秋の並木道が描かれており、ダンスやDJの要素はない"
+      ],
+      "reasonJa": "秋の並木道を散策して写真撮影を楽しむためのワールドであり、ナイトクラブやDJイベントの会場ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-10-31T23:28:15.764824+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
