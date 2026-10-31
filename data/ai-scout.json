@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-30T22:58:25+00:00",
+  "updatedAt": "2026-10-31T22:28:41+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 116,
+    "totalCandidates": 113,
     "assessed": 24,
-    "newAssessments": 0,
-    "pending": 92
+    "newAssessments": 3,
+    "pending": 86
   },
   "scored": [
     {
@@ -562,14 +562,6 @@
       "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
     },
     {
-      "id": "wrld_52a84f8f-a1c3-4073-a1f4-f7e6cb417e85",
-      "name": "Aqua School",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_52a84f8f-a1c3-4073-a1f4-f7e6cb417e85"
-    },
-    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -579,6 +571,22 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
+    },
+    {
+      "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
+      "name": "Endless Suburbia",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_21d6afad-8b22-4b4c-bde0-78991413b525"
+    },
+    {
+      "id": "wrld_8edab379-d5de-4d05-8605-31b4fd4709f4",
+      "name": "La Fille Pink Pool Lounge",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_8edab379-d5de-4d05-8605-31b4fd4709f4"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -592,71 +600,28 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
-      "id": "wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde",
-      "name": "No Reason ⁄ 理由もなく",
+      "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
+      "name": "RS COASTER SECTOR",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde"
+      "url": "https://vrcmap.com/world/wrld_d389407f-b02f-446b-8096-12112be07a7f"
     },
     {
-      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
-      "name": "Oh's Party Ballroom",
-      "author": "emymin",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
-    },
-    {
-      "id": "wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd",
-      "name": "アンジェリカ・サルヴァティオ教会",
+      "id": "wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db",
+      "name": "ネルフランド（α）",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_3bb7444b-6b4b-4ab8-8d48-b719fdab12fd"
+      "url": "https://vrcmap.com/world/wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db"
     },
     {
-      "id": "wrld_8618b8ff-c3e7-4146-91d0-0ad1adfeef9c",
-      "name": "微瀾 – Nocturne",
+      "id": "wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e",
+      "name": "秋の並木道-autumn street-",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_8618b8ff-c3e7-4146-91d0-0ad1adfeef9c"
-    },
-    {
-      "id": "wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69",
-      "name": "星の入り江 – Liminal Cove",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69"
-    },
-    {
-      "id": "wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7",
-      "name": "木犀環 ~Osmanthus Halo~",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_c1ce2088-0b86-4a99-9074-ac709920bbe7"
-    },
-    {
-      "id": "wrld_4ff971d5-652c-4199-857c-2482ce054d83",
-      "name": "白瀬団地4",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_4ff971d5-652c-4199-857c-2482ce054d83"
-    },
-    {
-      "id": "wrld_7b49b124-a144-4048-80a4-35276b72d738",
-      "name": "退勤",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_7b49b124-a144-4048-80a4-35276b72d738"
+      "url": "https://vrcmap.com/world/wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -697,26 +662,6 @@
         "STAGE"
       ],
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
-    },
-    {
-      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
-      "name": "Girl's night",
-      "author": "Ame୨୧",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
-    },
-    {
-      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
-      "name": "IOLITE",
-      "author": "わヴぇふぃる",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
     },
     {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
@@ -777,6 +722,64 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+    },
+    {
+      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
+      "name": "stadium rave A （audiolink party world ）",
+      "author": "ALDUMGAMES",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
+    },
+    {
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
+    },
+    {
+      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
+      "name": "The Ruiners Club Venue［BETA VERSION］",
+      "author": "Ａｒｔｉ",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
+    },
+    {
+      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+      "name": "TUBE VR - IN THE DANCE",
+      "author": "Hadean",
+      "sourceType": "catalog",
+      "signals": [
+        "IMMERSIVE"
+      ],
+      "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
+    },
+    {
+      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+      "name": "アストロビーチ",
+      "author": "チョス_Thoth",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
     }
   ],
   "attempts": {
@@ -797,8 +800,8 @@
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
-      "checkedAt": "2026-10-30T22:58:25+00:00",
-      "status": "provider-unavailable"
+      "checkedAt": "2026-10-31T22:28:08+00:00",
+      "status": "assessed"
     },
     "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92": {
       "checkedAt": "2026-10-06T12:51:24+00:00",
@@ -849,11 +852,11 @@
       "status": "assessed"
     },
     "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
-      "checkedAt": "2026-10-23T22:08:19+00:00",
+      "checkedAt": "2026-10-31T22:28:37+00:00",
       "status": "assessed"
     },
     "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6": {
-      "checkedAt": "2026-10-23T22:08:21+00:00",
+      "checkedAt": "2026-10-31T22:28:41+00:00",
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
@@ -981,7 +984,7 @@
       "status": "assessed"
     },
     "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6": {
-      "checkedAt": "2026-10-23T22:08:16+00:00",
+      "checkedAt": "2026-10-31T22:28:33+00:00",
       "status": "insufficient-image"
     },
     "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808": {
