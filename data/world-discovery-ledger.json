@@ -318,6 +318,22 @@
     ]
   },
   {
+    "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
+    "name": "Endless Suburbia",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-31",
+    "lastSeenAt": "2026-10-31",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260336",
+        "firstSeenAt": "2026-10-31",
+        "lastSeenAt": "2026-10-31"
+      }
+    ]
+  },
+  {
     "id": "wrld_24ad9d9c-1489-406d-af2f-aeb938831280",
     "name": "padded boiler room",
     "authorHint": "KER 3271",
@@ -575,7 +591,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-28",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -741,7 +757,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-28",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -773,7 +789,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-28",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1237,7 +1253,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-29",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1371,7 +1387,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-29",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1403,12 +1419,28 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-29",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-260499",
         "firstSeenAt": "2026-10-29",
+        "lastSeenAt": "2026-10-31"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e",
+    "name": "秋の並木道-autumn street-",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-31",
+    "lastSeenAt": "2026-10-31",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260403",
+        "firstSeenAt": "2026-10-31",
         "lastSeenAt": "2026-10-31"
       }
     ]
@@ -1425,6 +1457,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-31"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8edab379-d5de-4d05-8605-31b4fd4709f4",
+    "name": "La Fille Pink Pool Lounge",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-31",
+    "lastSeenAt": "2026-10-31",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-250484",
+        "firstSeenAt": "2026-10-31",
         "lastSeenAt": "2026-10-31"
       }
     ]
@@ -1544,6 +1592,22 @@
         "ref": "https://sia-vr.com/vrchat-world-241730",
         "firstSeenAt": "2026-10-22",
         "lastSeenAt": "2026-10-22"
+      }
+    ]
+  },
+  {
+    "id": "wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db",
+    "name": "ネルフランド（α）",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-31",
+    "lastSeenAt": "2026-10-31",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230891",
+        "firstSeenAt": "2026-10-31",
+        "lastSeenAt": "2026-10-31"
       }
     ]
   },
@@ -1805,7 +1869,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-29",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1971,7 +2035,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-28",
     "lastSeenAt": "2026-10-31",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2139,6 +2203,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-10-31"
+      }
+    ]
+  },
+  {
+    "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
+    "name": "RS COASTER SECTOR",
+    "authorHint": "",
+    "firstSeenAt": "2026-10-31",
+    "lastSeenAt": "2026-10-31",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-260454",
+        "firstSeenAt": "2026-10-31",
         "lastSeenAt": "2026-10-31"
       }
     ]
