@@ -1095,5 +1095,40 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
+    "name": "B5 Parking",
+    "author": "FDzama Gnuk",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "World name is B5 Parking",
+        "Description mentions parking area",
+        "Thumbnail shows a parking garage with cars"
+      ],
+      "reasonJa": "ワールド名や説明文、サムネイル画像から地下駐車場を模した空間であり、クラブやレイブ会場ではないと判断されます。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-01T23:40:47.032623+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
+    "name": "DanceWorld ˸ Alice",
+    "author": "Masasi_TG",
+    "status": "classification_unavailable",
+    "classification": {},
+    "note": "Gemini classification temporarily unavailable: ValueError",
+    "reviewedAt": "2026-11-01T23:40:48.760820+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2"
   }
 ]
