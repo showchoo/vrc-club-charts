@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-10-31T22:28:41+00:00",
+  "updatedAt": "2026-11-01T22:47:56+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 113,
+    "totalCandidates": 118,
     "assessed": 24,
     "newAssessments": 3,
-    "pending": 86
+    "pending": 91
   },
   "scored": [
     {
@@ -562,6 +562,14 @@
       "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
     },
     {
+      "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
+      "name": "B5 Parking",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9"
+    },
+    {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
       "name": "Club Deviate",
       "author": "TOTC",
@@ -573,12 +581,28 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
+      "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
+      "name": "DanceWorld ˸ Alice",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42"
+    },
+    {
       "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
       "name": "Endless Suburbia",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_21d6afad-8b22-4b4c-bde0-78991413b525"
+    },
+    {
+      "id": "wrld_22682321-26e1-494e-a9b4-b87d7e935c25",
+      "name": "HTC VIVE SPACE",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_22682321-26e1-494e-a9b4-b87d7e935c25"
     },
     {
       "id": "wrld_8edab379-d5de-4d05-8605-31b4fd4709f4",
@@ -600,12 +624,39 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
+    },
+    {
+      "id": "wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6",
+      "name": "RAMP",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6"
+    },
+    {
       "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
       "name": "RS COASTER SECTOR",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_d389407f-b02f-446b-8096-12112be07a7f"
+    },
+    {
+      "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+      "name": "The Dingo Denǃ",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2"
     },
     {
       "id": "wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db",
@@ -664,6 +715,26 @@
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     },
     {
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
+    },
+    {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
+    },
+    {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
       "name": "kakuhira's club house",
       "author": "kakuhira",
@@ -674,26 +745,6 @@
       "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
-      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
-      "name": "Lights Out Night Club",
-      "author": "Lights Out Host",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
-    },
-    {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -702,16 +753,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
-      "name": "Neon Catnip - Customizable DJ Venue",
-      "author": "DJ Megu",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
       "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
@@ -732,54 +773,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
-    },
-    {
-      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
-      "name": "The Deep Dusk - Magic Land Mod",
-      "author": "Lydia K",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
-    },
-    {
-      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
-      "name": "The Ruiners Club Venue［BETA VERSION］",
-      "author": "Ａｒｔｉ",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8.html"
-    },
-    {
-      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
-      "name": "TUBE VR - IN THE DANCE",
-      "author": "Hadean",
-      "sourceType": "catalog",
-      "signals": [
-        "IMMERSIVE"
-      ],
-      "url": "worlds/wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2.html"
-    },
-    {
-      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
-      "name": "アストロビーチ",
-      "author": "チョス_Thoth",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_0508f15f-869b-44d4-b538-1f6615fd5273.html"
-    },
-    {
-      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
-      "name": "After Dark Night Club",
-      "author": "₥₳J₳․₴Ø₥₥ɆR",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_252e3107-9ae4-4513-a17a-321909162e21.html"
     }
   ],
   "attempts": {
@@ -864,15 +857,15 @@
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
-      "checkedAt": "2026-10-24T21:35:49+00:00",
-      "status": "insufficient-image"
+      "checkedAt": "2026-11-01T22:47:47+00:00",
+      "status": "assessed"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-10-24T21:35:51+00:00",
+      "checkedAt": "2026-11-01T22:47:50+00:00",
       "status": "assessed"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
-      "checkedAt": "2026-10-24T21:35:55+00:00",
+      "checkedAt": "2026-11-01T22:47:54+00:00",
       "status": "insufficient-image"
     },
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
@@ -880,7 +873,7 @@
       "status": "assessed"
     },
     "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682": {
-      "checkedAt": "2026-10-24T21:35:57+00:00",
+      "checkedAt": "2026-11-01T22:47:56+00:00",
       "status": "assessed"
     },
     "wrld_c292785c-0700-449a-9963-2dd97dc3fa83": {
