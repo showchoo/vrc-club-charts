@@ -168,6 +168,22 @@
     ]
   },
   {
+    "id": "wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6",
+    "name": "RAMP",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240868",
+        "firstSeenAt": "2026-11-01",
+        "lastSeenAt": "2026-11-01"
+      }
+    ]
+  },
+  {
     "id": "wrld_0b42489a-dfb5-4bc5-821e-91a59f4aeee2",
     "name": "TMJ CLUB",
     "authorHint": "tumujin",
@@ -329,6 +345,22 @@
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-260336",
         "firstSeenAt": "2026-10-31",
+        "lastSeenAt": "2026-11-01"
+      }
+    ]
+  },
+  {
+    "id": "wrld_22682321-26e1-494e-a9b4-b87d7e935c25",
+    "name": "HTC VIVE SPACE",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240799",
+        "firstSeenAt": "2026-11-01",
         "lastSeenAt": "2026-11-01"
       }
     ]
@@ -581,6 +613,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-01"
+      }
+    ]
+  },
+  {
+    "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+    "name": "The Dingo Denǃ",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240734",
+        "firstSeenAt": "2026-11-01",
         "lastSeenAt": "2026-11-01"
       }
     ]
@@ -1998,6 +2046,22 @@
     ]
   },
   {
+    "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
+    "name": "B5 Parking",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240465",
+        "firstSeenAt": "2026-11-01",
+        "lastSeenAt": "2026-11-01"
+      }
+    ]
+  },
+  {
     "id": "wrld_bd302e3d-0951-4596-99a3-ae99aad7b1d9",
     "name": "Spanish Cooming Soon Club",
     "authorHint": "врзешка",
@@ -2375,6 +2439,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dance",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-01"
+      }
+    ]
+  },
+  {
+    "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
+    "name": "DanceWorld ˸ Alice",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240751",
+        "firstSeenAt": "2026-11-01",
         "lastSeenAt": "2026-11-01"
       }
     ]

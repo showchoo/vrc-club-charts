@@ -78,5 +78,85 @@
     ],
     "firstDiscoveredAt": "2026-10-31",
     "lastSeenAt": "2026-10-31"
+  },
+  {
+    "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
+    "name": "B5 Parking",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240465",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01"
+  },
+  {
+    "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
+    "name": "DanceWorld ˸ Alice",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240751",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01"
+  },
+  {
+    "id": "wrld_22682321-26e1-494e-a9b4-b87d7e935c25",
+    "name": "HTC VIVE SPACE",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240799",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01"
+  },
+  {
+    "id": "wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6",
+    "name": "RAMP",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240868",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01"
+  },
+  {
+    "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+    "name": "The Dingo Denǃ",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240734",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-01",
+    "lastSeenAt": "2026-11-01"
   }
 ]
