@@ -142,21 +142,5 @@
     ],
     "firstDiscoveredAt": "2026-11-01",
     "lastSeenAt": "2026-11-01"
-  },
-  {
-    "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
-    "name": "The Dingo Denǃ",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240734",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-01",
-    "lastSeenAt": "2026-11-01"
   }
 ]

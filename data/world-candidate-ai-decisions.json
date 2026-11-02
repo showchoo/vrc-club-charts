@@ -1124,11 +1124,95 @@
     "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
     "name": "DanceWorld ˸ Alice",
     "author": "Masasi_TG",
-    "status": "classification_unavailable",
-    "classification": {},
-    "note": "Gemini classification temporarily unavailable: ValueError",
-    "reviewedAt": "2026-11-01T23:40:48.760820+00:00",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.85,
+      "evidence": [
+        "Description indicates the world is a commercial asset sample for Booth",
+        "Tags include author_tag_chill and author_tag_playing_cards rather than club-specific terms"
+      ],
+      "reasonJa": "このワールドはBoothで販売されているアセットのサンプル展示用であり、常設のナイトクラブやレイブスペースとして機能するものではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-02T06:24:02.666930+00:00",
     "source": "auto-discovery",
-    "classifierRevision": "json-validation-20261007-v2"
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_22682321-26e1-494e-a9b4-b87d7e935c25",
+    "name": "HTC VIVE SPACE",
+    "author": "BEBE CARROT",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.95,
+      "evidence": [
+        "World name is HTC VIVE SPACE",
+        "Description states it is for trying on VIVE VR and viewing posters and videos",
+        "Thumbnail shows HTC VIVE promotional displays and hardware"
+      ],
+      "reasonJa": "このワールドはHTC VIVEの展示やプロモーションを目的としており、ナイトクラブやDJイベント用の空間ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-02T06:24:04.576149+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6",
+    "name": "RAMP V3",
+    "author": "FlyingFly",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "uncertain",
+      "confidence": 0.5,
+      "evidence": [
+        "ワールド名がRAMP V3である",
+        "説明文には制作者の情報のみでクラブに関する言及がない",
+        "サムネイル画像には赤黒の抽象的なグラフィックとRAMPの文字のみが表示されている"
+      ],
+      "reasonJa": "ワールド名やサムネイルにクラブを明示する情報はなく、説明文も制作者クレジットのみであるため、クラブ目的であるか判断できません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-02T06:24:06.519307+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+    "name": "The Dingo Denǃ",
+    "author": "CoffeeBandit`",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description explicitly states it is a neon danceclub",
+        "Mentions an audiolink dance floor and a bar with fillable glasses",
+        "Thumbnail shows a brightly lit entrance with neon lighting fitting a venue space"
+      ],
+      "reasonJa": "説明文にネオンダンスクラブであることが明記され、オーディオリンク付きのダンスフロアやバーが備わっているため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-11-02T06:24:08.430133+00:00",
+    "source": "auto-discovery",
+    "classifierRevision": "json-validation-20261007-v2",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

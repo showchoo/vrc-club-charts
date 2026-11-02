@@ -3174,6 +3174,41 @@
       }
     },
     {
+      "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+      "name": "The Dingo Denǃ",
+      "author": "CoffeeBandit`",
+      "genres": [
+        "CLUB"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_1aeb37ec-5a1a-46de-b3f7-9c31c29d4ec8",
       "name": "The Last Drop",
       "author": "VikingMan",
