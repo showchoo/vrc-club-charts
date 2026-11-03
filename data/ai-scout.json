@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-03T01:33:58+00:00",
+  "updatedAt": "2026-11-03T23:58:13+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 118,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 91
+    "newAssessments": 1,
+    "pending": 93
   },
   "scored": [
     {
@@ -613,6 +613,17 @@
       "url": "https://vrcmap.com/world/wrld_8edab379-d5de-4d05-8605-31b4fd4709f4"
     },
     {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
+    },
+    {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
       "name": "Oh's Party Ballroom",
       "author": "emymin",
@@ -716,16 +727,6 @@
       "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
     },
     {
-      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
-      "name": "kakuhira's club house",
-      "author": "kakuhira",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
-    },
-    {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
       "name": "Lights Out Night Club",
       "author": "Lights Out Host",
@@ -766,14 +767,14 @@
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
-      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
-      "name": "stadium rave A （audiolink party world ）",
-      "author": "ALDUMGAMES",
+      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
+      "name": "Solitude （Club Set）",
+      "author": "Atom_ilalia",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
+      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
     }
   ],
   "attempts": {
@@ -854,7 +855,7 @@
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
-      "checkedAt": "2026-10-27T22:56:38+00:00",
+      "checkedAt": "2026-11-03T23:58:03+00:00",
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
@@ -898,11 +899,11 @@
       "status": "assessed"
     },
     "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
-      "checkedAt": "2026-10-25T21:45:37+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-11-03T23:58:06+00:00",
+      "status": "insufficient-image"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
-      "checkedAt": "2026-10-26T23:06:58+00:00",
+      "checkedAt": "2026-11-03T23:58:10+00:00",
       "status": "insufficient-image"
     },
     "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384": {
@@ -914,8 +915,8 @@
       "status": "assessed"
     },
     "wrld_0508f15f-869b-44d4-b538-1f6615fd5273": {
-      "checkedAt": "2026-10-26T23:07:00+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-11-03T23:58:13+00:00",
+      "status": "insufficient-image"
     },
     "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350": {
       "checkedAt": "2026-10-11T22:52:57+00:00",
