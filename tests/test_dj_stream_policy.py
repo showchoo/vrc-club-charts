@@ -88,6 +88,19 @@ class DJStreamPolicyTests(unittest.TestCase):
         self.assertEqual(blank["scored"], [])
         self.assertEqual(blank["candidates"], [])
 
+    def test_public_world_feeds_are_not_stale_after_policy_change(self):
+        config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))
+        headers = next(row["headers"] for row in config["headers"]
+                       if row["source"].startswith("/data/"))
+        cc = next(row["value"] for row in headers
+                  if row["key"] == "Cache-Control")
+        self.assertIn("no-store", cc)
+        for path in ("app.js", "ai-scout.js", "community-reviews.js"):
+            code = (ROOT / path).read_text(encoding="utf-8")
+            self.assertIn("weekly-ranking.json?v=dj-live-verified-01", code)
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("app.js?v=20261105-dj-live-verified-01", home)
+
     def test_current_site_has_no_unverified_public_world_pages(self):
         """A clean static build does not leak old catalog Worlds by direct URLs."""
         verified = policy.load_verified()
