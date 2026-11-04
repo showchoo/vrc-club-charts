@@ -20,6 +20,16 @@ class CatalogThumbnailRecoveryTests(unittest.TestCase):
         self.assertIn("row.dataset.thumbReady='false'", page)
         self.assertIn("window.vccQueueThumbnail = queueThumbnail", page)
 
+    def test_monitor_samples_directory_not_just_first_thumbnail(self):
+        from pathlib import Path
+        source = (Path(__file__).resolve().parents[1] /
+                  "scripts/browser_health_probe.cjs").read_text(encoding="utf-8")
+        self.assertIn("Math.floor(count / 2)", source)
+        self.assertIn("count - 1", source)
+        self.assertIn("thumbnails_sampled", source)
+        self.assertIn("browser_world_images_partial", source)
+        self.assertIn("false);", source)
+
     def test_recovered_images_use_proxy_and_have_safe_fallback(self):
         page = index_page([{"id": "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05", "name": "Club"}])
         self.assertIn("world-thumb?id=", page)
