@@ -109,7 +109,7 @@ def validate_site(fetcher=fetch) -> dict:
         if filename == "app.js" and js and "world-thumb" not in js:
             fail("home_image_fallback", "home", "Homepage JS lacks cached VRChat World thumbnail proxy")
 
-    ranking = get("/data/weekly-ranking.json", "rankings")
+    ranking = get("/data/weekly-ranking.json?v=dj-live-verified-01", "rankings")
     valid_worlds = []
     publication_policy = ""
     if ranking:
@@ -135,7 +135,7 @@ def validate_site(fetcher=fetch) -> dict:
             fail("world_count_mismatch", "worlds",
                  f"Directory has {card_count} cards; ranking has {len(valid_worlds)}. CDN data may be stale",
                  auto_fixable=False)
-    get("/data/ai-scout.json", "scout_data")
+    get("/data/ai-scout.json?v=dj-live-verified-01", "scout_data")
 
     if valid_worlds:
         world_id = valid_worlds[0]
