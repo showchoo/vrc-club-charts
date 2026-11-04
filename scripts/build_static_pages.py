@@ -368,6 +368,31 @@ def event_page(event: dict, djs: list[dict]) -> str:
 """ + footer("../")
 
 
+def world_root_alias(world_id: str) -> str:
+    """Preserve old /wrld_*.html links without duplicating indexed profiles."""
+    if not WORLD_ID_RE.fullmatch(world_id):
+        raise ValueError("Invalid World ID")
+    target = f"worlds/{quote(world_id)}.html"
+    canonical = f"{BASE_URL}{target}"
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href="{esc(canonical)}" />
+  <meta http-equiv="refresh" content="0;url={esc(target)}" />
+  <title>World page moved — VRC Club Charts</title>
+</head>
+<body>
+  <p>Worldの個別ページへ移動します。
+    <a href="{esc(target)}">移動しない場合はこちらをクリック</a>
+  </p>
+</body>
+</html>
+"""
+
+
 def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | None = None) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
@@ -718,8 +743,14 @@ def main() -> int:
     world_dir = out / "worlds"
     world_dir.mkdir(parents=True, exist_ok=True)
     for w in worlds:
-        (world_dir / f"{w['id']}.html").write_text(
-            world_page(w, events, djs, scout_by_world.get(w["id"])), encoding="utf-8")
+        wid = str(w.get("id") or "")
+        if not WORLD_ID_RE.fullmatch(wid):
+            raise ValueError(f"Cannot publish invalid World ID: {wid!r}")
+        (world_dir / f"{wid}.html").write_text(
+            world_page(w, events, djs, scout_by_world.get(wid)), encoding="utf-8")
+        # Historical links sometimes omitted /worlds/. Keep those URLs usable
+        # on both Vercel and GitHub Pages while canonicalizing to /worlds/.
+        (out / f"{wid}.html").write_text(world_root_alias(wid), encoding="utf-8")
     (world_dir / "index.html").write_text(index_page(worlds), encoding="utf-8")
 
     dj_dir = out / "djs"
