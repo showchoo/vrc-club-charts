@@ -626,7 +626,7 @@ def index_page(worlds: list[dict]) -> str:
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">DJタグ付きWorld、運営者が配信機能を確認したお気に入りWorld、または独立検証済みWorldを掲載しています（現在 {len(cards)} 件）。DJタグだけでは配信機能を保証しません。本人確認と独立検証は区別して表示します。</p>
+    <p class="lead">DJタグ付きWorld、運営者が配信機能を確認したお気に入りWorld、または独立検証済みWorldを掲載しています（現在 {len(cards)} 件）。DJタグだけでは配信機能を保証しません。運営者による申告と独立検証は区別して表示します。</p>
     {'<p class="world-review-disclaimer">掲載対象のDJタグ付きWorld・配信確認済みWorldはまだありません。</p>' if not cards else ""}
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
