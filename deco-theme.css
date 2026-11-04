@@ -1,0 +1,445 @@
+/* VRC Club Charts · Midnight Deco (2026-11)
+   Reference: deep indigo river skyline, airy geometric lettering and restrained editorial framing.
+   The supplied HAARLEM DECO image is inspiration only; no original photo or lettering is reused. */
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+
+:root {
+  --bg: #080e1a;
+  --bg-2: #122039;
+  --surface: rgba(14, 24, 43, .94);
+  --surface-strong: #15243a;
+  --surface-soft: #1b2b45;
+  --line: rgba(189, 208, 233, .21);
+  --text: #f1f5ff;
+  --muted: #b2bfd2;
+  --ink-soft: #d5deed;
+  --accent: #e4ecfa;
+  --accent-strong: #c9dcf5;
+  --accent-soft: rgba(166, 192, 225, .15);
+  --radius: 5px;
+  --shadow: 0 18px 52px rgba(0, 3, 12, .24);
+  --deco-display: 'Poiret One', 'Avenir Next', 'Helvetica Neue', sans-serif;
+}
+
+body, body.ranking-home, body.focus-home, body.reviewer-page, body.calm-home {
+  background: linear-gradient(180deg,#0c1425 0%, #080e1a 52%, #090f1b 100%);
+  color: var(--text);
+  font-family: Inter, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, system-ui, sans-serif;
+  letter-spacing: .012em;
+}
+body:not(.ranking-home)::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  inset: 0 0 auto;
+  height: min(770px, 100vh);
+  background:
+    linear-gradient(180deg,rgba(5,9,20,.43),rgba(8,14,26,.61) 46%,#080e1a 100%),
+    url('deco-nightscape.svg') center top / cover no-repeat;
+  opacity: .80;
+}
+body > main, body > footer { position: relative; z-index: 1; }
+.noise { opacity: .023; }
+
+/* Brand: engraved rather than neon; reserve decorative font for titles. */
+.brand { color: #f5f6fb; letter-spacing: .10em; gap: 13px; }
+.brand > span:last-child {
+  font-family: var(--deco-display);
+  font-weight: 400;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.15;
+  letter-spacing: .11em;
+}
+.brand-mark {
+  width: 43px;
+  height: 43px;
+  border: 1px solid rgba(218,230,247,.55);
+  border-radius: 2px;
+  background: rgba(3,9,21,.35);
+  box-shadow: inset 0 0 0 3px rgba(217,229,243,.09);
+  color: #f6f7fc;
+  font-family: var(--deco-display);
+  font-size: 14px;
+  font-weight: 400;
+}
+.site-header,
+body.ranking-home .site-header,
+body.reviewer-page .site-header {
+  border-radius: 0;
+  border: 1px solid rgba(201,217,236,.22);
+  border-left: 0;
+  border-right: 0;
+  background: rgba(6,12,24,.83);
+  box-shadow: 0 13px 32px rgba(0,0,0,.18);
+  backdrop-filter: blur(18px);
+}
+.nav {
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.nav-link, body.ranking-home .focus-header .nav-link {
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .10em;
+  color: #c0cde0;
+}
+.nav-link.active, .nav-link:hover, body.ranking-home .focus-header .nav-link:hover {
+  background: rgba(218,228,247,.10);
+  color: #fff;
+}
+.vcc-language-toggle {
+  border-radius: 0;
+  color: #f1f5fc;
+  border-color: rgba(218,228,247,.35);
+  background: rgba(9,20,36,.70);
+}
+
+/* Nightlife editorial typography. Japanese text falls back to native sans. */
+h1, h2, h3,
+.section-heading h2,
+.calm-section-head h2,
+.ai-scout-heading h2,
+.world-detail-page h1,
+.events-hero h1,
+.djs-hero h1,
+.prose-page h1,
+.reviewer-hero h1,
+.reviewer-section h2 {
+  font-family: var(--deco-display);
+  font-weight: 400;
+  letter-spacing: .025em;
+}
+h1 em, h2 em, h3 em { color: #f7f8fc; }
+.kicker, .eyebrow, .focus-eyebrow, .section-note {
+  color: #c5d4e8;
+  letter-spacing: .22em;
+}
+.kicker, .eyebrow { font-weight: 600; }
+.section-heading, .calm-section-head { border-bottom: 1px solid rgba(190,211,242,.18); padding-bottom: 20px; }
+.section-heading h2 { font-size: clamp(29px, 3.4vw, 44px); line-height: 1.2; }
+.prose-page h1 { font-size: clamp(40px, 6vw, 78px); line-height: 1.2; letter-spacing: .015em; }
+.prose-section h2 { font-size: clamp(22px, 2.4vw, 31px); line-height: 1.32; }
+.prose-section, .prose-page .lead { color: #d8dfed; }
+.prose-section p, .prose-page p { line-height: 1.85; }
+.world-detail-page h1 { font-size: clamp(32px, 5vw, 72px); line-height: 1.16; overflow-wrap: anywhere; }
+.world-catalog-page h1 { font-size: clamp(36px, 5.4vw, 72px); line-height: 1.17; overflow-wrap:anywhere; }
+.event-detail-page .event-detail-hero h1 {
+  font-size: clamp(19px, 2.27vw, 32px); /* preserve the user's chosen compact detail title */
+  line-height: 1.25;
+  letter-spacing: .02em;
+}
+.world-detail-image-placeholder:not(.event-detail-mark) {
+  color: rgba(223,234,251,.24);
+  font-family: var(--deco-display);
+  font-weight: 400;
+  font-size: clamp(54px, 9vw, 120px);
+}
+.event-detail-mark { color: rgba(223,234,251,.28); font-family: var(--deco-display); font-weight: 400; }
+
+/* Restraint: slender rules, squared corners, tinted blue-black surfaces. */
+:is(.event-card,.dj-card,.reviewer-criteria article,.community-review-item,
+    .editor-pick-card,.world-suggestion-block,.admin-panel,.admin-card,
+    .world-detail-stats,.world-detail-meta,.world-catalog-thumb,
+    .ai-scout-card,.focus-world-card,.method-card,.podium-card) {
+  border-color: rgba(194,210,231,.22);
+  border-radius: 4px;
+  box-shadow: 0 10px 38px rgba(0,5,15,.12);
+}
+:is(.event-card,.dj-card,.reviewer-criteria article,.community-review-item,.editor-pick-card,
+    .world-suggestion-block,.admin-panel,.admin-card,.method-card,.podium-card) {
+  background: linear-gradient(140deg,rgba(22,35,57,.85),rgba(8,14,27,.94));
+}
+.event-card:hover, .dj-card:hover, .ai-scout-card:hover, .focus-world-card:hover {
+  border-color: rgba(227,236,249,.47);
+}
+:is(.tag,.chip,.event-provenance,.event-status,.status-pill) {
+  border-radius: 2px;
+  color: #d9e3f3;
+  border-color: rgba(197,215,236,.20);
+  background: rgba(203,221,241,.07);
+}
+.chip.active, .chip:hover {
+  background: rgba(213,227,245,.15);
+  color: #fff;
+  border-color: rgba(215,228,246,.45);
+}
+.primary-button,
+.world-suggestion-controls button {
+  border-radius: 2px;
+  border: 1px solid #eef1f9;
+  background: #ebeff8;
+  color: #081224;
+  box-shadow: none;
+  font-weight: 800;
+  letter-spacing: .05em;
+}
+.primary-button:hover, .world-suggestion-controls button:hover:not(:disabled) {
+  background: #fff;
+  color: #071124;
+  transform: none;
+}
+.secondary-button, .search-wrap, .world-suggestion-controls input,
+.reviewer-apply-form input, .reviewer-apply-form select, .reviewer-apply-form textarea {
+  border-radius: 2px;
+  border-color: rgba(202,219,242,.32);
+  background: rgba(6,14,27,.66);
+  color: #eaf0fa;
+  box-shadow: none;
+}
+.secondary-button:hover { background: rgba(215,228,247,.12); border-color: rgba(220,233,251,.5); }
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #f0f5ff;
+  outline-offset: 3px;
+}
+
+/* The photograph-like nocturne stays in the top half of the homepage.
+   World lists and interactive filters remain below on an opaque dark surface. */
+body.ranking-home .ranking-hero {
+  isolation: isolate;
+  padding: 100px 0 112px;
+  background: linear-gradient(180deg,#0b1528 0%, #08101e 57%, #080e1a 100%);
+  perspective: none;
+}
+body.ranking-home .ranking-hero::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  inset: 0 0 auto;
+  height: 790px;
+  opacity: .95;
+  background:
+    linear-gradient(180deg,rgba(5,10,23,.34) 0%,rgba(5,10,22,.47) 52%,#08101e 98%),
+    url('deco-nightscape.svg') center top / cover no-repeat;
+  mask-image: none;
+}
+body.ranking-home .ranking-hero::after { content: none; }
+body.ranking-home .ranking-scene { display: none; }
+body.ranking-home .ranking-hero-inner { transform: none; }
+body.ranking-home .ai-scout-primary .ranking-hero-head {
+  min-height: 540px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 0 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+body.ranking-home .ai-scout-primary .ranking-hero-head > div {
+  width: 100%;
+  max-width: 940px;
+  margin: auto;
+}
+body.ranking-home .focus-eyebrow {
+  justify-content: center;
+  margin: 0 0 36px;
+  color: #d7e0ef;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .28em;
+}
+body.ranking-home .focus-eyebrow span { display: none; }
+body.ranking-home .ai-scout-primary .dimensional-title {
+  align-items: center;
+  gap: 3px;
+  margin: 0;
+  transform: none;
+  text-transform: uppercase;
+}
+body.ranking-home .ai-scout-primary .title-overline,
+body.ranking-home .ai-scout-primary .title-main {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  color: #f7f9ff;
+  font-family: var(--deco-display);
+  font-weight: 400;
+  font-stretch: normal;
+  -webkit-text-stroke: 0;
+  background: none;
+  text-shadow: 0 4px 36px rgba(0,4,14,.82);
+  letter-spacing: .095em;
+  line-height: 1.12;
+  white-space: normal;
+  transform: none;
+}
+body.ranking-home .ai-scout-primary .title-overline {
+  font-size: clamp(47px, 6.9vw, 93px);
+}
+body.ranking-home .ai-scout-primary .title-main {
+  font-size: clamp(52px, 8.3vw, 112px);
+  letter-spacing: .055em;
+}
+body.ranking-home .ai-scout-primary :is(.title-overline,.title-main)::before,
+body.ranking-home .ai-scout-primary :is(.title-overline,.title-main)::after { content: none; }
+body.ranking-home .ai-scout-primary .title-jp {
+  margin: 27px 0 0;
+  padding: 18px 36px 0;
+  border: 0;
+  border-top: 1px solid rgba(241,245,253,.65);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: #eaf0f9;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  text-shadow: 0 4px 20px rgba(0,0,0,.85);
+}
+body.ranking-home .ai-scout-primary .ranking-intro {
+  max-width: 675px;
+  width: 100%;
+  margin: 28px auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  text-align: center;
+  transform: none;
+}
+body.ranking-home .ai-scout-primary .ranking-intro p {
+  color: #e4eaf4;
+  font-size: clamp(14px, 1.35vw, 16px);
+  line-height: 1.85;
+  text-shadow: 0 2px 20px rgba(1,4,14,.9);
+}
+body.ranking-home .ai-scout-primary .ranking-intro a {
+  display: inline-block;
+  margin-top: 18px;
+  color: #edf1f8;
+  font-weight: 650;
+  letter-spacing: .11em;
+  border-bottom: 1px solid rgba(237,243,250,.62);
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading {
+  border-top: 1px solid rgba(206,224,246,.28);
+  padding-top: 38px;
+  align-items: end;
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading h2 {
+  font-size: clamp(28px, 3.6vw, 47px);
+  line-height: 1.22;
+  letter-spacing: .015em;
+}
+body.ranking-home .ai-scout-primary .ai-scout-heading p:not(.kicker) {
+  color: #bfcce1;
+}
+body.ranking-home .ai-scout-primary .ai-scout-card {
+  background: #101b30;
+  box-shadow: none;
+  overflow: hidden;
+}
+body.ranking-home .ai-scout-primary .ai-scout-link {
+  border-radius: 3px;
+  background: linear-gradient(120deg,rgba(17,29,50,.92),rgba(7,13,25,.97));
+}
+body.ranking-home .ai-scout-primary .ai-scout-number,
+body.ranking-home .ai-scout-primary .ai-scout-score {
+  color: #f4f7fc;
+  text-shadow: none;
+}
+body.ranking-home .ai-scout-primary .ai-scout-copy h3 {
+  font-size: clamp(20px, 2.2vw, 29px);
+  letter-spacing: .03em;
+}
+body.ranking-home .ai-scout-primary .ai-scout-reason { color: #bac8dc; }
+body.ranking-home .ai-scout-primary .ai-scout-disclaimer { color: #aebbd0; }
+body.ranking-home .ai-scout-primary .ai-scout-disclaimer a { color: #e2ebf8; }
+body.ranking-home .lower-section { opacity: 1; }
+body.ranking-home .calm-events-section {
+  background: linear-gradient(180deg,rgba(16,28,47,.5),rgba(8,15,29,.5));
+}
+body.ranking-home .calm-section h2,
+body.ranking-home .calm-events-section h2,
+body.ranking-home .calm-section-head h2 {
+  font-size: clamp(28px, 3.6vw, 46px);
+  line-height: 1.28;
+  letter-spacing: .025em;
+}
+body.ranking-home .world-suggestion-block {
+  background: linear-gradient(130deg,rgba(21,37,58,.94),rgba(7,15,28,.96));
+}
+
+/* Events / DJs / Worlds: lighter titles, skyline atmosphere, readable lists. */
+.events-hero, .djs-hero {
+  position: relative;
+  max-width: 920px;
+  min-height: 440px;
+  padding-bottom: 50px;
+}
+.events-hero h1,.djs-hero h1 {
+  font-size: clamp(44px, 6.2vw, 78px);
+  line-height: 1.14;
+  letter-spacing: .035em;
+}
+.events-hero .lead,.djs-hero .lead { color: #d3deeb; line-height: 1.9; }
+.event-card h3,.dj-card h3 {
+  font-family: var(--deco-display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.3vw, 28px);
+  line-height: 1.25;
+  letter-spacing: .018em;
+}
+.event-card, .dj-card { min-width: 0; overflow-wrap: anywhere; }
+.world-detail-hero,.event-detail-hero,.dj-detail-hero { gap: clamp(20px,3vw,42px); }
+.world-detail-copy { min-width: 0; }
+.world-detail-meta > div { background: #101a2c; }
+.world-detail-meta strong,.world-detail-meta code { color: #e6eefa; }
+.world-catalog-row:hover { background: rgba(205,219,241,.065); }
+.world-catalog-name { color: #f4f7ff; font-family: var(--deco-display); font-size: 19px; font-weight: 400; letter-spacing:.025em; }
+.world-relations .section-heading h2, .dj-appearances .section-heading h2 {
+  font-size: clamp(24px,2.7vw,36px);
+  line-height: 1.25;
+}
+
+/* Accessible mobile proportions, with the already-approved Events detail title untouched. */
+@media (max-width: 900px) {
+  body.ranking-home .ai-scout-primary .ranking-hero-head { min-height: 460px; margin-bottom: 44px; }
+  body.ranking-home .ranking-hero::before { height: 670px; }
+  .site-header { width: calc(100% - 24px); }
+}
+@media (max-width: 640px) {
+  body.ranking-home .ranking-hero { padding: 76px 0 84px; }
+  body.ranking-home .ranking-hero::before { height: 600px; background-position: 57% top; }
+  body.ranking-home .ai-scout-primary .ranking-hero-head { min-height: 430px; }
+  body.ranking-home .focus-eyebrow { font-size: 9px; letter-spacing: .14em; margin-bottom: 24px; }
+  body.ranking-home .ai-scout-primary .dimensional-title { gap: 6px; }
+  body.ranking-home .ai-scout-primary .title-overline {
+    font-size: clamp(38px, 10vw, 58px);
+    letter-spacing: .10em;
+  }
+  body.ranking-home .ai-scout-primary .title-main {
+    font-size: clamp(41px, 10.1vw, 63px);
+    letter-spacing: .015em;
+    overflow-wrap: anywhere;
+  }
+  body.ranking-home .ai-scout-primary .title-jp {
+    margin-top: 20px;
+    padding: 13px 0 0;
+    font-size: 12px;
+    letter-spacing: .08em;
+  }
+  body.ranking-home .ai-scout-primary .ranking-intro { margin-top: 20px; }
+  body.ranking-home .ai-scout-primary .ranking-intro p { font-size: 13px; line-height: 1.85; }
+  body.ranking-home .ai-scout-primary .ai-scout-heading { padding-top: 28px; }
+  body.ranking-home .ai-scout-primary .ai-scout-heading h2 { font-size: 29px; }
+  body.ranking-home .calm-section h2, body.ranking-home .calm-events-section h2 { font-size: 31px; }
+  .brand > span:last-child { font-size: 15px; }
+  .brand-mark { width: 35px; height: 35px; font-size: 11px; }
+  .events-hero h1,.djs-hero h1 { font-size: clamp(38px,8.3vw,52px); }
+  .world-detail-page h1 { font-size: clamp(28px, 7vw, 46px); }
+  .event-detail-page .event-detail-hero h1 { font-size: clamp(16px, 4vw, 23px); }
+  .event-card h3 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.ranking-home .ai-scout-primary .dimensional-title,
+  body.ranking-home .ai-scout-primary .ranking-intro { transform: none; transition: none; }
+}

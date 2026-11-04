@@ -19,7 +19,7 @@ PUBLIC_FILES = (
     "index.html", "about.html", "privacy.html", "reviewer.html",
     "reviewer-admin.html", "events.html", "djs.html",
     "app.js", "analytics.js", "i18n.js", "ai-scout.js", "community-reviews.js", "world-submission.js", "events.js", "djs.js",
-    "styles.css", "favicon.svg", "site.webmanifest", "robots.txt",
+    "styles.css", "deco-theme.css", "deco-nightscape.svg", "favicon.svg", "site.webmanifest", "robots.txt",
     "google19b2b044fc820283.html",
 )
 DATA_FILES = (

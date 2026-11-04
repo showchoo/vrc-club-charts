@@ -18,6 +18,8 @@ on:
       - "data/ai-scout.json"
       - "scripts/build_ai_scout.py"
       - "styles.css"
+      - "deco-theme.css"
+      - "deco-nightscape.svg"
       - "favicon.svg"
       - "site.webmanifest"
       - "robots.txt"
@@ -90,7 +92,7 @@ jobs:
           python scripts/sync_reviews_from_supabase.py
           python scripts/build_review_scores.py
           mkdir _site
-          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js i18n.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css favicon.svg site.webmanifest robots.txt google19b2b044fc820283.html _site/
+          cp index.html about.html privacy.html reviewer.html reviewer-admin.html events.html djs.html app.js analytics.js i18n.js ai-scout.js community-reviews.js world-submission.js events.js djs.js styles.css deco-theme.css deco-nightscape.svg favicon.svg site.webmanifest robots.txt google19b2b044fc820283.html _site/
           mkdir -p _site/data
           cp data/weekly-ranking.json _site/data/
           cp data/review-scores.json data/ai-scout.json _site/data/
