@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - "scripts/monitor_site_health.py"
+      - "scripts/browser_health_probe.cjs"
       - "scripts/gemini_site_repair.py"
       - "scripts/notify_site_health.py"
       - "tests/test_site_self_heal.py"
