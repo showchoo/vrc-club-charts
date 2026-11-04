@@ -1,38 +1,36 @@
 [
   {
-    "id": "feed-041c96967d446bc35031",
-    "name": "Quest Dance party Club No.282 [ VRC Quest対応DJイベント] 📅11月03日(火) OPEN 20:40 JST～ START 21:00 JST～ 今…",
-    "start": "2026-11-03T11:40:00Z",
+    "id": "feed-8e7a3cbe1b401d9b9851",
+    "name": "今月の #GrooveNoir は 明日 、11月4日（水）です！ VRChat で行われるマンスリーのバー DJ 、今回もフリー選曲で90分、ハウスとディスコを中心に素敵なサウンドをお届けし…",
+    "start": "2026-11-04T13:00:00Z",
     "end": null,
-    "organizer": "@ClubDanceparty",
+    "organizer": "@dj_tsumugi",
     "worldName": "VRChat",
     "genres": [
-      "DJ",
-      "DANCE"
+      "DJ"
     ],
-    "url": "https://x.com/ClubDanceparty/status/2116299179102470654?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/dj_tsumugi/status/2117506169828933799?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "041c96967d446bc35031",
+    "upstreamId": "8e7a3cbe1b401d9b9851",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
   {
-    "id": "feed-115afe0e1b80ee4f2f35",
-    "name": "⠀ ⚡️今週 開催 ⚡️ ⠀ VRC DJイベント 【 #RAVEcho 】 🔥今回は特別仕様🔥 アニソン原曲メインでお届けします！ 11/5(木)22:00 ゲスト DJ /VJ ALAIN…",
-    "start": "2026-11-05T13:00:00Z",
+    "id": "feed-f03235e2192497da7814",
+    "name": "🎂 イベント告知 🎂 様々なご縁やご紹介でお世話になっているdataさんのお誕生日会が VRChat で 開催 されます！私も DJ でお祝いさせていただきます☺️ 📅 イベント開始 ：11/…",
+    "start": "2026-11-06T21:00:00Z",
     "end": null,
-    "organizer": "@RAVEcho2026",
+    "organizer": "@kohadachaan",
     "worldName": "VRChat",
     "genres": [
-      "DJ",
-      "RAVE"
+      "DJ"
     ],
-    "url": "https://x.com/RAVEcho2026/status/2117235184223580265?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/kohadachaan/status/2117709580822265871?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "115afe0e1b80ee4f2f35",
+    "upstreamId": "f03235e2192497da7814",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
