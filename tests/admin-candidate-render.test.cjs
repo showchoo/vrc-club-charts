@@ -120,3 +120,23 @@ test('invalid World IDs do not create links or untrusted redirects', () => {
   assert.doesNotMatch(markup, /candidate-world-link|candidate-visit|https:\/\/vrchat.com\/home\/world\//);
   assert.match(markup, /APPROVE WORLD/);
 });
+
+test('favorite importer extracts only unique World IDs from TXT CSV JSON or URL text', () => {
+  const snippet=sourceBetween('      function parseFavoriteWorldIds(raw){',
+    '      importFavoriteWorlds.addEventListener');
+  const sandbox={};
+  vm.createContext(sandbox);
+  vm.runInContext(snippet+'\nthis.parseFavoriteWorldIds=parseFavoriteWorldIds;',sandbox);
+  const id='wrld_12345678-1234-1234-1234-123456789abc';
+  const raw='{"worlds":["https://vrchat.com/home/world/'+id+'/info","'+id.toUpperCase()+
+    '"],"user":"private_user", "ignored":"usr_00000000-0000-0000-0000-000000000000"}';
+  assert.deepEqual([...sandbox.parseFavoriteWorldIds(raw)],[id]);
+  assert.equal(sandbox.parseFavoriteWorldIds('not a world').length,0);
+});
+
+test('favorite imports are sent to the authenticated admin endpoint, never raw files', () => {
+  assert.match(html, /callAdmin\('import_favorite_worlds',null,\{worldIds:group\}\)/);
+  assert.doesNotMatch(html, /callAdmin\('import_favorite_worlds'[^\n]*raw/);
+  assert.match(html, /file\.size>3_000_000/);
+  assert.match(html, /ids\.length>150/);
+});
