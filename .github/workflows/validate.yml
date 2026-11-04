@@ -152,7 +152,7 @@ jobs:
           test -s _site/worlds/index.html
           test -s _site/i18n.js
           grep -q '../i18n.js' _site/worlds/index.html
-          test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
+          python -m unittest tests.test_dj_stream_policy
           test -s _site/index.html
           test -f _site/og-image.png
           test -s _site/sitemap.xml
