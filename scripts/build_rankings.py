@@ -3,6 +3,8 @@ from __future__ import annotations
 import datetime as dt, json, math
 from pathlib import Path
 
+from scripts.dj_stream_policy import load_verified, published_worlds
+
 ROOT = Path(__file__).resolve().parents[1]
 CRAFT_MAX = {'visual':20, 'lighting':20, 'sound':15, 'spatial':15, 'interaction':10, 'originality':10, 'optimization':10}
 
@@ -38,6 +40,8 @@ def load_snapshots():
 
 def main():
     seeds = json.loads((ROOT/'data/worlds.json').read_text(encoding='utf-8'))
+    verified = load_verified()
+    seeds = published_worlds(seeds, verified)
     seed_by_id = {w['id']: w for w in seeds}
     public_path = ROOT/'data/weekly-ranking.json'
     try:
@@ -72,6 +76,7 @@ def main():
             'source': seed.get('source'),
             'editorialStatus': editorial_status,
             'chartEligible': bool(seed.get('chartEligible', True)),
+            'djStreamVerification': seed['djStreamVerification'],
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
             'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
@@ -136,7 +141,8 @@ def main():
     payload = {
         'status': 'live' if has_trend else 'seed',
         'updatedAt': latest[0].isoformat() if latest else 'MVP seed — weekly deltas begin after 2 snapshots',
-        'methodVersion': '0.3',
+        'methodVersion': '0.4-dj-stream-verified',
+        'publicationPolicy': 'verified-dj-live-stream-only',
         'worlds': rows,
     }
     public_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
