@@ -57,6 +57,12 @@ class GeminiGroundedEvidenceTests(unittest.TestCase):
         self.assertEqual(r["sources"][0]["url"], "https://maker.example/live-dj")
         self.assertEqual(r["groundingQueries"], ["exact world DJ live playback"])
 
+    def test_api_grounding_supports_can_supply_sources_without_model_indices(self):
+        result = research.parse_grounded_reply(
+            gemini(indices=[], support=[0]), W1, None)
+        self.assertEqual(result["status"], "evidence_found")
+        self.assertEqual(result["sources"][0]["url"], "https://maker.example/live-dj")
+
     def test_source_not_supported_by_grounding_is_not_evidence(self):
         r = research.parse_grounded_reply(gemini(support=[1]), W1, None)
         self.assertEqual(r["status"], "needs_review")
