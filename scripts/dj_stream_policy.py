@@ -113,7 +113,10 @@ def load_owner_confirmed(path: Path | None = None) -> dict[str, dict]:
             when = dt.date.fromisoformat(date)
         except (ValueError, TypeError):
             raise ValueError(f"Owner confirmation date invalid for {wid}") from None
-        if when > dt.datetime.now(dt.timezone.utc).date():
+        # Owner statement was made in Japan; allow the local 2026-11-05 date
+        # even when GitHub Actions is still on 2026-11-04 UTC.
+        jst = dt.timezone(dt.timedelta(hours=9))
+        if when > dt.datetime.now(jst).date():
             raise ValueError(f"Owner confirmation date in future for {wid}")
         confirmed[wid] = {
             "status": "owner-attested",
