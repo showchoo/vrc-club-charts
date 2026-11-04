@@ -16,6 +16,22 @@
     ]
   },
   {
+    "id": "wrld_02f4c671-0515-44e9-badb-516d43b61eac",
+    "name": "Dance Studio Dust",
+    "authorHint": "8Spark",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_02f4c671-0515-44e9-badb-516d43b61eac/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
     "name": "Club VGL",
     "authorHint": "Varneon",
@@ -88,6 +104,22 @@
         "ref": "https://sia-vr.com/vrchat-world-260479",
         "firstSeenAt": "2026-10-27",
         "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
+    "id": "wrld_05ffe2a3-eec8-4e7f-a3ec-8ff439652b67",
+    "name": "Flatline2․SPITE",
+    "authorHint": "lLavy",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_05ffe2a3-eec8-4e7f-a3ec-8ff439652b67/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
       }
     ]
   },
@@ -216,6 +248,38 @@
     ]
   },
   {
+    "id": "wrld_0bbe0a68-4b3c-4443-887c-720b4b79a901",
+    "name": "Pool Party",
+    "authorHint": "4liceD",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_0bbe0a68-4b3c-4443-887c-720b4b79a901/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_0cb12f51-0494-4bb0-ad6e-1a93edc75559",
+    "name": "QDC＿Quest",
+    "authorHint": "ねこたん",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_0cb12f51-0494-4bb0-ad6e-1a93edc75559/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",
     "name": "ZODIAC DJ EVENT",
     "authorHint": "Virgo4u",
@@ -227,6 +291,86 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_0f564d1b-f299-423f-9a6f-bc12ea5441e4",
+    "name": "Recording Studio",
+    "authorHint": "ChanBi_",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_0f564d1b-f299-423f-9a6f-bc12ea5441e4/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_0fae39f9-9be1-4311-b0ff-ea538a571eea",
+    "name": "CLUB GOOD PARKING",
+    "authorHint": "八神精工（yagami）",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_0fae39f9-9be1-4311-b0ff-ea538a571eea/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_10b71385-d059-4615-a5c2-887be49a4e1f",
+    "name": "T_L Factory",
+    "authorHint": "ThehomieDouggie",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_10b71385-d059-4615-a5c2-887be49a4e1f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_1347b502-0423-4d08-a1cc-7f1c6781e21a",
+    "name": "Hypothetical at Electric Sands",
+    "authorHint": "Smooth_Octopus",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_1347b502-0423-4d08-a1cc-7f1c6781e21a/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_1429e6e2-fb41-470e-bd15-7126dfc2f2a6",
+    "name": "Topazchat streaming test world",
+    "authorHint": "ねこ鍋 ［neconabe］",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_1429e6e2-fb41-470e-bd15-7126dfc2f2a6/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -270,6 +414,38 @@
     ]
   },
   {
+    "id": "wrld_17d18e88-e06e-42a6-88e8-c90ac5d8d597",
+    "name": "GROOVE EXPRESS",
+    "authorHint": "Haaylo",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_17d18e88-e06e-42a6-88e8-c90ac5d8d597/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_18196fcb-8e5e-428f-887b-8ba11db37d62",
+    "name": "アイアンサウンド",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_18196fcb-8e5e-428f-887b-8ba11db37d62/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
     "name": "Neptune Night Club",
     "authorHint": "Plutto2Times",
@@ -297,6 +473,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_1ad0c499-14b7-4e5d-8f8a-10f309fb4e30",
+    "name": "Vapor Warehouse",
+    "authorHint": "ArcanaTigris",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_1ad0c499-14b7-4e5d-8f8a-10f309fb4e30/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -345,6 +537,38 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_1c78bf42-a772-47f8-bf2b-2f2d3af9835d",
+    "name": "VRC EHD World",
+    "authorHint": "ni_rila ⁄ りら",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_1c78bf42-a772-47f8-bf2b-2f2d3af9835d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_1f826277-a33a-4cb9-b933-8cfc188ed97d",
+    "name": "SOULS_live",
+    "authorHint": "beesha",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_1f826277-a33a-4cb9-b933-8cfc188ed97d/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -462,6 +686,22 @@
     ]
   },
   {
+    "id": "wrld_2760e034-4ef5-49c8-bcb3-035734df721d",
+    "name": "カラクリクラブ․2",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_2760e034-4ef5-49c8-bcb3-035734df721d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_28f87118-050c-4d1f-a6b1-74a73f7a6b88",
     "name": "Under Ground",
     "authorHint": "EHAR",
@@ -544,14 +784,20 @@
   {
     "id": "wrld_2d74e168-29c9-437b-9664-4e20ba5c1330",
     "name": "Culdesac",
-    "authorHint": "",
+    "authorHint": "Phototaker",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-240527",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_2d74e168-29c9-437b-9664-4e20ba5c1330/info",
         "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
@@ -606,6 +852,22 @@
     ]
   },
   {
+    "id": "wrld_31f20948-91c8-428a-9d84-10ff7b21d55f",
+    "name": "BLOSSOM ｜ Experiment",
+    "authorHint": "artsy glitch",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_31f20948-91c8-428a-9d84-10ff7b21d55f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
     "name": "ORBITER 9",
     "authorHint": "Cloma",
@@ -639,6 +901,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dj",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_37035458-32d6-406d-97c3-bddbded74b53",
+    "name": "QNode",
+    "authorHint": "Tom․exe",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_37035458-32d6-406d-97c3-bddbded74b53/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -774,6 +1052,22 @@
     ]
   },
   {
+    "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
+    "name": "Shatoo's Dance Stage",
+    "authorHint": "Shatoo",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_3dea1b90-93e1-45f3-9988-c43b2f614300",
     "name": "Alter Sound Wave Club",
     "authorHint": "",
@@ -806,6 +1100,38 @@
     ]
   },
   {
+    "id": "wrld_3e73c691-705a-4092-9419-82c135a6f56d",
+    "name": "The Mall",
+    "authorHint": "Laȋn",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_3e73c691-705a-4092-9419-82c135a6f56d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_3fe488cb-8681-481c-934e-0efd820d1582",
+    "name": "SECTOR44 - GYAPTIX",
+    "authorHint": "RAMRAMPA",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_3fe488cb-8681-481c-934e-0efd820d1582/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
     "name": "Club Rayne",
     "authorHint": "Candy Rayne",
@@ -817,6 +1143,38 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_42697837-82f8-4393-9765-fec4bd790f8c",
+    "name": "SONAR_Underpass",
+    "authorHint": "Llamahat",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_42697837-82f8-4393-9765-fec4bd790f8c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_429fbbc1-bb83-4eaf-bc93-d9300bd50219",
+    "name": "Dark City Ma-das",
+    "authorHint": "UnrealJourneys",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_429fbbc1-bb83-4eaf-bc93-d9300bd50219/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -838,6 +1196,38 @@
     ]
   },
   {
+    "id": "wrld_44a80703-f703-439e-b588-1a076fde8b11",
+    "name": "Skyscraper night pool",
+    "authorHint": "foxof",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_44a80703-f703-439e-b588-1a076fde8b11/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_473ce7de-94c3-4d6c-b4d9-031f83b2c863",
+    "name": "牛马CLUB起源2․0",
+    "authorHint": "牛马仙人666究极无敌暴龙兽",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_473ce7de-94c3-4d6c-b4d9-031f83b2c863/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
     "name": "Music＆BAR【PPC】",
     "authorHint": "PAPICO",
@@ -848,6 +1238,22 @@
       {
         "source": "catalog",
         "ref": "https://vrchat.com/home/world/wrld_4780a08f-8d44-4533-838b-2ec497fcf34e/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_478cf915-abb0-457c-874c-15cb0859ef5e",
+    "name": "_restroom",
+    "authorHint": "_buki",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_478cf915-abb0-457c-874c-15cb0859ef5e/info",
         "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
@@ -865,6 +1271,38 @@
         "source": "catalog",
         "ref": "https://en.vrcw.net/world/detail/wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_4921ccd6-56eb-4af5-8c3f-7991b01dc83f",
+    "name": "Veiled Dark",
+    "authorHint": "Dean`",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_4921ccd6-56eb-4af5-8c3f-7991b01dc83f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_4980b7ba-734c-43dd-9a25-d70f58677f58",
+    "name": "宅録DJワールド",
+    "authorHint": "ちゃるしあ",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_4980b7ba-734c-43dd-9a25-d70f58677f58/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -897,6 +1335,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_4c657dee-8604-425b-a21a-e27c05079717",
+    "name": "The Club District",
+    "authorHint": "Hadean",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_4c657dee-8604-425b-a21a-e27c05079717/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -962,6 +1416,22 @@
         "ref": "https://sia-vr.com/vrchat-world-230103",
         "firstSeenAt": "2026-10-28",
         "lastSeenAt": "2026-10-31"
+      }
+    ]
+  },
+  {
+    "id": "wrld_52efb916-5113-4928-bfff-2ad10702f29f",
+    "name": "ReflectionFactory",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_52efb916-5113-4928-bfff-2ad10702f29f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
       }
     ]
   },
@@ -1058,6 +1528,22 @@
     ]
   },
   {
+    "id": "wrld_57235d92-147d-4e02-95d0-d3261a801558",
+    "name": "warehouse_333",
+    "authorHint": "isle［アイル］",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_57235d92-147d-4e02-95d0-d3261a801558/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
     "name": "Lost in a Vortex ［Club］",
     "authorHint": "ZIPPY251",
@@ -1091,6 +1577,38 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_5945a303-834b-4996-a8a9-9be4f582a62a",
+    "name": "Void Club 21st",
+    "authorHint": "Lycon",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_5945a303-834b-4996-a8a9-9be4f582a62a/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_59757e52-4c43-4d72-941f-0509cc86d894",
+    "name": "Green Room",
+    "authorHint": "iron biscuit",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_59757e52-4c43-4d72-941f-0509cc86d894/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1161,6 +1679,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_5c941a21-12d2-4b4d-8eab-761042749ead",
+    "name": "Yitties District 2․0",
+    "authorHint": "Fox ®",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_5c941a21-12d2-4b4d-8eab-761042749ead/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1258,6 +1792,22 @@
     ]
   },
   {
+    "id": "wrld_62bc3ff0-2e97-4257-8256-304636d3773e",
+    "name": "Afterdark Apartment ［2026 Updateǃ］",
+    "authorHint": "Reava_レイ",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_62bc3ff0-2e97-4257-8256-304636d3773e/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_63039b3d-42e8-4f40-9825-cb51ba99a16d",
     "name": "Tainted Sins V1",
     "authorHint": "Tainted Sins",
@@ -1285,6 +1835,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_66cc6289-1968-4d56-9f9f-5f8cd77bb192",
+    "name": "MMD Dance Studio 「MMD ダンススタジオ」",
+    "authorHint": "Shiftle",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_66cc6289-1968-4d56-9f9f-5f8cd77bb192/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1323,6 +1889,22 @@
         "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_6f47e969-edf4-4d31-98cd-f247e26c784b",
+    "name": "RIFT Site Epsilon",
+    "authorHint": "AztecAngelo",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_6f47e969-edf4-4d31-98cd-f247e26c784b/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1398,6 +1980,22 @@
     ]
   },
   {
+    "id": "wrld_7431a241-e116-44d5-8034-0372209a66bd",
+    "name": "Soul Fest",
+    "authorHint": "Smooth_Octopus",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_7431a241-e116-44d5-8034-0372209a66bd/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_76678288-40f1-462a-b9cf-8b492214a1bd",
     "name": "ケモミ高校バレー部 -部室-",
     "authorHint": "",
@@ -1430,6 +2028,22 @@
     ]
   },
   {
+    "id": "wrld_77b46334-25a8-4ec8-9c1e-29a242bebc71",
+    "name": "LiveHouseNovice v3",
+    "authorHint": "saguzi",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_77b46334-25a8-4ec8-9c1e-29a242bebc71/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_786726d2-81c7-4356-8db8-7c29503c56ad",
     "name": "The Beach Rave",
     "authorHint": "ES Studios",
@@ -1441,6 +2055,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_78680b3c-9b7b-404e-9cbc-f4ded80b0380",
+    "name": "SMOL BOAT",
+    "authorHint": "Halᴏ",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_78680b3c-9b7b-404e-9cbc-f4ded80b0380/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1494,6 +2124,22 @@
     ]
   },
   {
+    "id": "wrld_7badea26-ce3e-4555-8259-004993ee7e69",
+    "name": "HOR Berlin",
+    "authorHint": "mugi1",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_7badea26-ce3e-4555-8259-004993ee7e69/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_7d8d252e-63f6-4179-aad4-c4fe6ca9355a",
     "name": "Club Nebula",
     "authorHint": "",
@@ -1526,6 +2172,54 @@
     ]
   },
   {
+    "id": "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c",
+    "name": "Void Club",
+    "authorHint": "Lycon",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_7e79707b-0c9c-4c9a-9c17-d192c2f1cd48",
+    "name": "Skarage",
+    "authorHint": "iron biscuit",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_7e79707b-0c9c-4c9a-9c17-d192c2f1cd48/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05",
+    "name": "_nocturne",
+    "authorHint": "_buki",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_7ed67946-3514-48f1-971e-32162b0a73db",
     "name": "vrc_living_quarters",
     "authorHint": "",
@@ -1538,6 +2232,22 @@
         "ref": "https://sia-vr.com/vrchat-world-241303",
         "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8329b59b-4809-4578-953c-d46c14fd8f6f",
+    "name": "Underground Warehouse",
+    "authorHint": "4liceD",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_8329b59b-4809-4578-953c-d46c14fd8f6f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
       }
     ]
   },
@@ -1655,6 +2365,38 @@
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-260403",
         "firstSeenAt": "2026-10-31",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8cd61e99-e566-41f4-9bfc-26f1d85c4166",
+    "name": "カラクリクラブ",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_8cd61e99-e566-41f4-9bfc-26f1d85c4166/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_8d5b66c9-b3e7-4c94-9f37-f2305518b732",
+    "name": "Club_Plane",
+    "authorHint": "Jaku san",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_8d5b66c9-b3e7-4c94-9f37-f2305518b732/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1842,6 +2584,22 @@
     ]
   },
   {
+    "id": "wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1",
+    "name": "A․venue Pub",
+    "authorHint": "Reava_レイ",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
     "name": "Club Deviate",
     "authorHint": "TOTC",
@@ -1922,6 +2680,38 @@
     ]
   },
   {
+    "id": "wrld_9ba9fd77-31c7-432a-bcb4-8983bec75ef8",
+    "name": "FirstNoteStation-始発駅-EastGate",
+    "authorHint": "AONEKO⁄青猫",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_9ba9fd77-31c7-432a-bcb4-8983bec75ef8/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e",
+    "name": "Club Cybercore",
+    "authorHint": "Βigby",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
     "name": "Deep Night BAR",
     "authorHint": "ゼグァール（Zeguar）",
@@ -1933,6 +2723,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_9d71fbd4-d193-4e6c-aa07-5b937876777c",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_9eee6453-8c18-4ce1-a9f8-d6a0fc69530c",
+    "name": "Summer Night Beach Party",
+    "authorHint": "Kento520",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_9eee6453-8c18-4ce1-a9f8-d6a0fc69530c/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1986,6 +2792,38 @@
     ]
   },
   {
+    "id": "wrld_a42588cd-ce37-4d57-90d6-8048be247b0f",
+    "name": "Thai Street",
+    "authorHint": "Sathon",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_a42588cd-ce37-4d57-90d6-8048be247b0f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_a5d79e31-8e17-4894-b804-e625bcf21caa",
+    "name": "ESJ Dance Practice",
+    "authorHint": "Jᴜzo",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_a5d79e31-8e17-4894-b804-e625bcf21caa/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
     "name": "Club Astra",
     "authorHint": "ZIPPY251",
@@ -2003,6 +2841,38 @@
         "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_a62dd01c-80ad-4bf6-a651-166a0a395482",
+    "name": "GRAY OASIS",
+    "authorHint": "MAGURO",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_a62dd01c-80ad-4bf6-a651-166a0a395482/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_a6d6a57f-64a0-4c3e-98e9-a30f6a7ecfc6",
+    "name": "Chaotic Rose - Seabreeze Villa （Night）",
+    "authorHint": "BlackRoseThorns",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_a6d6a57f-64a0-4c3e-98e9-a30f6a7ecfc6/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2035,6 +2905,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/club",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_a99f8cae-b6fb-4df7-92de-daeb5af74898",
+    "name": "Cozy DJ Studio",
+    "authorHint": "Kampfhase",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_a99f8cae-b6fb-4df7-92de-daeb5af74898/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2094,6 +2980,22 @@
     ]
   },
   {
+    "id": "wrld_b1ac17aa-cb4c-4aaf-a1e0-88e7252ddeac",
+    "name": "CLUB ORIGINS",
+    "authorHint": "rets34",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_b1ac17aa-cb4c-4aaf-a1e0-88e7252ddeac/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_b26c8a97-5c38-4dd2-9aa7-520eea7b3e69",
     "name": "星の入り江 – Liminal Cove",
     "authorHint": "",
@@ -2142,6 +3044,22 @@
     ]
   },
   {
+    "id": "wrld_b322926d-f057-4d00-90a1-0491ad1c280c",
+    "name": "Sacrifice",
+    "authorHint": "ᴅɪɢɪᴛᴀʟ",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_b322926d-f057-4d00-90a1-0491ad1c280c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_b372bdec-7819-4e45-b82d-d8727f2f7dc1",
     "name": "MPS DJ",
     "authorHint": "jack14050",
@@ -2169,6 +3087,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_b40886b0-8a0b-4771-90ff-09c2d80e2729",
+    "name": "Club 808",
+    "authorHint": "Salvific",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_b40886b0-8a0b-4771-90ff-09c2d80e2729/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2228,6 +3162,38 @@
     ]
   },
   {
+    "id": "wrld_bb8b69e7-b1c9-4eb7-8192-ac72318e591c",
+    "name": "Lounge Nokt",
+    "authorHint": "ayafmy",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_bb8b69e7-b1c9-4eb7-8192-ac72318e591c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_bbf52d7c-1a5b-4ffc-a19a-ed79be2c6cae",
+    "name": "響水路 Music Chamber",
+    "authorHint": "_you5248",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_bbf52d7c-1a5b-4ffc-a19a-ed79be2c6cae/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
     "name": "B5 Parking",
     "authorHint": "",
@@ -2239,6 +3205,22 @@
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-240465",
         "firstSeenAt": "2026-11-01",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_bc759f54-09a3-48ce-ab53-a456e3408b8a",
+    "name": "DanceStreet",
+    "authorHint": "Asaka․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_bc759f54-09a3-48ce-ab53-a456e3408b8a/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2271,6 +3253,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/world/detail/wrld_bd8f9a44-0ceb-4712-b85c-c4084cba0a35",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_bf8a1bc1-1cd9-4610-a386-60a751045e61",
+    "name": "VRPDanceStudio - Tint",
+    "authorHint": "ふぁゔ／Favnir",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_bf8a1bc1-1cd9-4610-a386-60a751045e61/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2324,6 +3322,38 @@
     ]
   },
   {
+    "id": "wrld_c537d77b-0e96-4bac-80e4-8f34ab43cb1c",
+    "name": "LUXOR CLUB",
+    "authorHint": "Matiusito",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_c537d77b-0e96-4bac-80e4-8f34ab43cb1c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_c63943ee-16be-4f89-a326-315fc098c01f",
+    "name": "SoundBar Méllon",
+    "authorHint": "ayafmy",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_c63943ee-16be-4f89-a326-315fc098c01f/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_c80885cb-561c-4a2a-becc-559709006fe9",
     "name": "The Sinner's Garden - Disco Map",
     "authorHint": "Petals for Amor",
@@ -2346,6 +3376,38 @@
     ]
   },
   {
+    "id": "wrld_c82a5c14-97a5-4782-a034-d897d2d943a2",
+    "name": "新宿ライブストリート ⁄ Shinjuku Live Street",
+    "authorHint": "Artistoid",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_c82a5c14-97a5-4782-a034-d897d2d943a2/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80",
+    "name": "DanceStage",
+    "authorHint": "Asaka․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
     "name": "13th Floor DJ",
     "authorHint": "SaintHaru",
@@ -2357,6 +3419,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_ccc4e982-23d5-45e8-81e9-0b1ebc2a882f",
+    "name": "Poolside Partyǃ Golden Sunset - Pachi",
+    "authorHint": "okgold",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_ccc4e982-23d5-45e8-81e9-0b1ebc2a882f/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2454,6 +3532,22 @@
     ]
   },
   {
+    "id": "wrld_d319c58a-dcec-47de-b5fc-21200116462c",
+    "name": "FBT Heaven",
+    "authorHint": "Azuma Fumiko",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_d319c58a-dcec-47de-b5fc-21200116462c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
     "name": "RS COASTER SECTOR",
     "authorHint": "",
@@ -2487,6 +3581,54 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_d5bc0f01-b6df-442f-abe5-f40b7361fc18",
+    "name": "SECTOR45 - 怒BAR",
+    "authorHint": "RAMRAMPA",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_d5bc0f01-b6df-442f-abe5-f40b7361fc18/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_d6212f45-75e5-4473-92a9-90fb0075d9d3",
+    "name": "MAINFRAME",
+    "authorHint": "CYBERBEAR_VR",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_d6212f45-75e5-4473-92a9-90fb0075d9d3/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b",
+    "name": "Refuge˸ Experiment 1․69",
+    "authorHint": "Humphreaky",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2594,6 +3736,38 @@
     ]
   },
   {
+    "id": "wrld_e68ec799-4f85-4cdc-af16-736a72663d5d",
+    "name": "デビルズカクテル",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_e68ec799-4f85-4cdc-af16-736a72663d5d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_e87009dc-b7c1-421f-9865-31e99d8af30d",
+    "name": "Encode",
+    "authorHint": "iron biscuit",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_e87009dc-b7c1-421f-9865-31e99d8af30d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
     "name": "Club Neon Spin",
     "authorHint": "Andron827",
@@ -2605,6 +3779,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_eae833a7-d513-4364-9780-336fa16a4da4",
+    "name": "Cleanroom Warehouse Initiative",
+    "authorHint": "iron biscuit",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_eae833a7-d513-4364-9780-336fa16a4da4/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2637,6 +3827,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dance",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_ec231372-9617-4299-8f71-613c51362a63",
+    "name": "DJ Street",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_ec231372-9617-4299-8f71-613c51362a63/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2712,6 +3918,22 @@
     ]
   },
   {
+    "id": "wrld_f059e174-249c-4aa9-b1f2-3873ed9dfd89",
+    "name": "Just Dance VRChat",
+    "authorHint": "Ikbenmathijs",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f059e174-249c-4aa9-b1f2-3873ed9dfd89/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_f1d95348-8cfa-45c2-b96b-585bda930d2b",
     "name": "NIGHTIDEv1.2.4_放置育成RPG",
     "authorHint": "",
@@ -2728,6 +3950,54 @@
     ]
   },
   {
+    "id": "wrld_f20326da-f1ac-45fc-a062-609723b097b1",
+    "name": "PyPyDance",
+    "authorHint": "pypy",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f20326da-f1ac-45fc-a062-609723b097b1/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_f3e9bbbf-3cb6-4725-8452-e6d25edd268c",
+    "name": "YATAGARASU v2",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f3e9bbbf-3cb6-4725-8452-e6d25edd268c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_f60a9f77-4ca2-4cd1-bd2b-3a96619425a4",
+    "name": "Celestial",
+    "authorHint": "Phototaker",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f60a9f77-4ca2-4cd1-bd2b-3a96619425a4/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
     "name": "Club Neon pulse",
     "authorHint": "soseanon",
@@ -2739,6 +4009,54 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_f90dbbe4-dd88-4385-b058-fd6ecec6d51c",
+    "name": "Quest Dance",
+    "authorHint": "k0sm0sx",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f90dbbe4-dd88-4385-b058-fd6ecec6d51c/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05",
+    "name": "MusicAncientForest",
+    "authorHint": "COMA․",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_f9ba4558-baa6-45db-83e6-a413e0fb6f6a",
+    "name": "BROOM 8299",
+    "authorHint": "bedroomtheft",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_f9ba4558-baa6-45db-83e6-a413e0fb6f6a/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
