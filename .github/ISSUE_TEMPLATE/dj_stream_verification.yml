@@ -1,0 +1,56 @@
+name: DJライブ配信対応Worldの確認情報
+description: DJライブ配信が実際に可能なクラブWorldの検証情報を提出します（この報告だけでは掲載されません）。
+title: "[DJ Live Verification] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Worldが公開されていること**、および **DJのライブ配信音声が参加者に再生できること** が掲載条件です。
+        DJブースの外観、AudioLinkタグ、一般動画の再生成功だけでは不十分です。
+        このIssueは確認依頼であり、管理者が根拠を検証するまで掲載しません。
+  - type: input
+    id: world_url
+    attributes:
+      label: VRChat World URL
+      placeholder: https://vrchat.com/home/world/wrld_.../info
+    validations:
+      required: true
+  - type: dropdown
+    id: method
+    attributes:
+      label: 確認方法
+      options:
+        - 自分でDJライブ配信の再生を実際にテストした
+        - World制作者からDJライブ配信対応の具体的な説明がある
+    validations:
+      required: true
+  - type: input
+    id: checked_at
+    attributes:
+      label: 確認日（日本時間）
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 動作を確認したプラットフォーム
+      options:
+        - PC VRChat
+        - PCとQuest
+        - 未確認
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: ライブ配信の動作と根拠
+      description: 配信サービス、World内のURL入力・再生操作、確認できた音声、制作者の説明URLなど。個人情報や配信キーは投稿しないでください。
+      placeholder: |
+        World内のプレーヤー名：
+        試したライブ配信URLの提供サービス：
+        再生を確認した人数・環境：
+        制作者の公開説明URL：
+    validations:
+      required: true
