@@ -94,8 +94,8 @@ The daily `.github/workflows/dj-stream-research.yml` workflow searches for
 public evidence of **live DJ audio playback inside specific VRChat Worlds**.
 It is independent of thumbnail AI SCOUT and of the World club classifier:
 
-1. Select up to **4 unverified catalog Worlds per daily execution**, prioritizing
-   DJ/music-oriented names and tags, while remembering research dates and retry
+1. Select up to **4 unverified, non-DJ-tagged catalog Worlds per daily execution**, prioritizing
+   music-oriented names and other discovery clues, while remembering research dates and retry
    cooldowns. Owners can trigger an extra bounded run through Actions.
 2. Try official VRChat World metadata (ID, public release status, maker description).
    If the public API is blocked by 401/403, continue public-web research but mark
