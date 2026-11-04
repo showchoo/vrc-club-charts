@@ -83,6 +83,51 @@ Admission to the research catalog remains separate from *public publication*.
 - `scripts/dj_stream_policy.py` holds the shared gate and
   `tests/test_dj_stream_policy.py` guards against accidental bypass.
 
+## AI-assisted DJ livestream evidence research
+
+The daily `.github/workflows/dj-stream-research.yml` workflow searches for
+public evidence of **live DJ audio playback inside specific VRChat Worlds**.
+It is independent of thumbnail AI SCOUT and of the World club classifier:
+
+1. Select up to **4 unverified catalog Worlds per daily execution**, prioritizing
+   DJ/music-oriented names and tags, while remembering research dates and retry
+   cooldowns. Owners can trigger an extra bounded run through Actions.
+2. Try official VRChat World metadata (ID, public release status, maker description).
+   If the public API is blocked by 401/403, continue public-web research but mark
+   official metadata as unavailable. Explicitly private Worlds are skipped.
+3. Ask Gemini `gemini-3.5-flash-lite` to use **Google Search grounding**
+   to find creator documentation, technical setup descriptions and firsthand
+   live-playback test notes. The response must reference actual
+   `groundingMetadata.groundingChunks` indices *also* mentioned by
+   `groundingSupports`. Ungrounded guesses and made-up URLs never count.
+   Ordinary video-player listings, AudioLink, decorative DJ booths and event
+   history do not establish a working live audio stream.
+4. Save a **research-only** queue to `data/dj-stream-research.json` with the
+   World ID, checked date, result category, relevant source URLs, and unverified
+   search hits marked separately:
+   - `evidence_found` — explicit source-backed compatibility *candidate*;
+   - `negative_evidence` — cited explicit statement suggesting non-support;
+   - `needs_review` — unclear or no suitably grounded evidence;
+   - `research_unavailable` — temporary model/metadata failure; retry sooner;
+   - `non_public` — VRChat officially reports a non-public World.
+5. When new `evidence_found` results appear, create **one GitHub Issue per
+   research batch**, with links and a reminder to check the live playback,
+   World ID, creator identity and PC/Quest support. Identical findings do
+   not re-notify on the next run.
+
+**Important:** This workflow **NEVER** writes
+`data/dj-stream-verifications.json`, changes approvals, claims that playback
+was personally tested, or adds any World to the public site. After a human checks
+the actual source and confirms the live input/playback support, they may enter
+a verified record in the existing registry. That is the only publication gate.
+
+The Gemini API key is read only from the existing `GEMINI_API_KEY` Actions
+secret. Missing API key leaves all records unchanged. Grounding can incur
+**charges per search query**, so research is intentionally capped at four Worlds
+per run; Gemini may issue more than one search query per World.
+Offline safeguards are in `tests/test_dj_stream_research.py`. This job
+does not crawl arbitrary AI-returned URLs or expose secrets to GitHub Issues.
+
 ## Automated World coverage
 
 The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.
