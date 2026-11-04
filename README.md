@@ -51,42 +51,58 @@ Implementation:
 Run the existing Node analytics test to verify opt-out, Do Not Track, and
 stable browser pseudonyms: `node --test tests/analytics-opt-out.test.cjs`.
 
-## Public listing policy: DJ tag OR independently verified live playback
+## Public listing policy: DJ tag, explicit owner favorites, or independently verified live playback
 
-**A public World is eligible for the directory if an exact `DJ` tag is present,
-even without verified live-stream equipment.** The existing catalog's `genres`
-are the displayed tags; new submissions/discoveries may use official VRChat
-`tags` (including `author_tag_dj`) only after confirming `releaseStatus=public`.
-Names, descriptions, model guesses, `DJVU`, substring matches and AudioLink
-alone **do not** trigger this exception. Explicitly private/unavailable Worlds
-remain excluded; manual moderation rejections remain authoritative.
+A World is eligible for publication through any one of the three routes,
+as long as its public/available status has not been revoked:
 
-- `scripts/dj_stream_policy.py` is the common listing gate for ranking,
-  directory, detailed pages and public discovery feed. It accepts **either**
-  exact DJ tag or independently recorded live-stream verification. Existing
-  source catalog records are retained regardless of listing.
-- `data/dj-stream-verifications.json` is the **separate proof registry**.
-  Only independently tested playback or a maker's concrete live-stream
-  confirmation gets the **DJ LIVE VERIFIED** label. A DJ-tagged World with
-  no proof displays **DJ TAG — livestream playback not verified**.
-- Source Worlds with a DJ tag publish immediately through the normal build;
-  AI does **not** need to conclude they have a working live stream. In the
-  source catalog checked when this policy was introduced, **51/109** records
-  had the `DJ` genre. This number is historical, not a live guarantee.
-- New discoveries and World submissions with an **official** DJ tag bypass
-  Gemini club-classification approval, but official World public status is
-  still mandatory. Non-tagged clubs may enter the *internal* catalog through
-  the original Gemini classification; they only appear publicly once a
-  legitimate live-stream verification is available.
-- The public weekly ranking, AI SCOUT data, World detail and root aliases are
-  generated for eligible Worlds only. Do not let older data feeds republish
-  private or unrelated Worlds.
-- To contribute independent proof of livestream support, use the
-  [DJ live verification issue form](https://github.com/showchoo/vrc-club-charts/issues/new?template=dj_stream_verification.yml).
-  That optional proof determines the displayed verification badge; it is
-  **not a prerequisite** for DJ-tagged World admission.
-- Tests in `tests/test_dj_stream_policy.py` assert the separation between
-  membership admission and actual DJ live-stream verification.
+1. **DJ TAG:** An exact `DJ` genre in our catalog, or a genuine
+   `author_tag_dj` tag supplied by VRChat on a publicly accessible World.
+   Names, screenshots, AI guesses and AudioLink alone are never enough.
+   This route does **not** claim a working livestream player.
+2. **OWNER CONFIRMED:** World IDs explicitly identified as imported from
+   the site owner's VRChat favorites and confirmed by that owner to have
+   DJ live playback functionality. The owner confirmation and source batch
+   must be recorded in `data/owner-favorite-confirmations.json` using
+   `confirmation=owner-attested-live-playback`.
+   **This is the owner's attestation, not an independent test.**
+3. **DJ LIVE VERIFIED:** Independent playback test or a concrete creator
+   statement recorded in `data/dj-stream-verifications.json`, including
+   verifier, platform, date, method and HTTPS source.
+
+The three labels must remain distinct in generated World pages and public
+ranking JSON. `published_worlds()` in `scripts/dj_stream_policy.py` is the
+single admission gate, used by ranking, AI SCOUT feed and static pages.
+Neither ordinary public submissions nor someone else's favorites may add
+an `owner-attested` record. Exclusions for private, inaccessible, explicitly
+moderated-out, or `chartEligible=false` Worlds remain in force.
+
+**Owner favorite import reconciliation (2026-11-04 UTC):**
+Supabase `world_submissions` contains a 76-World batch submitted at 13:22,
+and a 10-World batch submitted at 13:24. Their World IDs, public-at-submission
+status, names, authors and original author tags were retained. These are the
+86 identified favorite imports the owner confirmed on 2026-11-05 JST.
+Three of the earlier batch were already present in the source catalog;
+73 previously missing catalog entries were added without duplicating IDs.
+The later 10 were also added, producing **86 unique owner attestations**.
+The separately mentioned *one pre-existing World* from the later 11 URL attempts
+could not be identified from the submission tables, so it was **not** silently
+attested. Do not infer that all 120+ historical catalog Worlds came from favorites.
+
+- `data/worlds.json` is the retained research/catalog source. New World
+  submissions and discoveries with a public official DJ tag can still bypass
+  Gemini classification; untagged, non-owner Worlds require independent
+  live-playback verification for publication.
+- No automated workflow can convert arbitrary user submissions into owner
+  confirmations. Future owner-favorite batches require a trusted record of
+  the exact World IDs and owner approval before receiving this status.
+- World cards display `DJ TAG`, `OWNER CONFIRMED`, or
+  `DJ LIVE VERIFIED`. A checkmark for independence is only granted by
+  the original verification registry.
+- The AI research script may skip owner-confirmed Worlds to avoid paying for
+  unnecessary independent research unless the owner wants additional evidence.
+- Regression tests in `tests/test_dj_stream_policy.py` check provenance,
+  non-public exclusion and proper separation of the labels.
 
 ## AI-assisted DJ livestream evidence research
 
@@ -94,7 +110,7 @@ The daily `.github/workflows/dj-stream-research.yml` workflow searches for
 public evidence of **live DJ audio playback inside specific VRChat Worlds**.
 It is independent of thumbnail AI SCOUT and of the World club classifier:
 
-1. Select up to **4 unverified, non-DJ-tagged catalog Worlds per daily execution**, prioritizing
+1. Select up to **4 unverified, non-DJ-tagged, non-owner-confirmed catalog Worlds per daily execution**, prioritizing
    music-oriented names and other discovery clues, while remembering research dates and retry
    cooldowns. Owners can trigger an extra bounded run through Actions.
 2. Try official VRChat World metadata (ID, public release status, maker description).
@@ -124,7 +140,9 @@ It is independent of thumbnail AI SCOUT and of the World club classifier:
 `data/dj-stream-verifications.json`, changes approvals, claims that playback
 was personally tested, or adds any World to the public site. After a human checks
 the actual source and confirms the live input/playback support, they may enter
-a verified record in the existing registry. That is the only publication gate.
+a verified record in the independent registry. That grants the independent
+DJ LIVE VERIFIED label; exact DJ tags and explicit owner confirmations are
+separate publication paths.
 
 The Gemini API key is read only from the existing `GEMINI_API_KEY` Actions
 secret. Missing API key leaves all records unchanged. Grounding can incur

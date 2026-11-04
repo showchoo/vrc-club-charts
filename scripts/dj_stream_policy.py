@@ -1,6 +1,6 @@
 """Publication policy for DJ-tagged and independently live-stream-tested Worlds.
 
-An exact DJ tag permits listing without proof of a working live-stream player.
+An exact DJ tag or explicitly recorded site-owner favorite confirmation permits listing.
 Only independently tested/creator-confirmed evidence earns a LIVE VERIFIED label.
 Unknown or explicitly non-public Worlds must not be represented as verified.
 """
@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "dj-stream-verifications.json"
+OWNER_REGISTRY = ROOT / "data" / "owner-favorite-confirmations.json"
 WORLD_ID = re.compile(r"^wrld_[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$")
 METHODS = {"live-playback-tested", "creator-confirmed-live-playback"}
 
@@ -85,12 +86,56 @@ def load_verified(registry_path: Path | None = None) -> dict[str, dict]:
     return verified
 
 
+
+def load_owner_confirmed(path: Path | None = None) -> dict[str, dict]:
+    """Read explicitly attested owner favorites, never infer from favorite counts.
+
+    This is a *user assertion* of in-world functionality, distinct from
+    independent technical confirmation. It is not for untrusted visitor forms.
+    """
+    source = path if path is not None else OWNER_REGISTRY
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("worlds"), list):
+        raise ValueError("Owner favorite confirmation registry must contain worlds")
+    confirmed = {}
+    for record in payload["worlds"]:
+        if not isinstance(record, dict):
+            raise ValueError("Invalid owner favorite confirmation")
+        wid = record.get("worldId")
+        if not isinstance(wid, str) or not WORLD_ID.fullmatch(wid) or wid in confirmed:
+            raise ValueError("Duplicate or invalid owner favorite World ID")
+        if (record.get("confirmation") != "owner-attested-live-playback" or
+                record.get("releaseStatusAtSubmission") != "public" or
+                record.get("source") != f"https://vrchat.com/home/world/{wid}/info"):
+            raise ValueError(f"Unverified origin of owner favorite {wid}")
+        date = record.get("attestedAt")
+        try:
+            when = dt.date.fromisoformat(date)
+        except (ValueError, TypeError):
+            raise ValueError(f"Owner confirmation date invalid for {wid}") from None
+        # Owner statement was made in Japan; allow the local 2026-11-05 date
+        # even when GitHub Actions is still on 2026-11-04 UTC.
+        jst = dt.timezone(dt.timedelta(hours=9))
+        if when > dt.datetime.now(jst).date():
+            raise ValueError(f"Owner confirmation date in future for {wid}")
+        confirmed[wid] = {
+            "status": "owner-attested",
+            "attestedAt": date,
+            "method": "owner-asserted-in-world-live-playback",
+            "source": record["source"],
+        }
+    return confirmed
+
+
 def published_worlds(worlds: list[dict], verified: dict[str, dict]) -> list[dict]:
     """Admit exact DJ tags or genuine verification; keep publication basis explicit.
 
     The visible DJ tag is a *directory* admission rule, never proof of playback.
     This function is idempotent so the ranking and static builders may both use it.
     """
+    # Exact owner confirmations are admitted as a separately labeled trust
+    # source. They do NOT receive the independently verified stream badge.
+    owner_confirmed = load_owner_confirmed()
     result = []
     for item in worlds:
         if not isinstance(item, dict):
@@ -106,14 +151,19 @@ def published_worlds(worlds: list[dict], verified: dict[str, dict]) -> list[dict
         if item.get("chartEligible") is False:
             continue
         proof = verified.get(wid)
+        owner_proof = owner_confirmed.get(wid)
         dj_tag = has_dj_tag(item)
-        if not (dj_tag or proof):
+        if not (dj_tag or proof or owner_proof):
             continue
+        basis = ("live-playback-verified" if proof else
+                 "owner-favorite-confirmed" if owner_proof else "dj-tag")
         result.append({
             **item,
-            "publicationBasis": "live-playback-verified" if proof else "dj-tag",
+            "publicationBasis": basis,
             "djStreamVerification": proof if proof else None,
             "djStreamTested": bool(proof),
+            "ownerStreamConfirmation": owner_proof,
+            "djStreamOwnerConfirmed": bool(owner_proof),
         })
     return result
 

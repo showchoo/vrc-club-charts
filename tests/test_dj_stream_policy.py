@@ -93,6 +93,53 @@ class DJStreamPolicyTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertFalse(second[0]["djStreamTested"])
 
+    def test_86_owner_favorite_confirmations_have_exact_distinct_world_ids(self):
+        owners = policy.load_owner_confirmed()
+        self.assertEqual(len(owners), 86)
+        catalog = json.loads((ROOT / "data/worlds.json").read_text(encoding="utf-8"))
+        ids = {w["id"] for w in catalog}
+        self.assertTrue(owners.keys() <= ids)
+        published = policy.published_worlds(catalog, {})
+        admitted = {w["id"]: w for w in published}
+        self.assertTrue(owners.keys() <= admitted.keys())
+        for wid in owners:
+            self.assertEqual(admitted[wid]["publicationBasis"], "owner-favorite-confirmed")
+            self.assertTrue(admitted[wid]["djStreamOwnerConfirmed"])
+            self.assertFalse(admitted[wid]["djStreamTested"])
+            self.assertIsNone(admitted[wid]["djStreamVerification"])
+
+    def test_explicit_nonpublic_owner_favorite_cannot_publish(self):
+        wid = next(iter(policy.load_owner_confirmed()))
+        source = {"id":wid,"genres":["MUSIC"],"chartEligible":True}
+        self.assertEqual(
+            policy.published_worlds([{**source,"releaseStatus":"private"}],{}),[])
+        self.assertEqual(
+            policy.published_worlds([{**source,"availabilityStatus":"unavailable"}],{}),[])
+        self.assertEqual(
+            policy.published_worlds([{**source,"chartEligible":False}],{}),[])
+
+    def test_unrelated_favorite_metrics_do_not_authorize_publication(self):
+        record = {"id": W1, "name": "Many favorites",
+                  "genres": ["MUSIC"], "totals":{"favorites":100000}}
+        self.assertFalse(policy.published_worlds([record], {}))
+
+    def test_owner_registry_rejects_invalid_or_untrusted_batch_record(self):
+        wid = next(iter(policy.load_owner_confirmed()))
+        original = json.loads((ROOT / "data/owner-favorite-confirmations.json").read_text(encoding="utf-8"))
+        record = next(x for x in original["worlds"] if x["worldId"]==wid)
+        for mutation in [
+            {"confirmation":"ordinary-user-submission"},
+            {"releaseStatusAtSubmission":"private"},
+            {"attestedAt":"2100-01-01"},
+            {"source":"https://another.example/world"},
+        ]:
+            with tempfile.TemporaryDirectory() as folder:
+                payload={"worlds":[{**record, **mutation}]}
+                file=Path(folder)/"owner.json"
+                file.write_text(json.dumps(payload),encoding="utf-8")
+                with self.subTest(change=mutation),self.assertRaises(ValueError):
+                    policy.load_owner_confirmed(file)
+
     def test_stale_scout_scores_and_discovery_candidates_do_not_leak(self):
         confirmed = self.load([evidence(W1)])
         source = {
@@ -145,7 +192,7 @@ class DJStreamPolicyTests(unittest.TestCase):
                 {p.stem for p in out.glob("wrld_*.html")}, expected)
             feed = json.loads((out / "data/weekly-ranking.json").read_text(encoding="utf-8"))
             self.assertEqual({x["id"] for x in feed["worlds"]}, expected)
-            self.assertEqual(feed["publicationPolicy"], "dj-tag-or-verified-live-stream")
+            self.assertEqual(feed["publicationPolicy"], "dj-tag-owner-favorite-or-verified-live-stream")
             scout = json.loads((out / "data/ai-scout.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 {x["id"] for x in scout["scored"] + scout["candidates"]} - expected, set())
