@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-04T16:40:16+00:00",
+  "updatedAt": "2026-11-04T17:04:47+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -93,10 +93,62 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
+      "name": "Club Earthquake 〖Night pool〗",
+      "author": "ro_tta",
+      "checkedAt": "2026-11-04T17:04:46+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "checkedAt": "2026-11-04T17:04:46+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
+      "name": "Cyberpunk City Rave",
+      "author": "Coldcancer",
+      "checkedAt": "2026-11-04T17:04:46+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_d4e02d69-2d17-4972-9c7a-712b076039be",
       "name": "DJ Nightclub",
       "author": "Rainbowlex",
       "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
+      "name": "LOST COLONY RAVE V2.5",
+      "author": "booploops",
+      "checkedAt": "2026-11-04T17:04:46+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
