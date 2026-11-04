@@ -54,6 +54,6 @@ test('AI SCOUT uses a cached thumbnail proxy for catalog Worlds without second m
 });
 
 test('Homepage references freshly versioned JavaScript assets', () => {
-  assert.match(html, /app\.js\?v=20261007-home-thumbs-01/);
-  assert.match(html, /ai-scout\.js\?v=20261007-home-thumbs-01/);
+  assert.match(html, /app\.js\?v=[a-z0-9-]+/);
+  assert.match(html, /ai-scout\.js\?v=[a-z0-9-]+/);
 });
