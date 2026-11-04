@@ -7,6 +7,12 @@
   'use strict';
   const STORE = 'vcc-site-language';
   const translations = {
+    "「DJ」タグ付きWorld、運営者が配信機能を確認したお気に入りWorld、または独立検証済みWorldを掲載します。DJタグだけでは配信機能の動作は保証されません。": "We list Worlds with a DJ tag, owner-confirmed favorites, or independent livestream evidence. A DJ tag alone does not guarantee live playback.",
+    "DJタグ・運営者確認済み・配信実証済みWorldを読み込み中…": "Loading DJ-tagged, owner-confirmed and independently verified Worlds…",
+    "World掲載条件：DJタグ・運営者確認・配信検証": "World criteria: DJ tag, owner confirmation, or independent proof",
+    "VRC Club Chartsでは、①公開Worldに「DJ」タグがある、②運営者がお気に入りから登録して配信機能を確認したと申告している、③配信機能の独立した根拠が確認できた、のいずれかを満たすWorldを掲載します。DJタグだけでは配信ができることを保証しません。": "We list public Worlds with an exact DJ tag, World IDs that the site owner added from favorites and attested to support livestream playback, or Worlds with independent evidence. A DJ tag alone is not proof.",
+    "運営者のお気に入り由来のWorldは「OWNER CONFIRMED（運営者申告）」とし、ライブ再生テストや制作者の具体的な説明で検証した「DJ LIVE VERIFIED」と明確に区別します。既存の投稿や一般利用者のお気に入りは、運営者確認として自動承認しません。": "Owner-favorite Worlds receive an OWNER CONFIRMED (owner attestation) label, separate from DJ LIVE VERIFIED entries supported by a test or maker documentation. Other users' submissions are not automatically owner-approved.",
+    "DJタグ付き・運営者確認済み・独立検証済みのWorldを探しています。DJタグだけではライブ配信動作を保証しません。": "Discovering DJ-tagged, owner-confirmed or independently verified Worlds. A DJ tag alone does not guarantee live-stream support.",
     "「DJ」タグのある公開World、またはライブ配信確認済みWorldを掲載します。DJタグは配信機能の動作保証ではありません。ビジュアル評価はサムネイル画像の参考値です。": "We list public Worlds tagged DJ, or Worlds with independently verified live-stream playback. A DJ tag does not guarantee streaming functionality. Visual impressions are based on thumbnails.",
     "DJタグ付きWorld・配信確認済みWorldを読み込み中…": "Loading DJ-tagged and live-verified Worlds…",
     "VRChatのWorld URLを貼るだけ。公開Worldの公式「DJ」タグが確認できれば自動掲載します。DJタグがないWorldは従来どおり追加審査の対象です。": "Paste a VRChat World URL. Public Worlds with an official DJ tag are listed automatically; Worlds without that tag undergo further review.",
