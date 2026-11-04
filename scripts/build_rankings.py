@@ -3,7 +3,10 @@ from __future__ import annotations
 import datetime as dt, json, math
 from pathlib import Path
 
-from scripts.dj_stream_policy import load_verified, published_worlds
+try:
+    from scripts.dj_stream_policy import load_verified, published_worlds
+except ModuleNotFoundError:
+    from dj_stream_policy import load_verified, published_worlds
 
 ROOT = Path(__file__).resolve().parents[1]
 CRAFT_MAX = {'visual':20, 'lighting':20, 'sound':15, 'spatial':15, 'interaction':10, 'originality':10, 'optimization':10}
