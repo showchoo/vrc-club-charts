@@ -31,10 +31,10 @@ def fake_site(path_status=None, world_thumb=True):
         body = ("vccLanguageToggle" if name == "i18n.js" else
                 "world-thumb" if name == "app.js" else "ok")
         responses[monitor.SITE + "/" + name] = (200, "application/javascript", body.encode())
-    responses[monitor.SITE + "/data/weekly-ranking.json"] = (
+    responses[monitor.SITE + "/data/weekly-ranking.json?v=dj-live-verified-01"] = (
         200, "application/json", json.dumps({"worlds": [{"id": WORLD}]}).encode()
     )
-    responses[monitor.SITE + "/data/ai-scout.json"] = (
+    responses[monitor.SITE + "/data/ai-scout.json?v=dj-live-verified-01"] = (
         200, "application/json", b'{"scored":[]}'
     )
     responses[monitor.SITE + "/worlds/" + WORLD + ".html"] = (
@@ -74,7 +74,7 @@ class SiteMonitoringTests(unittest.TestCase):
         }).encode()
         fetch = fake_site({
             monitor.SITE + "/worlds/": (200, "text/html", no_cards),
-            monitor.SITE + "/data/weekly-ranking.json": (
+            monitor.SITE + "/data/weekly-ranking.json?v=dj-live-verified-01": (
                 200, "application/json", no_worlds
             ),
         })
@@ -86,7 +86,7 @@ class SiteMonitoringTests(unittest.TestCase):
         no_cards = b'<html><body>worldCatalog<script src="../i18n.js"></script></body></html>'
         fetch = fake_site({
             monitor.SITE + "/worlds/": (200, "text/html", no_cards),
-            monitor.SITE + "/data/weekly-ranking.json": (
+            monitor.SITE + "/data/weekly-ranking.json?v=dj-live-verified-01": (
                 200, "application/json", b'{"worlds":[]}'
             ),
         })
@@ -106,8 +106,8 @@ class SiteMonitoringTests(unittest.TestCase):
     def test_ai_repair_workflow_does_not_require_unverified_worlds(self):
         steps = (Path(__file__).resolve().parents[1] /
                  ".github/workflows/site-self-heal.yml").read_text(encoding="utf-8")
-        self.assertIn("test -s _site/data/weekly-ranking.json", steps)
-        self.assertIn("test -s _site/data/ai-scout.json", steps)
+        self.assertIn("test -s _site/data/weekly-ranking.json?v=dj-live-verified-01", steps)
+        self.assertIn("test -s _site/data/ai-scout.json?v=dj-live-verified-01", steps)
         self.assertNotIn("ge 80", steps)
 
     def test_missing_world_directory_is_actionable(self):

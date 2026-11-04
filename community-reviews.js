@@ -46,7 +46,7 @@
     try {
       const [response, worldResponse] = await Promise.all([
         fetch(endpoint + '?limit=' + (feed ? '12' : '3'), { cache: 'no-store' }),
-        fetch('data/weekly-ranking.json', { cache: 'no-store' }).catch(() => null)
+        fetch('data/weekly-ranking.json?v=dj-live-verified-01', { cache: 'no-store' }).catch(() => null)
       ]);
       if (!response.ok) throw new Error('feed');
       const data = await response.json();
@@ -94,7 +94,7 @@
 
     let available = [];
     try {
-      const response = await fetch('data/weekly-ranking.json', { cache: 'no-store' });
+      const response = await fetch('data/weekly-ranking.json?v=dj-live-verified-01', { cache: 'no-store' });
       if (!response.ok) throw new Error('worlds');
       const data = await response.json();
       available = (Array.isArray(data.worlds) ? data.worlds : [])

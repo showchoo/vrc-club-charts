@@ -446,7 +446,7 @@ async function load() {
   }
 
   const [worldData, eventData, editorData] = await Promise.all([
-    safeJson('data/weekly-ranking.json', {cache:'no-store'}),
+    safeJson('data/weekly-ranking.json?v=dj-live-verified-01', {cache:'no-store'}),
     safeJson('data/events.json', {cache:'no-store'}),
     safeJson('https://ypqpgpetrriirywrzikj.supabase.co/rest/v1/editor_world_scores?select=*', {
       cache:'no-store',
