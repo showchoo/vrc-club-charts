@@ -25,6 +25,11 @@ DECISIONS = DATA / "world-submission-decisions.json"
 QUEUE = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-submit?queue=1"
 MODEL = os.environ.get("VCC_SUBMISSION_MODEL", "gemini-3.5-flash-lite")
 WORLD_ID = re.compile(r"^wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+try:
+    from scripts.dj_stream_policy import is_dj_tag
+except ModuleNotFoundError:
+    from dj_stream_policy import is_dj_tag
+
 STRONG = ("nightclub", "dancefloor", "dance floor", "dj", "disco",
           "rave", "club", "クラブ", "ナイトクラブ", "レイブ", "ディスコ", "djブース")
 SUPPORT = ("party", "dance", "dancing", "music", "techno", "house music",
@@ -194,6 +199,12 @@ def classify_world(metadata: dict, key: str) -> dict:
             "imageConsidered":bool(pic)}
 
 
+def has_official_dj_tag(metadata: dict) -> bool:
+    """Only a tag from the official public World metadata, not name/description."""
+    tags = metadata.get("tags")
+    return isinstance(tags, list) and any(is_dj_tag(tag) for tag in tags)
+
+
 def may_auto_approve(assessment: dict, metadata: dict) -> bool:
     """Conservative gate independent of Gemini's self-reported confidence."""
     terms, in_description = nightlife_signals(metadata)
@@ -229,8 +240,7 @@ def main() -> None:
     unseen=unseen[:limit]
     key=os.environ.get("GEMINI_API_KEY","").strip()
     if not key:
-        print(f"INFO: Gemini key not configured; {len(unseen)} Worlds await AI club classification")
-        return
+        print("INFO: Gemini key missing; processing official DJ-tagged Worlds only")
     approved=0
     for item in unseen:
         wid=item["world_id"]
@@ -248,24 +258,35 @@ def main() -> None:
                                     + type(exc).__name__))
             print("MANUAL_REVIEW "+wid+" public metadata unavailable")
             continue
-        try:
-            assessment=classify_world(meta,key)
-        except (ValueError,urllib.error.HTTPError,urllib.error.URLError,TimeoutError) as exc:
-            # API outages/invalid model/key are NOT a judgement on the World.
-            print("WARN: Gemini unavailable; no World auto-approved: "+type(exc).__name__)
-            break
-        if may_auto_approve(assessment,meta):
+        dj_tagged = has_official_dj_tag(meta)
+        if dj_tagged:
+            # A public official DJ tag is sufficient for LISTING, not proof of
+            # working livestream playback. No AI inference or billable call.
+            assessment = {"verdict": "club", "method": "official-vrchat-dj-tag"}
+        elif not key:
+            continue
+        else:
+            try:
+                assessment=classify_world(meta,key)
+            except (ValueError,urllib.error.HTTPError,urllib.error.URLError,TimeoutError) as exc:
+                print("WARN: Gemini unavailable; no World auto-approved: "+type(exc).__name__)
+                break
+        if dj_tagged or may_auto_approve(assessment,meta):
             catalog.append({
                 "id":wid,"name":str(meta["name"]).strip()[:120],
                 "author":str(meta["authorName"]).strip()[:120],
-                "genres":["CLUB"],"editorialStatus":"unreviewed",
+                "genres":["CLUB", "DJ"] if dj_tagged else ["CLUB"],
+                "officialTags":[tag for tag in meta.get("tags", []) if isinstance(tag,str)],
+                "releaseStatus":"public", "editorialStatus":"unreviewed",
                 "chartEligible":True,"source":
                     "https://vrchat.com/home/world/"+wid+"/info",
-                "discoveredBy":"user-submission-ai-reviewed",
+                "discoveredBy":("user-submission-official-dj-tag" if dj_tagged
+                                else "user-submission-ai-reviewed"),
             })
             known.add(wid)
             decisions.append(decide(wid,meta,assessment,"approved",
-                                    "Confirmed public World and high-confidence nightlife evidence"))
+                                    "Official public World DJ tag" if dj_tagged
+                                    else "Confirmed public World and high-confidence nightlife evidence"))
             approved+=1
             print("APPROVED "+wid+" "+str(meta["name"]).strip()[:120])
         else:
