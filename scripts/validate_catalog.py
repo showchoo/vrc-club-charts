@@ -8,6 +8,11 @@ import sys
 import tempfile
 from pathlib import Path
 
+try:
+    from scripts.dj_stream_policy import load_verified, published_worlds
+except ModuleNotFoundError:
+    from dj_stream_policy import load_verified, published_worlds
+
 ROOT = Path(__file__).resolve().parents[1]
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F-]{36}$")
 CRAFT_MAX = {
@@ -92,9 +97,16 @@ def main() -> int:
         fail(f"weekly-ranking contains unknown ids: {unknown}")
         errors += 1
 
-    missing = sorted(seen - set(ranked_ids))
+    # Internal research catalog includes unverified Worlds, while the public
+    # ranking intentionally contains only evidence-backed DJ live-stream Worlds.
+    required_public = {row["id"] for row in published_worlds(worlds, load_verified())}
+    missing = sorted(required_public - set(ranked_ids))
+    extra = sorted(set(ranked_ids) - required_public)
     if missing:
-        fail(f"weekly-ranking is missing {len(missing)} registry ids")
+        fail(f"weekly-ranking is missing {len(missing)} DJ-live-verified ids")
+        errors += 1
+    if extra:
+        fail(f"weekly-ranking publishes {len(extra)} Worlds without DJ-live verification")
         errors += 1
 
     if len(ranked_ids) != len(set(ranked_ids)):
