@@ -26,6 +26,12 @@ UA = "VRCClubCharts/1.0 (+https://vrc-club-charts.vercel.app/about.html)"
 ARTICLE_PATH = re.compile(r"^/vrchat-world-\d+/?$")
 WORLD_PATH = re.compile(r"^/home/world/(wrld_[0-9a-fA-F-]{36})(?:/info)?/?$")
 PAGE_LIMIT = 2
+# Verified, separately categorised public pages. Extra sources require
+# explicit club wording in the article title to avoid importing generic bars.
+SECONDARY_INDEXES = (
+    ("sia_vr_music", BASE + "/category/genre/music"),
+    ("sia_vr_bar", BASE + "/category/building/bar"),
+)
 
 
 class LinkParser(HTMLParser):
@@ -86,13 +92,13 @@ def extract_world_article(article_html: str) -> tuple[str, str] | None:
 
 def fetch_text(url: str) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html"})
-    with urllib.request.urlopen(req, timeout=16) as response:
+    with urllib.request.urlopen(req, timeout=10) as response:
         return response.read(1_000_000).decode("utf-8", errors="replace")
 
 
 def robots_policy() -> urllib.robotparser.RobotFileParser:
     request = urllib.request.Request(BASE + "/robots.txt", headers={"User-Agent": UA})
-    with urllib.request.urlopen(request, timeout=10) as response:
+    with urllib.request.urlopen(request, timeout=8) as response:
         raw = response.read(200_000).decode("utf-8", errors="replace")
     parsed = urllib.robotparser.RobotFileParser()
     parsed.parse(raw.splitlines())
@@ -167,5 +173,60 @@ def collect_candidates(today: str | None = None) -> tuple[list[dict], dict]:
         state = state if isinstance(state, dict) else {}
         state["siaVrNextIndex"] = (start + len(chosen)) % len(links)
         STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Sia VR leads: {len(found)} from {report['articlesChecked']} permitted articles")
+    # Also sample publicly listed music and bar worlds with bounded requests.
+    # A nightclub-like name is required for these much broader categories;
+    # this is ONLY a discovery lead, never automatic World approval.
+    extra_state = read_json(STATE, {})
+    extra_state = extra_state if isinstance(extra_state, dict) else {}
+    secondary_positions = extra_state.get("siaVrSecondaryIndexes", {})
+    secondary_positions = secondary_positions if isinstance(secondary_positions, dict) else {}
+    category_report = {}
+    for category, index_url in SECONDARY_INDEXES:
+        stats = {"status": "unavailable", "articlesChecked": 0, "newLeads": 0}
+        if not policy.can_fetch(UA, index_url):
+            stats["status"] = "robots_disallowed"
+            category_report[category] = stats
+            continue
+        try:
+            entries = article_urls(fetch_text(index_url))
+            if not entries:
+                stats["status"] = "empty"
+            else:
+                stats["status"] = "ok"
+                start_index = int(secondary_positions.get(category, 0)) % len(entries)
+                # Never let secondary sites dominate the daily workflow.
+                selected = (entries[start_index:] + entries[:start_index])[:2]
+                for article in selected:
+                    if not policy.can_fetch(UA, article):
+                        continue
+                    try:
+                        item = extract_world_article(fetch_text(article))
+                        stats["articlesChecked"] += 1
+                        if not item:
+                            continue
+                        wid, name = item
+                        if wid in found or BLOCKED_NAME.search(name) or not CLUB_NAME.search(name):
+                            continue
+                        found[wid] = {
+                            "id": wid, "name": name, "authorHint": "",
+                            "source": article, "sourceCategories": [category],
+                            "confidenceScore": 80, "confidence": "awaiting-public-metadata",
+                            "reasons": ["source:" + category, "+explicit-club-name"],
+                            "firstDiscoveredAt": today, "lastSeenAt": today,
+                        }
+                        stats["newLeads"] += 1
+                    except Exception as exc:
+                        print(f"INFO: Sia VR extra article skipped: {type(exc).__name__}")
+                secondary_positions[category] = (start_index + len(selected)) % len(entries)
+        except Exception as exc:
+            print(f"INFO: Sia VR {category} unavailable: {type(exc).__name__}")
+        category_report[category] = stats
+    extra_state = read_json(STATE, {})
+    extra_state = extra_state if isinstance(extra_state, dict) else {}
+    extra_state["siaVrSecondaryIndexes"] = secondary_positions
+    STATE.write_text(json.dumps(extra_state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report["secondarySources"] = category_report
+    report["leads"] = len(found)
+    print(f"Sia VR leads: {len(found)} from {report['articlesChecked']} club articles + "
+          f"{sum(s['articlesChecked'] for s in category_report.values())} extra articles")
     return list(found.values()), report
