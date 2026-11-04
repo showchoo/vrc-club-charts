@@ -502,6 +502,28 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_ec231372-9617-4299-8f71-613c51362a63",
+    "name": "DJ Street",
+    "author": "COMA․",
+    "genres": [
+      "CLUB",
+      "DJ"
+    ],
+    "officialTags": [
+      "author_tag_DJ",
+      "author_tag_vj",
+      "author_tag_club",
+      "author_tag_photo",
+      "author_tag_city"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_ec231372-9617-4299-8f71-613c51362a63/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
     "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
     "name": "Eden 6",
     "author": "SimplySymmetry",
@@ -554,6 +576,28 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_9ba9fd77-31c7-432a-bcb4-8983bec75ef8",
+    "name": "FirstNoteStation-始発駅-EastGate",
+    "author": "AONEKO⁄青猫",
+    "genres": [
+      "MUSIC",
+      "LIVE"
+    ],
+    "officialTags": [
+      "author_tag_Music",
+      "author_tag_Live",
+      "author_tag_Station",
+      "author_tag_Realistic",
+      "author_tag_TopazChat"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_9ba9fd77-31c7-432a-bcb4-8983bec75ef8/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
     "id": "wrld_556018f9-5e94-486c-b30d-aa294deb923b",
     "name": "Furlumin Starlight Club",
     "author": "MarlonXFurry",
@@ -577,6 +621,21 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_59757e52-4c43-4d72-941f-0509cc86d894",
+    "name": "Green Room",
+    "author": "iron biscuit",
+    "genres": [
+      "VENUE"
+    ],
+    "officialTags": [],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_59757e52-4c43-4d72-941f-0509cc86d894/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
   },
   {
     "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
@@ -887,6 +946,37 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_0bbe0a68-4b3c-4443-887c-720b4b79a901",
+    "name": "Pool Party",
+    "author": "4liceD",
+    "genres": [
+      "CLUB",
+      "RAVE"
+    ],
+    "officialTags": [
+      "author_tag_Mirror",
+      "author_tag_Hidden City",
+      "author_tag_AudioLink",
+      "author_tag_Vibe",
+      "author_tag_Chill",
+      "author_tag_Billiards",
+      "author_tag_Water",
+      "author_tag_Neon",
+      "author_tag_Night",
+      "author_tag_Rave",
+      "author_tag_Club",
+      "author_tag_Swim",
+      "author_tag_Party",
+      "author_tag_Pool"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_0bbe0a68-4b3c-4443-887c-720b4b79a901/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
     "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
     "name": "Poolside Chill House",
     "author": "JimmyyJames",
@@ -981,6 +1071,28 @@
     "chartEligible": true,
     "source": "https://vrchat.com/home/world/wrld_55db23e4-12f2-405a-b457-6235e454170c/info",
     "discoveredBy": "user-submission-ai-reviewed"
+  },
+  {
+    "id": "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b",
+    "name": "Refuge˸ Experiment 1․69",
+    "author": "Humphreaky",
+    "genres": [
+      "DJ",
+      "AUDIOLINK"
+    ],
+    "officialTags": [
+      "author_tag_dj",
+      "author_tag_arealit",
+      "author_tag_audiolink",
+      "author_tag_popup",
+      "author_tag_refuge"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
   },
   {
     "id": "wrld_06fdbbc8-21b0-41fd-85db-492fd087c950",
@@ -1387,6 +1499,27 @@
     "discoveredBy": "user-submission-official-dj-tag"
   },
   {
+    "id": "wrld_4921ccd6-56eb-4af5-8c3f-7991b01dc83f",
+    "name": "Veiled Dark",
+    "author": "Dean`",
+    "genres": [
+      "AMBIENT",
+      "VENUE"
+    ],
+    "officialTags": [
+      "author_tag_island",
+      "author_tag_house",
+      "author_tag_ambient",
+      "author_tag_dark"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_4921ccd6-56eb-4af5-8c3f-7991b01dc83f/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
     "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",
     "name": "ZODIAC DJ EVENT",
     "author": "Virgo4u",
@@ -1426,21 +1559,6 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
-  },
-  {
-    "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
-    "name": "どんのラウンジバー「BLACK GOLD」",
-    "author": "＝DonK＝",
-    "genres": [
-      "BAR",
-      "DJ",
-      "STAGE",
-      "EVENT",
-      "QUEST"
-    ],
-    "editorialStatus": "unreviewed",
-    "chartEligible": true,
-    "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d"
   },
   {
     "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
@@ -1484,6 +1602,29 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_2760e034-4ef5-49c8-bcb3-035734df721d",
+    "name": "カラクリクラブ․2",
+    "author": "COMA․",
+    "genres": [
+      "CLUB",
+      "DJ",
+      "AUDIOLINK"
+    ],
+    "officialTags": [
+      "author_tag_audiolink",
+      "author_tag_dj",
+      "author_tag_yama",
+      "author_tag_club",
+      "author_tag_vj"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_2760e034-4ef5-49c8-bcb3-035734df721d/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
     "id": "wrld_3583582a-e53b-44f4-bcfa-d8b1d28a5096",
     "name": "チル＆v睡＆DJ ワールド（ベータ版）",
     "author": "GUNYON1",
@@ -1498,6 +1639,43 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_e68ec799-4f85-4cdc-af16-736a72663d5d",
+    "name": "デビルズカクテル",
+    "author": "COMA․",
+    "genres": [
+      "CLUB",
+      "BAR"
+    ],
+    "officialTags": [
+      "author_tag_club",
+      "author_tag_bar",
+      "author_tag_devil",
+      "author_tag_red",
+      "author_tag_s"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_e68ec799-4f85-4cdc-af16-736a72663d5d/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
+  },
+  {
+    "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+    "name": "どんのラウンジバー「BLACK GOLD」",
+    "author": "＝DonK＝",
+    "genres": [
+      "BAR",
+      "DJ",
+      "STAGE",
+      "EVENT",
+      "QUEST"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d"
+  },
+  {
     "id": "wrld_501c9f08-cd8c-4b77-94d9-69e631ff5374",
     "name": "中文歌友会-体育场EMF舞台旧",
     "author": "小杨又失利了",
@@ -1509,6 +1687,28 @@
     "editorialStatus": "unreviewed",
     "source": "https://www.vrcw.net/category/detail/event_venue",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_c82a5c14-97a5-4782-a034-d897d2d943a2",
+    "name": "新宿ライブストリート ⁄ Shinjuku Live Street",
+    "author": "Artistoid",
+    "genres": [
+      "MUSIC",
+      "LIVE"
+    ],
+    "officialTags": [
+      "author_tag_city",
+      "author_tag_topazchat",
+      "author_tag_shinjuku",
+      "author_tag_Music",
+      "author_tag_Live"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_c82a5c14-97a5-4782-a034-d897d2d943a2/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
   },
   {
     "id": "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346",
@@ -1547,5 +1747,28 @@
     "editorialStatus": "unreviewed",
     "source": "https://www.vrcw.net/category/detail/dance",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_bbf52d7c-1a5b-4ffc-a19a-ed79be2c6cae",
+    "name": "響水路 Music Chamber",
+    "author": "_you5248",
+    "genres": [
+      "MUSIC",
+      "CLUB",
+      "DJ"
+    ],
+    "officialTags": [
+      "author_tag_music",
+      "author_tag_chill",
+      "author_tag_DJ",
+      "author_tag_club",
+      "author_tag_Vrclightvolumes_v2"
+    ],
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_bbf52d7c-1a5b-4ffc-a19a-ed79be2c6cae/info",
+    "releaseStatus": "public",
+    "discoveredBy": "owner-favorites-live-playback-attested",
+    "ownerFavoriteImportDate": "2026-11-04"
   }
 ]
