@@ -1,0 +1,184 @@
+name: Release verified thumbnail fix when Vercel quota permits
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Recheck every six hours. Backoff below severely limits new builds.
+    - cron: "17 */6 * * *"
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: vcc-thumbnail-release-on-quota-recovery
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'showchoo/vrc-club-charts'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify CI, retry quota-limited builds, and release only reviewed code
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: showchoo/vrc-club-charts
+          PR: "131"
+          EXPECTED_BRANCH: fix/catalog-thumbnail-recovery-20261105
+          REVIEWED_CODE_SHA: d0dae34ff6a791e05b049a74642ac086ee50dec1
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Backoff: 6h for the first four retries, daily for the next eight,
+          # then weekly. This never loops rapidly or spends paid capacity.
+          retry_window() {
+            local attempts="$1"
+            if (( attempts < 4 )); then echo 21600
+            elif (( attempts < 12 )); then echo 86400
+            else echo 604800
+            fi
+          }
+          # Only the actual Vercel Git status proves this commit was deployed.
+          vercel_status() {
+            local sha="$1"
+            gh api "repos/$REPO/commits/$sha/statuses?per_page=100" \
+              | jq -c '[.[] | select(.context == "Vercel")][0] // {}'
+          }
+          status_field() {
+            jq -r "$1 // empty"
+          }
+          retry_permitted() {
+            local ref="$1" marker="$2"
+            local attempts last now cooldown
+            attempts=$(git log "$ref" --format=%s --grep="^$marker$" | wc -l | tr -d ' ')
+            if (( attempts >= 60 )); then
+              echo "::warning::Maximum bounded retry attempts reached for $ref"
+              return 1
+            fi
+            last=$(git show -s --format=%ct "$ref")
+            now=$(date -u +%s)
+            cooldown=$(retry_window "$attempts")
+            if (( now - last < cooldown )); then
+              echo "Cooldown still active on $ref ($attempts prior retries)"
+              return 1
+            fi
+            return 0
+          }
+          git config user.name "vcc-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          gh auth setup-git
+
+          pr_json=$(gh api "repos/$REPO/pulls/$PR")
+          state=$(jq -r '.state' <<<"$pr_json")
+          merged=$(jq -r '.merged' <<<"$pr_json")
+          branch=$(jq -r '.head.ref' <<<"$pr_json")
+
+          if [[ "$state" == "open" && "$merged" == "false" ]]; then
+            # This is deliberately a one-PR release gate, not a generic
+            # bot with authority to merge arbitrary future changes.
+            if [[ "$branch" != "$EXPECTED_BRANCH" ]]; then
+              echo "::warning::PR branch changed; refusing automated release"
+              exit 0
+            fi
+            head=$(jq -r '.head.sha' <<<"$pr_json")
+            git fetch origin "$EXPECTED_BRANCH"
+            git merge-base --is-ancestor "$REVIEWED_CODE_SHA" "origin/$EXPECTED_BRANCH" || {
+              echo "::warning::Reviewed commit no longer in PR history"
+              exit 0
+            }
+            if ! git diff --quiet "$REVIEWED_CODE_SHA" "origin/$EXPECTED_BRANCH"; then
+              echo "::warning::PR contains new file changes; require human review"
+              exit 0
+            fi
+
+            ci=$(gh api "repos/$REPO/actions/workflows/validate.yml/runs?branch=$EXPECTED_BRANCH&per_page=100")
+            ci_success=$(jq -r --arg sha "$head" \
+              '[.workflow_runs[] | select(.head_sha == $sha and .conclusion == "success")] | length > 0' <<<"$ci")
+            if [[ "$ci_success" != "true" ]]; then
+              # A workflow_dispatch run is needed after bot-created empty
+              # commits because GITHUB_TOKEN pushes suppress Actions events.
+              any_ci=$(jq -r --arg sha "$head" \
+                '[.workflow_runs[] | select(.head_sha == $sha)] | length > 0' <<<"$ci")
+              if [[ "$any_ci" != "true" ]]; then
+                gh workflow run validate.yml --ref "$EXPECTED_BRANCH"
+                echo "Requested validation for unchanged PR content"
+              else
+                echo "Validation has not passed for PR head $head"
+              fi
+              exit 0
+            fi
+
+            vc=$(vercel_status "$head")
+            vc_state=$(jq -r '.state // "missing"' <<<"$vc")
+            vc_url=$(jq -r '.target_url // ""' <<<"$vc")
+            if [[ "$vc_state" == "success" ]]; then
+              # GitHub enforces branch protections. Never use --admin.
+              gh api -X PUT "repos/$REPO/pulls/$PR/merge" \
+                -f merge_method=squash -f sha="$head" > /dev/null
+              echo "Merged CI-passed and Vercel-preview-READY PR #$PR"
+              exit 0
+            fi
+            if [[ "$vc_state" == "failure" && "$vc_url" != *"build-rate-limit"* ]]; then
+              echo "::warning::Vercel preview failed for a non-quota reason; no automatic retry"
+              exit 0
+            fi
+            if [[ "$vc_state" == "pending" ]]; then
+              echo "Vercel preview still pending"
+              exit 0
+            fi
+            if retry_permitted "origin/$EXPECTED_BRANCH" \
+              "ci: retry Vercel preview after quota"; then
+              git switch -C "$EXPECTED_BRANCH" "origin/$EXPECTED_BRANCH"
+              git -c commit.gpgsign=false commit --allow-empty \
+                -m "ci: retry Vercel preview after quota"
+              git push origin "HEAD:refs/heads/$EXPECTED_BRANCH"
+              # Explicitly run tests against the retried, identical tree.
+              gh workflow run validate.yml --ref "$EXPECTED_BRANCH"
+              echo "Retried Vercel preview on the same reviewed tree"
+            fi
+            exit 0
+          fi
+
+          if [[ "$merged" != "true" ]]; then
+            echo "PR was closed without merge; nothing will be deployed."
+            exit 0
+          fi
+
+          # After a safe merge, the Vercel Git integration should deploy main.
+          # If its Git status records a quota failure, a throttled empty commit
+          # retries production without changing files or bypassing CI.
+          git fetch origin main
+          merge_sha=$(jq -r '.merge_commit_sha // empty' <<<"$pr_json")
+          [[ -n "$merge_sha" ]] || exit 0
+          git merge-base --is-ancestor "$merge_sha" "origin/main" || exit 0
+          main_sha=$(git rev-parse "origin/main")
+          vc=$(vercel_status "$main_sha")
+          vc_state=$(jq -r '.state // "missing"' <<<"$vc")
+          vc_url=$(jq -r '.target_url // ""' <<<"$vc")
+          if [[ "$vc_state" == "success" ]]; then
+            echo "Production Vercel status succeeded for $main_sha"
+            exit 0
+          fi
+          if [[ "$vc_state" == "pending" ]]; then
+            echo "Production deployment still pending"
+            exit 0
+          fi
+          if [[ "$vc_state" == "failure" && "$vc_url" != *"build-rate-limit"* ]]; then
+            echo "::warning::Production failed for a non-quota reason; manual diagnosis required"
+            exit 0
+          fi
+          if retry_permitted origin/main \
+            "ci: retry Vercel production after quota"; then
+            git switch -C main origin/main
+            git -c commit.gpgsign=false commit --allow-empty \
+              -m "ci: retry Vercel production after quota"
+            git push origin "HEAD:refs/heads/main"
+            echo "Retried production by pushing an unchanged tree"
+          fi
