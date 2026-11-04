@@ -7,6 +7,14 @@
   'use strict';
   const STORE = 'vcc-site-language';
   const translations = {
+    "「DJ」タグのある公開World、またはライブ配信確認済みWorldを掲載します。DJタグは配信機能の動作保証ではありません。ビジュアル評価はサムネイル画像の参考値です。": "We list public Worlds tagged DJ, or Worlds with independently verified live-stream playback. A DJ tag does not guarantee streaming functionality. Visual impressions are based on thumbnails.",
+    "DJタグ付きWorld・配信確認済みWorldを読み込み中…": "Loading DJ-tagged and live-verified Worlds…",
+    "VRChatのWorld URLを貼るだけ。公開Worldの公式「DJ」タグが確認できれば自動掲載します。DJタグがないWorldは従来どおり追加審査の対象です。": "Paste a VRChat World URL. Public Worlds with an official DJ tag are listed automatically; Worlds without that tag undergo further review.",
+    "公開Worldのみ／同じWorldは重複登録しません。1日3件まで。公式DJタグがあれば配信設備の確認なしで掲載しますが、配信動作は保証しません。": "Public Worlds only. No duplicates; up to three submissions daily. Official DJ-tagged Worlds are listed without playback verification, which is not guaranteed.",
+    "World掲載条件：DJタグ または ライブ配信確認済み": "World listing: DJ tag or verified live playback",
+    "VRC Club Chartsでは、公開Worldに「DJ」タグが付いている場合は配信設備の確認なしで掲載します。DJタグがないWorldも、ライブ配信対応を確認できれば掲載対象になります。DJタグ、DJブース、AudioLinkはライブ配信が実際に動作する証明ではありません。": "Public Worlds with an exact DJ tag may be listed without checking their playback equipment. Untagged Worlds may also qualify if live playback is independently verified. Tags, booths and AudioLink do not prove livestream support.",
+    "配信確認済みの表示には、ライブ再生テストまたは制作者による具体的な説明の証拠が必要です。確認方法・日時・動作プラットフォームを記録します。DJタグのない未確認Worldは公開保留にします。": "The LIVE VERIFIED designation requires evidence from a playback test or a specific creator statement. We record the method, date and supported platform. Untagged Worlds without proof remain unpublished.",
+    "DJタグ付き、またはライブ配信確認済みのWorldを探しています。DJタグはライブ配信動作を保証しません。": "Discovering DJ-tagged or live-verified Worlds. A DJ tag does not guarantee live-stream functionality.",
     // Public page titles and browser search descriptions
     'VRC Club Charts — CLUB DISCOVERY | VRChatクラブを発見': 'VRC Club Charts — CLUB DISCOVERY | Discover VRChat Clubs',
     '体験レビュー — VRC Club Charts': 'Field Notes & Reviews — VRC Club Charts',
