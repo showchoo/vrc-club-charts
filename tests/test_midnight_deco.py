@@ -20,7 +20,7 @@ class MidnightDecoTests(unittest.TestCase):
             with self.subTest(page=name):
                 html = (ROOT / name).read_text(encoding="utf-8")
                 original = re.search(r'href="styles\.css\?v=[^"]+"', html)
-                theme = html.find('href="deco-theme.css?v=20261104-01"')
+                theme = html.find('href="deco-theme.css?v=20261104-02"')
                 self.assertIsNotNone(original)
                 self.assertGreater(theme, original.end())
                 self.assertLess(theme, html.find("</head>"))
@@ -35,7 +35,7 @@ class MidnightDecoTests(unittest.TestCase):
             },
             [],
         )
-        self.assertIn('href="../deco-theme.css?v=20261104-01"', page)
+        self.assertIn('href="../deco-theme.css?v=20261104-02"', page)
         self.assertIn('href="../styles.css?v=20261104-event-detail-02"', page)
 
     def test_nightscape_is_well_formed_original_svg_without_reference_text(self):
@@ -55,6 +55,21 @@ class MidnightDecoTests(unittest.TestCase):
         for asset in ("deco-theme.css", "deco-nightscape.svg"):
             self.assertIn(f'      - "{asset}"', pages)
             self.assertIn(f" {asset} ", pages)
+
+    def test_only_main_discovery_title_uses_poiret(self):
+        css = (ROOT / "deco-theme.css").read_text(encoding="utf-8")
+        self.assertIn("--body-font: Inter,", css)
+        self.assertIn("font-family: var(--body-font);", css)
+        # Restrict the decorative font to the CLUB / DISCOVERY hero words.
+        self.assertEqual(css.count("font-family: var(--deco-display);"), 1)
+        hero_start = css.index("body.ranking-home .ai-scout-primary .title-main {")
+        hero_declarations = css[hero_start:].split("}", 1)[0]
+        self.assertIn("font-family: var(--deco-display);", hero_declarations)
+        for selector in (".event-card h3,.dj-card h3", ".world-catalog-name",
+                         ".brand > span:last-child", ".event-detail-mark"):
+            self.assertIn(selector, css)
+        self.assertIn(".ranking-summary strong,", css)
+        self.assertIn("font-weight: 750;", css)
 
     def test_google_font_csp_and_readability_rules(self):
         config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))

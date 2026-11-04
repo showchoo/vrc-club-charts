@@ -19,12 +19,13 @@
   --radius: 5px;
   --shadow: 0 18px 52px rgba(0, 3, 12, .24);
   --deco-display: 'Poiret One', 'Avenir Next', 'Helvetica Neue', sans-serif;
+  --body-font: Inter, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, system-ui, sans-serif;
 }
 
 body, body.ranking-home, body.focus-home, body.reviewer-page, body.calm-home {
   background: linear-gradient(180deg,#0c1425 0%, #080e1a 52%, #090f1b 100%);
   color: var(--text);
-  font-family: Inter, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, system-ui, sans-serif;
+  font-family: var(--body-font);
   letter-spacing: .012em;
 }
 body:not(.ranking-home)::before {
@@ -45,8 +46,8 @@ body > main, body > footer { position: relative; z-index: 1; }
 /* Brand: engraved rather than neon; reserve decorative font for titles. */
 .brand { color: #f5f6fb; letter-spacing: .10em; gap: 13px; }
 .brand > span:last-child {
-  font-family: var(--deco-display);
-  font-weight: 400;
+  font-family: var(--body-font);
+  font-weight: 750;
   font-size: clamp(16px, 1.8vw, 20px);
   line-height: 1.15;
   letter-spacing: .11em;
@@ -59,9 +60,9 @@ body > main, body > footer { position: relative; z-index: 1; }
   background: rgba(3,9,21,.35);
   box-shadow: inset 0 0 0 3px rgba(217,229,243,.09);
   color: #f6f7fc;
-  font-family: var(--deco-display);
+  font-family: var(--body-font);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 750;
 }
 .site-header,
 body.ranking-home .site-header,
@@ -108,8 +109,8 @@ h1, h2, h3,
 .prose-page h1,
 .reviewer-hero h1,
 .reviewer-section h2 {
-  font-family: var(--deco-display);
-  font-weight: 400;
+  font-family: var(--body-font);
+  font-weight: 700;
   letter-spacing: .025em;
 }
 h1 em, h2 em, h3 em { color: #f7f8fc; }
@@ -133,11 +134,11 @@ h1 em, h2 em, h3 em { color: #f7f8fc; }
 }
 .world-detail-image-placeholder:not(.event-detail-mark) {
   color: rgba(223,234,251,.24);
-  font-family: var(--deco-display);
-  font-weight: 400;
+  font-family: var(--body-font);
+  font-weight: 650;
   font-size: clamp(54px, 9vw, 120px);
 }
-.event-detail-mark { color: rgba(223,234,251,.28); font-family: var(--deco-display); font-weight: 400; }
+.event-detail-mark { color: rgba(223,234,251,.28); font-family: var(--body-font); font-weight: 650; }
 
 /* Restraint: slender rules, squared corners, tinted blue-black surfaces. */
 :is(.event-card,.dj-card,.reviewer-criteria article,.community-review-item,
@@ -382,8 +383,8 @@ body.ranking-home .world-suggestion-block {
 }
 .events-hero .lead,.djs-hero .lead { color: #d3deeb; line-height: 1.9; }
 .event-card h3,.dj-card h3 {
-  font-family: var(--deco-display);
-  font-weight: 400;
+  font-family: var(--body-font);
+  font-weight: 700;
   font-size: clamp(22px, 2.3vw, 28px);
   line-height: 1.25;
   letter-spacing: .018em;
@@ -394,10 +395,20 @@ body.ranking-home .world-suggestion-block {
 .world-detail-meta > div { background: #101a2c; }
 .world-detail-meta strong,.world-detail-meta code { color: #e6eefa; }
 .world-catalog-row:hover { background: rgba(205,219,241,.065); }
-.world-catalog-name { color: #f4f7ff; font-family: var(--deco-display); font-size: 19px; font-weight: 400; letter-spacing:.025em; }
+.world-catalog-name { color: #f4f7ff; font-family: var(--body-font); font-size: 19px; font-weight: 700; letter-spacing:.025em; }
 .world-relations .section-heading h2, .dj-appearances .section-heading h2 {
   font-size: clamp(24px,2.7vw,36px);
   line-height: 1.25;
+}
+
+/* Rankings also carried a heavy Impact font from the previous theme.
+   Only the large CLUB DISCOVERY headline keeps Poiret One. */
+.ranking-empty-visual span,
+.ranking-summary strong,
+.panel-rank-score b,
+.panel-rank-no {
+  font-family: var(--body-font);
+  font-weight: 750;
 }
 
 /* Accessible mobile proportions, with the already-approved Events detail title untouched. */
