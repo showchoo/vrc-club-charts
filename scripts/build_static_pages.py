@@ -421,6 +421,12 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     vrchat = f"https://vrchat.com/home/world/{wid}"
     source_url = w.get("source")
     proof = w.get("djStreamVerification") or {}
+    live_confirmed = bool(w.get("djStreamTested") and proof)
+    stream_status = ("DJライブ配信確認済み" if live_confirmed
+                     else "DJタグによる掲載：ライブ配信設備の動作は未確認")
+    stream_method = (f'{esc(proof.get("method"))}／{esc(proof.get("platform"))}／'
+                     f'{esc(proof.get("verifiedAt"))}' if live_confirmed else
+                     "実際のライブ配信動作は検証していません")
     stream_proof = (f'<a class="secondary-button" href="{esc(proof.get("evidenceUrl"))}" '
                     f'target="_blank" rel="noreferrer">DJ LIVE VERIFICATION ↗</a>'
                     if proof.get("evidenceUrl") else "")
@@ -491,7 +497,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
     </section>
 
-    <p class="world-review-disclaimer">DJライブ配信対応の確認：{esc(proof.get("method") or "未確認")}／{esc(proof.get("platform") or "—")}／{esc(proof.get("verifiedAt") or "—")}。配信機能以外の音響・ギミック・動作性能は未確認です。<br />ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
+    <p class="world-review-disclaimer">{esc(stream_status)}。{stream_method}。配信機能以外の音響・ギミック・動作性能も未確認です。<br />ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
       <div><span>評価範囲</span><strong>{'IMAGE ONLY / REFERENCE' if image_scored else 'NOT ASSESSED'}</strong></div>
@@ -587,7 +593,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
 
 def index_page(worlds: list[dict]) -> str:
     canonical = f"{BASE_URL}worlds/"
-    description = "DJライブ配信設備が確認されたVRChatクラブWorldのみを紹介。設備未確認の会場は掲載保留です。"
+    description = "DJタグ付き、またはライブ配信動作が確認済みのVRChatクラブWorldを紹介。DJタグは配信設備の動作保証ではありません。"
     cards = []
     for w in sorted(worlds, key=lambda x: (x.get("name") or "").casefold()):
         if w.get("availabilityStatus") == "unavailable":
@@ -609,15 +615,15 @@ def index_page(worlds: list[dict]) -> str:
           <span class="world-catalog-thumb">{thumb_html}</span>
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
-          <span>{esc(genres)} · DJ LIVE ✓</span>
+          <span>{esc(genres)} · {'DJ LIVE VERIFIED' if w.get('djStreamTested') else 'DJ TAG'}</span>
           <span>↗</span>
         </a>""")
     return page_head("VRChat クラブワールド一覧・DJイベント会場 | VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">DJのライブ配信に対応することが確認できたWorldのみ掲載しています（現在 {len(cards)} 件）。未確認Worldは確認が済むまで非掲載です。</p>
-    {'<p class="world-review-disclaimer">現在、DJライブ配信対応を確認できたWorldはありません。情報が確認でき次第、順次掲載します。</p>' if not cards else ""}
+    <p class="lead">DJタグのあるWorld、またはDJライブ配信動作が確認できたWorldを掲載しています（現在 {len(cards)} 件）。DJタグはライブ配信対応を保証するものではありません。</p>
+    {'<p class="world-review-disclaimer">掲載対象のDJタグ付きWorld・配信確認済みWorldはまだありません。</p>' if not cards else ""}
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
       <div class="chip-row"><a class="chip" href="../index.html#aiScoutSection">CLUB DISCOVERY ↗</a></div>
@@ -745,18 +751,18 @@ def main() -> int:
 
     public_data_dir = out / "data"
     public_data_dir.mkdir(parents=True, exist_ok=True)
-    # Public artifacts are always rebuilt from the evidence registry, even when
-    # a previous ranking/scout JSON snapshot still contains legacy Worlds.
+    # Public artifacts enforce the exact DJ-tag or independently verified
+    # admission rule even when stale snapshots contain non-admitted Worlds.
     public_rankings = {**data, "worlds": worlds,
-                       "publicationPolicy": "verified-dj-live-stream-only"}
+                       "publicationPolicy": "dj-tag-or-verified-live-stream"}
     (public_data_dir / "weekly-ranking.json").write_text(
         json.dumps(public_rankings, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     old_scout = ROOT / "data" / "ai-scout.json"
     scout_snapshot = json.loads(old_scout.read_text(encoding="utf-8")) if old_scout.exists() else {}
-    published_evidence = {wid: verified[wid] for wid in (w['id'] for w in worlds)}
-    safe_scout = sanitize_ai_scout(scout_snapshot, published_evidence)
+    admitted = {w["id"]: w.get("publicationBasis") for w in worlds}
+    safe_scout = sanitize_ai_scout(scout_snapshot, admitted)
     (public_data_dir / "ai-scout.json").write_text(
         json.dumps(safe_scout, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -777,8 +783,8 @@ def main() -> int:
         wid = str(w.get("id") or "")
         if not WORLD_ID_RE.fullmatch(wid):
             raise ValueError(f"Cannot publish invalid World ID: {wid!r}")
-        if wid not in verified:
-            raise ValueError(f"Refusing to publish unverified DJ live-stream World: {wid}")
+        if w.get("publicationBasis") not in {"dj-tag", "live-playback-verified"}:
+            raise ValueError(f"Refusing to publish World without a DJ tag or live-stream proof: {wid}")
         (world_dir / f"{wid}.html").write_text(
             world_page(w, events, djs, scout_by_world.get(wid)), encoding="utf-8")
         # Historical links sometimes omitted /worlds/. Keep those URLs usable
