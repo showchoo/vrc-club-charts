@@ -1,6 +1,7 @@
 name: Validate catalog
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
