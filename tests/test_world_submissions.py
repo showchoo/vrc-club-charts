@@ -160,6 +160,29 @@ class SubmissionAITests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"incomplete"):
                 review.classify_world(META,"dummy-key")
 
+    def test_old_pending_submission_retried_under_dj_tag_rule(self):
+        meta={**META,"tags":["DJ"],"description":"Unclear"}
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds=Path(tmp)/"worlds.json"
+            decisions=Path(tmp)/"decisions.json"
+            worlds.write_text("[]",encoding="utf-8")
+            decisions.write_text(json.dumps([{
+                "id":ID,"status":"needs_review","policyRevision":"old-rule"
+            }]),encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id":ID}]), patch.object(
+                review,"public_metadata",return_value=meta), patch.object(
+                review,"classify_world") as ai, patch.dict(
+                review.os.environ,{"GEMINI_API_KEY":""}):
+                review.main()
+            ai.assert_not_called()
+            self.assertEqual(len(json.loads(worlds.read_text(encoding="utf-8"))),1)
+            all_decisions=json.loads(decisions.read_text(encoding="utf-8"))
+            self.assertEqual(len(all_decisions),1)
+            self.assertEqual(all_decisions[0]["status"],"approved")
+            self.assertEqual(all_decisions[0]["policyRevision"],review.POLICY_REVISION)
+
     def test_official_dj_tag_auto_publishes_even_without_gemini(self):
         dj_meta = {**META, "description": "Unclear", "tags": ["author_tag_DJ"]}
         with tempfile.TemporaryDirectory() as tmp:
