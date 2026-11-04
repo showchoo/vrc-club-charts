@@ -10,7 +10,10 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
-from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
+try:
+    from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
+except ModuleNotFoundError:
+    from dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
