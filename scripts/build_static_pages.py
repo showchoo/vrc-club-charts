@@ -10,6 +10,8 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
+from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
 
@@ -576,7 +578,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
 
 def index_page(worlds: list[dict]) -> str:
     canonical = f"{BASE_URL}worlds/"
-    description = "VRChatのクラブワールド一覧。DJ・レイヴ・AudioLink対応の公開ワールドを探し、ビジュアルの参考評価、制作者情報、体験レビューをチェックできます。"
+    description = "DJライブ配信設備が確認されたVRChatクラブWorldのみを紹介。設備未確認の会場は掲載保留です。"
     cards = []
     for w in sorted(worlds, key=lambda x: (x.get("name") or "").casefold()):
         if w.get("availabilityStatus") == "unavailable":
@@ -605,7 +607,8 @@ def index_page(worlds: list[dict]) -> str:
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">{len(cards)}のWorldを収録。クラブ・DJ・レイヴなど、まだ知らないWorldを探せます。ビジュアルの参考スコアと、訪問した人の体験レビューを分けて紹介します。</p>
+    <p class="lead">DJのライブ配信に対応することが確認できたWorldのみ掲載しています（現在 {len(cards)} 件）。未確認Worldは確認が済むまで非掲載です。</p>
+    {'<p class="world-review-disclaimer">現在、DJライブ配信対応を確認できたWorldはありません。情報が確認でき次第、順次掲載します。</p>' if not cards else ""}
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
       <div class="chip-row"><a class="chip" href="../index.html#aiScoutSection">CLUB DISCOVERY ↗</a></div>
@@ -713,7 +716,8 @@ def main() -> int:
         return 2
     out = Path(sys.argv[1])
     data = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
-    worlds = data.get("worlds", [])
+    verified = load_verified()
+    worlds = published_worlds(data.get("worlds", []), verified)
     review_scores_path = ROOT / "data/review-scores.json"
     review_scores = json.loads(review_scores_path.read_text(encoding="utf-8")) if review_scores_path.exists() else {"worlds": []}
     review_by_world = {r.get("worldId"): r for r in review_scores.get("worlds", []) if r.get("worldId")}
@@ -732,6 +736,22 @@ def main() -> int:
 
     public_data_dir = out / "data"
     public_data_dir.mkdir(parents=True, exist_ok=True)
+    # Public artifacts are always rebuilt from the evidence registry, even when
+    # a previous ranking/scout JSON snapshot still contains legacy Worlds.
+    public_rankings = {**data, "worlds": worlds,
+                       "publicationPolicy": "verified-dj-live-stream-only"}
+    (public_data_dir / "weekly-ranking.json").write_text(
+        json.dumps(public_rankings, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    old_scout = ROOT / "data" / "ai-scout.json"
+    scout_snapshot = json.loads(old_scout.read_text(encoding="utf-8")) if old_scout.exists() else {}
+    safe_scout = sanitize_ai_scout(scout_snapshot, verified)
+    (public_data_dir / "ai-scout.json").write_text(
+        json.dumps(safe_scout, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     (public_data_dir / "events.json").write_text(
         json.dumps(events, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -747,6 +767,8 @@ def main() -> int:
         wid = str(w.get("id") or "")
         if not WORLD_ID_RE.fullmatch(wid):
             raise ValueError(f"Cannot publish invalid World ID: {wid!r}")
+        if wid not in verified:
+            raise ValueError(f"Refusing to publish unverified DJ live-stream World: {wid}")
         (world_dir / f"{wid}.html").write_text(
             world_page(w, events, djs, scout_by_world.get(wid)), encoding="utf-8")
         # Historical links sometimes omitted /worlds/. Keep those URLs usable
