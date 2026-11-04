@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-03T23:58:13+00:00",
+  "updatedAt": "2026-11-04T17:06:31+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 118,
+    "totalCandidates": 204,
     "assessed": 24,
-    "newAssessments": 1,
-    "pending": 93
+    "newAssessments": 4,
+    "pending": 176
   },
   "scored": [
     {
@@ -100,6 +100,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T08:10:04+00:00"
+    },
+    {
+      "id": "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b",
+      "name": "Refuge˸ Experiment 1․69",
+      "author": "Humphreaky",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b.html",
+      "visualPotential": 70,
+      "factors": {
+        "visual": 4,
+        "lighting": 3,
+        "spatial": 4,
+        "originality": 3
+      },
+      "reasonJa": "緑色の光を放つ培養カプセルや金属製の配管が配置された、退廃的なSF実験室の雰囲気が描かれています。",
+      "cautionsJa": "この画像はプロモーション用のイラストである可能性があり、実際のワールド内の見え方とは異なる場合があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-04T17:06:12+00:00"
     },
     {
       "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
@@ -523,29 +546,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T23:03:08+00:00"
-    },
-    {
-      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
-      "name": "Consilium",
-      "author": "Tsuβaki",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "木目を基調とした落ち着いた内装に大きめのソファが配置された、モダンでシックなラウンジ空間が確認できます。",
-      "cautionsJa": "サムライ全体にタイトルロゴが大きく重なっており、実際の室内の細部や照明の効果を正確に把握することは難しいです。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T23:03:13+00:00"
     }
   ],
   "candidates": [
@@ -562,12 +562,20 @@
       "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
     },
     {
-      "id": "wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9",
-      "name": "B5 Parking",
+      "id": "wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c",
+      "name": "_recovered․SHELTER2․mrg",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_bc40e792-a04f-4b32-a02c-7184edcdc5c9"
+      "url": "https://vrcmap.com/world/wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c"
+    },
+    {
+      "id": "wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead",
+      "name": "Atomica",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead"
     },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
@@ -581,36 +589,12 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42",
-      "name": "DanceWorld ˸ Alice",
+      "id": "wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d",
+      "name": "Moon Diner",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_ef32176c-b9ef-48ad-bfb1-6cfed1f35b42"
-    },
-    {
-      "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
-      "name": "Endless Suburbia",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_21d6afad-8b22-4b4c-bde0-78991413b525"
-    },
-    {
-      "id": "wrld_22682321-26e1-494e-a9b4-b87d7e935c25",
-      "name": "HTC VIVE SPACE",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_22682321-26e1-494e-a9b4-b87d7e935c25"
-    },
-    {
-      "id": "wrld_8edab379-d5de-4d05-8605-31b4fd4709f4",
-      "name": "La Fille Pink Pool Lounge",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_8edab379-d5de-4d05-8605-31b4fd4709f4"
+      "url": "https://vrcmap.com/world/wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -635,36 +619,44 @@
       "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
     },
     {
-      "id": "wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6",
-      "name": "RAMP",
+      "id": "wrld_59e089b3-c0d9-4592-afcd-590ebe55d398",
+      "name": "Pixel Paradise Arcade",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_0ad56f93-4894-40b9-8543-6abaf408eaf6"
+      "url": "https://vrcmap.com/world/wrld_59e089b3-c0d9-4592-afcd-590ebe55d398"
     },
     {
-      "id": "wrld_d389407f-b02f-446b-8096-12112be07a7f",
-      "name": "RS COASTER SECTOR",
+      "id": "wrld_918ff65a-8fa4-442e-a983-da1506993b3f",
+      "name": "Restroom Session",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_d389407f-b02f-446b-8096-12112be07a7f"
+      "url": "https://vrcmap.com/world/wrld_918ff65a-8fa4-442e-a983-da1506993b3f"
     },
     {
-      "id": "wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db",
-      "name": "ネルフランド（α）",
+      "id": "wrld_e3e9bd57-665f-4170-b9fb-00101f24729f",
+      "name": "RIFT Site Alpha",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_951f34c1-9e3d-45b9-8c7b-d062aa0f46db"
+      "url": "https://vrcmap.com/world/wrld_e3e9bd57-665f-4170-b9fb-00101f24729f"
     },
     {
-      "id": "wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e",
-      "name": "秋の並木道-autumn street-",
+      "id": "wrld_23808179-ae84-4262-a9fa-c7a171ef6791",
+      "name": "The Obsidian Nightclub",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_8bec17fe-887a-4b4f-9f7c-49c9ebc5791e"
+      "url": "https://vrcmap.com/world/wrld_23808179-ae84-4262-a9fa-c7a171ef6791"
+    },
+    {
+      "id": "wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e",
+      "name": "术力口工坊",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e"
     },
     {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
@@ -725,6 +717,16 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
+    },
+    {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
@@ -984,6 +986,22 @@
     },
     "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808": {
       "checkedAt": "2026-10-26T23:07:03+00:00",
+      "status": "assessed"
+    },
+    "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e": {
+      "checkedAt": "2026-11-04T17:05:08+00:00",
+      "status": "assessed"
+    },
+    "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80": {
+      "checkedAt": "2026-11-04T17:05:38+00:00",
+      "status": "assessed"
+    },
+    "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b": {
+      "checkedAt": "2026-11-04T17:06:12+00:00",
+      "status": "assessed"
+    },
+    "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab": {
+      "checkedAt": "2026-11-04T17:06:31+00:00",
       "status": "assessed"
     }
   }
