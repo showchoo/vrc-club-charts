@@ -422,11 +422,15 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     source_url = w.get("source")
     proof = w.get("djStreamVerification") or {}
     live_confirmed = bool(w.get("djStreamTested") and proof)
-    stream_status = ("DJライブ配信確認済み" if live_confirmed
+    owner_confirm = w.get("ownerStreamConfirmation") or {}
+    owner_attested = bool(w.get("djStreamOwnerConfirmed") and owner_confirm)
+    stream_status = ("DJライブ配信確認済み（独立した根拠あり）" if live_confirmed
+                     else "サイト運営者が配信機能を確認したと申告" if owner_attested
                      else "DJタグによる掲載：ライブ配信設備の動作は未確認")
     stream_method = (f'{esc(proof.get("method"))}／{esc(proof.get("platform"))}／'
                      f'{esc(proof.get("verifiedAt"))}' if live_confirmed else
-                     "実際のライブ配信動作は検証していません")
+                     f'本人申告・{esc(owner_confirm.get("attestedAt"))}（動作環境は未記録）'
+                     if owner_attested else "実際のライブ配信動作は検証していません")
     stream_proof = (f'<a class="secondary-button" href="{esc(proof.get("evidenceUrl"))}" '
                     f'target="_blank" rel="noreferrer">DJ LIVE VERIFICATION ↗</a>'
                     if proof.get("evidenceUrl") else "")
@@ -593,7 +597,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
 
 def index_page(worlds: list[dict]) -> str:
     canonical = f"{BASE_URL}worlds/"
-    description = "DJタグ付き、またはライブ配信動作が確認済みのVRChatクラブWorldを紹介。DJタグは配信設備の動作保証ではありません。"
+    description = "DJタグ付き、運営者のお気に入りから配信確認済み、または独立検証済みのVRChatクラブWorldを紹介。確認根拠を区別して表示します。"
     cards = []
     for w in sorted(worlds, key=lambda x: (x.get("name") or "").casefold()):
         if w.get("availabilityStatus") == "unavailable":
@@ -615,14 +619,14 @@ def index_page(worlds: list[dict]) -> str:
           <span class="world-catalog-thumb">{thumb_html}</span>
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
-          <span>{esc(genres)} · {'DJ LIVE VERIFIED' if w.get('djStreamTested') else 'DJ TAG'}</span>
+          <span>{esc(genres)} · {'DJ LIVE VERIFIED' if w.get('djStreamTested') else 'OWNER CONFIRMED' if w.get('djStreamOwnerConfirmed') else 'DJ TAG'}</span>
           <span>↗</span>
         </a>""")
     return page_head("VRChat クラブワールド一覧・DJイベント会場 | VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
   <main class="shell world-catalog-page">
     <p class="kicker">WORLD DIRECTORY</p>
     <h1>まだ知らない、次のフロアへ。</h1>
-    <p class="lead">DJタグのあるWorld、またはDJライブ配信動作が確認できたWorldを掲載しています（現在 {len(cards)} 件）。DJタグはライブ配信対応を保証するものではありません。</p>
+    <p class="lead">DJタグ付きWorld、運営者が配信機能を確認したお気に入りWorld、または独立検証済みWorldを掲載しています（現在 {len(cards)} 件）。DJタグだけでは配信機能を保証しません。本人確認と独立検証は区別して表示します。</p>
     {'<p class="world-review-disclaimer">掲載対象のDJタグ付きWorld・配信確認済みWorldはまだありません。</p>' if not cards else ""}
     <div class="world-directory-controls">
       <label class="search-wrap world-directory-search"><span>⌕</span><input id="worldDirectorySearch" type="search" placeholder="World名・制作者・ジャンル" /></label>
@@ -754,7 +758,7 @@ def main() -> int:
     # Public artifacts enforce the exact DJ-tag or independently verified
     # admission rule even when stale snapshots contain non-admitted Worlds.
     public_rankings = {**data, "worlds": worlds,
-                       "publicationPolicy": "dj-tag-or-verified-live-stream"}
+                       "publicationPolicy": "dj-tag-owner-favorite-or-verified-live-stream"}
     (public_data_dir / "weekly-ranking.json").write_text(
         json.dumps(public_rankings, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -783,8 +787,8 @@ def main() -> int:
         wid = str(w.get("id") or "")
         if not WORLD_ID_RE.fullmatch(wid):
             raise ValueError(f"Cannot publish invalid World ID: {wid!r}")
-        if w.get("publicationBasis") not in {"dj-tag", "live-playback-verified"}:
-            raise ValueError(f"Refusing to publish World without a DJ tag or live-stream proof: {wid}")
+        if w.get("publicationBasis") not in {"dj-tag", "owner-favorite-confirmed", "live-playback-verified"}:
+            raise ValueError(f"Refusing to publish World without DJ tag, explicit owner attestation or live-stream proof: {wid}")
         (world_dir / f"{wid}.html").write_text(
             world_page(w, events, djs, scout_by_world.get(wid)), encoding="utf-8")
         # Historical links sometimes omitted /worlds/. Keep those URLs usable
