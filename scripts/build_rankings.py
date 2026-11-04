@@ -82,6 +82,8 @@ def main():
             'chartEligible': bool(seed.get('chartEligible', True)),
             'djStreamVerification': seed.get('djStreamVerification'),
             'djStreamTested': seed.get('djStreamTested', False),
+            'djStreamOwnerConfirmed': seed.get('djStreamOwnerConfirmed', False),
+            'ownerStreamConfirmation': seed.get('ownerStreamConfirmation'),
             'publicationBasis': seed.get('publicationBasis'),
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
@@ -147,8 +149,8 @@ def main():
     payload = {
         'status': 'live' if has_trend else 'seed',
         'updatedAt': latest[0].isoformat() if latest else 'MVP seed — weekly deltas begin after 2 snapshots',
-        'methodVersion': '0.5-dj-tag-admission',
-        'publicationPolicy': 'dj-tag-or-verified-live-stream',
+        'methodVersion': '0.6-owner-favorite-attestation',
+        'publicationPolicy': 'dj-tag-owner-favorite-or-verified-live-stream',
         'worlds': rows,
     }
     public_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
