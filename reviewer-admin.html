@@ -56,6 +56,14 @@
 .candidate-world-link:hover,.candidate-world-link:focus-visible{color:#5edcf9;text-decoration-color:currentColor}
 .candidate-visit{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;border:1px solid rgba(94,220,249,.35);border-radius:10px;color:#b5eeff;background:rgba(94,220,249,.06);font-size:12px;font-weight:800;text-decoration:none}
 .candidate-visit:hover,.candidate-visit:focus-visible{background:rgba(94,220,249,.15);color:#e6fbff}
+.favorites-import{margin:18px 0 24px;padding:17px;border:1px solid rgba(94,220,249,.19);border-radius:14px;background:rgba(94,220,249,.035)}
+.favorites-import p{color:#9ebcc5;font-size:12px;line-height:1.7}
+.favorites-import textarea{width:100%;min-height:100px;padding:12px;border:1px solid rgba(172,239,255,.22);border-radius:10px;background:#07161c;color:#e4f7fb;resize:vertical;font:12px/1.7 monospace}
+.favorites-import input[type=file]{max-width:100%;margin:10px 0;color:#a8cad2}
+.favorites-import button{padding:10px 14px;border:0;border-radius:10px;background:#50ddff;color:#041318;font-weight:900;cursor:pointer}
+.favorites-import button:disabled{opacity:.5;cursor:wait}
+.favorites-import-status{margin-top:10px;color:#b4d7df;font-size:12px;white-space:pre-wrap}
+.favorites-import-status[data-state=error]{color:#ffaaaa}
     .candidate-ai-note{margin:10px 0 2px;padding:11px 13px;border-left:3px solid #6faab4;border-radius:6px;background:rgba(90,202,216,.065);color:#d0e3e7;font-size:13px;line-height:1.7}
     .candidate-ai-note.pending{border-color:#b1a06c}
     .candidate-ai-note.uncertain{border-color:#9d849b}
@@ -241,6 +249,20 @@ body.admin-page{font-size:15px}
       <div class="admin-list" id="communityReviewList"></div>
       <div class="admin-queue-divider"></div>
 
+
+      <div class="favorites-import" aria-label="VRChatお気に入りWorld一括登録">
+        <div class="admin-toolbar">
+          <strong>IMPORT FAVORITE WORLDS / お気に入り一括取り込み</strong>
+          <span class="admin-auto-label">ONLY WORLD IDS ARE SENT</span>
+        </div>
+        <p>VRChatのWorldリンクを貼り付けるか、VRCXなどから出力したTXT・CSV・JSONファイルを選択してください。
+        ファイルはブラウザ内で解析し、World IDのみを送信します。VRChatの認証情報は不要です。
+        候補は公式公開確認後、通常のGemini審査キューに入ります（即時掲載ではありません）。</p>
+        <textarea id="favoriteWorldLinks" placeholder="https://vrchat.com/home/world/wrld_.../info&#10;wrld_..."></textarea>
+        <input id="favoriteWorldFile" type="file" accept=".txt,.csv,.json,.html,text/plain,text/csv,application/json" aria-label="お気に入り一覧ファイル" />
+        <div><button id="importFavoriteWorlds" type="button">お気に入りWorldを候補に追加</button></div>
+        <div class="favorites-import-status" id="favoriteWorldImportStatus" role="status" aria-live="polite"></div>
+      </div>
       <div class="admin-toolbar">
         <strong>NEW WORLD CANDIDATES <span class="admin-count" id="worldCandidateCount">0</span></strong>
         <span class="admin-auto-label">DAILY AUTO DISCOVERY</span>
@@ -268,7 +290,12 @@ body.admin-page{font-size:15px}
       const communityReviewList = document.getElementById('communityReviewList');
       const pendingCommunityCount = document.getElementById('pendingCommunityCount');
       const worldCandidateList = document.getElementById('worldCandidateList');
+
       const worldCandidateCount = document.getElementById('worldCandidateCount');
+      const favoriteWorldLinks = document.getElementById('favoriteWorldLinks');
+      const favoriteWorldFile = document.getElementById('favoriteWorldFile');
+      const importFavoriteWorlds = document.getElementById('importFavoriteWorlds');
+      const favoriteWorldImportStatus = document.getElementById('favoriteWorldImportStatus');
       const loginStatus = document.getElementById('loginStatus');
       const analyticsExcludeMe = document.getElementById('analyticsExcludeMe');
       const analyticsExcludeStatus = document.getElementById('analyticsExcludeStatus');
@@ -726,6 +753,51 @@ body.admin-page{font-size:15px}
           editorStatus.dataset.state='success';
         }catch(err){editorStatus.textContent=err.message;editorStatus.dataset.state='error';}
         finally{saveEditorScore.disabled=clearEditorScore.disabled=false;}
+      });
+
+      // Recognize World IDs embedded anywhere in VRCX TXT/CSV/JSON exports.
+      // No raw file, creator/account identity, or VRChat login data is uploaded.
+      function parseFavoriteWorldIds(raw){
+        const matches=String(raw||'').match(/wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ig)||[];
+        return [...new Set(matches.map(id=>id.toLowerCase()))];
+      }
+
+      importFavoriteWorlds.addEventListener('click',async()=>{
+        importFavoriteWorlds.disabled=true;
+        favoriteWorldImportStatus.dataset.state='';
+        let total=0,accepted=0,skipped=0,failed=[];
+        try{
+          let raw=favoriteWorldLinks.value||'';
+          const file=favoriteWorldFile.files?.[0];
+          if(file){
+            if(file.size>3_000_000) throw new Error('ファイルは3MB以下にしてください。');
+            raw+='\n'+await file.text();
+          }
+          const ids=parseFavoriteWorldIds(raw);
+          if(!ids.length) throw new Error('有効なWorld IDが見つかりません。VRChat WorldのURLが含まれるファイルを指定してください。');
+          if(ids.length>150) throw new Error('一度に取り込めるのは150 Worldまでです。分割して取り込んでください。');
+          total=ids.length;
+          for(let i=0;i<ids.length;i+=6){
+            const group=ids.slice(i,i+6);
+            favoriteWorldImportStatus.textContent='公式公開状態を確認中… '+Math.min(i+6,total)+' / '+total;
+            // Server-side admin authentication and official public metadata check.
+            const result=await callAdmin('import_favorite_worlds',null,{worldIds:group});
+            accepted+=(result.queued||[]).length;
+            skipped+=(result.skipped||[]).length;
+            failed.push(...(result.failed||[]));
+          }
+          favoriteWorldImportStatus.textContent=total+'件確認：新規受付 '+accepted+'件、既存・判定済み '+skipped+
+            '件、公開情報取得不可 '+failed.length+'件。'+
+            (failed.length?'\n再確認が必要なID: '+failed.slice(0,15).join(', '):'')+
+            '\n受付したWorldは次の自動AI審査で判定されます。';
+          favoriteWorldImportStatus.dataset.state=failed.length?'error':'success';
+        }catch(err){
+          favoriteWorldImportStatus.dataset.state='error';
+          favoriteWorldImportStatus.textContent=(err?.message||'一括取り込みに失敗しました。')+
+            (total?' （処理済み：新規'+accepted+'件／既存'+skipped+'件。再試行しても重複登録されません。）':'');
+        }finally{
+          importFavoriteWorlds.disabled=false;
+        }
       });
 
       async function loadEditorWorlds(){
