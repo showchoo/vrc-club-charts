@@ -24,6 +24,7 @@ WORLDS = DATA / "worlds.json"
 DECISIONS = DATA / "world-submission-decisions.json"
 QUEUE = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-submit?queue=1"
 MODEL = os.environ.get("VCC_SUBMISSION_MODEL", "gemini-3.5-flash-lite")
+POLICY_REVISION = "dj-tag-auto-admission-20261105-v1"
 WORLD_ID = re.compile(r"^wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 try:
     from scripts.dj_stream_policy import is_dj_tag
@@ -222,6 +223,7 @@ def decide(wid: str, metadata: dict | None, assessment: dict | None, status: str
         "author":str((metadata or {}).get("authorName") or "")[:120],
         "status":status,"classification":assessment or {},
         "note":note[:250],"reviewedAt":dt.datetime.now(dt.timezone.utc).isoformat(),
+        "policyRevision": POLICY_REVISION,
     }
 
 
@@ -231,7 +233,9 @@ def main() -> None:
     if not isinstance(catalog,list) or not isinstance(decisions,list):
         raise ValueError("Invalid catalog or review decisions")
     known={x["id"] for x in catalog if isinstance(x,dict) and x.get("id")}
-    reviewed={x["id"] for x in decisions if isinstance(x,dict) and x.get("id")}
+    reviewed={x["id"] for x in decisions if isinstance(x,dict) and x.get("id")
+              and (x.get("status") != "needs_review" or
+                   x.get("policyRevision") == POLICY_REVISION)}
     queue=queue_items()
     unseen=[row for row in queue if isinstance(row,dict) and
             WORLD_ID.fullmatch(str(row.get("world_id") or "")) and
@@ -296,6 +300,10 @@ def main() -> None:
     if approved:
         catalog.sort(key=lambda x:str(x.get("name") or "").casefold())
         WORLDS.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    # Rechecked unresolved submissions replace their old decision by World ID.
+    # The original review log was an array; duplicates are not useful state.
+    decisions=list({d["id"]:d for d in decisions if isinstance(d,dict)
+                    and d.get("id")}.values())
     if decisions != read_json(DECISIONS,[]):
         DECISIONS.write_text(json.dumps(decisions,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"AI World submissions: checked={len(unseen)} auto_approved={approved} "
