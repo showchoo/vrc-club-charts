@@ -125,7 +125,7 @@ class DJStreamPolicyTests(unittest.TestCase):
             code = (ROOT / path).read_text(encoding="utf-8")
             self.assertIn("weekly-ranking.json?v=dj-live-verified-01", code)
         home = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("app.js?v=20261105-dj-live-verified-01", home)
+        self.assertIn("app.js?v=20261105-dj-tag-02", home)
 
     def test_current_site_has_no_unverified_public_world_pages(self):
         """A clean static build does not leak old catalog Worlds by direct URLs."""
