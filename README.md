@@ -51,6 +51,38 @@ Implementation:
 Run the existing Node analytics test to verify opt-out, Do Not Track, and
 stable browser pseudonyms: `node --test tests/analytics-opt-out.test.cjs`.
 
+## Public listing policy: DJ live-stream-compatible Worlds only
+
+**Only verified DJ live-stream-capable Worlds appear on the public site.**
+A DJ booth model, music tag, AudioLink, an ordinary video player, a past music
+event or an AI thumbnail score **does not** demonstrate a working live stream.
+Admission to the research catalog remains separate from *public publication*.
+
+- `data/worlds.json` keeps all original and automatically discovered World records
+  for future verification. No existing entries are deleted by this change.
+- The fail-closed publication registry is `data/dj-stream-verifications.json`.
+  A record only publishes if `status` is `verified`, `method` is
+  `live-playback-tested` or `creator-confirmed-live-playback`,
+  `verifiedBy` identifies the verifier, `verifiedAt` is a non-future ISO date,
+  `platform` is `PC` or `PC-and-Quest`, and `evidenceUrl` is a valid HTTPS URL.
+  Never enter a verification by guessing from screenshots or World tags.
+- At first rollout, **zero Worlds have sufficient recorded evidence**. This is
+  intentional: the old 109+ entries remain in the internal source catalog but
+  are hidden from the public ranking/listing/detail pages until verified.
+- New AI-discovered/visitor-submitted Worlds may enter the internal catalog,
+  but **must not appear publicly** before the independent DJ live-stream gate.
+- Public `data/weekly-ranking.json` and `data/ai-scout.json` are filtered
+  at the static site build boundary, to avoid republishing stale snapshots
+  or unverified candidate-only rows from earlier workflows. Generated World
+  pages and legacy alias URLs are created for verified Worlds only.
+- Submit a verification request using
+  [DJ live verification issue form](https://github.com/showchoo/vrc-club-charts/issues/new?template=dj_stream_verification.yml).
+  Operators must check playback/creator evidence first, then explicitly
+  update the registry. Group events do not prove that a live-stream URL works.
+  When support is revoked, set the record status to `unsupported` and rebuild.
+- `scripts/dj_stream_policy.py` holds the shared gate and
+  `tests/test_dj_stream_policy.py` guards against accidental bypass.
+
 ## Automated World coverage
 
 The catalog starts from an existing seed list; it does **not** claim to include every VRChat club.

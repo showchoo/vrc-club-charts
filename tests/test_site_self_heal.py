@@ -25,7 +25,6 @@ def fake_site(path_status=None, world_thumb=True):
             text += (
                 '<script src="../i18n.js"></script>'
                 f'<a class="world-catalog-row"><img src="world-thumb?id={WORLD}"></a>'
-                f'<a class="world-catalog-row"><img src="world-thumb?id={WORLD}"></a>'
             )
         responses[monitor.SITE + path] = (200, "text/html", text.encode())
     for name in monitor.SCRIPTS:
@@ -61,8 +60,38 @@ class SiteMonitoringTests(unittest.TestCase):
     def test_healthy_route_and_thumbnail_feed(self):
         report = monitor.validate_site(fake_site())
         self.assertTrue(report["healthy"], report["issues"])
-        self.assertEqual(report["checks"]["world_catalog"]["rows"], 2)
+        self.assertEqual(report["checks"]["world_catalog"]["rows"], 1)
         self.assertEqual(report["checks"]["thumbnail_proxy"]["status"], 200)
+
+
+    def test_empty_directory_with_verified_only_policy_is_healthy(self):
+        no_cards = (
+            '<!doctype html><html><body>worldCatalog'
+            '<script src="../i18n.js"></script></body></html>'
+        ).encode()
+        no_worlds = json.dumps({
+            "worlds": [], "publicationPolicy": "verified-dj-live-stream-only"
+        }).encode()
+        fetch = fake_site({
+            monitor.SITE + "/worlds/": (200, "text/html", no_cards),
+            monitor.SITE + "/data/weekly-ranking.json": (
+                200, "application/json", no_worlds
+            ),
+        })
+        result = monitor.validate_site(fetch)
+        self.assertTrue(result["healthy"], result["issues"])
+        self.assertEqual(result["checks"]["rankings"]["world_count"], 0)
+
+    def test_empty_directory_without_policy_is_problem(self):
+        no_cards = b'<html><body>worldCatalog<script src="../i18n.js"></script></body></html>'
+        fetch = fake_site({
+            monitor.SITE + "/worlds/": (200, "text/html", no_cards),
+            monitor.SITE + "/data/weekly-ranking.json": (
+                200, "application/json", b'{"worlds":[]}'
+            ),
+        })
+        result = monitor.validate_site(fetch)
+        self.assertFalse(result["healthy"])
 
     def test_missing_world_directory_is_actionable(self):
         fetch = fake_site({monitor.SITE + "/worlds/": (404, "text/plain", b"")})

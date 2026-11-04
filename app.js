@@ -388,7 +388,7 @@ function renderWorlds() {
   const chosen = pickWorlds(available);
   grid.innerHTML = chosen.length
     ? chosen.map(worldCard).join('')
-    : '<div class="focus-loading">ワールド情報を表示できません。</div>';
+    : '<div class="focus-loading">現在、DJライブ配信対応を確認済みのWorldはありません。確認でき次第掲載します。</div>';
 }
 
 function eventStatus(e, now=Date.now()) {

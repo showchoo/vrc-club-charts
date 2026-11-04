@@ -152,10 +152,10 @@ jobs:
           test -s _site/worlds/index.html
           test -s _site/i18n.js
           grep -q '../i18n.js' _site/worlds/index.html
-          test "$(grep -o 'world-thumb?id=wrld_' _site/worlds/index.html | wc -l)" -ge 80
+          test -s _site/data/weekly-ranking.json
           test -s _site/index.html
           test -f _site/og-image.png
           test -s _site/sitemap.xml
-          test "$(find _site/worlds -maxdepth 1 -name 'wrld_*.html' | wc -l)" -gt 0
+          test -s _site/data/ai-scout.json
           grep -q "worlds/" _site/index.html
 

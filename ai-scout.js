@@ -108,14 +108,12 @@
       const scoredIds = new Set(scored.map(item => item.id));
       const records = [...scored, ...pending.filter(item => !scoredIds.has(item.id))].slice(0, 6);
       const count = Number(data.summary?.totalCandidates ?? pending.length);
-      status.textContent = isAssessed ?
-        'ビジュアル評価 ' + scored.length + '件 · 画像ベースの参考値' :
-        count + ' WORLDS DISCOVERED / ' +
-        (data.modelConfigured ? 'VISUAL EVALUATION IN PROGRESS' : 'VISUAL EVALUATION PAUSED');
+      status.textContent = count + ' DJ LIVE VERIFIED WORLDS' +
+        (isAssessed ? ' · VISUAL IMPRESSIONS ' + scored.length : ' · AWAITING VISUAL REVIEW');
       grid.replaceChildren();
       if (!records.length) {
         grid.appendChild(el('div', 'ai-scout-empty',
-          'クラブWorldを探しています。画像の分析ができたWorldからビジュアル評価を紹介します。'));
+          'DJライブ配信に対応していると確認できたWorldを審査中です。対応未確認の会場は公開していません。'));
         return;
       }
       const byId = new Map(worlds.map(w => [w.id, w]));

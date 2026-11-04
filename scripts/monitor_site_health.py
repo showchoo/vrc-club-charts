@@ -97,9 +97,7 @@ def validate_site(fetcher=fetch) -> dict:
         count = len(re.findall(r'class="world-catalog-row"', worlds))
         thumb_count = worlds.count("world-thumb?id=wrld_")
         checks["world_catalog"] = {"rows": count, "thumbnail_sources": thumb_count}
-        if count < 1:
-            fail("worlds_empty", "worlds", "Worlds directory contains no listed World cards")
-        elif thumb_count < count // 2:
+        if thumb_count < count // 2:
             fail("worlds_images", "worlds", f"Only {thumb_count}/{count} Worlds have thumbnail image sources")
         if '../i18n.js' not in worlds:
             fail("worlds_language_asset", "worlds", "Generated Worlds directory lacks translation script")
@@ -113,16 +111,29 @@ def validate_site(fetcher=fetch) -> dict:
 
     ranking = get("/data/weekly-ranking.json", "rankings")
     valid_worlds = []
+    publication_policy = ""
     if ranking:
         try:
             data = json.loads(ranking)
+            publication_policy = data.get("publicationPolicy") or ""
             valid_worlds = [row["id"] for row in data.get("worlds", [])
                             if isinstance(row, dict) and WORLD_ID.fullmatch(str(row.get("id", "")))]
             checks["rankings"] = {"world_count": len(valid_worlds)}
-            if not valid_worlds:
-                fail("ranking_empty", "rankings", "Published rankings contain no Worlds")
+            if not valid_worlds and publication_policy != "verified-dj-live-stream-only":
+                fail("ranking_empty", "rankings", "Published rankings contain no Worlds without verified-only policy")
+            if publication_policy == "verified-dj-live-stream-only":
+                if any(row.get("djStreamVerification", {}).get("status") != "verified"
+                       for row in data.get("worlds", [])):
+                    fail("unverified_world", "rankings", "World published without DJ-live proof")
         except (ValueError, TypeError, KeyError) as exc:
             fail("rankings_invalid", "rankings", type(exc).__name__)
+    # An empty directory is expected until verification evidence is collected.
+    # A nonempty ranking must still have the same number of static cards.
+    if worlds:
+        card_count = checks.get("world_catalog", {}).get("rows", 0)
+        if card_count != len(valid_worlds):
+            fail("world_count_mismatch", "worlds",
+                 f"Directory has {card_count} cards; ranking has {len(valid_worlds)}")
     get("/data/ai-scout.json", "scout_data")
 
     if valid_worlds:
