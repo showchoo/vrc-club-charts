@@ -294,7 +294,7 @@ def inject_event_json_ld(out: Path, events: list[dict]) -> None:
     path.write_text(doc, encoding="utf-8")
 
 
-def event_page(event: dict, djs: list[dict]) -> str:
+def event_page(event: dict, djs: list[dict], published_world_ids: set[str] | None = None) -> str:
     eid = event_id(event)
     name = event.get("name") or eid
     organizer = event.get("organizer") or "—"
@@ -307,7 +307,8 @@ def event_page(event: dict, djs: list[dict]) -> str:
     description = f"{name} — VRChat DJ / music event details on VRC Club Charts."
     public_url = event.get("url")
     world_id = event.get("worldId")
-    world_link = f'../worlds/{esc(world_id)}.html' if world_id else None
+    world_link = (f'../worlds/{esc(world_id)}.html' if world_id and
+                  (published_world_ids is None or world_id in published_world_ids) else None)
 
     dj_by_id = {str(d.get("id")): d for d in djs if d.get("id")}
     dj_cards = []
@@ -419,6 +420,10 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
              f'onerror="{thumbnail_fallback("div")}" />') if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
     source_url = w.get("source")
+    proof = w.get("djStreamVerification") or {}
+    stream_proof = (f'<a class="secondary-button" href="{esc(proof.get("evidenceUrl"))}" '
+                    f'target="_blank" rel="noreferrer">DJ LIVE VERIFICATION ↗</a>'
+                    if proof.get("evidenceUrl") else "")
 
     now = dt.datetime.now(dt.timezone.utc)
     related_events = []
@@ -473,6 +478,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
           <a class="primary-button" href="{esc(vrchat)}" target="_blank" rel="noreferrer">OPEN IN VRCHAT ↗</a>
           <a class="secondary-button" href="../reviewer.html?world={esc(wid)}#write-review">体験レビューを投稿 ↗</a>
           {f'<a class="secondary-button" href="{esc(source_url)}" target="_blank" rel="noreferrer">PUBLIC SOURCE ↗</a>' if source_url else ""}
+          {stream_proof}
         </div>
       </div>
       {image}
@@ -485,7 +491,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
     </section>
 
-    <p class="world-review-disclaimer">ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。音響・ギミック・動作性能は未確認です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
+    <p class="world-review-disclaimer">DJライブ配信対応の確認：{esc(proof.get("method") or "未確認")}／{esc(proof.get("platform") or "—")}／{esc(proof.get("verifiedAt") or "—")}。配信機能以外の音響・ギミック・動作性能は未確認です。<br />ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
       <div><span>評価範囲</span><strong>{'IMAGE ONLY / REFERENCE' if image_scored else 'NOT ASSESSED'}</strong></div>
@@ -603,7 +609,7 @@ def index_page(worlds: list[dict]) -> str:
           <span class="world-catalog-thumb">{thumb_html}</span>
           <span class="world-catalog-name">{esc(w.get('name'))}</span>
           <span>{esc(w.get('author'))}</span>
-          <span>{esc(genres)}</span>
+          <span>{esc(genres)} · DJ LIVE ✓</span>
           <span>↗</span>
         </a>""")
     return page_head("VRChat クラブワールド一覧・DJイベント会場 | VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
@@ -789,7 +795,8 @@ def main() -> int:
     event_dir.mkdir(parents=True, exist_ok=True)
     for event in events:
         if event.get("name") and event.get("start"):
-            (event_dir / f"{event_id(event)}.html").write_text(event_page(event, djs), encoding="utf-8")
+            (event_dir / f"{event_id(event)}.html").write_text(
+                event_page(event, djs, {w["id"] for w in worlds}), encoding="utf-8")
 
     (out / "events.ics").write_text(build_ics(events), encoding="utf-8", newline="")
     inject_event_json_ld(out, events)
