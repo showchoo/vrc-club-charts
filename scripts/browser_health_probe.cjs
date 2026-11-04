@@ -99,15 +99,41 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
       if (count !== expectedWorlds) {
         add('browser_world_cards', 'World cards differ from the verified-only public ranking');
       } else {
-        try {
-          await world.locator('.world-catalog-row img').first().scrollIntoViewIfNeeded();
-          await world.waitForFunction(() => {
-            const imgs = [...document.querySelectorAll('.world-catalog-row img')].slice(0, 3);
-            return imgs.some(img => img.complete && img.naturalWidth > 0);
-          }, null, {timeout: 16000});
-        } catch (_) {
-          add('browser_world_images', 'No directory thumbnail loaded in browser',
-            false /* can be transient upstream image delivery */);
+        // Inspect thumbnails throughout the directory, not just the first row.
+        // This detects partial cache loss (e.g. a newly imported batch) even
+        // when older cards still load normally.
+        const positions = [...new Set([
+          0, 1, Math.floor(count / 4), Math.floor(count / 2),
+          Math.floor(3 * count / 4), count - 1
+        ])].filter(i => i >= 0 && i < count);
+        let loaded = 0;
+        const failed = [];
+        for (const pos of positions) {
+          const row = world.locator('.world-catalog-row').nth(pos);
+          const id = await row.getAttribute('data-world-id');
+          try {
+            await row.scrollIntoViewIfNeeded({timeout: 5000});
+            await world.waitForFunction(worldId => {
+              const card = [...document.querySelectorAll('.world-catalog-row')]
+                .find(item => item.dataset.worldId === worldId);
+              const img = card?.querySelector('.world-catalog-thumb img');
+              return Boolean(img && img.complete && img.naturalWidth > 0);
+            }, id, {timeout: 8500});
+            loaded += 1;
+          } catch (_) {
+            failed.push(pos);
+          }
+        }
+        report.checks.browser_worlds.thumbnails_sampled = positions.length;
+        report.checks.browser_worlds.thumbnails_loaded = loaded;
+        report.checks.browser_worlds.thumbnails_failed = failed.length;
+        // One failed image can be a transient CDN hiccup; report sustained
+        // partial failure without asking Gemini to rewrite site code.
+        if (failed.length >= 2 || loaded === 0) {
+          add('browser_world_images_partial',
+            'World directory thumbnails failed: ' + failed.length +
+            '/' + positions.length + ' sampled positions (' + failed.join(',') + ')',
+            false);
         }
       }
     }
