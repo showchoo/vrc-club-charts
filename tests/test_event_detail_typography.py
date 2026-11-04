@@ -20,14 +20,14 @@ class EventDetailTypographyTests(unittest.TestCase):
         )
         self.assertIsNotNone(match, "Event title requires a dedicated rule")
         declarations = match.group(1)
-        self.assertIn("font-size: clamp(28px, 3.4vw, 48px)", declarations)
+        self.assertIn("font-size: clamp(19px, 2.27vw, 32px)", declarations)
         self.assertIn("overflow-wrap: anywhere", declarations)
         self.assertIn("line-height: 1.18", declarations)
         # World detail headlines retain their original independent scale.
         self.assertIn("font-size: clamp(3rem, 8vw, 7.2rem)", self.css)
 
     def test_mobile_event_titles_and_lineup_are_smaller(self):
-        self.assertIn("font-size: clamp(24px, 6vw, 34px)", self.css)
+        self.assertIn("font-size: clamp(16px, 4vw, 23px)", self.css)
         self.assertIn(".event-detail-page .world-relations .section-heading h2", self.css)
         self.assertIn("font-size: clamp(23px, 2.5vw, 32px)", self.css)
         self.assertIn("font-size: clamp(36px, 5vw, 72px)", self.css)
@@ -44,7 +44,7 @@ class EventDetailTypographyTests(unittest.TestCase):
         )
         self.assertIn('class="shell world-detail-page event-detail-page"', html)
         self.assertIn("A very long VRChat DJ night event title</h1>", html)
-        self.assertIn("styles.css?v=20261104-event-detail-01", html)
+        self.assertIn("styles.css?v=20261104-event-detail-02", html)
 
 
 if __name__ == "__main__":
