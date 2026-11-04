@@ -25,7 +25,7 @@ WORLDS = ROOT / "data" / "worlds.json"
 DECISIONS = ROOT / "data" / "world-candidate-ai-decisions.json"
 MODERATION = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-candidate-status"
 RETRY_HOURS = 6
-CLASSIFIER_REVISION = 'json-validation-20261007-v2'
+CLASSIFIER_REVISION = 'dj-tag-auto-admission-20261105-v1'
 
 
 def moderation_decisions() -> dict[str, str]:
@@ -47,6 +47,10 @@ def moderation_decisions() -> dict[str, str]:
 
 
 def retry_due(record: dict, now: dt.datetime) -> bool:
+    # Reconsider older, unresolved decisions once when the DJ-tag policy changes.
+    if (record.get("status") == "needs_review" and
+            record.get("classifierRevision") != CLASSIFIER_REVISION):
+        return True
     if record.get("status") not in {"verification_unavailable", "classification_unavailable"}:
         return False
     # Reprocess an invalid Gemini response once when the JSON decoder is fixed.
