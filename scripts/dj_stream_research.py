@@ -55,9 +55,12 @@ def short(value, length: int = 240) -> str:
 def valid_https(url: object) -> bool:
     if not isinstance(url, str) or len(url) > 1000:
         return False
-    p = urllib.parse.urlsplit(url)
-    return (p.scheme == "https" and bool(p.hostname) and not p.username
-            and not p.password and not any(c.isspace() for c in url))
+    try:
+        p = urllib.parse.urlsplit(url)
+        return (p.scheme == "https" and bool(p.hostname) and not p.username
+                and not p.password and not any(c.isspace() for c in url))
+    except ValueError:
+        return False
 
 
 def source_chunks(metadata: dict) -> list[dict]:
@@ -144,6 +147,8 @@ def parse_grounded_reply(result: dict, world_id: str, official_meta: dict | None
         "status": status,
         "summaryJa": short(parsed.get("summaryJa"), 320),
         "sources": cited[:6],
+        # Search hits without claim-level Google grounding are leads, never proof.
+        "unverifiedSearchResults": [c for c in chunks if c][:5],
         "groundingQueries": queries,
         "creatorDescriptionClue": official_support,
         "requiresHumanVerification": True,
@@ -235,8 +240,10 @@ def select_worlds(catalog: list[dict], previous: dict[str, dict],
 
     def order(row):
         record = previous.get(row["id"])
+        genres = row.get("genres")
         terms = (str(row.get("name") or "") + " " +
-                 " ".join(str(t) for t in row.get("genres", []))).casefold()
+                 " ".join(str(t) for t in genres if t) if isinstance(genres, list)
+                 else str(row.get("name") or "")).casefold()
         priority = sum(1 for keyword in SIGNALS if keyword in terms)
         # Scan fresh catalog first; evidence changes are refreshed on a slower cadence.
         return (bool(record), -priority, str(row.get("name", "")).casefold(), row["id"])
@@ -332,8 +339,9 @@ def main() -> int:
         "methodVersion": METHOD, "updatedAt": now_utc().isoformat(timespec="seconds"),
         "worlds": records,
     }
-    REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n",
-                      encoding="utf-8")
+    if records != payload["worlds"]:
+        REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n",
+                          encoding="utf-8")
     if args.notice_output:
         args.notice_output.write_text(notice_markdown(found), encoding="utf-8")
     counts = {name: sum(r.get("status") == name for r in records)
