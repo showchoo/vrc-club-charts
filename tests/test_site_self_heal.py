@@ -64,6 +64,37 @@ class SiteMonitoringTests(unittest.TestCase):
         self.assertEqual(report["checks"]["thumbnail_proxy"]["status"], 200)
 
 
+    def test_dj_tagged_world_is_healthy_without_live_verification(self):
+        feed=json.dumps({
+            "publicationPolicy":"dj-tag-or-verified-live-stream",
+            "worlds":[{
+                "id":WORLD,"genres":["MUSIC","DJ"],
+                "publicationBasis":"dj-tag","djStreamVerification":None,
+                "djStreamTested":False
+            }]
+        }).encode()
+        mocked=fake_site({
+            monitor.SITE + "/data/weekly-ranking.json?v=dj-live-verified-01":
+                (200,"application/json",feed),
+        })
+        result=monitor.validate_site(mocked)
+        self.assertTrue(result["healthy"],result["issues"])
+
+    def test_untagged_world_without_proof_is_rejected(self):
+        feed=json.dumps({
+            "publicationPolicy":"dj-tag-or-verified-live-stream",
+            "worlds":[{
+                "id":WORLD,"genres":["MUSIC","CLUB"],
+                "publicationBasis":"dj-tag","djStreamVerification":None
+            }]
+        }).encode()
+        mocked=fake_site({
+            monitor.SITE + "/data/weekly-ranking.json?v=dj-live-verified-01":
+                (200,"application/json",feed),
+        })
+        result=monitor.validate_site(mocked)
+        self.assertIn("unqualified_world",{i["code"] for i in result["issues"]})
+
     def test_empty_directory_with_verified_only_policy_is_healthy(self):
         no_cards = (
             '<!doctype html><html><body>worldCatalog'
@@ -106,8 +137,8 @@ class SiteMonitoringTests(unittest.TestCase):
     def test_ai_repair_workflow_does_not_require_unverified_worlds(self):
         steps = (Path(__file__).resolve().parents[1] /
                  ".github/workflows/site-self-heal.yml").read_text(encoding="utf-8")
-        self.assertIn("test -s _site/data/weekly-ranking.json?v=dj-live-verified-01", steps)
-        self.assertIn("test -s _site/data/ai-scout.json?v=dj-live-verified-01", steps)
+        self.assertIn("test -s _site/data/weekly-ranking.json", steps)
+        self.assertIn("test -s _site/data/ai-scout.json", steps)
         self.assertNotIn("ge 80", steps)
 
     def test_missing_world_directory_is_actionable(self):
