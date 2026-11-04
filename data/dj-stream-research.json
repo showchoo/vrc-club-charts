@@ -1,12 +1,25 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-04T16:15:33+00:00",
+  "updatedAt": "2026-11-04T16:40:16+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
       "name": "13th Floor DJ",
       "author": "SaintHaru",
       "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
+      "name": "After Dark Night Club",
+      "author": "₥₳J₳․₴Ø₥₥ɆR",
+      "checkedAt": "2026-11-04T16:40:15+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -29,6 +42,19 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
+      "name": "AudioLink ClubSystem",
+      "author": "JJavierPV",
+      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
       "name": "Audiolinkバチバチワールド",
       "author": "しゃちょー",
@@ -39,6 +65,31 @@
       "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
       "sources": [],
       "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
+      "name": "Beach in a Bottle",
+      "author": "∗Lotus∗",
+      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
+      "name": "Brick House Night Club",
+      "author": "BadKarma8489",
+      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "metadataStatus": "official_nonpublic",
+      "method": "gemini-grounded-search-v1",
+      "status": "non_public",
+      "summaryJa": "公式APIで非公開Worldと確認。掲載対象外。",
+      "sources": [],
       "requiresHumanVerification": true
     },
     {
