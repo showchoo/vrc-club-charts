@@ -144,6 +144,15 @@ def fetch_text(url: str) -> str:
     raise RuntimeError("; ".join(errors))
 
 
+def vrcmap_network_unreachable(error: Exception) -> bool:
+    """Distinguish host transport failures from one malformed category page."""
+    message = str(error).lower()
+    return any(word in message for word in (
+        "timed out", "connection refused", "network is unreachable",
+        "temporary failure in name resolution", "name or service not known",
+    ))
+
+
 def public_rest(path: str) -> list[dict]:
     req = urllib.request.Request(
         f"{SUPABASE_URL}/rest/v1/{path}",
@@ -354,12 +363,22 @@ def main() -> int:
     source_membership: dict[str, list[tuple[str, str, int]]] = {}
     successful_sources = 0
     source_health: dict[str, dict] = {}
+    network_failures = 0
+    vrcmap_circuit_open = False
 
     for source_name, source_url, base_score in LISTING_SOURCES:
+        # Same host/category service: stop costly retries after 2 consecutive
+        # transport failures, then focus remaining run time on other sources.
+        if vrcmap_circuit_open:
+            source_health[source_name] = {
+                "lastAttemptAt": today, "status": "skipped_host_unreachable"
+            }
+            continue
         try:
             raw = fetch_text(source_url)
             ids = listing_world_ids(raw)
             successful_sources += 1
+            network_failures = 0
             source_health[source_name] = {"lastAttemptAt": today, "status": "ok",
                                           "listedWorldIds": len(ids)}
             print(f"{source_name}: found {len(ids)} listed World IDs")
@@ -392,6 +411,11 @@ def main() -> int:
                                           "status": "unavailable",
                                           "errorType": type(exc).__name__}
             print(f"WARN: discovery source failed {source_url}: {exc}")
+            network_failures = network_failures + 1 if vrcmap_network_unreachable(exc) else 0
+            if network_failures >= 2:
+                vrcmap_circuit_open = True
+                print("INFO: VRCmap host circuit open after two consecutive network "
+                      "failures; skipping remaining VRCmap requests for this run")
 
     if successful_sources == 0:
         print("WARN: VRCmap sources unavailable; checking independent club directories")
@@ -414,7 +438,7 @@ def main() -> int:
     )
     related_checked = 0
     related_new_links: set[str] = set()
-    if related_seeds:
+    if related_seeds and not vrcmap_circuit_open:
         related_start = max(0, int(discovery_state.get("vrcmapRelatedSeedIndex", 0))) % len(related_seeds)
         per_run = max(1, min(8, int(os.environ.get("VCC_RELATED_SEEDS_PER_RUN", "4"))))
         chosen_seeds = (related_seeds[related_start:] + related_seeds[:related_start])[:per_run]
@@ -436,7 +460,8 @@ def main() -> int:
         ) % len(related_seeds)
     source_health["vrcmap_related"] = {
         "lastAttemptAt": today,
-        "status": "ok" if related_checked else "unavailable",
+        "status": ("skipped_host_unreachable" if vrcmap_circuit_open else
+                   "ok" if related_checked else "unavailable"),
         "seedsChecked": related_checked,
         "unregisteredLinks": len(related_new_links),
     }
