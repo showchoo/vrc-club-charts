@@ -122,7 +122,11 @@ def parse_grounded_reply(result: dict, world_id: str, official_meta: dict | None
     ids = parsed.get("sourceIndices")
     if not isinstance(ids, list) or any(type(i) is not int for i in ids) or len(ids) > 6:
         ids = []
-    selected = sorted(set(i for i in ids if 0 <= i < len(chunks) and i in supported and chunks[i]))
+    # Gemini may omit its own index hints; the API-supplied grounding support
+    # mapping still identifies grounded sources. These remain review-only leads.
+    referenced = ids if ids else sorted(supported)
+    selected = sorted(set(i for i in referenced
+                          if 0 <= i < len(chunks) and i in supported and chunks[i]))[:3]
     cited = [chunks[i] for i in selected]
     # Creator text is an official clue ONLY when VRChat itself reports public
     # metadata for the exact World ID. The model cannot fabricate this link.
