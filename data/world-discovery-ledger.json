@@ -350,22 +350,6 @@
     ]
   },
   {
-    "id": "wrld_2095ba41-f0b8-4ed3-a00d-3f0e9a4e2a79",
-    "name": "SANCTUM",
-    "authorHint": "",
-    "firstSeenAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04",
-    "status": "pending",
-    "evidence": [
-      {
-        "source": "sia_vr_club",
-        "ref": "https://sia-vr.com/vrchat-world-240303",
-        "firstSeenAt": "2026-11-04",
-        "lastSeenAt": "2026-11-04"
-      }
-    ]
-  },
-  {
     "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
     "name": "Endless Suburbia",
     "authorHint": "",
@@ -714,6 +698,22 @@
     ]
   },
   {
+    "id": "wrld_3b782fd3-d52b-4efa-ba67-f634f7b8615d",
+    "name": "Under Sea Dj House",
+    "authorHint": "blanc_uw",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_3b782fd3-d52b-4efa-ba67-f634f7b8615d/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
     "name": "The Dingo Denǃ",
     "authorHint": "CoffeeBandit`",
@@ -834,6 +834,22 @@
         "ref": "https://sia-vr.com/vrchat-world-241277",
         "firstSeenAt": "2026-10-24",
         "lastSeenAt": "2026-10-28"
+      }
+    ]
+  },
+  {
+    "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
+    "name": "Music＆BAR【PPC】",
+    "authorHint": "PAPICO",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_4780a08f-8d44-4533-838b-2ec497fcf34e/info",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
       }
     ]
   },
@@ -983,6 +999,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_55db23e4-12f2-405a-b457-6235e454170c",
+    "name": "RaveCage 5․31",
+    "authorHint": "∗Tera∗",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_55db23e4-12f2-405a-b457-6235e454170c/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2605,6 +2637,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dance",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_ee359c3d-533b-4432-9028-490190f51829",
+    "name": "Tribe Lounge",
+    "authorHint": "Zeraxx",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "published",
+    "evidence": [
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_ee359c3d-533b-4432-9028-490190f51829/info",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]

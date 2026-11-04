@@ -1,1 +1,121 @@
-[]
+[
+  {
+    "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
+    "name": "Music＆BAR【PPC】",
+    "author": "PAPICO",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag",
+    "reviewedAt": "2026-11-04T16:40:19.838913+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_e359e2fb-6284-4e1b-80ab-64ee8f7250b5",
+    "name": "ReflectionSunset",
+    "author": "COMA․",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "Description mentions ambient music showcase rather than a club venue",
+        "Thumbnail shows geometric structural interior without dance floor or DJ setup"
+      ],
+      "reasonJa": "説明文に特定の音楽家が記載されているものの、ナイトクラブやDJイベント向けの設備や空間を示す要素が確認できないため。",
+      "imageConsidered": true
+    },
+    "note": "AI classification/evidence insufficient for automatic admission",
+    "reviewedAt": "2026-11-04T16:40:43.547726+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_55db23e4-12f2-405a-b457-6235e454170c",
+    "name": "RaveCage 5․31",
+    "author": "∗Tera∗",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "World name includes 'Rave'",
+        "Description mentions industrial location for hard parties",
+        "Tags include 'party', 'club', 'rave', and 'dance'",
+        "Thumbnail shows an industrial venue with stage lighting and visual displays"
+      ],
+      "reasonJa": "公式のメタデータやタグにレイブやクラブ、パーティに関する記述があり、画像でも工業的なイベントスペースの様子が確認できるため。",
+      "imageConsidered": true
+    },
+    "note": "Confirmed public World and high-confidence nightlife evidence",
+    "reviewedAt": "2026-11-04T16:41:12.616429+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_ee359c3d-533b-4432-9028-490190f51829",
+    "name": "Tribe Lounge",
+    "author": "Zeraxx",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag",
+    "reviewedAt": "2026-11-04T16:41:12.756943+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_b40886b0-8a0b-4771-90ff-09c2d80e2729",
+    "name": "Club 808",
+    "author": "Salvific",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "uncertain",
+      "confidence": 0.5,
+      "evidence": [
+        "World name includes 'Club'",
+        "Thumbnail shows minimalist '808' neon graphic without club interior context"
+      ],
+      "reasonJa": "名前やサムネイルに「Club」や「808」の文字が見られますが、実際の内部構造やイベント目的を示す情報が不足しているため不確実です。",
+      "imageConsidered": true
+    },
+    "note": "AI classification/evidence insufficient for automatic admission",
+    "reviewedAt": "2026-11-04T16:41:52.030658+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_3b782fd3-d52b-4efa-ba67-f634f7b8615d",
+    "name": "Under Sea Dj House",
+    "author": "blanc_uw",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag",
+    "reviewedAt": "2026-11-04T16:41:52.141589+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_4980b7ba-734c-43dd-9a25-d70f58677f58",
+    "name": "宅録DJワールド",
+    "author": "ちゃるしあ",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "ワールド名は宅録DJワールドである",
+        "説明欄に配信用のストリームキーに関する記述がある",
+        "サムネイルには家庭の部屋を思わせる空間にDJ機材が設置されている",
+        "大規模なクラブやレイヴスペースではなく、個人向けのDJ練習・配信用の空間である"
+      ],
+      "reasonJa": "宅録や配信向けのDJ用スペースであり、大規模なナイトクラブやレイヴ会場としての目的ではないためクラブとは判定されません。",
+      "imageConsidered": true
+    },
+    "note": "AI classification/evidence insufficient for automatic admission",
+    "reviewedAt": "2026-11-04T16:42:06.236031+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1"
+  }
+]

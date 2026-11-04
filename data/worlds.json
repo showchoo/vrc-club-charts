@@ -708,6 +708,28 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
+    "name": "Music＆BAR【PPC】",
+    "author": "PAPICO",
+    "genres": [
+      "CLUB",
+      "DJ"
+    ],
+    "officialTags": [
+      "author_tag_dj",
+      "author_tag_bar",
+      "author_tag_topaz",
+      "system_approved",
+      "author_tag_VRCMELTDOWN",
+      "author_tag_PPC"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_4780a08f-8d44-4533-838b-2ec497fcf34e/info",
+    "discoveredBy": "user-submission-official-dj-tag"
+  },
+  {
     "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
     "name": "Neon Catnip - Customizable DJ Venue",
     "author": "DJ Megu",
@@ -937,6 +959,28 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_55db23e4-12f2-405a-b457-6235e454170c",
+    "name": "RaveCage 5․31",
+    "author": "∗Tera∗",
+    "genres": [
+      "CLUB"
+    ],
+    "officialTags": [
+      "author_tag_audiolink",
+      "content_other",
+      "author_tag_party",
+      "author_tag_club",
+      "author_tag_rave",
+      "system_approved",
+      "author_tag_dance"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_55db23e4-12f2-405a-b457-6235e454170c/info",
+    "discoveredBy": "user-submission-ai-reviewed"
   },
   {
     "id": "wrld_06fdbbc8-21b0-41fd-85db-492fd087c950",
@@ -1252,6 +1296,27 @@
     "chartEligible": true
   },
   {
+    "id": "wrld_ee359c3d-533b-4432-9028-490190f51829",
+    "name": "Tribe Lounge",
+    "author": "Zeraxx",
+    "genres": [
+      "CLUB",
+      "DJ"
+    ],
+    "officialTags": [
+      "author_tag_dj",
+      "author_tag_live",
+      "author_tag_music",
+      "system_approved",
+      "admin_approved"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_ee359c3d-533b-4432-9028-490190f51829/info",
+    "discoveredBy": "user-submission-official-dj-tag"
+  },
+  {
     "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
     "name": "TUBE VR - IN THE DANCE",
     "author": "Hadean",
@@ -1299,6 +1364,27 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_3b782fd3-d52b-4efa-ba67-f634f7b8615d",
+    "name": "Under Sea Dj House",
+    "author": "blanc_uw",
+    "genres": [
+      "CLUB",
+      "DJ"
+    ],
+    "officialTags": [
+      "author_tag_music",
+      "author_tag_dj",
+      "author_tag_chill",
+      "author_tag_sea",
+      "system_approved"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_3b782fd3-d52b-4efa-ba67-f634f7b8615d/info",
+    "discoveredBy": "user-submission-official-dj-tag"
   },
   {
     "id": "wrld_0daf27f5-462f-4223-936f-be107dbdb195",

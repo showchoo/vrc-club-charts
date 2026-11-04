@@ -1214,5 +1214,17 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_2095ba41-f0b8-4ed3-a00d-3f0e9a4e2a79",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-11-04T16:42:48.736510+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1"
   }
 ]

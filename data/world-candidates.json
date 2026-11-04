@@ -129,22 +129,6 @@
     "lastSeenAt": "2026-11-04"
   },
   {
-    "id": "wrld_2095ba41-f0b8-4ed3-a00d-3f0e9a4e2a79",
-    "name": "SANCTUM",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240303",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
     "id": "wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e",
     "name": "术力口工坊",
     "authorHint": "",
