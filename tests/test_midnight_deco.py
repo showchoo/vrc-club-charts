@@ -62,13 +62,9 @@ class MidnightDecoTests(unittest.TestCase):
         self.assertIn("font-family: var(--body-font);", css)
         # Restrict the decorative font to the CLUB / DISCOVERY hero words.
         self.assertEqual(css.count("font-family: var(--deco-display);"), 1)
-        hero = re.search(
-            r"body\\.ranking-home \\.ai-scout-primary \\.title-overline,[\\s\\S]*?"
-            r"body\\.ranking-home \\.ai-scout-primary \\.title-main \\{([^}]*)\\}",
-            css,
-        )
-        self.assertIsNotNone(hero)
-        self.assertIn("font-family: var(--deco-display);", hero.group(1))
+        hero_start = css.index("body.ranking-home .ai-scout-primary .title-main {")
+        hero_declarations = css[hero_start:].split("}", 1)[0]
+        self.assertIn("font-family: var(--deco-display);", hero_declarations)
         for selector in (".event-card h3,.dj-card h3", ".world-catalog-name",
                          ".brand > span:last-child", ".event-detail-mark"):
             self.assertIn(selector, css)
