@@ -95,6 +95,38 @@ class SiteMonitoringTests(unittest.TestCase):
         result=monitor.validate_site(mocked)
         self.assertIn("unqualified_world",{i["code"] for i in result["issues"]})
 
+    def test_owner_favorite_attestation_permits_world_without_dj_tag(self):
+        ranking=json.dumps({
+            "publicationPolicy":"dj-tag-owner-favorite-or-verified-live-stream",
+            "worlds":[{
+                "id":WORLD,"genres":["MUSIC"],"publicationBasis":"owner-favorite-confirmed",
+                "djStreamOwnerConfirmed":True,
+                "ownerStreamConfirmation":{"status":"owner-attested",
+                    "method":"owner-asserted-in-world-live-playback"},
+                "djStreamTested":False,"djStreamVerification":None,
+            }]
+        }).encode("utf-8")
+        mocked=fake_site({
+            monitor.SITE+"/data/weekly-ranking.json?v=dj-live-verified-01":
+                (200,"application/json",ranking),
+        })
+        report=monitor.validate_site(mocked)
+        self.assertTrue(report["healthy"],report["issues"])
+
+    def test_owner_publication_without_owner_record_fails_monitor(self):
+        ranking=json.dumps({
+            "publicationPolicy":"dj-tag-owner-favorite-or-verified-live-stream",
+            "worlds":[{"id":WORLD,"genres":["MUSIC"],
+                       "publicationBasis":"owner-favorite-confirmed",
+                       "ownerStreamConfirmation":None}],
+        }).encode("utf-8")
+        mocked=fake_site({
+            monitor.SITE+"/data/weekly-ranking.json?v=dj-live-verified-01":
+                (200,"application/json",ranking),
+        })
+        report=monitor.validate_site(mocked)
+        self.assertIn("unqualified_world",{x["code"] for x in report["issues"]})
+
     def test_empty_directory_with_verified_only_policy_is_healthy(self):
         no_cards = (
             '<!doctype html><html><body>worldCatalog'
