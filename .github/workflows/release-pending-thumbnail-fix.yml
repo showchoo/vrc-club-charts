@@ -110,7 +110,30 @@ jobs:
                 gh workflow run validate.yml --ref "$EXPECTED_BRANCH"
                 echo "Requested validation for unchanged PR content"
               else
-                echo "Validation has not passed for PR head $head"
+                # A runner/billing failure may end a workflow without a single
+                # test step. Retry that infrastructure-only case, not genuine
+                # test failures, after a separate 24-hour cooldown.
+                latest_ci=$(jq -c --arg sha "$head" \
+                  '[.workflow_runs[] | select(.head_sha == $sha)] | sort_by(.created_at) | reverse | .[0] // {}' <<<"$ci")
+                last_status=$(jq -r '.status // empty' <<<"$latest_ci")
+                last_conclusion=$(jq -r '.conclusion // empty' <<<"$latest_ci")
+                last_id=$(jq -r '.id // empty' <<<"$latest_ci")
+                if [[ "$last_status" == "completed" && "$last_conclusion" == "failure" && -n "$last_id" ]]; then
+                  jobs_json=$(gh api "repos/$REPO/actions/runs/$last_id/jobs?per_page=20")
+                  executed_steps=$(jq '[.jobs[].steps[]?] | length' <<<"$jobs_json")
+                  created=$(jq -r '.created_at' <<<"$latest_ci")
+                  elapsed=$(( $(date -u +%s) - $(date -u -d "$created" +%s) ))
+                  if (( executed_steps == 0 && elapsed >= 86400 )); then
+                    gh workflow run validate.yml --ref "$EXPECTED_BRANCH"
+                    echo "Retried infrastructure-only validation failure"
+                  elif (( executed_steps > 0 )); then
+                    echo "::warning::Real CI test failure; no automatic release or retry"
+                  else
+                    echo "Validation infrastructure retry cooldown active"
+                  fi
+                else
+                  echo "Validation is queued, running or unavailable for PR head $head"
+                fi
               fi
               exit 0
             fi
