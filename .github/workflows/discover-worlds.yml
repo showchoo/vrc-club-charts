@@ -11,6 +11,7 @@ on:
       - "data/events-auto.json"
       - "scripts/discover_vrcw.py"
       - "scripts/discover_official.py"
+      - "scripts/discover_sia_vr.py"
       - "data/discovery-seeds.json"
       - ".github/workflows/discover-worlds.yml"
   schedule:
@@ -27,7 +28,7 @@ concurrency:
 jobs:
   discover:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,6 +39,7 @@ jobs:
           VRC_USER_AGENT: ${{ vars.VRC_USER_AGENT }}
           VCC_DISCOVERY_PAGES_PER_SOURCE: "12"
           VCC_DISCOVERY_VERIFY_PER_RUN: "16"
+          PYTHONUNBUFFERED: "1"
         run: |
           python scripts/discover_worlds.py
           python scripts/build_rankings.py

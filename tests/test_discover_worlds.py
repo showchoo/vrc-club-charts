@@ -58,6 +58,10 @@ class VrcmapRotationTests(unittest.TestCase):
         self.assertEqual(stats.get("excluded_title"), 1)
         self.assertNotIn("qualified", stats)
 
+    def test_network_work_is_bounded_before_15_minute_job_timeout(self):
+        self.assertLessEqual(worlds.MAX_DETAIL_FETCHES, 25)
+        self.assertLess(worlds.DETAIL_BUDGET_SECONDS, 15*60)
+
     def test_fight_club_not_treated_as_nightlife(self):
         raw = "<h1>Fighting Club</h1><p>club DJ party music</p>"
         with patch.object(worlds, "fetch_text", return_value=raw):

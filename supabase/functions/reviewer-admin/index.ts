@@ -74,6 +74,84 @@ async function handleVccRequest(req: Request) {
   try{body=await req.json()}catch(_){return json({error:"Invalid JSON"},400)}
   const action=String(body?.action||"");
 
+  if(action==="import_favorite_worlds"){
+    // Admin-key protected, bounded import. Never upload the raw favorite export,
+    // VRChat login credentials or the operator's account identity.
+    const submitted=body?.worldIds;
+    const valid=/^wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    if(!Array.isArray(submitted) || !submitted.length || submitted.length>6 ||
+       submitted.some((v:unknown)=>typeof v!=="string" || !valid.test(v)))
+      return json({error:"1〜6件の正しいWorld IDを指定してください。"},400);
+    const ids=[...new Set(submitted)] as string[];
+
+    const [submissionRows,publicRows,moderationRows]=await Promise.all([
+      supabase.from("world_submissions").select("world_id").in("world_id",ids),
+      supabase.from("worlds_public").select("id").in("id",ids),
+      supabase.from("world_candidate_decisions").select("world_id,status").in("world_id",ids),
+    ]);
+    if(submissionRows.error || publicRows.error || moderationRows.error)
+      return json({error:"登録状態を確認できません。"},503);
+    const existing=new Set<string>([
+      ...(submissionRows.data||[]).map((r:any)=>r.world_id),
+      ...(publicRows.data||[]).map((r:any)=>r.id),
+      ...(moderationRows.data||[]).filter((r:any)=>r.status==="rejected"||r.status==="approved")
+        .map((r:any)=>r.world_id),
+    ]);
+    // Local static catalog contains historic approved Worlds not in worlds_public.
+    try{
+      const res=await fetch(WORLD_CATALOG_URL,{signal:AbortSignal.timeout(6500)});
+      if(!res.ok) return json({error:"掲載済みWorld一覧を取得できません。"},503);
+      const catalog=await res.json();
+      if(!Array.isArray(catalog)) return json({error:"掲載一覧が不正です。"},503);
+      for(const row of catalog){
+        if(row?.chartEligible===true && typeof row?.id==="string") existing.add(row.id);
+      }
+    }catch(_){ return json({error:"掲載済みWorld一覧の確認に失敗しました。"},503); }
+
+    const result:{queued:string[];skipped:string[];failed:string[]}={
+      queued:[], skipped:[], failed:[]
+    };
+    const inspect=async(id:string)=>{
+      if(existing.has(id)){result.skipped.push(id);return;}
+      let world:any;
+      try{
+        const res=await fetch(VRCHAT_WORLD_API+encodeURIComponent(id),{
+          headers:{"Accept":"application/json",
+                   "User-Agent":"VRCClubCharts-FavoriteImport/1.0"},
+          signal:AbortSignal.timeout(7000),
+        });
+        if(!res.ok){result.failed.push(id);return;}
+        world=await res.json();
+      }catch(_){result.failed.push(id);return;}
+      // Only official public worlds can enter the existing AI review queue.
+      if(world?.id!==id || String(world?.releaseStatus||"").toLowerCase()!=="public"
+        || !String(world?.name||"").trim() || !String(world?.authorName||"").trim()){
+        result.failed.push(id);return;
+      }
+      const tags=Array.isArray(world.tags)
+        ? world.tags.filter((v:unknown)=>typeof v==="string")
+            .slice(0,25).map((v:string)=>v.slice(0,80)):[];
+      const thumbnail=String(world.thumbnailImageUrl||"");
+      const safeThumb=/^https:\/\/api\.vrchat\.cloud\//i.test(thumbnail)
+        ? thumbnail.slice(0,500):null;
+      const {error}=await supabase.from("world_submissions").insert({
+        world_id:id,world_url:"https://vrchat.com/home/world/"+id+"/info",
+        world_name:String(world.name).trim().slice(0,120),
+        world_author:String(world.authorName).trim().slice(0,120),
+        world_description:String(world.description||"").trim().slice(0,1800),
+        world_tags:tags,world_thumbnail:safeThumb,status:"queued",
+      });
+      if(error){
+        if(error.code==="23505") result.skipped.push(id);
+        else result.failed.push(id);
+      }else result.queued.push(id);
+    };
+    // Two simultaneous lookups avoid VRChat API bursts and bound latency.
+    for(let i=0;i<ids.length;i+=2)
+      await Promise.all(ids.slice(i,i+2).map(inspect));
+    return json({ok:true,...result});
+  }
+
   if(action==="list"){
     const {data,error}=await supabase.from("reviewer_applications")
       .select("id,vrchat_name,contact,experience,background,affiliations,availability,status,created_at,reviewed_at,reviewer_id")

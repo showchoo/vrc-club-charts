@@ -64,6 +64,35 @@ class SiaVRDiscoveryTests(unittest.TestCase):
         self.assertNotIn("releaseStatus", leads[0])
         self.assertNotIn("chartEligible", leads[0])
 
+    def test_other_public_sections_filter_to_explicit_nightclub_names(self):
+        class Allowed:
+            def can_fetch(self, agent, url):
+                return True
+        club = "wrld_12345678-1234-1234-1234-123456789abc"
+        extra = "wrld_abcdefab-1234-5678-9abc-abcdefabcdef"
+        rejected = "wrld_eeeeeeee-1234-5678-9abc-abcdefabcdef"
+        def fake(url):
+            if "category/building/club" in url:
+                return '<a href="/vrchat-world-1234">One</a>'
+            if "category/genre/music" in url:
+                return '<a href="/vrchat-world-5678">Two</a>'
+            if "category/building/bar" in url:
+                return '<a href="/vrchat-world-9999">Three</a>'
+            if url.endswith("1234"):
+                return '<h1>Nightclub One</h1><a href="https://vrchat.com/home/world/' + club + '">v</a>'
+            if url.endswith("5678"):
+                return '<h1>Neon CLUB</h1><a href="https://vrchat.com/home/world/' + extra + '">v</a>'
+            return '<h1>Quiet Bar</h1><a href="https://vrchat.com/home/world/' + rejected + '">v</a>'
+        with tempfile.TemporaryDirectory() as directory, patch.object(
+                source, "STATE", Path(directory)/"state.json"), patch.object(
+                source, "robots_policy", return_value=Allowed()), patch.object(
+                source, "fetch_text", side_effect=fake):
+            rows, status=source.collect_candidates("2026-11-04")
+        self.assertEqual({item["id"] for item in rows}, {club, extra})
+        self.assertEqual(next(x for x in rows if x["id"]==extra)["sourceCategories"], ["sia_vr_music"])
+        self.assertEqual(status["secondarySources"]["sia_vr_bar"]["newLeads"],0)
+        self.assertEqual(status["secondarySources"]["sia_vr_music"]["newLeads"],1)
+
 
 if __name__ == "__main__":
     unittest.main()
