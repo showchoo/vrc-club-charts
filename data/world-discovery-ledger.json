@@ -5,7 +5,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -462,6 +462,22 @@
     ]
   },
   {
+    "id": "wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc",
+    "name": "club bunny",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-231542",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_1a13ec63-43ae-4616-bb80-f7c05f2a6d99",
     "name": "Trance VR˸ TranceMission",
     "authorHint": "Kitsune。",
@@ -611,7 +627,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -723,7 +739,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -927,7 +943,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1528,6 +1544,22 @@
     ]
   },
   {
+    "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
+    "name": "青色クラブ ⁄ AOIRO CLUB ［ Ver2․XX ］",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-231114",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_57235d92-147d-4e02-95d0-d3261a801558",
     "name": "warehouse_333",
     "authorHint": "isle［アイル］",
@@ -1619,7 +1651,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1635,7 +1667,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1889,6 +1921,22 @@
         "source": "catalog",
         "ref": "https://vrcmap.com/world/wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144",
+    "name": "Axe Throwing Club 2․0",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-231650",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -2338,6 +2386,22 @@
     ]
   },
   {
+    "id": "wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68",
+    "name": "Club BEBE CARROT",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-231352",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_8901b417-3cfc-4b4c-a29c-43c67d53adde",
     "name": "No Reason ⁄ 理由もなく",
     "authorHint": "",
@@ -2455,7 +2519,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2959,6 +3023,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
+    "name": "_SEREN",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230659",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -3725,7 +3805,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-04",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",

@@ -1,9 +1,9 @@
 [
   {
-    "id": "wrld_23808179-ae84-4262-a9fa-c7a171ef6791",
-    "name": "The Obsidian Nightclub",
+    "id": "wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144",
+    "name": "Axe Throwing Club 2․0",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240671",
+    "source": "https://sia-vr.com/vrchat-world-231650",
     "sourceCategories": [
       "sia_vr_club"
     ],
@@ -17,122 +17,61 @@
     "lastSeenAt": "2026-11-04"
   },
   {
-    "id": "wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c",
-    "name": "_recovered․SHELTER2․mrg",
+    "id": "wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68",
+    "name": "Club BEBE CARROT",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240076",
+    "source": "https://sia-vr.com/vrchat-world-231352",
     "sourceCategories": [
       "sia_vr_club"
     ],
-    "confidenceScore": 72,
+    "confidenceScore": 88,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club"
+      "source:sia-vr-club",
+      "+explicit-club-name"
     ],
     "firstDiscoveredAt": "2026-11-04",
     "lastSeenAt": "2026-11-04"
   },
   {
-    "id": "wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead",
-    "name": "Atomica",
+    "id": "wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc",
+    "name": "club bunny",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240219",
+    "source": "https://sia-vr.com/vrchat-world-231542",
     "sourceCategories": [
       "sia_vr_club"
     ],
-    "confidenceScore": 72,
+    "confidenceScore": 88,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club"
+      "source:sia-vr-club",
+      "+explicit-club-name"
     ],
     "firstDiscoveredAt": "2026-11-04",
     "lastSeenAt": "2026-11-04"
   },
   {
-    "id": "wrld_2d74e168-29c9-437b-9664-4e20ba5c1330",
-    "name": "Culdesac",
+    "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
+    "name": "青色クラブ ⁄ AOIRO CLUB ［ Ver2․XX ］",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240527",
+    "source": "https://sia-vr.com/vrchat-world-231114",
     "sourceCategories": [
       "sia_vr_club"
     ],
-    "confidenceScore": 72,
+    "confidenceScore": 88,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club"
+      "source:sia-vr-club",
+      "+explicit-club-name"
     ],
     "firstDiscoveredAt": "2026-11-04",
     "lastSeenAt": "2026-11-04"
   },
   {
-    "id": "wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d",
-    "name": "Moon Diner",
+    "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
+    "name": "_SEREN",
     "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240374",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_59e089b3-c0d9-4592-afcd-590ebe55d398",
-    "name": "Pixel Paradise Arcade",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240544",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_918ff65a-8fa4-442e-a983-da1506993b3f",
-    "name": "Restroom Session",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240266",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_e3e9bd57-665f-4170-b9fb-00101f24729f",
-    "name": "RIFT Site Alpha",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-231787",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e",
-    "name": "术力口工坊",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-240603",
+    "source": "https://sia-vr.com/vrchat-world-230659",
     "sourceCategories": [
       "sia_vr_club"
     ],
