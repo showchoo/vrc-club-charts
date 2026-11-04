@@ -94,8 +94,7 @@ def review_candidates() -> dict:
         to_check.append(candidate)
     to_check=to_check[:max_per_run]
     if not key:
-        print(f"INFO: Gemini key missing; {len(to_check)} discovered Worlds remain pending")
-        return {"checked":0,"approved":0,"unresolved":len(pending),"skipped":"gemini_key_missing"}
+        print("INFO: Gemini key missing; only official DJ-tagged Worlds can be auto-admitted")
 
     approved=[]
     excluded_nonpublic=[]
@@ -137,29 +136,40 @@ def review_candidates() -> dict:
             attempted+=1
             print(f"VERIFY_{state.upper()} {wid} {type(exc).__name__}")
             continue
-        try:
-            assessment=classifier.classify_world(meta,key)
-        except (ValueError,urllib.error.HTTPError,urllib.error.URLError,OSError,TimeoutError) as exc:
-            history[wid]={**classifier.decide(wid,meta,None,"classification_unavailable",
-                          "Gemini classification temporarily unavailable: "+type(exc).__name__),
-                          "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
-            attempted+=1
-            print(f"CLASSIFICATION_UNAVAILABLE {wid} {type(exc).__name__}")
-            # Avoid repeated failing paid API calls if the service is down.
-            break
-        if classifier.may_auto_approve(assessment,meta):
+        dj_tagged = classifier.has_official_dj_tag(meta)
+        if dj_tagged:
+            assessment = {"verdict": "club", "method": "official-vrchat-dj-tag"}
+        elif not key:
+            # Leave the candidate available for a later Gemini classification.
+            continue
+        else:
+            try:
+                assessment=classifier.classify_world(meta,key)
+            except (ValueError,urllib.error.HTTPError,urllib.error.URLError,OSError,TimeoutError) as exc:
+                history[wid]={**classifier.decide(wid,meta,None,"classification_unavailable",
+                              "Gemini classification temporarily unavailable: "+type(exc).__name__),
+                              "source":"auto-discovery","classifierRevision":CLASSIFIER_REVISION}
+                attempted+=1
+                print(f"CLASSIFICATION_UNAVAILABLE {wid} {type(exc).__name__}")
+                break
+        if dj_tagged or classifier.may_auto_approve(assessment,meta):
             catalog.append({
                 "id":wid, "name":str(meta["name"]).strip()[:120],
                 "author":str(meta["authorName"]).strip()[:120],
-                "genres":["CLUB"], "editorialStatus":"unreviewed",
+                "genres":["CLUB", "DJ"] if dj_tagged else ["CLUB"],
+                "officialTags":[t for t in meta.get("tags", []) if isinstance(t,str)],
+                "releaseStatus":"public", "editorialStatus":"unreviewed",
                 "chartEligible":True,
                 "source":"https://vrchat.com/home/world/"+wid+"/info",
-                "discoveredBy":"automatic-discovery-gemini-reviewed",
+                "discoveredBy":("automatic-discovery-official-dj-tag" if dj_tagged
+                                else "automatic-discovery-gemini-reviewed"),
             })
             known.add(wid)
             approved.append(wid)
             status="approved"
-            note="Official public World verified; Gemini and independent nightlife evidence agreed"
+            note=("Official public World DJ tag; live playback not independently tested"
+                  if dj_tagged else
+                  "Official public World verified; Gemini and independent nightlife evidence agreed")
             print("APPROVED "+wid+" "+str(meta["name"]).strip()[:120])
         else:
             status="needs_review"
