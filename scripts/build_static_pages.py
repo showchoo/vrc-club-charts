@@ -755,7 +755,8 @@ def main() -> int:
     )
     old_scout = ROOT / "data" / "ai-scout.json"
     scout_snapshot = json.loads(old_scout.read_text(encoding="utf-8")) if old_scout.exists() else {}
-    safe_scout = sanitize_ai_scout(scout_snapshot, verified)
+    published_evidence = {wid: verified[wid] for wid in (w['id'] for w in worlds)}
+    safe_scout = sanitize_ai_scout(scout_snapshot, published_evidence)
     (public_data_dir / "ai-scout.json").write_text(
         json.dumps(safe_scout, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
