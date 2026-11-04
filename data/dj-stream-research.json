@@ -1,5 +1,58 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": null,
-  "worlds": []
+  "updatedAt": "2026-11-04T16:15:33+00:00",
+  "worlds": [
+    {
+      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
+      "name": "13th Floor DJ",
+      "author": "SaintHaru",
+      "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
+      "name": "ANIMA CANVAS",
+      "author": "PudinKiller",
+      "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
+      "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_d4e02d69-2d17-4972-9c7a-712b076039be",
+      "name": "DJ Nightclub",
+      "author": "Rainbowlex",
+      "checkedAt": "2026-11-04T16:15:32+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    }
+  ]
 }
