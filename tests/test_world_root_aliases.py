@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.build_static_pages import world_root_alias
+from scripts.dj_stream_policy import load_verified, published_worlds
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,7 +31,7 @@ class WorldRootAliasTests(unittest.TestCase):
 
     def test_all_generated_worlds_have_root_aliases_and_profiles(self):
         data = json.loads((ROOT / "data/weekly-ranking.json").read_text(encoding="utf-8"))
-        ids = [row["id"] for row in data["worlds"]]
+        ids = [row["id"] for row in published_worlds(data["worlds"], load_verified())]
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)
             subprocess.run(
@@ -48,6 +49,10 @@ class WorldRootAliasTests(unittest.TestCase):
                     self.assertTrue((output / "worlds" / f"{wid}.html").is_file())
                     self.assertIn(f'url=worlds/{wid}.html', root_alias.read_text(encoding="utf-8"))
             self.assertEqual(len(list(output.glob("wrld_*.html"))), len(ids))
+            # The legacy 109-item source catalog must not bypass DJ live verification.
+            self.assertEqual(
+                {p.stem for p in output.glob("wrld_*.html")}, set(ids)
+            )
 
 
 if __name__ == "__main__":
