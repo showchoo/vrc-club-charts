@@ -61,7 +61,9 @@ def moderation_status_ids() -> set[str]:
 WORLD_LINK_RE = re.compile(r"/world/(wrld_[0-9a-fA-F-]{36})")
 TAG_RE = re.compile(r"<[^>]+>")
 H1_RE = re.compile(r"(?is)<h1[^>]*>(.*?)</h1>")
-MAX_DETAIL_FETCHES = 70
+MAX_DETAIL_FETCHES = 18
+# Stop optional detail crawling early enough to commit collected leads.
+DETAIL_BUDGET_SECONDS = 340
 
 POSITIVE = {
     "club": 30,
@@ -130,7 +132,7 @@ def fetch_text(url: str) -> str:
     for candidate_url in attempts:
         try:
             req = urllib.request.Request(candidate_url, headers=headers)
-            with urllib.request.urlopen(req, timeout=45) as response:
+            with urllib.request.urlopen(req, timeout=10) as response:
                 text = response.read().decode("utf-8", errors="replace")
                 if "wrld_" in text:
                     if candidate_url != url:
@@ -301,6 +303,7 @@ def detail_candidate(world_id: str, source_name: str, source_url: str,
 
 def main() -> int:
     today = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    started = time.monotonic()
 
     existing_catalog = json.loads(WORLDS.read_text(encoding="utf-8"))
     existing_ids = {
@@ -442,24 +445,45 @@ def main() -> int:
 
     saved_positions = discovery_state.get("vrcmapNextIndex", {})
     saved_positions = saved_positions if isinstance(saved_positions, dict) else {}
-    next_positions = dict(saved_positions)
-    selected_ids = []
-    seen_ids = set()
-    per_source = max(5, min(24, int(os.environ.get("VCC_VRCMAP_DETAILS_PER_SOURCE", "12"))))
-    for source_name in ["vrcmap_related"] + [name for name, _, _ in LISTING_SOURCES]:
-        pool = sorted(wid for wid, memberships in source_membership.items()
-                      if any(member[0] == source_name for member in memberships))
-        if not pool:
-            continue
-        start = max(0, int(saved_positions.get(source_name, 0))) % len(pool)
-        cycle = pool[start:] + pool[:start]
-        for wid in cycle[:per_source]:
-            if wid not in seen_ids and len(selected_ids) < MAX_DETAIL_FETCHES:
+    source_names = ["vrcmap_related"] + [name for name, _, _ in LISTING_SOURCES]
+    pools = {
+        name: sorted(wid for wid, memberships in source_membership.items()
+                     if any(member[0] == name for member in memberships))
+        for name in source_names
+    }
+    # Round-robin prevents the first category from consuming the entire
+    # per-run detail budget. Advance only visited positions for each source.
+    source_offset = max(0, int(discovery_state.get("vrcmapSourceNextIndex", 0))) % len(source_names)
+    ordered_names = source_names[source_offset:] + source_names[:source_offset]
+    consumption = {name: 0 for name in source_names}
+    selected_ids: list[str] = []
+    seen_ids: set[str] = set()
+    while len(selected_ids) < MAX_DETAIL_FETCHES:
+        advanced = False
+        for source_name in ordered_names:
+            pool = pools[source_name]
+            if not pool or consumption[source_name] >= len(pool):
+                continue
+            start = max(0, int(saved_positions.get(source_name, 0))) % len(pool)
+            wid = pool[(start + consumption[source_name]) % len(pool)]
+            consumption[source_name] += 1
+            advanced = True
+            if wid not in seen_ids:
                 selected_ids.append(wid)
                 seen_ids.add(wid)
-        next_positions[source_name] = (start + per_source) % len(pool)
-        print(f"{source_name}: rotating detail index {start} -> {next_positions[source_name]} "
-              f"from {len(pool)} unregistered IDs")
+            if len(selected_ids) >= MAX_DETAIL_FETCHES:
+                break
+        if not advanced:
+            break
+    next_positions = dict(saved_positions)
+    for name, pool in pools.items():
+        if pool:
+            start = max(0, int(saved_positions.get(name, 0))) % len(pool)
+            next_positions[name] = (start + consumption[name]) % len(pool)
+            if consumption[name]:
+                print(f"{name}: rotating detail index {start} -> {next_positions[name]} "
+                      f"from {len(pool)} unregistered IDs")
+    discovery_state["vrcmapSourceNextIndex"] = (source_offset + 1) % len(source_names)
     ordered = [(wid, source_membership[wid]) for wid in selected_ids]
     discovery_state["sourceHealth"] = {
         **(discovery_state.get("sourceHealth", {})
@@ -475,6 +499,10 @@ def main() -> int:
     by_id: dict[str, dict] = {}
     detail_stats: dict[str, int] = {"selected": len(ordered), "eligible_ids": len(source_membership)}
     for idx, (wid, memberships) in enumerate(ordered):
+        if time.monotonic() - started >= DETAIL_BUDGET_SECONDS:
+            increment_counter(detail_stats, "time_budget_exhausted")
+            print("INFO: bounded VRCmap detail crawl stopped; proceeding to save other sources")
+            break
         source_name, source_url, base_score = max(memberships, key=lambda x: x[2])
         try:
             item = detail_candidate(wid, source_name, source_url, base_score, detail_stats)
@@ -489,7 +517,9 @@ def main() -> int:
         if idx < len(ordered) - 1:
             time.sleep(0.15)
 
-    source_health["vrcmap_detail_scan"] = {"lastAttemptAt": today, **detail_stats}
+    source_health["vrcmap_detail_scan"] = {
+        "lastAttemptAt": today, **detail_stats, "elapsedSeconds": round(time.monotonic()-started, 1)
+    }
     print("VRCmap candidate funnel: " + json.dumps(detail_stats, sort_keys=True))
 
     # Independently crawl verified club/DJ category listings with resumable paging.
