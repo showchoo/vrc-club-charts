@@ -93,6 +93,23 @@ class SiteMonitoringTests(unittest.TestCase):
         result = monitor.validate_site(fetch)
         self.assertFalse(result["healthy"])
 
+    def test_transient_public_feed_mismatch_never_triggers_code_auto_fix(self):
+        no_cards = b'<html><body>worldCatalog<script src="../i18n.js"></script></body></html>'
+        fetch = fake_site({
+            monitor.SITE + "/worlds/": (200, "text/html", no_cards),
+        })
+        report = monitor.validate_site(fetch)
+        issue = next(x for x in report["issues"]
+                     if x["code"] == "world_count_mismatch")
+        self.assertFalse(issue["auto_fixable"])
+
+    def test_ai_repair_workflow_does_not_require_unverified_worlds(self):
+        steps = (Path(__file__).resolve().parents[1] /
+                 ".github/workflows/site-self-heal.yml").read_text(encoding="utf-8")
+        self.assertIn("test -s _site/data/weekly-ranking.json", steps)
+        self.assertIn("test -s _site/data/ai-scout.json", steps)
+        self.assertNotIn("ge 80", steps)
+
     def test_missing_world_directory_is_actionable(self):
         fetch = fake_site({monitor.SITE + "/worlds/": (404, "text/plain", b"")})
         report = monitor.validate_site(fetch)
