@@ -89,8 +89,8 @@
   async function load() {
     try {
       const [scoutRes, worldRes] = await Promise.all([
-        fetch('data/ai-scout.json', {cache: 'no-store'}),
-        fetch('data/weekly-ranking.json', {cache: 'no-store'}).catch(() => null)
+        fetch('data/ai-scout.json?v=dj-live-verified-01', {cache: 'no-store'}),
+        fetch('data/weekly-ranking.json?v=dj-live-verified-01', {cache: 'no-store'}).catch(() => null)
       ]);
       if (!scoutRes.ok) throw new Error('Scout data unavailable');
       const data = await scoutRes.json();
