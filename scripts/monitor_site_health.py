@@ -133,7 +133,8 @@ def validate_site(fetcher=fetch) -> dict:
         card_count = checks.get("world_catalog", {}).get("rows", 0)
         if card_count != len(valid_worlds):
             fail("world_count_mismatch", "worlds",
-                 f"Directory has {card_count} cards; ranking has {len(valid_worlds)}")
+                 f"Directory has {card_count} cards; ranking has {len(valid_worlds)}. CDN data may be stale",
+                 auto_fixable=False)
     get("/data/ai-scout.json", "scout_data")
 
     if valid_worlds:
