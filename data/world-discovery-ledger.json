@@ -173,7 +173,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-01",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -339,7 +339,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-31",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -355,12 +355,28 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-01",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
         "ref": "https://sia-vr.com/vrchat-world-240799",
         "firstSeenAt": "2026-11-01",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_23808179-ae84-4262-a9fa-c7a171ef6791",
+    "name": "The Obsidian Nightclub",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240671",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -446,6 +462,22 @@
     ]
   },
   {
+    "id": "wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e",
+    "name": "术力口工坊",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240603",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
     "name": "Club Earthquake 〖Night pool〗",
     "authorHint": "ro_tta",
@@ -489,6 +521,22 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_2d74e168-29c9-437b-9664-4e20ba5c1330",
+    "name": "Culdesac",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240527",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -963,6 +1011,38 @@
         "source": "catalog",
         "ref": "data/worlds.json",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_59e089b3-c0d9-4592-afcd-590ebe55d398",
+    "name": "Pixel Paradise Arcade",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240544",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d",
+    "name": "Moon Diner",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240374",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1489,7 +1569,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-31",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1521,7 +1601,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-31",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -1655,7 +1735,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-31",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2057,7 +2137,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-01",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2283,7 +2363,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-10-31",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",
@@ -2455,7 +2535,7 @@
     "authorHint": "",
     "firstSeenAt": "2026-11-01",
     "lastSeenAt": "2026-11-04",
-    "status": "pending",
+    "status": "historical",
     "evidence": [
       {
         "source": "sia_vr_club",

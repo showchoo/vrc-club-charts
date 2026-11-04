@@ -37,57 +37,74 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 50
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 48
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 50
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 50
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 50
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "listedWorldIds": 50
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "errorType": "RuntimeError"
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-11-01",
+      "lastAttemptAt": "2026-11-04",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-11-01",
+      "lastAttemptAt": "2026-11-04",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-11-01",
-      "status": "ok",
-      "seedsChecked": 4,
+      "lastAttemptAt": "2026-11-04",
+      "status": "unavailable",
+      "seedsChecked": 0,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-11-01",
+      "lastAttemptAt": "2026-11-04",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
-      "articlesListed": 77
+      "articlesListed": 77,
+      "secondarySources": {
+        "sia_vr_music": {
+          "status": "ok",
+          "articlesChecked": 2,
+          "newLeads": 0
+        },
+        "sia_vr_bar": {
+          "status": "ok",
+          "articlesChecked": 2,
+          "newLeads": 0
+        }
+      }
     }
   },
-  "vrcmapRelatedSeedIndex": 6,
-  "siaVrNextIndex": 55
+  "vrcmapRelatedSeedIndex": 10,
+  "siaVrNextIndex": 60,
+  "vrcmapSourceNextIndex": 1,
+  "siaVrSecondaryIndexes": {
+    "sia_vr_music": 2,
+    "sia_vr_bar": 2
+  }
 }
