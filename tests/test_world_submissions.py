@@ -160,6 +160,55 @@ class SubmissionAITests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"incomplete"):
                 review.classify_world(META,"dummy-key")
 
+    def test_old_pending_submission_retried_under_dj_tag_rule(self):
+        meta={**META,"tags":["DJ"],"description":"Unclear"}
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds=Path(tmp)/"worlds.json"
+            decisions=Path(tmp)/"decisions.json"
+            worlds.write_text("[]",encoding="utf-8")
+            decisions.write_text(json.dumps([{
+                "id":ID,"status":"needs_review","policyRevision":"old-rule"
+            }]),encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id":ID}]), patch.object(
+                review,"public_metadata",return_value=meta), patch.object(
+                review,"classify_world") as ai, patch.dict(
+                review.os.environ,{"GEMINI_API_KEY":""}):
+                review.main()
+            ai.assert_not_called()
+            self.assertEqual(len(json.loads(worlds.read_text(encoding="utf-8"))),1)
+            all_decisions=json.loads(decisions.read_text(encoding="utf-8"))
+            self.assertEqual(len(all_decisions),1)
+            self.assertEqual(all_decisions[0]["status"],"approved")
+            self.assertEqual(all_decisions[0]["policyRevision"],review.POLICY_REVISION)
+
+    def test_official_dj_tag_auto_publishes_even_without_gemini(self):
+        dj_meta = {**META, "description": "Unclear", "tags": ["author_tag_DJ"]}
+        with tempfile.TemporaryDirectory() as tmp:
+            worlds=Path(tmp)/"worlds.json"
+            decisions=Path(tmp)/"decisions.json"
+            worlds.write_text("[]",encoding="utf-8")
+            decisions.write_text("[]",encoding="utf-8")
+            with patch.object(review,"WORLDS",worlds), patch.object(
+                review,"DECISIONS",decisions), patch.object(
+                review,"queue_items",return_value=[{"world_id": ID}]), patch.object(
+                review,"public_metadata",return_value=dj_meta), patch.object(
+                review,"classify_world") as ai, patch.dict(
+                review.os.environ,{"GEMINI_API_KEY":""}):
+                review.main()
+            ai.assert_not_called()
+            published=json.loads(worlds.read_text(encoding="utf-8"))
+            self.assertEqual(len(published),1)
+            self.assertIn("DJ",published[0]["genres"])
+            self.assertEqual(published[0]["officialTags"],["author_tag_DJ"])
+            self.assertEqual(published[0]["releaseStatus"],"public")
+            self.assertEqual(json.loads(decisions.read_text(encoding="utf-8"))[0]["status"],"approved")
+
+    def test_partial_dj_words_are_not_official_dj_tag(self):
+        self.assertFalse(review.has_official_dj_tag({**META,"tags":["DJVU","DJ booth"]}))
+        self.assertTrue(review.has_official_dj_tag({**META,"tags":["DJ"]}))
+
     def test_empty_api_key_does_not_publish(self):
         with tempfile.TemporaryDirectory() as tmp:
             worlds=Path(tmp)/"worlds.json"
@@ -169,7 +218,8 @@ class SubmissionAITests(unittest.TestCase):
             with patch.object(review,"WORLDS",worlds), patch.object(
                 review,"DECISIONS",decisions), patch.object(
                 review,"queue_items",return_value=[{"world_id":ID}]
-            ), patch.dict(review.os.environ,{"GEMINI_API_KEY":""}):
+            ), patch.object(review,"public_metadata",return_value=META), patch.dict(
+                review.os.environ,{"GEMINI_API_KEY":""}):
                 review.main()
                 self.assertEqual(worlds.read_text(encoding="utf-8"),"[]")
 

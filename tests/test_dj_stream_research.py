@@ -18,7 +18,7 @@ NOW = dt.datetime(2026, 11, 5, tzinfo=dt.timezone.utc)
 
 def world(wid=W1, name="VRChat DJ room"):
     return {"id": wid, "name": name, "author": "Maker",
-            "genres": ["DJ", "MUSIC"], "chartEligible": True}
+            "genres": ["CLUB", "MUSIC"], "chartEligible": True}
 
 
 def gemini(verdict="evidence_found", indices=None, support=None, official=False):
@@ -125,6 +125,12 @@ class ResearchQueueTests(unittest.TestCase):
         catalog = [world(W1), world(W2, "Simple space")]
         selected = research.select_worlds(catalog, {}, {W1: {}}, NOW, 4)
         self.assertEqual([x["id"] for x in selected], [W2])
+
+    def test_dj_tagged_world_is_already_listable_so_skip_paid_search(self):
+        tagged={**world(W1), "genres":["CLUB","DJ"]}
+        untagged=world(W2, "Untagged club")
+        selected=research.select_worlds([tagged,untagged], {}, {}, NOW, 4)
+        self.assertEqual([w["id"] for w in selected],[W2])
 
     def test_no_repeat_within_cooldown(self):
         prior = {"id": W1, "checkedAt": NOW.isoformat(), "status": "needs_review"}

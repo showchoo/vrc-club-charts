@@ -144,7 +144,9 @@ class DiscoveryAIReviewTests(unittest.TestCase):
         record={"status":"verification_unavailable","reviewedAt":now.isoformat()}
         self.assertFalse(worker.retry_due(record,now))
         self.assertTrue(worker.retry_due(record,now+dt.timedelta(hours=7)))
-        self.assertFalse(worker.retry_due({"status":"needs_review","reviewedAt":"bad"},now))
+        self.assertTrue(worker.retry_due({"status":"needs_review","reviewedAt":"bad"},now))
+        self.assertFalse(worker.retry_due({"status":"needs_review",
+            "classifierRevision":worker.CLASSIFIER_REVISION,"reviewedAt":"bad"},now))
 
     def test_old_broken_json_retries_once_after_decoder_revision(self):
         now=dt.datetime.now(dt.timezone.utc)
@@ -153,12 +155,42 @@ class DiscoveryAIReviewTests(unittest.TestCase):
         upgraded={**old,"classifierRevision":worker.CLASSIFIER_REVISION}
         self.assertFalse(worker.retry_due(upgraded,now))
 
+    def test_old_pending_decision_gets_one_new_tag_review(self):
+        self.decisions.write_text(json.dumps([{
+            "id":WID, "status":"needs_review",
+            "classifierRevision":"old-v1",
+            "reviewedAt":dt.datetime.now(dt.timezone.utc).isoformat(),
+        }]),encoding="utf-8")
+        meta={**OFFICIAL,"tags":["DJ"],"description":"Ambiguous"}
+        with patch.object(worker.classifier,"public_metadata",return_value=meta), patch.object(
+            worker.classifier,"classify_world") as ai, patch.dict(
+            worker.os.environ,{"GEMINI_API_KEY":""}):
+            result=worker.review_candidates()
+        ai.assert_not_called()
+        self.assertEqual(result["approved"],1)
+        self.assertEqual(self.read(self.decisions)[0]["status"],"approved")
+
+    def test_official_dj_tag_auto_admits_without_gemini(self):
+        meta={**OFFICIAL,"description":"Unclear","tags":["author_tag_DJ"]}
+        with patch.dict(worker.os.environ,{"GEMINI_API_KEY":""}), patch.object(
+            worker.classifier,"public_metadata",return_value=meta) as official, patch.object(
+            worker.classifier,"classify_world") as gemini:
+            outcome=worker.review_candidates()
+        official.assert_called_once_with(WID)
+        gemini.assert_not_called()
+        self.assertEqual(outcome["approved"],1)
+        row=self.read(self.worlds)[0]
+        self.assertEqual(row["genres"],["CLUB","DJ"])
+        self.assertEqual(row["releaseStatus"],"public")
+        self.assertEqual(row["officialTags"],["author_tag_DJ"])
+        self.assertEqual(self.read(self.candidates),[])
+
     def test_heuristic_score_100_without_ai_key_cannot_publish(self):
         with patch.dict(worker.os.environ,{"GEMINI_API_KEY":""}),patch.object(
-            worker.classifier,"public_metadata"
+            worker.classifier,"public_metadata",return_value=OFFICIAL
         ) as verify:
             result=worker.review_candidates()
-        verify.assert_not_called()
+        verify.assert_called_once_with(WID)
         self.assertEqual(result["approved"],0)
         self.assertEqual(self.read(self.candidates)[0]["confidenceScore"],97)
 

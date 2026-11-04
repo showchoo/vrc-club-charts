@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="styles.css?v=20261007-title-02" />
   <link rel="stylesheet" href="deco-theme.css?v=20261104-02" />
   <script src="analytics.js?v=20261006-03" defer></script>
-  <script src="i18n.js?v=20261007-bilingual-01" defer></script>
+  <script src="i18n.js?v=20261105-dj-tag-02" defer></script>
 </head>
 <body class="focus-home ranking-home">
   <div class="noise"></div>
@@ -75,7 +75,7 @@
           <div>
             <p class="kicker">VISUAL CHART / WORLD DISCOVERY</p>
             <h2>ビジュアル評価ランキング</h2>
-            <p>DJのライブ配信対応が確認できたWorldだけを掲載します。未確認のWorldは審査中として公開しません。ビジュアル評価はサムネイル画像の参考値です。</p>
+            <p>「DJ」タグのある公開World、またはライブ配信確認済みWorldを掲載します。DJタグは配信機能の動作保証ではありません。ビジュアル評価はサムネイル画像の参考値です。</p>
           </div>
           <div class="ai-scout-heading-info">
             <span id="aiScoutStatus">CLUB DISCOVERY / LOADING…</span>
@@ -83,7 +83,7 @@
           </div>
         </div>
         <div id="aiScoutGrid" class="ai-scout-grid">
-          <div class="ai-scout-empty">DJライブ配信対応を確認したWorldを読み込み中…</div>
+          <div class="ai-scout-empty">DJタグ付きWorld・配信確認済みWorldを読み込み中…</div>
         </div>
         <p class="ai-scout-disclaimer">※ビジュアル評価は公開サムネイル1枚をAIで分析した参考スコアです。実地調査ではなく、音響・ギミック・動作性能は含みません。<a href="about.html#evaluation-method">評価方法と限界 ↗</a></p>
       </div>
@@ -94,7 +94,7 @@
       <div class="world-suggestion-intro">
         <p class="kicker">COMMUNITY / HELP US DISCOVER</p>
         <h2>掲載されていないクラブを、教えてください。</h2>
-        <p>VRChatのWorld URLを貼るだけ。公開Worldかどうかとクラブ用途を確認します。掲載には別途DJライブ配信対応の証拠が必要です。</p>
+        <p>VRChatのWorld URLを貼るだけ。公開Worldの公式「DJ」タグが確認できれば自動掲載します。DJタグがないWorldは従来どおり追加審査の対象です。</p>
       </div>
       <form class="world-suggestion-form" id="worldSuggestionForm">
         <label for="worldSuggestionUrl">VRChat World URL</label>
@@ -109,7 +109,7 @@
           <input id="worldSuggestionWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
         <p id="worldSuggestionStatus" class="world-suggestion-status" role="status" aria-live="polite" hidden></p>
-        <p class="world-suggestion-disclaimer">公開Worldのみ／同じWorldは重複登録しません。1日3件まで。AIがクラブ用途を認めても、DJライブ配信対応が確認できるまでは掲載保留になります。</p>
+        <p class="world-suggestion-disclaimer">公開Worldのみ／同じWorldは重複登録しません。1日3件まで。公式DJタグがあれば配信設備の確認なしで掲載しますが、配信動作は保証しません。</p>
       </form>
     </section>
 
@@ -179,8 +179,8 @@
     </span>
   </footer>
 
-  <script src="app.js?v=20261105-dj-live-verified-01" defer></script>
-  <script src="ai-scout.js?v=20261105-dj-live-verified-01" defer></script>
+  <script src="app.js?v=20261105-dj-tag-02" defer></script>
+  <script src="ai-scout.js?v=20261105-dj-tag-02" defer></script>
   <script src="community-reviews.js?v=20261105-dj-live-verified-01" defer></script>
   <script src="world-submission.js?v=20261006-01" defer></script>
 </body>

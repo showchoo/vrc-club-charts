@@ -1,4 +1,4 @@
-"""Fail-closed DJ live stream publication and evidence regression tests."""
+"""DJ tag admission and independent live stream evidence regression tests."""
 from __future__ import annotations
 
 import json
@@ -52,20 +52,46 @@ class DJStreamPolicyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.load([evidence(), evidence()])
 
-    def test_published_list_does_not_trust_tags_or_catalog_approval(self):
+    def test_exact_dj_tag_auto_lists_without_claiming_live_playback(self):
         confirmed = self.load([evidence(W1)])
         catalog = [
-            {"id": W1, "name": "Live tested", "genres": ["DJ"], "chartEligible": True},
-            {"id": W2, "name": "Big DJ booth", "genres": ["DJ", "AUDIOLINK"],
+            {"id": W1, "name": "Live tested", "genres": ["CLUB"], "chartEligible": True},
+            {"id": W2, "name": "DJ tagged", "genres": ["CLUB", "DJ"],
              "chartEligible": True},
         ]
         visible = policy.published_worlds(catalog, confirmed)
-        self.assertEqual([row["id"] for row in visible], [W1])
-        self.assertEqual(visible[0]["djStreamVerification"]["method"],
-                         "live-playback-tested")
-        self.assertEqual(policy.published_worlds(catalog, {}), [])
+        self.assertEqual([row["id"] for row in visible], [W1, W2])
+        self.assertEqual(visible[0]["publicationBasis"], "live-playback-verified")
+        self.assertTrue(visible[0]["djStreamTested"])
+        self.assertEqual(visible[1]["publicationBasis"], "dj-tag")
+        self.assertIsNone(visible[1]["djStreamVerification"])
+        self.assertFalse(visible[1]["djStreamTested"])
+        self.assertEqual([row["id"] for row in policy.published_worlds(catalog, {})], [W2])
         self.assertEqual(
-            policy.published_worlds([{**catalog[0], "releaseStatus": "private"}], confirmed), [])
+            policy.published_worlds([{**catalog[1], "releaseStatus": "private"}], {}), [])
+
+    def test_dj_tag_is_exact_not_a_name_description_or_ai_guess(self):
+        self.assertTrue(policy.is_dj_tag("DJ"))
+        self.assertTrue(policy.is_dj_tag("author_tag_DJ"))
+        for tag in ("DJVU", "DJs", "dj booth", "AUDIO LINK", "author_tag_djbooth"):
+            self.assertFalse(policy.is_dj_tag(tag))
+        catalog = [
+            {"id": W1, "name": "DJ Events", "genres": ["MUSIC"], "description": "DJ"},
+            {"id": W2, "name": "Music", "genres": ["DJs", "AUDIOLINK"]},
+        ]
+        self.assertEqual(policy.published_worlds(catalog, {}), [])
+        tagged = {"id": W1, "name": "Official", "genres": ["CLUB"],
+                  "officialTags": ["author_tag_DJ"]}
+        self.assertEqual(len(policy.published_worlds([tagged], {})), 1)
+        self.assertEqual(policy.published_worlds(
+            [{**tagged, "availabilityStatus": "unavailable"}], {}), [])
+
+    def test_publication_basis_does_not_fabricate_verification_on_second_pass(self):
+        source = [{"id": W2, "genres": ["DJ"], "name": "Stage"}]
+        first = policy.published_worlds(source, {})
+        second = policy.published_worlds(first, {})
+        self.assertEqual(first, second)
+        self.assertFalse(second[0]["djStreamTested"])
 
     def test_stale_scout_scores_and_discovery_candidates_do_not_leak(self):
         confirmed = self.load([evidence(W1)])
@@ -99,7 +125,7 @@ class DJStreamPolicyTests(unittest.TestCase):
             code = (ROOT / path).read_text(encoding="utf-8")
             self.assertIn("weekly-ranking.json?v=dj-live-verified-01", code)
         home = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("app.js?v=20261105-dj-live-verified-01", home)
+        self.assertIn("app.js?v=20261105-dj-tag-02", home)
 
     def test_current_site_has_no_unverified_public_world_pages(self):
         """A clean static build does not leak old catalog Worlds by direct URLs."""
@@ -119,7 +145,7 @@ class DJStreamPolicyTests(unittest.TestCase):
                 {p.stem for p in out.glob("wrld_*.html")}, expected)
             feed = json.loads((out / "data/weekly-ranking.json").read_text(encoding="utf-8"))
             self.assertEqual({x["id"] for x in feed["worlds"]}, expected)
-            self.assertEqual(feed["publicationPolicy"], "verified-dj-live-stream-only")
+            self.assertEqual(feed["publicationPolicy"], "dj-tag-or-verified-live-stream")
             scout = json.loads((out / "data/ai-scout.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 {x["id"] for x in scout["scored"] + scout["candidates"]} - expected, set())

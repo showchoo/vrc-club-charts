@@ -108,12 +108,12 @@
       const scoredIds = new Set(scored.map(item => item.id));
       const records = [...scored, ...pending.filter(item => !scoredIds.has(item.id))].slice(0, 6);
       const count = Number(data.summary?.totalCandidates ?? pending.length);
-      status.textContent = count + ' DJ LIVE VERIFIED WORLDS' +
+      status.textContent = count + ' DJ-TAG / VERIFIED WORLDS' +
         (isAssessed ? ' · VISUAL IMPRESSIONS ' + scored.length : ' · AWAITING VISUAL REVIEW');
       grid.replaceChildren();
       if (!records.length) {
         grid.appendChild(el('div', 'ai-scout-empty',
-          'DJライブ配信に対応していると確認できたWorldを審査中です。対応未確認の会場は公開していません。'));
+          'DJタグ付き、またはライブ配信確認済みのWorldを探しています。DJタグはライブ配信動作を保証しません。'));
         return;
       }
       const byId = new Map(worlds.map(w => [w.id, w]));

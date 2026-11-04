@@ -58,11 +58,11 @@ test('All public root pages and static generator load the language switch', () =
   for (const filename of ['index.html','about.html','privacy.html',
                           'reviewer.html','events.html','djs.html']) {
     const html = fs.readFileSync(path.join(root,filename),'utf8');
-    assert.match(html, /<script src="i18n\.js\?v=20261007-bilingual-01" defer><\/script>/,
+    assert.match(html, /<script src="i18n\.js\?v=[0-9a-z-]+" defer><\/script>/,
       filename + ' missing locale script');
   }
   const builder = fs.readFileSync(path.join(root,'scripts/build_static_pages.py'),'utf8');
-  assert.match(builder, /src="\{prefix\}i18n\.js\?v=20261007-bilingual-01"/);
+  assert.match(builder, /src="\{prefix\}i18n\.js\?v=[0-9a-z-]+"/);
   const build = fs.readFileSync(path.join(root,'scripts/build_vercel.py'),'utf8');
   assert.match(build, /"i18n\.js"/);
   const pages = fs.readFileSync(path.join(root,'.github/workflows/pages.yml'),'utf8');

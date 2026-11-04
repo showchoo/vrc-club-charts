@@ -1,8 +1,8 @@
-"""Fail-closed publication gate for VRChat DJ live-stream-capable Worlds.
+"""Publication policy for DJ-tagged and independently live-stream-tested Worlds.
 
-AI scores, club tags, DJ booth thumbnails and mere video-player presence are
-never proof that a *live stream* can be played by event attendees.
-The source catalog remains intact; this registry controls what is published.
+An exact DJ tag permits listing without proof of a working live-stream player.
+Only independently tested/creator-confirmed evidence earns a LIVE VERIFIED label.
+Unknown or explicitly non-public Worlds must not be represented as verified.
 """
 from __future__ import annotations
 
@@ -16,6 +16,25 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "dj-stream-verifications.json"
 WORLD_ID = re.compile(r"^wrld_[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$")
 METHODS = {"live-playback-tested", "creator-confirmed-live-playback"}
+
+POLICY = "dj-tag-or-verified-live-stream"
+
+
+def is_dj_tag(tag: object) -> bool:
+    """Match DJ tags, not World names, descriptions, DJVU or DJ booth text."""
+    return isinstance(tag, str) and tag.strip().casefold() in {"dj", "author_tag_dj"}
+
+
+def has_dj_tag(world: dict) -> bool:
+    """Use catalog genres (existing visible tags) or retained VRChat official tags."""
+    if not isinstance(world, dict):
+        return False
+    for key in ("genres", "officialTags"):
+        tags = world.get(key, [])
+        if isinstance(tags, list) and any(is_dj_tag(tag) for tag in tags):
+            return True
+    return False
+
 
 
 def load_verified(registry_path: Path | None = None) -> dict[str, dict]:
@@ -67,30 +86,52 @@ def load_verified(registry_path: Path | None = None) -> dict[str, dict]:
 
 
 def published_worlds(worlds: list[dict], verified: dict[str, dict]) -> list[dict]:
-    """No record can publish unless independent live-stream evidence exists."""
-    return [
-        {**item, "djStreamVerification": verified[item["id"]]}
-        for item in worlds
-        if isinstance(item, dict) and item.get("id") in verified
-        and item.get("availabilityStatus") != "unavailable"
-        and str(item.get("releaseStatus") or "").casefold() not in {"private", "hidden"}
-    ]
+    """Admit exact DJ tags or genuine verification; keep publication basis explicit.
+
+    The visible DJ tag is a *directory* admission rule, never proof of playback.
+    This function is idempotent so the ranking and static builders may both use it.
+    """
+    result = []
+    for item in worlds:
+        if not isinstance(item, dict):
+            continue
+        wid = item.get("id")
+        if not isinstance(wid, str) or not WORLD_ID.fullmatch(wid):
+            continue
+        status = str(item.get("releaseStatus") or "").strip().casefold()
+        if status in {"private", "hidden", "unpublished", "pending"}:
+            continue
+        if item.get("availabilityStatus") == "unavailable":
+            continue
+        if item.get("chartEligible") is False:
+            continue
+        proof = verified.get(wid)
+        dj_tag = has_dj_tag(item)
+        if not (dj_tag or proof):
+            continue
+        result.append({
+            **item,
+            "publicationBasis": "live-playback-verified" if proof else "dj-tag",
+            "djStreamVerification": proof if proof else None,
+            "djStreamTested": bool(proof),
+        })
+    return result
 
 
-def sanitize_ai_scout(source: dict, verified: dict[str, dict]) -> dict:
-    """Hide all unverified and candidate-only Worlds from the public AI feed."""
+def sanitize_ai_scout(source: dict, admitted: dict[str, object]) -> dict:
+    """Hide all non-admitted and discovery-only Worlds from the public AI feed."""
     if not isinstance(source, dict):
         source = {}
     def allowed(record):
         return (isinstance(record, dict)
                 and record.get("sourceType") == "catalog"
-                and record.get("id") in verified)
+                and record.get("id") in admitted)
     scored = [row for row in source.get("scored", []) if allowed(row)] if isinstance(source.get("scored"), list) else []
     scored_ids = {row["id"] for row in scored}
     candidates = [row for row in source.get("candidates", [])
                   if allowed(row) and row["id"] not in scored_ids] if isinstance(source.get("candidates"), list) else []
     attempts = source.get("attempts", {})
-    attempts = {wid: value for wid, value in attempts.items() if wid in verified} if isinstance(attempts, dict) else {}
+    attempts = {wid: value for wid, value in attempts.items() if wid in admitted} if isinstance(attempts, dict) else {}
     summary = dict(source.get("summary") or {})
     summary.update(totalCandidates=len(scored)+len(candidates),
                    assessed=len(scored), pending=len(candidates), newAssessments=0)

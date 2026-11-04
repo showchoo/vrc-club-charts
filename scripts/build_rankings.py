@@ -76,10 +76,13 @@ def main():
             'name': now.get('name') or seed.get('name'),
             'author': now.get('author') or seed.get('author'),
             'genres': seed.get('genres', []),
+            'officialTags': seed.get('officialTags', []),
             'source': seed.get('source'),
             'editorialStatus': editorial_status,
             'chartEligible': bool(seed.get('chartEligible', True)),
-            'djStreamVerification': seed['djStreamVerification'],
+            'djStreamVerification': seed.get('djStreamVerification'),
+            'djStreamTested': seed.get('djStreamTested', False),
+            'publicationBasis': seed.get('publicationBasis'),
             'releaseStatus': now.get('releaseStatus') or seed.get('releaseStatus'),
             'availabilityStatus': 'unavailable' if latest_skipped.get(wid) in {'http_404', 'http_403'} else 'available',
             'thumbnail': now.get('thumbnailImageUrl') or now.get('imageUrl') or seed.get('thumbnail'),
@@ -144,8 +147,8 @@ def main():
     payload = {
         'status': 'live' if has_trend else 'seed',
         'updatedAt': latest[0].isoformat() if latest else 'MVP seed — weekly deltas begin after 2 snapshots',
-        'methodVersion': '0.4-dj-stream-verified',
-        'publicationPolicy': 'verified-dj-live-stream-only',
+        'methodVersion': '0.5-dj-tag-admission',
+        'publicationPolicy': 'dj-tag-or-verified-live-stream',
         'worlds': rows,
     }
     public_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
