@@ -58,6 +58,16 @@ class VrcmapRotationTests(unittest.TestCase):
         self.assertEqual(stats.get("excluded_title"), 1)
         self.assertNotIn("qualified", stats)
 
+    def test_host_circuit_only_opens_for_transport_failures(self):
+        self.assertTrue(worlds.vrcmap_network_unreachable(
+            RuntimeError("https://vrcmap.com: The read operation timed out")))
+        self.assertTrue(worlds.vrcmap_network_unreachable(
+            ConnectionError("Network is unreachable")))
+        self.assertFalse(worlds.vrcmap_network_unreachable(
+            ValueError("response contained no World IDs")))
+        self.assertFalse(worlds.vrcmap_network_unreachable(
+            RuntimeError("unexpected HTML layout")))
+
     def test_network_work_is_bounded_before_15_minute_job_timeout(self):
         self.assertLessEqual(worlds.MAX_DETAIL_FETCHES, 25)
         self.assertLess(worlds.DETAIL_BUDGET_SECONDS, 15*60)
