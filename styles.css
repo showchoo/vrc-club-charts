@@ -1519,17 +1519,67 @@ main,
 }
 
 
-/* Event detail */
+/* Event detail — intentionally smaller than the separate World profiles. */
+.event-detail-page .event-detail-hero {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+  gap: 32px;
+}
+.event-detail-page .event-detail-hero .world-detail-copy {
+  min-width: 0;
+  min-height: 360px;
+  padding: 24px 0;
+}
+.event-detail-page .event-detail-hero h1 {
+  max-width: 100%;
+  margin: 12px 0 18px;
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.18;
+  letter-spacing: -.035em;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.event-detail-page .world-detail-author {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.event-detail-page .event-detail-hero .world-detail-image {
+  min-height: 360px;
+}
+.event-detail-page .world-relations .section-heading h2 {
+  font-size: clamp(23px, 2.5vw, 32px);
+  line-height: 1.2;
+}
 .event-detail-mark {
   color: rgba(63,217,255,.44);
-  font-size: clamp(52px, 9vw, 120px);
-  letter-spacing: -.08em;
+  font-size: clamp(36px, 5vw, 72px);
+  letter-spacing: -.05em;
 }
 .event-detail-meta {
   grid-template-columns: repeat(4, 1fr);
 }
 @media (max-width: 800px) {
   .event-detail-meta { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .event-detail-page .event-detail-hero {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .event-detail-page .event-detail-hero .world-detail-copy {
+    min-height: 0;
+    padding: 20px 0 6px;
+  }
+  .event-detail-page .event-detail-hero .world-detail-image {
+    min-height: 220px;
+    max-height: 280px;
+  }
+}
+@media (max-width: 560px) {
+  .event-detail-page .event-detail-hero h1 {
+    font-size: clamp(24px, 6vw, 34px);
+    line-height: 1.25;
+    letter-spacing: -.025em;
+  }
 }
 @media (max-width: 480px) {
   .event-detail-meta { grid-template-columns: 1fr; }
