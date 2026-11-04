@@ -11,6 +11,11 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+try:
+    from scripts.dj_stream_policy import has_dj_tag
+except ModuleNotFoundError:
+    from dj_stream_policy import has_dj_tag
+
 SITE = "https://vrc-club-charts.vercel.app"
 THUMB = "https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-thumb"
 MAX_BODY = 2_000_000
@@ -119,16 +124,27 @@ def validate_site(fetcher=fetch) -> dict:
             valid_worlds = [row["id"] for row in data.get("worlds", [])
                             if isinstance(row, dict) and WORLD_ID.fullmatch(str(row.get("id", "")))]
             checks["rankings"] = {"world_count": len(valid_worlds)}
-            if not valid_worlds and publication_policy != "verified-dj-live-stream-only":
-                fail("ranking_empty", "rankings", "Published rankings contain no Worlds without verified-only policy")
+            recognized = {"verified-dj-live-stream-only", "dj-tag-or-verified-live-stream"}
+            if not valid_worlds and publication_policy not in recognized:
+                fail("ranking_empty", "rankings", "Published rankings contain no Worlds without listing policy")
             if publication_policy == "verified-dj-live-stream-only":
-                if any(row.get("djStreamVerification", {}).get("status") != "verified"
+                if any((row.get("djStreamVerification") or {}).get("status") != "verified"
                        for row in data.get("worlds", [])):
                     fail("unverified_world", "rankings", "World published without DJ-live proof")
+            if publication_policy == "dj-tag-or-verified-live-stream":
+                for row in data.get("worlds", []):
+                    basis = row.get("publicationBasis")
+                    proof = (row.get("djStreamVerification") or {}).get("status") == "verified"
+                    if (basis == "dj-tag" and not has_dj_tag(row) or
+                            basis == "live-playback-verified" and not proof or
+                            basis not in {"dj-tag", "live-playback-verified"}):
+                        fail("unqualified_world", "rankings",
+                             "Ranking contains a World without exact DJ tag or real live verification")
+                        break
         except (ValueError, TypeError, KeyError) as exc:
             fail("rankings_invalid", "rankings", type(exc).__name__)
-    # An empty directory is expected until verification evidence is collected.
-    # A nonempty ranking must still have the same number of static cards.
+    # Tag and verified-only policies are both valid. The static World directory
+    # must agree with the published public ranking regardless of admission route.
     if worlds:
         card_count = checks.get("world_catalog", {}).get("rows", 0)
         if card_count != len(valid_worlds):
