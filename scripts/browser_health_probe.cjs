@@ -8,6 +8,7 @@ const { chromium } = require('playwright');
 const REPORT = process.env.VCC_HEALTH_REPORT || '/tmp/vcc-site-health.json';
 const BASE = 'https://vrc-club-charts.vercel.app';
 const report = JSON.parse(fs.readFileSync(REPORT, 'utf8'));
+const expectedWorlds = Number(report.checks?.rankings?.world_count ?? 0);
 
 function add(code, detail, autoFixable = true) {
   report.issues.push({code, category: 'browser', detail: String(detail).slice(0, 230),
@@ -32,6 +33,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
     if (!response || response.status() >= 400) {
       add('browser_home', 'Homepage HTTP status failed');
     } else {
+      if (expectedWorlds > 0) {
       try {
         await page.locator('.focus-world-card').first().waitFor({timeout: 18000});
       } catch (_) {
@@ -41,6 +43,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
         await page.locator('.ai-scout-card').first().waitFor({timeout: 18000});
       } catch (_) {
         add('browser_ai_scout', 'AI SCOUT visual cards did not render');
+      }
+
       }
 
       const button = page.locator('#vccLanguageToggle');
@@ -62,6 +66,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
       }
 
       // Wait for image proxy requests to complete without depending on lazy tiles below the fold.
+      if (expectedWorlds > 0) {
       try {
         const card = page.locator('.focus-world-card').first();
         await card.scrollIntoViewIfNeeded({timeout: 4000});
@@ -72,6 +77,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
       } catch (_) {
         add('browser_home_images', 'No featured World thumbnail loaded in browser',
           false /* backend image/CDN outage is indistinguishable from code here */);
+      }
       }
       if (errors.length) {
         add('browser_js_exception', errors.slice(0, 3).join('; '));
@@ -90,8 +96,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
     } else {
       const count = await world.locator('.world-catalog-row').count();
       report.checks.browser_worlds = {rows: count};
-      if (!count) {
-        add('browser_world_cards', 'World list contains zero visible rows');
+      if (count !== expectedWorlds) {
+        add('browser_world_cards', 'World cards differ from the verified-only public ranking');
       } else {
         try {
           await world.locator('.world-catalog-row img').first().scrollIntoViewIfNeeded();
