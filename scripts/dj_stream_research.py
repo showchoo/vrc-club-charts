@@ -18,10 +18,10 @@ import urllib.request
 from pathlib import Path
 
 try:
-    from scripts.dj_stream_policy import load_verified, WORLD_ID
+    from scripts.dj_stream_policy import load_verified, WORLD_ID, has_dj_tag
     from scripts.review_world_submissions import public_metadata, NonPublicWorldError
 except ModuleNotFoundError:
-    from dj_stream_policy import load_verified, WORLD_ID
+    from dj_stream_policy import load_verified, WORLD_ID, has_dj_tag
     from review_world_submissions import public_metadata, NonPublicWorldError
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -236,7 +236,9 @@ def select_worlds(catalog: list[dict], previous: dict[str, dict],
         if not isinstance(row, dict) or not WORLD_ID.fullmatch(str(row.get("id", ""))):
             continue
         wid = row["id"]
-        if wid in verified or wid in unique or not due(previous.get(wid), now):
+        # Official/catalog DJ tags already authorize directory inclusion.
+        # Reserve paid search research for Worlds needing independent proof.
+        if has_dj_tag(row) or wid in verified or wid in unique or not due(previous.get(wid), now):
             continue
         if not str(row.get("name") or "").strip():
             continue
