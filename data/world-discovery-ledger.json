@@ -1,5 +1,21 @@
 [
   {
+    "id": "wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c",
+    "name": "_recovered․SHELTER2․mrg",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240076",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
     "name": "Club VGL",
     "authorHint": "Varneon",
@@ -334,6 +350,22 @@
     ]
   },
   {
+    "id": "wrld_2095ba41-f0b8-4ed3-a00d-3f0e9a4e2a79",
+    "name": "SANCTUM",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240303",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_21d6afad-8b22-4b4c-bde0-78991413b525",
     "name": "Endless Suburbia",
     "authorHint": "",
@@ -623,6 +655,22 @@
         "source": "catalog",
         "ref": "https://www.vrcw.net/category/detail/dj",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead",
+    "name": "Atomica",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240219",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]
@@ -1628,6 +1676,22 @@
     ]
   },
   {
+    "id": "wrld_918ff65a-8fa4-442e-a983-da1506993b3f",
+    "name": "Restroom Session",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-240266",
+        "firstSeenAt": "2026-11-04",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
     "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
     "name": "BNE˸ Underground",
     "authorHint": "BooneDoggy",
@@ -2477,6 +2541,22 @@
         "source": "catalog",
         "ref": "https://en.vrcw.net/world/detail/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
         "firstSeenAt": "2026-10-06",
+        "lastSeenAt": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "wrld_e3e9bd57-665f-4170-b9fb-00101f24729f",
+    "name": "RIFT Site Alpha",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-231787",
+        "firstSeenAt": "2026-11-04",
         "lastSeenAt": "2026-11-04"
       }
     ]

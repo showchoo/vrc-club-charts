@@ -48,23 +48,19 @@
     },
     "vrcmap_cafe": {
       "lastAttemptAt": "2026-11-04",
-      "status": "unavailable",
-      "errorType": "RuntimeError"
+      "status": "skipped_host_unreachable"
     },
     "vrcmap_japan": {
       "lastAttemptAt": "2026-11-04",
-      "status": "unavailable",
-      "errorType": "RuntimeError"
+      "status": "skipped_host_unreachable"
     },
     "vrcmap_trending": {
       "lastAttemptAt": "2026-11-04",
-      "status": "unavailable",
-      "errorType": "RuntimeError"
+      "status": "skipped_host_unreachable"
     },
     "vrcmap_chill": {
       "lastAttemptAt": "2026-11-04",
-      "status": "unavailable",
-      "errorType": "RuntimeError"
+      "status": "skipped_host_unreachable"
     },
     "vrcw_directory": {
       "lastAttemptAt": "2026-11-04",
@@ -76,7 +72,7 @@
     },
     "vrcmap_related": {
       "lastAttemptAt": "2026-11-04",
-      "status": "unavailable",
+      "status": "skipped_host_unreachable",
       "seedsChecked": 0,
       "unregisteredLinks": 0
     },
@@ -101,10 +97,10 @@
     }
   },
   "vrcmapRelatedSeedIndex": 10,
-  "siaVrNextIndex": 60,
-  "vrcmapSourceNextIndex": 1,
+  "siaVrNextIndex": 65,
+  "vrcmapSourceNextIndex": 2,
   "siaVrSecondaryIndexes": {
-    "sia_vr_music": 2,
-    "sia_vr_bar": 2
+    "sia_vr_music": 4,
+    "sia_vr_bar": 4
   }
 }

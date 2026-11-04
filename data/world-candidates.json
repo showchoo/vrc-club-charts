@@ -17,6 +17,38 @@
     "lastSeenAt": "2026-11-04"
   },
   {
+    "id": "wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c",
+    "name": "_recovered․SHELTER2․mrg",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240076",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04"
+  },
+  {
+    "id": "wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead",
+    "name": "Atomica",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240219",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04"
+  },
+  {
     "id": "wrld_2d74e168-29c9-437b-9664-4e20ba5c1330",
     "name": "Culdesac",
     "authorHint": "",
@@ -53,6 +85,54 @@
     "name": "Pixel Paradise Arcade",
     "authorHint": "",
     "source": "https://sia-vr.com/vrchat-world-240544",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04"
+  },
+  {
+    "id": "wrld_918ff65a-8fa4-442e-a983-da1506993b3f",
+    "name": "Restroom Session",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240266",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04"
+  },
+  {
+    "id": "wrld_e3e9bd57-665f-4170-b9fb-00101f24729f",
+    "name": "RIFT Site Alpha",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-231787",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-04",
+    "lastSeenAt": "2026-11-04"
+  },
+  {
+    "id": "wrld_2095ba41-f0b8-4ed3-a00d-3f0e9a4e2a79",
+    "name": "SANCTUM",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-240303",
     "sourceCategories": [
       "sia_vr_club"
     ],
