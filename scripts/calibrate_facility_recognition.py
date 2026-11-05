@@ -57,7 +57,7 @@ def read_small_json(path: Path) -> dict:
     return data
 
 
-def validate_draft(draft: dict, video: Path) -> tuple[str, str, dict]:
+def validate_draft(draft: dict, video: Path) -> tuple[str, str, str, dict]:
     if (draft.get("schemaVersion") != 1 or
         draft.get("status") != "draft_video_assessment" or
         draft.get("rankingEligible") is not False):
@@ -68,6 +68,13 @@ def validate_draft(draft: dict, video: Path) -> tuple[str, str, dict]:
     digest = evidence.get("sha256")
     if not isinstance(digest, str) or len(digest) != 64:
         raise FacilityCalibrationError("Missing full video SHA-256")
+    method = draft.get("method")
+    if (not isinstance(method, dict) or method.get("kind") != "gemini_video_analysis"
+            or method.get("independentInWorldInspection") is not False):
+        raise FacilityCalibrationError("Unexpected inspection or analysis provenance")
+    model = method.get("model")
+    if not isinstance(model, str) or not model.startswith("gemini-") or len(model) > 80:
+        raise FacilityCalibrationError("Unrecognized facility analysis model")
     rights = draft.get("consent")
     if not isinstance(rights, dict) or rights.get("recordingConsentConfirmed") is not True:
         raise FacilityCalibrationError("Owner/participant recording rights not attested")
@@ -89,13 +96,13 @@ def validate_draft(draft: dict, video: Path) -> tuple[str, str, dict]:
     world_id = draft.get("worldId")
     if not isinstance(world_id, str) or not WORLD_ID.fullmatch(world_id):
         raise FacilityCalibrationError("Invalid World ID")
-    return world_id, digest, facilities
+    return world_id, digest, model, facilities
 
 
 def create_label_template(draft_path: Path, video_path: Path, out_path: Path) -> dict:
     """No footage uploaded or exported. Template is explicitly NOT a review."""
     draft = read_small_json(draft_path)
-    world_id, digest, _ = validate_draft(draft, video_path)
+    world_id, digest, _, _ = validate_draft(draft, video_path)
     destination = private_destination(out_path)
     screen_file = destination.with_suffix(".review.html")
     if destination.exists() or screen_file.exists():
@@ -164,6 +171,7 @@ def score_dataset(manifest_path: Path) -> dict:
     counts = {name: {"tp": 0, "fp": 0, "fn": 0, "tn": 0, "unknown": 0}
               for name in FACILITIES}
     seen = set()
+    selected_model = None
     for item in cases:
         if not isinstance(item, dict) or set(item) != {"draft", "video", "labels"}:
             raise FacilityCalibrationError("Each case requires draft, video and labels local paths")
@@ -171,7 +179,11 @@ def score_dataset(manifest_path: Path) -> dict:
         video_path = _local_entry_path(manifest_path, item["video"])
         labels_path = _local_entry_path(manifest_path, item["labels"])
         draft = read_small_json(draft_path)
-        world_id, digest, predictions = validate_draft(draft, video_path)
+        world_id, digest, model, predictions = validate_draft(draft, video_path)
+        if selected_model is None:
+            selected_model = model
+        elif selected_model != model:
+            raise FacilityCalibrationError("Calibration cannot mix multiple Gemini model versions")
         label = _check_label(read_small_json(labels_path), world_id=world_id, digest=digest)
         unique = (world_id, digest)
         if unique in seen:
@@ -207,6 +219,7 @@ def score_dataset(manifest_path: Path) -> dict:
     return {
         "schemaVersion": 1, "status": "local-operator-labeled-calibration",
         "threshold": MIN_PUBLIC_CONFIDENCE,
+        "model": selected_model,
         "reviewedClips": len(seen), "classes": classes,
         "micro": micro, "unknownCategoryReviews": sum(counts[k]["unknown"] for k in FACILITIES),
         "enoughSamplesForPreliminaryReview": sufficiently_sampled,
