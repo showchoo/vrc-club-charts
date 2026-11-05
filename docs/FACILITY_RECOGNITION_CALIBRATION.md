@@ -85,6 +85,7 @@ py -3 scripts/calibrate_facility_recognition.py score --manifest "D:\VRC-Capture
 - モデルの「見えた」という推定信頼度は現行の表示基準
   **0.80以上**で正検出の候補として扱います。
 - 同じワールドの同じ動画を重複登録すると中止します。
+- **異なるGeminiモデル名の評価を混ぜるとエラー**になります。精度はモデル別に測定してください。
 
 \`enoughSamplesForPreliminaryReview\` が \`true\` になるには
 **30録画以上**で、各設備について正例10件・負例10件以上のラベルが必要です。
