@@ -78,6 +78,11 @@ class InspectionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "120"):
                 m.inspect(**base)
 
+    def test_focus_handshake_is_bounded_before_start(self):
+        source = Path(m.__file__).read_text(encoding="utf-8")
+        self.assertIn("focus_deadline = time.monotonic() + 15", source)
+        self.assertIn("if not is_active(hwnd):", source)
+
     def test_local_ai_inspection_generates_draft_without_ranking_changes(self):
         class FakeRecorder:
             FPS = 4
