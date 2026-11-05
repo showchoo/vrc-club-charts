@@ -183,7 +183,9 @@ class WorkspaceTests(unittest.TestCase):
         result = self.run_batch()
         self.assertEqual(result["status"], "no-matching-consented-analysis")
         self.assertEqual(result["matched"], 0)
-        self.assertEqual(result["reviewed"], 0) if "reviewed" in result else self.assertEqual(result["ignoredDrafts"], 0)
+        self.assertEqual(result["ignoredDrafts"], 0)
+        self.assertEqual(result["foundVideos"], 0)
+        self.assertEqual(result["foundDrafts"], 0)
 
 
 if __name__ == "__main__":
