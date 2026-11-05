@@ -12,6 +12,15 @@ Human field notes are supplementary: anyone can submit a visit review without ap
 
 A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
+## Public World profile facts
+
+Each admitted profile now shows a plainly labelled evidence-basis panel,
+public creator-authored VRChat tags, and validated catalog capacity and
+update date (when actually available). Unknowns stay unknown; tags and owner
+statements are never presented as proven DJ equipment functionality.
+Third-party source buttons accept only known HTTPS directory origins.
+See [public profile data provenance](docs/WORLD_PROFILE_DATA_PROVENANCE.md).
+
 ## Google Search discovery
 
 Each admitted public World has a server-rendered profile with a distinct,
