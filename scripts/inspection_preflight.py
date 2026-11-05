@@ -34,6 +34,8 @@ def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
     add("python", sys.version_info >= (3, 10), "Python 3.10 or later required")
     ffmpeg = shutil.which("ffmpeg")
     add("ffmpeg", bool(ffmpeg), "FFmpeg must be installed and available on PATH")
+    ffprobe = shutil.which("ffprobe")
+    add("ffprobe", bool(ffprobe), "FFprobe is required to validate video output before any AI upload")
     if ffmpeg:
         try:
             proc = subprocess.run([ffmpeg, "-hide_banner", "-encoders"],
