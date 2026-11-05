@@ -26,6 +26,14 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Verified video-timestamp evidence
+
+Each newly evaluated interior video draft now carries the FFprobe-measured
+recording duration. Model-proposed evidence timestamps beyond the actual
+clip length are rejected before a provisional visual score can appear
+on the site. No automatic DJ equipment functionality claim is inferred
+from visible furniture, decks, screens, or stage lighting.
+
 ### Pre-AI inspection footage quality gate
 
 Recording content is now inspected *locally* before Gemini video analysis.
