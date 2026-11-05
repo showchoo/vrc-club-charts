@@ -18,6 +18,7 @@ try:
     from scripts.evaluate_interior_video import validate_media, media_sha256
     from scripts.publish_interior_visual_previews import release
     from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
+    from scripts.inspection_visual_quality import assess_video_quality, VisualQualityError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
@@ -25,6 +26,7 @@ except ModuleNotFoundError:
     from evaluate_interior_video import validate_media, media_sha256
     from publish_interior_visual_previews import release
     from inspection_media_verify import verify_mp4, MediaVerificationError
+    from inspection_visual_quality import assess_video_quality, VisualQualityError
 
 
 def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
@@ -103,6 +105,17 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         result["detail"] = str(exc)
         return result
     result["mediaVerification"] = metadata
+    try:
+        quality = assess_video_quality(video, metadata=metadata)
+        result["visualQuality"] = quality
+    except (VisualQualityError, OSError) as exc:
+        result["status"] = "capture-unusable"
+        result["detail"] = "Visual inspection could not decode usable frames"
+        return result
+    if quality["status"] != "ok":
+        result["status"] = "capture-unusable"
+        result["detail"] = "No useful interior survey motion or visible detail"
+        return result
     if not analyze_video:
         return result
 
@@ -194,7 +207,7 @@ def main(argv=None) -> int:
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
+    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
 
 
 if __name__ == "__main__":
