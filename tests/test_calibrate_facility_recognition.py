@@ -77,6 +77,15 @@ def manifest(folder: Path, cases: list[tuple[Path, Path, Path]]) -> Path:
 
 
 class CalibrationTests(unittest.TestCase):
+    def setUp(self):
+        # Fixtures contain synthetic bytes. FFprobe is tested separately
+        # against real MP4 in the project's integration smoke test.
+        probe = patch.object(calibration, "verify_mp4", return_value={
+            "metadataVerified": True, "durationSeconds": 5.0, "audioTracks": 0,
+        })
+        probe.start()
+        self.addCleanup(probe.stop)
+
     def test_make_template_requires_actual_matching_video_and_stays_unreviewed(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
@@ -90,6 +99,16 @@ class CalibrationTests(unittest.TestCase):
             self.assertEqual(set(stored["labels"]), set(FACILITIES))
             self.assertEqual(set(stored["labels"].values()), {"unreviewed"})
             self.assertFalse(outcome["eligibleForMetrics"])
+            review = Path(outcome["reviewHtml"])
+            self.assertTrue(review.is_file())
+            source = review.read_text(encoding="utf-8")
+            self.assertIn("DJ設備の認識精度を確認", source)
+            self.assertIn(video.as_uri(), source)
+            self.assertIn('connect-src &#39;none&#39;', source.replace("'", "&#39;"))
+            self.assertIn("URL.createObjectURL", source)
+            self.assertNotIn("https://", source)
+            self.assertNotIn("http://", source)
+            self.assertNotIn("private text must stay private", source)
             with self.assertRaises(FileExistsError):
                 calibration.create_label_template(draft, video, target)
 
@@ -167,6 +186,16 @@ class CalibrationTests(unittest.TestCase):
             draft.write_text(json.dumps(data), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Facility evidence"):
                 calibration.score_dataset(manifest(folder, [(video, draft, labels)]))
+
+    def test_fake_probe_duration_rejected_before_ground_truth_labels(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            video, draft, label_file = make_case(folder)
+            with patch.object(calibration, "verify_mp4",
+                              return_value={"metadataVerified": True,
+                                            "durationSeconds": 2.0, "audioTracks": 0}):
+                with self.assertRaisesRegex(calibration.FacilityCalibrationError, "durations differ"):
+                    calibration.score_dataset(manifest(folder, [(video, draft, label_file)]))
 
     def test_no_false_precision_claim_with_zero_positive_examples(self):
         metrics = calibration._score(0, 0, 0, 7)
