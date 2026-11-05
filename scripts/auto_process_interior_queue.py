@@ -155,6 +155,28 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
     if not os.getenv("GEMINI_API_KEY"):
         raise ValueError("GEMINI_API_KEY must be set locally")
     output.mkdir(parents=True, exist_ok=True)
+    # Owner may grant or revoke public numeric-score permission later. Never
+    # reupload the footage merely to edit that consent flag.
+    permission_edits = 0
+    for job in entries:
+        prior = state["jobs"].get(job["jobId"], {})
+        if prior.get("status") != "complete":
+            continue
+        filename = prior.get("resultFile")
+        if not isinstance(filename, str) or Path(filename).name != filename:
+            raise ValueError("Unsafe cached draft path")
+        draft_file = output / filename
+        if not draft_file.is_file():
+            continue
+        draft = json.loads(draft_file.read_text(encoding="utf-8"))
+        if draft.get("worldId") != job["worldId"] or draft.get("evidence", {}).get("sha256") != job["sha256"]:
+            raise ValueError("Stored video report provenance mismatch")
+        consent = draft.get("consent", {})
+        if consent.get("permissionToPublishVisualEstimate") != job["permissionToPublish"]:
+            consent["permissionToPublishVisualEstimate"] = job["permissionToPublish"]
+            draft["consent"] = consent
+            atomic_json(draft_file, draft)
+            permission_edits += 1
     succeeded, failed = 0, 0
     for job in selected:
         prior = state["jobs"].get(job["jobId"], {})
@@ -186,7 +208,8 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
             failed += 1
         state["jobs"][job["jobId"]] = entry
         atomic_json(journal_path, state)
-    return {"status": "complete", "manifestVideos": len(entries),
+    return {"status": "complete", "permissionChanges": permission_edits,
+            "manifestVideos": len(entries),
             "pendingAtStart": len(pending), "processed": len(selected),
             "succeeded": succeeded, "failed": failed,
             "remaining": len(pending) - len(selected),
