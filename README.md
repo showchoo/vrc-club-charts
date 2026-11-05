@@ -36,6 +36,15 @@ consented Gemini analysis, but never uploads these images or treats
 visual sightings as verified DJ player functionality. Its end-to-end
 synthetic H.264 smoke test now checks real JPEG extraction.
 
+### まとめてDJ設備の認識精度を確認（Windows）
+
+録画済みMP4と対応する非公開Gemini評価レポートの組をSHA-256で自動発見し、
+確認ページをまとめて生成する[一括キャリブレーション](docs/FACILITY_RECOGNITION_CALIBRATION.md)を追加。
+Windowsで `git pull` の後、`.\scripts\run_facility_calibration.ps1 -OpenReview` を実行すると、
+ローカルの確認ページが開きます。6項目の正解ラベルをブラウザーから保存して、
+同コマンドを再実行すれば、回答済み動画だけをモデル別に集計します。
+**実動画がない場合は精度数値を作りません。** 公開サイトとDJ動作評価は変更しません。
+
 ### DJ設備認識の定量精度テスト（ローカル）
 
 AIがDJブース・スクリーンなどを見間違えていないかを確かめる
