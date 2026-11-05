@@ -44,6 +44,7 @@ class NavigationGuard:
         self.last_action = None
         self.stale_count = 0
         self.recoveries = 0
+        self.total_recovery_turns = 0
         self.sampling_count = 0
         self.total_novel_changes = 0
         self.stale_limit = stale_limit
@@ -75,6 +76,7 @@ class NavigationGuard:
                 return "stop", "no_visual_progress_after_recovery"
             action = "turn_right" if self.recoveries % 2 == 0 else "turn_left"
             self.recoveries += 1
+            self.total_recovery_turns += 1
             self.last_action = action
             return action, "bounded_recovery_turn"
         self.last_action = suggested_action
@@ -84,7 +86,7 @@ class NavigationGuard:
         return {
             "observedFrames": self.sampling_count,
             "visualChanges": self.total_novel_changes,
-            "recoveryTurns": self.recoveries,
+            "recoveryTurns": self.total_recovery_turns,
             "reliableCollisionDetection": False,
             "independentWorldCoverageVerified": False,
         }
