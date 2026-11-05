@@ -23,7 +23,8 @@ Development plan, recording/privacy constraints, and the future authorized-agent
 ### One-command Windows inspection (single World, local first)
 
 The new [one-run inspector](docs/ONE_WORLD_INSPECTION.md) provides a
-read-only system diagnostic plus a one-command sequence:
+read-only system diagnostic, a synthetic offline FFmpeg/FFprobe recorder
+self-test, plus a one-command sequence:
 **record foreground VRChat window → consented Gemini video draft →
 optional public provisional visual score**. The owner must manually
 enter the World and confirm recording rights. No unattended login, World
