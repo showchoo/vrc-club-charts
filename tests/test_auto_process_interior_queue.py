@@ -40,6 +40,19 @@ def make_manifest(folder, *, consent=True, publish=False):
 
 
 class QueueTests(unittest.TestCase):
+    def setUp(self):
+        # Historical fixtures contain fake bytes; FFmpeg integration is tested
+        # independently with genuine encoded MP4 files.
+        probe = patch.object(queue, "verify_mp4", return_value={
+            "metadataVerified": True, "audioTracks": 0,
+        })
+        quality = patch.object(queue, "assess_video_quality",
+                               return_value={"status": "ok", "reasons": []})
+        probe.start()
+        quality.start()
+        self.addCleanup(probe.stop)
+        self.addCleanup(quality.stop)
+
     def test_dry_run_without_cloud_key_does_not_contact_model(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
@@ -93,6 +106,27 @@ class QueueTests(unittest.TestCase):
                     self.assertEqual(model.call_count, 1)
             saved = json.loads(next(out.glob("*.draft.json")).read_text(encoding="utf-8"))
             self.assertTrue(saved["consent"]["permissionToPublishVisualEstimate"])
+
+    def test_unusable_footage_rejected_once_without_cloud_upload(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            manifest = make_manifest(folder)
+            out = folder / "private"
+            with (patch.dict(queue.os.environ, {"GEMINI_API_KEY": "test"}),
+                  patch.object(queue, "assess_video_quality", return_value={
+                      "status": "unusable", "reasons": ["almost_all_frames_black"],
+                  }),
+                  patch.object(queue, "ask_gemini", side_effect=AssertionError("Do not upload"))):
+                first = queue.process_queue(manifest, out, max_items=1,
+                    model="gemini-3.5-flash-lite", allow_upload=True)
+                second = queue.process_queue(manifest, out, max_items=1,
+                    model="gemini-3.5-flash-lite", allow_upload=True)
+            self.assertEqual(first["rejected"], 1)
+            self.assertEqual(first["failed"], 0)
+            self.assertEqual(second["processed"], 0)
+            self.assertEqual(list(out.glob("*.draft.json")), [])
+            journal = json.loads((out / "processing-journal.json").read_text(encoding="utf-8"))
+            self.assertEqual(list(journal["jobs"].values())[0]["status"], "rejected")
 
     def test_manifest_rejects_uncleared_videos(self):
         with tempfile.TemporaryDirectory() as tmp:

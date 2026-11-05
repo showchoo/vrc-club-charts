@@ -30,6 +30,10 @@ class AutoCaptureQueueTests(unittest.TestCase):
         })
         patcher.start()
         self.addCleanup(patcher.stop)
+        qual_patch = patch.object(auto, "assess_video_quality",
+                                  return_value={"status": "ok", "reasons": []})
+        qual_patch.start()
+        self.addCleanup(qual_patch.stop)
 
     def test_dry_run_counts_only_safe_private_capture(self):
         with tempfile.TemporaryDirectory() as d:
@@ -81,6 +85,15 @@ class AutoCaptureQueueTests(unittest.TestCase):
             folder = Path(d)
             local_capture(folder)
             with patch.object(auto, "verify_mp4", side_effect=auto.MediaVerificationError("bad container")):
+                self.assertEqual(auto.discover_captures(folder), [])
+
+    def test_black_video_not_queued_for_gemini(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            local_capture(folder)
+            with patch.object(auto, "assess_video_quality",
+                              return_value={"status": "unusable",
+                                            "reasons": ["almost_all_frames_black"]}):
                 self.assertEqual(auto.discover_captures(folder), [])
 
     def test_rejects_filename_path_traversal(self):

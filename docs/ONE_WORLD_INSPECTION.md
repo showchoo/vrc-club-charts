@@ -66,6 +66,27 @@ A result with `"status": "passed"` establishes only that this **offline
 local data pipeline** operates. It does not prove real-world recording,
 AI reasoning, navigation, DJ equipment or production publication.
 
+### Automated visual-content checks before AI billing
+
+After the MP4 container/codec has been verified, the local program decodes
+**one 32x18 grayscale frame per second** with FFmpeg. If most frames are
+entirely black, show almost no visible detail, or a long recording never
+changes visually, the capture is marked `capture-unusable`: it is retained
+locally for troubleshooting but is **not sent to Gemini** and cannot be
+published as evidence. A dark VRChat club can still pass when lighting and
+visible surfaces provide real detail and some variation.
+
+Inspect any existing local clip without a cloud request:
+
+```powershell
+py -3 scripts/inspection_visual_quality.py --video "C:\path\to\your.mp4"
+```
+
+The `-SmokeTest` integration now verifies two **real** FFmpeg videos:
+a moving color-pattern clip is accepted, and an all-black clip is rejected.
+A moving logo, UI overlay, or animated decorative element could fool this
+heuristic; it does **not** prove room coverage, DJ playback, FPS or permissions.
+
 ### A. Capture without AI movement or cloud upload
 
 Use the **actual** ID of the World you manually entered:

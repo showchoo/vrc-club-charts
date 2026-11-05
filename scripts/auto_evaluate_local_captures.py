@@ -13,10 +13,12 @@ try:
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
     from scripts.evaluate_interior_video import WORLD_ID, validate_media
     from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
+    from scripts.inspection_visual_quality import assess_video_quality, VisualQualityError
 except ModuleNotFoundError:
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
     from evaluate_interior_video import WORLD_ID, validate_media
     from inspection_media_verify import verify_mp4, MediaVerificationError
+    from inspection_visual_quality import assess_video_quality, VisualQualityError
 
 
 def discover_captures(folder: Path) -> list[dict]:
@@ -53,8 +55,10 @@ def discover_captures(folder: Path) -> list[dict]:
             continue
         try:
             validate_media(video)
-            verify_mp4(video)
-        except (ValueError, MediaVerificationError, OSError):
+            metadata = verify_mp4(video)
+            if assess_video_quality(video, metadata=metadata)["status"] != "ok":
+                continue
+        except (ValueError, MediaVerificationError, VisualQualityError, OSError):
             continue
         if video.name in seen:
             continue

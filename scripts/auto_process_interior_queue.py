@@ -24,6 +24,13 @@ except ModuleNotFoundError:
         WORLD_ID, ask_gemini, create_report, media_sha256, validate_media,
     )
 
+try:
+    from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
+    from scripts.inspection_visual_quality import assess_video_quality, VisualQualityError
+except ModuleNotFoundError:
+    from inspection_media_verify import verify_mp4, MediaVerificationError
+    from inspection_visual_quality import assess_video_quality, VisualQualityError
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_TYPES = frozenset({"creator-provided", "owner-recorded"})
 MAX_PER_RUN = 4
@@ -107,7 +114,7 @@ def load_state(path: Path) -> dict:
 def should_process(job: dict, history: dict | None, now: dt.datetime) -> bool:
     if not history:
         return True
-    if history.get("status") == "complete":
+    if history.get("status") in {"complete", "rejected"}:
         # Different video bytes always create a different jobId.
         return False
     attempts = history.get("attempts", 0)
@@ -177,7 +184,7 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
             draft["consent"] = consent
             atomic_json(draft_file, draft)
             permission_edits += 1
-    succeeded, failed = 0, 0
+    succeeded, failed, rejected = 0, 0, 0
     for job in selected:
         prior = state["jobs"].get(job["jobId"], {})
         attempts = prior.get("attempts", 0) + 1
@@ -187,10 +194,22 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
             "lastAttempt": now_utc().isoformat(), "source": job["source"],
         }
         try:
+            # Only actual viable, decoded interior footage may reach Gemini.
+            # This check runs AFTER user consent but BEFORE any API upload.
+            metadata = verify_mp4(job["video"])
+            quality = assess_video_quality(job["video"], metadata=metadata)
+            if quality["status"] != "ok":
+                entry.update(status="rejected", errorType="InsufficientVisualCoverage",
+                             visualQuality=quality)
+                rejected += 1
+                state["jobs"][job["jobId"]] = entry
+                atomic_json(journal_path, state)
+                continue
             # No external URLs. Provider upload is within the explicit opt-in.
             result = ask_gemini(job["video"], model)
             report = create_report(job["worldId"], job["video"],
                                    job["source"], result, model)
+            report["visualQuality"] = quality
             report["consent"] = {
                 "recordingConsentConfirmed": True,
                 "aiAnalysisConsentConfirmed": True,
@@ -211,7 +230,7 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
     return {"status": "complete", "permissionChanges": permission_edits,
             "manifestVideos": len(entries),
             "pendingAtStart": len(pending), "processed": len(selected),
-            "succeeded": succeeded, "failed": failed,
+            "succeeded": succeeded, "failed": failed, "rejected": rejected,
             "remaining": len(pending) - len(selected),
             "journal": str(journal_path)}
 
