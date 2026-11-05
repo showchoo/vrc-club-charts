@@ -12,6 +12,15 @@ Human field notes are supplementary: anyone can submit a visit review without ap
 
 A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
+## Public World profile facts
+
+Each admitted profile now shows a plainly labelled evidence-basis panel,
+public creator-authored VRChat tags, and validated catalog capacity and
+update date (when actually available). Unknowns stay unknown; tags and owner
+statements are never presented as proven DJ equipment functionality.
+Third-party source buttons accept only known HTTPS directory origins.
+See [public profile data provenance](docs/WORLD_PROFILE_DATA_PROVENANCE.md).
+
 ## Google Search discovery
 
 Each admitted public World has a server-rendered profile with a distinct,
@@ -51,7 +60,11 @@ test clip. Both signals must be present to report
 `inconclusive`. The test never independently authenticates that the audio
 originated inside VRChat, verifies live DJ streaming, or publishes a ranking.
 It requires operator consent and does not automate VRChat client access.
-Synthetic H.264/AAC + simulated Udon events are exercised together in CI.
+Synthetic H.264/AAC + simulated Udon events are checked together in CI
+when FFmpeg/libx264 is present on the runner. When absent, that media smoke is
+explicitly marked **skipped**, not passed; Python tests and website build
+checks still run. Repeat the media test on an FFmpeg-equipped machine before
+claiming real video-pipeline validation.
 
 ### Owner-controlled DJ audio calibration (offline, no live client control)
 
