@@ -17,12 +17,14 @@ try:
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
     from scripts.evaluate_interior_video import validate_media, media_sha256
     from scripts.publish_interior_visual_previews import release
+    from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
     from evaluate_interior_video import validate_media, media_sha256
     from publish_interior_visual_previews import release
+    from inspection_media_verify import verify_mp4, MediaVerificationError
 
 
 def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
@@ -94,6 +96,13 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     if video.name != recording["filename"]:
         raise ValueError("Invalid recorded video filename")
     validate_media(video)
+    try:
+        metadata = verify_mp4(video, max_seconds=seconds)
+    except MediaVerificationError as exc:
+        result["status"] = "capture-invalid"
+        result["detail"] = str(exc)
+        return result
+    result["mediaVerification"] = metadata
     if not analyze_video:
         return result
 
@@ -185,7 +194,7 @@ def main(argv=None) -> int:
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-failed", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
+    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
 
 
 if __name__ == "__main__":
