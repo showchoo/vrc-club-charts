@@ -40,6 +40,27 @@ class PublicationTests(unittest.TestCase):
                                      copyright_clearance_confirmed=True)
             self.assertEqual(result["status"], "no-eligible-records")
 
+    def test_revocation_updates_public_feed_to_empty_when_drafts_exist(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            draft = root / "drafts"
+            draft.mkdir()
+            (draft / "one.draft.json").write_text("{}")
+            target = root / "data" / "interior-visual-estimates.json"
+            target.parent.mkdir()
+            target.write_text(json.dumps(example_feed()))
+            ops = []
+            with (patch.object(pub, "ROOT", root), patch.object(pub, "OUTPUT", target),
+                  patch.object(pub, "compile_feed", return_value={"schemaVersion": 1, "worlds": []}),
+                  patch.object(pub, "eligible_catalog_ids", return_value=set()),
+                  patch.object(pub, "check_git_safety"),
+                  patch.object(pub, "git", side_effect=lambda *args, **kw: ops.append(args))):
+                result = pub.release(draft, publish_and_push=True,
+                                     copyright_clearance_confirmed=True)
+            self.assertEqual(result["status"], "pushed")
+            self.assertEqual(json.loads(target.read_text(encoding="utf-8"))["worlds"], [])
+            self.assertEqual(ops[-1], ("push", "origin", "main"))
+
     def test_unchanged_feed_has_no_commit(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
