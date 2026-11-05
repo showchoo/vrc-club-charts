@@ -12,6 +12,16 @@ Human field notes are supplementary: anyone can submit a visit review without ap
 
 A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
+## Google Search discovery
+
+Each admitted public World has a server-rendered profile with a distinct,
+evidence-aware search title and description, linked canonical World URL, and
+safe CreativeWork structured data. DJ tags and owner attestations are never
+misrepresented as functional verification. Read the
+[Google Search Console monitoring guide](docs/SEARCH_DISCOVERY_SEO.md)
+for indexing checks after the next successful Vercel deployment. Search
+metadata alone does not guarantee traffic.
+
 ## Long-term goal: evidence-based autonomous in-world inspection
 
 The long-term objective is a fully autonomous, **authorized** inspector that can visit public VRChat DJ Worlds, navigate their interiors, test DJ/live-playback equipment and gimmicks, measure performance, and produce a separately substantiated Craftsmanship Ranking. **No autonomous VRChat login or exploration is currently implemented.** An OSC input API is not authorization to run an unattended inspection bot; obtain clear VRChat permission before any such pilot.
