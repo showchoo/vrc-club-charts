@@ -13,9 +13,11 @@ from urllib.parse import quote
 try:
     from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
     from scripts.inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
+    from scripts.world_search_metadata import safe_json_ld, world_search_metadata
 except ModuleNotFoundError:
     from dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
     from inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
+    from world_search_metadata import safe_json_ld, world_search_metadata
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
@@ -144,7 +146,8 @@ def display_event_time(value: str | None) -> str:
         return str(value)
 
 
-def page_head(title: str, description: str, canonical: str, prefix: str = "") -> str:
+def page_head(title: str, description: str, canonical: str, prefix: str = "",
+              main_entity: dict | None = None) -> str:
     json_ld = {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -157,6 +160,8 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
             "url": BASE_URL,
         },
     }
+    if main_entity is not None:
+        json_ld["mainEntity"] = main_entity
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -177,7 +182,7 @@ def page_head(title: str, description: str, canonical: str, prefix: str = "") ->
   <link rel="stylesheet" href="{prefix}deco-theme.css?v=20261104-02" />
   <script src="{prefix}analytics.js?v=20261006-03" defer></script>
   <script src="{prefix}i18n.js?v=20261105-owner-favs-01" defer></script>
-  <script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>
+  <script type="application/ld+json">{safe_json_ld(json_ld)}</script>
 </head>
 <body>
   <div class="noise"></div>
@@ -291,7 +296,7 @@ def inject_event_json_ld(out: Path, events: list[dict]) -> None:
         if event.get("end"):
             item["endDate"] = event["end"]
         items.append(item)
-    block = '<script type="application/ld+json">' + json.dumps(items, ensure_ascii=False) + '</script>'
+    block = '<script type="application/ld+json">' + safe_json_ld(items) + '</script>'
     doc = doc.replace("</head>", f"  {block}\n</head>")
     path.write_text(doc, encoding="utf-8")
 
@@ -372,7 +377,7 @@ def event_page(event: dict, djs: list[dict], published_world_ids: set[str] | Non
       <div class="relation-dj-grid">{djs_html}</div>
     </section>
 
-    <script type="application/ld+json">{json.dumps(event_ld, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{safe_json_ld(event_ld)}</script>
   </main>
 """ + footer("../")
 
@@ -415,7 +420,8 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     weekly = w.get("weekly") or {}
     thumbnail = world_thumbnail_url(w)
     canonical = f"{BASE_URL}worlds/{quote(wid)}.html"
-    description = f"{name} by {author} — VRChat club / DJ world profile on VRC Club Charts."
+    search_metadata = world_search_metadata(w, canonical=canonical, thumbnail=thumbnail)
+    description = search_metadata["description"]
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
     status_text = "VISUAL IMPRESSION" if image_scored else "WORLD DIRECTORY / UNEVALUATED"
     score_html = str(image_score) if image_scored else "—"
@@ -522,7 +528,8 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
         )
     djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">関連するDJの情報は、まだ登録されていません。</div>'
 
-    return page_head(f"{name} — VRC Club Charts", description, canonical, "../") + site_header("../", "worlds") + f"""
+    return page_head(search_metadata["title"], description, canonical, "../",
+                     main_entity=search_metadata["entity"]) + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
     <a class="world-back" href="../index.html#aiScoutSection">← CLUB DISCOVERY</a>
     <section class="world-detail-hero">
@@ -639,7 +646,7 @@ def dj_page(dj: dict, events: list[dict]) -> str:
       </div>
       <div class="dj-event-list">{appearances_html}</div>
     </section>
-    <script type="application/ld+json">{json.dumps(person_ld, ensure_ascii=False)}</script>
+    <script type="application/ld+json">{safe_json_ld(person_ld)}</script>
   </main>
 """ + footer("../")
 
