@@ -16,10 +16,12 @@ try:
     from scripts.auto_process_interior_queue import atomic_json, ROOT
     from scripts.evaluate_interior_video import validate_analysis, WORLD_ID
     from scripts.dj_stream_policy import published_worlds, load_verified
+    from scripts.inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
 except ModuleNotFoundError:
     from auto_process_interior_queue import atomic_json, ROOT
     from evaluate_interior_video import validate_analysis, WORLD_ID
     from dj_stream_policy import published_worlds, load_verified
+    from inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
 
 WEIGHTS = {"visual_design": 20, "lighting_design": 20,
            "spatial_design": 15, "originality": 10}
@@ -55,6 +57,9 @@ def assess_draft(raw: dict) -> dict | None:
     )):
         return None
 
+    # The model can cite any timestamp syntactically; public estimates
+    # require locally proven clip duration and in-range evidence moments.
+    audit_timeline(raw)
     result = validate_analysis(raw.get("analysis"))
     observed = {}
     confidences = []
