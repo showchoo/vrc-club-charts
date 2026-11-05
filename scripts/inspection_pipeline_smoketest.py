@@ -22,6 +22,7 @@ try:
     from scripts.inspection_evidence_timeline import attach_verified_timeline
     from scripts.inspection_facility_inventory import FACILITIES
     from scripts.inspection_facility_keyframes import export_frame_evidence
+    from scripts.calibrate_facility_recognition import create_label_template, score_dataset
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -31,6 +32,7 @@ except ModuleNotFoundError:
     from inspection_evidence_timeline import attach_verified_timeline
     from inspection_facility_inventory import FACILITIES
     from inspection_facility_keyframes import export_frame_evidence
+    from calibrate_facility_recognition import create_label_template, score_dataset
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -139,6 +141,34 @@ def smoke_test() -> dict:
             raise RuntimeError("Private offline evidence index missing required disclaimer")
         draft = output / (SYNTHETIC_WORLD + "_" + report["evidence"]["sha256"][:16] + ".draft.json")
         draft.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+        # Test the FULL local review/metrics chain using SYNTHETIC assumptions:
+        # the test video contains no DJ booth, and these labels are synthetic
+        # fixtures only, not real annotations or an AI accuracy claim.
+        annotations = output / "synthetic-calibration-template.json"
+        template_result = create_label_template(draft, clip, annotations)
+        if not Path(template_result["reviewHtml"]).is_file():
+            raise RuntimeError("Offline local annotation page was not created")
+        ground_truth = json.loads(annotations.read_text(encoding="utf-8"))
+        ground_truth["reviewedEntireRecording"] = True  # test-only simulation
+        ground_truth["labels"] = {
+            name: "not_visible" for name in FACILITIES
+        }
+        ground_truth["labels"]["dj_booth"] = "visible"  # synthetic assumption
+        completed = output / "synthetic-calibration-completed.json"
+        completed.write_text(json.dumps(ground_truth), encoding="utf-8")
+        calibration_manifest = output / "synthetic-calibration-manifest.json"
+        calibration_manifest.write_text(json.dumps({
+            "schemaVersion": 1, "cases": [{
+                "draft": str(draft), "video": str(clip),
+                "labels": str(completed),
+            }],
+        }), encoding="utf-8")
+        synthetic_metrics = score_dataset(calibration_manifest)
+        if (synthetic_metrics["reviewedClips"] != 1
+                or synthetic_metrics["micro"]["tp"] != 1
+                or synthetic_metrics["readyForUnattendedDeployment"] is not False
+                or synthetic_metrics["equipmentFunctionalityVerified"] is not False):
+            raise RuntimeError("Synthetic calibration dataset validation failed")
         feed = compile_feed(output, eligible_ids={SYNTHETIC_WORLD})
         scores = feed.get("worlds", [])
         if len(scores) != 1 or scores[0].get("visualScore") != 60:
@@ -177,6 +207,8 @@ def smoke_test() -> dict:
             "syntheticFacilitySchemaVerified": True,
             "privateKeyframeJpegVerified": True,
             "privateEvidenceHtmlVerified": True,
+            "syntheticCalibrationMetricsVerified": True,
+            "realWorldAccuracyMeasured": False,
             "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,
             "previewVisualScore": scores[0]["visualScore"],
