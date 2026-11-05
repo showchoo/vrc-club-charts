@@ -33,6 +33,16 @@ current automation restrictions; support has not granted approval.
 Setup, user consent switches, output format and current limitations:
 [Windows VRChat Inspection](docs/WINDOWS_VRCHAT_INSPECTION.md).
 
+### Automatic review of consented interior recordings
+
+The optional Windows pipeline picks up new local recordings, processes a
+bounded queue through Gemini, compiles provisional *interior visual-only*
+scores, and can publish those numeric previews after explicit rights
+confirmation and normal Git authentication. This does **not** automate
+VRChat login/instance changes or verify DJ equipment operation. The site
+never receives private footage. Documentation:
+[Automatic inspection evidence pipeline](docs/AUTOMATED_INSPECTION_PIPELINE.md).
+
 ## AI SCOUT — automated discovery and visual estimates
 
 - `scripts/build_ai_scout.py` refreshes approved catalog candidates, preserving a separate unapproved discovery queue.
