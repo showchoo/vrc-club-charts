@@ -66,21 +66,5 @@
     ],
     "firstDiscoveredAt": "2026-11-04",
     "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
-    "name": "_SEREN",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230659",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
   }
 ]

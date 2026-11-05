@@ -1226,5 +1226,110 @@
     "policyRevision": "dj-tag-auto-admission-20261105-v1",
     "source": "auto-discovery",
     "classifierRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144",
+    "name": "Axe Throwing Club 2․0",
+    "author": "mahu",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "World name includes 'Axe Throwing'",
+        "Description mentions physics simulation and throwing axes",
+        "Tags include 'author_tag_axe' and 'author_tag_throwing'",
+        "Thumbnail shows axe throwing targets"
+      ],
+      "reasonJa": "名前に「クラブ」が含まれていますが、目的は斧投げのゲームプレイであり、音楽イベントやナイトクラブではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-05T00:25:21.939275+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68",
+    "name": "Carrot Jazz Club",
+    "author": "BEBE CARROT",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.85,
+      "evidence": [
+        "World name includes 'Jazz Club', but visuals and tags suggest a live music venue or instrument showcase",
+        "Thumbnail prominently features a drum set, guitars, and stage equipment typical of a live band performance rather than a nightclub",
+        "Tags include 'instrument' and 'avatar', pointing towards a music showcase or performance space rather than an electronic dance clu"
+      ],
+      "reasonJa": "ジャズクラブという名称が含まれていますが、サムネイルにはドラムセットや楽器が配置されており、電子音楽のクラブやレイヴスペースというよりはライブ演奏向けの会場です。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-05T00:25:24.658532+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc",
+    "name": "club bunny",
+    "author": "KouuAo",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 0.9,
+      "evidence": [
+        "説明文に「撮影用に作成しました」と記載されている",
+        "サムネイル画像には中央の鳥かごと装飾的な空間が写っており、実際のクラブ機能やDJブースは見当たらない"
+      ],
+      "reasonJa": "説明文に撮影用として作成されたことが明記されており、実際のナイトクラブやイベント会場としての機能が確認できないため不適合と判断しました。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-05T00:25:27.379639+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-11-05T00:25:27.490663+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
+    "name": "_SEREN",
+    "author": "Blue_portal77",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag; live playback not independently tested",
+    "reviewedAt": "2026-11-05T00:25:27.602173+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

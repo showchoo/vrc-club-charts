@@ -5,6 +5,50 @@
   "publicationPolicy": "dj-tag-owner-favorite-or-verified-live-stream",
   "worlds": [
     {
+      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
+      "name": "13th Floor DJ",
+      "author": "SaintHaru",
+      "genres": [
+        "MUSIC",
+        "DJ",
+        "EVENT",
+        "STAGE"
+      ],
+      "officialTags": [],
+      "source": null,
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "djStreamVerification": null,
+      "djStreamTested": false,
+      "djStreamOwnerConfirmed": false,
+      "ownerStreamConfirmation": null,
+      "publicationBasis": "dj-tag",
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05",
       "name": "_nocturne",
       "author": "_buki",
@@ -107,17 +151,21 @@
       }
     },
     {
-      "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
-      "name": "13th Floor DJ",
-      "author": "SaintHaru",
+      "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
+      "name": "_SEREN",
+      "author": "Blue_portal77",
       "genres": [
-        "MUSIC",
-        "DJ",
-        "EVENT",
-        "STAGE"
+        "CLUB",
+        "DJ"
       ],
-      "officialTags": [],
-      "source": null,
+      "officialTags": [
+        "author_tag_club",
+        "author_tag_seren",
+        "author_tag_rave",
+        "author_tag_dj",
+        "system_approved"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "djStreamVerification": null,
@@ -125,58 +173,6 @@
       "djStreamOwnerConfirmed": false,
       "ownerStreamConfirmation": null,
       "publicationBasis": "dj-tag",
-      "releaseStatus": null,
-      "availabilityStatus": "available",
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0.0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      }
-    },
-    {
-      "id": "wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1",
-      "name": "A․venue Pub",
-      "author": "Reava_レイ",
-      "genres": [
-        "MUSIC"
-      ],
-      "officialTags": [
-        "author_tag_bar",
-        "author_tag_photo",
-        "author_tag_drinking",
-        "author_tag_realistic",
-        "author_tag_event"
-      ],
-      "source": "https://vrchat.com/home/world/wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1/info",
-      "editorialStatus": "unreviewed",
-      "chartEligible": true,
-      "djStreamVerification": null,
-      "djStreamTested": false,
-      "djStreamOwnerConfirmed": true,
-      "ownerStreamConfirmation": {
-        "status": "owner-attested",
-        "attestedAt": "2026-11-05",
-        "method": "owner-asserted-in-world-live-playback",
-        "source": "https://vrchat.com/home/world/wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1/info"
-      },
-      "publicationBasis": "owner-favorite-confirmed",
       "releaseStatus": "public",
       "availabilityStatus": "available",
       "thumbnail": null,
@@ -318,6 +314,58 @@
       "ownerStreamConfirmation": null,
       "publicationBasis": "dj-tag",
       "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
+      "id": "wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1",
+      "name": "A․venue Pub",
+      "author": "Reava_レイ",
+      "genres": [
+        "MUSIC"
+      ],
+      "officialTags": [
+        "author_tag_bar",
+        "author_tag_photo",
+        "author_tag_drinking",
+        "author_tag_realistic",
+        "author_tag_event"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "djStreamVerification": null,
+      "djStreamTested": false,
+      "djStreamOwnerConfirmed": true,
+      "ownerStreamConfirmation": {
+        "status": "owner-attested",
+        "attestedAt": "2026-11-05",
+        "method": "owner-asserted-in-world-live-playback",
+        "source": "https://vrchat.com/home/world/wrld_953570c1-565f-464d-bf22-cfaea7a8b5f1/info"
+      },
+      "publicationBasis": "owner-favorite-confirmed",
+      "releaseStatus": "public",
       "availabilityStatus": "available",
       "thumbnail": null,
       "capacity": null,
@@ -3025,29 +3073,30 @@
       }
     },
     {
-      "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
-      "name": "Music＆BAR【PPC】",
-      "author": "PAPICO",
+      "id": "wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05",
+      "name": "MusicAncientForest",
+      "author": "COMA․",
       "genres": [
-        "CLUB",
-        "DJ"
+        "MUSIC"
       ],
       "officialTags": [
-        "author_tag_dj",
-        "author_tag_bar",
-        "author_tag_topaz",
-        "system_approved",
-        "author_tag_VRCMELTDOWN",
-        "author_tag_PPC"
+        "author_tag_forest",
+        "author_tag_music",
+        "author_tag_fantasy"
       ],
-      "source": "https://vrchat.com/home/world/wrld_4780a08f-8d44-4533-838b-2ec497fcf34e/info",
+      "source": "https://vrchat.com/home/world/wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "djStreamVerification": null,
       "djStreamTested": false,
-      "djStreamOwnerConfirmed": false,
-      "ownerStreamConfirmation": null,
-      "publicationBasis": "dj-tag",
+      "djStreamOwnerConfirmed": true,
+      "ownerStreamConfirmation": {
+        "status": "owner-attested",
+        "attestedAt": "2026-11-05",
+        "method": "owner-asserted-in-world-live-playback",
+        "source": "https://vrchat.com/home/world/wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05/info"
+      },
+      "publicationBasis": "owner-favorite-confirmed",
       "releaseStatus": "public",
       "availabilityStatus": "available",
       "thumbnail": null,
@@ -3074,30 +3123,29 @@
       }
     },
     {
-      "id": "wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05",
-      "name": "MusicAncientForest",
-      "author": "COMA․",
+      "id": "wrld_4780a08f-8d44-4533-838b-2ec497fcf34e",
+      "name": "Music＆BAR【PPC】",
+      "author": "PAPICO",
       "genres": [
-        "MUSIC"
+        "CLUB",
+        "DJ"
       ],
       "officialTags": [
-        "author_tag_forest",
-        "author_tag_music",
-        "author_tag_fantasy"
+        "author_tag_dj",
+        "author_tag_bar",
+        "author_tag_topaz",
+        "system_approved",
+        "author_tag_VRCMELTDOWN",
+        "author_tag_PPC"
       ],
-      "source": "https://vrchat.com/home/world/wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05/info",
+      "source": "https://vrchat.com/home/world/wrld_4780a08f-8d44-4533-838b-2ec497fcf34e/info",
       "editorialStatus": "unreviewed",
       "chartEligible": true,
       "djStreamVerification": null,
       "djStreamTested": false,
-      "djStreamOwnerConfirmed": true,
-      "ownerStreamConfirmation": {
-        "status": "owner-attested",
-        "attestedAt": "2026-11-05",
-        "method": "owner-asserted-in-world-live-playback",
-        "source": "https://vrchat.com/home/world/wrld_f9b6df0b-1a97-4dc6-af84-7ec2d81abf05/info"
-      },
-      "publicationBasis": "owner-favorite-confirmed",
+      "djStreamOwnerConfirmed": false,
+      "ownerStreamConfirmation": null,
+      "publicationBasis": "dj-tag",
       "releaseStatus": "public",
       "availabilityStatus": "available",
       "thumbnail": null,
@@ -6102,6 +6150,51 @@
       }
     },
     {
+      "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+      "name": "どんのラウンジバー「BLACK GOLD」",
+      "author": "＝DonK＝",
+      "genres": [
+        "BAR",
+        "DJ",
+        "STAGE",
+        "EVENT",
+        "QUEST"
+      ],
+      "officialTags": [],
+      "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "djStreamVerification": null,
+      "djStreamTested": false,
+      "djStreamOwnerConfirmed": false,
+      "ownerStreamConfirmation": null,
+      "publicationBasis": "dj-tag",
+      "releaseStatus": null,
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_18196fcb-8e5e-428f-887b-8ba11db37d62",
       "name": "アイアンサウンド",
       "author": "COMA․",
@@ -6415,51 +6508,6 @@
       },
       "publicationBasis": "owner-favorite-confirmed",
       "releaseStatus": "public",
-      "availabilityStatus": "available",
-      "thumbnail": null,
-      "capacity": null,
-      "recommendedCapacity": null,
-      "worldUpdatedAt": null,
-      "totals": {
-        "visits": null,
-        "favorites": null
-      },
-      "weekly": {
-        "visits": null,
-        "favorites": null
-      },
-      "scores": {
-        "trending": 0.0,
-        "craftsmanship": null,
-        "overall": null
-      },
-      "movement": {
-        "overall": null,
-        "trending": null,
-        "craftsmanship": null
-      }
-    },
-    {
-      "id": "wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
-      "name": "どんのラウンジバー「BLACK GOLD」",
-      "author": "＝DonK＝",
-      "genres": [
-        "BAR",
-        "DJ",
-        "STAGE",
-        "EVENT",
-        "QUEST"
-      ],
-      "officialTags": [],
-      "source": "https://www.vrcw.net/world/detail/wrld_25bf4795-501c-4d05-b874-8dc4e78ad83d",
-      "editorialStatus": "unreviewed",
-      "chartEligible": true,
-      "djStreamVerification": null,
-      "djStreamTested": false,
-      "djStreamOwnerConfirmed": false,
-      "ownerStreamConfirmation": null,
-      "publicationBasis": "dj-tag",
-      "releaseStatus": null,
       "availabilityStatus": "available",
       "thumbnail": null,
       "capacity": null,
