@@ -36,6 +36,16 @@ consented Gemini analysis, but never uploads these images or treats
 visual sightings as verified DJ player functionality. Its end-to-end
 synthetic H.264 smoke test now checks real JPEG extraction.
 
+### DJ設備認識の定量精度テスト（ローカル）
+
+AIがDJブース・スクリーンなどを見間違えていないかを確かめる
+[認識精度キャリブレーション](docs/FACILITY_RECOGNITION_CALIBRATION.md)
+を追加しました。ローカルMP4をブラウザーで見ながら6項目の正解ラベルを
+付け、適合率・再現率・F1を設備ごとに測れます。元動画のSHA-256と
+FFprobe動画長を照合し、未確認のラベルでは評価結果を生成しません。
+**実動画の正解ラベルがない間は認識精度は不明**であり、
+ランキング・DJ配信動作・無人巡回には反映しません。
+
 ### Video-only DJ facility appearances
 
 The Gemini video analysis now supports an appearance-based six-category
