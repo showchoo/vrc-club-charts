@@ -65,7 +65,8 @@ def discover_captures(folder: Path) -> list[dict]:
 
 def build_and_process(capture_dir: Path, output_dir: Path, *, dry_run: bool,
                       attest_all: bool, upload_allowed: bool,
-                      max_videos: int, model: str) -> dict:
+                      max_videos: int, model: str,
+                      allow_visual_publication: bool = False) -> dict:
     capture_dir = capture_dir.expanduser().resolve(strict=True)
     output_dir = output_dir.expanduser().resolve()
     if output_dir.is_relative_to(ROOT):
@@ -80,7 +81,7 @@ def build_and_process(capture_dir: Path, output_dir: Path, *, dry_run: bool,
     manifest = {"schemaVersion": 1, "videos": [
         {**clip, "recordingConsentConfirmed": True,
          "aiAnalysisConsentConfirmed": True,
-         "permissionToPublish": False}
+         "permissionToPublish": allow_visual_publication}
         for clip in clips
     ]}
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -103,6 +104,8 @@ def main(argv=None) -> int:
     choice.add_argument("--run", action="store_true")
     parser.add_argument("--attest-recording-rights", action="store_true")
     parser.add_argument("--allow-cloud-upload", action="store_true")
+    parser.add_argument("--allow-visual-publication", action="store_true",
+                        help="Permit ONLY provisional visual scores in public feed")
     args = parser.parse_args(argv)
     try:
         result = build_and_process(
@@ -110,6 +113,7 @@ def main(argv=None) -> int:
             attest_all=args.attest_recording_rights,
             upload_allowed=args.allow_cloud_upload,
             max_videos=args.max_videos, model=args.model,
+            allow_visual_publication=args.allow_visual_publication,
         )
     except (ValueError, OSError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
