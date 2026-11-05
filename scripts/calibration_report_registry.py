@@ -31,16 +31,21 @@ def _recognized_report(path: Path, key: str) -> bool:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError):
         return False
+    if not isinstance(data, dict) or not isinstance(data.get("model"), str):
+        return False
+    try:
+        matching_model = model_key(data["model"]) == key
+    except ValueError:
+        return False
     return (
-        isinstance(data, dict)
+        matching_model
         and data.get("schemaVersion") == 1
         and data.get("status") == "local-operator-labeled-calibration"
         and isinstance(data.get("reviewedClips"), int)
-        and data.get("reviewedClips") >= 1
+        and not isinstance(data.get("reviewedClips"), bool)
+        and data["reviewedClips"] >= 1
         and data.get("readyForUnattendedDeployment") is False
         and data.get("equipmentFunctionalityVerified") is False
-        and isinstance(data.get("model"), str)
-        and model_key(data["model"]) == key
     )
 
 
