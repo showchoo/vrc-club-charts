@@ -17,11 +17,13 @@ try:
     from scripts.evaluate_interior_video import validate_analysis, WORLD_ID
     from scripts.dj_stream_policy import published_worlds, load_verified
     from scripts.inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
+    from scripts.inspection_facility_inventory import public_facility_observations
 except ModuleNotFoundError:
     from auto_process_interior_queue import atomic_json, ROOT
     from evaluate_interior_video import validate_analysis, WORLD_ID
     from dj_stream_policy import published_worlds, load_verified
     from inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
+    from inspection_facility_inventory import public_facility_observations
 
 WEIGHTS = {"visual_design": 20, "lighting_design": 20,
            "spatial_design": 15, "originality": 10}
@@ -95,6 +97,9 @@ def assess_draft(raw: dict) -> dict | None:
         "assessedAtUtc": moment.astimezone(dt.timezone.utc).isoformat(),
         "evidenceType": "consented-video-ai-provisional",
         "mediaSha256Prefix": sha[:12],
+        "facilityObservations": public_facility_observations(
+            result.get("facilities"), duration_seconds=evidence["durationSeconds"],
+        ),
         "independentInWorldInspection": False,
         "djPlaybackVerified": False,
         "equipmentFunctionalityVerified": False,
