@@ -157,6 +157,17 @@ Public video-derived visual estimates are **not added** to Craftsmanship
 Ranking, trending, or overall scores. Video-only, subjective impressions
 are not equivalent to independent functional measurements.
 
+## Capture integrity gate
+
+The one-command inspection and the local batch queue now verify each MP4 with
+**FFprobe** before it can be uploaded to Gemini. The checks require a single
+H.264 stream, no audio track, plausible dimensions and duration, and a minimum
+frame count when available. FFprobe must be installed with FFmpeg.
+The optional `py -3 scripts/inspection_encoder_selftest.py` tests the encoder
+entirely on synthetic frames, leaving no recordings or user data behind.
+Metadata validation is not full decoding or a substitute for a Windows client
+recording test.
+
 ## Test and deployment
 
 The project CI runs all `test_*.py` regression files. The new modules do
