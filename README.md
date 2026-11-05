@@ -26,6 +26,15 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Video-only DJ facility appearances
+
+The Gemini video analysis now supports an appearance-based six-category
+DJ facility inventory. On consented clips, World detail pages can show
+allowlisted equipment appearance tags with video timestamps and the
+explicit label **unverified**. The system never treats a screen, mixer,
+deck or control panel as proof that a DJ can stream or operate it.
+The verified stream admission policy and Craftsmanship rankings are unchanged.
+
 ### Verified video-timestamp evidence
 
 Each newly evaluated interior video draft now carries the FFprobe-measured
