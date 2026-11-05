@@ -43,7 +43,7 @@ Do not request duration, speed or any other control parameters.
 
 def parse_decision(raw: object) -> tuple[str, str]:
     """Treat model output as untrusted; never allow arbitrary input addresses."""
-    if not isinstance(raw, dict) or raw.get("action") not in ACTIONS:
+    if not isinstance(raw, dict) or not isinstance(raw.get("action"), str) or raw["action"] not in ACTIONS:
         raise ValueError("Model returned an unrecognized action")
     reason = raw.get("reason", "")
     if not isinstance(reason, str):
