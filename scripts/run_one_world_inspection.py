@@ -15,13 +15,13 @@ try:
     from scripts.inspection_preflight import preflight
     from scripts.windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
-    from scripts.evaluate_interior_video import validate_media
+    from scripts.evaluate_interior_video import validate_media, media_sha256
     from scripts.publish_interior_visual_previews import release
 except ModuleNotFoundError:
     from inspection_preflight import preflight
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
-    from evaluate_interior_video import validate_media
+    from evaluate_interior_video import validate_media, media_sha256
     from publish_interior_visual_previews import release
 
 
@@ -121,11 +121,19 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     if processed.get("failed", 0):
         result["status"] = "analysis-failed"
         return result
-    if (processed.get("succeeded", 0) != 1 and
-        not any(private_dir.glob(world_id + "_*.draft.json"))):
+    # A stale draft for another recording of the same World is not proof
+    # that THIS newly captured video was analyzed. Validate its exact hash.
+    digest = media_sha256(video)
+    expected_draft = private_dir / (world_id + "_" + digest[:16] + ".draft.json")
+    if not expected_draft.is_file():
         result["status"] = "analysis-not-confirmed"
         return result
-
+    draft = json.loads(expected_draft.read_text(encoding="utf-8"))
+    if (draft.get("worldId") != world_id or
+        (draft.get("evidence") or {}).get("sha256") != digest or
+        draft.get("rankingEligible") is not False):
+        result["status"] = "analysis-provenance-mismatch"
+        return result
     result["status"] = "private-analysis-complete"
     if publish_visual:
         publication = release(private_dir, publish_and_push=True,
@@ -177,7 +185,7 @@ def main(argv=None) -> int:
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-failed", "analysis-failed", "analysis-not-confirmed"} else 1
+    return 0 if summary["status"] not in {"capture-failed", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
 
 
 if __name__ == "__main__":
