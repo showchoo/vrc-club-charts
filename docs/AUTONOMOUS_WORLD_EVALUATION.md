@@ -40,6 +40,19 @@ Use the actual visited World ID, video path, and own recording or creator-author
 
 `python -m unittest discover -s tests -p 'test_interior_video_evaluation.py'` runs offline regression tests.
 
+## Phase 2 baseline: offline autonomous route + local WebM recording
+
+The **offline camera lab** is in `experiments/offline-camera/index.html`. Open that file locally in a recent Chrome or Edge browser (or serve the repository on localhost). Click **自動巡回して録画（WebM）** to run a short autonomous grid-based inspection of a *synthetic club environment* and save a WebM video. The separate JSON audit link records the planned route, recording duration, and video SHA-256 where supported. Use **Esc** or the stop button to end recording early. No external dependencies, API key, camera/microphone permission, service account or VRChat connection is required. Browser download restrictions may require clicking the generated video link.
+
+In the same directory:
+- `navigation.js` includes walkability constraints, obstacle-aware shortest-path planning, target selection, and a deterministic timeline.
+- `camera.js` renders a local synthetic first-person view and uses Canvas `captureStream` plus browser `MediaRecorder` to record only that Canvas; no tab/desktop capture is used.
+- `tests/offline-camera.test.cjs` verifies route continuity, wall collision checks, detours, unreachable goals, emergency-stop wiring, and absence of network/camera APIs.
+
+This is **not yet an AI vision agent** and **not actual VRChat recording**. It proves the navigation → synthesized camera → local video → audit-report pipeline, and preserves separate interfaces so a vision-driven agent and an approved real-world sensor can be integrated later. Simulated clips MUST NOT be submitted as evidence for VRChat World craftsmanship or DJ playback.
+
+Run the offline Node tests via `node --test tests/offline-camera.test.cjs`. Browser MediaRecorder availability and a saved clip must still be confirmed on the intended Windows PC; CI tests do not substitute for a manual browser smoke test.
+
 ## Next phases (not yet implemented)
 
 1. **Evaluation calibration:** sample several intentionally selected, creator-consented interior videos. Verify Gemini's timestamps manually, measure false positive rate for DJ gear and lighting, determine whether an optional second evaluator is useful. Record inter-rater agreement.
