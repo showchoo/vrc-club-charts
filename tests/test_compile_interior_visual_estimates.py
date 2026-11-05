@@ -26,7 +26,12 @@ def fixture(allowed=True):
         "method": {"kind": "gemini_video_analysis",
                    "independentInWorldInspection": False},
         "evidence": {"type": "interior_video", "source": "creator-provided",
-                     "sha256": "a" * 64},
+                     "sha256": "a" * 64, "durationSeconds": 10.0,
+                     "durationSource": "ffprobe"},
+        "visualQuality": {
+            "status": "ok", "sampledFrames": 10,
+            "visualChangeIntervals": 4, "framesWithDetail": 10,
+        },
         "consent": {
             "recordingConsentConfirmed": True,
             "aiAnalysisConsentConfirmed": True,
@@ -77,6 +82,24 @@ class VisualFeedTests(unittest.TestCase):
             "status": "observed", "score": 5, "note": "fake", "evidence": [],
         }
         with self.assertRaises(ValueError):
+            c.assess_draft(report)
+
+    def test_nonexistent_video_timestamp_cannot_support_published_score(self):
+        report = fixture()
+        report["analysis"]["dimensions"]["visual_design"]["evidence"][0]["timestamp_seconds"] = 99.0
+        with self.assertRaisesRegex(ValueError, "beyond the verified recording"):
+            c.assess_draft(report)
+
+    def test_legacy_draft_without_verified_duration_is_unpublishable(self):
+        report = fixture()
+        del report["evidence"]["durationSeconds"]
+        with self.assertRaisesRegex(ValueError, "duration"):
+            c.assess_draft(report)
+
+    def test_unusable_visual_quality_cannot_be_published(self):
+        report = fixture()
+        report["visualQuality"]["status"] = "unusable"
+        with self.assertRaisesRegex(ValueError, "Unusable"):
             c.assess_draft(report)
 
     def test_catalog_gate_and_latest_by_timestamp(self):
