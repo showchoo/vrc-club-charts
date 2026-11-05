@@ -14,14 +14,16 @@ import json
 from pathlib import Path
 
 try:
-    from scripts.evaluate_interior_video import media_sha256, validate_media
+    from scripts.evaluate_interior_video import media_sha256, validate_media, WORLD_ID
+    from scripts.facility_calibration_review_ui import render_review_screen
     from scripts.inspection_evidence_timeline import audit_timeline
     from scripts.inspection_facility_inventory import (
         FACILITIES, MIN_PUBLIC_CONFIDENCE, validate_facilities,
     )
     from scripts.auto_process_interior_queue import atomic_json, ROOT
 except ModuleNotFoundError:
-    from evaluate_interior_video import media_sha256, validate_media
+    from evaluate_interior_video import media_sha256, validate_media, WORLD_ID
+    from facility_calibration_review_ui import render_review_screen
     from inspection_evidence_timeline import audit_timeline
     from inspection_facility_inventory import FACILITIES, MIN_PUBLIC_CONFIDENCE, validate_facilities
     from auto_process_interior_queue import atomic_json, ROOT
@@ -77,7 +79,7 @@ def validate_draft(draft: dict, video: Path) -> tuple[str, str, dict]:
     if facilities is None:
         raise FacilityCalibrationError("Legacy draft has no six-category facility predictions")
     world_id = draft.get("worldId")
-    if not isinstance(world_id, str) or not world_id.startswith("wrld_"):
+    if not isinstance(world_id, str) or not WORLD_ID.fullmatch(world_id):
         raise FacilityCalibrationError("Invalid World ID")
     return world_id, digest, facilities
 
@@ -87,8 +89,9 @@ def create_label_template(draft_path: Path, video_path: Path, out_path: Path) ->
     draft = read_small_json(draft_path)
     world_id, digest, _ = validate_draft(draft, video_path)
     destination = private_destination(out_path)
-    if destination.exists():
-        raise FileExistsError("Refusing to overwrite an existing human annotation")
+    screen_file = destination.with_suffix(".review.html")
+    if destination.exists() or screen_file.exists():
+        raise FileExistsError("Refusing to overwrite existing human annotation or review screen")
     labels = {
         "schemaVersion": 1, "worldId": world_id, "mediaSha256": digest,
         "reviewedEntireRecording": False,
@@ -96,10 +99,15 @@ def create_label_template(draft_path: Path, video_path: Path, out_path: Path) ->
         "labels": {name: "unreviewed" for name in FACILITIES},
         "notEquipmentFunctionalityVerification": True,
     }
+    # The UI shows the SOURCE VIDEO locally; it cannot certify that anyone
+    # actually watched the entire clip. Browser completion is human-attested.
+    screen = render_review_screen(template=labels, video=video_path)
     atomic_json(destination, labels)
+    screen_file.write_text(screen, encoding="utf-8")
     return {"status": "unreviewed-template-created",
             "categories": len(FACILITIES), "eligibleForMetrics": False,
-            "labelFile": str(destination), "modelUsed": False, "networkUsed": False}
+            "labelFile": str(destination), "reviewHtml": str(screen_file),
+            "modelUsed": False, "networkUsed": False}
 
 
 def _check_label(labels: dict, *, world_id: str, digest: str) -> dict:
