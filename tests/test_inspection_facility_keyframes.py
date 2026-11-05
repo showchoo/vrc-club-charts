@@ -102,6 +102,27 @@ class FrameKeyframeTests(unittest.TestCase):
         self.assertFalse(manifest["publiclyShareable"])
         self.assertEqual(ffmpeg.call_count, 1)
 
+    def test_repeated_run_reuses_complete_matching_private_evidence(self):
+        with (patch.object(frames.shutil, "which", return_value="/fake/ffmpeg"),
+              patch.object(frames.subprocess, "run", side_effect=self.fake_ffmpeg) as encode):
+            first = frames.export_frame_evidence(
+                fixture(self.video), self.video, self.dir / "private")
+            second = frames.export_frame_evidence(
+                fixture(self.video), self.video, self.dir / "private")
+        self.assertEqual(first["status"], "local-private-unreviewed")
+        self.assertEqual(second["status"], "existing-private-evidence")
+        self.assertEqual(second["frameCount"], 1)
+        self.assertEqual(encode.call_count, 1)
+
+    def test_incomplete_prior_folder_fails_instead_of_overwriting(self):
+        prior = self.dir / "private" / f"{WORLD}_{media_sha256(self.video)}"
+        prior.mkdir(parents=True)
+        (prior / "index.html").write_text("incomplete", encoding="utf-8")
+        with patch.object(frames.subprocess, "run", side_effect=AssertionError("No overwrites")):
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "incomplete"):
+                frames.export_frame_evidence(
+                    fixture(self.video), self.video, self.dir / "private")
+
     def test_unconsented_video_never_starts_ffmpeg(self):
         with patch.object(frames.subprocess, "run", side_effect=AssertionError("No decoding")):
             with self.assertRaisesRegex(frames.FrameEvidenceError, "permission"):
