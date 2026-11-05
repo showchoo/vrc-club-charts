@@ -25,6 +25,7 @@ try:
     from scripts.calibrate_facility_recognition import create_label_template, score_dataset
     from scripts.auto_prepare_facility_calibration import prepare_and_score
     from scripts.dj_audio_playback_test import make_clip as make_dj_audio_clip, verify as verify_dj_audio
+    from scripts.verify_dj_inspection_session import evaluate_session as evaluate_dj_session
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -37,6 +38,7 @@ except ModuleNotFoundError:
     from calibrate_facility_recognition import create_label_template, score_dataset
     from auto_prepare_facility_calibration import prepare_and_score
     from dj_audio_playback_test import make_clip as make_dj_audio_clip, verify as verify_dj_audio
+    from verify_dj_inspection_session import evaluate_session as evaluate_dj_session
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -252,6 +254,37 @@ def smoke_test() -> dict:
                 or audio_private["actualSpeakerOrHeadsetOutputVerified"] is not False
                 or audio_private["liveDjStreamVerified"] is not False):
             raise RuntimeError("Synthetic audio wrongly presented as verified VRChat playback")
+        # Synthetic Udon lines are just locally constructed TEST DATA. The
+        # combined result must never claim genuine VRChat verification.
+        synthetic_log = directory / "synthetic-dj-udon.txt"
+        session_token = "Synthetic001"
+        def line(kind, elapsed, video_ms=-1):
+            return (
+                "VCCDJPROBE|v=1|session=" + session_token
+                + "|world=" + SYNTHETIC_WORLD + "|component=screen01"
+                + "|event=" + kind + "|ms=" + str(elapsed)
+                + "|vms=" + str(video_ms) + "|players=1|code=0\n"
+            )
+        synthetic_log.write_text("".join([
+            line("begin", 0), line("ready", 70), line("start", 100),
+            line("play", 130), line("sample", 1000, 1000),
+            line("sample", 2000, 2000), line("sample", 3000, 3000),
+            line("stop", 3200),
+        ]), encoding="utf-8")
+        combined = evaluate_dj_session(
+            log=synthetic_log, session=session_token,
+            world=SYNTHETIC_WORLD, component="screen01",
+            reference=tone_source, capture=separate_capture,
+            recording_rights_confirmed=True, same_session_attested=True,
+        )
+        if (
+            combined["status"] != "operator_linked_local_observations"
+            or combined["equipmentFunctionalityVerified"] is not False
+            or combined["rankingEligible"] is not False
+            or combined["liveDjStreamingVerified"] is not False
+            or combined["vrchatClientOriginIndependentlyAuthenticated"] is not False
+        ):
+            raise RuntimeError("Synthetic DJ observation evidence was misclassified")
         return {
             "status": "passed",
             "capture": "synthetic_H264_MP4",
@@ -270,6 +303,7 @@ def smoke_test() -> dict:
             "privateCalibrationWorkspaceVerified": True,
             "realWorldAccuracyMeasured": False,
             "syntheticDjAudioPatternDetected": True,
+            "syntheticCombinedDjEvidenceVerified": True,
             "realVrchatAudioPlaybackMeasured": False,
             "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,

@@ -26,6 +26,18 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Combined private DJ equipment evidence (offline)
+
+The [creator-owned combined test](docs/COMBINED_DJ_INSPECTION_EVIDENCE.md)
+checks a particular operator-attested local session's Udon player event log
+alongside a separate audio-bearing recording of the original four-tone DJ
+test clip. Both signals must be present to report
+`operator_linked_local_observations`; incomplete sessions return
+`inconclusive`. The test never independently authenticates that the audio
+originated inside VRChat, verifies live DJ streaming, or publishes a ranking.
+It requires operator consent and does not automate VRChat client access.
+Synthetic H.264/AAC + simulated Udon events are exercised together in CI.
+
 ### Owner-controlled DJ audio calibration (offline, no live client control)
 
 The [DJ audio playback test](docs/CREATOR_DJ_AUDIO_TEST.md) generates an

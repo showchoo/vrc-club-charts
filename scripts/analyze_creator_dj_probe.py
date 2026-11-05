@@ -77,6 +77,8 @@ def assess(events: list[dict]) -> dict:
         defects.append("playback_interrupted")
     if not all(x in labels for x in ("ready", "start", "play")):
         defects.append("player_events_incomplete")
+    elif not (labels.index("ready") < labels.index("start") < labels.index("play")):
+        defects.append("player_events_out_of_order")
     end_count = labels.count("stop") + labels.count("end")
     if end_count != 1 or labels[-1] not in ("stop", "end"):
         defects.append("invalid_test_end")
@@ -99,6 +101,8 @@ def assess(events: list[dict]) -> dict:
             progress = False
     if not progress:
         defects.append("playback_clock_not_verified")
+    # A player clock is only supporting evidence AFTER the video-start
+    # handshake; a malformed or out-of-order handshake must never pass.
     complete = not defects
     return {
         "schemaVersion": 1,
