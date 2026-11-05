@@ -12,8 +12,10 @@ from urllib.parse import quote
 
 try:
     from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
+    from scripts.inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
 except ModuleNotFoundError:
     from dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
+    from inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
@@ -438,6 +440,29 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
         f'実際のワールドへの独立訪問、DJ機器の動作・音質・最適化性能は未検証です。'
         f'Craftsmanship Rankingの点数・順位には算入しません。</p>'
     ) if interior_scored else ""
+    # Public labels contain only known category IDs, timestamps and AI
+    # self-reported confidence; never arbitrary model text or user data.
+    facility_rows = []
+    if interior_scored:
+        for facility in sanitize_public_facilities(interior_visual.get("facilityObservations")):
+            label = LABELS_JA[facility["kind"]]
+            second = facility["timestampSeconds"]
+            confidence = facility["confidence"]
+            facility_rows.append(
+                f'<span class="tag" title="映像 {second:.1f}秒／AI推定信頼度 {confidence:.0%}">'
+                f'{esc(label)} · {second:.1f}s</span>'
+            )
+    facility_html = (
+        '<section class="world-relations">'
+        '<div class="section-heading"><div>'
+        '<p class="kicker">VISIBLE IN VIDEO / UNVERIFIED</p>'
+        '<h2>映像で見えた設備（AI推定）</h2>'
+        '</div></div><div class="tags">' + "".join(facility_rows) + '</div>'
+        '<p class="world-review-disclaimer">'
+        '映像上の外観から判断した参考情報です。'
+        'DJ配信・動画再生・操作・音響などの機能は確認していません。'
+        '</p></section>'
+    ) if facility_rows else ""
     image = (f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" '
              f'onerror="{thumbnail_fallback("div")}" />') if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
@@ -524,6 +549,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     </section>
 
     {interior_html}
+    {facility_html}
     <p class="world-review-disclaimer">{esc(stream_status)}。{stream_method}。配信機能以外の音響・ギミック・動作性能も未確認です。<br />ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
@@ -783,7 +809,7 @@ def main() -> int:
                     "observedCategories", "meanEvidenceConfidence", "assessedAtUtc",
                     "evidenceType", "mediaSha256Prefix", "independentInWorldInspection",
                     "djPlaybackVerified", "equipmentFunctionalityVerified",
-                    "craftsmanshipScore"}}
+                    "craftsmanshipScore", "facilityObservations"}}
         for item in interior_feed["worlds"]
         if isinstance(item, dict)
         and item.get("worldId") in {w["id"] for w in worlds}
@@ -796,6 +822,10 @@ def main() -> int:
         and not isinstance(item.get("visualScore"), bool)
         and 0 <= item.get("visualScore") <= 100
     ]
+    for item in interior_items:
+        item["facilityObservations"] = sanitize_public_facilities(
+            item.get("facilityObservations")
+        )
     interior_by_world = {item["worldId"]: item for item in interior_items}
     manual_events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
     auto_events_path = ROOT / "data/events-auto.json"
