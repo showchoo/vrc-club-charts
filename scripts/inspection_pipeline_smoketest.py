@@ -21,6 +21,7 @@ try:
     from scripts.build_static_pages import world_page
     from scripts.inspection_evidence_timeline import attach_verified_timeline
     from scripts.inspection_facility_inventory import FACILITIES
+    from scripts.inspection_facility_keyframes import export_frame_evidence
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -29,6 +30,7 @@ except ModuleNotFoundError:
     from build_static_pages import world_page
     from inspection_evidence_timeline import attach_verified_timeline
     from inspection_facility_inventory import FACILITIES
+    from inspection_facility_keyframes import export_frame_evidence
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -121,6 +123,20 @@ def smoke_test() -> dict:
             "aiAnalysisConsentConfirmed": True,
             "permissionToPublishVisualEstimate": True,
         }
+        extracted = export_frame_evidence(report, clip, directory / "private-keyframes")
+        if extracted["status"] != "local-private-unreviewed" or extracted["frameCount"] != 1:
+            raise RuntimeError("Synthetic facility keyframe extraction failed")
+        index_path = Path(extracted["index"])
+        private_report = json.loads((index_path.parent / "frames.json").read_text(encoding="utf-8"))
+        candidates = list(index_path.parent.glob("*.jpg"))
+        if (len(candidates) != 1 or not candidates[0].read_bytes().startswith(bytes.fromhex("ffd8"))
+                or private_report["mediaSha256"] != media_sha256(clip)
+                or private_report["publiclyShareable"] is not False
+                or private_report["equipmentFunctionalityVerified"] is not False):
+            raise RuntimeError("Private keyframe or evidence provenance invalid")
+        if ("未確認" not in index_path.read_text(encoding="utf-8")
+                or "DJブース" not in index_path.read_text(encoding="utf-8")):
+            raise RuntimeError("Private offline evidence index missing required disclaimer")
         draft = output / (SYNTHETIC_WORLD + "_" + report["evidence"]["sha256"][:16] + ".draft.json")
         draft.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
         feed = compile_feed(output, eligible_ids={SYNTHETIC_WORLD})
@@ -159,6 +175,8 @@ def smoke_test() -> dict:
             "blankVideoRejected": True,
             "consentedDraftCompiled": True,
             "syntheticFacilitySchemaVerified": True,
+            "privateKeyframeJpegVerified": True,
+            "privateEvidenceHtmlVerified": True,
             "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,
             "previewVisualScore": scores[0]["visualScore"],
