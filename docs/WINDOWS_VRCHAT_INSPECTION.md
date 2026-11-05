@@ -46,7 +46,8 @@ py scripts/windows_vrchat_inspector.py --world-id wrld_7eaf3905-10f8-4528-9aa3-8
 
 Produces a local MP4 (video only, no audio) and JSON audit under your Windows
 Videos/VRCClubCharts folder. It records the client rectangle, not your whole
-desktop. The client must remain visible and focused. Stop via Ctrl+C or change
+desktop. When you launch it from PowerShell, switch back to VRChat within 15 seconds.
+The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
 ## Optional video AI assessment
