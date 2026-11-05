@@ -75,3 +75,5 @@ Unity/VRChat実機でのコンパイル・再生実行は未検証です。オ�
 ```powershell
 py -3 -m unittest tests.test_analyze_creator_dj_probe tests.test_creator_dj_video_probe_contract
 ```
+
+実際に**ローカルで録音されたテスト音声**が元の校正動画と一致するかを調べたい場合は、[CREATOR_DJ_AUDIO_TEST.md](CREATOR_DJ_AUDIO_TEST.md) を参照してください。これもVRChat上の動作の独立認証ではありません。

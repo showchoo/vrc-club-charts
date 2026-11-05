@@ -26,6 +26,17 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Owner-controlled DJ audio calibration (offline, no live client control)
+
+The [DJ audio playback test](docs/CREATOR_DJ_AUDIO_TEST.md) generates an
+original eight-second test clip with four distinct tones, and checks whether a
+**separate consented recording** contains the same sequence. Analysis runs
+locally with FFmpeg; no account access, network request or footage upload
+occurs. This test is an audio recording sanity check, NOT independently
+verified VRChat sound, third-party playback or DJ livestream functionality.
+The existing synthetic MP4 CI smoke checks the signal processing without
+claiming a real VRChat session.
+
 ### Creator-controlled DJ player event probe (experimental)
 
 An [owner-installable UdonSharp video-player probe](docs/CREATOR_DJ_VIDEO_PROBE.md)
