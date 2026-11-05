@@ -42,8 +42,9 @@ class PublicationTests(unittest.TestCase):
 
     def test_revocation_updates_public_feed_to_empty_when_drafts_exist(self):
         with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder)
-            draft = root / "drafts"
+            root = Path(folder) / "repo"
+            root.mkdir()
+            draft = Path(folder) / "drafts"
             draft.mkdir()
             (draft / "one.draft.json").write_text("{}")
             target = root / "data" / "interior-visual-estimates.json"
@@ -63,7 +64,10 @@ class PublicationTests(unittest.TestCase):
 
     def test_unchanged_feed_has_no_commit(self):
         with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder)
+            root = Path(folder) / "repo"
+            root.mkdir()
+            draft = Path(folder) / "drafts"
+            draft.mkdir()
             target = root / "data" / "interior-visual-estimates.json"
             target.parent.mkdir()
             target.write_text(json.dumps(example_feed()))
@@ -72,14 +76,17 @@ class PublicationTests(unittest.TestCase):
                   patch.object(pub, "eligible_catalog_ids", return_value=set()),
                   patch.object(pub, "check_git_safety") as check,
                   patch.object(pub, "git", side_effect=AssertionError("git must not run"))):
-                result = pub.release(root, publish_and_push=True,
+                result = pub.release(draft, publish_and_push=True,
                                      copyright_clearance_confirmed=True)
             check.assert_called_once()
             self.assertEqual(result["status"], "unchanged")
 
     def test_new_feed_git_actions_are_fixed_and_never_force_push(self):
         with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder)
+            root = Path(folder) / "repo"
+            root.mkdir()
+            draft = Path(folder) / "drafts"
+            draft.mkdir()
             target = root / "data" / "interior-visual-estimates.json"
             target.parent.mkdir()
             target.write_text(json.dumps({"schemaVersion": 1, "worlds": []}))
@@ -91,7 +98,7 @@ class PublicationTests(unittest.TestCase):
                   patch.object(pub, "eligible_catalog_ids", return_value=set()),
                   patch.object(pub, "check_git_safety"),
                   patch.object(pub, "git", side_effect=record_git)):
-                result = pub.release(root, publish_and_push=True,
+                result = pub.release(draft, publish_and_push=True,
                                      copyright_clearance_confirmed=True)
             self.assertEqual(result["status"], "pushed")
             self.assertEqual(ops[0], ("add", "--", "data/interior-visual-estimates.json"))
