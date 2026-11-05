@@ -26,7 +26,15 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
-### One-command Windows inspection (single World, local first)
+### Pre-AI inspection footage quality gate
+
+Recording content is now inspected *locally* before Gemini video analysis.
+Black, visually empty or stagnant captures are rejected without cloud fees
+using a 1fps grayscale FFmpeg sampling check. A synthetic real-MP4
+positive/negative regression prevents future accidental removal of this gate.
+This is a heuristic, not proof of genuine in-world traversal.
+
+
 
 The new [one-run inspector](docs/ONE_WORLD_INSPECTION.md) provides a
 read-only system diagnostic, a synthetic offline FFmpeg/FFprobe recorder
