@@ -19,6 +19,44 @@
 - データはすべてローカルに保存。Gemini、VRChat、GitHub、Vercelへの通信や
   Craftsmanship Rankingの変更はありません。
 
+## 一括処理：動画を自動発見して確認ページを作成（推奨）
+
+Geminiによる評価ドラフトが保存され、録画ファイルがPCに残っていれば、
+**個別の動画名を入力せず**に次のコマンドだけで進められます。
+
+```powershell
+git pull
+.\scripts\run_facility_calibration.ps1 -OpenReview
+```
+
+標準では、次のローカルフォルダを使います。
+
+- 元の動画：`%USERPROFILE%\Videos\VRCClubCharts`
+- 非公開の評価ドラフト：上記内の `private-evaluations`
+- 正解ラベルを探す場所：`%USERPROFILE%\Downloads`
+- 生成されるレビュー画面と集計結果：上記内の `private-calibration`
+
+**1回目**：動画と評価レポートのSHA-256が一致する組だけ見つけて、
+`review-queue.html` を生成します。`-OpenReview` を付けると
+確認ページの一覧がブラウザーで開きます。動画を全編確認し、
+6種類の設備のラベルを付けてJSONをダウンロードしてください。
+
+**2回目以降**：同じコマンドを実行すると、既存の確認ページを
+上書きせず、`Downloads` に保存された
+`facility-labels-<動画ハッシュ先頭16文字>.json` を自動照合します。
+全項目が入力済みであり元動画と一致したデータのみモデル別に集計し、
+`private-calibration\calibration-metrics-*.json` を更新します。
+未回答・不一致・不明なデータは統計から除外します。
+
+録画やドラフトがまだなければ検出件数0として終了します。
+その場合、架空の検出結果や精度は作りません。
+ブラウザーのダウンロード先を変更している場合は、
+`-LabelsDir "D:\YourDownloads"` のように指定してください。
+
+`-CaptureDir`、`-DraftDir`、`-Workspace` も変更可能です。
+すべての動画・JSON・確認画面はローカルに残ります。
+ワールドの自動訪問、Gemini API呼び出し、公開サイト変更は行いません。
+
 ## 実際の動画から正解ラベルの入力画面を作る
 
 まず、動画本体、Geminiによる同動画の \`*.draft.json\`、
