@@ -1,36 +1,18 @@
 [
   {
-    "id": "feed-8e7a3cbe1b401d9b9851",
-    "name": "今月の #GrooveNoir は 明日 、11月4日（水）です！ VRChat で行われるマンスリーのバー DJ 、今回もフリー選曲で90分、ハウスとディスコを中心に素敵なサウンドをお届けし…",
-    "start": "2026-11-04T13:00:00Z",
+    "id": "feed-21168796bcc43a9d4735",
+    "name": "ワンマン 開催 記念ヴァーチャルミニ ライブ 『U1』 開催 決定☆彡 ういはら初の VRChat 上でのヴァーチャル ライブ が 開催 されます！ 日時 ： 2026年11月14日（土） 開…",
+    "start": "2026-11-14T13:00:00Z",
     "end": null,
-    "organizer": "@dj_tsumugi",
+    "organizer": "@u1_8ra",
     "worldName": "VRChat",
     "genres": [
-      "DJ"
+      "LIVE"
     ],
-    "url": "https://x.com/dj_tsumugi/status/2117506169828933799?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/u1_8ra/status/2117938779097104861?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "8e7a3cbe1b401d9b9851",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-f03235e2192497da7814",
-    "name": "🎂 イベント告知 🎂 様々なご縁やご紹介でお世話になっているdataさんのお誕生日会が VRChat で 開催 されます！私も DJ でお祝いさせていただきます☺️ 📅 イベント開始 ：11/…",
-    "start": "2026-11-06T21:00:00Z",
-    "end": null,
-    "organizer": "@kohadachaan",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/kohadachaan/status/2117709580822265871?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "f03235e2192497da7814",
+    "upstreamId": "21168796bcc43a9d4735",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
