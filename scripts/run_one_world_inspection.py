@@ -19,6 +19,7 @@ try:
     from scripts.publish_interior_visual_previews import release
     from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
     from scripts.inspection_visual_quality import assess_video_quality, VisualQualityError
+    from scripts.inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
@@ -27,6 +28,7 @@ except ModuleNotFoundError:
     from publish_interior_visual_previews import release
     from inspection_media_verify import verify_mp4, MediaVerificationError
     from inspection_visual_quality import assess_video_quality, VisualQualityError
+    from inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
 
 
 def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
@@ -155,6 +157,12 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         (draft.get("evidence") or {}).get("sha256") != digest or
         draft.get("rankingEligible") is not False):
         result["status"] = "analysis-provenance-mismatch"
+        return result
+    try:
+        result["timelineAudit"] = audit_timeline(draft)
+    except (EvidenceTimelineError, ValueError):
+        result["status"] = "analysis-provenance-mismatch"
+        result["detail"] = "Model timestamps or local visual proof do not match recorded MP4"
         return result
     result["status"] = "private-analysis-complete"
     if publish_visual:
