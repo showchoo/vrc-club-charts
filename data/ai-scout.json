@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-04T17:06:31+00:00",
+  "updatedAt": "2026-11-05T00:22:21+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 204,
+    "totalCandidates": 201,
     "assessed": 24,
-    "newAssessments": 4,
-    "pending": 176
+    "newAssessments": 3,
+    "pending": 174
   },
   "scored": [
     {
@@ -550,32 +550,36 @@
   ],
   "candidates": [
     {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
-    },
-    {
-      "id": "wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c",
-      "name": "_recovered․SHELTER2․mrg",
+      "id": "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e",
+      "name": "_SEREN",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_00e75c2a-1534-4854-affa-409cc8f5bd6c"
+      "url": "https://vrcmap.com/world/wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e"
     },
     {
-      "id": "wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead",
-      "name": "Atomica",
+      "id": "wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144",
+      "name": "Axe Throwing Club 2․0",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_3a57cc32-cf5e-4b57-834a-b6e6216a0ead"
+      "url": "https://vrcmap.com/world/wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144"
+    },
+    {
+      "id": "wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68",
+      "name": "Club BEBE CARROT",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68"
+    },
+    {
+      "id": "wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc",
+      "name": "club bunny",
+      "author": "Unknown",
+      "sourceType": "discovery",
+      "signals": [],
+      "url": "https://vrcmap.com/world/wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc"
     },
     {
       "id": "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e",
@@ -587,14 +591,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d",
-      "name": "Moon Diner",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_5a39ec00-f68f-4792-a3ac-f9c63e31ca3d"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -619,54 +615,12 @@
       "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
     },
     {
-      "id": "wrld_59e089b3-c0d9-4592-afcd-590ebe55d398",
-      "name": "Pixel Paradise Arcade",
+      "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
+      "name": "青色クラブ ⁄ AOIRO CLUB ［ Ver2․XX ］",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_59e089b3-c0d9-4592-afcd-590ebe55d398"
-    },
-    {
-      "id": "wrld_918ff65a-8fa4-442e-a983-da1506993b3f",
-      "name": "Restroom Session",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_918ff65a-8fa4-442e-a983-da1506993b3f"
-    },
-    {
-      "id": "wrld_e3e9bd57-665f-4170-b9fb-00101f24729f",
-      "name": "RIFT Site Alpha",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_e3e9bd57-665f-4170-b9fb-00101f24729f"
-    },
-    {
-      "id": "wrld_23808179-ae84-4262-a9fa-c7a171ef6791",
-      "name": "The Obsidian Nightclub",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_23808179-ae84-4262-a9fa-c7a171ef6791"
-    },
-    {
-      "id": "wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e",
-      "name": "术力口工坊",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_29bbf3df-411d-49a3-9fad-f6ffec9d366e"
-    },
-    {
-      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
-      "name": "Audiolinkバチバチワールド",
-      "author": "しゃちょー",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+      "url": "https://vrcmap.com/world/wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483"
     },
     {
       "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
@@ -679,14 +633,34 @@
       "url": "worlds/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6.html"
     },
     {
-      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
-      "name": "Club Rayne",
-      "author": "Candy Rayne",
+      "id": "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e",
+      "name": "Club Cybercore",
+      "author": "Βigby",
+      "sourceType": "catalog",
+      "signals": [
+        "CYBER"
+      ],
+      "url": "worlds/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e.html"
+    },
+    {
+      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
+      "name": "Consilium",
+      "author": "Tsuβaki",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
+      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html"
+    },
+    {
+      "id": "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80",
+      "name": "DanceStage",
+      "author": "Asaka․",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -769,6 +743,16 @@
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
     },
     {
+      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
+      "name": "Shatoo's Dance Stage",
+      "author": "Shatoo",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
+    },
+    {
       "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
       "name": "Solitude （Club Set）",
       "author": "Atom_ilalia",
@@ -777,15 +761,35 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
+    },
+    {
+      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
+      "name": "stadium rave A （audiolink party world ）",
+      "author": "ALDUMGAMES",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_5927be27-1e70-4f4a-98fb-439d343933ed.html"
+    },
+    {
+      "id": "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d",
+      "name": "The Deep Dusk - Magic Land Mod",
+      "author": "Lydia K",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d.html"
     }
   ],
   "attempts": {
     "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
-      "checkedAt": "2026-10-28T23:12:53+00:00",
+      "checkedAt": "2026-11-05T00:22:13+00:00",
       "status": "assessed"
     },
     "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
-      "checkedAt": "2026-10-28T23:12:56+00:00",
+      "checkedAt": "2026-11-05T00:22:15+00:00",
       "status": "insufficient-image"
     },
     "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
@@ -813,7 +817,7 @@
       "status": "assessed"
     },
     "wrld_099295a5-d221-4128-8f01-55cd81d71839": {
-      "checkedAt": "2026-10-28T23:12:58+00:00",
+      "checkedAt": "2026-11-05T00:22:18+00:00",
       "status": "assessed"
     },
     "wrld_4f015255-390a-44cb-9e81-bd2021eb970a": {
@@ -837,7 +841,7 @@
       "status": "assessed"
     },
     "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
-      "checkedAt": "2026-10-28T23:13:02+00:00",
+      "checkedAt": "2026-11-05T00:22:21+00:00",
       "status": "assessed"
     },
     "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
