@@ -20,6 +20,19 @@ Phase 1 is an opt-in, local interior-video evaluator: `scripts/evaluate_interior
 
 Development plan, recording/privacy constraints, and the future authorized-agent gate: [Autonomous World Evaluation](docs/AUTONOMOUS_WORLD_EVALUATION.md).
 
+### Windows VRChat inspection pilot (manual entry required)
+
+A new opt-in Windows tool records the foreground client window from a
+**manually entered private world**, optionally proposes bounded
+Gemini-guided OSC movement, and can create an evidence-labeled video
+assessment. This is a local pilot, **not a deployed cloud bot or an
+auto-publishing Craftsmanship Ranking**. The automated movement mode is
+disabled unless explicitly opted into and may conflict with VRChat's
+current automation restrictions; support has not granted approval.
+
+Setup, user consent switches, output format and current limitations:
+[Windows VRChat Inspection](docs/WINDOWS_VRCHAT_INSPECTION.md).
+
 ## AI SCOUT — automated discovery and visual estimates
 
 - `scripts/build_ai_scout.py` refreshes approved catalog candidates, preserving a separate unapproved discovery queue.
