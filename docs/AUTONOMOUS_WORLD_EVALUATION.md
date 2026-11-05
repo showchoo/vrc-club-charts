@@ -53,6 +53,21 @@ This is **not yet an AI vision agent** and **not actual VRChat recording**. It p
 
 Run the offline Node tests via `node --test tests/offline-camera.test.cjs`. Browser MediaRecorder availability and a saved clip must still be confirmed on the intended Windows PC; CI tests do not substitute for a manual browser smoke test.
 
+## Windows prototype (not a permitted unattended bot)
+
+The local `scripts/windows_vrchat_inspector.py` adds real Windows VRChat
+foreground-window silent MP4 capture and optional bounded Gemini image
+navigation via the documented OSC input axes. The user must manually open
+a private instance and provide a World ID. Video assessment integrates
+with the draft video evaluator; no score is automatically published.
+
+**This feature remains a policy-risk experiment:** VRChat has NOT approved
+unattended automated access. Do not mistake technical OSC support or support's
+non-answer for authorization. There is no automatic login, world hopping,
+interactive equipment verification, reliable navigation, or verified ranking.
+It has not been end-to-end tested on Windows. For prerequisites and exact
+owner controls, see [Windows VRChat Inspection](WINDOWS_VRCHAT_INSPECTION.md).
+
 ## Next phases (not yet implemented)
 
 1. **Evaluation calibration:** sample several intentionally selected, creator-consented interior videos. Verify Gemini's timestamps manually, measure false positive rate for DJ gear and lighting, determine whether an optional second evaluator is useful. Record inter-rater agreement.
