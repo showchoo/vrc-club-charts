@@ -128,7 +128,7 @@ jobs:
         run: |
           command -v ffmpeg
           command -v ffprobe
-          ffmpeg -hide_banner -encoders 2>/dev/null | grep -q libx264
+          ffmpeg -hide_banner -encoders 2>/dev/null | grep libx264
           python scripts/inspection_pipeline_smoketest.py
       - name: Build discovery evidence snapshot
         run: python scripts/build_discovery_ledger.py
