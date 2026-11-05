@@ -32,6 +32,11 @@ class OneWorldPipelineTests(unittest.TestCase):
         })
         patcher.start()
         self.addCleanup(patcher.stop)
+        quality_patch = patch.object(run, "assess_video_quality", return_value={
+            "status": "ok", "sampledFrames": 4, "reasons": [],
+        })
+        quality_patch.start()
+        self.addCleanup(quality_patch.stop)
 
     def common(self, d: str):
         return {"world_id": WORLD, "captures": Path(d), "seconds": 10,
@@ -161,6 +166,21 @@ class OneWorldPipelineTests(unittest.TestCase):
                     publishing_rights_confirmed=True)
             self.assertEqual(result["status"], "capture-invalid")
             self.assertIn("bad MP4", result["detail"])
+
+    def test_unusable_recording_never_reaches_ai_or_publication(self):
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "assess_video_quality", return_value={
+                      "status": "unusable", "reasons": ["almost_all_frames_black"],
+                  }),
+                  patch.object(run, "process_queue", side_effect=AssertionError("must not upload")),
+                  patch.object(run, "release", side_effect=AssertionError("must not publish"))):
+                result = run.run_inspection(**self.common(d), analyze_video=True,
+                    publish_visual=True, recording_rights_confirmed=True,
+                    gemini_upload_confirmed=True, publishing_rights_confirmed=True)
+            self.assertEqual(result["status"], "capture-unusable")
+            self.assertEqual(result["visualQuality"]["reasons"], ["almost_all_frames_black"])
 
     def test_ai_motion_remains_separate_opt_in(self):
         with tempfile.TemporaryDirectory() as d:
