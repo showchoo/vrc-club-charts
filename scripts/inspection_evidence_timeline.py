@@ -10,8 +10,10 @@ import math
 
 try:
     from scripts.evaluate_interior_video import validate_analysis
+    from scripts.inspection_facility_inventory import validate_facilities
 except ModuleNotFoundError:
     from evaluate_interior_video import validate_analysis
+    from inspection_facility_inventory import validate_facilities
 
 MAX_SECONDS = 125.0
 TIMESTAMP_TOLERANCE = 0.25
@@ -61,10 +63,21 @@ def audit_timeline(report: dict) -> dict:
                     "Model cited a time beyond the verified recording duration"
                 )
             checked_points += 1
+    facility_points = 0
+    facilities = analysis.get("facilities")
+    if facilities is not None:
+        for facility in validate_facilities(facilities).values():
+            for point in facility["evidence"]:
+                if point["timestamp_seconds"] > duration + TIMESTAMP_TOLERANCE:
+                    raise EvidenceTimelineError(
+                        "Facility evidence cited a time beyond the verified recording duration"
+                    )
+                facility_points += 1
     return {
         "timelineChecked": True,
         "durationSeconds": duration,
         "evidencePointsChecked": checked_points,
+        "facilityEvidencePointsChecked": facility_points,
         "observedDimensions": observed_dimensions,
         "timestampToleranceSeconds": TIMESTAMP_TOLERANCE,
         "independentSceneProof": False,
