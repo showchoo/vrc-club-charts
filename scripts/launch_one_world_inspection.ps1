@@ -5,6 +5,7 @@ param(
     [ValidateRange(5, 120)][int]$Seconds = 45,
     [string]$CaptureDir = "$env:USERPROFILE\Videos\VRCClubCharts",
     [switch]$Diagnose,
+    [switch]$SmokeTest,
     [switch]$AnalyzeVideo,
     [switch]$UseAiMotion,
     [switch]$PublishVisual,
@@ -19,6 +20,14 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Push-Location $repo
 try {
+    if ($SmokeTest) {
+        if ($Diagnose -or $WorldId -or $AnalyzeVideo -or $UseAiMotion -or $PublishVisual) {
+            throw "-SmokeTest is standalone; it never reads or records a VRChat window."
+        }
+        & py -3 scripts/inspection_pipeline_smoketest.py
+        if ($LASTEXITCODE -ne 0) { throw "Synthetic end-to-end test failed. Review the error above." }
+        return
+    }
     $arguments = @("scripts/run_one_world_inspection.py")
     if ($Diagnose) {
         $arguments += "--diagnose"

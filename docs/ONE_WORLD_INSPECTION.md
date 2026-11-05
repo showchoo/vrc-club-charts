@@ -46,6 +46,26 @@ AI upload of malformed, truncated, silent-track-invalid or audio-bearing files.
 A passing metadata probe does **not** prove all video frames are visually
 correct; it is a preliminary integrity check.
 
+### Synthetic end-to-end test (no VRChat needed)
+
+After the FFmpeg encoder self-test, you can also verify the **full local
+evidence-processing path** using one entirely synthetic MP4 video:
+
+```powershell
+.\scripts\launch_one_world_inspection.ps1 -SmokeTest
+```
+
+This creates temporary, real H.264 frames with FFmpeg; probes the MP4;
+computes its SHA-256 digest; builds a **synthetic** evidence report from
+fixed fixture values; compiles a provisional visual estimate; and verifies
+that a generated World page labels the estimate correctly **without
+publishing it**. The clip is deleted after the test. It does not connect
+to VRChat, Gemini, Supabase, GitHub or the Internet.
+
+A result with `"status": "passed"` establishes only that this **offline
+local data pipeline** operates. It does not prove real-world recording,
+AI reasoning, navigation, DJ equipment or production publication.
+
 ### A. Capture without AI movement or cloud upload
 
 Use the **actual** ID of the World you manually entered:

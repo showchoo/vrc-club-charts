@@ -168,6 +168,18 @@ entirely on synthetic frames, leaving no recordings or user data behind.
 Metadata validation is not full decoding or a substitute for a Windows client
 recording test.
 
+### Synthetic MP4 integration smoke test
+
+Run `py -3 scripts/inspection_pipeline_smoketest.py` (or use
+`-SmokeTest` with the Windows launcher) to create a **real temporary
+silent H.264 MP4** and test metadata verification, hash provenance,
+schema validation, consent-gated numeric visual scoring and the separate
+World page preview. All AI responses in this test are fixed fixtures,
+**not real Gemini inference**. No videos or drafts leave the temporary
+folder. GitHub CI executes this test with FFmpeg/FFprobe to catch pipeline
+regressions prior to merging. Passing does not substitute for real
+Windows/VRChat testing.
+
 ## Test and deployment
 
 The project CI runs all `test_*.py` regression files. The new modules do
