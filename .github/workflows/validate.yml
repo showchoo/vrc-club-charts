@@ -124,6 +124,10 @@ jobs:
           node --test tests/offline-camera.test.cjs
       - name: Test AI SCOUT catalog generation
         run: python -m unittest discover -s tests -p "test_*.py"
+      - name: Install FFmpeg for real synthetic MP4 test
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
       - name: Test real synthetic MP4 through offline inspection pipeline
         run: |
           command -v ffmpeg
