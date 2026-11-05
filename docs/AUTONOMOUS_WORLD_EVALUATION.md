@@ -6,7 +6,7 @@ VRC Club Charts should eventually discover eligible public DJ Worlds, visit thei
 
 **This is a development goal, not an existing capability.** There is no autonomous VRChat login or traversal in this repository today. Do not simulate an actual visit with a thumbnail or AI-generated narrative.
 
-## Current platform access gate (2026-11-05)
+## Current platform access gate
 
 - VRChat's current Terms of Service restrict third-party automated tools/agents used to access, search or extract from the platform, and access inconsistent with individual human use. Do not assume OSC input capability constitutes blanket permission for unattended account/client bots. See https://hello.vrchat.com/legal .
 - OSC Input Controller documents movement, look, jump and interaction inputs for the client: https://docs.vrchat.com/docs/osc-as-input-controller . This is a possible technical interface **only if VRChat authorizes the intended automated use**.
@@ -67,6 +67,16 @@ non-answer for authorization. There is no automatic login, world hopping,
 interactive equipment verification, reliable navigation, or verified ranking.
 It has not been end-to-end tested on Windows. For prerequisites and exact
 owner controls, see [Windows VRChat Inspection](WINDOWS_VRCHAT_INSPECTION.md).
+
+## Local review queue and provisional visual evidence
+
+A consent-gated batch pipeline now processes locally recorded or creator-provided
+interior videos, records retry/idempotency state, optionally produces
+provisional visual-only scores and (when separately authorized) publishes a
+numeric feed. The new screenshot novelty guard bounds recovery turns when
+AI-controlled movement appears stuck. None of this verifies real-world
+navigation, audio, or DJ equipment functionality. See
+[Automated Inspection Pipeline](AUTOMATED_INSPECTION_PIPELINE.md).
 
 ## Next phases (not yet implemented)
 
