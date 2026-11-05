@@ -26,6 +26,16 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Creator-controlled DJ player event probe (experimental)
+
+An [owner-installable UdonSharp video-player probe](docs/CREATOR_DJ_VIDEO_PROBE.md)
+records official VRChat video events and playback-clock samples **inside a
+World that its creator can edit**. This is a test adapter for an authorized
+private test instance; it requires Unity/VRChat Build & Test before declaring
+anything functional. Its event logs stay local, and mere playback clock
+progress is **not** proof of live DJ stream, video output or sound.
+Nothing is connected to verified Craftsmanship Ranking or a client crawler.
+
 ### Private source-video evidence frames
 
 A new Windows-compatible [local facility keyframe extractor](docs/PRIVATE_FACILITY_KEYFRAMES.md)
