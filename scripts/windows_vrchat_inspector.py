@@ -212,6 +212,7 @@ class WindowRecorder:
                 "-f", "rawvideo", "-pix_fmt", "bgra", "-s:v", f"{w}x{h}",
                 "-r", str(self.FPS), "-i", "pipe:0", "-an",
                 "-c:v", "libx264", "-preset", "ultrafast", "-crf", "27",
+                "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
                 "-pix_fmt", "yuv420p", str(self.output),
             ], stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=self.log_file)
         except Exception:
