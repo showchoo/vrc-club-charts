@@ -34,6 +34,8 @@ def make_case(folder: Path, *, video_name="test.mp4"):
     report = {
         "schemaVersion": 1, "worldId": "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05",
         "status": "draft_video_assessment", "rankingEligible": False,
+        "method": {"kind": "gemini_video_analysis", "model": "gemini-3.5-flash-lite",
+                   "independentInWorldInspection": False},
         "evidence": {
             "type": "interior_video", "sha256": sha,
             "source": "owner-recorded", "durationSource": "ffprobe",
@@ -119,6 +121,7 @@ class CalibrationTests(unittest.TestCase):
             outcome = calibration.score_dataset(manifest(folder, [paths]))
         classes = outcome["classes"]
         self.assertEqual(outcome["reviewedClips"], 1)
+        self.assertEqual(outcome["model"], "gemini-3.5-flash-lite")
         self.assertEqual(classes["dj_booth"]["tp"], 1)
         self.assertEqual(classes["dj_decks"]["fp"], 1)
         self.assertEqual(classes["video_screen"]["fn"], 1)
@@ -176,6 +179,18 @@ class CalibrationTests(unittest.TestCase):
             bad_manifest.write_text(json.dumps(data), encoding="utf-8")
             with self.assertRaisesRegex(calibration.FacilityCalibrationError, "local"):
                 calibration.score_dataset(bad_manifest)
+
+    def test_model_versions_cannot_be_mixed_in_same_metrics(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            first = make_case(folder, video_name="first.mp4")
+            second = make_case(folder, video_name="second.mp4")
+            data = json.loads(second[1].read_text(encoding="utf-8"))
+            data["method"]["model"] = "gemini-test-another-version"
+            second[1].write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(calibration.FacilityCalibrationError,
+                                        "mix multiple Gemini model"):
+                calibration.score_dataset(manifest(folder, [first, second]))
 
     def test_out_of_range_timestamp_is_not_accepted(self):
         with tempfile.TemporaryDirectory() as tmp:
