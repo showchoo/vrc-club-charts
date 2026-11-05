@@ -263,7 +263,7 @@ def smoke_test() -> dict:
                 "VCCDJPROBE|v=1|session=" + session_token
                 + "|world=" + SYNTHETIC_WORLD + "|component=screen01"
                 + "|event=" + kind + "|ms=" + str(elapsed)
-                + "|vms=" + str(video_ms) + "|players=1|code=0\\n"
+                + "|vms=" + str(video_ms) + "|players=1|code=0\n"
             )
         synthetic_log.write_text("".join([
             line("begin", 0), line("ready", 70), line("start", 100),
