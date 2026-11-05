@@ -78,6 +78,23 @@ AI-controlled movement appears stuck. None of this verifies real-world
 navigation, audio, or DJ equipment functionality. See
 [Automated Inspection Pipeline](AUTOMATED_INSPECTION_PIPELINE.md).
 
+## Creator-owned video player instrumentation (source available, untested)
+
+The source-only [VCCDJVideoProbe](CREATOR_DJ_VIDEO_PROBE.md) is an optional
+UdonSharp component for a World creator to install into their own or
+explicitly editable test scene. It listens for VRChat's official video
+load/start/play/pause/error events and records a bounded local playback-clock
+sample while only one tester is in the instance. No URLs, usernames, chat
+content or audio are intentionally emitted.
+
+**This is not yet a verified functionality result.** No creator-supplied
+Unity project or live Windows VRChat instance is available to build/test it.
+Only a static source-contract regression can run in GitHub CI. Decoder
+events do not prove audio playback, screen texture rendering, playback
+controls, DJ livestream compatibility or verified rankings. Subsequent
+integration requires creator consent, runtime execution and independent
+functional measurements.
+
 ## Next phases (not yet implemented)
 
 1. **Evaluation calibration:** sample several intentionally selected, creator-consented interior videos. Verify Gemini's timestamps manually, measure false positive rate for DJ gear and lighting, determine whether an optional second evaluator is useful. Record inter-rater agreement.
