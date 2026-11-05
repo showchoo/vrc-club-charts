@@ -20,6 +20,7 @@ try:
     from scripts.compile_interior_visual_estimates import compile_feed
     from scripts.build_static_pages import world_page
     from scripts.inspection_evidence_timeline import attach_verified_timeline
+    from scripts.inspection_facility_inventory import FACILITIES
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -27,6 +28,7 @@ except ModuleNotFoundError:
     from compile_interior_visual_estimates import compile_feed
     from build_static_pages import world_page
     from inspection_evidence_timeline import attach_verified_timeline
+    from inspection_facility_inventory import FACILITIES
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -44,8 +46,20 @@ def synthetic_analysis() -> dict:
                           "observation": "Synthetic video color-pattern frame",
                           "confidence": 0.95}],
         }
+    # Fixed simulated category sightings. The synthetic MP4 does not contain
+    # any actual DJ booth, so this is ONLY an output-schema integration test.
+    equipment = {
+        name: {
+            "visibility": "visible" if name == "dj_booth" else "unclear",
+            "evidence": (
+                [{"timestamp_seconds": 1.0, "confidence": 0.94}]
+                if name == "dj_booth" else []
+            ),
+        }
+        for name in FACILITIES
+    }
     return {"summary": "Synthetic test only; no VRChat World was visited",
-            "dimensions": dims}
+            "dimensions": dims, "facilities": equipment}
 
 
 def smoke_test() -> dict:
@@ -115,6 +129,10 @@ def smoke_test() -> dict:
             raise RuntimeError("Provisional visual scoring failed")
         if scores[0].get("craftsmanshipScore") is not None:
             raise RuntimeError("Provisional video score was mistaken for Craftsmanship")
+        facilities = scores[0].get("facilityObservations", [])
+        if (len(facilities) != 1 or facilities[0].get("kind") != "dj_booth"
+                or facilities[0].get("equipmentFunctionalityVerified") is not False):
+            raise RuntimeError("DJ equipment appearance incorrectly serialized")
         world = {
             "id": SYNTHETIC_WORLD, "name": "SYNTHETIC TEST ONLY",
             "author": "Local test fixture", "genres": ["DJ"],
@@ -124,7 +142,10 @@ def smoke_test() -> dict:
         if ("内部動画の暫定ビジュアル評価" not in html
                 or "60/100" not in html
                 or "Craftsmanship Rankingの点数・順位には算入しません" not in html
-                or "NOT SCORED" not in html):
+                or "NOT SCORED" not in html
+                or "映像で見えた設備（AI推定）" not in html
+                or "DJブース" not in html
+                or "DJ配信・動画再生・操作・音響などの機能は確認していません" not in html):
             raise RuntimeError("Public World detail page failed provisional evidence boundary checks")
         return {
             "status": "passed",
@@ -137,6 +158,8 @@ def smoke_test() -> dict:
             "movingVisualQuality": quality["status"],
             "blankVideoRejected": True,
             "consentedDraftCompiled": True,
+            "syntheticFacilitySchemaVerified": True,
+            "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,
             "previewVisualScore": scores[0]["visualScore"],
             "publishedCraftsmanshipScore": False,
