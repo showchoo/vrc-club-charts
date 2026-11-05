@@ -16,6 +16,7 @@ from pathlib import Path
 try:
     from scripts.evaluate_interior_video import media_sha256, validate_media, WORLD_ID
     from scripts.facility_calibration_review_ui import render_review_screen
+    from scripts.inspection_media_verify import verify_mp4
     from scripts.inspection_evidence_timeline import audit_timeline
     from scripts.inspection_facility_inventory import (
         FACILITIES, MIN_PUBLIC_CONFIDENCE, validate_facilities,
@@ -24,6 +25,7 @@ try:
 except ModuleNotFoundError:
     from evaluate_interior_video import media_sha256, validate_media, WORLD_ID
     from facility_calibration_review_ui import render_review_screen
+    from inspection_media_verify import verify_mp4
     from inspection_evidence_timeline import audit_timeline
     from inspection_facility_inventory import FACILITIES, MIN_PUBLIC_CONFIDENCE, validate_facilities
     from auto_process_interior_queue import atomic_json, ROOT
@@ -73,6 +75,12 @@ def validate_draft(draft: dict, video: Path) -> tuple[str, str, dict]:
     validate_media(video)
     if media_sha256(video) != digest:
         raise FacilityCalibrationError("Local video hash differs from draft report")
+    metadata = verify_mp4(video)
+    evidence_duration = evidence.get("durationSeconds")
+    if (not isinstance(evidence_duration, (int, float)) or
+        isinstance(evidence_duration, bool) or
+        abs(float(evidence_duration) - metadata["durationSeconds"]) > .15):
+        raise FacilityCalibrationError("Draft and independently probed video durations differ")
     audit_timeline(draft)
     analysis = draft.get("analysis")
     facilities = validate_facilities(analysis.get("facilities") if isinstance(analysis, dict) else None)
