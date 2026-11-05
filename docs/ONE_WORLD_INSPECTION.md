@@ -28,9 +28,23 @@ Run the read-only diagnostic FIRST (no account, capture, OSC, or cloud access):
 .\scripts\launch_one_world_inspection.ps1 -Diagnose -AnalyzeVideo
 ```
 
-The diagnostic checks Windows, Python, FFmpeg/libx264, `mss`, Gemini SDK/key,
+The diagnostic checks Windows, Python, FFmpeg/libx264, FFprobe, `mss`, Gemini SDK/key,
 and the visible VRChat window. It only reports whether a window was found;
 it cannot determine which World is open or whether OSC is authorized/enabled.
+
+**Recommended next check:** Test local H.264 encoding without starting VRChat or
+recording your desktop. This uses a **synthetic black test image**, saves a
+temporary MP4, verifies it using FFprobe, then deletes it:
+
+```powershell
+py -3 scripts/inspection_encoder_selftest.py
+```
+
+If this fails, fix FFmpeg/FFprobe or `libx264` before trying a real World.
+After any actual capture, the pipeline now inspects MP4 metadata and blocks
+AI upload of malformed, truncated, silent-track-invalid or audio-bearing files.
+A passing metadata probe does **not** prove all video frames are visually
+correct; it is a preliminary integrity check.
 
 ### A. Capture without AI movement or cloud upload
 
