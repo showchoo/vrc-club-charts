@@ -20,6 +20,7 @@ try:
     from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
     from scripts.inspection_visual_quality import assess_video_quality, VisualQualityError
     from scripts.inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
+    from scripts.inspection_facility_keyframes import export_frame_evidence, FrameEvidenceError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
@@ -29,6 +30,7 @@ except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4, MediaVerificationError
     from inspection_visual_quality import assess_video_quality, VisualQualityError
     from inspection_evidence_timeline import audit_timeline, EvidenceTimelineError
+    from inspection_facility_keyframes import export_frame_evidence, FrameEvidenceError
 
 
 def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
@@ -164,6 +166,18 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         result["status"] = "analysis-provenance-mismatch"
         result["detail"] = "Model timestamps or local visual proof do not match recorded MP4"
         return result
+    # Store timestamp-grounded JPEGs locally for the owner's private review.
+    # This stage never uploads screenshots or adds any functionality claim.
+    try:
+        evidence_result = export_frame_evidence(
+            draft, video, private_dir / "private-keyframes"
+        )
+        result["privateFrameEvidence"] = evidence_result
+    except (FrameEvidenceError, ValueError, OSError) as exc:
+        result["status"] = "private-evidence-extraction-failed"
+        result["detail"] = type(exc).__name__
+        # Fail closed: an incomplete evidence review must not auto-publish.
+        return result
     result["status"] = "private-analysis-complete"
     if publish_visual:
         publication = release(private_dir, publish_and_push=True,
@@ -215,7 +229,7 @@ def main(argv=None) -> int:
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch"} else 1
+    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch", "private-evidence-extraction-failed"} else 1
 
 
 if __name__ == "__main__":

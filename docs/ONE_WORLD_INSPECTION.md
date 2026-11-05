@@ -87,6 +87,17 @@ a moving color-pattern clip is accepted, and an all-black clip is rejected.
 A moving logo, UI overlay, or animated decorative element could fool this
 heuristic; it does **not** prove room coverage, DJ playback, FPS or permissions.
 
+### 撮影映像から根拠フレームを自動保存
+
+録画・AI分析が完了すると、モデルが指定した設備の時刻から
+**元動画の実際のJPEG画像**を最大6枚抽出します。元動画の
+SHA-256と長さを確認し、該当フレームと推定信頼度を
+ローカルの非公開HTMLにまとめます。画像はGitHubや
+ウェブサイトへアップロードしません。確認用の画像は
+配信機材の動作証明ではありません。
+
+[詳しい手順・保存場所](PRIVATE_FACILITY_KEYFRAMES.md)。
+
 ### DJ設備の外観検出（映像だけの暫定判定）
 
 Geminiは録画映像からDJブース・DJ機材らしき物・スクリーン・

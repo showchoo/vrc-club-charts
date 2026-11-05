@@ -26,6 +26,16 @@ FFmpeg MP4 and validates the entire provisional video-evidence path
 without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
 No ranking or actual World data are changed by this check.
 
+### Private source-video evidence frames
+
+A new Windows-compatible [local facility keyframe extractor](docs/PRIVATE_FACILITY_KEYFRAMES.md)
+saves real JPEG frames at the AI-proposed facility timestamps, alongside
+a private HTML review index, after matching the recording SHA-256 and
+FFprobe duration. The combined one-World pipeline runs this after
+consented Gemini analysis, but never uploads these images or treats
+visual sightings as verified DJ player functionality. Its end-to-end
+synthetic H.264 smoke test now checks real JPEG extraction.
+
 ### Video-only DJ facility appearances
 
 The Gemini video analysis now supports an appearance-based six-category

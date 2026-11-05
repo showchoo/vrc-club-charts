@@ -135,6 +135,17 @@ the two commands. The publisher updates the public feed to remove revoked
 entries. To avoid accidental data loss, it does not erase the feed when
 the private draft directory itself is empty.
 
+## Local source-frame evidence for facility observations
+
+The combined Windows one-World analyzer now also extracts up to six
+small private JPEG frames at model-proposed facility timestamps. Before
+decoding, it checks the original video SHA-256, FFprobe duration and
+recording rights. A local static HTML review index labels each frame
+unreviewed; no image goes to GitHub, Vercel or a published World page.
+If extraction fails, automatic publication of that run stops.
+
+[Private facility keyframe guide](PRIVATE_FACILITY_KEYFRAMES.md).
+
 ## DJ/club facility visual inventory (appearance only)
 
 The Gemini video pass now requests a **six-category facility inventory**:

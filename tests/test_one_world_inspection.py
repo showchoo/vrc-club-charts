@@ -37,6 +37,12 @@ class OneWorldPipelineTests(unittest.TestCase):
         })
         quality_patch.start()
         self.addCleanup(quality_patch.stop)
+        frames_patch = patch.object(run, "export_frame_evidence", return_value={
+            "status": "no-high-confidence-facilities", "frameCount": 0,
+            "functionalityVerified": False,
+        })
+        frames_patch.start()
+        self.addCleanup(frames_patch.stop)
 
     def common(self, d: str):
         return {"world_id": WORLD, "captures": Path(d), "seconds": 10,
@@ -223,6 +229,42 @@ class OneWorldPipelineTests(unittest.TestCase):
                     publish_visual=True, recording_rights_confirmed=True,
                     gemini_upload_confirmed=True, publishing_rights_confirmed=True)
             self.assertEqual(result["status"], "analysis-provenance-mismatch")
+
+    def test_failed_private_frame_extraction_stops_auto_publication(self):
+        with tempfile.TemporaryDirectory() as d:
+            def fake_analysis(manifest, out, **kwargs):
+                from scripts.evaluate_interior_video import DIMENSIONS
+                info = json.loads(manifest.read_text(encoding="utf-8"))
+                digest = run.media_sha256(Path(info["videos"][0]["video"]))
+                dimensions = {
+                    key: {"status": "unclear", "score": None,
+                          "note": "unknown", "evidence": []}
+                    for key in DIMENSIONS
+                }
+                (out / (WORLD + "_" + digest[:16] + ".draft.json")).write_text(
+                    json.dumps({
+                        "schemaVersion": 1, "worldId": WORLD,
+                        "status": "draft_video_assessment", "rankingEligible": False,
+                        "evidence": {"sha256": digest, "durationSeconds": 3.25,
+                                     "durationSource": "ffprobe"},
+                        "analysis": {"summary": "synthetic", "dimensions": dimensions},
+                        "visualQuality": {"status": "ok", "sampledFrames": 4,
+                                          "visualChangeIntervals": 2, "framesWithDetail": 4},
+                    }), encoding="utf-8")
+                return {"succeeded": 1, "failed": 0}
+
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "process_queue", side_effect=fake_analysis),
+                  patch.object(run, "export_frame_evidence",
+                               side_effect=run.FrameEvidenceError("missing frame")),
+                  patch.object(run, "release", side_effect=AssertionError("must not publish"))):
+                outcome = run.run_inspection(**self.common(d),
+                    analyze_video=True, publish_visual=True,
+                    recording_rights_confirmed=True, gemini_upload_confirmed=True,
+                    publishing_rights_confirmed=True)
+            self.assertEqual(outcome["status"], "private-evidence-extraction-failed")
+            self.assertFalse(outcome["rankingsChanged"])
 
     def test_ai_motion_remains_separate_opt_in(self):
         with tempfile.TemporaryDirectory() as d:
