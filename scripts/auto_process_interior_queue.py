@@ -31,6 +31,11 @@ except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4, MediaVerificationError
     from inspection_visual_quality import assess_video_quality, VisualQualityError
 
+try:
+    from scripts.inspection_evidence_timeline import attach_verified_timeline, EvidenceTimelineError
+except ModuleNotFoundError:
+    from inspection_evidence_timeline import attach_verified_timeline, EvidenceTimelineError
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_TYPES = frozenset({"creator-provided", "owner-recorded"})
 MAX_PER_RUN = 4
@@ -209,7 +214,10 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
             result = ask_gemini(job["video"], model)
             report = create_report(job["worldId"], job["video"],
                                    job["source"], result, model)
-            report["visualQuality"] = quality
+            if report["evidence"]["sha256"] != job["sha256"]:
+                raise EvidenceTimelineError("Video changed after manifest hashing")
+            report = attach_verified_timeline(report, metadata=metadata,
+                                              visual_quality=quality)
             report["consent"] = {
                 "recordingConsentConfirmed": True,
                 "aiAnalysisConsentConfirmed": True,
@@ -221,6 +229,11 @@ def process_queue(manifest: Path, output: Path, *, max_items: int, model: str,
             atomic_json(destination, report)
             entry.update(status="complete", resultFile=destination.name)
             succeeded += 1
+        except EvidenceTimelineError:
+            # Re-uploading a factually impossible model timestamp on every
+            # scheduled run is wasteful. Keep the original video private.
+            entry.update(status="rejected", errorType="EvidenceTimelineError")
+            rejected += 1
         except Exception as exc:
             # Record the type, never secrets, raw model output or personal footage.
             entry["errorType"] = type(exc).__name__

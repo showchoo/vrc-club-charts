@@ -44,10 +44,13 @@ class QueueTests(unittest.TestCase):
         # Historical fixtures contain fake bytes; FFmpeg integration is tested
         # independently with genuine encoded MP4 files.
         probe = patch.object(queue, "verify_mp4", return_value={
-            "metadataVerified": True, "audioTracks": 0,
+            "metadataVerified": True, "audioTracks": 0, "durationSeconds": 8.0,
         })
         quality = patch.object(queue, "assess_video_quality",
-                               return_value={"status": "ok", "reasons": []})
+                               return_value={"status": "ok", "reasons": [],
+                                             "sampledFrames": 8,
+                                             "visualChangeIntervals": 3,
+                                             "framesWithDetail": 8})
         probe.start()
         quality.start()
         self.addCleanup(probe.stop)
@@ -127,6 +130,32 @@ class QueueTests(unittest.TestCase):
             self.assertEqual(list(out.glob("*.draft.json")), [])
             journal = json.loads((out / "processing-journal.json").read_text(encoding="utf-8"))
             self.assertEqual(list(journal["jobs"].values())[0]["status"], "rejected")
+
+    def test_hallucinated_timestamp_rejected_once_without_retry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            manifest = make_manifest(folder, publish=True)
+            out = folder / "private"
+            analysis = fake_analysis()
+            analysis["dimensions"]["visual_design"] = {
+                "status": "observed", "score": 3, "note": "test only",
+                "evidence": [{"timestamp_seconds": 900,
+                              "observation": "Impossible moment", "confidence": .99}],
+            }
+            with (patch.dict(queue.os.environ, {"GEMINI_API_KEY": "test"}),
+                  patch.object(queue, "ask_gemini", return_value=analysis) as model):
+                first = queue.process_queue(manifest, out, max_items=1,
+                                            model="gemini-3.5-flash-lite", allow_upload=True)
+                second = queue.process_queue(manifest, out, max_items=1,
+                                             model="gemini-3.5-flash-lite", allow_upload=True)
+            self.assertEqual(first["rejected"], 1)
+            self.assertEqual(first["succeeded"], 0)
+            self.assertEqual(first["failed"], 0)
+            self.assertEqual(second["processed"], 0)
+            self.assertEqual(model.call_count, 1)
+            self.assertEqual(list(out.glob("*.draft.json")), [])
+            state = json.loads((out / "processing-journal.json").read_text(encoding="utf-8"))
+            self.assertEqual(list(state["jobs"].values())[0]["errorType"], "EvidenceTimelineError")
 
     def test_manifest_rejects_uncleared_videos(self):
         with tempfile.TemporaryDirectory() as tmp:

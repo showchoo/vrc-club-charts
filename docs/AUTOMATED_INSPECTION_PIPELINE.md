@@ -135,6 +135,22 @@ the two commands. The publisher updates the public feed to remove revoked
 entries. To avoid accidental data loss, it does not erase the feed when
 the private draft directory itself is empty.
 
+## Evidence timestamp provenance
+
+Video analysis models occasionally propose time references that do not
+exist in the source clip. The processor records a **locally verified**
+FFprobe duration, checks each model-suggested observation timestamp
+against it (up to 0.25 s tolerance), and requires a passing local
+visual-quality screen before the resulting private draft can contribute
+any provisional public numeric score. Legacy reports lacking a verified
+duration are not automatically eligible for publication. A failed
+timeline audit is marked as rejected so the same video cannot incur
+repeated Gemini processing charges without new input.
+
+This does NOT prove the scene contained the described equipment or that
+DJ streaming really worked; it rules out one specific kind of
+hallucinated evidence.
+
 ## Site ranking and provenance guarantees
 
 The production World list retains the existing eligibility rules: DJ tag,
