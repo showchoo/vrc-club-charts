@@ -39,7 +39,7 @@ observable outcome and label it a recorded demonstration, not a live verificatio
 Omit all user names, avatar identities, conversations, personal data and background music
 identification from the output. Evaluate only the world environment, not people.
 
-Return exactly a JSON object with keys: summary (string) and dimensions (object).
+Return a JSON object with keys: summary (string), dimensions (object), and facilities (object).
 Dimensions must have exactly these keys:
 visual_design, lighting_design, spatial_design, originality, interactive_gimmicks,
 dj_equipment, live_playback, audio_quality, performance_optimization.
