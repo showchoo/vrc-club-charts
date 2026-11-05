@@ -157,7 +157,22 @@ Public video-derived visual estimates are **not added** to Craftsmanship
 Ranking, trending, or overall scores. Video-only, subjective impressions
 are not equivalent to independent functional measurements.
 
-## Capture integrity gate
+## Offline interior-visual-quality gate
+
+Before invoking Gemini, all one-run clips and queued local videos go through
+`scripts/inspection_visual_quality.py`. FFmpeg extracts a very small
+32x18 grayscale frame every second and checks for near-black screens,
+insufficient visible detail, and long recordings without visual change.
+This rejects black, frozen and empty captures **without paid AI calls**.
+For queued videos, rejected footage is journaled as `rejected` instead of
+being retried repeatedly every day. Raw frame samples are not stored or
+uploaded.
+
+It is an approximate heuristic, not an objective World coverage or
+authenticity check. It may reject a valid static scene or accept a moving
+overlay. The original MP4 stays private locally for manual inspection.
+
+
 
 The one-command inspection and the local batch queue now verify each MP4 with
 **FFprobe** before it can be uploaded to Gemini. The checks require a single
