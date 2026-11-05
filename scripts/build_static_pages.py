@@ -14,10 +14,12 @@ try:
     from scripts.dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
     from scripts.inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
     from scripts.world_search_metadata import safe_json_ld, world_search_metadata
+    from scripts.related_worlds import related_worlds
 except ModuleNotFoundError:
     from dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
     from inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
     from world_search_metadata import safe_json_ld, world_search_metadata
+    from related_worlds import related_worlds
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
@@ -408,7 +410,8 @@ def world_root_alias(world_id: str) -> str:
 
 
 def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | None = None,
-               interior_visual: dict | None = None) -> str:
+               interior_visual: dict | None = None,
+               related_catalog: list[dict] | None = None) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
     author = w.get("author") or "—"
@@ -528,6 +531,27 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
         )
     djs_html = "".join(dj_cards) if dj_cards else '<div class="relation-empty">関連するDJの情報は、まだ登録されていません。</div>'
 
+    # Cross-link only other published, DJ-admitted public Worlds. The label
+    # states the shared creator/genre, not equipment similarity or verification.
+    related = (related_worlds(w, related_catalog)
+               if related_catalog is not None else [])
+    related_cards = "".join(
+        f'<a class="relation-dj" href="{esc(item["id"])}.html">'
+        f'<strong>{esc(item["name"])}</strong>'
+        f'<span>{esc(item["reason"])}</span><b>↗</b></a>'
+        for item in related
+    )
+    related_section = (
+        '<section class="world-relations">'
+        '<div class="section-heading"><div><p class="kicker">DISCOVER MORE / WORLDS</p>'
+        '<h2>ほかの公開クラブワールド</h2></div>'
+        '<a class="section-link" href="index.html">全ワールドを見る ↗</a></div>'
+        '<div class="relation-dj-grid">' + related_cards + '</div>'
+        '<p class="world-review-disclaimer">同じ制作者や共通ジャンルをもとに表示しています。'
+        'DJ設備の類似性・動作性能を検証したものではありません。</p>'
+        '</section>'
+    ) if related_cards else ""
+
     return page_head(search_metadata["title"], description, canonical, "../",
                      main_entity=search_metadata["entity"]) + site_header("../", "worlds") + f"""
   <main class="shell world-detail-page">
@@ -578,6 +602,8 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
       </div>
       <div class="relation-dj-grid">{djs_html}</div>
     </section>
+
+    {related_section}
 
     <p class="disclaimer">ビジュアル評価は公開画像のみを参考にした推定値です。現地体験レビューは投稿者の自己申告であり、ビジュアル評価の点数・順位に合算されません。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
   </main>
@@ -884,7 +910,9 @@ def main() -> int:
         if w.get("publicationBasis") not in {"dj-tag", "owner-favorite-confirmed", "live-playback-verified"}:
             raise ValueError(f"Refusing to publish World without DJ tag, explicit owner attestation or live-stream proof: {wid}")
         (world_dir / f"{wid}.html").write_text(
-            world_page(w, events, djs, scout_by_world.get(wid), interior_by_world.get(wid)), encoding="utf-8")
+            world_page(w, events, djs, scout_by_world.get(wid),
+                       interior_by_world.get(wid), related_catalog=worlds),
+            encoding="utf-8")
         # Historical links sometimes omitted /worlds/. Keep those URLs usable
         # on both Vercel and GitHub Pages while canonicalizing to /worlds/.
         (out / f"{wid}.html").write_text(world_root_alias(wid), encoding="utf-8")
