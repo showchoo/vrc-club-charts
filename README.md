@@ -20,6 +20,17 @@ Phase 1 is an opt-in, local interior-video evaluator: `scripts/evaluate_interior
 
 Development plan, recording/privacy constraints, and the future authorized-agent gate: [Autonomous World Evaluation](docs/AUTONOMOUS_WORLD_EVALUATION.md).
 
+### One-command Windows inspection (single World, local first)
+
+The new [one-run inspector](docs/ONE_WORLD_INSPECTION.md) provides a
+read-only system diagnostic plus a one-command sequence:
+**record foreground VRChat window → consented Gemini video draft →
+optional public provisional visual score**. The owner must manually
+enter the World and confirm recording rights. No unattended login, World
+hopping, real DJ equipment test or verified Craftsmanship publication
+is implemented. AI OSC movement remains an explicitly opt-in,
+platform-policy-risk experiment, not the default.
+
 ### Windows VRChat inspection pilot (manual entry required)
 
 A new opt-in Windows tool records the foreground client window from a
