@@ -146,6 +146,24 @@ If extraction fails, automatic publication of that run stops.
 
 [Private facility keyframe guide](PRIVATE_FACILITY_KEYFRAMES.md).
 
+## Recognition accuracy calibration — private, offline only
+
+The [Facility Recognition Calibration](FACILITY_RECOGNITION_CALIBRATION.md)
+workflow is available for the existing six-category video inventory.
+It generates a local review HTML page that plays the original MP4 and
+lets an operator label whether each facility is visible anywhere in
+the FULL video, not necessarily anywhere in the World. It then compares
+the labels to model sightings at the current 0.80 visibility-confidence
+threshold, reporting TP/FP/FN/TN and per-class/micro precision, recall
+and F1.
+
+**No automated truth labels are invented.** The reviewer must explicitly
+attest full-video review, uncertain samples are excluded, and media
+digest/duration provenance is checked before scoring. Reports and videos
+stay local and never flow into verified Craftsmanship ranks or live DJ
+equipment attestations. Synthetic fixtures in GitHub CI verify arithmetic
+and privacy boundaries; they cannot establish real-world accuracy.
+
 ## DJ/club facility visual inventory (appearance only)
 
 The Gemini video pass now requests a **six-category facility inventory**:
