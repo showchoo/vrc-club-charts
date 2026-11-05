@@ -121,7 +121,8 @@ document.getElementById("review").addEventListener("submit", event => {
   a.href = url;
   a.download = "__OUTPUT_NAME__";
   a.click();
-  URL.revokeObjectURL(url);
+  // Give the browser time to begin the download before revoking the blob.
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
   state.textContent = "正解ラベルをローカル保存しました。動画はアップロードされません。";
 });
 refresh();
