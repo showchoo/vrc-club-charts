@@ -87,6 +87,19 @@ a moving color-pattern clip is accepted, and an all-black clip is rejected.
 A moving logo, UI overlay, or animated decorative element could fool this
 heuristic; it does **not** prove room coverage, DJ playback, FPS or permissions.
 
+### DJ設備の外観検出（映像だけの暫定判定）
+
+Geminiは録画映像からDJブース・DJ機材らしき物・スクリーン・
+照明・ステージ・操作パネルらしき物の6種類を調べます。
+各項目について映った時刻とAIの推定信頼度を記録します。
+録画時間内であることを確かめ、十分な信頼度がある場合だけ
+公開サイトのワールド詳細ページに暫定表示します。
+
+**これは実動作の検証ではありません。** 機材の見た目から
+DJ配信可能、ボタン操作可能、URLプレイヤー動作済み、
+音響良好、FPS良好などとは判定しません。動画内の人物情報や
+AIの自由記述は公開データに含めません。
+
 ### Frame timestamp consistency check
 
 The final AI draft now records the **actual FFprobe-measured video duration**
