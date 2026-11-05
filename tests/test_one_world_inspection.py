@@ -64,8 +64,17 @@ class OneWorldPipelineTests(unittest.TestCase):
                 video = Path(data["videos"][0]["video"])
                 digest = run.media_sha256(video)
                 draft_path = out / (WORLD + "_" + digest[:16] + ".draft.json")
+                from scripts.evaluate_interior_video import DIMENSIONS
+                dimensions = {key: {"status": "unclear", "score": None,
+                                    "note": "not verified", "evidence": []}
+                              for key in DIMENSIONS}
                 draft_path.write_text(json.dumps({
-                    "worldId": WORLD, "evidence": {"sha256": digest},
+                    "worldId": WORLD,
+                    "evidence": {"sha256": digest, "durationSeconds": 3.25,
+                                 "durationSource": "ffprobe"},
+                    "analysis": {"summary": "test only", "dimensions": dimensions},
+                    "visualQuality": {"status": "ok", "sampledFrames": 4,
+                                      "visualChangeIntervals": 2, "framesWithDetail": 4},
                     "rankingEligible": False,
                 }), encoding="utf-8")
                 return {"succeeded": 1, "failed": 0}
@@ -181,6 +190,39 @@ class OneWorldPipelineTests(unittest.TestCase):
                     gemini_upload_confirmed=True, publishing_rights_confirmed=True)
             self.assertEqual(result["status"], "capture-unusable")
             self.assertEqual(result["visualQuality"]["reasons"], ["almost_all_frames_black"])
+
+    def test_fake_timestamp_report_never_reaches_git_publication(self):
+        with tempfile.TemporaryDirectory() as d:
+            def fake_analysis(manifest, out, **kwargs):
+                from scripts.evaluate_interior_video import DIMENSIONS
+                info = json.loads(manifest.read_text(encoding="utf-8"))
+                digest = run.media_sha256(Path(info["videos"][0]["video"]))
+                dimensions = {key: {"status": "unclear", "score": None,
+                                    "note": "unknown", "evidence": []}
+                              for key in DIMENSIONS}
+                dimensions["visual_design"] = {
+                    "status": "observed", "score": 5, "note": "fake",
+                    "evidence": [{"timestamp_seconds": 50.0,
+                                  "observation": "Impossible frame", "confidence": .99}],
+                }
+                (out / (WORLD + "_" + digest[:16] + ".draft.json")).write_text(
+                    json.dumps({"worldId": WORLD, "evidence": {
+                        "sha256": digest, "durationSeconds": 3.25,
+                        "durationSource": "ffprobe"},
+                        "analysis": {"summary": "fake", "dimensions": dimensions},
+                        "visualQuality": {"status": "ok", "sampledFrames": 4,
+                                          "visualChangeIntervals": 2,
+                                          "framesWithDetail": 4},
+                        "rankingEligible": False}), encoding="utf-8")
+                return {"succeeded": 1, "failed": 0}
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "process_queue", side_effect=fake_analysis),
+                  patch.object(run, "release", side_effect=AssertionError("Must not publish"))):
+                result = run.run_inspection(**self.common(d), analyze_video=True,
+                    publish_visual=True, recording_rights_confirmed=True,
+                    gemini_upload_confirmed=True, publishing_rights_confirmed=True)
+            self.assertEqual(result["status"], "analysis-provenance-mismatch")
 
     def test_ai_motion_remains_separate_opt_in(self):
         with tempfile.TemporaryDirectory() as d:
