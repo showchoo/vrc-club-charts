@@ -19,12 +19,14 @@ try:
     from scripts.evaluate_interior_video import DIMENSIONS, create_report, media_sha256
     from scripts.compile_interior_visual_estimates import compile_feed
     from scripts.build_static_pages import world_page
+    from scripts.inspection_evidence_timeline import attach_verified_timeline
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
     from evaluate_interior_video import DIMENSIONS, create_report, media_sha256
     from compile_interior_visual_estimates import compile_feed
     from build_static_pages import world_page
+    from inspection_evidence_timeline import attach_verified_timeline
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -98,6 +100,8 @@ def smoke_test() -> dict:
         )
         if report["evidence"]["sha256"] != media_sha256(clip):
             raise RuntimeError("Video digest mismatch")
+        report = attach_verified_timeline(report, metadata=evidence,
+                                         visual_quality=quality)
         report["consent"] = {
             "recordingConsentConfirmed": True,
             "aiAnalysisConsentConfirmed": True,
@@ -129,6 +133,7 @@ def smoke_test() -> dict:
             "durationSeconds": evidence["durationSeconds"],
             "audioTracks": evidence["audioTracks"],
             "videoDigestVerified": True,
+            "evidenceTimelineAudited": report["timelineAudit"]["timelineChecked"],
             "movingVisualQuality": quality["status"],
             "blankVideoRejected": True,
             "consentedDraftCompiled": True,
