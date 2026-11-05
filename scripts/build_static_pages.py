@@ -400,7 +400,8 @@ def world_root_alias(world_id: str) -> str:
 """
 
 
-def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | None = None) -> str:
+def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | None = None,
+               interior_visual: dict | None = None) -> str:
     wid = w.get("id", "")
     name = w.get("name") or wid
     author = w.get("author") or "—"
@@ -416,6 +417,27 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     tags = "".join(f'<span class="tag">{esc(g)}</span>' for g in genres[:8])
     status_text = "VISUAL IMPRESSION" if image_scored else "WORLD DIRECTORY / UNEVALUATED"
     score_html = str(image_score) if image_scored else "—"
+    interior_visual = interior_visual if isinstance(interior_visual, dict) else {}
+    interior_score = interior_visual.get("visualScore")
+    interior_scored = (
+        isinstance(interior_score, int) and not isinstance(interior_score, bool) and
+        0 <= interior_score <= 100 and
+        interior_visual.get("evidenceType") == "consented-video-ai-provisional" and
+        interior_visual.get("independentInWorldInspection") is False and
+        interior_visual.get("djPlaybackVerified") is False and
+        interior_visual.get("craftsmanshipScore") is None
+    )
+    interior_html = (
+        f'<section class="world-detail-stats">'
+        f'<article><span>内部動画の暫定ビジュアル評価</span>'
+        f'<strong>{interior_score}/100</strong></article>'
+        f'<article><span>動画で観察できた項目</span>'
+        f'<strong>{esc(interior_visual.get("evidenceCoverage"))}/4</strong></article>'
+        f'</section><p class="world-review-disclaimer">'
+        f'AIが録画済みの内部映像から推定した視覚評価です。'
+        f'実際のワールドへの独立訪問、DJ機器の動作・音質・最適化性能は未検証です。'
+        f'Craftsmanship Rankingの点数・順位には算入しません。</p>'
+    ) if interior_scored else ""
     image = (f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" '
              f'onerror="{thumbnail_fallback("div")}" />') if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
@@ -501,6 +523,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
       <article><span>TOTAL FAVS</span><strong>{esc(fmt_num(totals.get("favorites")))}</strong></article>
     </section>
 
+    {interior_html}
     <p class="world-review-disclaimer">{esc(stream_status)}。{stream_method}。配信機能以外の音響・ギミック・動作性能も未確認です。<br />ビジュアル評価は公開サムネイル1枚をAIで分析した参考値です。<a href="../about.html#evaluation-method">評価方法を見る ↗</a></p>
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
@@ -747,6 +770,33 @@ def main() -> int:
             "reviewCount": 0,
             "confidence": "low",
         })
+    interior_feed_path = ROOT / "data/interior-visual-estimates.json"
+    interior_feed = (json.loads(interior_feed_path.read_text(encoding="utf-8"))
+                     if interior_feed_path.exists() else {"schemaVersion": 1, "worlds": []})
+    if interior_feed.get("schemaVersion") != 1 or not isinstance(interior_feed.get("worlds"), list):
+        raise ValueError("Invalid interior video feed")
+    # Never let the optional AI video estimates admit an excluded World or
+    # turn speculative equipment functionality into public verified scores.
+    interior_items = [
+        {key: value for key, value in item.items()
+         if key in {"worldId", "visualScore", "evidenceCoverage", "maxCategories",
+                    "observedCategories", "meanEvidenceConfidence", "assessedAtUtc",
+                    "evidenceType", "mediaSha256Prefix", "independentInWorldInspection",
+                    "djPlaybackVerified", "equipmentFunctionalityVerified",
+                    "craftsmanshipScore"}}
+        for item in interior_feed["worlds"]
+        if isinstance(item, dict)
+        and item.get("worldId") in {w["id"] for w in worlds}
+        and item.get("evidenceType") == "consented-video-ai-provisional"
+        and item.get("craftsmanshipScore") is None
+        and item.get("djPlaybackVerified") is False
+        and item.get("independentInWorldInspection") is False
+        and item.get("equipmentFunctionalityVerified") is False
+        and isinstance(item.get("visualScore"), int)
+        and not isinstance(item.get("visualScore"), bool)
+        and 0 <= item.get("visualScore") <= 100
+    ]
+    interior_by_world = {item["worldId"]: item for item in interior_items}
     manual_events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
     auto_events_path = ROOT / "data/events-auto.json"
     auto_events = json.loads(auto_events_path.read_text(encoding="utf-8")) if auto_events_path.exists() else []
@@ -772,6 +822,13 @@ def main() -> int:
         encoding="utf-8",
     )
 
+    (public_data_dir / "interior-visual-estimates.json").write_text(
+        json.dumps({"schemaVersion": 1,
+                    "method": "consented-video-visual-only-provisional",
+                    "worlds": interior_items}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     (public_data_dir / "events.json").write_text(
         json.dumps(events, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -790,7 +847,7 @@ def main() -> int:
         if w.get("publicationBasis") not in {"dj-tag", "owner-favorite-confirmed", "live-playback-verified"}:
             raise ValueError(f"Refusing to publish World without DJ tag, explicit owner attestation or live-stream proof: {wid}")
         (world_dir / f"{wid}.html").write_text(
-            world_page(w, events, djs, scout_by_world.get(wid)), encoding="utf-8")
+            world_page(w, events, djs, scout_by_world.get(wid), interior_by_world.get(wid)), encoding="utf-8")
         # Historical links sometimes omitted /worlds/. Keep those URLs usable
         # on both Vercel and GitHub Pages while canonicalizing to /worlds/.
         (out / f"{wid}.html").write_text(world_root_alias(wid), encoding="utf-8")

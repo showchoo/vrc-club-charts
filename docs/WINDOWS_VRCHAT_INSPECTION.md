@@ -94,3 +94,10 @@ to Gemini during AI mode; no direct VRChat API calls occur.
 Next: verify the local recording pipeline, evaluate image-based action safety
 in a consented test environment, add route memory and obstacle recovery, then
 develop a real equipment-testing protocol where platform use is authorized.
+
+## Automated local video evaluation and safe public visual previews
+
+See [Automated Inspection Pipeline](AUTOMATED_INSPECTION_PIPELINE.md) for
+consent-gated batch processing, numeric visual preview scores, Git deployment
+and provenance/revocation rules. The batch analysis is independent of
+unattended VRChat access and cannot claim verified DJ equipment function.

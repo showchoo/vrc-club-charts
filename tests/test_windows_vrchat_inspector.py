@@ -104,11 +104,18 @@ class InspectionTests(unittest.TestCase):
             def close(self):
                 self.closed = True
 
+        class FakeGuard:
+            def decide(self, png, suggestion):
+                return suggestion, "normal"
+            def metrics(self):
+                return {"observedFrames": 1, "recoveryTurns": 0}
+
         with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "test"}, clear=False):
             with (patch.object(m, "get_window", return_value=(1234, {"left": 0, "top": 0, "width": 640, "height": 480})),
                   patch.object(m, "is_active", return_value=True),
                   patch.object(m, "WindowRecorder", FakeRecorder),
                   patch.object(m, "OscMovement", FakeController),
+                  patch.object(m, "NavigationGuard", FakeGuard),
                   patch.object(m, "screenshot_png", return_value=b"safe_mock"),
                   patch.object(m, "choose_action", return_value=("stop", "End observation"))):
                 report = m.inspect(world_id=WORLD, out_dir=Path(d), seconds=5,
