@@ -15,11 +15,13 @@ from pathlib import Path
 
 try:
     from scripts.inspection_media_verify import verify_mp4
+    from scripts.inspection_visual_quality import assess_video_quality
     from scripts.evaluate_interior_video import DIMENSIONS, create_report, media_sha256
     from scripts.compile_interior_visual_estimates import compile_feed
     from scripts.build_static_pages import world_page
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
+    from inspection_visual_quality import assess_video_quality
     from evaluate_interior_video import DIMENSIONS, create_report, media_sha256
     from compile_interior_visual_estimates import compile_feed
     from build_static_pages import world_page
@@ -68,6 +70,28 @@ def smoke_test() -> dict:
         evidence = verify_mp4(clip, max_seconds=10)
         if evidence["audioTracks"] != 0 or evidence["durationSeconds"] < 3:
             raise RuntimeError("Synthetic video integrity verification failed")
+        quality = assess_video_quality(clip, metadata=evidence)
+        if quality["status"] != "ok" or quality["visualChangeIntervals"] < 2:
+            raise RuntimeError("Moving test footage was incorrectly rejected by quality gate")
+        # A different, genuine MP4 that is entirely black must be rejected
+        # before it could ever reach Gemini.
+        blank = directory / "synthetic-blank.mp4"
+        black_cmd = [
+            ffmpeg, "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
+            "-f", "lavfi", "-i", "color=c=black:s=640x360:r=4:d=4",
+            "-an", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "27",
+            "-pix_fmt", "yuv420p", str(blank),
+        ]
+        try:
+            subprocess.run(black_cmd, check=True, capture_output=True, timeout=25)
+        except (OSError, subprocess.SubprocessError) as exc:
+            raise RuntimeError("Could not generate black negative test video") from exc
+        black_meta = verify_mp4(blank, max_seconds=10)
+        black_quality = assess_video_quality(blank, metadata=black_meta)
+        if black_quality["status"] != "unusable" or (
+            "almost_all_frames_black" not in black_quality["reasons"]
+        ):
+            raise RuntimeError("Black video incorrectly accepted as an interior inspection")
         report = create_report(
             SYNTHETIC_WORLD, clip, "creator-provided",
             synthetic_analysis(), "gemini-3.5-flash-lite",
@@ -105,6 +129,8 @@ def smoke_test() -> dict:
             "durationSeconds": evidence["durationSeconds"],
             "audioTracks": evidence["audioTracks"],
             "videoDigestVerified": True,
+            "movingVisualQuality": quality["status"],
+            "blankVideoRejected": True,
             "consentedDraftCompiled": True,
             "siteVisualPreviewRendered": True,
             "previewVisualScore": scores[0]["visualScore"],
