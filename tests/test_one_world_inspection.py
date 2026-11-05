@@ -44,9 +44,19 @@ class OneWorldPipelineTests(unittest.TestCase):
 
     def test_capture_then_ai_then_explicit_public_preview(self):
         with tempfile.TemporaryDirectory() as d:
+            def fake_analysis(manifest, out, **kwargs):
+                data = json.loads(manifest.read_text(encoding="utf-8"))
+                video = Path(data["videos"][0]["video"])
+                digest = run.media_sha256(video)
+                draft_path = out / (WORLD + "_" + digest[:16] + ".draft.json")
+                draft_path.write_text(json.dumps({
+                    "worldId": WORLD, "evidence": {"sha256": digest},
+                    "rankingEligible": False,
+                }), encoding="utf-8")
+                return {"succeeded": 1, "failed": 0}
             with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
                   patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
-                  patch.object(run, "process_queue", return_value={"succeeded": 1, "failed": 0}) as ai,
+                  patch.object(run, "process_queue", side_effect=fake_analysis) as ai,
                   patch.object(run, "release", return_value={"published": True, "status": "pushed"}) as push):
                 result = run.run_inspection(
                     **self.common(d), analyze_video=True, publish_visual=True,
@@ -109,6 +119,24 @@ class OneWorldPipelineTests(unittest.TestCase):
                     publish_visual=True, recording_rights_confirmed=True,
                     gemini_upload_confirmed=True, publishing_rights_confirmed=True)
             self.assertEqual(result["status"], "analysis-failed")
+
+    def test_stale_report_for_same_world_cannot_authorize_publication(self):
+        with tempfile.TemporaryDirectory() as d:
+            old = Path(d) / "private-evaluations"
+            old.mkdir()
+            (old / (WORLD + "_old.draft.json")).write_text(
+                json.dumps({"worldId": WORLD, "rankingEligible": False}),
+                encoding="utf-8",
+            )
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "process_queue", return_value={"succeeded": 0, "failed": 0}),
+                  patch.object(run, "release", side_effect=AssertionError("Never publish"))):
+                result = run.run_inspection(**self.common(d),
+                    analyze_video=True, publish_visual=True,
+                    recording_rights_confirmed=True, gemini_upload_confirmed=True,
+                    publishing_rights_confirmed=True)
+            self.assertEqual(result["status"], "analysis-not-confirmed")
 
     def test_ai_motion_remains_separate_opt_in(self):
         with tempfile.TemporaryDirectory() as d:
