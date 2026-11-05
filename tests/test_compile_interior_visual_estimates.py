@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 from scripts import compile_interior_visual_estimates as c
 from scripts.evaluate_interior_video import DIMENSIONS
+from scripts.inspection_facility_inventory import FACILITIES
 
 WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 
@@ -52,6 +53,25 @@ class VisualFeedTests(unittest.TestCase):
         self.assertFalse(report["djPlaybackVerified"])
         self.assertFalse(report["independentInWorldInspection"])
         self.assertNotIn("private user", json.dumps(report))
+
+    def test_high_confidence_visible_facilities_are_numeric_only(self):
+        report = fixture()
+        report["analysis"]["facilities"] = {
+            kind: {
+                "visibility": "visible" if kind in {"dj_booth", "dj_decks"} else "unclear",
+                "evidence": (
+                    [{"timestamp_seconds": 3.0, "confidence": .92}] if kind == "dj_booth"
+                    else [{"timestamp_seconds": 4.0, "confidence": .7}] if kind == "dj_decks"
+                    else []
+                ),
+            }
+            for kind in FACILITIES
+        }
+        result = c.assess_draft(report)
+        self.assertEqual(len(result["facilityObservations"]), 1)
+        self.assertEqual(result["facilityObservations"][0]["kind"], "dj_booth")
+        self.assertFalse(result["facilityObservations"][0]["equipmentFunctionalityVerified"])
+        self.assertNotIn("Visible synthetic", json.dumps(result))
 
     def test_no_permission_means_no_public_entry(self):
         self.assertIsNone(c.assess_draft(fixture(False)))

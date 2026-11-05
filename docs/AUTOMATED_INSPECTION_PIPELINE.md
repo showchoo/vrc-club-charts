@@ -135,6 +135,30 @@ the two commands. The publisher updates the public feed to remove revoked
 entries. To avoid accidental data loss, it does not erase the feed when
 the private draft directory itself is empty.
 
+## DJ/club facility visual inventory (appearance only)
+
+The Gemini video pass now requests a **six-category facility inventory**:
+DJ booth, DJ-deck-shaped objects, video screens, lighting rig, stage, and
+control-panel-shaped objects. Each sighting is an AI observation backed by
+at most two proposed timestamps and confidence estimates.
+
+The local timeline audit checks that each timestamp is within the
+actual FFprobe-verified MP4 duration. Only observations with confidence
+at least 0.80 can enter the **provisional visual feed**. Public JSON
+contains only a category ID, time in clip, confidence and
+`equipmentFunctionalityVerified: false` — never usernames, prose,
+screenshots, audio or arbitrary AI text.
+
+World detail pages may show the label **映像で見えた設備（AI推定）** alongside
+timestamped tags. The presence of a booth or screen does **not** establish
+live-streaming capability, working controls, playback, sound, or independent
+in-World verification; verified DJ stream rules and Craftsmanship score
+are unchanged. Legacy reports without facility observations still work.
+
+This inventory is only produced on real consented video analysis. Offline
+integration tests use fixed synthetic facility labels, not actual VRChat
+sightings.
+
 ## Evidence timestamp provenance
 
 Video analysis models occasionally propose time references that do not

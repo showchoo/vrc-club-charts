@@ -26,6 +26,26 @@ class VideoRenderingTests(unittest.TestCase):
         self.assertIn("Craftsmanship Rankingの点数・順位には算入しません", html)
         self.assertIn("NOT SCORED", html)
 
+    def test_sanitized_sighted_equipment_and_timestamp_without_function_claim(self):
+        preview = {**VIDEO, "facilityObservations": [
+            {"kind": "dj_booth", "timestampSeconds": 2.0,
+             "confidence": .95, "equipmentFunctionalityVerified": False,
+             "privateUser": "should never render"},
+            {"kind": "<script>alert(1)</script>", "timestampSeconds": 2.0,
+             "confidence": .99, "equipmentFunctionalityVerified": False},
+            {"kind": "dj_decks", "timestampSeconds": 3.0,
+             "confidence": .85, "equipmentFunctionalityVerified": True},
+        ]}
+        html = page.world_page(WORLD, [], [], {}, preview)
+        self.assertIn("映像で見えた設備（AI推定）", html)
+        self.assertIn("DJブース", html)
+        self.assertIn("2.0s", html)
+        self.assertIn("DJ配信・動画再生・操作・音響などの機能は確認していません", html)
+        self.assertNotIn("privateUser", html)
+        self.assertNotIn("should never render", html)
+        self.assertNotIn("<script>alert(1)</script>", html)
+        self.assertNotIn("DJ機材らしきもの", html)
+
     def test_no_video_does_not_display_provisional_score(self):
         html = page.world_page(WORLD, [], [])
         self.assertNotIn("内部動画の暫定ビジュアル評価", html)

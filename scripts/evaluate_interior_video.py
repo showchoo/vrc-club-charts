@@ -12,6 +12,11 @@ import sys
 import time
 from pathlib import Path
 
+try:
+    from scripts.inspection_facility_inventory import MODEL_INSTRUCTIONS, validate_facilities
+except ModuleNotFoundError:
+    from inspection_facility_inventory import MODEL_INSTRUCTIONS, validate_facilities
+
 WORLD_ID = re.compile(r"^wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 ALLOWED_SUFFIXES = {".mp4", ".mov", ".webm", ".avi", ".mpeg", ".mpg"}
 MAX_BYTES = 250 * 1024 * 1024
@@ -34,7 +39,7 @@ observable outcome and label it a recorded demonstration, not a live verificatio
 Omit all user names, avatar identities, conversations, personal data and background music
 identification from the output. Evaluate only the world environment, not people.
 
-Return exactly a JSON object with keys: summary (string) and dimensions (object).
+Return a JSON object with keys: summary (string), dimensions (object), and facilities (object).
 Dimensions must have exactly these keys:
 visual_design, lighting_design, spatial_design, originality, interactive_gimmicks,
 dj_equipment, live_playback, audio_quality, performance_optimization.
@@ -46,7 +51,7 @@ Scores may be used ONLY for directly visible visual_design, lighting_design,
 spatial_design, originality, and ONLY when you provide timestamped evidence.
 For all other dimensions score MUST be null. If unsure, status='unclear', score=null.
 Do not fabricate video moments or assert validation of unseen equipment.
-"""
+""" + MODEL_INSTRUCTIONS
 
 
 def media_sha256(path: Path) -> str:
@@ -108,7 +113,12 @@ def validate_analysis(value: object) -> dict:
         if status != "observed" and points:
             raise ValueError(f"Unobserved dimension cannot have timestamp evidence: {key}")
         validated[key] = {"status": status, "score": score, "note": note, "evidence": points}
-    return {"summary": value["summary"][:1000], "dimensions": validated}
+    result = {"summary": value["summary"][:1000], "dimensions": validated}
+    if "facilities" in value:
+        if value["facilities"] is None:
+            raise ValueError("Facilities cannot be null if supplied")
+        result["facilities"] = validate_facilities(value["facilities"])
+    return result
 
 
 def ask_gemini(video: Path, model: str) -> dict:
