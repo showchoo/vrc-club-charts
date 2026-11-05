@@ -60,7 +60,11 @@ test clip. Both signals must be present to report
 `inconclusive`. The test never independently authenticates that the audio
 originated inside VRChat, verifies live DJ streaming, or publishes a ranking.
 It requires operator consent and does not automate VRChat client access.
-Synthetic H.264/AAC + simulated Udon events are exercised together in CI.
+Synthetic H.264/AAC + simulated Udon events are checked together in CI
+when FFmpeg/libx264 is present on the runner. When absent, that media smoke is
+explicitly marked **skipped**, not passed; Python tests and website build
+checks still run. Repeat the media test on an FFmpeg-equipped machine before
+claiming real video-pipeline validation.
 
 ### Owner-controlled DJ audio calibration (offline, no live client control)
 
