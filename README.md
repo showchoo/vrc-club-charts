@@ -12,6 +12,14 @@ Human field notes are supplementary: anyone can submit a visit review without ap
 
 A World needs actual in-world measurement before claiming validated sound, dynamic lighting, gimmick behavior or optimization. We never conflate these with a single-image assessment.
 
+## Long-term goal: evidence-based autonomous in-world inspection
+
+The long-term objective is a fully autonomous, **authorized** inspector that can visit public VRChat DJ Worlds, navigate their interiors, test DJ/live-playback equipment and gimmicks, measure performance, and produce a separately substantiated Craftsmanship Ranking. **No autonomous VRChat login or exploration is currently implemented.** An OSC input API is not authorization to run an unattended inspection bot; obtain clear VRChat permission before any such pilot.
+
+Phase 1 is an opt-in, local interior-video evaluator: `scripts/evaluate_interior_video.py`. It analyzes creator-provided or owner-recorded video with Gemini only when explicitly invoked and permitted, emits a **local draft** with timestamped evidence, and never changes the public ranking or asserts real-in-world verification. The script and its tests are deliberately disconnected from scheduled site builds and from public World admission.
+
+Development plan, recording/privacy constraints, and the future authorized-agent gate: [Autonomous World Evaluation](docs/AUTONOMOUS_WORLD_EVALUATION.md).
+
 ## AI SCOUT — automated discovery and visual estimates
 
 - `scripts/build_ai_scout.py` refreshes approved catalog candidates, preserving a separate unapproved discovery queue.
