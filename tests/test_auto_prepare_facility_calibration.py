@@ -166,6 +166,88 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(len(result["metricsByModel"]), 2)
         self.assertEqual(len(list(self.out.glob("calibration-metrics-*.json"))), 2)
 
+    def test_metrics_dashboard_displays_per_class_precision_without_private_text(self):
+        _, _, digest = make_pair(self.videos, self.drafts)
+        reviewed_label(self.labels, digest)
+        result = self.run_batch()
+        html = Path(result["reviewIndex"]).read_text(encoding="utf-8")
+        self.assertIn("モデル別・設備別の認識精度", html)
+        self.assertIn("gemini-3.5-flash-lite", html)
+        self.assertIn("DJブース", html)
+        self.assertIn("適合率", html)
+        self.assertIn("100.0%", html)
+        self.assertNotIn("untrusted private text", html)
+        current = json.loads(Path(result["currentIndex"]).read_text(encoding="utf-8"))
+        self.assertEqual(len(current["activeModels"]), 1)
+        self.assertFalse(current["readyForUnattendedDeployment"])
+
+    def test_deleted_review_labels_archive_stale_active_metrics(self):
+        _, _, digest = make_pair(self.videos, self.drafts)
+        saved_label = reviewed_label(self.labels, digest)
+        first = self.run_batch()
+        report = Path(first["metricsByModel"][0]["report"])
+        self.assertTrue(report.is_file())
+        saved_label.unlink()
+        second = self.run_batch()
+        self.assertEqual(second["reviewed"], 0)
+        self.assertEqual(second["pending"], 1)
+        self.assertEqual(second["archivedOldReports"], 1)
+        self.assertEqual(second["metricsByModel"], [])
+        self.assertFalse(report.exists())
+        archived = list((self.out / "history").glob("calibration-metrics-*.json"))
+        self.assertEqual(len(archived), 1)
+        self.assertIn("local-operator-labeled-calibration", archived[0].read_text())
+        self.assertEqual(len(list((self.out / "history").glob("reviewed-dataset-*.json"))), 1)
+        html = Path(second["reviewIndex"]).read_text(encoding="utf-8")
+        self.assertIn("実測値はありません", html)
+        current = json.loads((self.out / "calibration-current.json").read_text())
+        self.assertEqual(current["activeModels"], [])
+        self.assertEqual(current["reviewedClips"], 0)
+
+    def test_last_video_removed_retires_prior_report_but_preserves_review_files(self):
+        video, _, digest = make_pair(self.videos, self.drafts)
+        reviewed_label(self.labels, digest)
+        first = self.run_batch()
+        self.assertEqual(first["reviewed"], 1)
+        video.unlink()
+        second = self.run_batch()
+        self.assertEqual(second["status"], "no-matching-consented-analysis")
+        self.assertEqual(second["archivedOldReports"], 1)
+        self.assertEqual(len(list(self.out.glob("calibration-metrics-*.json"))), 0)
+        self.assertEqual(len(list((self.out / "review").glob("*.review.html"))), 1)
+        self.assertEqual(len(list((self.out / "history").glob("calibration-metrics-*.json"))), 1)
+        current = json.loads((self.out / "calibration-current.json").read_text())
+        self.assertEqual(current["status"], "no-current-reviewed-videos")
+
+    def test_only_withdrawn_model_is_archived(self):
+        _, _, first_hash = make_pair(self.videos, self.drafts, "first",
+                                     "gemini-3.5-flash-lite")
+        _, _, second_hash = make_pair(self.videos, self.drafts, "second",
+                                      "gemini-next-model")
+        reviewed_label(self.labels, first_hash)
+        second_labels = reviewed_label(self.labels, second_hash)
+        first = self.run_batch()
+        self.assertEqual(len(first["metricsByModel"]), 2)
+        second_labels.unlink()
+        second = self.run_batch()
+        self.assertEqual(len(second["metricsByModel"]), 1)
+        self.assertEqual(second["archivedOldReports"], 1)
+        self.assertEqual(second["metricsByModel"][0]["model"], "gemini-3.5-flash-lite")
+        self.assertEqual(len(list(self.out.glob("calibration-metrics-*.json"))), 1)
+        self.assertEqual(len(list((self.out / "history").glob("calibration-metrics-*.json"))), 1)
+
+    def test_unknown_metric_files_not_deleted_on_label_revocation(self):
+        _, _, digest = make_pair(self.videos, self.drafts)
+        saved = reviewed_label(self.labels, digest)
+        self.run_batch()
+        saved.unlink()
+        unknown = self.out / "calibration-metrics-000000000000.json"
+        unknown.write_text('{"not": "our report"}', encoding="utf-8")
+        result = self.run_batch()
+        self.assertEqual(result["archivedOldReports"], 1)
+        self.assertEqual(result["unknownFilesPreserved"], 1)
+        self.assertEqual(unknown.read_text(), '{"not": "our report"}')
+
     def test_private_git_folder_cannot_be_used_for_output(self):
         make_pair(self.videos, self.drafts)
         with self.assertRaisesRegex(cal.FacilityCalibrationError, "outside git"):
