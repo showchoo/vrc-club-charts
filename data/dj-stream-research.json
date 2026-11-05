@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-04T17:04:47+00:00",
+  "updatedAt": "2026-11-05T00:29:02+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -149,6 +149,58 @@
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
       "checkedAt": "2026-11-04T17:04:46+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "checkedAt": "2026-11-05T00:29:01+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
+      "name": "NOIR X ECLIPSE",
+      "author": "Dustyᵀᴹ",
+      "checkedAt": "2026-11-05T00:29:01+00:00",
+      "metadataStatus": "unavailable",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "checkedAt": "2026-11-05T00:29:01+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
+      "name": "particle abyss 2.0",
+      "author": "Cyberƴ",
+      "checkedAt": "2026-11-05T00:29:01+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
