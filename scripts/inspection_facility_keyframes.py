@@ -131,8 +131,35 @@ def export_frame_evidence(report: dict, video: Path, out_root: Path) -> dict:
         raise FrameEvidenceError("FFmpeg required for local frame extraction")
     out_root.mkdir(parents=True, exist_ok=True)
     folder = out_root / f"{wid}_{digest}"
-    if folder.exists() or folder.is_symlink():
-        raise FileExistsError("Evidence folder already exists; refusing to overwrite")
+    if folder.is_symlink():
+        raise FrameEvidenceError("Existing evidence folder cannot be a symlink")
+    if folder.exists():
+        manifest_file = folder / "frames.json"
+        index_file = folder / "index.html"
+        if not manifest_file.is_file() or manifest_file.is_symlink() or not index_file.is_file():
+            raise FrameEvidenceError("Existing evidence folder is incomplete; refusing to overwrite")
+        previous = json.loads(manifest_file.read_text(encoding="utf-8"))
+        items = previous.get("items")
+        if (previous.get("schemaVersion") != 1 or
+            previous.get("status") != "local-private-unreviewed" or
+            previous.get("worldId") != wid or previous.get("mediaSha256") != digest or
+            previous.get("equipmentFunctionalityVerified") is not False or
+            not isinstance(items, list) or len(items) != len(sightings)):
+            raise FrameEvidenceError("Existing evidence folder does not match this exact video")
+        for item in items:
+            if not isinstance(item, dict) or item.get("kind") not in LABELS_JA:
+                raise FrameEvidenceError("Existing evidence records are invalid")
+            filename = item.get("file")
+            if not isinstance(filename, str) or Path(filename).name != filename:
+                raise FrameEvidenceError("Existing evidence filename is invalid")
+            still = folder / filename
+            if still.is_symlink() or not still.is_file() or still.stat().st_size < 300:
+                raise FrameEvidenceError("Previously extracted frame is missing")
+        return {
+            "status": "existing-private-evidence", "worldId": wid,
+            "frameCount": len(items), "index": str(index_file),
+            "functionalityVerified": False,
+        }
     folder.mkdir()
     rows = []
     for observation in sightings:
