@@ -24,6 +24,7 @@ try:
     from scripts.inspection_facility_keyframes import export_frame_evidence
     from scripts.calibrate_facility_recognition import create_label_template, score_dataset
     from scripts.auto_prepare_facility_calibration import prepare_and_score
+    from scripts.dj_audio_playback_test import make_clip as make_dj_audio_clip, verify as verify_dj_audio
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -35,6 +36,7 @@ except ModuleNotFoundError:
     from inspection_facility_keyframes import export_frame_evidence
     from calibrate_facility_recognition import create_label_template, score_dataset
     from auto_prepare_facility_calibration import prepare_and_score
+    from dj_audio_playback_test import make_clip as make_dj_audio_clip, verify as verify_dj_audio
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -219,6 +221,37 @@ def smoke_test() -> dict:
                 or "DJブース" not in html
                 or "DJ配信・動画再生・操作・音響などの機能は確認していません" not in html):
             raise RuntimeError("Public World detail page failed provisional evidence boundary checks")
+        # A wholly synthetic audio end-to-end test: original licensed clip,
+        # independently reencoded audio, and local analysis. This is NOT
+        # evidence of VRChat playback; a human-supplied isolated test recording
+        # is still required for real-world corroboration.
+        tone_source = directory / "synthetic-dj-original.mp4"
+        generated = make_dj_audio_clip(tone_source)
+        if not generated["audioTestSequenceConfirmed"]:
+            raise RuntimeError("Original DJ audio test sequence was not generated")
+        separate_capture = directory / "synthetic-dj-reencoded.mp4"
+        transcode = [
+            ffmpeg, "-hide_banner", "-loglevel", "error", "-nostdin",
+            "-i", str(tone_source), "-map", "0:v:0", "-map", "0:a:0",
+            "-c:v", "copy", "-c:a", "aac", "-b:a", "128k",
+            str(separate_capture),
+        ]
+        try:
+            subprocess.run(transcode, check=True, capture_output=True, timeout=25)
+        except (OSError, subprocess.SubprocessError) as exc:
+            raise RuntimeError("Unable to build separate audio test recording") from exc
+        audio_check = verify_dj_audio(
+            original=tone_source, recording=separate_capture,
+            out=directory / "synthetic-dj-audio-check.json",
+            recording_rights_confirmed=True,
+        )
+        if audio_check["status"] != "test_audio_sequence_detected":
+            raise RuntimeError("Synthetic test audio pattern was not detected")
+        audio_private = json.loads(Path(audio_check["report"]).read_text(encoding="utf-8"))
+        if (audio_private["equipmentFunctionalityVerified"] is not False
+                or audio_private["actualSpeakerOrHeadsetOutputVerified"] is not False
+                or audio_private["liveDjStreamVerified"] is not False):
+            raise RuntimeError("Synthetic audio wrongly presented as verified VRChat playback")
         return {
             "status": "passed",
             "capture": "synthetic_H264_MP4",
@@ -236,6 +269,8 @@ def smoke_test() -> dict:
             "syntheticCalibrationMetricsVerified": True,
             "privateCalibrationWorkspaceVerified": True,
             "realWorldAccuracyMeasured": False,
+            "syntheticDjAudioPatternDetected": True,
+            "realVrchatAudioPlaybackMeasured": False,
             "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,
             "previewVisualScore": scores[0]["visualScore"],
