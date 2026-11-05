@@ -20,6 +20,11 @@ import threading
 import time
 from pathlib import Path
 
+try:
+    from scripts.inspection_navigation_guard import NavigationGuard
+except ModuleNotFoundError:
+    from inspection_navigation_guard import NavigationGuard
+
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 ACTIONS = {"forward", "backward", "turn_left", "turn_right",
            "strafe_left", "strafe_right", "observe", "stop"}
@@ -310,6 +315,7 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
 
     recorder = WindowRecorder(hwnd, area, video, ffmpeg)
     controller = OscMovement() if ai else None
+    guard = NavigationGuard() if ai else None
     started = time.monotonic()
     try:
         recorder.start()
@@ -319,12 +325,15 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
                 if time.monotonic() - started >= seconds or recorder.stop_event.is_set():
                     break
                 png = screenshot_png(hwnd, area)
-                action, reason = choose_action(png, model)
+                suggested, reason = choose_action(png, model)
+                action, safety = guard.decide(png, suggested)
                 report["actions"].append({
                     "elapsedSeconds": round(time.monotonic() - started, 1),
-                    "action": action, "reason": reason,
+                    "action": action, "requestedAction": suggested,
+                    "safetyDecision": safety, "reason": reason,
                 })
                 if action == "stop":
+                    report["stopReason"] = safety
                     break
                 controller.act(action, lambda: is_active(hwnd) and not recorder.stop_event.is_set())
                 # Time for a new image rather than repeating movement blindly.
@@ -344,6 +353,9 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         recorder.close()
 
     report["endedAtUtc"] = dt.datetime.now(dt.timezone.utc).isoformat()
+    report["elapsedSeconds"] = round(time.monotonic() - started, 2)
+    if guard is not None:
+        report["navigationSafety"] = guard.metrics()
     report["recording"]["frames"] = recorder.frames
     report["recording"]["bytes"] = video.stat().st_size if video.is_file() else 0
     if recorder.failed:
