@@ -1,5 +1,5 @@
 /* A synthetic-camera recorder for an owned, offline demo scene.
- * No VRChat integration. No getUserMedia(), OSC, fetch() or remote uploads.
+ * No VRChat integration, camera/mic access, OSC, or remote network requests.
  */
 (() => {
   'use strict';
