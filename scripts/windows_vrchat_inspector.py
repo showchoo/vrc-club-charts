@@ -204,11 +204,14 @@ class WindowRecorder:
         self.stop_event = threading.Event()
         self.failed = None
         self.frames = 0
+        self.max_duration_seconds = MAX_SECONDS
+        self.stop_deadline = None
         self.process = None
         self.thread = None
         self.log_file = None
 
     def start(self) -> None:
+        self.stop_deadline = time.monotonic() + self.max_duration_seconds
         w, h = self.area["width"], self.area["height"]
         self.log_file = self.output.with_suffix(".ffmpeg.log").open("wb")
         try:
@@ -232,6 +235,9 @@ class WindowRecorder:
             with mss() as grabber:
                 next_frame = time.monotonic()
                 while not self.stop_event.is_set():
+                    if self.stop_deadline is not None and time.monotonic() >= self.stop_deadline:
+                        self.stop_event.set()
+                        break
                     if not is_active(self.hwnd):
                         raise RuntimeError("VRChat lost focus during recording")
                     shot = grabber.grab(self.area)
@@ -314,6 +320,7 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
     }
 
     recorder = WindowRecorder(hwnd, area, video, ffmpeg)
+    recorder.max_duration_seconds = seconds
     controller = OscMovement() if ai else None
     guard = NavigationGuard() if ai else None
     started = time.monotonic()
@@ -326,6 +333,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
                     break
                 png = screenshot_png(hwnd, area)
                 suggested, reason = choose_action(png, model)
+                if recorder.stop_event.is_set():
+                    break
                 action, safety = guard.decide(png, suggested)
                 report["actions"].append({
                     "elapsedSeconds": round(time.monotonic() - started, 1),
