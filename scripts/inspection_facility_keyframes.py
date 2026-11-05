@@ -126,9 +126,6 @@ def export_frame_evidence(report: dict, video: Path, out_root: Path) -> dict:
         return {"status": "no-high-confidence-facilities",
                 "worldId": wid, "frameCount": 0,
                 "functionalityVerified": False}
-    ffmpeg = shutil.which("ffmpeg")
-    if not ffmpeg:
-        raise FrameEvidenceError("FFmpeg required for local frame extraction")
     out_root.mkdir(parents=True, exist_ok=True)
     folder = out_root / f"{wid}_{digest}"
     if folder.is_symlink():
@@ -160,6 +157,9 @@ def export_frame_evidence(report: dict, video: Path, out_root: Path) -> dict:
             "frameCount": len(items), "index": str(index_file),
             "functionalityVerified": False,
         }
+    ffmpeg = shutil.which("ffmpeg")
+    if not ffmpeg:
+        raise FrameEvidenceError("FFmpeg required for local frame extraction")
     folder.mkdir()
     rows = []
     for observation in sightings:
