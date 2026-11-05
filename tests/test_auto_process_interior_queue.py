@@ -74,6 +74,26 @@ class QueueTests(unittest.TestCase):
             self.assertNotIn(str(folder), files[0].read_text(encoding="utf-8"))
             self.assertTrue((out / "processing-journal.json").exists())
 
+    def test_cached_video_permission_changes_without_second_upload(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            manifest = make_manifest(folder)
+            out = folder / "private"
+            with patch.dict(queue.os.environ, {"GEMINI_API_KEY": "test"}):
+                with patch.object(queue, "ask_gemini", return_value=fake_analysis()) as model:
+                    queue.process_queue(manifest, out, max_items=1,
+                        model="gemini-3.5-flash-lite", allow_upload=True)
+                    changed = json.loads(manifest.read_text(encoding="utf-8"))
+                    changed["videos"][0]["permissionToPublish"] = True
+                    manifest.write_text(json.dumps(changed), encoding="utf-8")
+                    result = queue.process_queue(manifest, out, max_items=1,
+                        model="gemini-3.5-flash-lite", allow_upload=True)
+                    self.assertEqual(result["permissionChanges"], 1)
+                    self.assertEqual(result["processed"], 0)
+                    self.assertEqual(model.call_count, 1)
+            saved = json.loads(next(out.glob("*.draft.json")).read_text(encoding="utf-8"))
+            self.assertTrue(saved["consent"]["permissionToPublishVisualEstimate"])
+
     def test_manifest_rejects_uncleared_videos(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
