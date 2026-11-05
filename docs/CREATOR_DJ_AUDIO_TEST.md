@@ -52,3 +52,7 @@ FFmpegでローカルの録画から音声だけを一時的に復号し、元�
 ## オフラインでのコード検証
 
 `python -m unittest discover` では音声パターン検出の単体テストを実行します。`python scripts/inspection_pipeline_smoketest.py` は**FFmpegで生成した合成動画**を再エンコードしただけの比較テストであり、VRChat実機で録音できたという意味にはなりません。
+
+## プレイヤー内部イベントとの組み合わせ
+
+同じプライベートな検査について、Udonのイベントログも残っている場合は、[COMBINED_DJ_INSPECTION_EVIDENCE.md](COMBINED_DJ_INSPECTION_EVIDENCE.md) の一括照合を使えます。ログと録音が同じセッションに由来するかは利用者が確認します。検査の陽性結果はライブDJ配信の機能証明ではありません。
