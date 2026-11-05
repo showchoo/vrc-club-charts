@@ -283,7 +283,12 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
 
     hwnd, area = get_window("VRChat")
     if not is_active(hwnd):
-        raise RuntimeError("Focus the VRChat window before recording")
+        print("Switch to the VRChat window now (15 seconds to focus)...", flush=True)
+        focus_deadline = time.monotonic() + 15
+        while not is_active(hwnd) and time.monotonic() < focus_deadline:
+            time.sleep(0.15)
+        if not is_active(hwnd):
+            raise RuntimeError("VRChat did not receive window focus within 15 seconds")
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     stem = f"{world_id}_{stamp}"
