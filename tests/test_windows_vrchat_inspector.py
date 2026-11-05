@@ -55,6 +55,10 @@ class InspectionTests(unittest.TestCase):
             self.assertEqual(set(hosts), {("127.0.0.1", 9000)})
             ctl.close()
 
+    def test_h264_recorder_normalizes_odd_window_dimensions(self):
+        source = Path(m.__file__).read_text(encoding="utf-8")
+        self.assertIn("scale=trunc(iw/2)*2:trunc(ih/2)*2", source)
+
     def test_requires_private_instance_and_risk_ack_for_ai(self):
         with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "test"}, clear=False):
             base = dict(world_id=WORLD, out_dir=Path(d), seconds=5, ai=True, evaluate=False,
