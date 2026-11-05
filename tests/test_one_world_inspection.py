@@ -23,6 +23,16 @@ def captured(world: str, root: Path, *, frames: int = 25, failed: bool = False):
 
 
 class OneWorldPipelineTests(unittest.TestCase):
+    def setUp(self):
+        # Historical integration fixtures contain synthetic bytes, not actual
+        # H.264. Separate verification behavior is covered by FFprobe unit tests.
+        patcher = patch.object(run, "verify_mp4", return_value={
+            "codec": "h264", "durationSeconds": 3.25,
+            "metadataVerified": True, "audioTracks": 0,
+        })
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def common(self, d: str):
         return {"world_id": WORLD, "captures": Path(d), "seconds": 10,
                 "private_confirmed": True}
@@ -137,6 +147,20 @@ class OneWorldPipelineTests(unittest.TestCase):
                     recording_rights_confirmed=True, gemini_upload_confirmed=True,
                     publishing_rights_confirmed=True)
             self.assertEqual(result["status"], "analysis-not-confirmed")
+
+    def test_corrupt_capture_aborts_before_model_upload_or_site_update(self):
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "inspect", side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "verify_mp4", side_effect=run.MediaVerificationError("bad MP4")),
+                  patch.object(run, "process_queue", side_effect=AssertionError("AI must not run")),
+                  patch.object(run, "release", side_effect=AssertionError("Git must not run"))):
+                result = run.run_inspection(**self.common(d),
+                    analyze_video=True, publish_visual=True,
+                    recording_rights_confirmed=True, gemini_upload_confirmed=True,
+                    publishing_rights_confirmed=True)
+            self.assertEqual(result["status"], "capture-invalid")
+            self.assertIn("bad MP4", result["detail"])
 
     def test_ai_motion_remains_separate_opt_in(self):
         with tempfile.TemporaryDirectory() as d:

@@ -24,6 +24,13 @@ def local_capture(folder, *, frames=20, private=True, audio=False, filename=None
 
 
 class AutoCaptureQueueTests(unittest.TestCase):
+    def setUp(self):
+        patcher = patch.object(auto, "verify_mp4", return_value={
+            "metadataVerified": True, "audioTracks": 0,
+        })
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_dry_run_counts_only_safe_private_capture(self):
         with tempfile.TemporaryDirectory() as d:
             folder = Path(d)
@@ -68,6 +75,13 @@ class AutoCaptureQueueTests(unittest.TestCase):
                 self.assertFalse(manifest["videos"][0]["permissionToPublish"])
                 self.assertTrue(kw["allow_upload"])
                 self.assertEqual(kw["max_items"], 2)
+
+    def test_corrupt_video_is_not_added_to_queue(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            local_capture(folder)
+            with patch.object(auto, "verify_mp4", side_effect=auto.MediaVerificationError("bad container")):
+                self.assertEqual(auto.discover_captures(folder), [])
 
     def test_rejects_filename_path_traversal(self):
         with tempfile.TemporaryDirectory() as d:

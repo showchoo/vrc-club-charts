@@ -12,9 +12,11 @@ from pathlib import Path
 try:
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
     from scripts.evaluate_interior_video import WORLD_ID, validate_media
+    from scripts.inspection_media_verify import verify_mp4, MediaVerificationError
 except ModuleNotFoundError:
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
     from evaluate_interior_video import WORLD_ID, validate_media
+    from inspection_media_verify import verify_mp4, MediaVerificationError
 
 
 def discover_captures(folder: Path) -> list[dict]:
@@ -51,7 +53,8 @@ def discover_captures(folder: Path) -> list[dict]:
             continue
         try:
             validate_media(video)
-        except ValueError:
+            verify_mp4(video)
+        except (ValueError, MediaVerificationError, OSError):
             continue
         if video.name in seen:
             continue
