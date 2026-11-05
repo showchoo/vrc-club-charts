@@ -54,7 +54,7 @@ def validate_facilities(data: object) -> dict | None:
         if not isinstance(item, dict) or set(item) != {"visibility", "evidence"}:
             raise ValueError("Invalid facility category contents")
         visibility = item["visibility"]
-        if visibility not in {"visible", "not_visible", "unclear"}:
+        if not isinstance(visibility, str) or visibility not in {"visible", "not_visible", "unclear"}:
             raise ValueError("Invalid facility visibility state")
         evidence = item["evidence"]
         if not isinstance(evidence, list) or len(evidence) > MAX_EVIDENCE_PER_FACILITY:
