@@ -42,3 +42,36 @@
 - [VRChat Udon video events](https://creators.vrchat.com/worlds/udon/graph/event-nodes/)
 - [VRChat Udon debugging](https://creators.vrchat.com/worlds/udon/debugging-udon-projects/)
 - [VRChat Terms of Service](https://hello.vrchat.com/legal)
+
+## Windowsのローカルログ自動判定（新機能）
+
+Unityでの実行と動画の再生が完了したら、**撮影・ログ閲覧権限がある実機のPowerShell**で以下を実行します。※「World ID」「session token」はUnity内で設定した**実際の値**に置き換えてください。
+
+```powershell
+git pull
+py -3 scripts/analyze_creator_dj_probe.py `
+  --log "$env:USERPROFILE\AppData\LocalLow\VRChat\VRChat\output_log_実際の名前.txt" `
+  --session CreatorTest01 `
+  --world wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05 `
+  --component screen01 `
+  --out "$env:USERPROFILE\Videos\VRCClubCharts\private-player-check.json"
+```
+
+このスクリプトはログ全体を公開したり送信したりせず、指定したセッションのイベントのみを読み取ります。元ログのSHA-256と、個人情報を含まない判定結果だけを**GitHubリポジトリ外**のJSONに保存します。既存の結果ファイルを勝手に上書きしません。
+
+次の条件がすべて満たされたときだけ、`local_player_clock_observed` と判定します。
+
+- 開始イベントが1回あり、ready → start → play のイベントが録画中に記録された
+- 3点以上の再生位置サンプルから約2秒以上の進行を認め、実時間と概ね整合する
+- エラー、停止前のpause、他参加者の出入り、検査途中の終了がない
+- 指定したsession、World ID、component IDが一致し、イベント時刻が逆行していない
+
+その他は `inconclusive`（判定不能）です。ライブストリームでは再生位置 `GetTime()` が取得できない場合があり、判定不能でもプレイヤーが故障しているとは限りません。
+
+**重要：** `local_player_clock_observed` は内部イベントと再生位置を観測したという意味のみです。音声・映像が来場者に実際に再生されたこと、操作が可能なこと、ライブDJ配信に対応すること、第三者が検証したことは示しません。JSONの `equipmentFunctionalityVerified` と `rankingEligible` は常に `false` で、ランキングを更新しません。
+
+Unity/VRChat実機でのコンパイル・再生実行は未検証です。オフライン単体テストは次のコマンドで確認できます。
+
+```powershell
+py -3 -m unittest tests.test_analyze_creator_dj_probe tests.test_creator_dj_video_probe_contract
+```
