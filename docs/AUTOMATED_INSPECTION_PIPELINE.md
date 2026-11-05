@@ -146,6 +146,20 @@ If extraction fails, automatic publication of that run stops.
 
 [Private facility keyframe guide](PRIVATE_FACILITY_KEYFRAMES.md).
 
+## One-command local recognition review queue
+
+After owner-consented videos and Gemini private drafts have been created,
+run `powershell -File scripts/run_facility_calibration.ps1 -OpenReview`
+from the local Windows checkout. The workflow hashes the existing MP4 files
+to find exact matching private drafts, creates a **local HTML review queue**
+and six-category labeling pages, and finds completed label JSON downloads.
+Re-running the same command reuses the pages and scores fully reviewed videos
+by Gemini model version. Review data/metrics never leave the PC, and no
+new Gemini inference is requested by this batch step.
+
+A missing/invalid label never becomes fake ground truth. The pipeline keeps
+the site's Craftsmanship score and DJ streaming verification untouched.
+
 ## Recognition accuracy calibration — private, offline only
 
 The [Facility Recognition Calibration](FACILITY_RECOGNITION_CALIBRATION.md)

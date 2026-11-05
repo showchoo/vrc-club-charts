@@ -23,6 +23,7 @@ try:
     from scripts.inspection_facility_inventory import FACILITIES
     from scripts.inspection_facility_keyframes import export_frame_evidence
     from scripts.calibrate_facility_recognition import create_label_template, score_dataset
+    from scripts.auto_prepare_facility_calibration import prepare_and_score
 except ModuleNotFoundError:
     from inspection_media_verify import verify_mp4
     from inspection_visual_quality import assess_video_quality
@@ -33,6 +34,7 @@ except ModuleNotFoundError:
     from inspection_facility_inventory import FACILITIES
     from inspection_facility_keyframes import export_frame_evidence
     from calibrate_facility_recognition import create_label_template, score_dataset
+    from auto_prepare_facility_calibration import prepare_and_score
 
 SYNTHETIC_WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
 VISIBLE = ("visual_design", "lighting_design", "spatial_design", "originality")
@@ -169,6 +171,30 @@ def smoke_test() -> dict:
                 or synthetic_metrics["readyForUnattendedDeployment"] is not False
                 or synthetic_metrics["equipmentFunctionalityVerified"] is not False):
             raise RuntimeError("Synthetic calibration dataset validation failed")
+        # End-to-end private workspace: discover the exact video and draft,
+        # produce local review HTML, then detect completed downloaded labels.
+        downloaded = directory / "Downloads"
+        downloaded.mkdir()
+        workspace = directory / "private-workspace"
+        empty = prepare_and_score(
+            video_dir=directory, draft_dir=output,
+            work_dir=workspace, label_dir=downloaded,
+        )
+        if (empty["status"] != "review-queue-ready"
+                or empty["pending"] != 1 or empty["reviewed"] != 0
+                or empty["newReviewPages"] != 1):
+            raise RuntimeError("Private batch review discovery failed")
+        completed_download = downloaded / ("facility-labels-" + report["evidence"]["sha256"][:16] + ".json")
+        completed_download.write_text(json.dumps(ground_truth), encoding="utf-8")
+        reviewed = prepare_and_score(
+            video_dir=directory, draft_dir=output,
+            work_dir=workspace, label_dir=downloaded,
+        )
+        if (reviewed["reviewed"] != 1 or reviewed["pending"] != 0
+                or reviewed["reusedReviewPages"] != 1
+                or len(reviewed["metricsByModel"]) != 1
+                or reviewed["metricsByModel"][0]["microF1"] != 1.0):
+            raise RuntimeError("Private batch automatic calibration scoring failed")
         feed = compile_feed(output, eligible_ids={SYNTHETIC_WORLD})
         scores = feed.get("worlds", [])
         if len(scores) != 1 or scores[0].get("visualScore") != 60:
@@ -208,6 +234,7 @@ def smoke_test() -> dict:
             "privateKeyframeJpegVerified": True,
             "privateEvidenceHtmlVerified": True,
             "syntheticCalibrationMetricsVerified": True,
+            "privateCalibrationWorkspaceVerified": True,
             "realWorldAccuracyMeasured": False,
             "equipmentFunctionalityVerified": False,
             "siteVisualPreviewRendered": True,
