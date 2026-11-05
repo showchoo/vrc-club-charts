@@ -15,11 +15,15 @@ try:
     from scripts.inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
     from scripts.world_search_metadata import safe_json_ld, world_search_metadata
     from scripts.related_worlds import related_worlds
+    from scripts.world_public_facts import (safe_source_url, creator_tags,
+                                           count_text, update_day, provenance)
 except ModuleNotFoundError:
     from dj_stream_policy import load_verified, published_worlds, sanitize_ai_scout
     from inspection_facility_inventory import LABELS_JA, sanitize_public_facilities
     from world_search_metadata import safe_json_ld, world_search_metadata
     from related_worlds import related_worlds
+    from world_public_facts import (safe_source_url, creator_tags,
+                                    count_text, update_day, provenance)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://vrc-club-charts.vercel.app/"
@@ -475,7 +479,7 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     image = (f'<img class="world-detail-image" src="{esc(thumbnail)}" alt="{esc(name)}" '
              f'onerror="{thumbnail_fallback("div")}" />') if thumbnail else '<div class="world-detail-image world-detail-image-placeholder">VRC</div>'
     vrchat = f"https://vrchat.com/home/world/{wid}"
-    source_url = w.get("source")
+    source_url = safe_source_url(w.get("source"))
     proof = w.get("djStreamVerification") or {}
     live_confirmed = bool(w.get("djStreamTested") and proof)
     owner_confirm = w.get("ownerStreamConfirmation") or {}
@@ -490,6 +494,40 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     stream_proof = (f'<a class="secondary-button" href="{esc(proof.get("evidenceUrl"))}" '
                     f'target="_blank" rel="noreferrer">DJ LIVE VERIFICATION ↗</a>'
                     if proof.get("evidenceUrl") else "")
+
+    basis_label, basis_note = provenance(w)
+    world_tags = creator_tags(w)
+    world_tag_list = (
+        '<div class="tags">' +
+        "".join(f'<span class="tag">{esc(label)}</span>' for label in world_tags)
+        + '</div>'
+    ) if world_tags else '<p>制作者タグは取得できていません。</p>'
+    public_facts_section = (
+        '<section class="world-relations">'
+        '<div class="section-heading"><div>'
+        '<p class="kicker">PUBLIC DATA / EVIDENCE BASIS</p>'
+        '<h2>掲載情報と確認範囲</h2></div></div>'
+        '<div class="world-detail-meta">'
+        '<div><span>掲載根拠</span><strong>' + esc(basis_label) + '</strong></div>'
+        '<div><span>ワールドの情報元</span><strong>公開カタログ</strong></div>'
+        '</div>'
+        '<p class="world-review-disclaimer">' + esc(basis_note) + '</p>'
+        '<h3>VRChat上の制作者タグ</h3>' + world_tag_list
+        + '<p class="world-review-disclaimer">'
+        'タグは制作者による分類情報です。AudioLink、DJなどのタグがあっても'
+        '設備の存在や動作、配信機能の実証を意味しません。'
+        '</p></section>'
+    )
+    capacity_text = count_text(w.get("capacity"))
+    recommended_text = count_text(w.get("recommendedCapacity"))
+    if capacity_text != "—" and recommended_text != "—":
+        if int(recommended_text) > int(capacity_text):
+            recommended_text = "—"
+    recommended_html = (
+        f'<div><span>RECOMMENDED CAPACITY</span>'
+        f'<strong>{recommended_text}</strong></div>'
+        if recommended_text != "—" else ""
+    )
 
     now = dt.datetime.now(dt.timezone.utc)
     related_events = []
@@ -585,9 +623,12 @@ def world_page(w: dict, events: list[dict], djs: list[dict], ai_visual: dict | N
     <section class="world-detail-meta">
       <div><span>WORLD ID</span><code>{esc(wid)}</code></div>
       <div><span>評価範囲</span><strong>{'IMAGE ONLY / REFERENCE' if image_scored else 'NOT ASSESSED'}</strong></div>
-      <div><span>CAPACITY</span><strong>{esc(fmt_num(w.get("capacity")))}</strong></div>
-      <div><span>WORLD UPDATED</span><strong>{esc(w.get("worldUpdatedAt") or "—")}</strong></div>
+      <div><span>CAPACITY</span><strong>{capacity_text}</strong></div>
+      {recommended_html}
+      <div><span>WORLD UPDATED</span><strong>{update_day(w.get("worldUpdatedAt"))}</strong></div>
     </section>
+
+    {public_facts_section}
 
     <section class="world-relations">
       <div class="section-heading">
