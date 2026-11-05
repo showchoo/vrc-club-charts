@@ -87,6 +87,20 @@ a moving color-pattern clip is accepted, and an all-black clip is rejected.
 A moving logo, UI overlay, or animated decorative element could fool this
 heuristic; it does **not** prove room coverage, DJ playback, FPS or permissions.
 
+### Frame timestamp consistency check
+
+The final AI draft now records the **actual FFprobe-measured video duration**
+and checks **every timestamp** proposed by Gemini. For example, a model
+claiming evidence at 50 seconds in a 5-second MP4 will be rejected even
+if its text sounds plausible. The check runs before a draft can enter the
+public numeric visual-preview feed, and before a one-command publication.
+Clips rejected for impossible timestamps retain a local journal record
+and are not uploaded repeatedly on scheduled retries.
+
+This is a sanity check rather than proof the described object was really
+present in that frame. Scene contents and any DJ equipment still need
+independent functional testing for verified Craftsmanship scores.
+
 ### A. Capture without AI movement or cloud upload
 
 Use the **actual** ID of the World you manually entered:
