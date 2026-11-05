@@ -33,8 +33,11 @@ def check_git_safety() -> None:
     if branch != "main":
         raise ValueError("Automatic publishing only runs from the local main branch")
     upstream = git("remote", "get-url", "origin").stdout.strip()
-    if not (upstream.endswith("github.com/showchoo/vrc-club-charts.git")
-            or upstream.endswith("github.com:showchoo/vrc-club-charts.git")):
+    root_url = upstream.removesuffix(".git")
+    if root_url not in {
+        "https://github.com/showchoo/vrc-club-charts",
+        "git@github.com:showchoo/vrc-club-charts",
+    }:
         raise ValueError("Unexpected Git remote")
     if git("status", "--porcelain").stdout.strip():
         raise ValueError("Working tree must be clean to avoid touching other work")
@@ -57,7 +60,10 @@ def release(draft_dir: Path, *, publish_and_push: bool,
                 "published": False}
     if not copyright_clearance_confirmed:
         raise ValueError("Confirm permission to publish the numeric visual previews")
-    if not count:
+    # A nonempty draft directory with all permission flags revoked must
+    # remove previously published visual entries; an empty directory should
+    # not silently erase public data during a temporary disk/mount failure.
+    if not count and not any(draft_dir.glob("*.draft.json")):
         return {"status": "no-eligible-records", "published": False}
     check_git_safety()
     current = json.loads(OUTPUT.read_text(encoding="utf-8")) if OUTPUT.exists() else {}
