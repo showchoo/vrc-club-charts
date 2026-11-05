@@ -20,6 +20,12 @@ Phase 1 is an opt-in, local interior-video evaluator: `scripts/evaluate_interior
 
 Development plan, recording/privacy constraints, and the future authorized-agent gate: [Autonomous World Evaluation](docs/AUTONOMOUS_WORLD_EVALUATION.md).
 
+**Offline end-to-end video pipeline:** The command
+`py -3 scripts/inspection_pipeline_smoketest.py` uses a real synthetic
+FFmpeg MP4 and validates the entire provisional video-evidence path
+without VRChat or Gemini. The Windows launcher also supports `-SmokeTest`.
+No ranking or actual World data are changed by this check.
+
 ### One-command Windows inspection (single World, local first)
 
 The new [one-run inspector](docs/ONE_WORLD_INSPECTION.md) provides a
