@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-06T00:13:59+00:00",
+  "updatedAt": "2026-11-06T23:43:41+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
-    "totalCandidates": 206,
+    "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 4,
-    "pending": 178
+    "newAssessments": 3,
+    "pending": 180
   },
   "scored": [
     {
@@ -190,6 +190,27 @@
       "assessedAt": "2026-10-22T22:18:19+00:00"
     },
     {
+      "id": "wrld_478cf915-abb0-457c-874c-15cb0859ef5e",
+      "name": "_restroom",
+      "author": "_buki",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_478cf915-abb0-457c-874c-15cb0859ef5e.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "紫色の発光表現とタイル張りの内装が特徴的な、洗面所を模した空間が確認できます。",
+      "cautionsJa": "サムネイル画像のみの判断であり、実際のインタラクションや詳細な空間の広がりは不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-06T23:43:36+00:00"
+    },
+    {
       "id": "wrld_dfa6adde-f2e4-491c-beb6-22f7888c0f3c",
       "name": "ANIMA CANVAS",
       "author": "PudinKiller",
@@ -299,6 +320,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T16:10:42+00:00"
+    },
+    {
+      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
+      "name": "Club Neon Spin",
+      "author": "Andron827",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "緑のネオンラインやサイバー風のアンドロイド像が配置され、クラブらしい電脳的な空間が表現されています。",
+      "cautionsJa": "サムネイル全体に文字やグラフィックが重なっており、実際のゲーム内の見え方や明るさは異なる可能性があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-06T23:43:34+00:00"
     },
     {
       "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
@@ -500,50 +544,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T16:10:39+00:00"
-    },
-    {
-      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
-      "name": "Club Jinja",
-      "author": "はるみやにき",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 2,
-        "spatial": 3,
-        "originality": 3
-      },
-      "reasonJa": "神社の境内を背景に、手前にDJブースとレーザー光線が配置された和風クラブの空間が確認できます。",
-      "cautionsJa": "スクリーンショットにタイトルロゴが重んでおり、実際の襫内や照明の動作は出入りせん。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-13T23:16:31+00:00"
-    },
-    {
-      "id": "wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1",
-      "name": "Club Neon pulse",
-      "author": "soseanon",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_f75fd5f4-0897-48b2-bc73-adc5722878e1.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "色鮮やかなネオンカラーの床面やステージ照明が配置され、典型的なクラブの雰囲気が視覚的に表現されています。",
-      "cautionsJa": "ロゴ文字が大きく配置されているため、実際の空間構成や細部の造形が隠れて確認しづらいです。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-19T22:54:17+00:00"
     }
   ],
   "candidates": [
@@ -611,12 +611,12 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
-      "name": "Dragon Rave",
+      "id": "wrld_b7a18737-ef6d-4044-bf05-13ac573510f3",
+      "name": "Dropoff",
       "author": "Unknown",
       "sourceType": "discovery",
       "signals": [],
-      "url": "https://vrcmap.com/world/wrld_2299385b-be7f-48d6-a843-b221646e89ce"
+      "url": "https://vrcmap.com/world/wrld_b7a18737-ef6d-4044-bf05-13ac573510f3"
     },
     {
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
@@ -647,14 +647,6 @@
       "sourceType": "discovery",
       "signals": [],
       "url": "https://vrcmap.com/world/wrld_6b1b8977-51c7-48be-b097-f735ddc0e5fb"
-    },
-    {
-      "id": "wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016",
-      "name": "The Syndicate Garage",
-      "author": "Unknown",
-      "sourceType": "discovery",
-      "signals": [],
-      "url": "https://vrcmap.com/world/wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016"
     },
     {
       "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
@@ -705,6 +697,16 @@
       "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
     },
     {
+      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
+      "name": "Consilium",
+      "author": "Tsuβaki",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html"
+    },
+    {
       "id": "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80",
       "name": "DanceStage",
       "author": "Asaka․",
@@ -713,6 +715,16 @@
         "STAGE"
       ],
       "url": "worlds/wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80.html"
+    },
+    {
+      "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
+      "name": "Decibel Vault VR Event Center",
+      "author": "SoundInVolumes",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     },
     {
       "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
@@ -763,16 +775,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
-    },
-    {
-      "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
-      "name": "LOST COLONY RAVE V2.5",
-      "author": "booploops",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
     }
   ],
   "attempts": {
@@ -829,7 +831,7 @@
       "status": "assessed"
     },
     "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a": {
-      "checkedAt": "2026-10-06T23:03:08+00:00",
+      "checkedAt": "2026-11-06T23:43:34+00:00",
       "status": "assessed"
     },
     "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
@@ -921,7 +923,7 @@
       "status": "assessed"
     },
     "wrld_252e3107-9ae4-4513-a17a-321909162e21": {
-      "checkedAt": "2026-10-27T22:56:40+00:00",
+      "checkedAt": "2026-11-06T23:43:41+00:00",
       "status": "assessed"
     },
     "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc": {
@@ -1007,6 +1009,14 @@
     "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05": {
       "checkedAt": "2026-11-06T00:13:59+00:00",
       "status": "assessed"
+    },
+    "wrld_478cf915-abb0-457c-874c-15cb0859ef5e": {
+      "checkedAt": "2026-11-06T23:43:36+00:00",
+      "status": "assessed"
+    },
+    "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e": {
+      "checkedAt": "2026-11-06T23:43:38+00:00",
+      "status": "insufficient-image"
     }
   }
 }
