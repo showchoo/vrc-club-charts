@@ -1331,5 +1331,104 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_b9060e41-962d-4a40-88d4-40f1738bd47b",
+    "name": "Club BlueSphere",
+    "author": "COMA․",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "World name includes 'Club'",
+        "Tags include 'author_tag_club'",
+        "Thumbnail shows DJ equipment and club-like lighting"
+      ],
+      "reasonJa": "ワールド名やタグにクラブを示す文言が含まれており、サムネイル画像にもDJ機材や会場の様子が確認できるため、クラブ・音楽イベント向けのワールドであると判定しました。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-06T03:28:50.458836+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
+    "name": "Dragon Rave",
+    "author": "Coldcancer",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.95,
+      "evidence": [
+        "Description explicitly mentions a club environment with Audiolink",
+        "Tags include dance, club, and party",
+        "Thumbnail shows DJ equipment and neon lighting typical of rave venues"
+      ],
+      "reasonJa": "説明文にクラブやAudiolinkの言及があり、タグやサムネイルのDJ機材からレイヴやダンスイベント用の空間であると明確に判断できます。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-11-06T03:28:52.523993+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
+  },
+  {
+    "id": "wrld_94270b27-d54f-4375-aa08-68117559b735",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-11-06T03:28:52.630020+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_6b1b8977-51c7-48be-b097-f735ddc0e5fb",
+    "name": "",
+    "author": "",
+    "status": "needs_review",
+    "classification": {},
+    "note": "Official World lookup HTTP 404",
+    "reviewedAt": "2026-11-06T03:28:52.725064+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016",
+    "name": "The Syndicate Garage",
+    "author": "【Kay】",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 0.9,
+      "evidence": [
+        "Description explicitly mentions a wealthy club disguised as a car-shop",
+        "Tags include author_tag_club and author_tag_dance",
+        "Thumbnail shows interior lighting, seating arrangements, and a central dance floor layout typical of a club"
+      ],
+      "reasonJa": "説明文やタグにクラブとしての機能が明記されており、画像でもダンスフロアや照明設備が確認できるためクラブと判断しました。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-11-06T03:28:54.794734+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

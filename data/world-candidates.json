@@ -85,23 +85,6 @@
     "lastSeenAt": "2026-11-05"
   },
   {
-    "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
-    "name": "Dragon Rave",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230439",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-11-05",
-    "lastSeenAt": "2026-11-05"
-  },
-  {
     "id": "wrld_94270b27-d54f-4375-aa08-68117559b735",
     "name": "Avinity ; Oasis",
     "authorHint": "",
@@ -122,22 +105,6 @@
     "name": "SinghaSiam",
     "authorHint": "",
     "source": "https://sia-vr.com/vrchat-world-230856",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-05",
-    "lastSeenAt": "2026-11-05"
-  },
-  {
-    "id": "wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016",
-    "name": "The Syndicate Garage",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230866",
     "sourceCategories": [
       "sia_vr_club"
     ],

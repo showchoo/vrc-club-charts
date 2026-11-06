@@ -939,6 +939,27 @@
     "ownerFavoriteImportDate": "2026-11-04"
   },
   {
+    "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
+    "name": "Dragon Rave",
+    "author": "Coldcancer",
+    "genres": [
+      "CLUB"
+    ],
+    "officialTags": [
+      "author_tag_dance",
+      "author_tag_club",
+      "author_tag_cyberpunk",
+      "author_tag_neon",
+      "author_tag_party",
+      "system_approved"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_2299385b-be7f-48d6-a843-b221646e89ce/info",
+    "discoveredBy": "automatic-discovery-gemini-reviewed"
+  },
+  {
     "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
     "name": "Eden 6",
     "author": "SimplySymmetry",
@@ -2547,6 +2568,28 @@
     ],
     "editorialStatus": "unreviewed",
     "chartEligible": true
+  },
+  {
+    "id": "wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016",
+    "name": "The Syndicate Garage",
+    "author": "【Kay】",
+    "genres": [
+      "CLUB"
+    ],
+    "officialTags": [
+      "content_sex",
+      "author_tag_garage",
+      "author_tag_club",
+      "author_tag_dance",
+      "author_tag_private",
+      "author_tag_room",
+      "system_approved"
+    ],
+    "releaseStatus": "public",
+    "editorialStatus": "unreviewed",
+    "chartEligible": true,
+    "source": "https://vrchat.com/home/world/wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016/info",
+    "discoveredBy": "automatic-discovery-gemini-reviewed"
   },
   {
     "id": "wrld_16baa8ad-1395-4546-9670-771a7759b3c4",
