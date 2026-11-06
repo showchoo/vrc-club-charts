@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-05T00:29:02+00:00",
+  "updatedAt": "2026-11-06T00:29:27+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -201,6 +201,58 @@
       "name": "particle abyss 2.0",
       "author": "Cyberƴ",
       "checkedAt": "2026-11-05T00:29:01+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
+      "name": "Poolside Chill House",
+      "author": "JimmyyJames",
+      "checkedAt": "2026-11-06T00:29:26+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
+      "name": "stadium rave A （audiolink party world ）",
+      "author": "ALDUMGAMES",
+      "checkedAt": "2026-11-06T00:29:26+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_bd8f9a44-0ceb-4712-b85c-c4084cba0a35",
+      "name": "The NEW Saturday Night Club",
+      "author": "CharlieGT",
+      "checkedAt": "2026-11-06T00:29:26+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8",
+      "name": "The Ruiners Club Venue［BETA VERSION］",
+      "author": "Ａｒｔｉ",
+      "checkedAt": "2026-11-06T00:29:26+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
