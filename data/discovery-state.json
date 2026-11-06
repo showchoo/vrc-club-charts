@@ -37,47 +37,47 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "skipped_host_unreachable"
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "skipped_host_unreachable",
       "seedsChecked": 0,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-11-05",
+      "lastAttemptAt": "2026-11-06",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
@@ -97,10 +97,10 @@
     }
   },
   "vrcmapRelatedSeedIndex": 10,
-  "siaVrNextIndex": 75,
-  "vrcmapSourceNextIndex": 4,
+  "siaVrNextIndex": 3,
+  "vrcmapSourceNextIndex": 5,
   "siaVrSecondaryIndexes": {
-    "sia_vr_music": 8,
-    "sia_vr_bar": 8
+    "sia_vr_music": 10,
+    "sia_vr_bar": 10
   }
 }

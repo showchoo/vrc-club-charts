@@ -115,5 +115,21 @@
     ],
     "firstDiscoveredAt": "2026-11-05",
     "lastSeenAt": "2026-11-05"
+  },
+  {
+    "id": "wrld_b7a18737-ef6d-4044-bf05-13ac573510f3",
+    "name": "Dropoff",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-230281",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-06",
+    "lastSeenAt": "2026-11-06"
   }
 ]

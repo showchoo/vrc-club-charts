@@ -3286,6 +3286,22 @@
     ]
   },
   {
+    "id": "wrld_b7a18737-ef6d-4044-bf05-13ac573510f3",
+    "name": "Dropoff",
+    "authorHint": "",
+    "firstSeenAt": "2026-11-06",
+    "lastSeenAt": "2026-11-06",
+    "status": "pending",
+    "evidence": [
+      {
+        "source": "sia_vr_club",
+        "ref": "https://sia-vr.com/vrchat-world-230281",
+        "firstSeenAt": "2026-11-06",
+        "lastSeenAt": "2026-11-06"
+      }
+    ]
+  },
+  {
     "id": "wrld_b89ce0b6-f867-4569-b958-7bf91839d7e1",
     "name": "PARooM",
     "authorHint": "ぱるみん",
