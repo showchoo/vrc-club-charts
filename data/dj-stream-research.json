@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-06T00:29:27+00:00",
+  "updatedAt": "2026-11-06T23:46:06+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -145,6 +145,19 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
+      "name": "Dragon Rave",
+      "author": "Coldcancer",
+      "checkedAt": "2026-11-06T23:46:06+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
@@ -254,6 +267,45 @@
       "author": "Ａｒｔｉ",
       "checkedAt": "2026-11-06T00:29:26+00:00",
       "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
+      "name": "TUBE VR - IN THE DANCE",
+      "author": "Hadean",
+      "checkedAt": "2026-11-06T23:46:06+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384",
+      "name": "Udder Rave",
+      "author": "MøøƁerriღ",
+      "checkedAt": "2026-11-06T23:46:06+00:00",
+      "metadataStatus": "unavailable",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_28f87118-050c-4d1f-a6b1-74a73f7a6b88",
+      "name": "Under Ground",
+      "author": "EHAR",
+      "checkedAt": "2026-11-06T23:46:06+00:00",
+      "metadataStatus": "unavailable",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
       "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
