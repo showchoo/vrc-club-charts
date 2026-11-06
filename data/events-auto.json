@@ -1,7 +1,43 @@
 [
   {
+    "id": "feed-0d7e3d179a5d358762e2",
+    "name": "【次回 営業 日のご案内】 Club Moon Hopper Vol․82 11/8(sun) 22:00〜24:00 TimeTable DJ 22:00~ coffee_trip (@57…",
+    "start": "2026-11-08T13:00:00Z",
+    "end": null,
+    "organizer": "@ClubMoonHopper",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/ClubMoonHopper/status/2118264284899905968?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0d7e3d179a5d358762e2",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-f59aa35f76a259a21e26",
+    "name": "📢 VRCイベント 出演のお知らせ📢 ﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋ 🎵シアター ライブ Special🎵 ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏ VR演劇のミライを作るメタシアター主催の音楽 ライブ…",
+    "start": "2026-11-14T12:00:00Z",
+    "end": null,
+    "organizer": "@dadada_datarou",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/dadada_datarou/status/2118182836704539116?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "f59aa35f76a259a21e26",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-21168796bcc43a9d4735",
-    "name": "ワンマン 開催 記念ヴァーチャルミニ ライブ 『U1』 開催 決定☆彡 ういはら初の VRChat 上でのヴァーチャル ライブ が 開催 されます！ 日時 ： 2026年11月14日（土） 開…",
+    "name": "ワンマン 開催 記念ヴァーチャルミニライブ『U1』 開催決定 ☆彡 ういはら初の VRChat 上でのヴァーチャルライブが 開催 されます！ 日時 ： 2026年11月14日（土） 開場 / …",
     "start": "2026-11-14T13:00:00Z",
     "end": null,
     "organizer": "@u1_8ra",
@@ -13,6 +49,79 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "21168796bcc43a9d4735",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-7177e8df9bc7a47832ec",
+    "name": "【ライブ出演 告知 】 「 VRChat 最大級 ライブイベント 」 ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter 🗓 開催 日程 DAY1：2026.11.2…",
+    "start": "2026-11-21T17:20:00Z",
+    "end": null,
+    "organizer": "@Deden_VRC",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/Deden_VRC/status/2113412588235374708?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "7177e8df9bc7a47832ec",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-b2251b1266e87f06cce7",
+    "name": "VRChat 最大級の ライブイベント Autonomy vol.4 in Vket 2026 Winter IVIフルメンバーで激熱参戦します！！🔥 出演 日時 🎤 DAY2：12月12日(…",
+    "start": "2026-12-12T09:00:00Z",
+    "end": null,
+    "organizer": "@IVIartistgroup",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/IVIartistgroup/status/2113202119511789778?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "b2251b1266e87f06cce7",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-de9127484d23fc5fff0d",
+    "name": "🪐年末イベント出演情報🪐ˎˊ˗ VRChat 最大級 ライブイベント 「Autonomy vol.4 in Vket 2026 Winter」 Hiphop Tomodachiの初出演が決定し…",
+    "start": "2026-12-12T09:00:00Z",
+    "end": null,
+    "organizer": "@moomoo_okiraku",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE",
+      "DANCE"
+    ],
+    "url": "https://x.com/moomoo_okiraku/status/2113214174952312905?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "de9127484d23fc5fff0d",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-d09cd1a42d7b23acb6f2",
+    "name": "⚔ 告知 ⚔ Vket公認 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter 193出演します！！！ DAY3：2026.12…",
+    "start": "2026-12-12T18:20:00Z",
+    "end": null,
+    "organizer": "@193IQ3_kashikoi",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/193IQ3_kashikoi/status/2113213698357760028?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "d09cd1a42d7b23acb6f2",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
