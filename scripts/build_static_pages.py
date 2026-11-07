@@ -732,9 +732,14 @@ def index_page(worlds: list[dict]) -> str:
             " ".join(w.get("genres") or []),
         ]).casefold()
         thumb = world_thumbnail_url(w)
+        thumb_error = (
+            "const row=this.closest('.world-catalog-row');"
+            "if(row){row.dataset.thumbReady='false';window.vccQueueThumbnail?.(row)};"
+            "this.replaceWith(Object.assign(document.createElement('i'),{textContent:'VRC'}))"
+        )
         thumb_html = (
             f'<img src="{esc(thumb)}" alt="" loading="lazy" decoding="async" '
-            f'onerror="{thumbnail_fallback()}" />'
+            f'onerror="{esc(thumb_error)}" />'
             if thumb else '<i>VRC</i>'
         )
         thumb_ready = "true" if thumb else "false"
@@ -768,17 +773,25 @@ def index_page(worlds: list[dict]) -> str:
         let mediaTimer = 0;
         let mediaBusy = false;
 
-        function escAttr(value='') {{
-          return String(value).replace(/[&<>"']/g, ch => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[ch]));
-        }}
-
         function showThumbnail(worldId, image) {{
           if (!image) return;
           const row = rows.find(item => item.dataset.worldId === worldId);
           if (!row) return;
           const thumb = row.querySelector('.world-catalog-thumb');
           if (!thumb) return;
-          thumb.innerHTML = '<img src="' + escAttr(image) + '" alt="" loading="lazy" decoding="async" />';
+          const img = document.createElement('img');
+          // world-meta caches the official source; display it through our image proxy.
+          // An extra query parameter avoids reusing an earlier cached 404 response.
+          img.src = 'https://ypqpgpetrriirywrzikj.supabase.co/functions/v1/world-thumb?id='
+            + encodeURIComponent(worldId) + '&refreshed=1';
+          img.alt = '';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.onerror = () => {{
+            img.replaceWith(Object.assign(document.createElement('i'), {{textContent: 'VRC'}}));
+            row.dataset.thumbReady = 'false';
+          }};
+          thumb.replaceChildren(img);
           row.dataset.thumbReady = 'true';
         }}
 
@@ -815,6 +828,9 @@ def index_page(worlds: list[dict]) -> str:
           window.clearTimeout(mediaTimer);
           mediaTimer = window.setTimeout(flushMediaQueue, 80);
         }}
+
+        // Inline image error handlers can retry metadata only after the proxy fails.
+        window.vccQueueThumbnail = queueThumbnail;
 
         if ('IntersectionObserver' in window) {{
           const observer = new IntersectionObserver(entries => {{
