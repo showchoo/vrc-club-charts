@@ -37,50 +37,50 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "skipped_host_unreachable"
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "skipped_host_unreachable",
       "seedsChecked": 0,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-11-06",
+      "lastAttemptAt": "2026-11-07",
       "status": "ok",
       "articlesChecked": 5,
-      "leads": 5,
+      "leads": 4,
       "articlesListed": 77,
       "secondarySources": {
         "sia_vr_music": {
@@ -97,10 +97,10 @@
     }
   },
   "vrcmapRelatedSeedIndex": 10,
-  "siaVrNextIndex": 3,
-  "vrcmapSourceNextIndex": 5,
+  "siaVrNextIndex": 8,
+  "vrcmapSourceNextIndex": 6,
   "siaVrSecondaryIndexes": {
-    "sia_vr_music": 10,
-    "sia_vr_bar": 10
+    "sia_vr_music": 12,
+    "sia_vr_bar": 12
   }
 }
