@@ -1430,5 +1430,23 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_b7a18737-ef6d-4044-bf05-13ac573510f3",
+    "name": "Dropoff",
+    "author": "iron biscuit",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag; live playback not independently tested",
+    "reviewedAt": "2026-11-07T00:09:08.115369+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]

@@ -1911,6 +1911,57 @@
       }
     },
     {
+      "id": "wrld_b7a18737-ef6d-4044-bf05-13ac573510f3",
+      "name": "Dropoff",
+      "author": "iron biscuit",
+      "genres": [
+        "CLUB",
+        "DJ"
+      ],
+      "officialTags": [
+        "system_approved",
+        "admin_approved",
+        "author_tag_party",
+        "author_tag_dj",
+        "author_tag_club",
+        "author_tag_event",
+        "author_tag_music",
+        "feature_avatar_scaling"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_b7a18737-ef6d-4044-bf05-13ac573510f3/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "djStreamVerification": null,
+      "djStreamTested": false,
+      "djStreamOwnerConfirmed": false,
+      "ownerStreamConfirmation": null,
+      "publicationBasis": "dj-tag",
+      "releaseStatus": "public",
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_b741f289-e449-4ebe-8a5c-cc3951d91aad",
       "name": "Eden 6",
       "author": "SimplySymmetry",
