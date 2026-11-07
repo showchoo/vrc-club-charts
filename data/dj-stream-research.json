@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-06T23:46:06+00:00",
+  "updatedAt": "2026-11-07T22:54:25+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -72,6 +72,45 @@
       "name": "Beach in a Bottle",
       "author": "∗Lotus∗",
       "checkedAt": "2026-11-04T16:40:15+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc",
+      "name": "BlackMoonLinCLUB",
+      "author": "BlackMoonLin",
+      "checkedAt": "2026-11-07T22:54:24+00:00",
+      "metadataStatus": "unavailable",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
+      "name": "BLANK SPACE",
+      "author": "ChaikaRaven",
+      "checkedAt": "2026-11-07T22:54:24+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_924d8065-2203-4cb2-9697-37ccb68cceb1",
+      "name": "BNE˸ Underground",
+      "author": "BooneDoggy",
+      "checkedAt": "2026-11-07T22:54:24+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -306,6 +345,19 @@
       "author": "EHAR",
       "checkedAt": "2026-11-06T23:46:06+00:00",
       "metadataStatus": "unavailable",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_0508f15f-869b-44d4-b538-1f6615fd5273",
+      "name": "アストロビーチ",
+      "author": "チョス_Thoth",
+      "checkedAt": "2026-11-07T22:54:24+00:00",
+      "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
       "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
