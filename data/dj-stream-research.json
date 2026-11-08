@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-07T22:54:25+00:00",
+  "updatedAt": "2026-11-08T23:00:08+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -129,6 +129,58 @@
       "status": "non_public",
       "summaryJa": "公式APIで非公開Worldと確認。掲載対象外。",
       "sources": [],
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
+      "name": "Cafe＆Club CYBERIA",
+      "author": "PhysisKITE",
+      "checkedAt": "2026-11-08T23:00:07+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_cdb406eb-0d37-4b5b-8cce-ca3d6f662ff9",
+      "name": "CARROT CLUB",
+      "author": "BEBE CARROT",
+      "checkedAt": "2026-11-08T23:00:07+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
+      "name": "Club Astra",
+      "author": "ZIPPY251",
+      "checkedAt": "2026-11-08T23:00:07+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1.222",
+      "author": "TGCFabian",
+      "checkedAt": "2026-11-08T23:00:07+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
       "requiresHumanVerification": true
     },
     {
