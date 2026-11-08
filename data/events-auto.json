@@ -1,5 +1,24 @@
 [
   {
+    "id": "feed-565d6c0549ec1a295edc",
+    "name": "【 VRChat DJイベント 告知 】 GTInutのバースデーパーティーで 明日 11時JSTからサイケします！ \" Club Chemistry - GTInut's Birthday\"…",
+    "start": "2026-11-08T02:00:00Z",
+    "end": null,
+    "organizer": "@yossy222_VRC",
+    "worldName": "VRChat",
+    "genres": [
+      "PSYTRANCE",
+      "DJ"
+    ],
+    "url": "https://x.com/yossy222_VRC/status/2118944879250489412?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "565d6c0549ec1a295edc",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-0d7e3d179a5d358762e2",
     "name": "【次回 営業 日のご案内】 Club Moon Hopper Vol․82 11/8(sun) 22:00〜24:00 TimeTable DJ 22:00~ coffee_trip (@57…",
     "start": "2026-11-08T13:00:00Z",
@@ -49,6 +68,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "21168796bcc43a9d4735",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-fede8cb88f8baa4ccb4d",
+    "name": "《おしらせ①》 #9_Joule vol.10を 開催 します。 Date // 11.28(sat) 21:00(JST) At// VRChat ( Group +) Guest DJ /…",
+    "start": "2026-11-28T12:00:00Z",
+    "end": null,
+    "organizer": "@pika_vrc",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/pika_vrc/status/2119007063506612691?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "fede8cb88f8baa4ccb4d",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
