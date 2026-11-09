@@ -1,55 +1,37 @@
 [
   {
-    "id": "feed-565d6c0549ec1a295edc",
-    "name": "【 VRChat DJイベント 告知 】 GTInutのバースデーパーティーで 明日 11時JSTからサイケします！ \" Club Chemistry - GTInut's Birthday\"…",
-    "start": "2026-11-08T02:00:00Z",
+    "id": "feed-c539d78557766e554cef",
+    "name": "Quest Dance party Club No.283 [ VRC Quest対応 DJイベント ] 📅11月10日(火) OPEN 20:40 JST～ START 21:00 JST～…",
+    "start": "2026-11-10T11:40:00Z",
     "end": null,
-    "organizer": "@yossy222_VRC",
+    "organizer": "@ClubDanceparty",
     "worldName": "VRChat",
     "genres": [
-      "PSYTRANCE",
-      "DJ"
+      "DJ",
+      "DANCE"
     ],
-    "url": "https://x.com/yossy222_VRC/status/2118944879250489412?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/ClubDanceparty/status/2119204670359130612?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "565d6c0549ec1a295edc",
+    "upstreamId": "c539d78557766e554cef",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
   },
   {
-    "id": "feed-0d7e3d179a5d358762e2",
-    "name": "【次回 営業 日のご案内】 Club Moon Hopper Vol․82 11/8(sun) 22:00〜24:00 TimeTable DJ 22:00~ coffee_trip (@57…",
-    "start": "2026-11-08T13:00:00Z",
+    "id": "feed-856fc95397b9a7d3ebb7",
+    "name": "【GeekJack様とVDP2026がコラボ！】 11月11日(水)に「Geek Jack Music Stage」を 開催 ！ VRChat で DJイベント を行います！✨ OPEN 19…",
+    "start": "2026-11-11T10:30:00Z",
     "end": null,
-    "organizer": "@ClubMoonHopper",
+    "organizer": "@virtualparty_co",
     "worldName": "VRChat",
     "genres": [
       "DJ"
     ],
-    "url": "https://x.com/ClubMoonHopper/status/2118264284899905968?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/virtualparty_co/status/2112489691870359681?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "0d7e3d179a5d358762e2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-f59aa35f76a259a21e26",
-    "name": "📢 VRC イベント出演のお知らせ📢 ﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋ 🎵シアターライブSpecial🎵 ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏ VR演劇のミライを作るメタシアター主催の音楽ライブイベン…",
-    "start": "2026-11-14T12:00:00Z",
-    "end": null,
-    "organizer": "@dadada_datarou",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/dadada_datarou/status/2118182836704539116?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "f59aa35f76a259a21e26",
+    "upstreamId": "856fc95397b9a7d3ebb7",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -73,19 +55,37 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-fede8cb88f8baa4ccb4d",
-    "name": "《おしらせ①》 #9_Joule vol.10を 開催 します。 Date // 11.28(sat) 21:00(JST) At// VRChat ( Group +) Guest DJ /…",
-    "start": "2026-11-28T12:00:00Z",
+    "id": "feed-cd4f5d552782d7670d92",
+    "name": "【お知らせ】 『瑠璃色のぬいぐるみ VRChat 2nd Anniversary LIVE』 VRChat を始めて2周年！時が経つの早い 素敵なゲストの皆さんと一緒に ライブ を 開催 しま…",
+    "start": "2026-11-27T12:50:00Z",
     "end": null,
-    "organizer": "@pika_vrc",
+    "organizer": "@luliilo_nui",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/luliilo_nui/status/2119384445971034617?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "cd4f5d552782d7670d92",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-60c54db6f2d514ee7d2a",
+    "name": "【 VRChat DJ Event】 IN THE DUSK 5th Phase 2026/11/28(Sat) Start 23:00 JST Group + ---DJs--- cruca…",
+    "start": "2026-11-28T14:00:00Z",
+    "end": null,
+    "organizer": "@hellneko_mstdn",
     "worldName": "VRChat",
     "genres": [
       "DJ"
     ],
-    "url": "https://x.com/pika_vrc/status/2119007063506612691?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/hellneko_mstdn/status/2115078782277267817?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "fede8cb88f8baa4ccb4d",
+    "upstreamId": "60c54db6f2d514ee7d2a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
