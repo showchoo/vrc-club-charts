@@ -500,7 +500,8 @@ def main(argv=None) -> int:
             "recording": report["recording"], "actions": len(report["actions"]),
             "rankingEligible": report["rankingEligible"],
         }, ensure_ascii=False, indent=2))
-        return 1 if (report.get("error") or report["recording"].get("error")
+        return 1 if (report.get("stopReason") != "completed"
+                     or report.get("error") or report["recording"].get("error")
                      or (args.sweep and report.get("sweep", {}).get("status") != "completed")) else 0
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
