@@ -124,7 +124,8 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
               inspection_fn: Callable | None = None,
               input_fn: Callable[[str], str] = input,
               open_world_page: bool = False,
-              open_url_fn: Callable[[str], bool] | None = None) -> dict:
+              open_url_fn: Callable[[str], bool] | None = None,
+              verify_world_log: bool = False) -> dict:
     worlds = validate_plan(plan)
     captures = outside_repository(capture_dir)
     if not 5 <= seconds <= 120:
@@ -196,6 +197,7 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
                 publishing_rights_confirmed=False,
                 sweep_motion=sweep,
                 platform_authorization_confirmed=platform_authorized,
+                verify_world_log=verify_world_log,
             )
             if not isinstance(result, dict) or result.get("worldId") != wid:
                 raise RuntimeError("Inspector result World ID mismatch")
@@ -221,6 +223,8 @@ def main(argv=None) -> int:
     parser.add_argument("--limit", type=int, default=5, help="Number of public Worlds, maximum 25")
     parser.add_argument("--seconds", type=int, default=45)
     parser.add_argument("--sweep", action="store_true")
+    parser.add_argument("--verify-local-log", action="store_true",
+                        help="Before/after local VRChat output log corroboration; no uploads")
     parser.add_argument("--open-world-page", action="store_true",
                         help="Open each official VRChat World launch web page, not the client")
     parser.add_argument("--analyze-video", action="store_true")
@@ -242,6 +246,7 @@ def main(argv=None) -> int:
                 recording_rights_confirmed=args.confirm_recording_rights,
                 gemini_upload_confirmed=args.confirm_gemini_upload,
                 open_world_page=args.open_world_page,
+                verify_world_log=args.verify_local_log,
             )
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0 if result["status"] == "completed" else 1

@@ -13,6 +13,7 @@ from pathlib import Path
 
 try:
     from scripts.inspection_preflight import preflight
+    from scripts.inspection_world_log import corroborate_world
     from scripts.windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
     from scripts.evaluate_interior_video import validate_media, media_sha256
@@ -23,6 +24,7 @@ try:
     from scripts.inspection_facility_keyframes import export_frame_evidence, FrameEvidenceError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
+    from inspection_world_log import corroborate_world
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
     from evaluate_interior_video import validate_media, media_sha256
@@ -42,7 +44,8 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
                    publishing_rights_confirmed: bool = False,
                    model: str = "gemini-3.5-flash-lite",
                    sweep_motion: bool = False,
-                   platform_authorization_confirmed: bool = False) -> dict:
+                   platform_authorization_confirmed: bool = False,
+                   verify_world_log: bool = False) -> dict:
     if use_ai_motion and sweep_motion:
         raise ValueError("Cannot use AI movement and bounded sweep in the same capture")
     if sweep_motion and not platform_authorization_confirmed:
@@ -74,8 +77,18 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         raise RuntimeError("Preflight failed (no capture or API requests attempted): " +
                            ", ".join(missing))
 
-    # The user must already have opened the correct World. There is no direct
-    # evidence that this manually supplied World ID matches the scene.
+    # Optional read-only local log corroboration; never upload log content.
+    # This is only a conservative signal, not independent proof of participants.
+    log_before = None
+    if verify_world_log:
+        log_before = corroborate_world(world_id, max_age_seconds=180)
+        if log_before.get("status") != "corroborated":
+            return {
+                "schemaVersion": 1, "worldId": world_id,
+                "status": "world-log-unconfirmed", "detail": log_before["reason"],
+                "rankingsChanged": False, "equipmentFunctionalityVerified": False,
+            }
+
     report = inspect(
         world_id=world_id, out_dir=root, seconds=seconds,
         ai=use_ai_motion, evaluate=False,
@@ -97,6 +110,18 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         "worldEnteredByHuman": True,
         "equipmentFunctionalityVerified": False,
     }
+
+    # Re-check AFTER capture but BEFORE Gemini/upload/publication. A World
+    # switch while recording must never be credited to the original World.
+    if verify_world_log:
+        log_after = corroborate_world(world_id, max_age_seconds=900)
+        if (log_after.get("status") != "corroborated"
+                or log_after.get("joinFingerprint") != log_before["joinFingerprint"]):
+            result["status"] = "world-log-changed"
+            result["detail"] = "Latest local VRChat join changed or became unconfirmed"
+            return result
+        result["worldLogCorroborated"] = True
+        result["worldLogDoesNotVerifyParticipantAbsence"] = True
 
     if sweep_motion and (
         not isinstance(report.get("sweep"), dict)
@@ -224,6 +249,8 @@ def main(argv=None) -> int:
     parser.add_argument("--model", default="gemini-3.5-flash-lite")
     parser.add_argument("--ai-explore", action="store_true",
                         help="Opt-in Gemini OSC movement; requires platform permission")
+    parser.add_argument("--verify-local-log", action="store_true",
+                        help="Require recent matching private World join in local VRChat output log")
     parser.add_argument("--sweep", action="store_true",
                         help="Opt-in stationary locally observed OSC sweep")
     parser.add_argument("--confirm-platform-authorization", action="store_true",
@@ -256,11 +283,12 @@ def main(argv=None) -> int:
             model=args.model,
             sweep_motion=args.sweep,
             platform_authorization_confirmed=args.confirm_platform_authorization,
+            verify_world_log=args.verify_local_log,
         )
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-incomplete", "capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch", "private-evidence-extraction-failed"} else 1
+    return 0 if summary["status"] not in {"world-log-unconfirmed", "world-log-changed", "capture-incomplete", "capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch", "private-evidence-extraction-failed"} else 1
 
 
 if __name__ == "__main__":
