@@ -1,11 +1,13 @@
 """Offline regression tests; never launch VRChat, record the desktop or call Gemini."""
 from __future__ import annotations
 
+import io
 import json
 import struct
 import tempfile
 import unittest
 from pathlib import Path
+from contextlib import redirect_stdout
 from unittest.mock import patch
 
 from scripts import windows_vrchat_inspector as m
@@ -287,6 +289,35 @@ class InspectionTests(unittest.TestCase):
                     confirm_upload=False, model="gemini-3.5-flash-lite")
             self.assertEqual(report["stopReason"], "emergency_stop_monitor_failed")
             self.assertFalse(report["rankingEligible"])
+
+    def test_direct_inspector_reports_nonzero_exit_for_operator_stop(self):
+        example = {
+            "stopReason": "operator_emergency_stop",
+            "mode": "local_windows_capture_only",
+            "recording": {"filename": "aborted.mp4", "frames": 18},
+            "actions": [],
+            "rankingEligible": False,
+        }
+        stdout = io.StringIO()
+        with patch.object(m, "inspect", return_value=example), redirect_stdout(stdout):
+            rc = m.main([
+                "--world-id", WORLD, "--seconds", "5",
+                "--private-instance-confirmed",
+            ])
+        self.assertEqual(rc, 1)
+        self.assertEqual(json.loads(stdout.getvalue())["status"], "operator_emergency_stop")
+
+    def test_direct_inspector_reports_zero_only_for_completed_capture(self):
+        example = {
+            "stopReason": "completed",
+            "mode": "local_windows_capture_only",
+            "recording": {"filename": "complete.mp4", "frames": 20},
+            "actions": [],
+            "rankingEligible": False,
+        }
+        with patch.object(m, "inspect", return_value=example), redirect_stdout(io.StringIO()):
+            rc = m.main(["--world-id", WORLD, "--seconds", "5", "--private-instance-confirmed"])
+        self.assertEqual(rc, 0)
 
     def test_source_never_launches_or_logs_in_or_uploads_automatically(self):
         source = Path(m.__file__).read_text(encoding="utf-8")
