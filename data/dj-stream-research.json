@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-08T23:00:08+00:00",
+  "updatedAt": "2026-11-10T02:20:25+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -197,6 +197,32 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_5ee1d511-d640-41ed-9e64-436c9e50781b",
+      "name": "Club Morningstar",
+      "author": "Insomniamoon_va",
+      "checkedAt": "2026-11-10T02:20:24+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_e8fbbc7b-6196-478d-b5c9-8ef884b56f4a",
+      "name": "Club Neon Spin",
+      "author": "Andron827",
+      "checkedAt": "2026-11-10T02:20:24+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
@@ -207,6 +233,31 @@
       "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
       "sources": [],
       "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_03183583-fbbf-4c6d-a874-457499e2fd3f",
+      "name": "Club VGL",
+      "author": "Varneon",
+      "checkedAt": "2026-11-10T02:20:24+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
+      "name": "Clubroom",
+      "author": "Gssam",
+      "checkedAt": "2026-11-10T02:20:24+00:00",
+      "metadataStatus": "official_nonpublic",
+      "method": "gemini-grounded-search-v1",
+      "status": "non_public",
+      "summaryJa": "公式APIで非公開Worldと確認。掲載対象外。",
+      "sources": [],
       "requiresHumanVerification": true
     },
     {
