@@ -9,6 +9,7 @@ param(
     [switch]$AnalyzeVideo,
     [switch]$UseAiMotion,
     [switch]$Sweep,
+    [switch]$VerifyLocalLog,
     [switch]$ConfirmPlatformAuthorization,
     [switch]$PublishVisual,
     [switch]$ConfirmPrivateInstance,
@@ -46,6 +47,7 @@ try {
         $arguments += "--private-instance-confirmed"
         if ($AnalyzeVideo) { $arguments += "--analyze-video" }
         if ($UseAiMotion) { $arguments += "--ai-explore" }
+        if ($VerifyLocalLog) { $arguments += "--verify-local-log" }
         if ($Sweep) {
             if (-not $ConfirmPlatformAuthorization) {
                 throw "A live OSC sweep requires -ConfirmPlatformAuthorization."
