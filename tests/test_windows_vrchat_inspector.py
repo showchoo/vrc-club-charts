@@ -1,11 +1,13 @@
 """Offline regression tests; never launch VRChat, record the desktop or call Gemini."""
 from __future__ import annotations
 
+import io
 import json
 import struct
 import tempfile
 import unittest
 from pathlib import Path
+from contextlib import redirect_stdout
 from unittest.mock import patch
 
 from scripts import windows_vrchat_inspector as m
@@ -54,6 +56,28 @@ class InspectionTests(unittest.TestCase):
             self.assertEqual(struct.unpack(">f", packets[-1][-4:])[0], 0)
             hosts = [a.args[1] for a in fake_socket.return_value.sendto.call_args_list]
             self.assertEqual(set(hosts), {("127.0.0.1", 9000)})
+            ctl.close()
+
+    def test_emergency_stop_event_releases_active_osc_input(self):
+        event = m.threading.Event()
+        checks = []
+        def still_safe():
+            checks.append(1)
+            if len(checks) >= 3:
+                event.set()  # Pretend the Ctrl+Shift+F12 monitor tripped.
+            return not event.is_set()
+        with patch.object(m.socket, "socket") as fake_socket:
+            ctl = m.OscMovement()
+            fake_socket.return_value.sendto.reset_mock()
+            with self.assertRaises(RuntimeError):
+                ctl.act("forward", still_safe)
+            packets = [call.args[0] for call in fake_socket.return_value.sendto.call_args_list]
+            self.assertTrue(any(struct.unpack(">f", p[-4:])[0] > 0 for p in packets))
+            tail = packets[-len(ctl.ALL):]
+            self.assertEqual(len(tail), len(ctl.ALL))
+            self.assertTrue(all(struct.unpack(">f", p[-4:])[0] == 0 for p in tail))
+            self.assertEqual({c.args[1] for c in fake_socket.return_value.sendto.call_args_list},
+                             {("127.0.0.1", 9000)})
             ctl.close()
 
     def test_h264_recorder_normalizes_odd_window_dimensions(self):
@@ -189,6 +213,111 @@ class InspectionTests(unittest.TestCase):
             self.assertEqual(report["localWorldGuard"]["status"], "stopped")
             self.assertFalse(report["rankingEligible"])
             self.assertFalse(list(Path(d).glob("*.evaluation-draft.json")))
+
+    def test_operator_emergency_hotkey_stops_capture_and_never_uploads(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.output = output
+                self.stop_event = m.threading.Event()
+                self.frames = 18
+                self.failed = None
+            def start(self):
+                self.output.write_bytes(b"synthetic-clip-only")
+            def close(self):
+                self.stop_event.set()
+
+        class FakeEmergencyStop:
+            def __init__(self, stop_event):
+                self.stop = stop_event
+                self.reason = None
+            def start(self):
+                self.reason = "operator-emergency-hotkey"
+                self.stop.set()
+                return True
+            def close(self):
+                return {"status": "stopped", "reason": self.reason, "keyLogging": False}
+
+        from scripts import evaluate_interior_video as evaluation
+        with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "mock"}, clear=False):
+            with (patch.object(m, "get_window", return_value=(123, {
+                       "left": 0, "top": 0, "width": 640, "height": 480})),
+                  patch.object(m, "is_active", return_value=True),
+                  patch.object(m, "WindowRecorder", FakeRecorder),
+                  patch.object(m, "EmergencyStop", FakeEmergencyStop),
+                  patch.object(evaluation, "ask_gemini",
+                               side_effect=AssertionError("Interrupted capture must not be uploaded"))):
+                report = m.inspect(
+                    world_id=WORLD, out_dir=Path(d), seconds=5, ai=False,
+                    evaluate=True, confirm_private=True, accept_risk=False,
+                    confirm_upload=True, model="gemini-3.5-flash-lite")
+            self.assertEqual(report["stopReason"], "operator_emergency_stop")
+            self.assertFalse(report["emergencyStop"]["keyLogging"])
+            self.assertFalse(list(Path(d).glob("*.evaluation-draft.json")))
+
+    def test_operator_hotkey_monitor_failure_blocks_capture_and_ai(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.stop_event = m.threading.Event()
+                self.output = output
+                self.frames = 0
+                self.failed = None
+            def start(self):
+                raise AssertionError("Must not record with failed monitor")
+            def close(self):
+                pass
+
+        class FakeEmergencyStop:
+            def __init__(self, stop_event):
+                self.reason = "hotkey-monitor-error"
+                stop_event.set()
+            def start(self):
+                return False
+            def close(self):
+                return {"status": "stopped", "reason": self.reason}
+
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(m, "get_window", return_value=(123, {
+                       "left": 0, "top": 0, "width": 640, "height": 480})),
+                  patch.object(m, "is_active", return_value=True),
+                  patch.object(m, "WindowRecorder", FakeRecorder),
+                  patch.object(m, "EmergencyStop", FakeEmergencyStop)):
+                report = m.inspect(
+                    world_id=WORLD, out_dir=Path(d), seconds=5, ai=False,
+                    evaluate=False, confirm_private=True, accept_risk=False,
+                    confirm_upload=False, model="gemini-3.5-flash-lite")
+            self.assertEqual(report["stopReason"], "emergency_stop_monitor_failed")
+            self.assertFalse(report["rankingEligible"])
+
+    def test_direct_inspector_reports_nonzero_exit_for_operator_stop(self):
+        example = {
+            "stopReason": "operator_emergency_stop",
+            "mode": "local_windows_capture_only",
+            "recording": {"filename": "aborted.mp4", "frames": 18},
+            "actions": [],
+            "rankingEligible": False,
+        }
+        stdout = io.StringIO()
+        with patch.object(m, "inspect", return_value=example), redirect_stdout(stdout):
+            rc = m.main([
+                "--world-id", WORLD, "--seconds", "5",
+                "--private-instance-confirmed",
+            ])
+        self.assertEqual(rc, 1)
+        self.assertEqual(json.loads(stdout.getvalue())["status"], "operator_emergency_stop")
+
+    def test_direct_inspector_reports_zero_only_for_completed_capture(self):
+        example = {
+            "stopReason": "completed",
+            "mode": "local_windows_capture_only",
+            "recording": {"filename": "complete.mp4", "frames": 20},
+            "actions": [],
+            "rankingEligible": False,
+        }
+        with patch.object(m, "inspect", return_value=example), redirect_stdout(io.StringIO()):
+            rc = m.main(["--world-id", WORLD, "--seconds", "5", "--private-instance-confirmed"])
+        self.assertEqual(rc, 0)
 
     def test_source_never_launches_or_logs_in_or_uploads_automatically(self):
         source = Path(m.__file__).read_text(encoding="utf-8")
