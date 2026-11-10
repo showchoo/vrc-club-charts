@@ -97,6 +97,7 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         confirm_upload=gemini_upload_confirmed,
         model=model, sweep=sweep_motion,
         platform_authorization_confirmed=platform_authorization_confirmed,
+        expected_join_fingerprint=(log_before["joinFingerprint"] if verify_world_log else None),
     )
     recording = report.get("recording") or {}
     result = {
