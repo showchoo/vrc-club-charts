@@ -18,6 +18,15 @@ import tempfile
 from datetime import datetime, timezone
 from typing import Callable
 
+try:
+    from scripts.inspection_capture_integrity import (
+        CaptureIntegrityError, capture_integrity, verify_capture_integrity,
+    )
+except ModuleNotFoundError:
+    from inspection_capture_integrity import (
+        CaptureIntegrityError, capture_integrity, verify_capture_integrity,
+    )
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WORLD_ID_RE = re.compile(r"wrld_[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\Z")
 MAX_WORLDS = 25
@@ -115,6 +124,48 @@ def plan_digest(worlds: list[dict]) -> str:
     return hashlib.sha256(json.dumps(ids, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
+def audit_queue(plan: dict, *, capture_dir: Path) -> dict:
+    """Offline, read-only audit of completed World's MP4 integrity.
+
+    This does not read client logs, send OSC, access VRChat or call Gemini.
+    Pending/failed entries are not represented as completed evidence.
+    """
+    worlds = validate_plan(plan)
+    captures = outside_repository(capture_dir)
+    path = captures / "inspection-queue-state.json"
+    if not path.is_file():
+        return {"status": "blocked", "reason": "queue-state-missing",
+                "auditedCompleted": 0, "problems": []}
+    try:
+        state = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"status": "blocked", "reason": "queue-state-unreadable",
+                "auditedCompleted": 0, "problems": []}
+    if (not isinstance(state, dict) or state.get("schemaVersion") != 1
+            or state.get("planDigest") != plan_digest(worlds)
+            or not isinstance(state.get("worlds"), dict)):
+        return {"status": "blocked", "reason": "queue-state-plan-mismatch",
+                "auditedCompleted": 0, "problems": []}
+    checked, problems = 0, []
+    for item in worlds:
+        wid = item["worldId"]
+        entry = state["worlds"].get(wid, {})
+        if not isinstance(entry, dict):
+            problems.append({"worldId": wid, "reason": "invalid-queue-entry"})
+            continue
+        if entry.get("status") != "completed":
+            continue
+        try:
+            verify_capture_integrity(captures, wid, entry.get("captureIntegrity"))
+            checked += 1
+        except (CaptureIntegrityError, OSError) as exc:
+            reason = (str(exc) if isinstance(exc, CaptureIntegrityError)
+                      else "capture-unreadable")
+            problems.append({"worldId": wid, "reason": reason})
+    return {"status": "blocked" if problems else "ok",
+            "auditedCompleted": checked, "problems": problems}
+
+
 def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
               sweep: bool = False, analyze_video: bool = False,
               platform_authorized: bool = False,
@@ -155,18 +206,34 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
             from run_one_world_inspection import run_inspection
         inspection_fn = run_inspection
 
-    def save(world_id: str, status: str, result: dict | None = None):
+    def save(world_id: str, status: str, result: dict | None = None,
+             media_evidence: dict | None = None):
         entry = {"status": status, "updatedAt": utc_now()}
         if result is not None:
             # Existing single-World result is already restricted to local audit metadata.
             entry["result"] = result
+        if media_evidence is not None:
+            entry["captureIntegrity"] = media_evidence
         state["worlds"][world_id] = entry
         state["updatedAt"] = utc_now()
         atomic_json(state_path, state)
 
     for number, item in enumerate(worlds, 1):
         wid = item["worldId"]
-        if state["worlds"].get(wid, {}).get("status") == "completed":
+        existing_entry = state["worlds"].get(wid, {})
+        if not isinstance(existing_entry, dict):
+            return {"status": "blocked", "reason": "invalid-queue-entry",
+                    "worldId": wid, "statePath": str(state_path)}
+        if existing_entry.get("status") == "completed":
+            try:
+                verify_capture_integrity(captures, wid,
+                                         existing_entry.get("captureIntegrity"))
+            except (CaptureIntegrityError, OSError) as exc:
+                reason = (str(exc) if isinstance(exc, CaptureIntegrityError)
+                          else "capture-unreadable")
+                print("Previous completed recording could not be verified: " + reason)
+                return {"status": "blocked", "reason": reason,
+                        "worldId": wid, "statePath": str(state_path)}
             continue
         print(f"\n[{number}/{len(worlds)}] {item['name']} ({wid})")
         page = world_launch_url(wid)
@@ -202,13 +269,25 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
             if not isinstance(result, dict) or result.get("worldId") != wid:
                 raise RuntimeError("Inspector result World ID mismatch")
         except (OSError, RuntimeError, ValueError) as exc:
-            save(wid, "failed", {"errorType": type(exc).__name__, "message": str(exc)[:300]})
+            # Exception text can contain a Windows username, path or API data.
+            save(wid, "failed", {"errorType": type(exc).__name__,
+                                 "message": "Inspection failed before verified completion"})
             return {"status": "failed", "worldId": wid, "statePath": str(state_path)}
         status = result.get("status")
         if status not in SUCCESS or result.get("captureStopReason") != "completed":
             save(wid, "failed", result)
             return {"status": "failed", "worldId": wid, "statePath": str(state_path)}
-        save(wid, "completed", result)
+        try:
+            # A completed World must have an immutable local file attestation;
+            # otherwise the next run must not silently skip the World.
+            media_evidence = capture_integrity(captures, wid, result.get("recording"))
+        except (CaptureIntegrityError, OSError) as exc:
+            reason = (str(exc) if isinstance(exc, CaptureIntegrityError)
+                      else "capture-unreadable")
+            save(wid, "failed", {"status": "capture-integrity-failed", "reason": reason})
+            return {"status": "failed", "worldId": wid,
+                    "reason": reason, "statePath": str(state_path)}
+        save(wid, "completed", result, media_evidence=media_evidence)
     return {"status": "completed", "completed": len(worlds), "statePath": str(state_path)}
 
 
@@ -217,6 +296,8 @@ def main(argv=None) -> int:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--prepare", action="store_true", help="Save an offline World plan, no client access")
     group.add_argument("--run", action="store_true", help="Run with manual confirmation at every World")
+    group.add_argument("--audit-state", action="store_true",
+                       help="Read-only audit of previously completed MP4s; no client/OSC/Gemini")
     parser.add_argument("--catalog", type=Path, default=REPO_ROOT / "data" / "worlds.json")
     parser.add_argument("--capture-dir", type=Path, default=Path.home() / "Videos" / "VRCClubCharts")
     parser.add_argument("--plan-file", type=Path, help="Private JSON plan; defaults to capture folder")
@@ -236,6 +317,11 @@ def main(argv=None) -> int:
     try:
         captures = outside_repository(args.capture_dir)
         plan_path = outside_repository(args.plan_file or (captures / "inspection-queue-plan.json"))
+        if args.audit_state:
+            plan = json.loads(plan_path.read_text(encoding="utf-8"))
+            result = audit_queue(plan, capture_dir=captures)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if result["status"] == "ok" else 1
         if args.run:
             plan = json.loads(plan_path.read_text(encoding="utf-8"))
             result = run_queue(
