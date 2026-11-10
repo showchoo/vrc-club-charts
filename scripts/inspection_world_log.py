@@ -46,8 +46,8 @@ def read_log_tail(file: Path, maximum: int = MAX_LOG_BYTES) -> str:
         stream.seek(0, 2)
         size = stream.tell()
         truncated = size > maximum
-        if truncated:
-            stream.seek(size - maximum)
+        # Always reposition after measuring size; otherwise short logs read at EOF.
+        stream.seek(size - maximum if truncated else 0)
         data = stream.read(maximum)
     if truncated:
         data = data.split(b"\n", 1)[-1]
