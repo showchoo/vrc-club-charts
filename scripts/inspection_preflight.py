@@ -23,7 +23,7 @@ def dependency_exists(name: str) -> bool:
 
 
 def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
-              check_window: bool = True) -> dict:
+              check_window: bool = True, wants_sweep: bool = False) -> dict:
     checks: list[dict] = []
     def add(name: str, ok: bool, detail: str, essential: bool = True):
         checks.append({"check": name, "ok": bool(ok), "required": essential,
@@ -50,7 +50,7 @@ def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
             "Install google-genai; video/frames may be uploaded to Gemini")
         add("gemini-key", bool(os.environ.get("GEMINI_API_KEY")),
             "Set GEMINI_API_KEY privately in the Windows environment (value is never printed)")
-    if wants_ai:
+    if wants_ai or wants_sweep:
         add("pillow", dependency_exists("PIL"),
             "Install Pillow for real frame novelty/loop detection")
         add("osc", True,
@@ -80,11 +80,12 @@ def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ai-explore", action="store_true")
+    parser.add_argument("--sweep", action="store_true")
     parser.add_argument("--analyze-video", action="store_true")
     parser.add_argument("--no-window-check", action="store_true")
     args = parser.parse_args(argv)
     result = preflight(wants_ai=args.ai_explore, wants_video_ai=args.analyze_video,
-                       check_window=not args.no_window_check)
+                       check_window=not args.no_window_check, wants_sweep=args.sweep)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["ready"] else 1
 

@@ -36,6 +36,17 @@ admitted** public DJ World pages, using explicit same-creator or shared-genre
 signals. It never implies functional DJ equipment verification. See the
 [production rollout and related World guide](docs/DEPLOYMENT_AND_RELATED_WORLDS.md).
 
+## Bounded local OSC camera sweep
+
+An opt-in [Windows stationary OSC sweep pilot](docs/BOUNDED_OSC_SWEEP.md)
+now records a human-entered, participant-free World while executing up to
+four short camera turns. It requires explicit operator confirmation of
+platform authorization, private instance, and automation risk. It uses no
+Gemini API or automatic World joining; stops on focus loss, insufficient
+time, or repeated unchanged views. **Actual VRChat Windows validation and
+unattended/public World permission remain unconfirmed.** Passing offline
+mock tests is not real in-world verification.
+
 ## Long-term goal: evidence-based autonomous in-world inspection
 
 The long-term objective is a fully autonomous, **authorized** inspector that can visit public VRChat DJ Worlds, navigate their interiors, test DJ/live-playback equipment and gimmicks, measure performance, and produce a separately substantiated Craftsmanship Ranking. **No autonomous VRChat login or exploration is currently implemented.** An OSC input API is not authorization to run an unattended inspection bot; obtain clear VRChat permission before any such pilot.

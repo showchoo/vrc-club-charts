@@ -22,8 +22,10 @@ from pathlib import Path
 
 try:
     from scripts.inspection_navigation_guard import NavigationGuard
+    from scripts.inspection_sweep import run_sweep
 except ModuleNotFoundError:
     from inspection_navigation_guard import NavigationGuard
+    from inspection_sweep import run_sweep
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 ACTIONS = {"forward", "backward", "turn_left", "turn_right",
@@ -100,13 +102,22 @@ class OscMovement:
         if action not in ACTIONS:
             raise ValueError("Unsafe action")
         self.neutral()
-        if action == "stop":
-            return
-        if action in self.AXES:
-            axis, value = self.AXES[action]
-            self.send(axis, value)
-        limit = min(clamp_duration(action), duration or MAX_SECONDS)
+        # Validate focus BEFORE any non-zero OSC movement. Neutralize even
+        # if the sender or safety callback raises before the sleep begins.
         try:
+            if duration is not None and (
+                isinstance(duration, bool) or not isinstance(duration, (int, float))
+                or not 0 < duration <= MAX_SECONDS
+            ):
+                raise ValueError("Invalid action duration")
+            if not still_safe():
+                raise RuntimeError("VRChat window lost focus; stopped all input")
+            if action == "stop":
+                return
+            if action in self.AXES:
+                axis, value = self.AXES[action]
+                self.send(axis, value)
+            limit = min(clamp_duration(action), duration if duration is not None else MAX_SECONDS)
             end = time.monotonic() + limit
             while time.monotonic() < end:
                 if not still_safe():
@@ -275,15 +286,23 @@ class WindowRecorder:
 
 def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
             evaluate: bool, confirm_private: bool, accept_risk: bool,
-            confirm_upload: bool, model: str, ffmpeg: str = "ffmpeg") -> dict:
+            confirm_upload: bool, model: str, ffmpeg: str = "ffmpeg",
+            sweep: bool = False,
+            platform_authorization_confirmed: bool = False) -> dict:
     if not WORLD_ID_RE.fullmatch(world_id):
         raise ValueError("Valid VRChat World ID is required")
     if not 5 <= seconds <= MAX_SECONDS:
         raise ValueError("Inspection duration must be between 5 and 120 seconds")
     if not confirm_private:
         raise ValueError("Confirm a private, participant-free instance")
+    if ai and sweep:
+        raise ValueError("Choose either AI motion or a bounded local sweep, not both")
+    if sweep and not platform_authorization_confirmed:
+        raise ValueError("Explicit platform authorization must be confirmed before any OSC sweep")
     if ai and not accept_risk:
         raise ValueError("AI OSC control may breach VRChat ToS; explicitly acknowledge risk")
+    if sweep and not accept_risk:
+        raise ValueError("OSC sweep needs explicit platform authorization and operator acknowledgement")
     if (ai or evaluate) and not confirm_upload:
         raise ValueError("Explicit consent for sending footage to Gemini is required")
     if ai or evaluate:
@@ -310,7 +329,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
     report = {
         "schemaVersion": 1, "worldId": world_id,
         "startedAtUtc": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "mode": "local_windows_ai_osc" if ai else "local_windows_capture_only",
+        "mode": ("local_windows_ai_osc" if ai else
+                 "local_windows_bounded_sweep" if sweep else "local_windows_capture_only"),
         "vrchatClient": "unmodified_client_manually_opened_by_owner",
         "instanceAccess": "owner_attested_private_no_other_participants",
         "recording": {"filename": video.name, "audio": False, "fpsTarget": WindowRecorder.FPS},
@@ -321,7 +341,7 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
 
     recorder = WindowRecorder(hwnd, area, video, ffmpeg)
     recorder.max_duration_seconds = seconds
-    controller = OscMovement() if ai else None
+    controller = OscMovement() if (ai or sweep) else None
     guard = NavigationGuard() if ai else None
     started = time.monotonic()
     try:
@@ -347,6 +367,24 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
                 controller.act(action, lambda: is_active(hwnd) and not recorder.stop_event.is_set())
                 # Time for a new image rather than repeating movement blindly.
                 recorder.stop_event.wait(1)
+        elif sweep:
+            controller.neutral()
+            sweep_result = run_sweep(
+                controller=controller,
+                capture_png=lambda: screenshot_png(hwnd, area),
+                still_safe=lambda: is_active(hwnd) and not recorder.stop_event.is_set(),
+                seconds_left=lambda: seconds - (time.monotonic() - started),
+                log_action=report["actions"].append,
+            )
+            report["sweep"] = sweep_result
+            if sweep_result["status"] != "completed":
+                report["stopReason"] = sweep_result["reason"]
+            # The rest of the capture duration is stationary observation.
+            while time.monotonic() - started < seconds and not recorder.stop_event.is_set():
+                if not is_active(hwnd):
+                    report["stopReason"] = "window_unfocused"
+                    break
+                time.sleep(0.15)
         else:
             print("Recording the foreground VRChat window. Ctrl+C to stop.", flush=True)
             while time.monotonic() - started < seconds and not recorder.stop_event.is_set():
@@ -395,6 +433,10 @@ def main(argv=None) -> int:
     parser.add_argument("--out-dir", type=Path, default=Path.home() / "Videos" / "VRCClubCharts")
     parser.add_argument("--seconds", type=int, default=60)
     parser.add_argument("--ai-explore", action="store_true", help="Opt-in Gemini-guided OSC exploration")
+    parser.add_argument("--sweep", action="store_true",
+                        help="Opt-in stationary local OSC camera sweep; no AI/cloud or World joins")
+    parser.add_argument("--confirm-platform-authorization", action="store_true",
+                        help="Operator attests VRChat authorized the proposed automated client control")
     parser.add_argument("--evaluate", action="store_true", help="Analyze captured video with Gemini afterward")
     parser.add_argument("--private-instance-confirmed", action="store_true",
                         help="I confirm a private instance with no other participants")
@@ -412,14 +454,16 @@ def main(argv=None) -> int:
             confirm_private=args.private_instance_confirmed,
             accept_risk=args.acknowledge_automation_risk,
             confirm_upload=args.confirm_gemini_upload,
-            model=args.model, ffmpeg=args.ffmpeg,
+            model=args.model, ffmpeg=args.ffmpeg, sweep=args.sweep,
+            platform_authorization_confirmed=args.confirm_platform_authorization,
         )
         print(json.dumps({
             "status": report["stopReason"], "mode": report["mode"],
             "recording": report["recording"], "actions": len(report["actions"]),
             "rankingEligible": report["rankingEligible"],
         }, ensure_ascii=False, indent=2))
-        return 1 if report.get("error") or report["recording"].get("error") else 0
+        return 1 if (report.get("error") or report["recording"].get("error")
+                     or (args.sweep and report.get("sweep", {}).get("status") != "completed")) else 0
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
 
