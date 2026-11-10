@@ -299,8 +299,10 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         raise ValueError("Choose either AI motion or a bounded local sweep, not both")
     if sweep and not platform_authorization_confirmed:
         raise ValueError("Explicit platform authorization must be confirmed before any OSC sweep")
-    if (ai or sweep) and not accept_risk:
-        raise ValueError("OSC automation needs explicit platform authorization and operator acknowledgement")
+    if ai and not accept_risk:
+        raise ValueError("AI OSC control may breach VRChat ToS; explicitly acknowledge risk")
+    if sweep and not accept_risk:
+        raise ValueError("OSC sweep needs explicit platform authorization and operator acknowledgement")
     if (ai or evaluate) and not confirm_upload:
         raise ValueError("Explicit consent for sending footage to Gemini is required")
     if ai or evaluate:
