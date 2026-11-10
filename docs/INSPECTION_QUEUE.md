@@ -49,6 +49,23 @@ py -3 scripts/inspection_queue.py --run --analyze-video --confirm-recording-righ
 
 スイープと動画分析は各条件が揃えば組み合わせ可能です。**公開プレビュー・ランキングの自動更新はこのキューでは常に無効**です。
 
+## オプション：VRChatクライアントのローカルログによるWorld照合
+
+公式クライアントの出力ログから直近の入室イベントと「入室成功」を読み、対象のWorld IDと一致するか保守的に照合します。--verify-local-log を有効にすると録画の前後で検査し、不一致・過去の入室・非公開ではないインスタンス・途中退室の記録を検出した場合は停止します。
+
+~~~powershell
+py -3 scripts/inspection_queue.py --run --open-world-page --verify-local-log --seconds 45
+~~~
+
+- Windows標準の出力ログ保存場所（AppData/LocalLow/VRChat/VRChat）の最新 output_log_*.txt の末尾最大1MBのみ読みます。ログは変更しません。
+- Worldへの手動入室から約3分以内にIDを入力してください。録画終了後にも同じ入室イベントか確認します。
+- これは実機でのWorld ID確認を補助するのみです。他参加者の不在、録画権利、現在も正しいWorldにいること、VRChat運営の無人アクセス許可を独立して証明するものではありません。
+- ログにはユーザーIDやIPアドレスなど個人情報が含まれます。ログ全文をGitHub、Gemini、Supabaseやチャットに共有しないでください。照合機能はログ全文を外部送信せず、ID以外のプライベートな入室情報を状態ファイルへ保存しません。
+- 保守的な初期実装のため、ログに ~private( と記録されているインスタンスのみ受け付けます。参加者の人数までは判定しません。
+- 明示的に指定しない限り、従来の手動録画挙動のままです。
+
+VRChat公式：[出力ログの場所](https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-Output-Logs-and-Crash-Dumps)、[Udonデバッグログ](https://creators.vrchat.com/worlds/udon/debugging-udon-projects/)。
+
 ## 停止・再開と個人情報保護
 
 - 1回の計画は最大25World。公開状態かつランキング候補になっているIDのみ選択し、無効ID・重複を除外します。候補であっても実際のアクセス可否は保証しません。
