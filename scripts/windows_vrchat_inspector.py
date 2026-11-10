@@ -23,9 +23,11 @@ from pathlib import Path
 try:
     from scripts.inspection_navigation_guard import NavigationGuard
     from scripts.inspection_sweep import run_sweep
+    from scripts.inspection_session_guard import WorldSessionGuard
 except ModuleNotFoundError:
     from inspection_navigation_guard import NavigationGuard
     from inspection_sweep import run_sweep
+    from inspection_session_guard import WorldSessionGuard
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 ACTIONS = {"forward", "backward", "turn_left", "turn_right",
@@ -288,7 +290,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
             evaluate: bool, confirm_private: bool, accept_risk: bool,
             confirm_upload: bool, model: str, ffmpeg: str = "ffmpeg",
             sweep: bool = False,
-            platform_authorization_confirmed: bool = False) -> dict:
+            platform_authorization_confirmed: bool = False,
+            expected_join_fingerprint: str | None = None) -> dict:
     if not WORLD_ID_RE.fullmatch(world_id):
         raise ValueError("Valid VRChat World ID is required")
     if not 5 <= seconds <= MAX_SECONDS:
@@ -341,10 +344,21 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
 
     recorder = WindowRecorder(hwnd, area, video, ffmpeg)
     recorder.max_duration_seconds = seconds
+    local_guard = (
+        WorldSessionGuard(
+            world_id=world_id,
+            join_fingerprint=expected_join_fingerprint,
+            capture_stop_event=recorder.stop_event,
+        ) if expected_join_fingerprint is not None else None
+    )
     controller = OscMovement() if (ai or sweep) else None
     guard = NavigationGuard() if ai else None
     started = time.monotonic()
     try:
+        # A fresh, matching local join record must still exist immediately
+        # before any recording or OSC movement begins.
+        if local_guard is not None and not local_guard.start():
+            raise RuntimeError("Local World log changed before recording")
         recorder.start()
         if ai:
             controller.neutral()
@@ -395,9 +409,18 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         report["stopReason"] = "error"
         report["error"] = str(exc)[:300]
     finally:
-        if controller is not None:
-            controller.close()
-        recorder.close()
+        # Always release OSC axes and the recorder, even if any cleanup fails.
+        try:
+            if controller is not None:
+                controller.close()
+        finally:
+            try:
+                if local_guard is not None:
+                    report["localWorldGuard"] = local_guard.close()
+                    if local_guard.reason is not None:
+                        report["stopReason"] = "world_log_guard_stopped"
+            finally:
+                recorder.close()
 
     report["endedAtUtc"] = dt.datetime.now(dt.timezone.utc).isoformat()
     report["elapsedSeconds"] = round(time.monotonic() - started, 2)
@@ -411,7 +434,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
     report_path = out_dir / (stem + ".inspection.json")
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    if evaluate and video.is_file() and video.stat().st_size > 0 and not recorder.failed:
+    if (evaluate and report.get("stopReason") == "completed"
+            and video.is_file() and video.stat().st_size > 0 and not recorder.failed):
         try:
             from scripts.evaluate_interior_video import ask_gemini, create_report
         except ModuleNotFoundError:

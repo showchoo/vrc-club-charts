@@ -132,6 +132,64 @@ class InspectionTests(unittest.TestCase):
             self.assertEqual(written["mode"], "local_windows_ai_osc")
             self.assertEqual(len(list(Path(d).glob("*.mp4"))), 1)
 
+    def test_local_world_guard_stop_disables_direct_gemini_and_releases_osc(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.output = output
+                self.stop_event = m.threading.Event()
+                self.frames = 30
+                self.failed = None
+            def start(self):
+                self.output.write_bytes(b"synthetic-local-only-test")
+                self.stop_event.set()
+            def close(self):
+                self.stop_event.set()
+
+        class FakeController:
+            closed = False
+            def neutral(self):
+                pass
+            def close(self):
+                self.closed = True
+
+        class FakeWorldGuard:
+            def __init__(self, **kwargs):
+                self.reason = None
+                self.stop = kwargs["capture_stop_event"]
+            def start(self):
+                return True
+            def close(self):
+                self.stop.set()
+                self.reason = "local-world-or-instance-changed"
+                return {"status": "stopped", "reason": self.reason, "checks": 2}
+
+        class FakeNavigationGuard:
+            def metrics(self):
+                return {"observedFrames": 0, "recoveryTurns": 0}
+
+        from scripts import evaluate_interior_video as evaluation
+        with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "test"}):
+            with (patch.object(m, "get_window", return_value=(123, {
+                        "left": 0, "top": 0, "width": 640, "height": 480})),
+                  patch.object(m, "is_active", return_value=True),
+                  patch.object(m, "WindowRecorder", FakeRecorder),
+                  patch.object(m, "WorldSessionGuard", FakeWorldGuard),
+                  patch.object(m, "OscMovement", FakeController),
+                  patch.object(m, "NavigationGuard", FakeNavigationGuard),
+                  patch.object(evaluation, "ask_gemini",
+                               side_effect=AssertionError("Gemini must not run after World guard stop"))):
+                report = m.inspect(
+                    world_id=WORLD, out_dir=Path(d), seconds=5,
+                    ai=True, evaluate=True, confirm_private=True,
+                    accept_risk=True, confirm_upload=True,
+                    model="gemini-3.5-flash-lite",
+                    expected_join_fingerprint="a" * 64)
+            self.assertEqual(report["stopReason"], "world_log_guard_stopped")
+            self.assertEqual(report["localWorldGuard"]["status"], "stopped")
+            self.assertFalse(report["rankingEligible"])
+            self.assertFalse(list(Path(d).glob("*.evaluation-draft.json")))
+
     def test_source_never_launches_or_logs_in_or_uploads_automatically(self):
         source = Path(m.__file__).read_text(encoding="utf-8")
         self.assertNotIn("vrchat.com/api", source)

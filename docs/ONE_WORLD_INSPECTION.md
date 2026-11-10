@@ -13,7 +13,7 @@ https://docs.vrchat.com/docs/osc-as-input-controller.
 
 ## Optional local World-ID log corroboration
 
-To conservatively cross-check a manually entered World, add -VerifyLocalLog to the PowerShell launcher. The client output log is read locally before and after capture; a recent successful join of the same World in a private-marked instance is required. Log contents are never uploaded. This is not proof that the participant count is zero or the client is still in that World at every instant.
+To conservatively cross-check a manually entered World, add -VerifyLocalLog to the PowerShell launcher. The client output log is read locally before and after capture; a recent successful join of the same World in a private-marked instance is required. Log contents are never uploaded. The optional guard also checks the local join during capture (approximately once per second), requests a recording stop on change or read failure, neutralizes OSC axes during cleanup, and checks again at the end. Stopping is subject to poll and controller timing and is not instantaneous. This is not proof that the participant count is zero or the client is still in that World at every instant.
 
 ~~~powershell
 .\scripts\launch_one_world_inspection.ps1 -WorldId wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05 -Seconds 45 -ConfirmPrivateInstance -VerifyLocalLog
