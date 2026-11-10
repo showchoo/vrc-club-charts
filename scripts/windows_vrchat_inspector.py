@@ -286,7 +286,8 @@ class WindowRecorder:
 def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
             evaluate: bool, confirm_private: bool, accept_risk: bool,
             confirm_upload: bool, model: str, ffmpeg: str = "ffmpeg",
-            sweep: bool = False) -> dict:
+            sweep: bool = False,
+            platform_authorization_confirmed: bool = False) -> dict:
     if not WORLD_ID_RE.fullmatch(world_id):
         raise ValueError("Valid VRChat World ID is required")
     if not 5 <= seconds <= MAX_SECONDS:
@@ -295,6 +296,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         raise ValueError("Confirm a private, participant-free instance")
     if ai and sweep:
         raise ValueError("Choose either AI motion or a bounded local sweep, not both")
+    if sweep and not platform_authorization_confirmed:
+        raise ValueError("Explicit platform authorization must be confirmed before any OSC sweep")
     if (ai or sweep) and not accept_risk:
         raise ValueError("OSC automation needs explicit platform authorization and operator acknowledgement")
     if (ai or evaluate) and not confirm_upload:
@@ -429,6 +432,8 @@ def main(argv=None) -> int:
     parser.add_argument("--ai-explore", action="store_true", help="Opt-in Gemini-guided OSC exploration")
     parser.add_argument("--sweep", action="store_true",
                         help="Opt-in stationary local OSC camera sweep; no AI/cloud or World joins")
+    parser.add_argument("--confirm-platform-authorization", action="store_true",
+                        help="Operator attests VRChat authorized the proposed automated client control")
     parser.add_argument("--evaluate", action="store_true", help="Analyze captured video with Gemini afterward")
     parser.add_argument("--private-instance-confirmed", action="store_true",
                         help="I confirm a private instance with no other participants")
@@ -447,13 +452,15 @@ def main(argv=None) -> int:
             accept_risk=args.acknowledge_automation_risk,
             confirm_upload=args.confirm_gemini_upload,
             model=args.model, ffmpeg=args.ffmpeg, sweep=args.sweep,
+            platform_authorization_confirmed=args.confirm_platform_authorization,
         )
         print(json.dumps({
             "status": report["stopReason"], "mode": report["mode"],
             "recording": report["recording"], "actions": len(report["actions"]),
             "rankingEligible": report["rankingEligible"],
         }, ensure_ascii=False, indent=2))
-        return 1 if report.get("error") or report["recording"].get("error") else 0
+        return 1 if (report.get("error") or report["recording"].get("error")
+                     or (args.sweep and report.get("sweep", {}).get("status") != "completed")) else 0
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
 
