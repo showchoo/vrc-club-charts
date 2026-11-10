@@ -127,6 +127,54 @@ class OneWorldPipelineTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "ffmpeg"):
                     run.run_inspection(**self.common(d))
 
+    def test_missing_local_join_proof_fails_before_recorder(self):
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "corroborate_world", return_value={
+                      "status": "unconfirmed", "reason": "join-too-old",
+                  }),
+                  patch.object(run, "inspect", side_effect=AssertionError("No recording allowed"))):
+                result = run.run_inspection(**self.common(d), verify_world_log=True)
+            self.assertEqual(result["status"], "world-log-unconfirmed")
+            self.assertEqual(result["detail"], "join-too-old")
+            self.assertFalse(result["rankingsChanged"])
+
+    def test_log_switch_after_capture_never_uploads_or_publishes(self):
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "corroborate_world", side_effect=[
+                      {"status": "corroborated", "joinFingerprint": "A"},
+                      {"status": "corroborated", "joinFingerprint": "B"},
+                  ]) as logs,
+                  patch.object(run, "inspect",
+                               side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "process_queue",
+                               side_effect=AssertionError("No Gemini after switch")),
+                  patch.object(run, "release",
+                               side_effect=AssertionError("No publication after switch"))):
+                result = run.run_inspection(
+                    **self.common(d), verify_world_log=True, analyze_video=True,
+                    publish_visual=True, recording_rights_confirmed=True,
+                    gemini_upload_confirmed=True, publishing_rights_confirmed=True)
+            self.assertEqual(result["status"], "world-log-changed")
+            self.assertEqual(logs.call_count, 2)
+            self.assertFalse(result["rankingsChanged"])
+
+    def test_matching_log_before_and_after_capture_records_restricted_proof(self):
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "corroborate_world", return_value={
+                      "status": "corroborated", "joinFingerprint": "private-hash",
+                  }),
+                  patch.object(run, "inspect",
+                               side_effect=lambda **kw: captured(WORLD, Path(d))),
+                  patch.object(run, "process_queue", side_effect=AssertionError("No AI by default"))):
+                result = run.run_inspection(**self.common(d), verify_world_log=True)
+            self.assertEqual(result["status"], "capture-complete")
+            self.assertTrue(result["worldLogCorroborated"])
+            self.assertTrue(result["worldLogDoesNotVerifyParticipantAbsence"])
+            self.assertNotIn("private-hash", json.dumps(result))
+
     def test_early_stop_never_uploads_or_publishes_even_with_video_frames(self):
         for reason in ("user_ctrl_c", "window_unfocused", "navigation_safety_stop", None):
             with self.subTest(reason=reason), tempfile.TemporaryDirectory() as d:
