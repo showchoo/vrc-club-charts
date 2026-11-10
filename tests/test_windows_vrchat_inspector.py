@@ -56,6 +56,28 @@ class InspectionTests(unittest.TestCase):
             self.assertEqual(set(hosts), {("127.0.0.1", 9000)})
             ctl.close()
 
+    def test_emergency_stop_event_releases_active_osc_input(self):
+        event = m.threading.Event()
+        checks = []
+        def still_safe():
+            checks.append(1)
+            if len(checks) >= 3:
+                event.set()  # Pretend the Ctrl+Shift+F12 monitor tripped.
+            return not event.is_set()
+        with patch.object(m.socket, "socket") as fake_socket:
+            ctl = m.OscMovement()
+            fake_socket.return_value.sendto.reset_mock()
+            with self.assertRaises(RuntimeError):
+                ctl.act("forward", still_safe)
+            packets = [call.args[0] for call in fake_socket.return_value.sendto.call_args_list]
+            self.assertTrue(any(struct.unpack(">f", p[-4:])[0] > 0 for p in packets))
+            tail = packets[-len(ctl.ALL):]
+            self.assertEqual(len(tail), len(ctl.ALL))
+            self.assertTrue(all(struct.unpack(">f", p[-4:])[0] == 0 for p in tail))
+            self.assertEqual({c.args[1] for c in fake_socket.return_value.sendto.call_args_list},
+                             {("127.0.0.1", 9000)})
+            ctl.close()
+
     def test_h264_recorder_normalizes_odd_window_dimensions(self):
         source = Path(m.__file__).read_text(encoding="utf-8")
         self.assertIn("scale=trunc(iw/2)*2:trunc(ih/2)*2", source)
