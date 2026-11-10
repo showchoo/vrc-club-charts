@@ -84,6 +84,36 @@ py -3 scripts/inspection_queue.py --run --open-world-page --verify-local-log --s
 
 VRChat公式：[出力ログの場所](https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-Output-Logs-and-Crash-Dumps)、[Udonデバッグログ](https://creators.vrchat.com/worlds/udon/debugging-udon-projects/)。
 
+## 保存済み録画の整合性監査（オフライン）
+
+検査が「完了」と判定されたとき、対応するローカルMP4のファイル名・バイト数・SHA-256を、非公開の inspection-queue-state.json に記録します。複数Worldのキューを再開するたびに、完了済み録画が実際に存在し、内容が保存時と一致するかを再計算します。
+
+**録画をせず、VRChatにアクセスせず監査だけを行う**場合は、検査計画と状態が保存済みの同じフォルダーで次を実行します。
+
+~~~powershell
+py -3 scripts/inspection_queue.py --audit-state
+~~~
+
+特定の保存先を指定している場合は、当時の保存先を使ってください。
+
+~~~powershell
+py -3 scripts/inspection_queue.py --audit-state --capture-dir "D:\VRCClubChartsCaptures"
+~~~
+
+- status: ok は「完了済みのMP4の整合性に問題がない」意味です。未検査のWorldまで完了した意味ではありません。auditedCompleted に検証した完了World数が表示されます。
+- 録画の削除・改変・差し替え、MP4ファイル名の異常、録画が空である場合は status: blocked と匿名化された原因コードを返します。**完了済みWorldを自動でスキップせず停止**します。
+- 過去のバージョンで captureIntegrity がない完了記録は、安全を優先して capture-attestation-missing として停止します。古い状態ファイルを自動で書き換えたり、MP4を正当な証拠として後付け認証したりしません。新しい検査バッチを作る場合は別の --capture-dir を用意してください。
+- 監査はMP4を読むだけで内容を変更・アップロードしません。SHA-256はファイル破損の検出用であり、**VRChatの実際の入室・参加者不在・DJ機材の動作・録画権利を証明しません**。
+- MP4の処理時に失敗しても例外に含まれるユーザー名や秘密のパスが状態ファイルへ記録されないよう、エラーは短い原因コードで保存します。
+
+オフラインの模擬統合テスト：
+
+~~~powershell
+py -3 -m unittest tests.test_inspection_capture_integrity tests.test_inspection_queue_integrity
+~~~
+
+これはダミーのローカルファイルだけを使うため、VRChat・OSC・FFmpeg・Geminiを起動しません。実機録画の代替ではありません。
+
 ## 停止・再開と個人情報保護
 
 - 1回の計画は最大25World。公開状態かつランキング候補になっているIDのみ選択し、無効ID・重複を除外します。候補であっても実際のアクセス可否は保証しません。
