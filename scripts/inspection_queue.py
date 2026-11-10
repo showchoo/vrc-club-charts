@@ -124,6 +124,20 @@ def plan_digest(worlds: list[dict]) -> str:
     return hashlib.sha256(json.dumps(ids, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
+def verify_completed_entry(captures: Path, world_id: str, entry: dict) -> dict:
+    """Require a consistent success result plus matching, intact local media."""
+    result = entry.get("result")
+    evidence = entry.get("captureIntegrity")
+    if (not isinstance(result, dict)
+            or result.get("worldId") != world_id
+            or result.get("status") not in SUCCESS
+            or result.get("captureStopReason") != "completed"
+            or not isinstance(evidence, dict)
+            or result.get("recording") != evidence.get("filename")):
+        raise CaptureIntegrityError("completed-result-mismatch")
+    return verify_capture_integrity(captures, world_id, evidence)
+
+
 def audit_queue(plan: dict, *, capture_dir: Path) -> dict:
     """Offline, read-only audit of completed World's MP4 integrity.
 
@@ -156,7 +170,7 @@ def audit_queue(plan: dict, *, capture_dir: Path) -> dict:
         if entry.get("status") != "completed":
             continue
         try:
-            verify_capture_integrity(captures, wid, entry.get("captureIntegrity"))
+            verify_completed_entry(captures, wid, entry)
             checked += 1
         except (CaptureIntegrityError, OSError) as exc:
             reason = (str(exc) if isinstance(exc, CaptureIntegrityError)
@@ -226,8 +240,7 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
                     "worldId": wid, "statePath": str(state_path)}
         if existing_entry.get("status") == "completed":
             try:
-                verify_capture_integrity(captures, wid,
-                                         existing_entry.get("captureIntegrity"))
+                verify_completed_entry(captures, wid, existing_entry)
             except (CaptureIntegrityError, OSError) as exc:
                 reason = (str(exc) if isinstance(exc, CaptureIntegrityError)
                           else "capture-unreadable")
