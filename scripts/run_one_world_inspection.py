@@ -40,7 +40,13 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
                    recording_rights_confirmed: bool = False,
                    gemini_upload_confirmed: bool = False,
                    publishing_rights_confirmed: bool = False,
-                   model: str = "gemini-3.5-flash-lite") -> dict:
+                   model: str = "gemini-3.5-flash-lite",
+                   sweep_motion: bool = False,
+                   platform_authorization_confirmed: bool = False) -> dict:
+    if use_ai_motion and sweep_motion:
+        raise ValueError("Cannot use AI movement and bounded sweep in the same capture")
+    if sweep_motion and not platform_authorization_confirmed:
+        raise ValueError("A bounded OSC sweep requires explicit platform authorization confirmation")
     if not isinstance(world_id, str) or not WORLD_ID_RE.fullmatch(world_id):
         raise ValueError("Provide the ID of the World already entered manually")
     if not 5 <= seconds <= MAX_SECONDS:
@@ -53,7 +59,7 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         raise ValueError("Video analysis requires recording/participant rights confirmation")
     if publish_visual and not publishing_rights_confirmed:
         raise ValueError("Publication requires additional publishing-rights confirmation")
-    if use_ai_motion and not automation_risk_confirmed:
+    if (use_ai_motion or sweep_motion) and not automation_risk_confirmed:
         raise ValueError("Automation risk acknowledgement is required")
     if not private_confirmed:
         raise ValueError("The owner must confirm a private, participant-free World instance")
@@ -61,7 +67,8 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     root = captures.expanduser().resolve()
     if root.is_relative_to(ROOT):
         raise ValueError("Captures must remain outside the source repository")
-    checks = preflight(wants_ai=use_ai_motion, wants_video_ai=analyze_video)
+    checks = preflight(wants_ai=use_ai_motion, wants_video_ai=analyze_video,
+                       wants_sweep=sweep_motion)
     if not checks["ready"]:
         missing = [c["check"] for c in checks["checks"] if c["required"] and not c["ok"]]
         raise RuntimeError("Preflight failed (no capture or API requests attempted): " +
@@ -75,7 +82,8 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         confirm_private=private_confirmed,
         accept_risk=automation_risk_confirmed,
         confirm_upload=gemini_upload_confirmed,
-        model=model,
+        model=model, sweep=sweep_motion,
+        platform_authorization_confirmed=platform_authorization_confirmed,
     )
     recording = report.get("recording") or {}
     result = {
@@ -89,6 +97,14 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         "worldEnteredByHuman": True,
         "equipmentFunctionalityVerified": False,
     }
+
+    if sweep_motion and (
+        not isinstance(report.get("sweep"), dict)
+        or report["sweep"].get("status") != "completed"
+    ):
+        result["status"] = "capture-incomplete"
+        result["detail"] = "Bounded camera sweep stopped or produced incomplete observations; no analysis or publication"
+        return result
 
     if (report.get("error") or recording.get("error") or
         not recording.get("filename") or
@@ -198,7 +214,11 @@ def main(argv=None) -> int:
                         default=Path.home() / "Videos" / "VRCClubCharts")
     parser.add_argument("--model", default="gemini-3.5-flash-lite")
     parser.add_argument("--ai-explore", action="store_true",
-                        help="Risky opt-in OSC automation; not authorized by VRChat support")
+                        help="Opt-in Gemini OSC movement; requires platform permission")
+    parser.add_argument("--sweep", action="store_true",
+                        help="Opt-in stationary locally observed OSC sweep")
+    parser.add_argument("--confirm-platform-authorization", action="store_true",
+                        help="Operator confirms authorization to automate the official client")
     parser.add_argument("--analyze-video", action="store_true")
     parser.add_argument("--publish-visual", action="store_true",
                         help="Push only separately labeled, provisional video visuals")
@@ -225,11 +245,13 @@ def main(argv=None) -> int:
             gemini_upload_confirmed=args.confirm_gemini_upload,
             publishing_rights_confirmed=args.confirm_publishing_rights,
             model=args.model,
+            sweep_motion=args.sweep,
+            platform_authorization_confirmed=args.confirm_platform_authorization,
         )
     except (ValueError, OSError, RuntimeError, json.JSONDecodeError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if summary["status"] not in {"capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch", "private-evidence-extraction-failed"} else 1
+    return 0 if summary["status"] not in {"capture-incomplete", "capture-failed", "capture-invalid", "capture-unusable", "analysis-failed", "analysis-not-confirmed", "analysis-provenance-mismatch", "private-evidence-extraction-failed"} else 1
 
 
 if __name__ == "__main__":
