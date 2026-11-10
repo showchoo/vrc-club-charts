@@ -434,7 +434,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
     report_path = out_dir / (stem + ".inspection.json")
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    if evaluate and video.is_file() and video.stat().st_size > 0 and not recorder.failed:
+    if (evaluate and report.get("stopReason") == "completed"
+            and video.is_file() and video.stat().st_size > 0 and not recorder.failed):
         try:
             from scripts.evaluate_interior_video import ask_gemini, create_report
         except ModuleNotFoundError:
