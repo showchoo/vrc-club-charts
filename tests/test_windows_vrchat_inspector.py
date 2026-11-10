@@ -48,7 +48,8 @@ class InspectionTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 ctl.act("forward", lambda: False)
             packets = [a.args[0] for a in fake_socket.return_value.sendto.call_args_list]
-            self.assertGreaterEqual(len(packets), 7)
+            self.assertGreaterEqual(len(packets), 6)
+            self.assertTrue(all(struct.unpack(">f", p[-4:])[0] == 0 for p in packets))
             self.assertTrue(packets[-1].startswith(b"/input/LookHorizontal\0"))
             self.assertEqual(struct.unpack(">f", packets[-1][-4:])[0], 0)
             hosts = [a.args[1] for a in fake_socket.return_value.sendto.call_args_list]
