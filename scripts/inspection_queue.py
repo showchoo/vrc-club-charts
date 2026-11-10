@@ -128,6 +128,8 @@ def verify_completed_entry(captures: Path, world_id: str, entry: dict) -> dict:
     """Require a consistent success result plus matching, intact local media."""
     result = entry.get("result")
     evidence = entry.get("captureIntegrity")
+    if not isinstance(evidence, dict):
+        raise CaptureIntegrityError("capture-attestation-missing")
     if (not isinstance(result, dict)
             or result.get("worldId") != world_id
             or result.get("status") not in SUCCESS
