@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09",
+  "updatedAt": "2026-11-10",
   "registeredWorlds": 200,
   "pendingCandidates": 7,
   "totalTrackedWorlds": 255,
@@ -14,47 +14,47 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "skipped_host_unreachable"
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "skipped_host_unreachable",
       "seedsChecked": 0,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-11-08",
+      "lastAttemptAt": "2026-11-10",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
