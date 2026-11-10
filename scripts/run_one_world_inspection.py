@@ -101,6 +101,7 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     if sweep_motion and (
         not isinstance(report.get("sweep"), dict)
         or report["sweep"].get("status") != "completed"
+        or report.get("stopReason", "completed") != "completed"
     ):
         result["status"] = "capture-incomplete"
         result["detail"] = "Bounded camera sweep stopped or produced incomplete observations; no analysis or publication"
