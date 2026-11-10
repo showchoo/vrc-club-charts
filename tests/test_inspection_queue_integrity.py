@@ -200,6 +200,25 @@ class QueueIntegrityAndAbortDrills(unittest.TestCase):
             self.assertEqual(result["status"], "ok")
             self.assertEqual(before, after)
 
+    def test_cli_audit_has_no_client_or_rewrite_side_effects(self):
+        with tempfile.TemporaryDirectory() as folder:
+            self.run_success(folder)
+            root = Path(folder)
+            private_plan = root / "inspection-queue-plan.json"
+            private_plan.write_text(json.dumps(plan()), encoding="utf-8")
+            state = root / "inspection-queue-state.json"
+            before = state.read_bytes()
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout):
+                code = q.main([
+                    "--audit-state", "--capture-dir", folder,
+                    "--plan-file", str(private_plan),
+                ])
+            self.assertEqual(code, 0)
+            self.assertEqual(json.loads(stdout.getvalue())["auditedCompleted"], 2)
+            self.assertEqual(before, state.read_bytes())
+            self.assertEqual(2, len(list(root.glob("*.mp4"))))
+
     def test_audit_wrong_plan_or_missing_state_is_blocked(self):
         with tempfile.TemporaryDirectory() as folder:
             self.assertEqual(q.audit_queue(plan(), capture_dir=Path(folder))["reason"],
