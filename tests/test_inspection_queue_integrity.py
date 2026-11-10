@@ -36,11 +36,12 @@ def synthetic_recording(**kwargs):
 
 class QueueIntegrityAndAbortDrills(unittest.TestCase):
     def run_success(self, folder):
+        answers = iter((A, B))
         with contextlib.redirect_stdout(io.StringIO()):
             output = q.run_queue(
                 plan(), capture_dir=Path(folder),
                 inspection_fn=synthetic_recording,
-                input_fn=lambda message: A if A in message else B,
+                input_fn=lambda _: next(answers),
             )
         self.assertEqual(output["status"], "completed")
         return output
