@@ -1,7 +1,7 @@
 [
   {
     "id": "feed-c539d78557766e554cef",
-    "name": "Quest Dance party Club No.283 [ VRC Quest対応 DJイベント ] 📅11月10日(火) OPEN 20:40 JST～ START 21:00 JST～…",
+    "name": "Quest Dance party Club No.283 [ VRC Quest対応DJイベント] 📅11月10日(火) OPEN 20:40 JST～ START 21:00 JST～ 今…",
     "start": "2026-11-10T11:40:00Z",
     "end": null,
     "organizer": "@ClubDanceparty",
@@ -19,26 +19,8 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-856fc95397b9a7d3ebb7",
-    "name": "【GeekJack様とVDP2026がコラボ！】 11月11日(水)に「Geek Jack Music Stage」を 開催 ！ VRChat で DJイベント を行います！✨ OPEN 19…",
-    "start": "2026-11-11T10:30:00Z",
-    "end": null,
-    "organizer": "@virtualparty_co",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/virtualparty_co/status/2112489691870359681?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "856fc95397b9a7d3ebb7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-21168796bcc43a9d4735",
-    "name": "ワンマン 開催 記念ヴァーチャルミニライブ『U1』 開催 決定☆彡 ういはら初の VRChat 上でのヴァーチャルライブが 開催 されます！ 日時 ： 2026年11月14日（土） 開場 / …",
+    "name": "ワンマン開催記念ヴァーチャルミニライブ『U1』 開催決定 ☆彡 ういはら初の VRChat 上でのヴァーチャルライブが開催されます！ 日時： 2026年11月14日（土） 開場 / 開演： 2…",
     "start": "2026-11-14T13:00:00Z",
     "end": null,
     "organizer": "@u1_8ra",
@@ -56,7 +38,7 @@
   },
   {
     "id": "feed-cd4f5d552782d7670d92",
-    "name": "【お知らせ】 『瑠璃色のぬいぐるみ VRChat 2nd Anniversary LIVE』 VRChat を始めて2周年！時が経つの早い 素敵なゲストの皆さんと一緒に ライブ を 開催 しま…",
+    "name": "【お知らせ】 『瑠璃色のぬいぐるみ VRChat 2nd Anniversary LIVE』 VRChat を始めて2周年！時が経つの早い 素敵なゲストの皆さんと一緒にライブを開催します！ 2…",
     "start": "2026-11-27T12:50:00Z",
     "end": null,
     "organizer": "@luliilo_nui",
@@ -68,24 +50,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "cd4f5d552782d7670d92",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-60c54db6f2d514ee7d2a",
-    "name": "【 VRChat DJ Event】 IN THE DUSK 5th Phase 2026/11/28(Sat) Start 23:00 JST Group + ---DJs--- cruca…",
-    "start": "2026-11-28T14:00:00Z",
-    "end": null,
-    "organizer": "@hellneko_mstdn",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/hellneko_mstdn/status/2115078782277267817?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "60c54db6f2d514ee7d2a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
