@@ -37,6 +37,20 @@ class LogCorroborationTests(unittest.TestCase):
             )
             return result
 
+    def test_realistic_padded_vrchat_log_spacing_is_accepted(self):
+        # Historical real client logs pad severity columns and the '-' field.
+        # An exact single-space parser misses both events and cannot verify join.
+        event = join().replace(" Debug - ", " Log        -  ")
+        done = succeeded().replace(" Debug - ", " Log        -  ")
+        result = self.check(event + done)
+        self.assertEqual(result["status"], "corroborated")
+        self.assertEqual(result["worldId"], A)
+
+    def test_mixed_severity_and_whitespace_are_accepted(self):
+        event = join().replace(" Debug - ", " Info      -  ")
+        done = succeeded().replace(" Debug - ", " Log   -   ")
+        self.assertEqual(self.check(event + done)["status"], "corroborated")
+
     def test_recent_private_success_matches_and_redacts_sensitive_lines(self):
         result = self.check(join() + succeeded())
         self.assertEqual(result["status"], "corroborated")
