@@ -11,6 +11,18 @@ therefore disabled by default and must only be used where the intended
 automation is permitted. Official OSC inputs are documented at
 https://docs.vrchat.com/docs/osc-as-input-controller.
 
+## Read-only local World log diagnostic (no recording or OSC)
+
+After manually entering a private, participant-free instance in the official VRChat client, run this from the project folder within roughly three minutes:
+
+~~~powershell
+.\scripts\launch_one_world_inspection.ps1 -Diagnose -VerifyLocalLog -WorldId wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05
+~~~
+
+The world-log check reports ok: true only when a recent successful private-World join log matches the supplied ID. The full ready result also checks Python, FFmpeg, window presence and other prerequisites. If the log check fails, inspect the redacted reason (for example wrong-world, join-not-found, join-too-old or not-private-instance). This does not establish participant absence, recording rights or platform authorization.
+
+No capture, OSC packet, Gemini upload, Git push or account request occurs. This mode reads only the newest local output-log tail. Raw client logs, user IDs, instance tokens and join fingerprints are never printed. Historical [RoomManager] and more recent [Behaviour] log formats are supported heuristically; a changed/unrecognized log fails closed. Never share raw VRChat logs.
+
 ## Optional local World-ID log corroboration
 
 To conservatively cross-check a manually entered World, add -VerifyLocalLog to the PowerShell launcher. The client output log is read locally before and after capture; a recent successful join of the same World in a private-marked instance is required. Log contents are never uploaded. The optional guard also checks the local join during capture (approximately once per second), requests a recording stop on change or read failure, neutralizes OSC axes during cleanup, and checks again at the end. Stopping is subject to poll and controller timing and is not instantaneous. This is not proof that the participant count is zero or the client is still in that World at every instant.
