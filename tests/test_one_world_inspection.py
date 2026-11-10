@@ -127,6 +127,27 @@ class OneWorldPipelineTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "ffmpeg"):
                     run.run_inspection(**self.common(d))
 
+    def test_early_stop_never_uploads_or_publishes_even_with_video_frames(self):
+        for reason in ("user_ctrl_c", "window_unfocused", "navigation_safety_stop", None):
+            with self.subTest(reason=reason), tempfile.TemporaryDirectory() as d:
+                report = captured(WORLD, Path(d))
+                if reason is None:
+                    del report["stopReason"]
+                else:
+                    report["stopReason"] = reason
+                with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                      patch.object(run, "inspect", return_value=report),
+                      patch.object(run, "process_queue",
+                                   side_effect=AssertionError("No Gemini upload after early stop")),
+                      patch.object(run, "release",
+                                   side_effect=AssertionError("No site publication after early stop"))):
+                    result = run.run_inspection(
+                        **self.common(d), analyze_video=True, publish_visual=True,
+                        recording_rights_confirmed=True, gemini_upload_confirmed=True,
+                        publishing_rights_confirmed=True)
+                self.assertEqual(result["status"], "capture-incomplete")
+                self.assertFalse(result["rankingsChanged"])
+
     def test_failed_or_too_short_capture_never_uploads_or_publishes(self):
         for options in ({"frames": 2}, {"failed": True}):
             with self.subTest(options=options), tempfile.TemporaryDirectory() as d:

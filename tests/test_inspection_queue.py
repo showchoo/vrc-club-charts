@@ -60,7 +60,8 @@ class InspectionQueueTests(unittest.TestCase):
         calls = []
         def inspect(**kw):
             calls.append(kw)
-            return {"worldId": kw["world_id"], "status": "capture-complete"}
+            return {"worldId": kw["world_id"], "status": "capture-complete",
+                    "captureStopReason": "completed"}
         with tempfile.TemporaryDirectory() as folder:
             first = iter([A, "q"])
             r1 = q.run_queue(plan(), capture_dir=Path(folder), inspection_fn=inspect,
@@ -92,6 +93,45 @@ class InspectionQueueTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "different plan"):
                 q.run_queue(changed, capture_dir=Path(folder), inspection_fn=fail,
                             input_fn=lambda _: A)
+
+    def test_launch_url_is_official_and_strict(self):
+        self.assertEqual(q.world_launch_url(A),
+                         "https://vrchat.com/home/launch?worldId=" + A)
+        for bad in ("https://attacker.example", A + "&instanceId=public", "wrld_invalid"):
+            with self.assertRaises(ValueError):
+                q.world_launch_url(bad)
+
+    def test_opt_in_browser_handoff_still_requires_manual_ack(self):
+        urls = []
+        with tempfile.TemporaryDirectory() as folder:
+            result = q.run_queue(
+                plan(), capture_dir=Path(folder), open_world_page=True,
+                open_url_fn=lambda url: urls.append(url) or True,
+                inspection_fn=lambda **kw: self.fail("Should never record before acknowledgement"),
+                input_fn=lambda _: "q")
+        self.assertEqual(result["status"], "paused")
+        self.assertEqual(urls, [q.world_launch_url(A)])
+
+    def test_failed_browser_open_does_not_prompt_or_record(self):
+        with tempfile.TemporaryDirectory() as folder:
+            r = q.run_queue(plan(), capture_dir=Path(folder), open_world_page=True,
+                            open_url_fn=lambda url: False,
+                            input_fn=lambda _: self.fail("No prompt after failed browser"),
+                            inspection_fn=lambda **kw: self.fail("No recording"))
+            self.assertEqual(r["status"], "paused")
+
+    def test_incomplete_capture_is_not_marked_completed(self):
+        with tempfile.TemporaryDirectory() as folder:
+            result = q.run_queue(
+                plan(), capture_dir=Path(folder), input_fn=lambda _: A,
+                inspection_fn=lambda **kw: {
+                    "worldId": kw["world_id"], "status": "capture-complete",
+                    "captureStopReason": "user_ctrl_c",
+                })
+            self.assertEqual(result["status"], "failed")
+            state = json.loads((Path(folder) / "inspection-queue-state.json").read_text())
+            self.assertEqual(state["worlds"][A]["status"], "failed")
+            self.assertNotIn(B, state["worlds"])
 
     def test_consent_enforced_before_any_prompt(self):
         with tempfile.TemporaryDirectory() as folder:
