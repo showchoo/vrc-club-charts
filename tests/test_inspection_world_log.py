@@ -37,6 +37,25 @@ class LogCorroborationTests(unittest.TestCase):
             )
             return result
 
+    def test_historical_roommanager_log_is_accepted(self):
+        # Historical official client logs used [RoomManager] rather than [Behaviour].
+        start = join().replace("[Behaviour]", "[RoomManager]")
+        joined = succeeded().replace("[Behaviour]", "[RoomManager]")
+        self.assertEqual(self.check(start + joined)["status"], "corroborated")
+
+    def test_mixed_roommanager_and_behaviour_messages(self):
+        start = join().replace("[Behaviour]", "[RoomManager]")
+        joined = succeeded()
+        self.assertEqual(self.check(start + joined)["status"], "corroborated")
+
+    def test_newer_join_replaces_historical_success(self):
+        old = join().replace("[Behaviour]", "[RoomManager]")
+        done = succeeded().replace("[Behaviour]", "[RoomManager]")
+        new = join(B, offset=-3)
+        self.assertEqual(
+            self.check(old + done + new + succeeded(-2))["reason"], "wrong-world"
+        )
+
     def test_realistic_padded_vrchat_log_spacing_is_accepted(self):
         # Historical real client logs pad severity columns and the '-' field.
         # An exact single-space parser misses both events and cannot verify join.

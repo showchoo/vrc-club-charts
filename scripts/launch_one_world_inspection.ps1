@@ -25,7 +25,7 @@ Push-Location $repo
 try {
     if ($Sweep -and $UseAiMotion) { throw "Choose -Sweep or -UseAiMotion, not both." }
     if ($SmokeTest) {
-        if ($Diagnose -or $WorldId -or $AnalyzeVideo -or $UseAiMotion -or $Sweep -or $PublishVisual) {
+        if ($Diagnose -or $WorldId -or $AnalyzeVideo -or $UseAiMotion -or $Sweep -or $VerifyLocalLog -or $PublishVisual) {
             throw "-SmokeTest is standalone; it never reads or records a VRChat window."
         }
         & py -3 scripts/inspection_pipeline_smoketest.py
@@ -38,6 +38,10 @@ try {
         if ($AnalyzeVideo) { $arguments += "--analyze-video" }
         if ($UseAiMotion) { $arguments += "--ai-explore" }
         if ($Sweep) { $arguments += "--sweep" }
+        if ($VerifyLocalLog) {
+            if (-not $WorldId) { throw "Provide -WorldId to diagnose the local VRChat join log." }
+            $arguments += @("--verify-local-log", "--world-id", $WorldId)
+        }
     } else {
         if (-not $WorldId) { throw "Provide -WorldId for the World you have already entered." }
         if (-not $ConfirmPrivateInstance) {

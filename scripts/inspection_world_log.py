@@ -15,7 +15,7 @@ import re
 
 WORLD_RE = re.compile(r"wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}\Z")
 EVENT_RE = re.compile(
-    r"^(\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2})\s+(?:Debug|Log|Info|Warning)\s+-\s+\[Behaviour\]\s+(.+)$"
+    r"^(\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2})\s+(?:Debug|Log|Info|Warning)\s+-\s+\[(?:Behaviour|RoomManager)\]\s+(.+)$"
 )
 JOIN_RE = re.compile(
     r"^Joining (wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}):(\S+)$"

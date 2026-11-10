@@ -49,6 +49,16 @@ py -3 scripts/inspection_queue.py --run --analyze-video --confirm-recording-righ
 
 スイープと動画分析は各条件が揃えば組み合わせ可能です。**公開プレビュー・ランキングの自動更新はこのキューでは常に無効**です。
 
+## ローカル入室ログの安全診断（録画なし）
+
+巡回キューを実行する前に、まず1つのWorldでログ照合が動くか確認できます。公式VRChatクライアントでPrivateの対象Worldへ手動入室した後、3分以内を目安に実行してください。
+
+~~~powershell
+.\scripts\launch_one_world_inspection.ps1 -Diagnose -VerifyLocalLog -WorldId wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05
+~~~
+
+表示される world-log の ok: true は、直近の入室ログと対象IDが一致した意味です。ログ全文・ユーザーID・インスタンスID・入室トークン・照合用ハッシュは出力しません。録画、OSC送信、Gemini処理、GitHub送信も行いません。ログの形式が異なれば安全側で失敗し、wrong-world / join-not-found / join-too-old などの匿名化された理由だけを表示します。ログ全文はチャットや外部サービスへ共有しないでください。
+
 ## オプション：VRChatクライアントのローカルログによるWorld照合
 
 公式クライアントの出力ログから直近の入室イベントと「入室成功」を読み、対象のWorld IDと一致するか保守的に照合します。--verify-local-log を有効にすると録画の前後で検査し、不一致・過去の入室・非公開ではないインスタンス・途中退室の記録を検出した場合は停止します。
