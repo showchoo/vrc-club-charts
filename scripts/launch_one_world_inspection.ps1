@@ -8,6 +8,8 @@ param(
     [switch]$SmokeTest,
     [switch]$AnalyzeVideo,
     [switch]$UseAiMotion,
+    [switch]$Sweep,
+    [switch]$ConfirmPlatformAuthorization,
     [switch]$PublishVisual,
     [switch]$ConfirmPrivateInstance,
     [switch]$AcknowledgeAutomationRisk,
@@ -20,8 +22,9 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Push-Location $repo
 try {
+    if ($Sweep -and $UseAiMotion) { throw "Choose -Sweep or -UseAiMotion, not both." }
     if ($SmokeTest) {
-        if ($Diagnose -or $WorldId -or $AnalyzeVideo -or $UseAiMotion -or $PublishVisual) {
+        if ($Diagnose -or $WorldId -or $AnalyzeVideo -or $UseAiMotion -or $Sweep -or $PublishVisual) {
             throw "-SmokeTest is standalone; it never reads or records a VRChat window."
         }
         & py -3 scripts/inspection_pipeline_smoketest.py
@@ -33,6 +36,7 @@ try {
         $arguments += "--diagnose"
         if ($AnalyzeVideo) { $arguments += "--analyze-video" }
         if ($UseAiMotion) { $arguments += "--ai-explore" }
+        if ($Sweep) { $arguments += "--sweep" }
     } else {
         if (-not $WorldId) { throw "Provide -WorldId for the World you have already entered." }
         if (-not $ConfirmPrivateInstance) {
@@ -42,6 +46,16 @@ try {
         $arguments += "--private-instance-confirmed"
         if ($AnalyzeVideo) { $arguments += "--analyze-video" }
         if ($UseAiMotion) { $arguments += "--ai-explore" }
+        if ($Sweep) {
+            if (-not $ConfirmPlatformAuthorization) {
+                throw "A live OSC sweep requires -ConfirmPlatformAuthorization."
+            }
+            if (-not $AcknowledgeAutomationRisk) {
+                throw "A live OSC sweep requires -AcknowledgeAutomationRisk."
+            }
+            $arguments += "--sweep"
+            $arguments += "--confirm-platform-authorization"
+        }
         if ($PublishVisual) { $arguments += "--publish-visual" }
         if ($AcknowledgeAutomationRisk) { $arguments += "--acknowledge-automation-risk" }
         if ($ConfirmRecordingRights) { $arguments += "--confirm-recording-rights" }
