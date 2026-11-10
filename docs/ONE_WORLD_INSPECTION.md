@@ -11,6 +11,16 @@ therefore disabled by default and must only be used where the intended
 automation is permitted. Official OSC inputs are documented at
 https://docs.vrchat.com/docs/osc-as-input-controller.
 
+## Optional local World-ID log corroboration
+
+To conservatively cross-check a manually entered World, add -VerifyLocalLog to the PowerShell launcher. The client output log is read locally before and after capture; a recent successful join of the same World in a private-marked instance is required. Log contents are never uploaded. This is not proof that the participant count is zero or the client is still in that World at every instant.
+
+~~~powershell
+.\scripts\launch_one_world_inspection.ps1 -WorldId wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05 -Seconds 45 -ConfirmPrivateInstance -VerifyLocalLog
+~~~
+
+Enter the World manually immediately before starting the recording (ideally within 3 minutes). The reader may reject new or unexpected VRChat log formats, in which case disable the option for normal manual-only recording or inspect the local-only diagnostic. Never share full client logs: they may contain personal data. See [inspection queue instructions](INSPECTION_QUEUE.md).
+
 ## Setup on your Windows PC
 
 1. Use the existing checked-out `showchoo/vrc-club-charts` repository and
