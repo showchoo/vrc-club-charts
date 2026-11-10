@@ -107,6 +107,14 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
         result["detail"] = "Bounded camera sweep stopped or produced incomplete observations; no analysis or publication"
         return result
 
+    # A focus loss, Ctrl+C, navigation-safety stop or absent completion
+    # marker is NOT a successful capture even if FFmpeg wrote frames.
+    # Never send incomplete session footage to Gemini or publish scores.
+    if report.get("stopReason") != "completed":
+        result["status"] = "capture-incomplete"
+        result["detail"] = "Capture stopped early or completion was not verified; no analysis or publication"
+        return result
+
     if (report.get("error") or recording.get("error") or
         not recording.get("filename") or
         not isinstance(recording.get("frames"), int) or recording["frames"] < 12 or
