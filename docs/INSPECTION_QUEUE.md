@@ -62,6 +62,8 @@ py -3 scripts/inspection_queue.py --run --open-world-page --verify-local-log --s
 - これは実機でのWorld ID確認を補助するのみです。他参加者の不在、録画権利、現在も正しいWorldにいること、VRChat運営の無人アクセス許可を独立して証明するものではありません。
 - ログにはユーザーIDやIPアドレスなど個人情報が含まれます。ログ全文をGitHub、Gemini、Supabaseやチャットに共有しないでください。照合機能はログ全文を外部送信せず、ID以外のプライベートな入室情報を状態ファイルへ保存しません。
 - 保守的な初期実装のため、ログに ~private( と記録されているインスタンスのみ受け付けます。参加者の人数までは判定しません。
+- このオプションを有効にした録画では、**開始直前・約1秒ごと・終了直後**にWorldのログを照合します。別Worldへの移動や退室、ログ取得の異常を検出すると録画停止を要求し、OSCの操作軸を終了処理でゼロに戻します。監視周期や操作の短い保持時間のため、瞬間停止を保証するものではありません。
+- ログの出力ではログレベル名の前後の空白幅が異なる場合があるため、それらに対応しました。ただし実際のWindowsクライアントでの照合・停止動作は未検証です。
 - 明示的に指定しない限り、従来の手動録画挙動のままです。
 
 VRChat公式：[出力ログの場所](https://help.vrchat.com/hc/en-us/articles/9521522810899-Where-do-I-find-my-Output-Logs-and-Crash-Dumps)、[Udonデバッグログ](https://creators.vrchat.com/worlds/udon/debugging-udon-projects/)。
