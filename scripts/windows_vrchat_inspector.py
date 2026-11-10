@@ -105,6 +105,11 @@ class OscMovement:
         # Validate focus BEFORE any non-zero OSC movement. Neutralize even
         # if the sender or safety callback raises before the sleep begins.
         try:
+            if duration is not None and (
+                isinstance(duration, bool) or not isinstance(duration, (int, float))
+                or not 0 < duration <= MAX_SECONDS
+            ):
+                raise ValueError("Invalid action duration")
             if not still_safe():
                 raise RuntimeError("VRChat window lost focus; stopped all input")
             if action == "stop":
@@ -112,10 +117,6 @@ class OscMovement:
             if action in self.AXES:
                 axis, value = self.AXES[action]
                 self.send(axis, value)
-            if duration is not None and (
-                isinstance(duration, bool) or not 0 < duration <= MAX_SECONDS
-            ):
-                raise ValueError("Invalid action duration")
             limit = min(clamp_duration(action), duration if duration is not None else MAX_SECONDS)
             end = time.monotonic() + limit
             while time.monotonic() < end:
