@@ -97,10 +97,10 @@
     }
   },
   "vrcmapRelatedSeedIndex": 10,
-  "siaVrNextIndex": 18,
-  "vrcmapSourceNextIndex": 1,
+  "siaVrNextIndex": 23,
+  "vrcmapSourceNextIndex": 2,
   "siaVrSecondaryIndexes": {
-    "sia_vr_music": 16,
-    "sia_vr_bar": 16
+    "sia_vr_music": 18,
+    "sia_vr_bar": 18
   }
 }
