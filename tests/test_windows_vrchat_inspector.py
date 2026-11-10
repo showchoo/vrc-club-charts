@@ -190,6 +190,82 @@ class InspectionTests(unittest.TestCase):
             self.assertFalse(report["rankingEligible"])
             self.assertFalse(list(Path(d).glob("*.evaluation-draft.json")))
 
+    def test_operator_emergency_hotkey_stops_capture_and_never_uploads(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.output = output
+                self.stop_event = m.threading.Event()
+                self.frames = 18
+                self.failed = None
+            def start(self):
+                self.output.write_bytes(b"synthetic-clip-only")
+            def close(self):
+                self.stop_event.set()
+
+        class FakeEmergencyStop:
+            def __init__(self, stop_event):
+                self.stop = stop_event
+                self.reason = None
+            def start(self):
+                self.reason = "operator-emergency-hotkey"
+                self.stop.set()
+                return True
+            def close(self):
+                return {"status": "stopped", "reason": self.reason, "keyLogging": False}
+
+        from scripts import evaluate_interior_video as evaluation
+        with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "mock"}, clear=False):
+            with (patch.object(m, "get_window", return_value=(123, {
+                       "left": 0, "top": 0, "width": 640, "height": 480})),
+                  patch.object(m, "is_active", return_value=True),
+                  patch.object(m, "WindowRecorder", FakeRecorder),
+                  patch.object(m, "EmergencyStop", FakeEmergencyStop),
+                  patch.object(evaluation, "ask_gemini",
+                               side_effect=AssertionError("Interrupted capture must not be uploaded"))):
+                report = m.inspect(
+                    world_id=WORLD, out_dir=Path(d), seconds=5, ai=False,
+                    evaluate=True, confirm_private=True, accept_risk=False,
+                    confirm_upload=True, model="gemini-3.5-flash-lite")
+            self.assertEqual(report["stopReason"], "operator_emergency_stop")
+            self.assertFalse(report["emergencyStop"]["keyLogging"])
+            self.assertFalse(list(Path(d).glob("*.evaluation-draft.json")))
+
+    def test_operator_hotkey_monitor_failure_blocks_capture_and_ai(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.stop_event = m.threading.Event()
+                self.output = output
+                self.frames = 0
+                self.failed = None
+            def start(self):
+                raise AssertionError("Must not record with failed monitor")
+            def close(self):
+                pass
+
+        class FakeEmergencyStop:
+            def __init__(self, stop_event):
+                self.reason = "hotkey-monitor-error"
+                stop_event.set()
+            def start(self):
+                return False
+            def close(self):
+                return {"status": "stopped", "reason": self.reason}
+
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(m, "get_window", return_value=(123, {
+                       "left": 0, "top": 0, "width": 640, "height": 480})),
+                  patch.object(m, "is_active", return_value=True),
+                  patch.object(m, "WindowRecorder", FakeRecorder),
+                  patch.object(m, "EmergencyStop", FakeEmergencyStop)):
+                report = m.inspect(
+                    world_id=WORLD, out_dir=Path(d), seconds=5, ai=False,
+                    evaluate=False, confirm_private=True, accept_risk=False,
+                    confirm_upload=False, model="gemini-3.5-flash-lite")
+            self.assertEqual(report["stopReason"], "emergency_stop_monitor_failed")
+            self.assertFalse(report["rankingEligible"])
+
     def test_source_never_launches_or_logs_in_or_uploads_automatically(self):
         source = Path(m.__file__).read_text(encoding="utf-8")
         self.assertNotIn("vrchat.com/api", source)
