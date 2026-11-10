@@ -268,7 +268,10 @@ def main(argv=None) -> int:
 
     if args.diagnose:
         report = preflight(wants_ai=args.ai_explore,
-                           wants_video_ai=args.analyze_video)
+                           wants_video_ai=args.analyze_video,
+                           wants_sweep=args.sweep,
+                           verify_world_log=args.verify_local_log,
+                           world_id=args.world_id)
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0 if report["ready"] else 1
     try:
