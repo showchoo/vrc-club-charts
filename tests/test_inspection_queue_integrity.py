@@ -76,6 +76,32 @@ class QueueIntegrityAndAbortDrills(unittest.TestCase):
             self.assertEqual(result["reason"], "capture-digest-mismatch")
             self.assertEqual(result["worldId"], A)
 
+    def test_result_json_tampering_is_detected_even_with_valid_mp4(self):
+        for field, replacement in (
+            ("captureStopReason", "operator_emergency_stop"),
+            ("worldId", B),
+            ("recording", B + "_20261111T120000Z.mp4"),
+            ("status", "world-log-changed"),
+        ):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as folder:
+                self.run_success(folder)
+                state_path = Path(folder) / "inspection-queue-state.json"
+                state = json.loads(state_path.read_text(encoding="utf-8"))
+                state["worlds"][A]["result"][field] = replacement
+                state_path.write_text(json.dumps(state), encoding="utf-8")
+                audit = q.audit_queue(plan(), capture_dir=Path(folder))
+                self.assertEqual(audit["status"], "blocked")
+                self.assertEqual(audit["problems"][0], {
+                    "worldId": A, "reason": "completed-result-mismatch",
+                })
+                result = q.run_queue(
+                    plan(), capture_dir=Path(folder),
+                    inspection_fn=lambda **kw: self.fail("No re-recording allowed"),
+                    input_fn=lambda _: self.fail("Do not request acknowledgement"),
+                )
+                self.assertEqual(result["status"], "blocked")
+                self.assertEqual(result["reason"], "completed-result-mismatch")
+
     def test_deleted_recording_fails_closed(self):
         with tempfile.TemporaryDirectory() as folder:
             self.run_success(folder)
