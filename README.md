@@ -36,6 +36,10 @@ admitted** public DJ World pages, using explicit same-creator or shared-genre
 signals. It never implies functional DJ equipment verification. See the
 [production rollout and related World guide](docs/DEPLOYMENT_AND_RELATED_WORLDS.md).
 
+## Operator-gated multi-World inspection queue
+
+A [local Windows inspection queue](docs/INSPECTION_QUEUE.md) now generates a bounded list of eligible public Worlds and resumes past successful captures. Each World still requires manual entry and an exact ID acknowledgement before recording; it never changes public rankings, automatically joins Worlds or uploads footage. A synthetic offline test suite covers consent, resume, plan mismatches and failed-capture stops. This is a step toward the explicitly authorized inspection pilot, **not** autonomous VRChat traversal.
+
 ## Bounded local OSC camera sweep
 
 An opt-in [Windows stationary OSC sweep pilot](docs/BOUNDED_OSC_SWEEP.md)
