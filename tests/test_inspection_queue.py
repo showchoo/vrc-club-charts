@@ -60,8 +60,11 @@ class InspectionQueueTests(unittest.TestCase):
         calls = []
         def inspect(**kw):
             calls.append(kw)
-            return {"worldId": kw["world_id"], "status": "capture-complete",
-                    "captureStopReason": "completed"}
+            wid = kw["world_id"]
+            filename = wid + "_20261111T120000Z.mp4"
+            (kw["captures"] / filename).write_bytes(b"synthetic-local-mp4:" + wid.encode())
+            return {"worldId": wid, "status": "capture-complete",
+                    "captureStopReason": "completed", "recording": filename}
         with tempfile.TemporaryDirectory() as folder:
             first = iter([A, "q"])
             r1 = q.run_queue(plan(), capture_dir=Path(folder), inspection_fn=inspect,
@@ -77,6 +80,12 @@ class InspectionQueueTests(unittest.TestCase):
             state = json.loads((Path(folder) / "inspection-queue-state.json").read_text())
             self.assertEqual(state["worlds"][A]["status"], "completed")
             self.assertEqual(state["worlds"][B]["status"], "completed")
+            self.assertEqual(len(state["worlds"][A]["captureIntegrity"]["sha256"]), 64)
+            self.assertEqual(state["worlds"][A]["captureIntegrity"]["bytes"],
+                             len(b"synthetic-local-mp4:" + A.encode()))
+            audit = q.audit_queue(plan(), capture_dir=Path(folder))
+            self.assertEqual(audit["status"], "ok")
+            self.assertEqual(audit["auditedCompleted"], 2)
 
     def test_failing_world_stops_and_requires_new_ack(self):
         calls = []
