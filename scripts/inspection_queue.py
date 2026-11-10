@@ -24,6 +24,13 @@ MAX_WORLDS = 25
 SUCCESS = {"capture-complete", "private-analysis-complete"}
 
 
+def world_launch_url(world_id: str) -> str:
+    """Return only VRChat's public web launch page, never a client-protocol jump."""
+    if not isinstance(world_id, str) or not WORLD_ID_RE.fullmatch(world_id):
+        raise ValueError("Invalid World ID for launch page")
+    return "https://vrchat.com/home/launch?worldId=" + world_id
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -115,7 +122,9 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
               recording_rights_confirmed: bool = False,
               gemini_upload_confirmed: bool = False,
               inspection_fn: Callable | None = None,
-              input_fn: Callable[[str], str] = input) -> dict:
+              input_fn: Callable[[str], str] = input,
+              open_world_page: bool = False,
+              open_url_fn: Callable[[str], bool] | None = None) -> dict:
     worlds = validate_plan(plan)
     captures = outside_repository(capture_dir)
     if not 5 <= seconds <= 120:
@@ -124,6 +133,9 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
         raise ValueError("Sweep requires platform authorization and risk acknowledgement")
     if analyze_video and not (recording_rights_confirmed and gemini_upload_confirmed):
         raise ValueError("Gemini requires recording rights and explicit cloud upload consent")
+    if open_world_page and open_url_fn is None:
+        import webbrowser
+        open_url_fn = webbrowser.open
     captures.mkdir(parents=True, exist_ok=True)
     state_path = captures / "inspection-queue-state.json"
     digest = plan_digest(worlds)
@@ -156,6 +168,16 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
         if state["worlds"].get(wid, {}).get("status") == "completed":
             continue
         print(f"\n[{number}/{len(worlds)}] {item['name']} ({wid})")
+        page = world_launch_url(wid)
+        print("Official World launch page: " + page)
+        if open_world_page:
+            try:
+                if not open_url_fn(page):
+                    print("Browser could not open the official World page. No capture attempted.")
+                    return {"status": "paused", "worldId": wid, "statePath": str(state_path)}
+            except Exception as exc:
+                print("World page launch failed (" + type(exc).__name__ + "). No capture attempted.")
+                return {"status": "paused", "worldId": wid, "statePath": str(state_path)}
         print("Open THIS World manually in a private, empty VRChat instance.")
         print("Verify World identity, permission and recording rights; the tool cannot verify them.")
         answer = input_fn("Type the entire World ID to begin recording (or q to stop): ").strip()
@@ -181,7 +203,7 @@ def run_queue(plan: dict, *, capture_dir: Path, seconds: int = 45,
             save(wid, "failed", {"errorType": type(exc).__name__, "message": str(exc)[:300]})
             return {"status": "failed", "worldId": wid, "statePath": str(state_path)}
         status = result.get("status")
-        if status not in SUCCESS:
+        if status not in SUCCESS or result.get("captureStopReason") != "completed":
             save(wid, "failed", result)
             return {"status": "failed", "worldId": wid, "statePath": str(state_path)}
         save(wid, "completed", result)
@@ -199,6 +221,8 @@ def main(argv=None) -> int:
     parser.add_argument("--limit", type=int, default=5, help="Number of public Worlds, maximum 25")
     parser.add_argument("--seconds", type=int, default=45)
     parser.add_argument("--sweep", action="store_true")
+    parser.add_argument("--open-world-page", action="store_true",
+                        help="Open each official VRChat World launch web page, not the client")
     parser.add_argument("--analyze-video", action="store_true")
     parser.add_argument("--confirm-platform-authorization", action="store_true")
     parser.add_argument("--acknowledge-automation-risk", action="store_true")
@@ -217,6 +241,7 @@ def main(argv=None) -> int:
                 automation_risk_acknowledged=args.acknowledge_automation_risk,
                 recording_rights_confirmed=args.confirm_recording_rights,
                 gemini_upload_confirmed=args.confirm_gemini_upload,
+                open_world_page=args.open_world_page,
             )
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0 if result["status"] == "completed" else 1
