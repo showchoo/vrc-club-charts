@@ -24,10 +24,12 @@ try:
     from scripts.inspection_navigation_guard import NavigationGuard
     from scripts.inspection_sweep import run_sweep
     from scripts.inspection_session_guard import WorldSessionGuard
+    from scripts.inspection_emergency_stop import EmergencyStop
 except ModuleNotFoundError:
     from inspection_navigation_guard import NavigationGuard
     from inspection_sweep import run_sweep
     from inspection_session_guard import WorldSessionGuard
+    from inspection_emergency_stop import EmergencyStop
 
 WORLD_ID_RE = re.compile(r"^wrld_[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
 ACTIONS = {"forward", "backward", "turn_left", "turn_right",
@@ -344,6 +346,7 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
 
     recorder = WindowRecorder(hwnd, area, video, ffmpeg)
     recorder.max_duration_seconds = seconds
+    emergency_stop = EmergencyStop(recorder.stop_event)
     local_guard = (
         WorldSessionGuard(
             world_id=world_id,
@@ -359,6 +362,8 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         # before any recording or OSC movement begins.
         if local_guard is not None and not local_guard.start():
             raise RuntimeError("Local World log changed before recording")
+        if not emergency_stop.start():
+            raise RuntimeError("Emergency stop hotkey active or monitor unavailable")
         recorder.start()
         if ai:
             controller.neutral()
@@ -420,7 +425,16 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
                     if local_guard.reason is not None:
                         report["stopReason"] = "world_log_guard_stopped"
             finally:
-                recorder.close()
+                try:
+                    report["emergencyStop"] = emergency_stop.close()
+                    if emergency_stop.reason is not None:
+                        report["stopReason"] = (
+                            "operator_emergency_stop"
+                            if emergency_stop.reason == "operator-emergency-hotkey"
+                            else "emergency_stop_monitor_failed"
+                        )
+                finally:
+                    recorder.close()
 
     report["endedAtUtc"] = dt.datetime.now(dt.timezone.utc).isoformat()
     report["elapsedSeconds"] = round(time.monotonic() - started, 2)
