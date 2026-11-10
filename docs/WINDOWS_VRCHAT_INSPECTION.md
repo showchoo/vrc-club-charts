@@ -21,6 +21,17 @@ permission to run an unattended inspection bot. `--ai-explore` is a
 technically supported, **explicit opt-in** integration that may breach these
 rules; use it only where the platform has authorized the intended activity.
 
+## Stationary OSC camera sweep (new opt-in pilot)
+
+The [bounded sweep guide](BOUNDED_OSC_SWEEP.md) explains the new
+`-Sweep` PowerShell mode. It makes up to four short rightward view
+rotations while recording a manually opened, private, empty World in the
+official Windows VRChat client. **No Gemini API key is needed** for this
+mode. However, the operator must independently confirm platform
+authorization (`-ConfirmPlatformAuthorization`), instance/privacy rights,
+and the automation risk. It never auto-joins Worlds, validates equipment
+functions, or publishes a ranking. Actual Windows testing is still pending.
+
 ## Windows prerequisites
 
 - Windows 10/11, a visible official VRChat desktop client, already manually
