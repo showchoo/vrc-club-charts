@@ -11,6 +11,18 @@ therefore disabled by default and must only be used where the intended
 automation is permitted. Official OSC inputs are documented at
 https://docs.vrchat.com/docs/osc-as-input-controller.
 
+## 緊急停止キー：Ctrl + Shift + F12
+
+録画中はVRChatウィンドウにフォーカスを保ったまま **Ctrl + Shift + F12** を同時に押すと、録画・OSC操作に停止要求を送れます。外部キー操作ツールは不要で、キー入力の履歴も保存しません。
+
+- 録画のみ、カメラスイープ、任意のAI操作、ローカルログ監視のすべてのモードで利用可能です。追加フラグは不要です。
+- 最大0.05秒間隔のポーリングを目標とします。ただしWindowsのスケジューリング、OSC動作の安全確認間隔、録画処理の終了時間により停止は**瞬時ではありません**。
+- 検出後は共通の停止イベントが立ち、OSCの移動軸は既存の制御処理でゼロへ戻されます。停止したMP4は成功扱いせず、Geminiへ送信・公開しません。
+- 緊急停止監視自体がエラーになった場合も録画を中断する設計です。キーの取りこぼし、VRChatのハング、OSのハングまで検出・制御する保証はありません。
+- フォーカスを他のウィンドウへ切り替えても録画は停止します。ターミナルでのCtrl+Cも従来どおり利用できます。PCの安全が優先される場合はVRChatの終了やOS側の操作を行ってください。
+
+この機能はWindowsのGetAsyncKeyStateで指定された3キーの押下状態だけを取得します。外部サーバーへの送信・キーロギング・VRChatへのフック挿入・ランチャー自動操作は行いません。Windows実機での検証はまだ実施していません。
+
 ## Read-only local World log diagnostic (no recording or OSC)
 
 After manually entering a private, participant-free instance in the official VRChat client, run this from the project folder within roughly three minutes:
