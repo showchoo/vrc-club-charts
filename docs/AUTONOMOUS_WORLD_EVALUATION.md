@@ -95,6 +95,22 @@ controls, DJ livestream compatibility or verified rankings. Subsequent
 integration requires creator consent, runtime execution and independent
 functional measurements.
 
+## New implementation: stationary local OSC sweep
+
+A bounded, opt-in camera-only sweep for a **manually joined** empty private
+World has been added. It uses the official client's documented OSC view
+input and local capture; no AI upload, autonomous login, World hopping or
+DJ-equipment interaction. Movement input is neutralized between turns,
+focus loss cancels active control, and repeated unchanged observations
+stop the sweep. See [BOUNDED_OSC_SWEEP.md](BOUNDED_OSC_SWEEP.md).
+
+**This is not full automated in-world navigation.** Real-client testing
+and verification of platform authorization scope remain unresolved. The
+user has reported a new approval, but the connected Gmail currently
+contains only acknowledgments, not the grant itself. Do not broaden
+the experimental scope to unattended public instance visits without
+verifying that permission.
+
 ## Next phases (not yet implemented)
 
 1. **Evaluation calibration:** sample several intentionally selected, creator-consented interior videos. Verify Gemini's timestamps manually, measure false positive rate for DJ gear and lighting, determine whether an optional second evaluator is useful. Record inter-rater agreement.
