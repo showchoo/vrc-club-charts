@@ -164,6 +164,10 @@ class InspectionTests(unittest.TestCase):
                 self.reason = "local-world-or-instance-changed"
                 return {"status": "stopped", "reason": self.reason, "checks": 2}
 
+        class FakeNavigationGuard:
+            def metrics(self):
+                return {"observedFrames": 0, "recoveryTurns": 0}
+
         from scripts import evaluate_interior_video as evaluation
         with tempfile.TemporaryDirectory() as d, patch.dict(m.os.environ, {"GEMINI_API_KEY": "test"}):
             with (patch.object(m, "get_window", return_value=(123, {
@@ -172,7 +176,7 @@ class InspectionTests(unittest.TestCase):
                   patch.object(m, "WindowRecorder", FakeRecorder),
                   patch.object(m, "WorldSessionGuard", FakeWorldGuard),
                   patch.object(m, "OscMovement", FakeController),
-                  patch.object(m, "NavigationGuard"),
+                  patch.object(m, "NavigationGuard", FakeNavigationGuard),
                   patch.object(evaluation, "ask_gemini",
                                side_effect=AssertionError("Gemini must not run after World guard stop"))):
                 report = m.inspect(
