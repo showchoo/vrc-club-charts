@@ -158,6 +158,18 @@ class CalendarReaderTests(unittest.TestCase):
                 gate.authenticate(Path(folder), allow_browser=False)
 
 
+class LauncherContractTests(unittest.TestCase):
+    def test_manual_launcher_checks_workday_before_inspection_when_selected(self):
+        script = (Path(__file__).resolve().parents[1] / "scripts" /
+                  "launch_one_world_inspection.ps1").read_text(encoding="utf-8")
+        self.assertIn("[switch]$WorkdayOnly", script)
+        self.assertIn("scripts/workday_patrol_gate.py", script)
+        self.assertIn("if ($calendarStatus -eq 3)", script)
+        self.assertIn("if ($calendarStatus -ne 0)", script)
+        self.assertLess(script.index("scripts/workday_patrol_gate.py"),
+                        script.index("scripts/run_one_world_inspection.py"))
+
+
 class CommandLineTests(unittest.TestCase):
     def test_eligible_returns_zero_without_launch(self):
         out = io.StringIO()
