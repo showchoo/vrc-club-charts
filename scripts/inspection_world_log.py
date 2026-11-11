@@ -22,6 +22,10 @@ JOIN_RE = re.compile(
 )
 SUCCESS = "Successfully joined room"
 MAX_LOG_BYTES = 1024 * 1024
+# Preserve the operator's current private World session for a full day while
+# the latest join and absence of a recognized leave remain in the log tail.
+# This is log corroboration, not proof of a live client or an empty instance.
+MAX_ACTIVE_SESSION_AGE_SECONDS = 24 * 60 * 60
 
 
 def default_log_dir() -> Path:
@@ -59,13 +63,17 @@ def corroborate_world(world_id: str, *, log_dir: Path | None = None,
                       now: datetime | None = None) -> dict:
     """Corroborate the latest logged join, or fail closed.
 
+    A previous successful join may be reused while the same recent log file
+    still contains it and no later join or recognized leave/disconnect follows.
+    This does not independently prove a current connection or empty World.
+
     A positive result includes an ephemeral hashed join marker for before/after
     comparison, never instance/user IDs, the source log or raw line.
     """
     if not isinstance(world_id, str) or not WORLD_RE.fullmatch(world_id):
         raise ValueError("Invalid VRChat World ID")
-    if not 30 <= max_age_seconds <= 900:
-        raise ValueError("Join freshness window must be 30..900 seconds")
+    if isinstance(max_age_seconds, bool) or not isinstance(max_age_seconds, int) or not 30 <= max_age_seconds <= MAX_ACTIVE_SESSION_AGE_SECONDS:
+        raise ValueError("Join freshness window must be 30..86400 seconds")
     moment = now if now is not None else datetime.now()
     if moment.tzinfo is not None:
         raise ValueError("Use local naive time for Unity local log timestamps")
