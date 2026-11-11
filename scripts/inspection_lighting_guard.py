@@ -94,6 +94,8 @@ def one_frame_low_light(png: bytes) -> dict:
         return {"status": "low-visibility" if darkness >= NEAR_BLACK_FRACTION else "not-near-black",
                 "nearBlackFraction": round(darkness, 4),
                 "visualNavigationShouldPause": darkness >= NEAR_BLACK_FRACTION}
-    except (ImportError, OSError, ValueError, UnidentifiedImageError):
+    except (ImportError, OSError, ValueError):
+        # PIL.UnidentifiedImageError subclasses OSError. Do not reference the
+        # PIL-specific name when Pillow itself cannot be imported.
         return {"status": "image-visibility-unavailable",
                 "visualNavigationShouldPause": True}
