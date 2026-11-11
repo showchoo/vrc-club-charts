@@ -61,30 +61,32 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
-## APIキーが1文字になっていた場合（2026-11-11実機）
+## APIキーではなくPowerShellのコマンドが送られていた（2026-11-11実機）
 
-同じWindows PowerShell環境で `Read-Host -AsSecureString` を使って「新しいキー」を入力した後も400 HTMLが続き、**`$env:GEMINI_API_KEY.Length` が `1`** と判明しました。これまでの400は、実際のAPIキーではなく途中で欠けた文字列を送っていた可能性が非常に高くなりました。`Read-Host` 画面に `*` が1個表示されただけでは判断できませんが、実際の環境変数の長さが1であることは確定しています。新しいキーの発行・動画の再撮影はまだ必要ありません。
+実機で `GEMINI_API_KEY.Length` が一度 `1`、次に `68` となり、後者をHTTPヘッダーに設定しようとした際、Pythonのエラーには `git pull --ff-only` と `py -3 scripts/diagnose_gemini_connection.py --run` の2行が現れました。**これはGoogle APIキーではなく、クリップボードにあったコマンドが環境変数に設定された証拠です。** これまでのHTTP 400や通信断は正しいキーでの検証だったことが確認できず、Google側の障害と断定できません。
 
-Google AI Studioの**コピー用ボタン**で発行済みキーをコピーし、PowerShellでは秘密入力欄を経由せず、以下のようにクリップボードから直接環境変数を設定できます。キー本体は表示しません。クリップボードを安全な固定文字列で**上書き**するので、必要なテキストは先に退避してください。Windows PowerShellの環境によっては `Set-Clipboard -Value ''` がnull引数エラーになるため、空文字列でのクリアは使用しません。`Set-Clipboard` のエラーは、それ以前に設定された `$env:GEMINI_API_KEY` を消去しません。
+誤操作の原因は、**APIキーをコピーした後に実行したいコマンドをコピーすることで、クリップボードの中身がコマンドに上書きされる**ことです。`Read-Host -AsSecureString` では貼り付けが1文字だけになった事例もありました。発行済みキーの再発行やVRChat動画の再撮影は不要です。
+
+**以下の1行を先にコピーしてPowerShellでEnter**。`Copy Gemini API key, then press Enter` と出て待機してから、ブラウザに移ってGoogle AI Studioのキーのコピーボタンを押し、PowerShellへ戻ってEnterを押します。APIキー自体をPowerShellへ貼り付けません。コピーを済ませてから下のコマンドをコピーする順番ではありません。
 
 ~~~powershell
-$copied = (Get-Clipboard -Raw).Trim()
-if ($copied.Length -lt 20) {
-    Remove-Variable copied
-    throw "APIキーが短すぎます。AI Studioでコピーし直してください。"
-}
-$env:GEMINI_API_KEY = $copied
-Remove-Variable copied
-Set-Clipboard -Value 'cleared'
-Write-Host "APIキーを設定しました"
+Remove-Item Env:GEMINI_API_KEY -ErrorAction SilentlyContinue; Read-Host 'Copy Gemini API key, then press Enter' | Out-Null; $k=Get-Clipboard -Raw; if (!$k -or $k -match '[^\x21-\x7E]' -or $k.Length -lt 20 -or $k -notmatch '^(AQ\.|AIza)') { Remove-Variable k -ErrorAction SilentlyContinue; throw 'クリップボードに有効な形式のAPIキーがありません' }; $env:GEMINI_API_KEY=$k; Remove-Variable k; Set-Clipboard -Value 'cleared'; Write-Host 'APIキーを設定しました'
+~~~
+
+この入力チェックは既知のGoogleキー形式（`AQ.` / `AIza`）、ASCII印字可能文字、20文字以上のみを許容する操作上の安全策です。Googleが将来発行する別形式の有効キーは通らない可能性があります。クリップボードを固定文字列で上書きするため、必要な別のテキストは事前に保存してください。Windowsのクリップボード履歴が有効な場合は履歴にも注意してください。
+
+設定完了後、**その時点で**次の診断コマンドをコピーして実行してください。環境変数はクリップボードを上書きしても保持されます。
+
+~~~powershell
+git pull --ff-only
 py -3 scripts/diagnose_gemini_connection.py --run
 ~~~
 
-なお `diagnose_gemini_connection.py` も20文字未満なら、**ネットワークへ送る前**に `status: "invalid-key-input-length"` を返すよう修正しました。文字数は厳密なGoogleの認証仕様を意味しません。十分長いキーでも有効性の保証はなく、`keyFamily` は形式の参考情報のみです。`rest-text-ok` が得られるまでは、動画を再解析しないでください。APIキー自体をGitHubやチャットに貼り付けないでください。
+プログラムは20文字未満のキーだけでなく、改行や非ASCIIなどHTTPヘッダーに不適切な文字が含まれていれば、**ネットワークへ送る前**に `invalid-key-input-characters` を返します。これにより、`ValueError: Invalid header value b'...'` のトレースにキー内容が表示される事故を防ぎます。`rest-text-ok` が出るまでは動画を再解析せず、キー本体をGitHub/チャット/ログに投稿しないでください。
 
 ## 2026年のGemini新型AuthキーとHTML 400について
 
-2026-11-11の実機診断で、動画なしの `GET /v1beta/models` すら `HTTP 400` / `responseKind: "html"` で失敗しました。`google-genai` SDKでも同じHTML 400が発生するため、動画サイズ・動画フォーマット・SDKのみの不具合とは断定できません。**動画を再撮影・再圧縮せず、認証キーとプロジェクトの設定を優先して調べます。**
+2026-11-11の実機診断で、動画なしの `GET /v1beta/models` も `HTTP 400` / `responseKind: "html"` で失敗しました。ただし、その後の調査で環境変数にはAPIキーではなく短い文字列やPowerShellのコマンドが格納されていたことが判明しました。**この400は正しいキーでも生じるか未検証です。まずキーを正しく設定して再診断してください。**
 
 Googleは2026-05-28からGoogle AI Studio新規作成キーをAuthキーへ移行しています。新型キーは通常 `AQ.`、旧Standardキーは `AIza` という形式です。旧診断の `keyLooksLikeStandardGoogleKey: false` は新型キーにも当てはまるため、**無効キーの根拠ではありません**。現行診断は機密値を表示しない `keyFamily`（`authorization` / `legacy-standard` / `unrecognized` / `missing`）へ変更しました。この分類は文字列パターンだけであり、キーの有効性の証明ではありません。
 
@@ -92,7 +94,7 @@ Googleは2026-05-28からGoogle AI Studio新規作成キーをAuthキーへ移�
 - 同一エラーの開発者報告（2026-10-26）: https://discuss.ai.google.dev/t/aq-authorization-key-returns-generic-html-400-for-get-v1beta-models-on-windows-11/195158
 - 上記フォーラムで2026-10-29にGoogle担当者は、**新しいGoogle AI Studioプロジェクトに新しいAuthキーを作り、最小限のAPIリクエストで検証する**ことを提案しています。ただし、解決を保証する回答ではありません。
 
-対処はGoogle AI StudioのAPI Keys画面でキーの種類と対象プロジェクト、Gemini APIへの割当を確認し、必要なら新しいプロジェクトに新しいキーを作って、現在のPowerShellの `$env:GEMINI_API_KEY` を差し替えて専用診断を再実行することです。既存のVercel用シークレットや稼働中サイトの設定は**変更しない**でください。キーそのものはGitHub/チャット/ログに投稿しないでください。
+正しいキーでも同じHTTP 400が発生したことが確認できた場合に限り、Google AI StudioのAPI Keys画面でキーの種類と対象プロジェクト、Gemini APIへの割当を確認し、必要なら別プロジェクトの新しいキーを検討してください。既存のVercel用シークレットや稼働中サイトの設定は**変更しない**でください。キーそのものはGitHub/チャット/ログに投稿しないでください。
 
 ## 動画・SDKを使わずにGeminiの400エラーを診断（2026-11-11）
 
