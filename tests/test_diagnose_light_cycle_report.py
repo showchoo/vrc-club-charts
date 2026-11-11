@@ -76,6 +76,22 @@ class DiagnosticTests(unittest.TestCase):
         self.assertFalse(opportunity["safeToMoveOrResumeAutomation"])
         self.assertFalse(result["originalReportModified"])
 
+
+    def test_longer_bright_window_outweighs_shorter_brighter_peak(self):
+        values = samples([6, 105, 186, 8, 63, 72, 68, 70, 5], black=.25)
+        analysis = diag.analyze_samples(values)
+        candidate = analysis["briefBrightWindow"]["candidate"]
+        self.assertEqual(candidate["brightRunLength"], 4)
+        self.assertEqual(candidate["brightRunSamples"], [5, 8])
+        self.assertEqual(candidate["candidateSample"], 7)
+        self.assertEqual(candidate["medianLuma"], 68)
+        self.assertEqual(candidate["selectionPolicy"],
+                         "longest-bright-run-then-lowest-luma-spread")
+        self.assertEqual(analysis["primaryDiagnostic"],
+                         "no-three-consecutive-eligible-stable-frames")
+        self.assertFalse(analysis["originalReportModified"])
+        self.assertFalse(analysis["lightingCycleRetroactivelyVerified"])
+
     def test_new_private_bright_candidate_report_can_be_reanalyzed(self):
         values = samples([5, 7, 70, 120, 9, 10, 60, 90, 7, 8],
                          black=.2)
