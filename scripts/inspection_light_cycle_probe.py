@@ -74,8 +74,9 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
                   capture_dark_diagnostic: bool = False) -> dict:
     """One-second spaced observations; still_safe must enforce focus+guards.
 
-    No OSC input ever. Return screenshot bytes ONLY after a full stable
-    dark-to-recovered cycle. Light changes never verify walkable geometry.
+    No OSC input ever. Return screenshot bytes after strict light recovery,
+    an explicitly opted-in brief bright candidate, or an explicitly opted-in
+    persistently dark capture. None verifies screen visibility or safe paths.
     """
     if type(max_samples) is not int or not 1 <= max_samples <= MAX_SECONDS:
         raise ValueError("invalid-observation-count")
