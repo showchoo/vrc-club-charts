@@ -220,6 +220,87 @@ class ObserverTests(unittest.TestCase):
         self.assertFalse(result["lightCycle"]["dimSeen"])
         self.assertFalse(list(self.destination.rglob("recovery.png")))
 
+
+    def test_dark_club_two_bright_frames_save_one_opt_in_candidate(self):
+        # No three stable bright frames: original lighting-cycle algorithm fails.
+        levels = [8, 10, 60, 120, 10, 11, 50, 100, 11, 10]
+        values = [sample(x, .3 if x >= 45 else .8) for x in levels]
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_brief_window=True)
+        self.assertEqual(result["status"], "brief-brightness-opportunity-observed")
+        self.assertEqual(result["lightCycle"]["status"], "calibrating")
+        self.assertEqual(result["screenshotsSaved"], 1)
+        self.assertIsNone(result["recoveryImage"])
+        self.assertTrue(Path(result["brightWindowImage"]).is_file())
+        self.assertEqual(len(list(self.destination.rglob("*.png"))), 1)
+        self.assertEqual(result["briefBrightWindow"]["candidate"]["medianLuma"], 120)
+        self.assertEqual(result["movementCommandsSent"], 0)
+        self.assertFalse(result["autonomousMovementRestarted"])
+        self.assertFalse(result["rankingEligible"])
+        report = json.loads(Path(result["reportFile"]).read_text())
+        self.assertFalse(report["screenshot"]["stableLightingRecoveryConfirmed"])
+        self.assertTrue(report["screenshot"]["humanReviewRequired"])
+        self.assertFalse(report["publiclyShareable"])
+        self.assertFalse(report["djBoothLocated"])
+        self.assertFalse(report["externalUploads"])
+
+    def test_dark_club_without_opt_in_still_saves_no_image(self):
+        levels = [8, 10, 60, 120, 10, 11, 50, 100, 11, 10]
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(x) for x in levels]),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0)
+        self.assertEqual(result["status"], "lighting-cycle-not-confirmed")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertFalse(list(self.destination.rglob("*.png")))
+
+    def test_isolated_strobes_and_near_black_overlay_do_not_save_candidate(self):
+        levels = [10, 186, 10, 90, 10, 100, 10, 170, 10, 60]
+        samples = [sample(x, .97 if x == 186 else .2) for x in levels]
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=samples),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_brief_window=True)
+        self.assertEqual(result["status"], "lighting-cycle-not-confirmed")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertIsNone(result["brightWindowImage"])
+
+    def test_late_world_change_discards_brief_candidate(self):
+        original_close = FakeWorldGuard.close
+
+        def changed(self):
+            self.reason = "local-world-or-instance-changed"
+            return original_close(self)
+
+        values = [sample(x) for x in [10, 12, 60, 100, 10, 9, 70, 90, 10, 11]]
+        with (
+            patch.object(FakeWorldGuard, "close", changed),
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_brief_window=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertFalse(self.destination.exists())
+
     def test_session_change_at_final_check_discards_recovery_image(self):
         original_close = FakeWorldGuard.close
 
