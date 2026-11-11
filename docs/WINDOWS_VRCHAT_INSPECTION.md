@@ -68,10 +68,10 @@ window focus. This is still awaiting real Windows smoke testing.
 **1. APIの基本通信（テキストのみ、小さなリクエスト）を先に確認する。** APIキーは現在のPowerShell内に `GEMINI_API_KEY` として設定済みであること。値を貼り付けたり表示したりしないこと。
 
 ~~~powershell
-py -3 -c 'import os; from google import genai; client=genai.Client(api_key=os.environ["GEMINI_API_KEY"]); print(client.models.generate_content(model="gemini-3.5-flash-lite", contents="Reply with OK only").text)'
+py -3 -c "import os; from google import genai; client=genai.Client(api_key=os.environ['GEMINI_API_KEY']); print(client.models.generate_content(model='gemini-3.5-flash-lite', contents='Reply OK only').text)"
 ~~~
 
-ここでも通信が切れるなら、動画の圧縮より先にインターネット接続、プロキシ/VPN、ローカルファイアウォール、Google APIへのアクセスを確認する。入力やAPIキーをこのチャットに貼らないこと。
+PowerShellでは外側をダブルクォート、Python内の文字列をシングルクォートにする（逆にするとWindowsでPythonへの引用符が失われ、SyntaxErrorになる場合がある）。ここでも通信が切れるなら、動画の圧縮より先にインターネット接続、プロキシ/VPN、ローカルファイアウォール、Google APIへのアクセスを確認する。入力やAPIキーをこのチャットに貼らないこと。
 
 **2. テキスト通信が成功した場合、元動画を変更せずに別ファイルへ軽量化する。** VRChatで録画し直す必要はなく、30秒のまま2fps・横960px・映像600kbps程度（おおむね2～3MiB以下）へ変換できる。映像のサンプル密度は下がるため、細かな機材・文字の確認精度は低下し得る。
 
