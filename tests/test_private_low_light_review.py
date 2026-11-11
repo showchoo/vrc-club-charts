@@ -184,7 +184,6 @@ class PrivateReviewTests(unittest.TestCase):
         older = self.root / (WORLD + "_20261111T072523Z_82d546cee3")
         older.mkdir()
         self.assertEqual(review.latest_private_report(self.root), self.report)
-        self.assertEqual(review.latest_private_report(), self.report) if False else None
 
     def test_monotonic_curve_preserves_highlights_and_black(self):
         lut = review.shadow_curve()
