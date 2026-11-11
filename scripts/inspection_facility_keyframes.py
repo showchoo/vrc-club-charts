@@ -19,7 +19,8 @@ from pathlib import Path
 
 try:
     from scripts.evaluate_interior_video import media_sha256, validate_media, WORLD_ID
-    from scripts.inspection_evidence_timeline import audit_timeline
+    from scripts.inspection_evidence_timeline import audit_timeline, attach_verified_timeline
+    from scripts.inspection_visual_quality import assess_video_quality
     from scripts.inspection_facility_inventory import (
         LABELS_JA, public_facility_observations,
     )
@@ -27,7 +28,8 @@ try:
     from scripts.auto_process_interior_queue import atomic_json, ROOT
 except ModuleNotFoundError:
     from evaluate_interior_video import media_sha256, validate_media, WORLD_ID
-    from inspection_evidence_timeline import audit_timeline
+    from inspection_evidence_timeline import audit_timeline, attach_verified_timeline
+    from inspection_visual_quality import assess_video_quality
     from inspection_facility_inventory import LABELS_JA, public_facility_observations
     from inspection_media_verify import verify_mp4
     from auto_process_interior_queue import atomic_json, ROOT
@@ -38,6 +40,54 @@ MAX_REPORT_BYTES = 1024 * 1024
 
 class FrameEvidenceError(ValueError):
     """Cannot safely extract an evidence frame from this particular recording."""
+
+
+
+def _authorize_direct_cli_draft_for_local_frames(report: dict, video: Path) -> dict:
+    """Locally reverify an older single-video CLI draft, with explicit CLI rights.
+
+    Direct evaluate_interior_video.py --analyze --confirm-sharing initially saved
+    provenance and AI findings but omitted the queue's consent/timeline metadata.
+    We may derive a PRIVATE, in-memory equivalent ONLY for this local extraction
+    and ONLY when the operator used --confirm-recording-rights. Never rewrite the
+    original draft, upload media, or imply permission to publish/stream.
+    """
+    if not isinstance(report, dict) or "consent" in report:
+        raise FrameEvidenceError("Cannot upgrade a draft with existing consent metadata")
+    if (report.get("status") != "draft_video_assessment" or
+            report.get("rankingEligible") is not False or
+            report.get("livePlaybackIndependentlyVerified") is not False):
+        raise FrameEvidenceError("Only private, unranked direct video drafts can be locally verified")
+    method = report.get("method")
+    if (not isinstance(method, dict) or
+            method.get("kind") != "gemini_video_analysis" or
+            method.get("independentInWorldInspection") is not False):
+        raise FrameEvidenceError("Only a direct video-analysis draft is eligible for local recovery")
+    evidence = report.get("evidence")
+    if (not isinstance(evidence, dict) or
+            evidence.get("type") != "interior_video" or
+            evidence.get("source") not in {"owner-recorded", "creator-provided"} or
+            evidence.get("timestampBasis") != "video_seconds_model_estimated"):
+        raise FrameEvidenceError("Unsupported direct draft video provenance")
+    digest = evidence.get("sha256")
+    if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise FrameEvidenceError("Missing full media SHA-256")
+    size = validate_media(video)
+    if evidence.get("bytes") != size or media_sha256(video) != digest:
+        raise FrameEvidenceError("Recorded video SHA-256 or size differs from the draft")
+    metadata = verify_mp4(video)
+    quality = assess_video_quality(video, metadata=metadata)
+    if quality.get("status") != "ok":
+        raise FrameEvidenceError("Original footage failed local visual-quality verification")
+    enriched = attach_verified_timeline(report, metadata=metadata, visual_quality=quality)
+    # This is NOT saved to the user's original draft; the current explicit
+    # --confirm-recording-rights acknowledges local extraction only.
+    enriched["consent"] = {
+        "recordingConsentConfirmed": True,
+        "aiAnalysisConsentConfirmed": False,
+        "permissionToPublishVisualEstimate": False,
+    }
+    return enriched
 
 
 def _check_document(report: dict, video: Path) -> tuple[str, str, float, list[dict]]:
@@ -108,7 +158,8 @@ def _render_index(world_id: str, rows: list[dict]) -> str:
     )
 
 
-def export_frame_evidence(report: dict, video: Path, out_root: Path) -> dict:
+def export_frame_evidence(report: dict, video: Path, out_root: Path, *,
+                          authorize_direct_draft: bool = False) -> dict:
     """One immutable local folder per (World ID, full source-video digest).
 
     A failure cannot leave a completed manifest. Existing folders cannot be
@@ -121,6 +172,8 @@ def export_frame_evidence(report: dict, video: Path, out_root: Path) -> dict:
         raise FrameEvidenceError("Private screenshots cannot be stored in source repository")
     if not video.is_file():
         raise FrameEvidenceError("Local source video not found")
+    if authorize_direct_draft and isinstance(report, dict) and "consent" not in report:
+        report = _authorize_direct_cli_draft_for_local_frames(report, video)
     wid, digest, duration, sightings = _check_document(report, video)
     if not sightings:
         return {"status": "no-high-confidence-facilities",
@@ -224,7 +277,10 @@ def main(argv=None) -> int:
         if draft_file.stat().st_size > MAX_REPORT_BYTES:
             raise FrameEvidenceError("Draft report exceeds size limit")
         report = json.loads(draft_file.read_text(encoding="utf-8"))
-        outcome = export_frame_evidence(report, args.video, args.out_dir)
+        outcome = export_frame_evidence(
+            report, args.video, args.out_dir,
+            authorize_direct_draft=args.confirm_recording_rights,
+        )
     except (ValueError, OSError, json.JSONDecodeError) as exc:
         p.exit(2, "ERROR: " + str(exc) + "\n")
     print(json.dumps(outcome, ensure_ascii=False, indent=2))

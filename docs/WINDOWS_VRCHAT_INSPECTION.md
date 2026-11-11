@@ -61,6 +61,21 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
+## Gemini直接解析済みドラフトからDJ設備の静止画を抽出（2026-11-11）
+
+ユーザーの30秒録画はGeminiの直接解析に成功し、DJブース、スクリーン、照明、ステージを検出しました。しかし、既存の `scripts/evaluate_interior_video.py --analyze --confirm-sharing` が保存したドラフトには `consent` / `evidence.durationSeconds` / `visualQuality` がなく、`inspection_facility_keyframes.py --confirm-recording-rights` が `ERROR: Recording/participant permission must be attested` と拒否する連携不具合がありました。
+
+現在は**既存ドラフトをGeminiに再送せず**、既に確認された録画・参加者の権利を `--confirm-recording-rights` で明示した場合だけ、ローカルで元動画ハッシュ、動画長、映像品質、タイムスタンプを再検証して静止画を作成します。元動画やドラフトは変更せず、GitHubへのアップロード・ランキング反映もしません。拒否記録を持つドラフトを上書きで承認することもありません。
+
+~~~powershell
+$video = "$HOME\Videos\VRCClubCharts\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_20261111T034002Z.mp4"
+$report = "$HOME\Videos\VRCClubCharts\private-evaluations\dj_floor_20261111T034002Z.draft.json"
+$result = py -3 scripts/inspection_facility_keyframes.py --draft "$report" --video "$video" --confirm-recording-rights | ConvertFrom-Json
+if ($LASTEXITCODE -eq 0 -and $result.index) { Start-Process $result.index }
+~~~
+
+表示されるHTMLはローカル非公開で、設備の外観に関する人手確認が未完了と明記されます。AIはDJ機材の実際の動作を検証していません。今後の `evaluate_interior_video.py --analyze` ではGemini送信前にローカルで動画品質を検証し、出力に必要な確認済み同意／FFprobeタイムラインを記録するため、同じ形式の不整合が再発しません。
+
 ## APIキーではなくPowerShellのコマンドが送られていた（2026-11-11実機）
 
 実機で `GEMINI_API_KEY.Length` が一度 `1`、次に `68` となり、後者をHTTPヘッダーに設定しようとした際、Pythonのエラーには `git pull --ff-only` と `py -3 scripts/diagnose_gemini_connection.py --run` の2行が現れました。**これはGoogle APIキーではなく、クリップボードにあったコマンドが環境変数に設定された証拠です。** これまでのHTTP 400や通信断は正しいキーでの検証だったことが確認できず、Google側の障害と断定できません。

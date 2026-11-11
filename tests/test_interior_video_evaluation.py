@@ -153,6 +153,58 @@ class VideoAssessmentTests(unittest.TestCase):
         self.assertEqual(client.files.upload.call_count, 1)
         client.models.generate_content.assert_not_called()
 
+    def test_direct_analyze_cli_creates_verified_consent_draft_for_keyframes(self):
+        """Offline: real video CLI must no longer omit consent and timeline."""
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "owner.mp4"
+            video.write_bytes(b"synthetic test video" * 100)
+            output = Path(d) / "direct.draft.json"
+            metadata = {
+                "metadataVerified": True, "durationSeconds": 4.0,
+                "audioTracks": 0,
+            }
+            quality = {
+                "status": "ok", "sampledFrames": 4,
+                "visualChangeIntervals": 2, "framesWithDetail": 4,
+            }
+            with (patch.object(evaluator, "ask_gemini", return_value=sample()) as gemini,
+                  patch("scripts.inspection_media_verify.verify_mp4", return_value=metadata),
+                  patch("scripts.inspection_visual_quality.assess_video_quality", return_value=quality)):
+                result = evaluator.main([
+                    "--world-id", WORLD_ID, "--video", str(video),
+                    "--source", "owner-recorded", "--out", str(output),
+                    "--analyze", "--confirm-sharing",
+                ])
+            self.assertEqual(result, 0)
+            gemini.assert_called_once()
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertTrue(report["consent"]["recordingConsentConfirmed"])
+            self.assertTrue(report["consent"]["aiAnalysisConsentConfirmed"])
+            self.assertFalse(report["consent"]["permissionToPublishVisualEstimate"])
+            self.assertEqual(report["evidence"]["durationSeconds"], 4.0)
+            self.assertEqual(report["evidence"]["durationSource"], "ffprobe")
+            self.assertTrue(report["timelineAudit"]["timelineChecked"])
+            self.assertFalse(report["rankingEligible"])
+
+    def test_direct_analyze_cli_rejects_poor_video_before_api_request(self):
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "owner.mp4"
+            video.write_bytes(b"synthetic test video" * 100)
+            output = Path(d) / "direct.draft.json"
+            metadata = {"metadataVerified": True, "durationSeconds": 4.0, "audioTracks": 0}
+            with (patch.object(evaluator, "ask_gemini", side_effect=AssertionError("No upload")),
+                  patch("scripts.inspection_media_verify.verify_mp4", return_value=metadata),
+                  patch("scripts.inspection_visual_quality.assess_video_quality",
+                        return_value={"status": "poor"})):
+                with self.assertRaises(SystemExit) as caught:
+                    evaluator.main([
+                        "--world-id", WORLD_ID, "--video", str(video),
+                        "--source", "owner-recorded", "--out", str(output),
+                        "--analyze", "--confirm-sharing",
+                    ])
+            self.assertEqual(caught.exception.code, 2)
+            self.assertFalse(output.exists())
+
     def test_valid_visual_video_does_not_publish_or_verify_playback(self):
         data = sample()
         data["dimensions"]["visual_design"] = {

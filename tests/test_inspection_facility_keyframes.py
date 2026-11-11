@@ -9,7 +9,7 @@ from subprocess import CompletedProcess
 from unittest.mock import patch
 
 from scripts import inspection_facility_keyframes as frames
-from scripts.evaluate_interior_video import DIMENSIONS, media_sha256
+from scripts.evaluate_interior_video import DIMENSIONS, media_sha256, create_report
 from scripts.inspection_facility_inventory import FACILITIES
 
 WORLD = "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05"
@@ -76,6 +76,84 @@ class FrameKeyframeTests(unittest.TestCase):
         self.assertTrue(Path(cmd[-1]).name.startswith("dj_booth_"))
         Path(cmd[-1]).write_bytes(b"\xff\xd8" + b"x" * 1024 + b"\xff\xd9")
         return CompletedProcess(cmd, 0, stdout=b"", stderr=b"")
+
+    def test_real_direct_cli_draft_is_recovered_offline_with_explicit_rights(self):
+        """Matches the direct --analyze --confirm-sharing draft from Windows."""
+        original = create_report(
+            WORLD, self.video, "owner-recorded",
+            fixture(self.video)["analysis"], "gemini-3.5-flash-lite")
+        self.assertNotIn("consent", original)
+        self.assertNotIn("durationSeconds", original["evidence"])
+        quality = {
+            "status": "ok", "sampledFrames": 4,
+            "visualChangeIntervals": 2, "framesWithDetail": 4,
+        }
+        with (patch.object(frames.shutil, "which", return_value="/fake/ffmpeg"),
+              patch.object(frames, "assess_video_quality", return_value=quality) as quality_check,
+              patch.object(frames.subprocess, "run", side_effect=self.fake_ffmpeg)):
+            outcome = frames.export_frame_evidence(
+                original, self.video, self.dir / "out",
+                authorize_direct_draft=True)
+        self.assertEqual(outcome["status"], "local-private-unreviewed")
+        self.assertEqual(outcome["frameCount"], 1)
+        self.assertTrue(Path(outcome["index"]).is_file())
+        self.assertNotIn("consent", original, "User's original draft must not be rewritten")
+        quality_check.assert_called_once()
+        manifest = json.loads((Path(outcome["index"]).parent / "frames.json").read_text())
+        self.assertFalse(manifest["publiclyShareable"])
+        self.assertFalse(manifest["equipmentFunctionalityVerified"])
+
+    def test_direct_cli_draft_without_explicit_rights_is_rejected(self):
+        original = create_report(
+            WORLD, self.video, "owner-recorded",
+            fixture(self.video)["analysis"], "gemini-3.5-flash-lite")
+        with patch.object(frames.subprocess, "run", side_effect=AssertionError("No extraction")):
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "permission"):
+                frames.export_frame_evidence(original, self.video, self.dir / "out")
+        self.assertFalse((self.dir / "out").exists())
+
+    def test_direct_cli_cannot_override_existing_refusal_of_consent(self):
+        original = create_report(
+            WORLD, self.video, "owner-recorded",
+            fixture(self.video)["analysis"], "gemini-3.5-flash-lite")
+        original["consent"] = {"recordingConsentConfirmed": False}
+        with patch.object(frames.subprocess, "run", side_effect=AssertionError("No extraction")):
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "permission"):
+                frames.export_frame_evidence(
+                    original, self.video, self.dir / "out",
+                    authorize_direct_draft=True)
+        self.assertFalse((self.dir / "out").exists())
+
+    def test_direct_cli_cannot_authorize_mismatched_file_or_untrusted_method(self):
+        original = create_report(
+            WORLD, self.video, "owner-recorded",
+            fixture(self.video)["analysis"], "gemini-3.5-flash-lite")
+        with patch.object(frames.subprocess, "run", side_effect=AssertionError("No extraction")):
+            fake = json.loads(json.dumps(original))
+            fake["method"]["kind"] = "untrusted"
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "direct video-analysis"):
+                frames.export_frame_evidence(
+                    fake, self.video, self.dir / "out",
+                    authorize_direct_draft=True)
+            fake = json.loads(json.dumps(original))
+            fake["evidence"]["sha256"] = "0" * 64
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "SHA-256"):
+                frames.export_frame_evidence(
+                    fake, self.video, self.dir / "out",
+                    authorize_direct_draft=True)
+
+    def test_direct_cli_unusable_video_stops_without_frames(self):
+        original = create_report(
+            WORLD, self.video, "owner-recorded",
+            fixture(self.video)["analysis"], "gemini-3.5-flash-lite")
+        quality = {"status": "poor"}
+        with (patch.object(frames, "assess_video_quality", return_value=quality),
+              patch.object(frames.subprocess, "run", side_effect=AssertionError("No extraction"))):
+            with self.assertRaisesRegex(frames.FrameEvidenceError, "quality"):
+                frames.export_frame_evidence(
+                    original, self.video, self.dir / "out",
+                    authorize_direct_draft=True)
+        self.assertFalse((self.dir / "out").exists())
 
     def test_sighting_creates_local_jpeg_json_and_offline_html(self):
         with (patch.object(frames.shutil, "which", return_value="/usr/bin/ffmpeg"),
