@@ -12,6 +12,28 @@ VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com
 - これは**ワールドを順次巡回する機能ではありません**。ワールド変更、アカウントのログイン、パブリックインスタンスへの自動入室、DJ機材のクリック・実動作検証、ランキングの自動公開は行いません。
 - 本機能はGitHubで実装・オフライン検証されますが、**実際のWindows VRChatクライアントでの動作確認は未実施**です。
 
+## DJブースが高い位置にあり、撮影地点から見えない場合（2026-11-11）
+
+本番環境で30秒のOSCスイープからGeminiが **DJブース visible / 自己申告信頼度90%** と判定しました。しかし利用者の実視認では、**DJブースは一段高い位置にあり、フロアからは見えず**、抽出画像にもブースが見当たりませんでした。今回のAI判定は、撮影地点での**未確認／誤検出候補**として扱います。映像に見えないことはWorld内にDJブースが無いという意味ではありません。Geminiの自己申告信頼度を実測の検出精度と取り違えないでください。
+
+### 人手レビューを非公開で記録
+
+`scripts/review_facility_keyframes.py` は、抽出済みの `frames.json` と画像をチェックし、元動画ハッシュに結び付けた `human-review.json` と `reviewed-index.html` を**ローカルにだけ**追加します。元の動画・Geminiドラフト・証拠画像・`frames.json`・`index.html` は書き換えません。明示的な `--confirm-visual-review` が必要で、Worldの外観／DJ配信機材の動作を確定しません。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+$frames = "$HOME\Videos\VRCClubCharts\private-keyframes\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_efce59d31eab0fb6759f69dc9b7de43d3e5ec72bcd6b4673cc487117812a9320"
+$review = py -3 scripts/review_facility_keyframes.py --frames-dir "$frames" --facility dj_booth --verdict not-visible-from-vantage --reason raised-area-out-of-view --confirm-visual-review | ConvertFrom-Json
+if ($LASTEXITCODE -eq 0 -and $review.reviewedIndex) { Start-Process $review.reviewedIndex }
+~~~
+
+「高い位置で撮影すれば見える可能性がある」という**撮影位置の制約**を記録するもので、AI判定の真偽を再生成するものではありません。他の設備は未確認のまま残ります。判定を変更したくなった場合は、暗黙の上書きをせず個別に見直します。現状は公開サイトやランキングに自動同期しません。
+
+### 次の自律巡回開発の要件
+
+今の `--sweep` は**同じ地点での視点回転**であり、階段・段差・隣の部屋への移動を行いません。次に開発すべきなのは、画角にブースがない場合に「視点不十分」と判断し、異なる視点から再検査する方式です。移動は障害物衝突・落下・World固有の仕組みを考慮する必要があり、現在は動作未検証です。十分な安全確認なしに階段等へ自動移動して「設備あり」と確定しないでください。
+
 ## 同じPrivate Worldなら再入室は不要（2026-11-11）
 
 毎回Privateインスタンスへ入り直す必要はありません。従来のローカルログ確認は「入室から180秒以内」という制限がありましたが、現行の検査は**最新の成功したPrivate入室から最大24時間**、同じWorldの同じ入室ログが残っていれば再利用します。
