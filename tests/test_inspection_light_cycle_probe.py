@@ -145,6 +145,7 @@ class ObserverTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.destination = Path(self.temp.name) / "private"
         patches = [
+            patch.object(probe, "OBSERVE_INTERVAL_SECONDS", 0),
             patch.object(probe.sys, "platform", "win32"),
             patch.object(probe, "corroborate_world", return_value={
                 "status": "corroborated", "joinFingerprint": JOIN, "worldId": WORLD}),
