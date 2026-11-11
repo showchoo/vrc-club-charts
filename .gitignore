@@ -1,3 +1,10 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Local Google Calendar OAuth materials: never commit or deploy.
+token.json
+oauth-client.json
+credentials.json
+client_secret_*.json
+calendar-auth/
