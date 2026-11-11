@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from scripts import review_facility_keyframes as review
 
-WORLD = "wrld_7eaf3905-10f8-4528-9aa3-a58e-f8427f87ba79"
+WORLD = "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79"
 SHA = "ab" * 32
 
 
