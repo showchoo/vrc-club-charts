@@ -226,7 +226,13 @@ def _read_existing_draft(path: Path, model: str, source_digest: str,
             data.get("publiclyShareable") is not False or
             data.get("rankingEligible") is not False or
             data.get("externalUploads") is not True or
-            data.get("imagesIndependent") is not False):
+            data.get("sourceMediaUploadedToGemini") is not True or
+            data.get("externalUploadsOtherThanGemini") is not False or
+            data.get("imagesIndependent") is not False or
+            data.get("liveDJStreamingVerified") is not False or
+            data.get("modelConfidenceCalibrated") is not False or
+            data.get("navigationSafe") is not False or
+            data.get("humanReviewRequired") is not True):
         raise StillFacilityError("existing-private-draft-provenance-invalid")
     # Verify stored data remains within the strict allowlist, not arbitrary
     # generative prose or a forged functionality claim.
