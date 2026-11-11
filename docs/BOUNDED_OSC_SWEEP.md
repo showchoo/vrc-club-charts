@@ -69,6 +69,18 @@ py -3 scripts/diagnose_light_cycle_report.py --report "$report"
 
 今後の`inspection_light_cycle_probe.py`の実行結果には `calibrationDiagnostics` が加わります。ただしこの診断は**元の輝度基準を勝手に下げません**。照明が変化したのか、暗いままなのか、映像として何が見えるかは数値だけでは確定できず、Worldの設備の有無・衝突安全性・自律移動の許可を与えるものではありません。診断結果を基に、次の校正方法を検討します。
 
+## 画面フォーカスによる事前停止の切り分け
+
+`world-focus-or-emergency-stop` は従来、VRChatが最前面にないケースと安全停止イベントの両方を表していました。真っ黒なキャプチャの診断前に停止した場合、画像は取得・保存されていません。事前停止理由を `vrchat-not-foreground-after-focus-delay`（待機時間終了時にVRChatが最前面ではない）と `safety-stop-during-focus-wait`（待機中に安全停止）に分けています。観測途中のフォーカス喪失とWorldログ/非常停止の安全停止判定は従来どおりです。
+
+画面切り替えに余裕が必要なら `--focus-seconds 20` を追加できます。**実行後は、PowerShellを前面に残さず、VRChat本体のウィンドウをクリックして前面にしてください**。他のアプリを操作するとキャプチャは停止します。自動でウィンドウを前面化する、エラーを無視して撮影する、といった操作はしません。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 10 --focus-seconds 20 --live --capture-dark-diagnostic --confirm-private-instance --confirm-recording-rights --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
 ## 真っ黒な撮影が続く場合の10秒診断（2026-11-11）
 
 同じWorldで前回90秒の輝度中央値は2～186と変動したのに、次の120秒間は**全サンプルが輝度1・ほぼ黒い画素比率約96%**になりました。画像が真っ黒な実Worldか、mss画面キャプチャが黒画面や別の領域を取っているか、数値だけでは決められません。判定条件を安易に下げず、画像取得そのものを検査します。
