@@ -31,6 +31,8 @@ except ModuleNotFoundError:
     from auto_process_interior_queue import ROOT
 
 MAX_INPUT_BYTES = 128 * 1024
+VERY_DARK_MAX_MEDIAN = 3.0
+VERY_DARK_MIN_NEAR_BLACK_FRACTION = 0.95
 STATES = frozenset((
     "calibrating", "watching-for-dim", "waiting-for-recovery",
     "recovered-stable-light",
@@ -48,6 +50,18 @@ def _safe_number(value: object, lower: float, upper: float) -> float:
             or not lower <= value <= upper):
         raise DiagnosticError("Malformed or out-of-range luminance sample")
     return float(value)
+
+
+def is_near_black_capture_sample(metrics: dict) -> bool:
+    """Only a capture/scene ambiguity signal, never proof of a capture defect."""
+    if not isinstance(metrics, dict):
+        return False
+    median = metrics.get("medianLuma")
+    fraction = metrics.get("nearBlackFraction")
+    return (type(median) in (int, float) and math.isfinite(median)
+            and 0 <= median <= VERY_DARK_MAX_MEDIAN
+            and type(fraction) in (int, float) and math.isfinite(fraction)
+            and VERY_DARK_MIN_NEAR_BLACK_FRACTION <= fraction <= 1)
 
 
 def analyze_samples(samples: list[dict]) -> dict:
@@ -104,6 +118,18 @@ def analyze_samples(samples: list[dict]) -> dict:
     elif "recovered-stable-light" in states:
         baseline_problem = "lighting-recovery-marked-in-original"
 
+    very_dark_count = sum(is_near_black_capture_sample(sample) for sample in samples)
+    capture_visibility = {
+        "status": ("near-black-throughout" if very_dark_count == len(samples)
+                   else "not-uniformly-near-black"),
+        "nearBlackSamples": very_dark_count,
+        "totalSamples": len(samples),
+        "suspectedCaptureOrSceneBlackout": very_dark_count == len(samples),
+        "imageCaptureFailureConfirmed": False,
+        "genuineDarkSceneConfirmed": False,
+        "humanComparisonRequired": very_dark_count == len(samples),
+        "visualNavigationSafe": False,
+    }
     bright_windows = BriefBrightWindow()
     for original_sample in samples:
         bright_windows.observe(original_sample)
@@ -111,6 +137,7 @@ def analyze_samples(samples: list[dict]) -> dict:
     return {
         "status": "read-only-calibration-diagnostics",
         "briefBrightWindow": bright_windows.summary(),
+        "captureVisibilityDiagnostic": capture_visibility,
         "samplesAnalyzed": len(samples),
         "firstSampleState": states[0],
         "lastSampleState": states[-1],
@@ -153,7 +180,8 @@ def read_report(path: Path) -> dict:
             report.get("source") != SOURCE or
             report.get("status") not in ("lighting-cycle-not-confirmed",
                                          "recovered-stable-light-observed",
-                                         "brief-brightness-opportunity-observed") or
+                                         "brief-brightness-opportunity-observed",
+                                         "capture-visibility-needs-review") or
             report.get("privateLocalOnly") is not True or
             report.get("publiclyShareable") is not False or
             report.get("rankingEligible") is not False or
@@ -178,6 +206,19 @@ def read_report(path: Path) -> dict:
                 bright_window.get("lightingCycleVerified") is not False or
                 bright_window.get("safeToMoveOrResumeAutomation") is not False):
             raise DiagnosticError("Unverified bright frame needs restricted provenance")
+    if report["status"] == "capture-visibility-needs-review":
+        shot = report.get("screenshot")
+        visibility = report.get("captureVisibilityDiagnostic")
+        if (not isinstance(shot, dict) or
+                shot.get("file") != "dark-capture-diagnostic.png" or
+                shot.get("humanReviewRequired") is not True or
+                shot.get("captureVisibilityVerified") is not False or
+                shot.get("stableLightingRecoveryConfirmed") is not False or
+                not isinstance(visibility, dict) or
+                visibility.get("status") != "near-black-throughout" or
+                visibility.get("imageCaptureFailureConfirmed") is not False or
+                visibility.get("genuineDarkSceneConfirmed") is not False):
+            raise DiagnosticError("Dark capture needs private visual review provenance")
     state = report.get("lightingCycle")
     if (not isinstance(state, dict) or
             state.get("status") not in STATES or

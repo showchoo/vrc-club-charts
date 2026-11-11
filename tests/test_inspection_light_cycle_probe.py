@@ -303,6 +303,86 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(result["screenshotsSaved"], 0)
         self.assertFalse(self.destination.exists())
 
+
+    def test_uniform_black_capture_saves_one_review_image_only_when_opted_in(self):
+        values = [sample(1, .9602)] * 10
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "capture-visibility-needs-review")
+        self.assertEqual(result["screenshotsSaved"], 1)
+        self.assertEqual(result["captureVisibilityDiagnostic"]["status"],
+                         "near-black-throughout")
+        self.assertIsNone(result["recoveryImage"])
+        self.assertIsNone(result["brightWindowImage"])
+        self.assertTrue(Path(result["captureDiagnosticImage"]).is_file())
+        self.assertEqual(len(list(self.destination.rglob("*.png"))), 1)
+        self.assertEqual(result["movementCommandsSent"], 0)
+        self.assertFalse(result["autonomousMovementRestarted"])
+        self.assertFalse(result["rankingEligible"])
+        stored = json.loads(Path(result["reportFile"]).read_text())
+        self.assertEqual(stored["screenshot"]["file"],
+                         "dark-capture-diagnostic.png")
+        self.assertTrue(stored["screenshot"]["humanReviewRequired"])
+        self.assertFalse(stored["screenshot"]["captureVisibilityVerified"])
+        self.assertFalse(stored["publiclyShareable"])
+        self.assertFalse(stored["externalUploads"])
+
+    def test_dark_without_diagnostic_opt_in_remains_numeric_only(self):
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(1, .9602)] * 10),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0)
+        self.assertEqual(result["status"], "lighting-cycle-not-confirmed")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertIsNone(result["captureDiagnosticImage"])
+        self.assertFalse(list(self.destination.rglob("*.png")))
+
+    def test_interleaved_bright_prevents_dark_diagnostic_image(self):
+        values = [sample(1, .96)] * 4 + [sample(10, .80)] + [sample(1, .96)] * 5
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "lighting-cycle-not-confirmed")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertIsNone(result["captureDiagnosticImage"])
+
+    def test_world_change_blocks_dark_capture_file(self):
+        original_close = FakeWorldGuard.close
+
+        def changed(self):
+            self.reason = "local-world-or-instance-changed"
+            return original_close(self)
+
+        with (
+            patch.object(FakeWorldGuard, "close", changed),
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(1, .96)] * 10),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertFalse(self.destination.exists())
+
     def test_session_change_at_final_check_discards_recovery_image(self):
         original_close = FakeWorldGuard.close
 
@@ -322,6 +402,43 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(result["status"], "stopped")
         self.assertEqual(result["reason"], "world-log-monitor-stopped")
         self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertFalse(self.destination.exists())
+
+
+    def test_focused_window_geometry_refreshed_before_capture(self):
+        initial = {"left": 0, "top": 0, "width": 640, "height": 480}
+        final = {"left": 120, "top": 60, "width": 800, "height": 600}
+        areas = []
+        with (
+            patch.object(probe, "get_window",
+                         side_effect=[(333, initial), (333, final)]),
+            patch.object(probe, "screenshot_png",
+                         side_effect=lambda hwnd, area:
+                         (areas.append(dict(area)) or
+                          b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200)),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(1, .96)] * 10),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "capture-visibility-needs-review")
+        self.assertEqual(result["captureRegion"], final)
+        self.assertEqual(areas, [final] * 10)
+
+    def test_window_swap_before_capture_discards_all_evidence(self):
+        with (
+            patch.object(probe, "get_window", side_effect=[
+                (333, {"left": 0, "top": 0, "width": 640, "height": 480}),
+                (444, {"left": 0, "top": 0, "width": 640, "height": 480})]),
+            patch.object(probe, "screenshot_png",
+                         side_effect=AssertionError("No capture after HWND change")),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "world-window-changed-before-capture")
         self.assertFalse(self.destination.exists())
 
     def test_lost_foreground_before_observation_creates_no_files(self):

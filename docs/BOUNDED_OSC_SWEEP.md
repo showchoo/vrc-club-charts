@@ -69,6 +69,30 @@ py -3 scripts/diagnose_light_cycle_report.py --report "$report"
 
 今後の`inspection_light_cycle_probe.py`の実行結果には `calibrationDiagnostics` が加わります。ただしこの診断は**元の輝度基準を勝手に下げません**。照明が変化したのか、暗いままなのか、映像として何が見えるかは数値だけでは確定できず、Worldの設備の有無・衝突安全性・自律移動の許可を与えるものではありません。診断結果を基に、次の校正方法を検討します。
 
+## 真っ黒な撮影が続く場合の10秒診断（2026-11-11）
+
+同じWorldで前回90秒の輝度中央値は2～186と変動したのに、次の120秒間は**全サンプルが輝度1・ほぼ黒い画素比率約96%**になりました。画像が真っ黒な実Worldか、mss画面キャプチャが黒画面や別の領域を取っているか、数値だけでは決められません。判定条件を安易に下げず、画像取得そのものを検査します。
+
+`diagnose_light_cycle_report.py` は既存ログの再解析だけで `captureVisibilityDiagnostic` を表示します。`near-black-throughout` は**画面の暗さと画像取得の不良を区別できない**という意味で、取得失敗を断定しません。画像を保存しない古い実行結果からPNGを復元することもできません。
+
+今後の**監督付きPrivate World**の検査に、明示的な `--capture-dark-diagnostic` を追加しました。全部のフレームで中央値3以下かつほぼ黒い画素比率95%以上の場合に限り、**最後の撮影画像1枚**を `dark-capture-diagnostic.png` としてローカル非公開保存します。通常の照明回復画像や明るい撮影候補の条件を優先します。暗さが途中で回復した場合はこの黒画面診断画像は作りません。
+
+VRChat公式クライアントを手動でPrivate Worldに入室させ、他人の写り込みがなく、録画・画面確認の権利があることを確認してください。PowerShellから次を実行すると、表示後8秒以内にVRChatを前面に戻して**10サンプルだけ観測**します。OSC移動は行いません。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 10 --live --capture-dark-diagnostic --confirm-private-instance --confirm-recording-rights --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+`status: capture-visibility-needs-review` なら `captureDiagnosticImage` にローカル画像のパスが出ます。PNGをPCで開き、**VRChatの実画面には明るい床やUIが見えていたか、保存画像には何が写っているか**を比較してください。
+
+- VRChat実画面は見えるのに保存PNGだけ黒い → キャプチャ方式・GPU／フルスクリーン・ウィンドウ座標等を優先調査
+- VRChat実画面もPNGも黒い → Worldが暗い／ロード途中／画面演出の可能性。証拠画像だけで原因断定不可
+- 別の場所や画面が写る → 対象範囲・座標・モニター構成を優先調査
+
+観測前にVRChatウィンドウ領域を取得し直して座標・サイズを `captureRegion` に記録します。視点の操作、Gemini送信、ランキング変更はしません。参加者・個人情報が写る可能性があるPNGは公開しないでください。失敗理由を切り分けるための試験であり、`capture-visibility-needs-review` 自体は映像取得の失敗を確定するものではありません。
+
 ## 短い最大輝度より、長く明るい撮影候補を優先（2026-11-11）
 
 初回の実機ログには、輝度186の83番目サンプル（82–83番目の連続2フレーム）を最も明るい候補とする旧結果がありました。ただし、**これは画面が最も見やすいことの証明ではありません**。同じ90サンプルには明るい条件を最大4フレーム連続して満たした区間もあります。そこで補助選択ロジックを修正しました。
