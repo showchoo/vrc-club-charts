@@ -69,6 +69,24 @@ py -3 scripts/diagnose_light_cycle_report.py --report "$report"
 
 今後の`inspection_light_cycle_probe.py`の実行結果には `calibrationDiagnostics` が加わります。ただしこの診断は**元の輝度基準を勝手に下げません**。照明が変化したのか、暗いままなのか、映像として何が見えるかは数値だけでは確定できず、Worldの設備の有無・衝突安全性・自律移動の許可を与えるものではありません。診断結果を基に、次の校正方法を検討します。
 
+## 輝度がしきい値未満でも1枚だけ視覚確認する（2026-11-11）
+
+実機の10秒観測で、VRChatは最前面、撮影範囲 `left:230, top:-970, width:1578, height:865`、中央値輝度は2〜44で変動し、9/10フレームが「ほぼ黒い画素が多すぎる」基準を下回りました。暗すぎて `45` の安定照明基準に達しず、完全真っ黒継続でもないため、従来の `--capture-dark-diagnostic` だけではPNGを保存しませんでした。負の `top` 座標は上方配置のサブモニターなら正当な座標で、座標のみで異常判定しません。
+
+この中間状態を切り分けるため、明示的な `--capture-visibility-sample` を追加しました。**すべて45未満でも、ほぼ黒い画素割合が92%未満のフレーム**について、最も黒い面積が少ないフレームを1枚選び、同率なら中央値が高い方を優先します。ローカルに `low-light-review.png` を**最大1枚だけ**保存し、`lowLightSample` に元のフレーム番号と数値を記録します。これは**照明回復の認定や視認性保証ではなく、画面キャプチャがVRChatの実表示と一致しているかを人間が比較する証拠**です。
+
+下記は**手動で入室した、参加者が写らず録画の権利があるPrivate World**に限ります。開始後20秒以内にVRChatを最前面に戻し、ほかのウィンドウを操作しないでください。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 10 --focus-seconds 20 --live --capture-visibility-sample --capture-dark-diagnostic --confirm-private-instance --confirm-recording-rights --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+`status: low-light-visibility-needs-review` なら `lowLightImage` に画像パスが表示されます。まずローカルPCで画像を開き、VRChatの画面と一致するか比較します。
+
+優先順位は**厳密な照明回復PNG → 継続した明るい候補PNG → 全フレーム真っ黒診断PNG → 低照明レビューPNG**です。同一実行で保存するPNGは最大1枚。権利・フォーカス・Worldセッション・緊急停止の条件は一切緩めず、OSC移動・Geminiアップロード・ランキング反映はありません。
+
 ## 画面フォーカスによる事前停止の切り分け
 
 `world-focus-or-emergency-stop` は従来、VRChatが最前面にないケースと安全停止イベントの両方を表していました。真っ黒なキャプチャの診断前に停止した場合、画像は取得・保存されていません。事前停止理由を `vrchat-not-foreground-after-focus-delay`（待機時間終了時にVRChatが最前面ではない）と `safety-stop-during-focus-wait`（待機中に安全停止）に分けています。観測途中のフォーカス喪失とWorldログ/非常停止の安全停止判定は従来どおりです。
