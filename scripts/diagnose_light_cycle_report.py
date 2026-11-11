@@ -154,6 +154,8 @@ def analyze_samples(samples: list[dict]) -> dict:
     # strict whole-scene brightness. Even large highlights might be a UI
     # overlay or an unrelated screen: NO image-content/safety certification.
     complete = len(contrast_metrics) == len(samples)
+    if contrast_metrics and not complete:
+        raise DiagnosticError("Mixed legacy and new contrast metrics in one observation")
     scene_contrast = {
         "status": "numeric-contrast-only" if complete else "not-recorded",
         "samplesWithMetrics": len(contrast_metrics),
