@@ -208,13 +208,16 @@ def read_report(path: Path) -> dict:
             raise DiagnosticError("Unverified bright frame needs restricted provenance")
     if report["status"] == "capture-visibility-needs-review":
         shot = report.get("screenshot")
+        visibility = report.get("captureVisibilityDiagnostic")
         if (not isinstance(shot, dict) or
                 shot.get("file") != "dark-capture-diagnostic.png" or
                 shot.get("humanReviewRequired") is not True or
                 shot.get("captureVisibilityVerified") is not False or
                 shot.get("stableLightingRecoveryConfirmed") is not False or
-                report.get("captureVisibilityDiagnostic", {}).get("status") !=
-                    "near-black-throughout"):
+                not isinstance(visibility, dict) or
+                visibility.get("status") != "near-black-throughout" or
+                visibility.get("imageCaptureFailureConfirmed") is not False or
+                visibility.get("genuineDarkSceneConfirmed") is not False):
             raise DiagnosticError("Dark capture needs private visual review provenance")
     state = report.get("lightingCycle")
     if (not isinstance(state, dict) or
