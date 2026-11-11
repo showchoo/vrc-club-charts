@@ -4,6 +4,24 @@
 
 VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com/docs/osc-as-input-controller) / [OSC Overview](https://docs.vrchat.com/docs/osc-overview)。OSCが公式に存在することと、**無人で公開ワールドを巡回するための運営許可があることは別**です。2026年11月10日にGmailで確認できた運営メールは受付・規約案内で、正式な許諾本文は見つかっていません。別経路で許可を得ている場合、許可の保存と使用範囲の確認を行ってください。下記の `-ConfirmPlatformAuthorization` は**利用者自身の確認**であり、サーバー側の許可判定ではありません。
 
+## 実機校正：前進を目視確認、旧画像比較では見逃し（2026-11-11）
+
+`inspection_position_step_probe.py` のWindows実機で `--direction forward` の0.20秒前進を実行しました。出力は `status: sent-unverified`、`visualChangeDetected: false`、`visualDifferenceScore: 0.00038`（旧しきい値 `0.018`）でしたが、**操作者が前進したことを目視で確認**しました。したがってOSC前進は実機で反応したと判断できますが、16×9縮小グレースケールによる旧画面比較には**偽陰性**があります。前進距離・階段・衝突安全性の独立検証にはまだ到達していません。
+
+これを記録・調査するため、`scripts/inspection_position_feedback.py` を追加しました。元の2枚のPNGのSHA-256を元レポートと照合し、192×108ピクセルでの細かな輝度差・変化画素率・16区画の最大変化を数値化します。利用可能ならPillowで**差分強調画像**も生成し、ブラウザで移動前後の画像と並べて表示します。これらは**視点の変化の診断値**であって、前進・障害物回避を機械的に確認した結果ではありません。今のところ旧NavigationGuardの閾値を安易に下げたり、移動時間を延ばしたりはしません。
+
+既に実行した動画や操作を撮り直さず、**人間が確かに前進を見た場合だけ**、以下のコマンドを実行します。クラウド送信もOSC送信もありません。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+$report = "$HOME\Videos\VRCClubCharts\private-position-probes\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_20261111T053943Z_0d74d0c97d\position-step.json"
+$result = py -3 scripts/inspection_position_feedback.py --report "$report" --observed moved --confirm-human-observation | ConvertFrom-Json
+if ($LASTEXITCODE -eq 0 -and $result.index) { Start-Process $result.index }
+~~~
+
+`position-step-feedback.json` と `position-step-feedback.html` を元データと**別ファイル**としてローカル保存します。Pillowが未導入の場合、画像差分の追加計測はできませんが、人手の確認は保存できます。元の `position-step.json`、`before.png`、`after.png` は変更せず、`independentPositionVerified: false` を維持します。後から矛盾する目視評価で上書きすることはできません。
+
 ## 監督付き・撮影位置の短距離移動パイロット（2026-11-11）
 
 GeminiがDJブースを見たと誤判定した理由は、フロアから高い位置のDJブースが見えないという**視点の制約**でした。固定位置でのOSCスイープだけでは解決しないため、**ローカルでの移動1回と移動前後の視点記録**を切り分けた `scripts/inspection_position_step_probe.py` を実装しました。
