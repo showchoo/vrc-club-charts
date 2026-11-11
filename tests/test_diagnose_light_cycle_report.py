@@ -70,8 +70,9 @@ class DiagnosticTests(unittest.TestCase):
                          "no-three-consecutive-eligible-stable-frames")
         opportunity = result["briefBrightWindow"]
         self.assertEqual(opportunity["status"], "brief-brightness-opportunity")
-        self.assertEqual(opportunity["candidate"]["candidateSample"], 4)
-        self.assertEqual(opportunity["candidate"]["medianLuma"], 186)
+        self.assertEqual(opportunity["candidate"]["candidateSample"], 8)
+        self.assertEqual(opportunity["candidate"]["medianLuma"], 100)
+        self.assertEqual(opportunity["candidate"]["brightRunLumaSpread"], 40)
         self.assertFalse(opportunity["lightingCycleVerified"])
         self.assertFalse(opportunity["safeToMoveOrResumeAutomation"])
         self.assertFalse(result["originalReportModified"])
