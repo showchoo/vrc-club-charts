@@ -12,6 +12,32 @@ VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com
 - これは**ワールドを順次巡回する機能ではありません**。ワールド変更、アカウントのログイン、パブリックインスタンスへの自動入室、DJ機材のクリック・実動作検証、ランキングの自動公開は行いません。
 - 本機能はGitHubで実装・オフライン検証されますが、**実際のWindows VRChatクライアントでの動作確認は未実施**です。
 
+## Windows 64-bit HWNDエラーとOSCボタン式の診断
+
+2026-11-11の実機テストでは、PowerShell経由のWindowsウィンドウ検出が OverflowError: int too long to convert となる場合がありました。Windowsのウィンドウハンドル（HWND）に対応するctypesのポインター幅の型宣言を修正しました。更新とオフライン回帰試験：
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 -m unittest tests.test_windows_window_handle_ctypes tests.test_inspection_osc_button_probe
+~~~
+
+長い日本語入りPythonコードをPowerShellからパイプすると文字化けする場合があるので、専用のファイルを実行します。まず送信しないdry-run：
+
+~~~powershell
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79
+~~~
+
+対象のWorldに手動でPrivate入室し、参加者不在・OSC操作許可を確認した上で、入室3分以内に下記の実機試験を実施してください。
+
+~~~powershell
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+VRChatのOSCを有効にし、Action Menu / OSC Debug画面を閉じます。実行後8秒以内にVRChatを最前面に戻し、マウスやゲームパッドを動かさず観察します。ボタン式の /input/LookRight に整数1（押下）を0.65秒ずつ3回送信し、毎回0（解除）を送ります。移動・長時間保持・録画・Geminiへの送信はしません。フォーカス喪失、Worldログ変更、Ctrl+Shift+F12で停止します。
+
+結果の status: sent-unverified はコマンド送信完了のみを示します。**実際に視点が動いたかは目視確認が必要**です。UDP/OSCの送信成功だけで視点移動が成功したとは判定できません。
+
 ## 1. Windows上で準備
 
 PowerShellをVRC Club ChartsのローカルGitチェックアウトで開きます。
