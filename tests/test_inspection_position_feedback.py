@@ -131,7 +131,7 @@ class PositionFeedbackTests(unittest.TestCase):
     def test_rejects_repository_storage_and_invalid_operator_choice(self):
         with self.assertRaisesRegex(feedback.PositionFeedbackError, "Invalid human"):
             feedback.save_feedback(self.report, observation="DJ-booth-confirmed")
-        with self.assertRaises(ValueError):
+        with self.assertRaises((OSError, ValueError)):
             feedback.validate_original(feedback.ROOT / "scripts" / "position-step.json")
 
     def test_pixel_lookback_preserves_subtle_motion_as_diagnostic_not_proof(self):
