@@ -457,6 +457,7 @@ class ObserverTests(unittest.TestCase):
     def test_focus_timeout_reports_explicit_reason_without_capture(self):
         with (
             patch.object(probe, "is_active", return_value=False),
+            patch.object(probe.threading.Event, "wait", return_value=False),
             patch.object(probe, "screenshot_png",
                          side_effect=AssertionError("Must not screenshot")),
         ):
@@ -475,7 +476,7 @@ class ObserverTests(unittest.TestCase):
                 probe.run_live(
                     world_id=WORLD, seconds=10, out_dir=self.destination,
                     focus_seconds=invalid)
-        with patch.object(probe, "sample_lighting",
+        with patch.object(probe.threading.Event, "wait", return_value=False), patch.object(probe, "sample_lighting",
                           side_effect=[sample(1, .96)] * 10), patch.object(
                           probe, "screenshot_png",
                           return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200):
