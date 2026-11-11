@@ -2,10 +2,13 @@
 from __future__ import annotations
 
 import json
+import os
+import sys
+from types import ModuleType, SimpleNamespace
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from scripts import evaluate_interior_video as evaluator
 
@@ -22,7 +25,98 @@ def sample():
     }
 
 
+def fake_google_sdk(client):
+    """Make a google-genai stand-in: unit tests never install an SDK or send data."""
+    google = ModuleType("google")
+    genai = ModuleType("google.genai")
+    types = ModuleType("google.genai.types")
+    errors = ModuleType("google.genai.errors")
+
+    class ApiError(Exception):
+        def __init__(self, code, raw):
+            self.code = code
+            super().__init__(raw)
+
+    types.Part = lambda inline_data: {"inline_data": inline_data}
+    types.Blob = lambda **kwargs: kwargs
+    types.UploadFileConfig = lambda **kwargs: kwargs
+    types.GenerateContentConfig = lambda **kwargs: kwargs
+    errors.APIError = ApiError
+    genai.Client = lambda api_key: client
+    genai.types = types
+    genai.errors = errors
+    google.genai = genai
+    return {
+        "google": google, "google.genai": genai,
+        "google.genai.types": types, "google.genai.errors": errors,
+    }, ApiError
+
+
 class VideoAssessmentTests(unittest.TestCase):
+    def test_small_mp4_uses_inline_and_never_calls_file_upload(self):
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        client.models.generate_content.return_value = SimpleNamespace(text=json.dumps(sample()))
+        modules, _ = fake_google_sdk(client)
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "short.mp4"
+            video.write_bytes(b"synthetic not a real video")
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                analysis = evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+        self.assertEqual(analysis["summary"], sample()["summary"])
+        client.files.upload.assert_not_called()
+        client.files.delete.assert_not_called()
+        args = client.models.generate_content.call_args.kwargs
+        self.assertEqual(args["model"], "gemini-3.5-flash-lite")
+        self.assertEqual(args["contents"][1]["inline_data"]["mime_type"], "video/mp4")
+        self.assertEqual(args["contents"][1]["inline_data"]["data"], b"synthetic not a real video")
+        self.assertEqual(args["config"]["response_mime_type"], "application/json")
+
+    def test_large_mp4_uses_file_api_with_mime_and_deletes_remote_afterward(self):
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        client.files.upload.return_value = SimpleNamespace(
+            name="files/test", state=SimpleNamespace(name="ACTIVE"))
+        client.models.generate_content.return_value = SimpleNamespace(text=json.dumps(sample()))
+        modules, _ = fake_google_sdk(client)
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "long.mp4"
+            with video.open("wb") as f:
+                f.truncate(evaluator.MAX_INLINE_VIDEO_BYTES + 1)
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                with patch.object(Path, "read_bytes", side_effect=AssertionError("No huge inline read")):
+                    result = evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+        self.assertEqual(result["summary"], sample()["summary"])
+        self.assertEqual(client.files.upload.call_args.kwargs["config"], {"mime_type": "video/mp4"})
+        client.files.delete.assert_called_once_with(name="files/test")
+
+    def test_400_from_api_is_redacted_not_printed_as_traceback(self):
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        modules, ApiError = fake_google_sdk(client)
+        client.models.generate_content.side_effect = ApiError(
+            400, "sensitive raw provider error api-key-1234")
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "short.mp4"
+            video.write_bytes(b"synthetic media")
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                with self.assertRaisesRegex(RuntimeError, "model-request failed \\(HTTP 400\\)") as caught:
+                    evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+        self.assertNotIn("api-key-1234", str(caught.exception))
+        client.files.upload.assert_not_called()
+
+    def test_failure_in_file_upload_is_redacted_and_not_retried(self):
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        modules, ApiError = fake_google_sdk(client)
+        client.files.upload.side_effect = ApiError(400, "do not echo HTML response")
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "long.mp4"
+            with video.open("wb") as f:
+                f.truncate(evaluator.MAX_INLINE_VIDEO_BYTES + 1)
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                with self.assertRaisesRegex(RuntimeError, "file-upload failed \\(HTTP 400\\)") as caught:
+                    evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+        self.assertNotIn("do not echo", str(caught.exception))
+        self.assertEqual(client.files.upload.call_count, 1)
+        client.models.generate_content.assert_not_called()
+
     def test_valid_visual_video_does_not_publish_or_verify_playback(self):
         data = sample()
         data["dimensions"]["visual_design"] = {

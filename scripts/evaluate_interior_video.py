@@ -121,40 +121,78 @@ def validate_analysis(value: object) -> dict:
     return result
 
 
+# A direct video request avoids the separate Files API upload endpoint.
+# 12 MiB of raw data becomes ~16 MiB base64, leaving room under the
+# documented 20 MB total request guidance for inline generateContent.
+MAX_INLINE_VIDEO_BYTES = 12 * 1024 * 1024
+VIDEO_MIME_TYPES = {
+    ".mp4": "video/mp4", ".mov": "video/quicktime",
+    ".webm": "video/webm", ".avi": "video/avi",
+    ".mpeg": "video/mpeg", ".mpg": "video/mpeg",
+}
+
+
 def ask_gemini(video: Path, model: str) -> dict:
-    """Provider interaction is isolated so offline tests never contact a server."""
+    """Analyze a consented video. Inline small clips; use Files API only when needed.
+
+    The source video remains unchanged. Each attempt sends one generation
+    request; errors are not automatically retried with another transport.
+    """
     if not os.environ.get("GEMINI_API_KEY"):
         raise ValueError("GEMINI_API_KEY is required to analyze a video")
     if not re.fullmatch(r"gemini-[a-zA-Z0-9.-]{2,55}", model):
         raise ValueError("Invalid Gemini model name")
     try:
         from google import genai
-        from google.genai import types
+        from google.genai import types, errors as genai_errors
     except ImportError as exc:
         raise RuntimeError("Install the optional google-genai Python package") from exc
 
+    size = validate_media(video)
+    mime = VIDEO_MIME_TYPES[video.suffix.lower()]
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     file_ref = None
+    phase = "inline-video-request" if size <= MAX_INLINE_VIDEO_BYTES else "file-upload"
     try:
-        file_ref = client.files.upload(file=str(video))
-        deadline = time.monotonic() + 180
-        while True:
-            state = getattr(file_ref.state, "name", str(file_ref.state or ""))
-            if state == "ACTIVE":
-                break
-            if state == "FAILED":
-                raise RuntimeError("Gemini video preprocessing failed")
-            if time.monotonic() >= deadline:
-                raise TimeoutError("Gemini video preprocessing exceeded 180 seconds")
-            time.sleep(5)
-            file_ref = client.files.get(name=file_ref.name)
+        if size <= MAX_INLINE_VIDEO_BYTES:
+            # Google documents inline video as a supported input option for
+            # short recordings. Never read unbounded media into memory.
+            part = types.Part(inline_data=types.Blob(
+                data=video.read_bytes(), mime_type=mime))
+        else:
+            file_ref = client.files.upload(
+                file=str(video), config=types.UploadFileConfig(mime_type=mime))
+            phase = "file-processing"
+            deadline = time.monotonic() + 180
+            while True:
+                state = getattr(file_ref.state, "name", str(file_ref.state or ""))
+                if state == "ACTIVE":
+                    break
+                if state == "FAILED":
+                    raise RuntimeError("Gemini video preprocessing failed")
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("Gemini video preprocessing exceeded 180 seconds")
+                time.sleep(5)
+                file_ref = client.files.get(name=file_ref.name)
+            part = file_ref
+        phase = "model-request"
         output = client.models.generate_content(
-            model=model, contents=[PROMPT, file_ref],
+            model=model, contents=[PROMPT, part],
             config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0),
         )
         if not output.text:
             raise RuntimeError("Gemini returned an empty analysis")
         return validate_analysis(json.loads(output.text))
+    except genai_errors.APIError as exc:
+        # The raw upstream exception can contain HTML and request identifiers.
+        # Do not print it or its chain, and never expose an API key or video.
+        code = getattr(exc, "code", None)
+        status = str(code) if type(code) is int and 100 <= code <= 599 else "unknown"
+        raise RuntimeError(
+            f"Gemini {phase} failed (HTTP {status}). "
+            "Check API key access, model availability, and proxy/network settings. "
+            "No automatic retry or ranking update was performed."
+        ) from None
     finally:
         # Best effort; the local video never enters GitHub or the production DB.
         if file_ref is not None and getattr(file_ref, "name", None):
