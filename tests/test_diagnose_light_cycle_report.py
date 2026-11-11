@@ -43,6 +43,57 @@ class DiagnosticTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.folder = Path(temp.name) / (WORLD + "_20261111T062458Z_0f2ebe8795")
 
+    def test_dark_median_with_stage_highlights_stays_unverified(self):
+        values = samples([8] * 10, black=.68)
+        for sample in values:
+            sample.update({
+                "lumaP90": 129.0,
+                "tonalRangeP10P90": 128.0,
+                "highlightPixelFraction": .1414,
+                "highlightTiles": 8,
+                "highlightTilesTotal": 12,
+            })
+        path = fixture(self.folder, values)
+        result = diag.read_report(path)
+        contrast = result["sceneContrastDiagnostic"]
+        self.assertEqual(contrast["status"], "numeric-contrast-only")
+        self.assertEqual(contrast["samplesWithMetrics"], 10)
+        self.assertEqual(contrast["maximum90thPercentileLuma"], 129.0)
+        self.assertEqual(contrast["maximumHighlightPixelFraction"], .1414)
+        self.assertEqual(contrast["maximumHighlightTiles"], 8)
+        self.assertTrue(contrast["humanReviewRequired"])
+        self.assertFalse(contrast["sceneDetailVisibilityVerified"])
+        self.assertFalse(contrast["cameraMotionOrPathSafetyVerified"])
+        self.assertFalse(result["brightnessThresholdsAutomaticallyChanged"])
+        self.assertEqual(result["primaryDiagnostic"],
+                         "no-samples-above-minimum-luminance")
+
+    def test_legacy_report_has_no_fabricated_scene_contrast(self):
+        result = diag.analyze_samples(samples([8] * 10, black=.7))
+        contrast = result["sceneContrastDiagnostic"]
+        self.assertEqual(contrast["status"], "not-recorded")
+        self.assertIsNone(contrast["maximum90thPercentileLuma"])
+        self.assertEqual(contrast["samplesWithMetrics"], 0)
+        self.assertFalse(contrast["sceneDetailVisibilityVerified"])
+
+    def test_reject_forged_or_partial_scene_metrics(self):
+        values = samples([8] * 10, black=.7)
+        values[0]["lumaP90"] = 128
+        with self.assertRaisesRegex(diag.DiagnosticError, "Incomplete"):
+            diag.analyze_samples(values)
+        values[0].update({
+            "tonalRangeP10P90": 128.0,
+            "highlightPixelFraction": .14,
+            "highlightTiles": 13,
+            "highlightTilesTotal": 12,
+        })
+        with self.assertRaisesRegex(diag.DiagnosticError, "Invalid spatial"):
+            diag.analyze_samples(values)
+
+        values[0]["highlightTiles"] = 3
+        with self.assertRaisesRegex(diag.DiagnosticError, "Mixed legacy"):
+            diag.analyze_samples(values)
+
     def test_full_90_second_baseline_failure_from_dark_but_visible_frames(self):
         path = fixture(self.folder, samples([20.0] * 90, black=.5))
         before = path.read_bytes()

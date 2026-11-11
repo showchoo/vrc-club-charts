@@ -71,6 +71,10 @@ def analyze_samples(samples: list[dict]) -> dict:
     medians = []
     black_fractions = []
     states = []
+    contrast_metrics = []
+    optional_scene_fields = ("lumaP90", "tonalRangeP10P90",
+                             "highlightPixelFraction", "highlightTiles",
+                             "highlightTilesTotal")
     for index, sample in enumerate(samples, 1):
         if (not isinstance(sample, dict) or
                 type(sample.get("sample")) is not int or sample["sample"] != index
@@ -79,6 +83,18 @@ def analyze_samples(samples: list[dict]) -> dict:
         medians.append(_safe_number(sample.get("medianLuma"), 0, 255))
         black_fractions.append(_safe_number(sample.get("nearBlackFraction"), 0, 1))
         states.append(sample["state"])
+        present = [key in sample for key in optional_scene_fields]
+        if any(present) and not all(present):
+            raise DiagnosticError("Incomplete private scene-contrast metrics")
+        if all(present):
+            p90 = _safe_number(sample["lumaP90"], 0, 255)
+            span = _safe_number(sample["tonalRangeP10P90"], 0, 255)
+            fraction = _safe_number(sample["highlightPixelFraction"], 0, 1)
+            tiles, total = sample["highlightTiles"], sample["highlightTilesTotal"]
+            if (type(total) is not int or type(tiles) is not int or
+                    not 1 <= total <= 100 or not 0 <= tiles <= total):
+                raise DiagnosticError("Invalid spatial highlight counts")
+            contrast_metrics.append((p90, span, fraction, tiles, total))
     bright = [v >= BASELINE_MIN_MEDIAN for v in medians]
     visible = [v < MAX_VALID_NEAR_BLACK for v in black_fractions]
     eligible = [a and b for a, b in zip(bright, visible)]
@@ -134,10 +150,37 @@ def analyze_samples(samples: list[dict]) -> dict:
     for original_sample in samples:
         bright_windows.observe(original_sample)
 
+    # Report descriptive contrast/illuminated-area signals independently of
+    # strict whole-scene brightness. Even large highlights might be a UI
+    # overlay or an unrelated screen: NO image-content/safety certification.
+    complete = len(contrast_metrics) == len(samples)
+    if contrast_metrics and not complete:
+        raise DiagnosticError("Mixed legacy and new contrast metrics in one observation")
+    scene_contrast = {
+        "status": "numeric-contrast-only" if complete else "not-recorded",
+        "samplesWithMetrics": len(contrast_metrics),
+        "totalSamples": len(samples),
+        "maximum90thPercentileLuma": max(x[0] for x in contrast_metrics)
+            if complete else None,
+        "maximumP10P90TonalRange": max(x[1] for x in contrast_metrics)
+            if complete else None,
+        "maximumHighlightPixelFraction": round(max(x[2] for x in contrast_metrics), 4)
+            if complete else None,
+        "maximumHighlightTiles": max(x[3] for x in contrast_metrics)
+            if complete else None,
+        "highlightTilesTotal": contrast_metrics[0][4] if complete else None,
+        "humanReviewRequired": True,
+        "sceneDetailVisibilityVerified": False,
+        "cameraMotionOrPathSafetyVerified": False,
+        "djEquipmentFunctionalityVerified": False,
+        "brightnessThresholdsChanged": False,
+    }
+
     return {
         "status": "read-only-calibration-diagnostics",
         "briefBrightWindow": bright_windows.summary(),
         "captureVisibilityDiagnostic": capture_visibility,
+        "sceneContrastDiagnostic": scene_contrast,
         "samplesAnalyzed": len(samples),
         "firstSampleState": states[0],
         "lastSampleState": states[-1],

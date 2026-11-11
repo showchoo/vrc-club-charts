@@ -86,6 +86,43 @@ class TrackerTests(unittest.TestCase):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 light.LightCycleTracker().observe(bad)
 
+    def test_illuminated_stage_can_have_dark_median_with_strong_highlights(self):
+        try:
+            from PIL import Image, ImageDraw
+        except ImportError:
+            self.skipTest("Pillow required for image distribution check")
+        frame = Image.new("RGB", (384, 240), (3, 3, 3))
+        ImageDraw.Draw(frame).rectangle((115, 35, 325, 195),
+                                        fill=(180, 180, 180))
+        payload = io.BytesIO()
+        frame.save(payload, format="PNG")
+        metrics = light.sample_lighting(payload.getvalue())
+        self.assertLess(metrics["medianLuma"], light.BASELINE_MIN_MEDIAN)
+        self.assertGreater(metrics["lumaP90"], 90)
+        self.assertGreater(metrics["highlightPixelFraction"], .10)
+        self.assertGreater(metrics["highlightTiles"], 2)
+        self.assertEqual(metrics["highlightTilesTotal"], 12)
+        # Contrast indicators must not change the lighting state machine.
+        tracker = light.LightCycleTracker()
+        for _ in range(5):
+            tracker.observe(metrics)
+        self.assertEqual(tracker.summary()["status"], "calibrating")
+        self.assertFalse(tracker.summary()["recoverySeen"])
+
+    def test_uniform_dark_frame_has_no_highlight_signal(self):
+        try:
+            from PIL import Image
+        except ImportError:
+            self.skipTest("Pillow required for image distribution check")
+        frame = Image.new("RGB", (384, 240), (3, 3, 3))
+        payload = io.BytesIO()
+        frame.save(payload, format="PNG")
+        metrics = light.sample_lighting(payload.getvalue())
+        self.assertEqual(metrics["highlightTiles"], 0)
+        self.assertEqual(metrics["highlightPixelFraction"], 0)
+        self.assertLess(metrics["lumaP90"], 10)
+        self.assertEqual(metrics["tonalRangeP10P90"], 0)
+
     def test_real_png_luminance_sampling_if_pillow_installed(self):
         try:
             from PIL import Image

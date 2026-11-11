@@ -23,6 +23,12 @@ LOW_VISIBILITY_FRACTION = 0.96
 MAX_VALID_NEAR_BLACK = 0.92
 WIDTH = 192
 HEIGHT = 108
+# Descriptive-only, intentionally independent of lighting-cycle thresholds.
+# A club may have a near-black median yet contain illuminated stages/screens.
+SCENE_HIGHLIGHT_LUMA = 96
+SCENE_TILE_COLS = 4
+SCENE_TILE_ROWS = 3
+SCENE_TILE_MIN_HIGHLIGHT_FRACTION = 0.05
 
 
 def sample_lighting(png: bytes) -> dict:
@@ -42,10 +48,33 @@ def sample_lighting(png: bytes) -> dict:
         raise ValueError("Local screenshot cannot be inspected") from exc
     median = statistics.median(raw)
     near_black = sum(x <= 18 for x in raw) / len(raw)
+    ordered = sorted(raw)
+    p10 = ordered[int((len(ordered) - 1) * .10)]
+    p90 = ordered[int((len(ordered) - 1) * .90)]
+    highlight_count = sum(x >= SCENE_HIGHLIGHT_LUMA for x in raw)
+    tiles_with_highlight = 0
+    # A few bright controls or pixels are NOT proof of visible world details.
+    # Record spatial distribution as a private, numeric review hint only.
+    tile_w = WIDTH // SCENE_TILE_COLS
+    tile_h = HEIGHT // SCENE_TILE_ROWS
+    for row in range(SCENE_TILE_ROWS):
+        for col in range(SCENE_TILE_COLS):
+            count = 0
+            for y in range(row * tile_h, (row + 1) * tile_h):
+                start = y * WIDTH + col * tile_w
+                count += sum(x >= SCENE_HIGHLIGHT_LUMA
+                             for x in raw[start:start + tile_w])
+            if count / (tile_w * tile_h) >= SCENE_TILE_MIN_HIGHLIGHT_FRACTION:
+                tiles_with_highlight += 1
     return {
         "medianLuma": round(float(median), 3),
         "meanLuma": round(sum(raw) / len(raw), 3),
         "nearBlackFraction": round(near_black, 4),
+        "lumaP90": float(p90),
+        "tonalRangeP10P90": float(p90 - p10),
+        "highlightPixelFraction": round(highlight_count / len(raw), 4),
+        "highlightTiles": tiles_with_highlight,
+        "highlightTilesTotal": SCENE_TILE_COLS * SCENE_TILE_ROWS,
     }
 
 
