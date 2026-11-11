@@ -136,6 +136,8 @@ def _render_review_index(manifest: dict, reviews: list[dict]) -> str:
 def record_review(folder: Path, *, facility: str, verdict: str,
                   reason: str) -> dict:
     """Explicit human attestation about THIS camera vantage, not whole World."""
+    if folder.expanduser().is_symlink():
+        raise HumanReviewError("Cannot review a symlinked private evidence directory")
     folder = folder.expanduser().resolve(strict=True)
     if facility not in FACILITIES or verdict not in VERDICTS or reason not in REASONS:
         raise HumanReviewError("Unknown facility/verdict/reason")
