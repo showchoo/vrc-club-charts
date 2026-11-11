@@ -61,6 +61,27 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
+## APIキーが1文字になっていた場合（2026-11-11実機）
+
+同じWindows PowerShell環境で `Read-Host -AsSecureString` を使って「新しいキー」を入力した後も400 HTMLが続き、**`$env:GEMINI_API_KEY.Length` が `1`** と判明しました。これまでの400は、実際のAPIキーではなく途中で欠けた文字列を送っていた可能性が非常に高くなりました。`Read-Host` 画面に `*` が1個表示されただけでは判断できませんが、実際の環境変数の長さが1であることは確定しています。新しいキーの発行・動画の再撮影はまだ必要ありません。
+
+Google AI Studioの**コピー用ボタン**で発行済みキーをコピーし、PowerShellでは秘密入力欄を経由せず、以下のようにクリップボードから直接環境変数を設定できます。キー本体は表示しません。クリップボードを消去するので、必要なテキストは先に退避してください。
+
+~~~powershell
+$copied = (Get-Clipboard -Raw).Trim()
+if ($copied.Length -lt 20) {
+    Remove-Variable copied
+    throw "APIキーが短すぎます。AI Studioでコピーし直してください。"
+}
+$env:GEMINI_API_KEY = $copied
+Remove-Variable copied
+Set-Clipboard -Value ''
+Write-Host "APIキーを設定しました"
+py -3 scripts/diagnose_gemini_connection.py --run
+~~~
+
+なお `diagnose_gemini_connection.py` も20文字未満なら、**ネットワークへ送る前**に `status: "invalid-key-input-length"` を返すよう修正しました。文字数は厳密なGoogleの認証仕様を意味しません。十分長いキーでも有効性の保証はなく、`keyFamily` は形式の参考情報のみです。`rest-text-ok` が得られるまでは、動画を再解析しないでください。APIキー自体をGitHubやチャットに貼り付けないでください。
+
 ## 2026年のGemini新型AuthキーとHTML 400について
 
 2026-11-11の実機診断で、動画なしの `GET /v1beta/models` すら `HTTP 400` / `responseKind: "html"` で失敗しました。`google-genai` SDKでも同じHTML 400が発生するため、動画サイズ・動画フォーマット・SDKのみの不具合とは断定できません。**動画を再撮影・再圧縮せず、認証キーとプロジェクトの設定を優先して調べます。**
