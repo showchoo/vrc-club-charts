@@ -154,6 +154,47 @@ class BoundedSweepTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "either AI motion"):
                 windows.inspect(**kwargs)
 
+    def test_ai_osc_mode_stops_in_blackout_before_any_gemini_call_or_movement(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.output = output
+                self.stop_event = threading.Event()
+                self.frames = 10
+                self.failed = None
+            def start(self):
+                self.output.write_bytes(b"synthetic-private-test-video")
+            def close(self):
+                pass
+
+        ctl = FakeController()
+        with tempfile.TemporaryDirectory() as directory:
+            with (
+                patch.object(windows, "get_window", return_value=(
+                    1234, {"left": 0, "top": 0, "width": 640, "height": 480})),
+                patch.object(windows, "is_active", return_value=True),
+                patch.object(windows, "WindowRecorder", FakeRecorder),
+                patch.object(windows, "OscMovement", return_value=ctl),
+                patch.object(windows, "screenshot_png", return_value=b"fake-private-frames"),
+                patch.object(windows, "one_frame_low_light", return_value={
+                    "status": "low-visibility", "visualNavigationShouldPause": True,
+                }),
+                patch.object(windows, "choose_action", side_effect=AssertionError(
+                    "Blackout must stop before cloud AI or new movement")),
+                patch.dict(windows.os.environ, {"GEMINI_API_KEY": "fake-for-offline-test"}),
+            ):
+                report = windows.inspect(
+                    world_id=WORLD, out_dir=Path(directory), seconds=10,
+                    ai=True, evaluate=False, sweep=False, confirm_private=True,
+                    accept_risk=True, confirm_upload=True, model="unused")
+        self.assertEqual(report["stopReason"], "insufficient_visibility_for_ai_navigation")
+        self.assertEqual(report["lightingSafety"]["status"], "low-visibility")
+        self.assertEqual(report["actions"], [])
+        self.assertFalse(report["rankingEligible"])
+        self.assertFalse(report["equipmentFunctionalityVerified"])
+        self.assertTrue(ctl.closed)
+        self.assertFalse(any(a == "forward" for a, _ in ctl.actions))
+
     def test_explicit_sweep_run_needs_no_cloud_key(self):
         class FakeRecorder:
             FPS = 4
