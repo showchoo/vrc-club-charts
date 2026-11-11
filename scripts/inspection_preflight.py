@@ -74,13 +74,13 @@ def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
         # private instance IDs, paths or the join fingerprint to the caller.
         try:
             try:
-                from scripts.inspection_world_log import corroborate_world, WORLD_RE
+                from scripts.inspection_world_log import corroborate_world, WORLD_RE, MAX_ACTIVE_SESSION_AGE_SECONDS
             except ModuleNotFoundError:
-                from inspection_world_log import corroborate_world, WORLD_RE
+                from inspection_world_log import corroborate_world, WORLD_RE, MAX_ACTIVE_SESSION_AGE_SECONDS
             if not isinstance(world_id, str) or not WORLD_RE.fullmatch(world_id):
                 add("world-log", False, "Provide a valid --world-id for local log diagnosis")
             else:
-                evidence = corroborate_world(world_id, max_age_seconds=180)
+                evidence = corroborate_world(world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
                 reason_codes = {
                     "logs-unavailable", "logs-unreadable", "join-not-found",
                     "wrong-world", "not-private-instance", "left-room",
@@ -88,7 +88,7 @@ def preflight(*, wants_ai: bool = False, wants_video_ai: bool = False,
                 }
                 ok = isinstance(evidence, dict) and evidence.get("status") == "corroborated"
                 detail = (
-                    "Recent private World join log matches; participant absence is NOT verified"
+                    "Current private World join log matches (up to 24h); participant absence is NOT verified"
                     if ok else
                     "World join not corroborated: " + (
                         evidence.get("reason") if isinstance(evidence, dict)
@@ -116,7 +116,7 @@ def main(argv=None) -> int:
     parser.add_argument("--analyze-video", action="store_true")
     parser.add_argument("--no-window-check", action="store_true")
     parser.add_argument("--verify-local-log", action="store_true",
-                        help="Read only local VRChat log for a recent matching private World")
+                        help="Read only local VRChat log for a matching private World session (up to 24h)")
     parser.add_argument("--world-id", help="World ID to check in local output log")
     args = parser.parse_args(argv)
     result = preflight(wants_ai=args.ai_explore, wants_video_ai=args.analyze_video,

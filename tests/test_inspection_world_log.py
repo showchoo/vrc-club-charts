@@ -100,6 +100,41 @@ class LogCorroborationTests(unittest.TestCase):
         self.assertEqual(self.check(join(offset=-600) + succeeded(-599))["reason"], "join-too-old")
         self.assertEqual(self.check(join(offset=20) + succeeded(21))["reason"], "join-in-future")
 
+    def test_same_private_world_stays_valid_without_reentering_after_hours(self):
+        # The private room was joined three hours ago. Nothing later indicates
+        # any room switch, disconnect, or change of session.
+        start = join(offset=-3 * 3600) + succeeded(-3 * 3600 + 1)
+        evidence = self.check(start, age=logs.MAX_ACTIVE_SESSION_AGE_SECONDS)
+        self.assertEqual(evidence["status"], "corroborated")
+        self.assertTrue(evidence["logBasedOnly"])
+        self.assertFalse(evidence["participantsIndependentlyVerified"])
+        self.assertNotIn("usr_", json.dumps(evidence))
+
+    def test_reused_session_rejects_new_join_leave_and_disconnect(self):
+        start = join(offset=-3 * 3600) + succeeded(-3 * 3600 + 1)
+        for suffix, expected in (
+            (log_line(-30, "Leaving Room"), "left-room"),
+            (log_line(-30, "OnDisconnected"), "left-room"),
+            (join(B, offset=-30) + succeeded(-29), "wrong-world"),
+            (join(A, offset=-30) + succeeded(-29), None),
+        ):
+            with self.subTest(expected=expected):
+                evidence = self.check(start + suffix, age=logs.MAX_ACTIVE_SESSION_AGE_SECONDS)
+                if expected:
+                    self.assertEqual(evidence["reason"], expected)
+                else:
+                    fresh = self.check(join(A, offset=-30) + succeeded(-29))
+                    self.assertEqual(evidence["joinFingerprint"], fresh["joinFingerprint"])
+
+    def test_reused_session_expires_after_a_day(self):
+        start = join(offset=-(24 * 3600 + 1))
+        result = self.check(start + succeeded(-(24 * 3600)), age=logs.MAX_ACTIVE_SESSION_AGE_SECONDS)
+        self.assertEqual(result["reason"], "join-too-old")
+
+    def test_reused_session_without_join_record_fails_closed(self):
+        result = self.check(log_line(-20, "Some other event"), age=logs.MAX_ACTIVE_SESSION_AGE_SECONDS)
+        self.assertEqual(result["reason"], "join-not-found")
+
     def test_unsupported_join_format_invalidates_previous_result(self):
         result = self.check(join() + succeeded() + log_line(-2, "Joining wrld_something_unrecognized"))
         self.assertEqual(result["reason"], "join-not-found")
@@ -137,7 +172,7 @@ class LogCorroborationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             logs.corroborate_world(A + "&instance=foo", now=NOW)
         with self.assertRaises(ValueError):
-            logs.corroborate_world(A, max_age_seconds=10000, now=NOW)
+            logs.corroborate_world(A, max_age_seconds=logs.MAX_ACTIVE_SESSION_AGE_SECONDS + 1, now=NOW)
 
 
 if __name__ == "__main__":

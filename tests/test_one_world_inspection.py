@@ -139,6 +139,24 @@ class OneWorldPipelineTests(unittest.TestCase):
             self.assertEqual(result["detail"], "join-too-old")
             self.assertFalse(result["rankingsChanged"])
 
+    def test_verified_same_private_session_does_not_require_rejoining(self):
+        # The age policy is shared by pre-capture verification, post-capture
+        # verification, and the live WorldSessionGuard.
+        with tempfile.TemporaryDirectory() as d:
+            with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),
+                  patch.object(run, "corroborate_world", return_value={
+                      "status": "corroborated", "worldId": WORLD,
+                      "joinFingerprint": "a" * 64,
+                  }) as check,
+                  patch.object(run, "inspect",
+                               side_effect=lambda **kw: captured(WORLD, Path(d))) as recorder):
+                result = run.run_inspection(**self.common(d), verify_world_log=True)
+        self.assertEqual(result["status"], "capture-complete")
+        self.assertEqual(check.call_count, 2)
+        self.assertEqual([c.kwargs["max_age_seconds"] for c in check.call_args_list],
+                         [run.MAX_ACTIVE_SESSION_AGE_SECONDS] * 2)
+        self.assertEqual(recorder.call_args.kwargs["expected_join_fingerprint"], "a" * 64)
+
     def test_log_switch_after_capture_never_uploads_or_publishes(self):
         with tempfile.TemporaryDirectory() as d:
             with (patch.object(run, "preflight", return_value={"ready": True, "checks": []}),

@@ -46,7 +46,7 @@ class LocalLogDiagnosticTests(unittest.TestCase):
         self.assertNotIn("deadbeef", dumped)
         self.assertNotIn("usr_PRIVATE", dumped)
         self.assertNotIn("instance_PRIVATE", dumped)
-        mocked.assert_called_once_with(WORLD, max_age_seconds=180)
+        mocked.assert_called_once_with(WORLD, max_age_seconds=logs.MAX_ACTIVE_SESSION_AGE_SECONDS)
 
     def test_missing_invalid_world_id_rejected_before_log_read(self):
         for bad in (None, "", "bad_id", WORLD + "&instance=secret"):

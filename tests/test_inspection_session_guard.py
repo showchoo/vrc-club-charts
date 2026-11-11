@@ -30,6 +30,8 @@ class WorldSessionGuardTests(unittest.TestCase):
         self.assertEqual(summary["status"], "corroborated")
         self.assertEqual(summary["checks"], 2)
         self.assertEqual([x[0] for x in seen], [A, A])
+        from scripts.inspection_world_log import MAX_ACTIVE_SESSION_AGE_SECONDS
+        self.assertTrue(all(x[1]["max_age_seconds"] == MAX_ACTIVE_SESSION_AGE_SECONDS for x in seen))
         self.assertFalse(event.is_set())
         self.assertFalse(summary["participantsIndependentlyVerified"])
         self.assertNotIn(HASH, json.dumps(summary))

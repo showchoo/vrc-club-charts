@@ -12,6 +12,26 @@ VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com
 - これは**ワールドを順次巡回する機能ではありません**。ワールド変更、アカウントのログイン、パブリックインスタンスへの自動入室、DJ機材のクリック・実動作検証、ランキングの自動公開は行いません。
 - 本機能はGitHubで実装・オフライン検証されますが、**実際のWindows VRChatクライアントでの動作確認は未実施**です。
 
+## 同じPrivate Worldなら再入室は不要（2026-11-11）
+
+毎回Privateインスタンスへ入り直す必要はありません。従来のローカルログ確認は「入室から180秒以内」という制限がありましたが、現行の検査は**最新の成功したPrivate入室から最大24時間**、同じWorldの同じ入室ログが残っていれば再利用します。
+
+- Windows公式クライアントが起動しており、対象WorldのPrivateインスタンスに現在滞在していることをオペレーターが確認
+- VRChatの最新output_logの末尾（最大1MiB）に、同じPrivate入室・入室成功の記録が残り、その後に別World/インスタンスへの入室、離室、切断の記録がないこと
+- 録画・OSC操作中に1秒間隔で同じログと入室フィンガープリントを検証し、録画後にも再確認すること
+- ログが古すぎる（24時間以上）、必要な入室行が末尾から消えている、ログを読めない、Worldが変わった等の場合は停止。確認できないときだけ再入室が必要
+- ログはオンライン接続や他の参加者不在を完全には証明しないため、確認フラグはこれまでどおり必要。自動でPublic Worldに入室したり、他の参加者を追いかけたりしない
+
+**通常の手順**：Private Worldにそのまま滞在し、下記コマンドを再実行するだけです。入室直後の3分以内に急ぐ必要はありません。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/run_one_world_inspection.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 30 --sweep --private-instance-confirmed --verify-local-log --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+動画解析を有効にしない限り、録画ファイル・入室ログはローカルに留まり、Geminiやランキングには送信しません。
+
 ## 実機成功：0.80のOSC右回転を通常スイープへ採用（2026-11-11）
 
 VRChatの完全再起動とOSC再有効化の後、Windowsデスクトップ実機で以下を目視確認しました。
@@ -31,7 +51,7 @@ git pull --ff-only
 py -3 -m unittest tests.test_windows_vrchat_inspector tests.test_inspection_sweep
 ~~~
 
-対象WorldのPrivateインスタンスに手動入室し、参加者不在・撮影の権利・OSCが有効であることを確認してから、入室3分以内に以下を実行します。
+対象WorldのPrivateインスタンスに手動入室し、参加者不在・撮影の権利・OSCが有効であることを確認してから、同じPrivate Worldに滞在していることを確認してから以下を実行します。
 
 ~~~powershell
 py -3 scripts/run_one_world_inspection.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 30 --sweep --private-instance-confirmed --verify-local-log --confirm-platform-authorization --acknowledge-automation-risk
@@ -55,7 +75,7 @@ py -3 -m unittest tests.test_windows_window_handle_ctypes tests.test_inspection_
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79
 ~~~
 
-対象のWorldに手動でPrivate入室し、参加者不在・OSC操作許可を確認した上で、入室3分以内に下記の実機試験を実施してください。
+対象のWorldに手動でPrivate入室し、参加者不在・OSC操作許可を確認した上で、同じPrivate Worldに滞在していることを確認してから下記の実機試験を実施してください。
 
 ~~~powershell
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
@@ -77,7 +97,7 @@ git pull --ff-only
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode analog
 ~~~
 
-同じWorldのPrivateインスタンスに手動で再入室し、他の参加者がいないこと、録画・操作の権利を確認してください。VRChatのOSCを有効にし、Action MenuとOSC Debugを閉じてください。3分以内に次を実行します。
+同じWorldのPrivateインスタンスに滞在していることを確認し、他の参加者がいないこと、録画・操作の権利を確認してください。VRChatのOSCを有効にし、Action MenuとOSC Debugを閉じてください。同じPrivate Worldに滞在していることを確認してから次を実行します。
 
 ~~~powershell
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode analog --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
@@ -99,7 +119,7 @@ git pull --ff-only
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode ui
 ~~~
 
-同じPrivate Worldへ手動で入室し直して3分以内に、許可・参加者不在を確認してから次を実行してください。
+同じPrivate Worldへの入室ログが確認できる状態で、許可・参加者不在を確認してから次を実行してください。
 
 ~~~powershell
 py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode ui --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
