@@ -16,7 +16,8 @@ param(
     [switch]$AcknowledgeAutomationRisk,
     [switch]$ConfirmRecordingRights,
     [switch]$ConfirmGeminiUpload,
-    [switch]$ConfirmPublishingRights
+    [switch]$ConfirmPublishingRights,
+    [switch]$WorkdayOnly
 )
 
 $ErrorActionPreference = "Stop"
@@ -31,6 +32,20 @@ try {
         & py -3 scripts/inspection_pipeline_smoketest.py
         if ($LASTEXITCODE -ne 0) { throw "Synthetic end-to-end test failed. Review the error above." }
         return
+    }
+    # Mandatory pre-launch check when this launcher is selected for patrol.
+    # Manual diagnostics/smoke tests are never a scheduled patrol.
+    if ($WorkdayOnly -and -not $Diagnose) {
+        & py -3 scripts/workday_patrol_gate.py
+        $calendarStatus = $LASTEXITCODE
+        if ($calendarStatus -eq 3) {
+            Write-Host "Non-workday in Google Calendar (JST): inspection skipped."
+            return
+        }
+        if ($calendarStatus -ne 0) {
+            throw "Workday check unavailable: no VRChat inspection launched."
+        }
+        Write-Host "Confirmed workday (JST). Proceeding with existing supervised-only gates."
     }
     $arguments = @("scripts/run_one_world_inspection.py")
     if ($Diagnose) {
