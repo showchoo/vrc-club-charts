@@ -20,12 +20,14 @@ try:
         BASELINE_MAX_SPREAD, BASELINE_MIN_MEDIAN, CALIBRATION_SAMPLES,
         MAX_VALID_NEAR_BLACK,
     )
+    from scripts.inspection_bright_window import BriefBrightWindow
     from scripts.auto_process_interior_queue import ROOT
 except ModuleNotFoundError:
     from inspection_light_cycle import (
         BASELINE_MAX_SPREAD, BASELINE_MIN_MEDIAN, CALIBRATION_SAMPLES,
         MAX_VALID_NEAR_BLACK,
     )
+    from inspection_bright_window import BriefBrightWindow
     from auto_process_interior_queue import ROOT
 
 MAX_INPUT_BYTES = 128 * 1024
@@ -102,8 +104,13 @@ def analyze_samples(samples: list[dict]) -> dict:
     elif "recovered-stable-light" in states:
         baseline_problem = "lighting-recovery-marked-in-original"
 
+    bright_windows = BriefBrightWindow()
+    for original_sample in samples:
+        bright_windows.observe(original_sample)
+
     return {
         "status": "read-only-calibration-diagnostics",
+        "briefBrightWindow": bright_windows.summary(),
         "samplesAnalyzed": len(samples),
         "firstSampleState": states[0],
         "lastSampleState": states[-1],
