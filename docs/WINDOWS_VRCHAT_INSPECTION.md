@@ -61,6 +61,27 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
+## 動画・SDKを使わずにGeminiの400エラーを診断（2026-11-11）
+
+有効な `gemini-3.5-flash-lite` モデルに、`google-genai` SDKからたった一文を送ってもHTML形式の `400 Bad Request` が返る場合、動画を何度圧縮しても原因は分かりません。先に**公式REST APIへPython標準ライブラリ（urllib）で直接通信**する診断を追加しました。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/diagnose_gemini_connection.py --run
+~~~
+
+この診断は、環境変数 `GEMINI_API_KEY` をHTTPヘッダーに載せ、モデル一覧GETを送ります。**GETが成功したときだけ**、固定文字列 `Reply with OK only` の小さな生成POSTを1回送ります。VRChatや動画には触れません。GitHubへも送信しません。API利用料が発生する可能性はあります。APIキー本体、リクエスト本文、API応答本文、プロキシURLは画面に出しません。
+
+見方：
+- `status: "rest-text-ok"`：APIキーと基本的な生成REST通信は成功。SDKの`httpx2`通信・環境設定の差を優先調査
+- `status: "rest-list-failed"`：SDK以外でもモデル一覧取得に失敗。HTTPコード・`responseKind`・`apiErrorStatus`・プロキシ環境の有無を確認
+- `modelList.responseKind: "html"`：Google公式の構造化JSONエラーでない応答。キー・プロキシ・ネットワーク・Googleのフロントエンドなどを切り分ける
+- `keyHasOuterWhitespace` / `keyHasQuoteCharacters` がtrue：誤って空白や引用符をキーに含めた可能性。**実際のキーは表示・共有しない**
+- `status: "rest-generate-failed"`：モデル一覧GETは成功したが生成POSTが失敗
+
+Python標準ライブラリのみで動き、Windows PowerShellの`py -c`の複雑な引用符も不要です。診断結果だけを開発相談へ渡せます。
+
 ## Gemini動画の送信途中で切断された場合（2026-11-11）
 
 実機で10.74 MiBの30秒MP4は直接送信経路に進みましたが、`httpx2.RemoteProtocolError: Server disconnected without sending a response` で応答前に通信断となりました。原因は未確定であり、動画不良・モデル名の誤りを示すものではありません。長いトレースに代えて、現行コードでは `Gemini model-request transport failed` と安全な診断案内を表示します。
