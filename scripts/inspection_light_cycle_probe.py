@@ -219,6 +219,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
                     "brief-brightness-opportunity-observed" if candidate_found else
                     "capture-visibility-needs-review" if dark_diagnostic_found else
                     "lighting-cycle-not-confirmed")
+    diagnostics = analyze_samples(observation["samples"])
     data = {
         "schemaVersion": 1,
         "status": final_status,
@@ -228,8 +229,8 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "observationSecondsMaximum": seconds,
         "lightingCycle": observation["state"],
         "luminanceSamples": observation["samples"],
-        "calibrationDiagnostics": analyze_samples(observation["samples"]),
-        "captureVisibilityDiagnostic": analyze_samples(observation["samples"])["captureVisibilityDiagnostic"],
+        "calibrationDiagnostics": diagnostics,
+        "captureVisibilityDiagnostic": diagnostics["captureVisibilityDiagnostic"],
         "briefBrightWindow": observation["briefBrightWindow"],
         "screenshot": (
             {"file": image_file, "sha256": hashlib.sha256(saved_png).hexdigest(),
