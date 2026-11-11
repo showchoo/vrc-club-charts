@@ -4,6 +4,34 @@
 
 VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com/docs/osc-as-input-controller) / [OSC Overview](https://docs.vrchat.com/docs/osc-overview)。OSCが公式に存在することと、**無人で公開ワールドを巡回するための運営許可があることは別**です。2026年11月10日にGmailで確認できた運営メールは受付・規約案内で、正式な許諾本文は見つかっていません。別経路で許可を得ている場合、許可の保存と使用範囲の確認を行ってください。下記の `-ConfirmPlatformAuthorization` は**利用者自身の確認**であり、サーバー側の許可判定ではありません。
 
+## 監督付き・撮影位置の短距離移動パイロット（2026-11-11）
+
+GeminiがDJブースを見たと誤判定した理由は、フロアから高い位置のDJブースが見えないという**視点の制約**でした。固定位置でのOSCスイープだけでは解決しないため、**ローカルでの移動1回と移動前後の視点記録**を切り分けた `scripts/inspection_position_step_probe.py` を実装しました。
+
+**現在できること**：手動で入室した1つのPrivate World内で、許可・録画権利・安全な平坦な進路を確認したうえで、OSCの `/input/Vertical` または `/input/Horizontal` を**最大1回、0.20秒だけ**操作して必ずゼロへ戻します。前後のVRChat画面を2枚のPNGとして `Videos/VRCClubCharts/private-position-probes` に保存し、差分と安全確認の状態を非公開JSONに残します。変更差分は「画面が変わった」ことの指標にすぎず、実際に歩けた距離や衝突・階段の安全性の証拠にはなりません。**Geminiクラウド、公開サイト、ランキングへの送信は一切行いません**。OSCのUDP送信先はローカル `127.0.0.1:9000` のみです。
+
+**できないこと**：階段や段差を認識して自律的に上ること、壁を避けて自律経路を計画すること、プレイヤーの位置や移動距離を確認すること、視界外のDJブース到達を宣言すること。将来の目標と、今回の初期試験を混同しないでください。OSCの `/input/Vertical` と `/input/Horizontal` はVRChat公式が案内する入力軸ですが、World設定や端末のデッドゾーンにより想定どおり動くとは限りません。参考: https://docs.vrchat.com/docs/osc-as-input-controller
+
+まず**dry-run**（VRChat操作・録画・UDPパケット送信を一切行わない）：
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_position_step_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79
+~~~
+
+実機試験は、公式VRChatクライアントを起動して**本人が当該WorldのPrivateインスタンスへ入室**し、別の参加者が映らず、フラットな空きスペースで前方の進路が明確に安全だと確認できたときだけ実施してください。**階段・高台・崖・ワールドの境界付近・障害物のある場所では実行しないこと。** 試験前にOSCを有効にして、OSC DebugやQuick Menuを閉じてください。オペレーターが必要な許可を確保し、実行時には一時的にVRChatを前面へ戻す必要があります。
+
+~~~powershell
+py -3 scripts/inspection_position_step_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --direction forward --live --confirm-private-instance --confirm-recording-rights --confirm-flat-clear-path --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+表示後8秒以内にVRChatを前面へ戻し、マウスやWASD・ゲームパッドから手を離します。**Ctrl+Shift+F12**の非常停止、フォーカス喪失、現在Worldの入室ログ変更を監視し、OSCの各軸は初期化時・操作後・終了時に必ずゼロを送る設計です。ただしOS/プロセスの強制終了やネットワーク障害があるとゼロ送信も保証できないので、VRChat側で操作を停止できるよう手動監督してください。
+
+結果の `status: "sent-unverified"` は**OSC入力を送っただけ**であり、歩行したことの証明ではありません。出力 `position-step.json` には `positionVerified: false`、`collisionSafetyVerified: false`、`stairsTraversed: false`、`djBoothLocated: false` が保持されます。動いていなければ自動再試行はしません。スクリーンショットに他のプレイヤーや個人情報が入っている可能性があるため、公開しないでください。
+
+次の段階は、今回の実機で動作を確認した後、複数の撮影位置を撮り分けるプランナーを別機能として開発することです。階段検出・移動経路の正確な安全確認ができるまでは、無監督での段差移動は解禁しません。
+
 ## 開発・試験の段階
 
 - 単独・非公開で、ユーザー本人またはワールド制作者の許可がある環境に限定する初期試験を想定しています。
