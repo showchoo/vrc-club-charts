@@ -14,9 +14,8 @@ import os
 import re
 import sys
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
-TIMEZONE = ZoneInfo("Asia/Tokyo")
+TIMEZONE = dt.timezone(dt.timedelta(hours=9), "Asia/Tokyo")
 SCOPES = ["https://www.googleapis.com/auth/calendar.events.readonly"]
 # A standalone "仕事" shift or "仕事　会計なし" / "仕事 明け..." variant.
 # Do not match "仕事なし", "仕事ズボン縫う", or other unrelated phrases.
