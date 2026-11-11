@@ -184,7 +184,7 @@ def run_live(*, world_id: str, direction: str, out_dir: Path,
         "positionVerified": False, "distanceMeters": None,
         "collisionSafetyVerified": False, "stairsTraversed": False,
         "djBoothLocated": False, "equipmentFunctionalityVerified": False,
-        "noPublicRankingChanges": True, "noNetworkOrCloudUploads": True,
+        "noPublicRankingChanges": True, "noExternalNetworkOrCloudUploads": True,
     }
     if reason is not None or outcome is None:
         return {**base, "status": "stopped", "reason": reason or "incomplete"}
