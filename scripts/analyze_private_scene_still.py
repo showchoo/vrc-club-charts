@@ -122,7 +122,7 @@ def validate_model_output(payload: object) -> dict:
             if not isinstance(row, dict) or set(row) != {"visibility", "confidence"}:
                 raise StillFacilityError("unexpected-facility-fields")
             visibility, confidence = row["visibility"], row["confidence"]
-            if visibility not in VISIBILITY:
+            if not isinstance(visibility, str) or visibility not in VISIBILITY:
                 raise StillFacilityError("invalid-facility-visibility")
             if (type(confidence) not in (float, int) or
                     not math.isfinite(confidence) or
@@ -210,7 +210,7 @@ def _draft_path(review_dir: Path, model: str) -> Path:
 
 
 def _read_existing_draft(path: Path, model: str, source_digest: str,
-                         enhanced_digest: str) -> dict:
+                         enhanced_digest: str, expected_world_id: str) -> dict:
     raw = _read_bounded(path, MAX_REPORT_BYTES)
     try:
         data = json.loads(raw)
@@ -219,6 +219,7 @@ def _read_existing_draft(path: Path, model: str, source_digest: str,
     if (not isinstance(data, dict) or data.get("schemaVersion") != 1 or
             data.get("status") != "private-image-appearance-draft" or
             data.get("model") != model or
+            data.get("worldId") != expected_world_id or
             data.get("originalSha256") != source_digest or
             data.get("enhancedSha256") != enhanced_digest or
             data.get("equipmentFunctionalityVerified") is not False or
@@ -258,7 +259,8 @@ def generate_private_facility_draft(*, report_path: Path, model: str = DEFAULT_M
             "status": "existing-private-image-appearance-draft",
             "draft": str(path),
             "worldId": _read_existing_draft(
-                path, model, original_digest, shadow_digest)["worldId"],
+                path, model, original_digest, shadow_digest,
+                review["worldId"])["worldId"],
             "newGeminiRequestMade": False, "publiclyShareable": False,
             "equipmentFunctionalityVerified": False,
         }
