@@ -94,10 +94,30 @@ class GeminiRestDiagnosticTests(unittest.TestCase):
             "outcome": "http-error", "httpStatus": 400}, environ={"GOOGLE_API_KEY": "another-secret"})
         self.assertTrue(r["keyHasOuterWhitespace"])
         self.assertTrue(r["keyHasQuoteCharacters"])
-        self.assertFalse(r["keyLooksLikeStandardGoogleKey"])
+        self.assertEqual(r["keyFamily"], "unrecognized")
         self.assertTrue(r["googleApiKeyAlsoSet"])
         self.assertNotIn("AIza_test", json.dumps(r))
         self.assertNotIn("another-secret", json.dumps(r))
+
+    def test_new_aq_authorization_key_is_normal_not_invalid(self):
+        secret = "AQ.fake_new_auth_key_secret"
+        captured = []
+        def no_success(url, key, **kwargs):
+            captured.append((url, key))
+            return {"outcome": "http-error", "httpStatus": 400, "responseKind": "html"}
+        r = diag.diagnostics(secret, probe_fn=no_success, environ={})
+        self.assertEqual(r["keyFamily"], "authorization")
+        self.assertEqual(r["modelList"]["httpStatus"], 400)
+        self.assertEqual(r["status"], "rest-list-failed")
+        self.assertEqual(len(captured), 1)
+        self.assertNotIn(secret, json.dumps(r))
+        self.assertNotIn("fake_new_auth", json.dumps(r))
+
+    def test_legacy_standard_key_is_classified_without_validation_claim(self):
+        r = diag.diagnostics("AIza_LegacySecret", probe_fn=lambda *a, **kwargs: {
+            "outcome": "http-error", "httpStatus": 400}, environ={})
+        self.assertEqual(r["keyFamily"], "legacy-standard")
+        self.assertNotIn("AIza_LegacySecret", json.dumps(r))
 
     def test_dry_run_is_inert(self):
         with patch.object(diag, "diagnostics", side_effect=AssertionError("network")):
