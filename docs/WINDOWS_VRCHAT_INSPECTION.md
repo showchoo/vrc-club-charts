@@ -65,7 +65,7 @@ window focus. This is still awaiting real Windows smoke testing.
 
 同じWindows PowerShell環境で `Read-Host -AsSecureString` を使って「新しいキー」を入力した後も400 HTMLが続き、**`$env:GEMINI_API_KEY.Length` が `1`** と判明しました。これまでの400は、実際のAPIキーではなく途中で欠けた文字列を送っていた可能性が非常に高くなりました。`Read-Host` 画面に `*` が1個表示されただけでは判断できませんが、実際の環境変数の長さが1であることは確定しています。新しいキーの発行・動画の再撮影はまだ必要ありません。
 
-Google AI Studioの**コピー用ボタン**で発行済みキーをコピーし、PowerShellでは秘密入力欄を経由せず、以下のようにクリップボードから直接環境変数を設定できます。キー本体は表示しません。クリップボードを消去するので、必要なテキストは先に退避してください。
+Google AI Studioの**コピー用ボタン**で発行済みキーをコピーし、PowerShellでは秘密入力欄を経由せず、以下のようにクリップボードから直接環境変数を設定できます。キー本体は表示しません。クリップボードを安全な固定文字列で**上書き**するので、必要なテキストは先に退避してください。Windows PowerShellの環境によっては `Set-Clipboard -Value ''` がnull引数エラーになるため、空文字列でのクリアは使用しません。`Set-Clipboard` のエラーは、それ以前に設定された `$env:GEMINI_API_KEY` を消去しません。
 
 ~~~powershell
 $copied = (Get-Clipboard -Raw).Trim()
@@ -75,7 +75,7 @@ if ($copied.Length -lt 20) {
 }
 $env:GEMINI_API_KEY = $copied
 Remove-Variable copied
-Set-Clipboard -Value ''
+Set-Clipboard -Value 'cleared'
 Write-Host "APIキーを設定しました"
 py -3 scripts/diagnose_gemini_connection.py --run
 ~~~
