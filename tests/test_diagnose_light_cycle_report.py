@@ -144,6 +144,51 @@ class DiagnosticTests(unittest.TestCase):
         self.assertEqual(data["primaryDiagnostic"], "baseline-acquired-but-dimming-unconfirmed")
         self.assertEqual(data["stableThreeFrameWindowsPassingAllConditions"], 13)
 
+
+    def test_uniform_near_black_flags_capture_or_scene_ambiguity(self):
+        values = samples([1.0] * 120, black=.9602)
+        data = diag.analyze_samples(values)
+        health = data["captureVisibilityDiagnostic"]
+        self.assertEqual(health["status"], "near-black-throughout")
+        self.assertEqual(health["nearBlackSamples"], 120)
+        self.assertTrue(health["suspectedCaptureOrSceneBlackout"])
+        self.assertTrue(health["humanComparisonRequired"])
+        self.assertFalse(health["imageCaptureFailureConfirmed"])
+        self.assertFalse(health["genuineDarkSceneConfirmed"])
+        self.assertFalse(health["visualNavigationSafe"])
+        self.assertFalse(data["originalReportModified"])
+
+    def test_variable_previous_club_capture_not_marked_black_throughout(self):
+        data = diag.analyze_samples(
+            samples([2, 10, 95, 186, 1, 95, 90, 30, 2, 13], black=.2))
+        self.assertEqual(data["captureVisibilityDiagnostic"]["status"],
+                         "not-uniformly-near-black")
+        self.assertFalse(data["captureVisibilityDiagnostic"]["suspectedCaptureOrSceneBlackout"])
+
+    def test_reject_dark_review_report_missing_provenance(self):
+        values = samples([1] * 10, black=.96)
+        path = fixture(self.folder, values)
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw["status"] = "capture-visibility-needs-review"
+        raw["screenshot"] = {
+            "file": "dark-capture-diagnostic.png",
+            "sha256": "a" * 64,
+            "humanReviewRequired": True,
+            "stableLightingRecoveryConfirmed": False,
+            "captureVisibilityVerified": False,
+        }
+        raw["captureVisibilityDiagnostic"] = (
+            diag.analyze_samples(values)["captureVisibilityDiagnostic"])
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        before = path.read_bytes()
+        result = diag.read_report(path)
+        self.assertEqual(result["sourceStatus"], "capture-visibility-needs-review")
+        self.assertEqual(path.read_bytes(), before)
+        raw["screenshot"]["humanReviewRequired"] = False
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        with self.assertRaisesRegex(diag.DiagnosticError, "visual review provenance"):
+            diag.read_report(path)
+
     def test_reject_tampered_or_public_report(self):
         p = fixture(self.folder, samples([20] * 10))
         raw = json.loads(p.read_text())
