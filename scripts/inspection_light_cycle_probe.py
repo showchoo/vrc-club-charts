@@ -170,6 +170,12 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
               flush=True)
         if stop.wait(focus_seconds) or not safe():
             raise ObservationStopped("world-focus-or-emergency-stop")
+        # Window geometry may change while the operator focuses VRChat.
+        # Re-read the foreground target before capturing any private pixels.
+        focused_hwnd, focused_area = get_window("VRChat")
+        if focused_hwnd != hwnd or not safe():
+            raise ObservationStopped("world-window-changed-before-capture")
+        area = focused_area
         observation = observe_cycle(
             capture_png=lambda: screenshot_png(hwnd, area),
             still_safe=safe, wait=stop.wait, max_samples=seconds,
@@ -227,6 +233,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "source": "local-supervised-stationary-light-cycle",
         "completedAtUtc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "observationSecondsMaximum": seconds,
+        "captureRegion": {k: area[k] for k in ("left", "top", "width", "height")},
         "lightingCycle": observation["state"],
         "luminanceSamples": observation["samples"],
         "calibrationDiagnostics": diagnostics,
@@ -267,6 +274,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "calibrationDiagnostics": data["calibrationDiagnostics"],
         "briefBrightWindow": data["briefBrightWindow"],
         "captureVisibilityDiagnostic": data["captureVisibilityDiagnostic"],
+        "captureRegion": data["captureRegion"],
         "reportFile": str(output / "lighting-cycle.json"),
         "recoveryImage": str(output / "recovery.png") if stable else None,
         "brightWindowImage": str(output / image_file) if candidate_found else None,
