@@ -141,6 +141,41 @@ class GeminiRestDiagnosticTests(unittest.TestCase):
         self.assertEqual(result["status"], "rest-list-failed")
         self.assertEqual(len(calls), 1)
 
+    def test_multiline_shell_commands_are_rejected_without_network(self):
+        misplaced = "git pull --ff-only\npy -3 scripts/diagnose_gemini_connection.py --run"
+        def must_not_send(*args, **kwargs):
+            raise AssertionError("Never send a command string in an API key header")
+        report = diag.diagnostics(misplaced, probe_fn=must_not_send, environ={})
+        self.assertEqual(report["status"], "invalid-key-input-characters")
+        self.assertTrue(report["keyContainsInvalidHeaderCharacters"])
+        self.assertNotIn("modelList", report)
+        self.assertNotIn("git pull", json.dumps(report))
+        self.assertNotIn("diagnose_gemini", json.dumps(report))
+
+    def test_probe_called_directly_rejects_newlines_before_urlopen(self):
+        def must_not_send(*args, **kwargs):
+            raise AssertionError("No HTTP with malformed key")
+        result = diag.probe(diag.MODEL_LIST_URL,
+                            "AQ.something\nnext command", urlopen=must_not_send)
+        self.assertEqual(result, {"outcome": "invalid-key-header"})
+
+    def test_http_header_value_error_never_leaks_raw_secrets(self):
+        secret = "AQ.test_fake_secret_do_not_print"
+        def throw_header_error(*args, **kwargs):
+            raise ValueError("Invalid header value: " + secret)
+        result = diag.probe(diag.MODEL_LIST_URL, secret, urlopen=throw_header_error)
+        self.assertEqual(result["outcome"], "request-format-error")
+        self.assertNotIn(secret, json.dumps(result))
+        self.assertEqual(result["errorType"], "ValueError")
+
+    def test_unicode_header_input_is_rejected_before_network(self):
+        result = diag.diagnostics("AQ.fakeValidPrefixButFullwidth：CHAR",
+                                  probe_fn=lambda *args, **kwargs: (
+                                      self.fail("Should reject non-ASCII key before network")),
+                                  environ={})
+        self.assertTrue(result["keyContainsInvalidHeaderCharacters"])
+        self.assertEqual(result["status"], "invalid-key-input-characters")
+
     def test_dry_run_is_inert(self):
         with patch.object(diag, "diagnostics", side_effect=AssertionError("network")):
             self.assertEqual(diag.main([]), 0)
