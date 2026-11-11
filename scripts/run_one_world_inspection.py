@@ -13,7 +13,7 @@ from pathlib import Path
 
 try:
     from scripts.inspection_preflight import preflight
-    from scripts.inspection_world_log import corroborate_world
+    from scripts.inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from scripts.windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from scripts.auto_process_interior_queue import atomic_json, process_queue, ROOT
     from scripts.evaluate_interior_video import validate_media, media_sha256
@@ -24,7 +24,7 @@ try:
     from scripts.inspection_facility_keyframes import export_frame_evidence, FrameEvidenceError
 except ModuleNotFoundError:
     from inspection_preflight import preflight
-    from inspection_world_log import corroborate_world
+    from inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from windows_vrchat_inspector import inspect, MAX_SECONDS, WORLD_ID_RE
     from auto_process_interior_queue import atomic_json, process_queue, ROOT
     from evaluate_interior_video import validate_media, media_sha256
@@ -81,7 +81,7 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     # This is only a conservative signal, not independent proof of participants.
     log_before = None
     if verify_world_log:
-        log_before = corroborate_world(world_id, max_age_seconds=180)
+        log_before = corroborate_world(world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
         if log_before.get("status") != "corroborated":
             return {
                 "schemaVersion": 1, "worldId": world_id,
@@ -115,7 +115,7 @@ def run_inspection(*, world_id: str, captures: Path, seconds: int = 60,
     # Re-check AFTER capture but BEFORE Gemini/upload/publication. A World
     # switch while recording must never be credited to the original World.
     if verify_world_log:
-        log_after = corroborate_world(world_id, max_age_seconds=900)
+        log_after = corroborate_world(world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
         if (log_after.get("status") != "corroborated"
                 or log_after.get("joinFingerprint") != log_before["joinFingerprint"]):
             result["status"] = "world-log-changed"
