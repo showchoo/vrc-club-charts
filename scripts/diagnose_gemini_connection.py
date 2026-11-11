@@ -51,9 +51,20 @@ def _safe_error_status(body: bytes) -> str | None:
     return status if isinstance(status, str) and re.fullmatch(r"[A-Z_]{3,50}", status) else None
 
 
+
+def _is_safe_api_key_header(value: str) -> bool:
+    """Reject whitespace/control/non-ASCII before urllib can echo header values.
+
+    This is a transport-safety filter, NOT a determination of Google key validity.
+    """
+    return bool(value) and all(33 <= ord(char) <= 126 for char in value)
+
+
 def probe(url: str, key: str, *, payload: bytes | None = None,
           urlopen=None) -> dict:
     """Never put the API key in the URL or the returned report."""
+    if not _is_safe_api_key_header(key):
+        return {"outcome": "invalid-key-header"}
     method = "POST" if payload is not None else "GET"
     headers = {"x-goog-api-key": key, "Accept": "application/json"}
     if payload is not None:
@@ -71,6 +82,10 @@ def probe(url: str, key: str, *, payload: bytes | None = None,
         body = error.read(MAX_ERROR_BYTES)
     except (OSError, urllib.error.URLError, TimeoutError, ConnectionError) as error:
         return {"outcome": "connection-error", "errorType": type(error).__name__}
+    except (ValueError, UnicodeError) as error:
+        # Some urllib/http.client exceptions embed the full header value,
+        # including a potentially secret API key. Never let them escape.
+        return {"outcome": "request-format-error", "errorType": type(error).__name__}
 
     kind = _response_kind(content_type, body)
     result = {
@@ -91,6 +106,7 @@ def diagnostics(key: str, *, probe_fn=probe, environ=None) -> dict:
         "schemaVersion": 1,
         "apiKeyPresent": bool(key),
         "keyLooksTruncated": bool(key and len(key) < 20),
+        "keyContainsInvalidHeaderCharacters": bool(key and not _is_safe_api_key_header(key)),
         "keyHasOuterWhitespace": bool(key and key != key.strip()),
         "keyHasQuoteCharacters": bool(key and ('"' in key or "'" in key)),
         # Google AI Studio began issuing AQ.-prefixed authorization keys by
@@ -114,6 +130,9 @@ def diagnostics(key: str, *, probe_fn=probe, environ=None) -> dict:
         return result
     if len(key) < 20:
         result["status"] = "invalid-key-input-length"
+        return result
+    if not _is_safe_api_key_header(key):
+        result["status"] = "invalid-key-input-characters"
         return result
     first = probe_fn(MODEL_LIST_URL, key)
     result["modelList"] = first
