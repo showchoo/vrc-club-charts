@@ -135,12 +135,21 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
         result = tracker.observe(metrics)
         if window is not None:
             window.observe(metrics, png)
-        samples.append({
+        # Additional image-contrast metrics never authorize navigation or
+        # alter the strict lighting-cycle state machine. Older/mock sample
+        # providers may have only the original two metrics.
+        review_fields = ("lumaP90", "tonalRangeP10P90",
+                         "highlightPixelFraction", "highlightTiles",
+                         "highlightTilesTotal")
+        sample = {
             "sample": index + 1,
             "medianLuma": metrics["medianLuma"],
             "nearBlackFraction": metrics["nearBlackFraction"],
             "state": result["status"],
-        })
+        }
+        if all(name in metrics for name in review_fields):
+            sample.update({name: metrics[name] for name in review_fields})
+        samples.append(sample)
         if result["status"] == "recovered-stable-light":
             if not still_safe():
                 raise ObservationStopped("world-focus-or-emergency-stop")
