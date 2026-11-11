@@ -451,8 +451,38 @@ class ObserverTests(unittest.TestCase):
                 world_id=WORLD, seconds=10, out_dir=self.destination,
                 focus_seconds=0)
         self.assertEqual(result["status"], "stopped")
-        self.assertEqual(result["reason"], "world-focus-or-emergency-stop")
+        self.assertEqual(result["reason"], "vrchat-not-foreground-after-focus-delay")
         self.assertFalse(self.destination.exists())
+
+    def test_focus_timeout_reports_explicit_reason_without_capture(self):
+        with (
+            patch.object(probe, "is_active", return_value=False),
+            patch.object(probe, "screenshot_png",
+                         side_effect=AssertionError("Must not screenshot")),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=20, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"],
+                         "vrchat-not-foreground-after-focus-delay")
+        self.assertFalse(self.destination.exists())
+        self.assertEqual(result["movementCommandsSent"], 0)
+
+    def test_focus_limit_is_bounded_and_invalid_request_fails(self):
+        for invalid in (-1, 20.1, float("nan"), True):
+            with self.subTest(value=invalid), self.assertRaises(ValueError):
+                probe.run_live(
+                    world_id=WORLD, seconds=10, out_dir=self.destination,
+                    focus_seconds=invalid)
+        with patch.object(probe, "sample_lighting",
+                          side_effect=[sample(1, .96)] * 10), patch.object(
+                          probe, "screenshot_png",
+                          return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=20, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "capture-visibility-needs-review")
 
     def test_bad_world_log_stops_before_window_lookup(self):
         with (
