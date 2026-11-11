@@ -60,6 +60,28 @@ py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-
 
 sent-unverified は送信完了だけを示し、実際に回転したことの証明ではありません。**目視で右回転したか**の結果をもとに、入力値の較正か、VRChat側の入力競合・デスクトップ設定の調査を次に行います。
 
+## OSCの受信とゲーム入力の切り分け：Quick Menu（2026-11-11）
+
+実機では、0.35/0.80のアナログ視点回転とボタン式LookRightは、送信完了でも視点が動きません。OSC Debugに受信が表示されることは、VRChatのゲーム入力まで適用された証拠ではありません。VRChatの公式入力仕様では、アナログ値は明示的に0へ戻すまで維持されるため、連続送信が必須という結論にもなりません。
+
+そこで通常スイープには手を加えず、**キャラクターを移動させない**Quick Menu操作を1回だけ行う診断モードを追加しました。実行前はVRChatのQuick MenuとAction Menuを閉じてください。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode ui
+~~~
+
+同じPrivate Worldへ手動で入室し直して3分以内に、許可・参加者不在を確認してから次を実行してください。
+
+~~~powershell
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode ui --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+8秒以内にVRChatのウィンドウを前面に戻し、必要なら一度ウィンドウ内部をクリックしてから手を離してください。/input/QuickMenuToggleRight の整数1（押下）と0（解除）を1回だけ送ります。メニューが開けばOSC入力の少なくとも一部は動いています。開かなければ入力処理の問題、別の入力デバイス・デスクトップ設定・キャプチャしたウィンドウの状態などを優先して調査します。ただし一つのUI操作だけで入力系全体の成功・失敗を断定しません。
+
+メニューを開くだけで録画・歩行・視点回転・クラウド送信はしません。結果の sent-unverified は送信完了のみです。開いたメニューは必要に応じて本人が閉じてください。異常時にはCtrl+Shift+F12で操作停止できます。
+
 ## 1. Windows上で準備
 
 PowerShellをVRC Club ChartsのローカルGitチェックアウトで開きます。

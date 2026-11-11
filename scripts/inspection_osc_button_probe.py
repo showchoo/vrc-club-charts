@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Opt-in, local-only VRChat OSC button and analog-turn probes.
+"""Opt-in, local-only VRChat OSC input diagnostics (button, analog, UI).
 
 Runs only against a manually joined private World, after local join-log
 corroboration and explicit authorization acknowledgements. Uses a few short
@@ -31,6 +31,7 @@ except ModuleNotFoundError:
 WORLD_RE = re.compile(r"wrld_[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\Z")
 LOOK_RIGHT = "/input/LookRight"
 LOOK_HORIZONTAL = "/input/LookHorizontal"
+QUICK_MENU = "/input/QuickMenuToggleRight"
 PULSES = 3
 HOLD_SECONDS = 0.65
 GAP_SECONDS = 0.55
@@ -38,6 +39,7 @@ FOCUS_SECONDS = 8
 ANALOG_PULSES = 2
 ANALOG_VALUE = 0.80
 ANALOG_HOLD_SECONDS = 0.40
+UI_HOLD_SECONDS = 0.12
 
 
 def _pad(value: str) -> bytes:
@@ -63,6 +65,13 @@ def look_horizontal_probe_packet(active: bool) -> bytes:
     return osc_packet(LOOK_HORIZONTAL, ANALOG_VALUE if active else 0.0)
 
 
+def quick_menu_packet(pressed: int) -> bytes:
+    """VRChat-documented Quick Menu toggle, OSC int 1 then 0."""
+    if type(pressed) is not int or pressed not in (0, 1):
+        raise ValueError("Quick Menu toggle must be integer 1 or 0")
+    return _pad(QUICK_MENU) + _pad(",i") + struct.pack(">i", pressed)
+
+
 class ProbeStopped(RuntimeError):
     def __init__(self, reason: str):
         super().__init__(reason)
@@ -72,7 +81,7 @@ class ProbeStopped(RuntimeError):
 def run_probe(world_id: str, *, focus_seconds: float = FOCUS_SECONDS,
               mode: str = "button") -> dict:
     """Observe focus, World log and emergency stop throughout short pulses."""
-    if mode not in ("button", "analog") or not isinstance(mode, str):
+    if mode not in ("button", "analog", "ui") or not isinstance(mode, str):
         raise ValueError("invalid-probe-mode")
     if sys.platform != "win32":
         raise ValueError("windows-required")
@@ -80,9 +89,12 @@ def run_probe(world_id: str, *, focus_seconds: float = FOCUS_SECONDS,
         raise ValueError("invalid-world-id")
     if isinstance(focus_seconds, bool) or not isinstance(focus_seconds, (int, float)) or not 0 <= focus_seconds <= FOCUS_SECONDS:
         raise ValueError("invalid-focus-delay")
-    pulses_planned = ANALOG_PULSES if mode == "analog" else PULSES
-    hold_seconds = ANALOG_HOLD_SECONDS if mode == "analog" else HOLD_SECONDS
-    packet = look_horizontal_probe_packet if mode == "analog" else look_right_packet
+    if mode == "analog":
+        pulses_planned, hold_seconds, packet = ANALOG_PULSES, ANALOG_HOLD_SECONDS, look_horizontal_probe_packet
+    elif mode == "ui":
+        pulses_planned, hold_seconds, packet = 1, UI_HOLD_SECONDS, quick_menu_packet
+    else:
+        pulses_planned, hold_seconds, packet = PULSES, HOLD_SECONDS, look_right_packet
     joined = corroborate_world(world_id, max_age_seconds=180)
     if joined.get("status") != "corroborated":
         return {"status": "blocked", "reason": "world-log-unconfirmed",
@@ -158,7 +170,7 @@ def run_probe(world_id: str, *, focus_seconds: float = FOCUS_SECONDS,
         "status": "stopped" if reason else "sent-unverified",
         "reason": reason,
         "mode": mode,
-        "oscAddress": LOOK_HORIZONTAL if mode == "analog" else LOOK_RIGHT,
+        "oscAddress": LOOK_HORIZONTAL if mode == "analog" else (QUICK_MENU if mode == "ui" else LOOK_RIGHT),
         "analogValue": ANALOG_VALUE if mode == "analog" else None,
         "pulsesSent": pulses,
         "cameraMotionVerified": False,
@@ -172,8 +184,8 @@ def main(argv=None) -> int:
     parser.add_argument("--world-id", required=True)
     parser.add_argument("--live", action="store_true",
                         help="Actually send short, bounded right-turn pulses to local VRChat")
-    parser.add_argument("--mode", choices=("button", "analog"), default="button",
-                        help="button=LookRight int 1/0; analog=LookHorizontal float 0.8/0")
+    parser.add_argument("--mode", choices=("button", "analog", "ui"), default="button",
+                        help="button=LookRight; analog=LookHorizontal 0.8; ui=toggle Quick Menu once")
     parser.add_argument("--confirm-private-instance", action="store_true")
     parser.add_argument("--confirm-platform-authorization", action="store_true")
     parser.add_argument("--acknowledge-automation-risk", action="store_true")
@@ -183,10 +195,10 @@ def main(argv=None) -> int:
     if not args.live:
         print(json.dumps({
             "status": "dry-run",
-            "wouldSend": LOOK_HORIZONTAL if args.mode == "analog" else LOOK_RIGHT,
+            "wouldSend": LOOK_HORIZONTAL if args.mode == "analog" else (QUICK_MENU if args.mode == "ui" else LOOK_RIGHT),
             "mode": args.mode,
             "value": ANALOG_VALUE if args.mode == "analog" else 1,
-            "pulses": ANALOG_PULSES if args.mode == "analog" else PULSES,
+            "pulses": ANALOG_PULSES if args.mode == "analog" else (1 if args.mode == "ui" else PULSES),
             "recordedOrUploaded": False,
         }, indent=2))
         return 0
