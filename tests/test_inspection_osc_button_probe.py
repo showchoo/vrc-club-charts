@@ -118,6 +118,73 @@ class ButtonProbeTests(unittest.TestCase):
         self.assertEqual(result["status"], "stopped")
         sock.sendto.assert_not_called()
 
+    def test_quick_menu_packet_only_int_1_and_0(self):
+        pressed = p.quick_menu_packet(1)
+        released = p.quick_menu_packet(0)
+        self.assertTrue(pressed.startswith(b"/input/QuickMenuToggleRight\0"))
+        self.assertIn(b",i\0\0", pressed)
+        self.assertEqual(struct.unpack(">i", pressed[-4:])[0], 1)
+        self.assertEqual(struct.unpack(">i", released[-4:])[0], 0)
+        self.assertEqual(p.UI_HOLD_SECONDS, 0.12)
+        for wrong in (True, False, -1, 2, 1.0, "1"):
+            with self.subTest(wrong=wrong), self.assertRaises(ValueError):
+                p.quick_menu_packet(wrong)
+
+    def test_quick_menu_default_dry_run_does_not_access_client(self):
+        output = io.StringIO()
+        with (patch.object(p, "run_probe", side_effect=AssertionError("No live OSC")),
+              redirect_stdout(output)):
+            code = p.main(["--world-id", WORLD, "--mode", "ui"])
+        self.assertEqual(code, 0)
+        report = json.loads(output.getvalue())
+        self.assertEqual(report["status"], "dry-run")
+        self.assertEqual(report["wouldSend"], "/input/QuickMenuToggleRight")
+        self.assertEqual(report["pulses"], 1)
+        self.assertFalse(report["recordedOrUploaded"])
+
+    def test_quick_menu_live_sends_single_press_and_releases_even_on_cleanup(self):
+        sock = Mock()
+        clock = itertools.count()
+        with (patch.object(p.sys, "platform", "win32"),
+              patch.object(p, "corroborate_world", return_value={
+                  "status": "corroborated", "worldId": WORLD,
+                  "joinFingerprint": "a" * 64}),
+              patch.object(p, "get_window", return_value=(42, {})),
+              patch.object(p, "is_active", return_value=True),
+              patch.object(p, "WorldSessionGuard", FakeWorldGuard),
+              patch.object(p, "EmergencyStop", FakeHotkey),
+              patch.object(p.socket, "socket", return_value=sock),
+              patch.object(p.time, "monotonic", side_effect=lambda: next(clock)),
+              redirect_stdout(io.StringIO())):
+            result = p.run_probe(WORLD, focus_seconds=0, mode="ui")
+        self.assertEqual(result["status"], "sent-unverified")
+        self.assertEqual(result["pulsesSent"], 1)
+        self.assertEqual(result["mode"], "ui")
+        self.assertEqual(result["oscAddress"], "/input/QuickMenuToggleRight")
+        self.assertFalse(result["cameraMotionVerified"])
+        packets = [call.args[0] for call in sock.sendto.call_args_list]
+        self.assertEqual([struct.unpack(">i", q[-4:])[0] for q in packets], [1, 0, 0])
+        self.assertTrue(all(q.startswith(b"/input/QuickMenuToggleRight\0") for q in packets))
+        self.assertEqual({call.args[1] for call in sock.sendto.call_args_list},
+                         {("127.0.0.1", 9000)})
+        sock.close.assert_called_once()
+
+    def test_quick_menu_focus_loss_blocks_all_live_input(self):
+        sock = Mock()
+        with (patch.object(p.sys, "platform", "win32"),
+              patch.object(p, "corroborate_world", return_value={
+                  "status": "corroborated", "worldId": WORLD,
+                  "joinFingerprint": "a" * 64}),
+              patch.object(p, "get_window", return_value=(42, {})),
+              patch.object(p, "is_active", return_value=False),
+              patch.object(p, "WorldSessionGuard", FakeWorldGuard),
+              patch.object(p, "EmergencyStop", FakeHotkey),
+              patch.object(p.socket, "socket", return_value=sock),
+              redirect_stdout(io.StringIO())):
+            result = p.run_probe(WORLD, focus_seconds=0, mode="ui")
+        self.assertEqual(result["status"], "stopped")
+        sock.sendto.assert_not_called()
+
     def test_default_cli_never_contacts_client_or_sends_osc(self):
         output = io.StringIO()
         with (patch.object(p, "run_probe", side_effect=AssertionError("Must be inert")),
