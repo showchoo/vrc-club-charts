@@ -20,8 +20,10 @@ from pathlib import Path
 
 try:
     from scripts.auto_process_interior_queue import ROOT, atomic_json
+    from scripts.inspection_lighting_guard import analyze_luma_pair
 except ModuleNotFoundError:
     from auto_process_interior_queue import ROOT, atomic_json
+    from inspection_lighting_guard import analyze_luma_pair
 
 WORLD_RE = re.compile(r"wrld_[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\Z")
 SHA_RE = re.compile(r"[0-9a-f]{64}\Z")
@@ -105,6 +107,7 @@ def compare_frames(before: bytes, after: bytes, *, preview_file: Path) -> dict:
             mode = Image.Resampling.BILINEAR
             a = first.convert("L").resize((GRID_W, GRID_H), mode)
             b = second.convert("L").resize((GRID_W, GRID_H), mode)
+        lighting = analyze_luma_pair(a.tobytes(), b.tobytes())
         diff = ImageChops.difference(a, b)
         values = list(diff.getdata())
         count = len(values)
@@ -134,6 +137,8 @@ def compare_frames(before: bytes, after: bytes, *, preview_file: Path) -> dict:
         "fractionPixelsDifferenceAbove3": round(sum(v > 3 for v in values) / count, 6),
         "fractionPixelsDifferenceAbove10": round(sum(v > 10 for v in values) / count, 6),
         "maxTileMeanDifference": round(max(tiles), 6),
+        "lightingDiagnostics": lighting,
+        "frameComparisonConfoundedByLighting": lighting["visualNavigationShouldPause"],
         "preview": preview_file.name,
         "imageDifferenceIsNotProofOfWalking": True,
         "movementAutomaticallyVerified": False,
@@ -161,6 +166,7 @@ def render_page(report: dict, observation: str, metrics: dict) -> str:
         '</head><body><h1>非公開・移動テスト目視確認</h1>'
         '<p>World ID: ' + html.escape(report["worldId"]) + '</p>'
         '<p><strong>人手の結果：' + html.escape(labels[observation]) + '</strong></p>'
+        '<p>照明・暗転の注意判定: '+html.escape(metrics.get("lightingDiagnostics", {}).get("status", "未測定"))+'。暗転や照明変化では、景色の差分から位置を判断できません。</p>'
         '<p>画像の差分が少なくてもOSC前進が実際に起きたことがあります。'
         'ただしこれは人手報告であり、画像による位置・移動距離・衝突の独立検証ではありません。'
         'スクリーン・ライト・アバターの変化も差分に含まれます。</p>'

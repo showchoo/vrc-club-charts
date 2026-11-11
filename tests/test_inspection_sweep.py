@@ -80,6 +80,49 @@ class BoundedSweepTests(unittest.TestCase):
         self.assertEqual(report["observations"], 3)
         self.assertEqual(records[-1]["action"], "stop")
 
+    def test_dark_real_png_signature_stops_before_any_camera_turn(self):
+        original = b"\x89PNG\r\n\x1a\nsynthetic-content"
+        ctl, logs = FakeController(), []
+        with patch.object(sweep, "one_frame_low_light", return_value={
+            "status": "low-visibility", "visualNavigationShouldPause": True
+        }):
+            result = sweep.run_sweep(
+                controller=ctl, capture_png=lambda: original,
+                still_safe=lambda: True, seconds_left=lambda: 40,
+                log_action=logs.append, turns=4)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "low_visibility_or_invalid_image")
+        self.assertEqual(result["executedTurns"], 0)
+        self.assertEqual(ctl.actions, [])
+        self.assertEqual(logs[-1]["safetyDecision"], "low_visibility_or_invalid_image")
+
+    def test_lighting_transition_stops_before_second_turn(self):
+        samples = iter([
+            b"\x89PNG\r\n\x1a\nbefore",
+            b"\x89PNG\r\n\x1a\nafter",
+        ])
+        controller, logs = FakeController(), []
+        with (
+            patch.object(sweep, "one_frame_low_light", return_value={
+                "status": "not-near-black", "visualNavigationShouldPause": False
+            }),
+            patch.object(sweep, "analyze_png_pair", return_value={
+                "status": "suspected-lighting-transition",
+                "visualNavigationShouldPause": True,
+            }),
+            patch.object(sweep, "signature", side_effect=[(80,)*9, (120,)*9]),
+        ):
+            result = sweep.run_sweep(
+                controller=controller, capture_png=lambda: next(samples),
+                still_safe=lambda: True, seconds_left=lambda: 40,
+                log_action=logs.append, turns=4)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "lighting_transition_or_low_visibility")
+        self.assertEqual(result["executedTurns"], 1)
+        self.assertEqual(sum(action == "turn_right" for action, _ in controller.actions), 1)
+        self.assertEqual(logs[-1]["action"], "stop")
+        self.assertEqual(result["viewChangesObserved"], 0)
+
     def test_focus_loss_never_sends_an_action(self):
         report, ctl, records = self.run_sweep([], safe=lambda: False)
         self.assertEqual(report["status"], "stopped")
@@ -110,6 +153,47 @@ class BoundedSweepTests(unittest.TestCase):
             kwargs["ai"] = True
             with self.assertRaisesRegex(ValueError, "either AI motion"):
                 windows.inspect(**kwargs)
+
+    def test_ai_osc_mode_stops_in_blackout_before_any_gemini_call_or_movement(self):
+        class FakeRecorder:
+            FPS = 4
+            def __init__(self, hwnd, area, output, ffmpeg):
+                self.output = output
+                self.stop_event = threading.Event()
+                self.frames = 10
+                self.failed = None
+            def start(self):
+                self.output.write_bytes(b"synthetic-private-test-video")
+            def close(self):
+                pass
+
+        ctl = FakeController()
+        with tempfile.TemporaryDirectory() as directory:
+            with (
+                patch.object(windows, "get_window", return_value=(
+                    1234, {"left": 0, "top": 0, "width": 640, "height": 480})),
+                patch.object(windows, "is_active", return_value=True),
+                patch.object(windows, "WindowRecorder", FakeRecorder),
+                patch.object(windows, "OscMovement", return_value=ctl),
+                patch.object(windows, "screenshot_png", return_value=b"fake-private-frames"),
+                patch.object(windows, "one_frame_low_light", return_value={
+                    "status": "low-visibility", "visualNavigationShouldPause": True,
+                }),
+                patch.object(windows, "choose_action", side_effect=AssertionError(
+                    "Blackout must stop before cloud AI or new movement")),
+                patch.dict(windows.os.environ, {"GEMINI_API_KEY": "fake-for-offline-test"}),
+            ):
+                report = windows.inspect(
+                    world_id=WORLD, out_dir=Path(directory), seconds=10,
+                    ai=True, evaluate=False, sweep=False, confirm_private=True,
+                    accept_risk=True, confirm_upload=True, model="unused")
+        self.assertEqual(report["stopReason"], "insufficient_visibility_for_ai_navigation")
+        self.assertEqual(report["lightingSafety"]["status"], "low-visibility")
+        self.assertEqual(report["actions"], [])
+        self.assertFalse(report["rankingEligible"])
+        self.assertFalse(report["equipmentFunctionalityVerified"])
+        self.assertTrue(ctl.closed)
+        self.assertFalse(any(a == "forward" for a, _ in ctl.actions))
 
     def test_explicit_sweep_run_needs_no_cloud_key(self):
         class FakeRecorder:

@@ -10,8 +10,10 @@ from typing import Callable
 
 try:
     from scripts.inspection_navigation_guard import signature, distance, DISTANCE_THRESHOLD
+    from scripts.inspection_lighting_guard import one_frame_low_light, analyze_png_pair
 except ModuleNotFoundError:
     from inspection_navigation_guard import signature, distance, DISTANCE_THRESHOLD
+    from inspection_lighting_guard import one_frame_low_light, analyze_png_pair
 
 MAX_TURNS = 4
 TURN_SECONDS = 0.48
@@ -42,6 +44,7 @@ def run_sweep(*, controller, capture_png: Callable[[], bytes],
     """
     actions = sweep_plan(turns)
     previous = None
+    previous_png = None
     stale_turns = 0
     visible_changes = 0
     executed_turns = 0
@@ -65,7 +68,23 @@ def run_sweep(*, controller, capture_png: Callable[[], bytes],
             return summary("incomplete", "recording_time_exhausted")
 
         if action == "observe":
-            current = signature(capture_png())
+            png = capture_png()
+            # Actual Windows captures are PNG. Test doubles may be opaque
+            # bytes; guard the real image path without blocking offline mocks.
+            if png.startswith(b"\x89PNG\r\n\x1a\n"):
+                light = one_frame_low_light(png)
+                if light["visualNavigationShouldPause"]:
+                    log_action({"action": "stop",
+                                "safetyDecision": "low_visibility_or_invalid_image"})
+                    return summary("stopped", "low_visibility_or_invalid_image")
+                if previous_png is not None:
+                    light = analyze_png_pair(previous_png, png)
+                    if light["visualNavigationShouldPause"]:
+                        log_action({"action": "stop",
+                                    "safetyDecision": "lighting_transition_or_low_visibility"})
+                        return summary("stopped", "lighting_transition_or_low_visibility")
+            current = signature(png)
+            previous_png = png
             observation_count += 1
             changed = None if previous is None else (
                 distance(previous, current) > DISTANCE_THRESHOLD

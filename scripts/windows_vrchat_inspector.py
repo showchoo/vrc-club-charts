@@ -22,11 +22,13 @@ from pathlib import Path
 
 try:
     from scripts.inspection_navigation_guard import NavigationGuard
+    from scripts.inspection_lighting_guard import one_frame_low_light, analyze_png_pair
     from scripts.inspection_sweep import run_sweep
     from scripts.inspection_session_guard import WorldSessionGuard
     from scripts.inspection_emergency_stop import EmergencyStop
 except ModuleNotFoundError:
     from inspection_navigation_guard import NavigationGuard
+    from inspection_lighting_guard import one_frame_low_light, analyze_png_pair
     from inspection_sweep import run_sweep
     from inspection_session_guard import WorldSessionGuard
     from inspection_emergency_stop import EmergencyStop
@@ -419,10 +421,31 @@ def inspect(*, world_id: str, out_dir: Path, seconds: int, ai: bool,
         recorder.start()
         if ai:
             controller.neutral()
+            previous_png = None
             for _ in range(MAX_DECISIONS):
                 if time.monotonic() - started >= seconds or recorder.stop_event.is_set():
                     break
                 png = screenshot_png(hwnd, area)
+                # Do not ask Gemini for the next locomotion command when the
+                # image is nearly black or a broad scene-lighting transition
+                # confounds frame-to-frame visual evidence. This is a safety
+                # heuristic, not proof of collision-free movement.
+                visibility = one_frame_low_light(png)
+                if visibility["visualNavigationShouldPause"]:
+                    report["stopReason"] = "insufficient_visibility_for_ai_navigation"
+                    report["lightingSafety"] = {
+                        "status": visibility["status"], "movementVerified": False,
+                    }
+                    break
+                if previous_png is not None:
+                    light = analyze_png_pair(previous_png, png)
+                    if light["visualNavigationShouldPause"]:
+                        report["stopReason"] = "lighting_change_or_low_visibility"
+                        report["lightingSafety"] = {
+                            "status": light["status"], "movementVerified": False,
+                        }
+                        break
+                previous_png = png
                 suggested, reason = choose_action(png, model)
                 if recorder.stop_event.is_set():
                     break

@@ -185,6 +185,8 @@ class InspectionTests(unittest.TestCase):
                   patch.object(m, "OscMovement", FakeController),
                   patch.object(m, "NavigationGuard", FakeGuard),
                   patch.object(m, "screenshot_png", return_value=b"safe_mock"),
+                  patch.object(m, "one_frame_low_light", return_value={
+                      "status": "not-near-black", "visualNavigationShouldPause": False}),
                   patch.object(m, "choose_action", return_value=("stop", "End observation"))):
                 report = m.inspect(world_id=WORLD, out_dir=Path(d), seconds=5,
                     ai=True, evaluate=False, confirm_private=True,
