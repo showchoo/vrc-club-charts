@@ -137,46 +137,96 @@ class OscMovement:
             self.sock.close()
 
 
+def _win32_window_api():
+    """Declare pointer-width-correct Win32 signatures before using HWND values.
+
+    ctypes defaults to 32-bit c_int for untyped function arguments and return
+    values. 64-bit HWND values from EnumWindows can overflow in a callback,
+    and GetForegroundWindow can otherwise be silently truncated.
+    """
+    from ctypes import wintypes
+
+    user32 = ctypes.windll.user32
+    callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+
+    user32.SetProcessDPIAware.argtypes = []
+    user32.SetProcessDPIAware.restype = wintypes.BOOL
+    user32.EnumWindows.argtypes = [callback_type, wintypes.LPARAM]
+    user32.EnumWindows.restype = wintypes.BOOL
+    user32.IsWindowVisible.argtypes = [wintypes.HWND]
+    user32.IsWindowVisible.restype = wintypes.BOOL
+    user32.GetWindowTextLengthW.argtypes = [wintypes.HWND]
+    user32.GetWindowTextLengthW.restype = ctypes.c_int
+    user32.GetWindowTextW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+    user32.GetWindowTextW.restype = ctypes.c_int
+    user32.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
+    user32.GetClientRect.restype = wintypes.BOOL
+    user32.ClientToScreen.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.POINT)]
+    user32.ClientToScreen.restype = wintypes.BOOL
+    user32.GetForegroundWindow.argtypes = []
+    user32.GetForegroundWindow.restype = wintypes.HWND
+
+    return user32, callback_type, wintypes
+
+
 def get_window(title_fragment: str):
-    """Find a visible Windows window and return (hwnd, screen capture rectangle)."""
+    """Find exactly one visible VRChat window with a pointer-safe handle."""
     if sys.platform != "win32":
         raise RuntimeError("Windows 10/11 is required")
     if not title_fragment or title_fragment.lower() != "vrchat":
         raise ValueError("Only the VRChat window is supported")
-    from ctypes import wintypes
-    user32 = ctypes.windll.user32
+
+    user32, callback_type, wintypes = _win32_window_api()
     user32.SetProcessDPIAware()
     matches = []
-    callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    callback_errors = []
 
     def callback(hwnd, unused):
-        if not user32.IsWindowVisible(hwnd):
+        # Exceptions from a ctypes callback are otherwise silently ignored,
+        # leaving an empty match list and concealing the actual WinAPI error.
+        try:
+            if not user32.IsWindowVisible(hwnd):
+                return True
+            length = user32.GetWindowTextLengthW(hwnd)
+            if length < 1:
+                return True
+            buf = ctypes.create_unicode_buffer(length + 1)
+            user32.GetWindowTextW(hwnd, buf, length + 1)
+            if buf.value.strip().lower() == "vrchat":
+                rect = wintypes.RECT()
+                if user32.GetClientRect(hwnd, ctypes.byref(rect)):
+                    tl = wintypes.POINT(0, 0)
+                    if user32.ClientToScreen(hwnd, ctypes.byref(tl)):
+                        w, h = rect.right - rect.left, rect.bottom - rect.top
+                        if w >= 320 and h >= 240:
+                            matches.append((int(hwnd), {
+                                "left": tl.x, "top": tl.y, "width": w, "height": h,
+                            }))
             return True
-        length = user32.GetWindowTextLengthW(hwnd)
-        if length < 1:
-            return True
-        buf = ctypes.create_unicode_buffer(length + 1)
-        user32.GetWindowTextW(hwnd, buf, length + 1)
-        if buf.value.strip().lower() == "vrchat":
-            rect = wintypes.RECT()
-            if user32.GetClientRect(hwnd, ctypes.byref(rect)):
-                tl = wintypes.POINT(0, 0)
-                if user32.ClientToScreen(hwnd, ctypes.byref(tl)):
-                    w, h = rect.right - rect.left, rect.bottom - rect.top
-                    if w >= 320 and h >= 240:
-                        matches.append((int(hwnd), {"left": tl.x, "top": tl.y,
-                                                    "width": w, "height": h}))
-        return True
+        except Exception:
+            # Avoid printing raw Windows data, window titles or user paths.
+            callback_errors.append("window-api-callback-error")
+            return False
 
     call = callback_type(callback)
     user32.EnumWindows(call, 0)
+    if callback_errors:
+        raise RuntimeError("VRChat window enumeration failed (WinAPI callback)")
     if len(matches) != 1:
         raise RuntimeError("Expected exactly one visible 'VRChat' window; found " + str(len(matches)))
     return matches[0]
 
 
 def is_active(hwnd: int) -> bool:
-    return sys.platform == "win32" and int(ctypes.windll.user32.GetForegroundWindow()) == hwnd
+    """Foreground-window test with HWND-sized return, including high bits."""
+    if sys.platform != "win32":
+        return False
+    if isinstance(hwnd, bool) or not isinstance(hwnd, int) or hwnd <= 0:
+        return False
+    user32, _, _ = _win32_window_api()
+    foreground = user32.GetForegroundWindow()
+    return foreground is not None and int(foreground) == hwnd
+
 
 
 def screenshot_png(hwnd: int, area: dict) -> bytes:
