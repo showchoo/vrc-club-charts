@@ -3,7 +3,8 @@
 
 Dry-run is inert. Live observation needs an operator, a manually joined
 private World, rights confirmation, live World log guard and emergency hotkey.
-Only one private recovered screenshot and numeric illumination data are saved.
+At most one private PNG (recovery, bright candidate or dark diagnostic)
+and numeric illumination data are saved.
 No player movement, Gemini, public ranking or automatic locomotion restart.
 """
 from __future__ import annotations
@@ -21,7 +22,8 @@ from pathlib import Path
 
 try:
     from scripts.inspection_light_cycle import LightCycleTracker, sample_lighting
-    from scripts.diagnose_light_cycle_report import analyze_samples
+    from scripts.diagnose_light_cycle_report import (analyze_samples,
+        is_near_black_capture_sample)
     from scripts.inspection_bright_window import BriefBrightWindow
     from scripts.inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from scripts.inspection_session_guard import WorldSessionGuard
@@ -30,7 +32,8 @@ try:
     from scripts.auto_process_interior_queue import ROOT, atomic_json
 except ModuleNotFoundError:
     from inspection_light_cycle import LightCycleTracker, sample_lighting
-    from diagnose_light_cycle_report import analyze_samples
+    from diagnose_light_cycle_report import (analyze_samples,
+        is_near_black_capture_sample)
     from inspection_bright_window import BriefBrightWindow
     from inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from inspection_session_guard import WorldSessionGuard
@@ -67,7 +70,8 @@ def validate_request(world_id: str, seconds: int, out_dir: Path) -> Path:
 
 
 def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
-                  capture_brief_window: bool = False) -> dict:
+                  capture_brief_window: bool = False,
+                  capture_dark_diagnostic: bool = False) -> dict:
     """One-second spaced observations; still_safe must enforce focus+guards.
 
     No OSC input ever. Return screenshot bytes ONLY after a full stable
@@ -79,6 +83,8 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
     window = BriefBrightWindow() if capture_brief_window else None
     samples = []
     recovered_png = None
+    all_near_black = True
+    dark_diagnostic_png = None
     for index in range(max_samples):
         if not still_safe():
             raise ObservationStopped("world-focus-or-emergency-stop")
@@ -89,6 +95,12 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
         if not still_safe():
             raise ObservationStopped("world-focus-or-emergency-stop")
         metrics = sample_lighting(png)
+        if capture_dark_diagnostic:
+            if is_near_black_capture_sample(metrics) and all_near_black:
+                dark_diagnostic_png = png
+            else:
+                all_near_black = False
+                dark_diagnostic_png = None
         result = tracker.observe(metrics)
         if window is not None:
             window.observe(metrics, png)
@@ -111,17 +123,23 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
         "recoveredPng": recovered_png,
         "briefBrightWindow": window.summary() if window is not None else None,
         "briefBrightPng": window.best_image if window is not None else None,
+        "darkDiagnosticPng": (dark_diagnostic_png
+                              if capture_dark_diagnostic and all_near_black
+                              and len(samples) >= 3 else None),
     }
 
 
 def run_live(*, world_id: str, seconds: int, out_dir: Path,
              focus_seconds: float = FOCUS_SECONDS,
-             capture_brief_window: bool = False) -> dict:
+             capture_brief_window: bool = False,
+             capture_dark_diagnostic: bool = False) -> dict:
     dest = validate_request(world_id, seconds, out_dir)
     if sys.platform != "win32":
         raise ValueError("windows-required")
     if type(capture_brief_window) is not bool:
         raise ValueError("invalid-brief-window-opt-in")
+    if type(capture_dark_diagnostic) is not bool:
+        raise ValueError("invalid-dark-diagnostic-opt-in")
     if (isinstance(focus_seconds, bool) or
             not isinstance(focus_seconds, (int, float)) or
             not math.isfinite(focus_seconds) or
@@ -155,7 +173,8 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         observation = observe_cycle(
             capture_png=lambda: screenshot_png(hwnd, area),
             still_safe=safe, wait=stop.wait, max_samples=seconds,
-            capture_brief_window=capture_brief_window)
+            capture_brief_window=capture_brief_window,
+            capture_dark_diagnostic=capture_dark_diagnostic)
     except ObservationStopped as exc:
         reason = exc.reason
     except KeyboardInterrupt:
@@ -189,10 +208,16 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
     stable = observation["state"]["status"] == "recovered-stable-light"
     candidate = observation["briefBrightPng"] if not stable else None
     candidate_found = candidate is not None
-    image_file = "recovery.png" if stable else "bright-window-candidate.png"
-    saved_png = recovered if stable else candidate
+    dark_diagnostic = (observation["darkDiagnosticPng"]
+                       if not stable and not candidate_found else None)
+    dark_diagnostic_found = dark_diagnostic is not None
+    image_file = ("recovery.png" if stable else
+                  "bright-window-candidate.png" if candidate_found else
+                  "dark-capture-diagnostic.png")
+    saved_png = recovered if stable else candidate if candidate_found else dark_diagnostic
     final_status = ("recovered-stable-light-observed" if stable else
                     "brief-brightness-opportunity-observed" if candidate_found else
+                    "capture-visibility-needs-review" if dark_diagnostic_found else
                     "lighting-cycle-not-confirmed")
     data = {
         "schemaVersion": 1,
@@ -204,11 +229,13 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "lightingCycle": observation["state"],
         "luminanceSamples": observation["samples"],
         "calibrationDiagnostics": analyze_samples(observation["samples"]),
+        "captureVisibilityDiagnostic": analyze_samples(observation["samples"])["captureVisibilityDiagnostic"],
         "briefBrightWindow": observation["briefBrightWindow"],
         "screenshot": (
             {"file": image_file, "sha256": hashlib.sha256(saved_png).hexdigest(),
              "humanReviewRequired": True,
-             "stableLightingRecoveryConfirmed": stable}
+             "stableLightingRecoveryConfirmed": stable,
+             "captureVisibilityVerified": False}
             if saved_png is not None else None),
         "privateLocalOnly": True,
         "recordingAndParticipantRightsOperatorAttested": True,
@@ -238,9 +265,12 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "status": data["status"], "lightCycle": observation["state"],
         "calibrationDiagnostics": data["calibrationDiagnostics"],
         "briefBrightWindow": data["briefBrightWindow"],
+        "captureVisibilityDiagnostic": data["captureVisibilityDiagnostic"],
         "reportFile": str(output / "lighting-cycle.json"),
         "recoveryImage": str(output / "recovery.png") if stable else None,
         "brightWindowImage": str(output / image_file) if candidate_found else None,
+        "captureDiagnosticImage": (str(output / "dark-capture-diagnostic.png")
+                                   if dark_diagnostic_found else None),
         "screenshotsSaved": 1 if saved_png is not None else 0,
         "movementCommandsSent": 0, "autonomousMovementRestarted": False,
         "rankingEligible": False,
@@ -257,6 +287,8 @@ def main(argv=None) -> int:
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--capture-bright-window", action="store_true",
                         help="Explicitly opt in to one local unverified bright candidate PNG")
+    parser.add_argument("--capture-dark-diagnostic", action="store_true",
+                        help="Opt in to one private near-black capture for human comparison")
     parser.add_argument("--confirm-private-instance", action="store_true")
     parser.add_argument("--confirm-recording-rights", action="store_true")
     parser.add_argument("--confirm-platform-authorization", action="store_true")
@@ -273,6 +305,7 @@ def main(argv=None) -> int:
                 "autonomousMovementRestarted": False,
                 "externalNetworkRequests": 0,
                 "briefWindowCaptureEnabled": False,
+                "darkDiagnosticCaptureEnabled": False,
             }, ensure_ascii=False, indent=2))
             return 0
         if not all((
@@ -282,13 +315,15 @@ def main(argv=None) -> int:
             raise ValueError("live-requires-private-rights-authorization-and-risk-ack")
         output = run_live(world_id=args.world_id, seconds=args.seconds,
                           out_dir=destination,
-                          capture_brief_window=args.capture_bright_window)
+                          capture_brief_window=args.capture_bright_window,
+                          capture_dark_diagnostic=args.capture_dark_diagnostic)
     except (OSError, ValueError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(output, ensure_ascii=False, indent=2))
     return 0 if output["status"] in (
         "recovered-stable-light-observed", "lighting-cycle-not-confirmed",
-        "brief-brightness-opportunity-observed") else 1
+        "brief-brightness-opportunity-observed",
+        "capture-visibility-needs-review") else 1
 
 
 if __name__ == "__main__":
