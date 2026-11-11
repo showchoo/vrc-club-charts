@@ -69,6 +69,31 @@ py -3 scripts/diagnose_light_cycle_report.py --report "$report"
 
 今後の`inspection_light_cycle_probe.py`の実行結果には `calibrationDiagnostics` が加わります。ただしこの診断は**元の輝度基準を勝手に下げません**。照明が変化したのか、暗いままなのか、映像として何が見えるかは数値だけでは確定できず、Worldの設備の有無・衝突安全性・自律移動の許可を与えるものではありません。診断結果を基に、次の校正方法を検討します。
 
+## 暗いクラブの「一瞬だけ明るい」撮影候補（2026-11-11、試験機能）
+
+90秒の実機観測を既存ログから診断したところ、輝度中央値は最低2／最高186／代表値11でした。輝度45以上は15フレームあり最大4フレーム連続しましたが、**3フレームの輝度差が6以内の校正窓はゼロ**でした。つまり暗いまま固定ではなく、**照明が大きく変わるため従来の安定校正が始まらなかった**状態です。
+
+再撮影せずに、最新の詳細診断で「暗いフレームの後に、2フレーム連続して明るい時間帯があったか」を調べます。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+$report = "$HOME\Videos\VRCClubCharts\private-light-recovery\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_20261111T062458Z_0f2ebe8795\lighting-cycle.json"
+py -3 scripts/diagnose_light_cycle_report.py --report "$report"
+~~~
+
+新しい `briefBrightWindow` には、輝度30以下の暗いフレームが先行し、その後に輝度45以上・ほぼ黒い画素比率92%未満の**2連続フレーム**があるか、候補フレーム番号と明るさを表示します。光量変化だけを調べるもので、画像を復元したり、DJ設備や明暗周期の完了を主張したりしません。
+
+将来の実機観測で、**手動で確認するための1枚だけ**の候補画像を保存したい場合は、従来の監督付きコマンドに `--capture-bright-window` を追加できます。これは**明示的に指定したときだけ有効**です。
+
+~~~powershell
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 90 --live --capture-bright-window --confirm-private-instance --confirm-recording-rights --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+保存する条件は「一度暗いフレームを観測し、その後に明るいフレームが2回連続したこと」です。従来の厳格な「明るい基準→暗転→安定した回復」検出に成功した場合は、今まで通り `recovery.png` を優先します。厳格な検出に失敗して上の条件だけ満たした場合は `brief-brightness-opportunity-observed` と表示し、`bright-window-candidate.png` を最大1枚だけ非公開保存します。どちらの状態でもOSC移動は0回です。候補画像は**画面が十分見えている証明ではなく、ストロボ・白飛びを除外できません**。必ず人間が視覚確認してください。
+
+権利確認済み・他者不在のPrivate Worldに手動入室している場合に限定し、実行後8秒以内にVRChatを前面に戻してください。出力は従来と同じローカル非公開フォルダに保存され、Geminiやランキングへ送信しません。Worldログ変更、フォーカス喪失、非常停止時には候補画像を保存しません。これを根拠に**自律歩行・自動再開・DJ配信機器の動作判定・ランキング公開**を行うことは禁止のままです。安定周期を確かめる基準値は変更していません。
+
 ## 照明回復を自動観測し、安定したフレームを記録する（2026-11-11）
 
 **新しい試験機能：** `scripts/inspection_light_cycle_probe.py`。今のWorldは時間経過でフロアが暗くなるため、OSC移動をさせずに**照明の周期を非公開で観測**できる専用モードを追加しました。
