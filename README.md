@@ -52,6 +52,19 @@ Real unattended patrol remains gated on applicable VRChat authorization.
 
 A [local Windows inspection queue](docs/INSPECTION_QUEUE.md) now generates a bounded list of eligible public Worlds and resumes past successful captures. Each World still requires manual entry and an exact ID acknowledgement before recording; it never changes public rankings, automatically joins Worlds or uploads footage. A synthetic offline test suite covers consent, resume, plan mismatches and failed-capture stops. This is a step toward the explicitly authorized inspection pilot, **not** autonomous VRChat traversal.
 
+## Private low-light DJ booth visual review (no new capture)
+
+A [local dark-club image review tool](docs/PRIVATE_LOW_LIGHT_REVIEW.md)
+takes the previously captured, SHA-256-verified low-light PNG and makes a
+side-by-side **original vs. luminance-only shadow-lift** comparison for
+human review. On the Windows machine, run
+`py -3 scripts/private_low_light_review.py --open`.
+It finds the most recent local low-light report automatically, never
+launches VRChat or requires a new capture, keeps images outside this
+repository, and never calls Gemini or publishes ranking claims.
+This improves *inspectability* of dark DJ-style stages; it does not
+establish AI detection accuracy, DJ streaming support, or safe movement.
+
 ## Bounded local OSC camera sweep
 
 An opt-in [Windows stationary OSC sweep pilot](docs/BOUNDED_OSC_SWEEP.md)
