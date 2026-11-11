@@ -1,0 +1,40 @@
+name: Verify private low-light DJ scene review
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/private_low_light_review.py'
+      - 'scripts/inspection_light_cycle.py'
+      - 'scripts/diagnose_light_cycle_report.py'
+      - 'tests/test_private_low_light_review.py'
+      - 'tests/test_diagnose_light_cycle_report.py'
+      - '.github/workflows/private-low-light-review-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/private_low_light_review.py'
+      - 'scripts/inspection_light_cycle.py'
+      - 'scripts/diagnose_light_cycle_report.py'
+      - 'tests/test_private_low_light_review.py'
+      - 'tests/test_diagnose_light_cycle_report.py'
+      - '.github/workflows/private-low-light-review-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  private-image-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow for actual synthetic PNG validation
+        run: python -m pip install 'Pillow>=10,<12'
+      - name: Test offline original and shadow-lift review
+        run: python -m unittest discover -s tests -p test_private_low_light_review.py -v
+      - name: Test existing private light-report provenance checks
+        run: python -m unittest discover -s tests -p test_diagnose_light_cycle_report.py -v
