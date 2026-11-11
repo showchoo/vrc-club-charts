@@ -178,7 +178,7 @@ def read_report(path: Path) -> dict:
                 bright_window.get("lightingCycleVerified") is not False or
                 bright_window.get("safeToMoveOrResumeAutomation") is not False):
             raise DiagnosticError("Unverified bright frame needs restricted provenance")
-        state = report.get("lightingCycle")
+    state = report.get("lightingCycle")
     if (not isinstance(state, dict) or
             state.get("status") not in STATES or
             type(state.get("samples")) is not int):
