@@ -85,7 +85,7 @@ class GeminiRestDiagnosticTests(unittest.TestCase):
         def fail(url, key, **kw):
             seen.append(url)
             return {"outcome": "http-error", "httpStatus": 400}
-        report = diag.diagnostics("AIza_TEST", probe_fn=fail, environ={})
+        report = diag.diagnostics("AIza_TEST_EXAMPLE_KEY_LONG_ENOUGH", probe_fn=fail, environ={})
         self.assertEqual(len(seen), 1)
         self.assertEqual(report["status"], "rest-list-failed")
 
@@ -118,6 +118,28 @@ class GeminiRestDiagnosticTests(unittest.TestCase):
             "outcome": "http-error", "httpStatus": 400}, environ={})
         self.assertEqual(r["keyFamily"], "legacy-standard")
         self.assertNotIn("AIza_LegacySecret", json.dumps(r))
+
+    def test_truncated_one_character_clipboard_input_fails_before_network(self):
+        def would_call_google(*args, **kwargs):
+            raise AssertionError("Invalid short key must not be sent")
+        result = diag.diagnostics("*", probe_fn=would_call_google, environ={})
+        self.assertEqual(result["status"], "invalid-key-input-length")
+        self.assertTrue(result["keyLooksTruncated"])
+        self.assertEqual(result["keyFamily"], "unrecognized")
+        self.assertNotIn("modelList", result)
+        self.assertNotIn("*", json.dumps(result))
+
+    def test_unrecognized_but_long_key_is_not_assumed_invalid(self):
+        calls = []
+        def maybe_valid(url, key, **kwargs):
+            calls.append(url)
+            return {"outcome": "http-error", "httpStatus": 400, "responseKind": "html"}
+        result = diag.diagnostics("some_unknown_prefix_with_enough_characters",
+                                  probe_fn=maybe_valid, environ={})
+        self.assertFalse(result["keyLooksTruncated"])
+        self.assertEqual(result["keyFamily"], "unrecognized")
+        self.assertEqual(result["status"], "rest-list-failed")
+        self.assertEqual(len(calls), 1)
 
     def test_dry_run_is_inert(self):
         with patch.object(diag, "diagnostics", side_effect=AssertionError("network")):
