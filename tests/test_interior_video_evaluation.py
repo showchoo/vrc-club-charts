@@ -102,6 +102,42 @@ class VideoAssessmentTests(unittest.TestCase):
         self.assertNotIn("api-key-1234", str(caught.exception))
         client.files.upload.assert_not_called()
 
+    def test_remote_protocol_error_is_safely_reported_without_raw_details(self):
+        # Mimic the httpx2.RemoteProtocolError thrown on the operator's PC.
+        class TransportError(Exception):
+            pass
+
+        TransportError.__module__ = "httpx2._exceptions"
+
+        class RemoteProtocolError(TransportError):
+            pass
+
+        RemoteProtocolError.__module__ = "httpx2._exceptions"
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        modules, _ = fake_google_sdk(client)
+        client.models.generate_content.side_effect = RemoteProtocolError(
+            "Proxy secret and private headers")
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "short.mp4"
+            video.write_bytes(b"synthetic test video")
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                with self.assertRaisesRegex(RuntimeError, "model-request transport failed") as caught:
+                    evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+        self.assertNotIn("Proxy secret", str(caught.exception))
+        self.assertEqual(client.models.generate_content.call_count, 1)
+        client.files.upload.assert_not_called()
+
+    def test_unexpected_programming_exception_is_not_hidden_as_network_error(self):
+        client = SimpleNamespace(files=Mock(), models=Mock())
+        modules, _ = fake_google_sdk(client)
+        client.models.generate_content.side_effect = TypeError("developer error")
+        with tempfile.TemporaryDirectory() as d:
+            video = Path(d) / "short.mp4"
+            video.write_bytes(b"synthetic test video")
+            with patch.dict(sys.modules, modules), patch.dict(os.environ, {"GEMINI_API_KEY": "fake"}):
+                with self.assertRaisesRegex(TypeError, "developer error"):
+                    evaluator.ask_gemini(video, "gemini-3.5-flash-lite")
+
     def test_failure_in_file_upload_is_redacted_and_not_retried(self):
         client = SimpleNamespace(files=Mock(), models=Mock())
         modules, ApiError = fake_google_sdk(client)

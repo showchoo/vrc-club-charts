@@ -61,6 +61,35 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
+## Gemini動画の送信途中で切断された場合（2026-11-11）
+
+実機で10.74 MiBの30秒MP4は直接送信経路に進みましたが、`httpx2.RemoteProtocolError: Server disconnected without sending a response` で応答前に通信断となりました。原因は未確定であり、動画不良・モデル名の誤りを示すものではありません。長いトレースに代えて、現行コードでは `Gemini model-request transport failed` と安全な診断案内を表示します。
+
+**1. APIの基本通信（テキストのみ、小さなリクエスト）を先に確認する。** APIキーは現在のPowerShell内に `GEMINI_API_KEY` として設定済みであること。値を貼り付けたり表示したりしないこと。
+
+~~~powershell
+py -3 -c 'import os; from google import genai; client=genai.Client(api_key=os.environ["GEMINI_API_KEY"]); print(client.models.generate_content(model="gemini-3.5-flash-lite", contents="Reply with OK only").text)'
+~~~
+
+ここでも通信が切れるなら、動画の圧縮より先にインターネット接続、プロキシ/VPN、ローカルファイアウォール、Google APIへのアクセスを確認する。入力やAPIキーをこのチャットに貼らないこと。
+
+**2. テキスト通信が成功した場合、元動画を変更せずに別ファイルへ軽量化する。** VRChatで録画し直す必要はなく、30秒のまま2fps・横960px・映像600kbps程度（おおむね2～3MiB以下）へ変換できる。映像のサンプル密度は下がるため、細かな機材・文字の確認精度は低下し得る。
+
+~~~powershell
+$video = "$HOME\Videos\VRCClubCharts\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_20261111T034002Z.mp4"
+$small = "$HOME\Videos\VRCClubCharts\dj_floor_20261111T034002Z_small.mp4"
+ffmpeg -hide_banner -loglevel error -n -i "$video" -vf "fps=2,scale=960:-2" -an -c:v libx264 -preset veryfast -b:v 600k -maxrate 700k -bufsize 1400k -movflags +faststart "$small"
+(Get-Item "$small").Length / 1MB
+~~~
+
+**3.** 動画内の人の撮影・分析・クラウド送信に必要な権利と同意がある場合だけ、軽量版を**別名の非公開ドラフト**に解析する。
+
+~~~powershell
+py -3 scripts/evaluate_interior_video.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --video "$small" --source owner-recorded --out "$HOME\Videos\VRCClubCharts\private-evaluations\dj_floor_20261111T034002Z_small.draft.json" --analyze --confirm-sharing
+~~~
+
+軽量版は元動画とは異なるハッシュを持つため、ドラフトの出典はこの軽量版になる。公開ランキングへは反映されない。**通信断はプロキシやネットワーク要因の可能性もあり、圧縮すれば必ず直るわけではない。**
+
 ## Gemini動画アップロードでHTTP 400になる場合（2026-11-11）
 
 実機で30秒のH.264/MP4自動撮影（120フレーム、映像品質ok）に成功しましたが、旧コードでは `client.files.upload(file=...)` が `400 Bad Request` を返す事例がありました。原因は未確定です。Gemini公式仕様では短い動画をモデル入力に直接含める方式があるため、現行の `evaluate_interior_video.py` は **12MiB以下ならinline video**、それより大きい動画は **MIMEタイプを明示したFiles API** を利用します。別方式による自動再送はしません。
