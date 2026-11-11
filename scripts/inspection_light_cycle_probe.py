@@ -45,6 +45,7 @@ WORLD_ID = re.compile(r"wrld_[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\Z")
 MIN_SECONDS = 10
 MAX_SECONDS = 120
 FOCUS_SECONDS = 8
+MAX_FOCUS_SECONDS = 20
 OBSERVE_INTERVAL_SECONDS = 1.0
 MAX_IMAGE_BYTES = 10 * 1024 * 1024
 
@@ -144,7 +145,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
     if (isinstance(focus_seconds, bool) or
             not isinstance(focus_seconds, (int, float)) or
             not math.isfinite(focus_seconds) or
-            not 0 <= focus_seconds <= FOCUS_SECONDS):
+            not 0 <= focus_seconds <= MAX_FOCUS_SECONDS):
         raise ValueError("invalid-focus-delay")
     joined = corroborate_world(world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
     if not isinstance(joined, dict) or joined.get("status") != "corroborated":
@@ -167,10 +168,14 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
             raise ObservationStopped("world-session-guard-refused")
         if not emergency.start():
             raise ObservationStopped("emergency-stop-unavailable")
-        print("Focus the manually joined private VRChat World within 8 seconds.",
-              flush=True)
-        if stop.wait(focus_seconds) or not safe():
-            raise ObservationStopped("world-focus-or-emergency-stop")
+        print(f"Focus the manually joined private VRChat World within "
+              f"{focus_seconds:g} seconds.", flush=True)
+        if stop.wait(focus_seconds):
+            raise ObservationStopped("safety-stop-during-focus-wait")
+        if not is_active(hwnd):
+            raise ObservationStopped("vrchat-not-foreground-after-focus-delay")
+        if stop.is_set():
+            raise ObservationStopped("safety-stop-during-focus-wait")
         # Window geometry may change while the operator focuses VRChat.
         # Re-read the foreground target before capturing any private pixels.
         focused_hwnd, focused_area = get_window("VRChat")
@@ -291,6 +296,8 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--world-id", required=True)
     parser.add_argument("--seconds", type=int, default=60)
+    parser.add_argument("--focus-seconds", type=float, default=FOCUS_SECONDS,
+                        help="Time to bring VRChat to foreground: 0-20 seconds")
     parser.add_argument("--out-dir", type=Path,
                         default=Path.home() / "Videos" / "VRCClubCharts"
                         / "private-light-recovery")
@@ -325,6 +332,7 @@ def main(argv=None) -> int:
             raise ValueError("live-requires-private-rights-authorization-and-risk-ack")
         output = run_live(world_id=args.world_id, seconds=args.seconds,
                           out_dir=destination,
+                          focus_seconds=args.focus_seconds,
                           capture_brief_window=args.capture_bright_window,
                           capture_dark_diagnostic=args.capture_dark_diagnostic)
     except (OSError, ValueError) as exc:
