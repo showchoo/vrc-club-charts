@@ -88,7 +88,9 @@ class OscMovement:
         "strafe_left": ("/input/Horizontal", -0.40),
         "strafe_right": ("/input/Horizontal", 0.40),
         "turn_left": ("/input/LookHorizontal", -0.35),
-        "turn_right": ("/input/LookHorizontal", 0.35),
+        # 0.80 was observed to rotate the real Desktop VRChat client (2026-11-11).
+        # 0.35 failed before the client restart; left turn remains uncalibrated.
+        "turn_right": ("/input/LookHorizontal", 0.80),
     }
     ALL = ("/input/Vertical", "/input/Horizontal", "/input/LookHorizontal")
 
