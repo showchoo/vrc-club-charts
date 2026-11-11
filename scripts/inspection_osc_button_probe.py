@@ -18,12 +18,12 @@ import threading
 import time
 
 try:
-    from scripts.inspection_world_log import corroborate_world
+    from scripts.inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from scripts.inspection_session_guard import WorldSessionGuard
     from scripts.inspection_emergency_stop import EmergencyStop
     from scripts.windows_vrchat_inspector import get_window, is_active, osc_packet
 except ModuleNotFoundError:
-    from inspection_world_log import corroborate_world
+    from inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from inspection_session_guard import WorldSessionGuard
     from inspection_emergency_stop import EmergencyStop
     from windows_vrchat_inspector import get_window, is_active, osc_packet
@@ -95,7 +95,7 @@ def run_probe(world_id: str, *, focus_seconds: float = FOCUS_SECONDS,
         pulses_planned, hold_seconds, packet = 1, UI_HOLD_SECONDS, quick_menu_packet
     else:
         pulses_planned, hold_seconds, packet = PULSES, HOLD_SECONDS, look_right_packet
-    joined = corroborate_world(world_id, max_age_seconds=180)
+    joined = corroborate_world(world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
     if joined.get("status") != "corroborated":
         return {"status": "blocked", "reason": "world-log-unconfirmed",
                 "pulsesSent": 0, "cameraMotionVerified": False}
