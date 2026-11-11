@@ -181,7 +181,8 @@ def read_report(path: Path) -> dict:
             report.get("status") not in ("lighting-cycle-not-confirmed",
                                          "recovered-stable-light-observed",
                                          "brief-brightness-opportunity-observed",
-                                         "capture-visibility-needs-review") or
+                                         "capture-visibility-needs-review",
+                                         "low-light-visibility-needs-review") or
             report.get("privateLocalOnly") is not True or
             report.get("publiclyShareable") is not False or
             report.get("rankingEligible") is not False or
@@ -219,6 +220,37 @@ def read_report(path: Path) -> dict:
                 visibility.get("imageCaptureFailureConfirmed") is not False or
                 visibility.get("genuineDarkSceneConfirmed") is not False):
             raise DiagnosticError("Dark capture needs private visual review provenance")
+    if report["status"] == "low-light-visibility-needs-review":
+        shot = report.get("screenshot")
+        sample = report.get("lowLightSample")
+        if (not isinstance(shot, dict) or
+                shot.get("file") != "low-light-review.png" or
+                shot.get("humanReviewRequired") is not True or
+                shot.get("captureVisibilityVerified") is not False or
+                shot.get("stableLightingRecoveryConfirmed") is not False or
+                not isinstance(sample, dict) or
+                sample.get("status") != "low-light-review-candidate" or
+                sample.get("humanReviewRequired") is not True or
+                sample.get("captureVisibilityVerified") is not False or
+                sample.get("lightingCycleVerified") is not False or
+                sample.get("safeToMoveOrResumeAutomation") is not False or
+                sample.get("djEquipmentVerified") is not False or
+                sample.get("selectionPolicy") !=
+                    "lowest-near-black-fraction-then-highest-median"):
+            raise DiagnosticError("Low-light frame requires human review provenance")
+        recorded_samples = report.get("luminanceSamples")
+        index = sample.get("sample")
+        if (not isinstance(recorded_samples, list) or
+                type(index) is not int or
+                not 1 <= index <= len(recorded_samples) or
+                not isinstance(recorded_samples[index - 1], dict) or
+                recorded_samples[index - 1].get("medianLuma") != sample.get("medianLuma") or
+                recorded_samples[index - 1].get("nearBlackFraction") != sample.get("nearBlackFraction") or
+                not isinstance(sample.get("medianLuma"), (float, int)) or
+                not isinstance(sample.get("nearBlackFraction"), (float, int)) or
+                not 0 <= sample["medianLuma"] < BASELINE_MIN_MEDIAN or
+                not 0 <= sample["nearBlackFraction"] < MAX_VALID_NEAR_BLACK):
+            raise DiagnosticError("Low-light review sample does not match source metrics")
     state = report.get("lightingCycle")
     if (not isinstance(state, dict) or
             state.get("status") not in STATES or
