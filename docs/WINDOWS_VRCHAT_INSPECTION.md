@@ -61,6 +61,18 @@ desktop. When you launch it from PowerShell, switch back to VRChat within 15 sec
 The client must remain visible and focused. Stop via Ctrl+C or change
 window focus. This is still awaiting real Windows smoke testing.
 
+## 2026年のGemini新型AuthキーとHTML 400について
+
+2026-11-11の実機診断で、動画なしの `GET /v1beta/models` すら `HTTP 400` / `responseKind: "html"` で失敗しました。`google-genai` SDKでも同じHTML 400が発生するため、動画サイズ・動画フォーマット・SDKのみの不具合とは断定できません。**動画を再撮影・再圧縮せず、認証キーとプロジェクトの設定を優先して調べます。**
+
+Googleは2026-05-28からGoogle AI Studio新規作成キーをAuthキーへ移行しています。新型キーは通常 `AQ.`、旧Standardキーは `AIza` という形式です。旧診断の `keyLooksLikeStandardGoogleKey: false` は新型キーにも当てはまるため、**無効キーの根拠ではありません**。現行診断は機密値を表示しない `keyFamily`（`authorization` / `legacy-standard` / `unrecognized` / `missing`）へ変更しました。この分類は文字列パターンだけであり、キーの有効性の証明ではありません。
+
+- 公式ドキュメント: https://ai.google.dev/gemini-api/docs/api-key
+- 同一エラーの開発者報告（2026-10-26）: https://discuss.ai.google.dev/t/aq-authorization-key-returns-generic-html-400-for-get-v1beta-models-on-windows-11/195158
+- 上記フォーラムで2026-10-29にGoogle担当者は、**新しいGoogle AI Studioプロジェクトに新しいAuthキーを作り、最小限のAPIリクエストで検証する**ことを提案しています。ただし、解決を保証する回答ではありません。
+
+対処はGoogle AI StudioのAPI Keys画面でキーの種類と対象プロジェクト、Gemini APIへの割当を確認し、必要なら新しいプロジェクトに新しいキーを作って、現在のPowerShellの `$env:GEMINI_API_KEY` を差し替えて専用診断を再実行することです。既存のVercel用シークレットや稼働中サイトの設定は**変更しない**でください。キーそのものはGitHub/チャット/ログに投稿しないでください。
+
 ## 動画・SDKを使わずにGeminiの400エラーを診断（2026-11-11）
 
 有効な `gemini-3.5-flash-lite` モデルに、`google-genai` SDKからたった一文を送ってもHTML形式の `400 Bad Request` が返る場合、動画を何度圧縮しても原因は分かりません。先に**公式REST APIへPython標準ライブラリ（urllib）で直接通信**する診断を追加しました。
