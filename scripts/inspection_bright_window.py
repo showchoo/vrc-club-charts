@@ -5,9 +5,14 @@ One or two strobe flashes can still fool this heuristic. No I/O or OSC here.
 """
 from __future__ import annotations
 
-from scripts.inspection_light_cycle import (
-    BASELINE_MIN_MEDIAN, MAX_VALID_NEAR_BLACK, _check_sample,
-)
+try:
+    from scripts.inspection_light_cycle import (
+        BASELINE_MIN_MEDIAN, MAX_VALID_NEAR_BLACK, _check_sample,
+    )
+except ModuleNotFoundError:
+    from inspection_light_cycle import (
+        BASELINE_MIN_MEDIAN, MAX_VALID_NEAR_BLACK, _check_sample,
+    )
 
 DARK_CONTEXT_MAX_MEDIAN = 30.0
 MIN_CONSECUTIVE_BRIGHT = 2
