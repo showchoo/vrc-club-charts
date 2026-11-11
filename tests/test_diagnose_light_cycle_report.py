@@ -70,11 +70,28 @@ class DiagnosticTests(unittest.TestCase):
                          "no-three-consecutive-eligible-stable-frames")
         opportunity = result["briefBrightWindow"]
         self.assertEqual(opportunity["status"], "brief-brightness-opportunity")
-        self.assertEqual(opportunity["candidate"]["candidateSample"], 4)
-        self.assertEqual(opportunity["candidate"]["medianLuma"], 186)
+        self.assertEqual(opportunity["candidate"]["candidateSample"], 8)
+        self.assertEqual(opportunity["candidate"]["medianLuma"], 100)
+        self.assertEqual(opportunity["candidate"]["brightRunLumaSpread"], 40)
         self.assertFalse(opportunity["lightingCycleVerified"])
         self.assertFalse(opportunity["safeToMoveOrResumeAutomation"])
         self.assertFalse(result["originalReportModified"])
+
+
+    def test_longer_bright_window_outweighs_shorter_brighter_peak(self):
+        values = samples([6, 105, 186, 8, 63, 76, 68, 72, 5], black=.25)
+        analysis = diag.analyze_samples(values)
+        candidate = analysis["briefBrightWindow"]["candidate"]
+        self.assertEqual(candidate["brightRunLength"], 4)
+        self.assertEqual(candidate["brightRunSamples"], [5, 8])
+        self.assertEqual(candidate["candidateSample"], 8)
+        self.assertEqual(candidate["medianLuma"], 72)
+        self.assertEqual(candidate["selectionPolicy"],
+                         "longest-bright-run-then-lowest-luma-spread")
+        self.assertEqual(analysis["primaryDiagnostic"],
+                         "no-three-consecutive-eligible-stable-frames")
+        self.assertFalse(analysis["originalReportModified"])
+        self.assertFalse(analysis["lightingCycleRetroactivelyVerified"])
 
     def test_new_private_bright_candidate_report_can_be_reanalyzed(self):
         values = samples([5, 7, 70, 120, 9, 10, 60, 90, 7, 8],
