@@ -470,6 +470,19 @@ class ObserverTests(unittest.TestCase):
         self.assertFalse(self.destination.exists())
         self.assertEqual(result["movementCommandsSent"], 0)
 
+    def test_safety_stop_during_focus_delay_is_distinguished(self):
+        with (
+            patch.object(probe.threading.Event, "wait", return_value=True),
+            patch.object(probe, "screenshot_png",
+                         side_effect=AssertionError("Must not capture")),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=20, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "safety-stop-during-focus-wait")
+        self.assertFalse(self.destination.exists())
+
     def test_focus_limit_is_bounded_and_invalid_request_fails(self):
         for invalid in (-1, 20.1, float("nan"), True):
             with self.subTest(value=invalid), self.assertRaises(ValueError):
