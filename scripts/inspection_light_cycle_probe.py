@@ -21,7 +21,8 @@ import uuid
 from pathlib import Path
 
 try:
-    from scripts.inspection_light_cycle import LightCycleTracker, sample_lighting
+    from scripts.inspection_light_cycle import (LightCycleTracker, sample_lighting,
+        BASELINE_MIN_MEDIAN, MAX_VALID_NEAR_BLACK)
     from scripts.diagnose_light_cycle_report import (analyze_samples,
         is_near_black_capture_sample)
     from scripts.inspection_bright_window import BriefBrightWindow
@@ -31,7 +32,8 @@ try:
     from scripts.windows_vrchat_inspector import get_window, is_active, screenshot_png
     from scripts.auto_process_interior_queue import ROOT, atomic_json
 except ModuleNotFoundError:
-    from inspection_light_cycle import LightCycleTracker, sample_lighting
+    from inspection_light_cycle import (LightCycleTracker, sample_lighting,
+        BASELINE_MIN_MEDIAN, MAX_VALID_NEAR_BLACK)
     from diagnose_light_cycle_report import (analyze_samples,
         is_near_black_capture_sample)
     from inspection_bright_window import BriefBrightWindow
@@ -72,7 +74,8 @@ def validate_request(world_id: str, seconds: int, out_dir: Path) -> Path:
 
 def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
                   capture_brief_window: bool = False,
-                  capture_dark_diagnostic: bool = False) -> dict:
+                  capture_dark_diagnostic: bool = False,
+                  capture_visibility_sample: bool = False) -> dict:
     """One-second spaced observations; still_safe must enforce focus+guards.
 
     No OSC input ever. Return screenshot bytes after strict light recovery,
@@ -87,6 +90,9 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
     recovered_png = None
     all_near_black = True
     dark_diagnostic_png = None
+    lowlight_png = None
+    lowlight_summary = None
+    lowlight_rank = None
     for index in range(max_samples):
         if not still_safe():
             raise ObservationStopped("world-focus-or-emergency-stop")
@@ -97,6 +103,29 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
         if not still_safe():
             raise ObservationStopped("world-focus-or-emergency-stop")
         metrics = sample_lighting(png)
+        # A private review image is NOT a passing brightness sample or a
+        # confirmed useful view. Prefer the frame with least near-black area.
+        if capture_visibility_sample:
+            level = metrics["medianLuma"]
+            dark_fraction = metrics["nearBlackFraction"]
+            if (0 <= level < BASELINE_MIN_MEDIAN and
+                    0 <= dark_fraction < MAX_VALID_NEAR_BLACK):
+                rank = (1 - dark_fraction, level)
+                if lowlight_rank is None or rank > lowlight_rank:
+                    lowlight_rank = rank
+                    lowlight_png = png
+                    lowlight_summary = {
+                        "status": "low-light-review-candidate",
+                        "sample": index + 1,
+                        "medianLuma": level,
+                        "nearBlackFraction": dark_fraction,
+                        "selectionPolicy": "lowest-near-black-fraction-then-highest-median",
+                        "humanReviewRequired": True,
+                        "captureVisibilityVerified": False,
+                        "lightingCycleVerified": False,
+                        "safeToMoveOrResumeAutomation": False,
+                        "djEquipmentVerified": False,
+                    }
         if capture_dark_diagnostic:
             if is_near_black_capture_sample(metrics) and all_near_black:
                 dark_diagnostic_png = png
@@ -128,13 +157,16 @@ def observe_cycle(*, capture_png, still_safe, wait, max_samples: int,
         "darkDiagnosticPng": (dark_diagnostic_png
                               if capture_dark_diagnostic and all_near_black
                               and len(samples) >= 3 else None),
+        "lowLightPng": lowlight_png,
+        "lowLightSample": lowlight_summary,
     }
 
 
 def run_live(*, world_id: str, seconds: int, out_dir: Path,
              focus_seconds: float = FOCUS_SECONDS,
              capture_brief_window: bool = False,
-             capture_dark_diagnostic: bool = False) -> dict:
+             capture_dark_diagnostic: bool = False,
+             capture_visibility_sample: bool = False) -> dict:
     dest = validate_request(world_id, seconds, out_dir)
     if sys.platform != "win32":
         raise ValueError("windows-required")
@@ -142,6 +174,8 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         raise ValueError("invalid-brief-window-opt-in")
     if type(capture_dark_diagnostic) is not bool:
         raise ValueError("invalid-dark-diagnostic-opt-in")
+    if type(capture_visibility_sample) is not bool:
+        raise ValueError("invalid-visibility-sample-opt-in")
     if (isinstance(focus_seconds, bool) or
             not isinstance(focus_seconds, (int, float)) or
             not math.isfinite(focus_seconds) or
@@ -186,7 +220,8 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
             capture_png=lambda: screenshot_png(hwnd, area),
             still_safe=safe, wait=stop.wait, max_samples=seconds,
             capture_brief_window=capture_brief_window,
-            capture_dark_diagnostic=capture_dark_diagnostic)
+            capture_dark_diagnostic=capture_dark_diagnostic,
+            capture_visibility_sample=capture_visibility_sample)
     except ObservationStopped as exc:
         reason = exc.reason
     except KeyboardInterrupt:
@@ -223,13 +258,20 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
     dark_diagnostic = (observation["darkDiagnosticPng"]
                        if not stable and not candidate_found else None)
     dark_diagnostic_found = dark_diagnostic is not None
+    lowlight = (observation["lowLightPng"] if not stable and
+                not candidate_found and not dark_diagnostic_found else None)
+    lowlight_found = lowlight is not None
     image_file = ("recovery.png" if stable else
                   "bright-window-candidate.png" if candidate_found else
-                  "dark-capture-diagnostic.png")
-    saved_png = recovered if stable else candidate if candidate_found else dark_diagnostic
+                  "dark-capture-diagnostic.png" if dark_diagnostic_found else
+                  "low-light-review.png")
+    saved_png = (recovered if stable else
+                 candidate if candidate_found else
+                 dark_diagnostic if dark_diagnostic_found else lowlight)
     final_status = ("recovered-stable-light-observed" if stable else
                     "brief-brightness-opportunity-observed" if candidate_found else
                     "capture-visibility-needs-review" if dark_diagnostic_found else
+                    "low-light-visibility-needs-review" if lowlight_found else
                     "lighting-cycle-not-confirmed")
     diagnostics = analyze_samples(observation["samples"])
     data = {
@@ -245,6 +287,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "calibrationDiagnostics": diagnostics,
         "captureVisibilityDiagnostic": diagnostics["captureVisibilityDiagnostic"],
         "briefBrightWindow": observation["briefBrightWindow"],
+        "lowLightSample": observation["lowLightSample"] if lowlight_found else None,
         "screenshot": (
             {"file": image_file, "sha256": hashlib.sha256(saved_png).hexdigest(),
              "humanReviewRequired": True,
@@ -279,6 +322,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "status": data["status"], "lightCycle": observation["state"],
         "calibrationDiagnostics": data["calibrationDiagnostics"],
         "briefBrightWindow": data["briefBrightWindow"],
+        "lowLightSample": data["lowLightSample"],
         "captureVisibilityDiagnostic": data["captureVisibilityDiagnostic"],
         "captureRegion": data["captureRegion"],
         "reportFile": str(output / "lighting-cycle.json"),
@@ -286,6 +330,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "brightWindowImage": str(output / image_file) if candidate_found else None,
         "captureDiagnosticImage": (str(output / "dark-capture-diagnostic.png")
                                    if dark_diagnostic_found else None),
+        "lowLightImage": str(output / "low-light-review.png") if lowlight_found else None,
         "screenshotsSaved": 1 if saved_png is not None else 0,
         "movementCommandsSent": 0, "autonomousMovementRestarted": False,
         "rankingEligible": False,
@@ -306,6 +351,8 @@ def main(argv=None) -> int:
                         help="Explicitly opt in to one local unverified bright candidate PNG")
     parser.add_argument("--capture-dark-diagnostic", action="store_true",
                         help="Opt in to one private near-black capture for human comparison")
+    parser.add_argument("--capture-visibility-sample", action="store_true",
+                        help="Opt in to one private below-threshold frame for human visual review")
     parser.add_argument("--confirm-private-instance", action="store_true")
     parser.add_argument("--confirm-recording-rights", action="store_true")
     parser.add_argument("--confirm-platform-authorization", action="store_true")
@@ -323,6 +370,7 @@ def main(argv=None) -> int:
                 "externalNetworkRequests": 0,
                 "briefWindowCaptureEnabled": False,
                 "darkDiagnosticCaptureEnabled": False,
+                "visibilitySampleCaptureEnabled": False,
             }, ensure_ascii=False, indent=2))
             return 0
         if not all((
@@ -334,14 +382,16 @@ def main(argv=None) -> int:
                           out_dir=destination,
                           focus_seconds=args.focus_seconds,
                           capture_brief_window=args.capture_bright_window,
-                          capture_dark_diagnostic=args.capture_dark_diagnostic)
+                          capture_dark_diagnostic=args.capture_dark_diagnostic,
+                          capture_visibility_sample=args.capture_visibility_sample)
     except (OSError, ValueError) as exc:
         parser.exit(2, f"ERROR: {exc}\n")
     print(json.dumps(output, ensure_ascii=False, indent=2))
     return 0 if output["status"] in (
         "recovered-stable-light-observed", "lighting-cycle-not-confirmed",
         "brief-brightness-opportunity-observed",
-        "capture-visibility-needs-review") else 1
+        "capture-visibility-needs-review",
+        "low-light-visibility-needs-review") else 1
 
 
 if __name__ == "__main__":

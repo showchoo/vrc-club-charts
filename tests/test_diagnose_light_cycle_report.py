@@ -189,6 +189,47 @@ class DiagnosticTests(unittest.TestCase):
         with self.assertRaisesRegex(diag.DiagnosticError, "visual review provenance"):
             diag.read_report(path)
 
+    def test_low_light_capture_report_requires_unverified_provenance(self):
+        values = samples([2, 5, 10, 20, 44, 12, 39, 3, 33, 20],
+                         black=[.9284, .70, .45, .32, .40, .26, .0871,
+                                .85, .20, .30])
+        path = fixture(self.folder, values)
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw["status"] = "low-light-visibility-needs-review"
+        raw["screenshot"] = {
+            "file": "low-light-review.png",
+            "sha256": "a" * 64,
+            "humanReviewRequired": True,
+            "stableLightingRecoveryConfirmed": False,
+            "captureVisibilityVerified": False,
+        }
+        raw["lowLightSample"] = {
+            "status": "low-light-review-candidate",
+            "sample": 7, "medianLuma": 39,
+            "nearBlackFraction": .0871,
+            "selectionPolicy": "lowest-near-black-fraction-then-highest-median",
+            "humanReviewRequired": True,
+            "captureVisibilityVerified": False,
+            "lightingCycleVerified": False,
+            "safeToMoveOrResumeAutomation": False,
+            "djEquipmentVerified": False,
+        }
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        before = path.read_bytes()
+        result = diag.read_report(path)
+        self.assertEqual(result["sourceStatus"], "low-light-visibility-needs-review")
+        self.assertFalse(result["lightingCycleRetroactivelyVerified"])
+        self.assertEqual(path.read_bytes(), before)
+        raw["lowLightSample"]["sample"] = 5  # data no longer matches original frame
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        with self.assertRaisesRegex(diag.DiagnosticError, "match source metrics"):
+            diag.read_report(path)
+        raw["lowLightSample"]["sample"] = 7
+        raw["lowLightSample"]["safeToMoveOrResumeAutomation"] = True
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        with self.assertRaisesRegex(diag.DiagnosticError, "human review provenance"):
+            diag.read_report(path)
+
     def test_reject_tampered_or_public_report(self):
         p = fixture(self.folder, samples([20] * 10))
         raw = json.loads(p.read_text())
