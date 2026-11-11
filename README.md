@@ -52,6 +52,18 @@ Real unattended patrol remains gated on applicable VRChat authorization.
 
 A [local Windows inspection queue](docs/INSPECTION_QUEUE.md) now generates a bounded list of eligible public Worlds and resumes past successful captures. Each World still requires manual entry and an exact ID acknowledgement before recording; it never changes public rankings, automatically joins Worlds or uploads footage. A synthetic offline test suite covers consent, resume, plan mismatches and failed-capture stops. This is a step toward the explicitly authorized inspection pilot, **not** autonomous VRChat traversal.
 
+## Permission-gated still-image DJ facility candidate analysis
+
+The [private still-facility analysis](docs/PRIVATE_STILL_FACILITY_DRAFT.md)
+can compare an authorized original low-light capture with its local
+shadow-lift rendering using Gemini, but **only** after explicit recording
+rights and Gemini image-upload consent. Without the opt-in flags it
+performs a read-only dry-run and sends no media. Strict, allowlisted
+appearance-only records are saved locally, never promoted to ranking or
+streaming-function verification. Both images are variants of the same
+frame, not independent confirmations. No automatic login, World
+traversal, credential sharing, or scheduled image upload is implemented.
+
 ## Private low-light DJ booth visual review (no new capture)
 
 A [local dark-club image review tool](docs/PRIVATE_LOW_LIGHT_REVIEW.md)
