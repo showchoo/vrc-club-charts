@@ -61,5 +61,5 @@ py -3 scripts/private_low_light_review.py --report "C:\Users\showchoo_main\Video
 自動テスト：
 
 ~~~powershell
-py -3 -m unittest tests.test_private_low_light_review
+py -3 -m unittest discover -s tests -p test_private_low_light_review.py -v
 ~~~
