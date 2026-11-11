@@ -36,6 +36,49 @@ class InspectionTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 m.osc_packet("/input/Vertical", value)
 
+    def test_live_verified_right_turn_amplitude_is_bounded_and_released(self):
+        # 0.80 Right LookHorizontal was confirmed by the Windows operator.
+        # Never infer that the left-turn amplitude was also confirmed.
+        self.assertEqual(m.OscMovement.AXES["turn_right"],
+                         ("/input/LookHorizontal", 0.80))
+        self.assertEqual(m.OscMovement.AXES["turn_left"],
+                         ("/input/LookHorizontal", -0.35))
+        with (patch.object(m.socket, "socket") as fake_socket,
+              patch.object(m.time, "monotonic", side_effect=[0.0, 0.5])):
+            controller = m.OscMovement()
+            controller.act("turn_right", lambda: True, duration=0.4)
+            calls = fake_socket.return_value.sendto.call_args_list
+            self.assertTrue(all(c.args[1] == ("127.0.0.1", 9000) for c in calls))
+            turning = [c.args[0] for c in calls
+                       if c.args[0].startswith(b"/input/LookHorizontal\0")
+                       and struct.unpack(">f", c.args[0][-4:])[0] > 0]
+            self.assertEqual(len(turning), 1)
+            self.assertAlmostEqual(struct.unpack(">f", turning[0][-4:])[0], .8, places=5)
+            final = calls[-len(controller.ALL):]
+            self.assertEqual(len(final), 3)
+            self.assertTrue(all(struct.unpack(">f", c.args[0][-4:])[0] == 0 for c in final))
+            controller.close()
+
+    def test_right_turn_emergency_stop_also_releases_high_amplitude(self):
+        stop = m.threading.Event()
+        checks = []
+        def still_safe():
+            checks.append(1)
+            if len(checks) >= 3:
+                stop.set()
+            return not stop.is_set()
+        with patch.object(m.socket, "socket") as fake_socket:
+            controller = m.OscMovement()
+            with self.assertRaises(RuntimeError):
+                controller.act("turn_right", still_safe, duration=0.4)
+            packets = [c.args[0] for c in fake_socket.return_value.sendto.call_args_list]
+            self.assertTrue(any(p.startswith(b"/input/LookHorizontal\0")
+                                and abs(struct.unpack(">f", p[-4:])[0] - .8) < .00001
+                                for p in packets))
+            self.assertTrue(all(struct.unpack(">f", p[-4:])[0] == 0
+                                for p in packets[-len(controller.ALL):]))
+            controller.close()
+
     def test_actions_bounded_and_inert_default(self):
         self.assertEqual(m.clamp_duration("stop"), 0)
         self.assertLessEqual(m.clamp_duration("forward"), .65)
