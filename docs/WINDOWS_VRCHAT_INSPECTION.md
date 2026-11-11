@@ -63,7 +63,7 @@ window focus. This is still awaiting real Windows smoke testing.
 
 ## Gemini動画アップロードでHTTP 400になる場合（2026-11-11）
 
-実機で30秒のH.264/MP4自動撮影（120フレーム、映像品質ok）に成功しましたが、旧コードでは \`client.files.upload(file=...)\` が \`400 Bad Request\` を返す事例がありました。原因は未確定です。Gemini公式仕様では短い動画をモデル入力に直接含める方式があるため、現行の \`evaluate_interior_video.py\` は **12MiB以下ならinline video**、それより大きい動画は **MIMEタイプを明示したFiles API** を利用します。別方式による自動再送はしません。
+実機で30秒のH.264/MP4自動撮影（120フレーム、映像品質ok）に成功しましたが、旧コードでは `client.files.upload(file=...)` が `400 Bad Request` を返す事例がありました。原因は未確定です。Gemini公式仕様では短い動画をモデル入力に直接含める方式があるため、現行の `evaluate_interior_video.py` は **12MiB以下ならinline video**、それより大きい動画は **MIMEタイプを明示したFiles API** を利用します。別方式による自動再送はしません。
 
 既存動画は再撮影不要。必要な撮影/参加者の権利とGeminiクラウド転送同意を確認してから、使用中のPowerShellで以下を実行します（APIキーを画面やログに表示しないこと）。
 
@@ -75,7 +75,7 @@ Get-Item "$video" | Select-Object Name, Length
 py -3 scripts/evaluate_interior_video.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --video "$video" --source owner-recorded --out "$HOME\Videos\VRCClubCharts\private-evaluations\dj_floor_20261111T034002Z.draft.json" --analyze --confirm-sharing
 ~~~
 
-\`Length\` が12,582,912バイト以下であればFiles APIを使わない経路に切り替わります。容量がそれより大きい場合は引き続きFiles APIを使うため、同じ400が発生したら、まずサイズ・利用可能モデル・Google側のキー権限とネットワーク条件を調べます。例外時は処理段階とHTTPコードのみを表示し、HTMLエラーやトークンをログに出しません。結果は非公開ドラフトのみで、公開ランキングへ反映しません。
+`Length` が12,582,912バイト以下であればFiles APIを使わない経路に切り替わります。容量がそれより大きい場合は引き続きFiles APIを使うため、同じ400が発生したら、まずサイズ・利用可能モデル・Google側のキー権限とネットワーク条件を調べます。例外時は処理段階とHTTPコードのみを表示し、HTMLエラーやトークンをログに出しません。結果は非公開ドラフトのみで、公開ランキングへ反映しません。
 
 ## Optional video AI assessment
 
