@@ -4,18 +4,22 @@ on:
   pull_request:
     paths:
       - 'scripts/private_low_light_review.py'
+      - 'scripts/analyze_private_scene_still.py'
       - 'scripts/inspection_light_cycle.py'
       - 'scripts/diagnose_light_cycle_report.py'
       - 'tests/test_private_low_light_review.py'
+      - 'tests/test_analyze_private_scene_still.py'
       - 'tests/test_diagnose_light_cycle_report.py'
       - '.github/workflows/private-low-light-review-tests.yml'
   push:
     branches: [main]
     paths:
       - 'scripts/private_low_light_review.py'
+      - 'scripts/analyze_private_scene_still.py'
       - 'scripts/inspection_light_cycle.py'
       - 'scripts/diagnose_light_cycle_report.py'
       - 'tests/test_private_low_light_review.py'
+      - 'tests/test_analyze_private_scene_still.py'
       - 'tests/test_diagnose_light_cycle_report.py'
       - '.github/workflows/private-low-light-review-tests.yml'
   workflow_dispatch:
@@ -38,3 +42,5 @@ jobs:
         run: python -m unittest discover -s tests -p test_private_low_light_review.py -v
       - name: Test existing private light-report provenance checks
         run: python -m unittest discover -s tests -p test_diagnose_light_cycle_report.py -v
+      - name: Test opt-in still-photo DJ facility draft without any Gemini network call
+        run: python -m unittest discover -s tests -p test_analyze_private_scene_still.py -v
