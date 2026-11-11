@@ -50,6 +50,25 @@ py -3 scripts/inspection_position_step_probe.py --world-id wrld_b2d9f284-3a77-4a
 
 次の段階は、今回の実機で動作を確認した後、複数の撮影位置を撮り分けるプランナーを別機能として開発することです。階段検出・移動経路の正確な安全確認ができるまでは、無監督での段差移動は解禁しません。
 
+## 90秒の暗いクラブ観測が「calibrating」のままだった場合（2026-11-11）
+
+実機World `wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79` にて90秒の監督付き観測が完了しましたが、`lighting-cycle-not-confirmed`、`lightCycle.status=calibrating`、`referenceMedianLuma=null` となりました。OSC移動は0回で、安全上の異常停止はありません。
+
+**まだ理由は断定できません。** 既存コードでは画面輝度中央値45以上、ほぼ黒い画素比率92%未満、3フレーム連続で明るさの差が6以内という基準が必要です。暗いWorldでは「45」を超えられない可能性がありますが、照明変化が速くて連続フレームが安定しなかった可能性もあります。
+
+今回は**再観測せず**、既存の90個の`luminanceSamples`を使って校正が失敗した理由を切り分ける`scripts/diagnose_light_cycle_report.py`を追加しました。以下はVRChatを起動せずに実行できる**完全ローカル・読み取り専用**のコマンドです。
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+$report = "$HOME\Videos\VRCClubCharts\private-light-recovery\wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79_20261111T062458Z_0f2ebe8795\lighting-cycle.json"
+py -3 scripts/diagnose_light_cycle_report.py --report "$report"
+~~~
+
+出力の `primaryDiagnostic` は原因の候補（`no-samples-above-minimum-luminance`／`all-samples-near-black`／`bright-frames-excluded-by-near-black-fraction`／`no-three-consecutive-eligible-stable-frames` など）です。`medianLumaMin/Max/Typical`、`framesAboveCurrentLumaThreshold`、`framesPassingNearBlackLimit`、`stableVisibleWindowsEntirelyBelowLumaThreshold` も表示します。画面そのものや個人情報は送信・出力せず、元のJSONも変更しません。
+
+今後の`inspection_light_cycle_probe.py`の実行結果には `calibrationDiagnostics` が加わります。ただしこの診断は**元の輝度基準を勝手に下げません**。照明が変化したのか、暗いままなのか、映像として何が見えるかは数値だけでは確定できず、Worldの設備の有無・衝突安全性・自律移動の許可を与えるものではありません。診断結果を基に、次の校正方法を検討します。
+
 ## 照明回復を自動観測し、安定したフレームを記録する（2026-11-11）
 
 **新しい試験機能：** `scripts/inspection_light_cycle_probe.py`。今のWorldは時間経過でフロアが暗くなるため、OSC移動をさせずに**照明の周期を非公開で観測**できる専用モードを追加しました。
