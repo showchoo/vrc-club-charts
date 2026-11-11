@@ -90,6 +90,10 @@ class DiagnosticTests(unittest.TestCase):
         with self.assertRaisesRegex(diag.DiagnosticError, "Invalid spatial"):
             diag.analyze_samples(values)
 
+        values[0]["highlightTiles"] = 3
+        with self.assertRaisesRegex(diag.DiagnosticError, "Mixed legacy"):
+            diag.analyze_samples(values)
+
     def test_full_90_second_baseline_failure_from_dark_but_visible_frames(self):
         path = fixture(self.folder, samples([20.0] * 90, black=.5))
         before = path.read_bytes()
