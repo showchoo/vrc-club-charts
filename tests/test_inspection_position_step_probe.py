@@ -225,7 +225,7 @@ class PositionStepTests(unittest.TestCase):
     def test_core_rechecks_focus_before_movement_and_after_step(self):
         ctl = FakeController()
         samples = [b"before-private", b"after-private"]
-        safe_states = iter([True, True, False])
+        safe_states = iter([True, True, True, False])
         with self.assertRaisesRegex(probe.StepStopped, "unsafe-after-movement"):
             probe.execute_one_step(
                 controller=ctl,
