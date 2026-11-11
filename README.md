@@ -36,6 +36,18 @@ admitted** public DJ World pages, using explicit same-creator or shared-genre
 signals. It never implies functional DJ equipment verification. See the
 [production rollout and related World guide](docs/DEPLOYMENT_AND_RELATED_WORLDS.md).
 
+## Local patrol restricted to Google Calendar workdays (JST)
+
+The future local inspection schedule will run **only on dates with a confirmed
+shift event** in the owner's primary Google Calendar. The
+[read-only Windows workday gate](docs/LOCAL_WORKDAY_PATROL.md) checks the live
+calendar before launch, excludes lookalike titles such as `仕事なし`, and fails
+closed when OAuth/API data is unavailable. Calendar OAuth tokens and personal
+shift dates stay on the operator's PC, never in this public repository or site.
+The manual inspection launcher supports optional `-WorkdayOnly`; autonomous
+Steam/VRChat launch and the Windows scheduling task **are not yet implemented**.
+Real unattended patrol remains gated on applicable VRChat authorization.
+
 ## Operator-gated multi-World inspection queue
 
 A [local Windows inspection queue](docs/INSPECTION_QUEUE.md) now generates a bounded list of eligible public Worlds and resumes past successful captures. Each World still requires manual entry and an exact ID acknowledgement before recording; it never changes public rankings, automatically joins Worlds or uploads footage. A synthetic offline test suite covers consent, resume, plan mismatches and failed-capture stops. This is a step toward the explicitly authorized inspection pilot, **not** autonomous VRChat traversal.
