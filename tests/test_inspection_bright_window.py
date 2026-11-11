@@ -53,6 +53,53 @@ class BrightWindowTests(unittest.TestCase):
         self.assertIsNotNone(window.summary()["candidate"])
         self.assertIsNone(window.best_image)
 
+
+    def test_longer_bright_run_beats_two_frame_186_peak(self):
+        window = BriefBrightWindow()
+        levels = [5, 100, 186, 9, 65, 75, 68, 71, 8]
+        for i, level in enumerate(levels):
+            window.observe(metrics(level), bytes([i]))
+        candidate = window.summary()["candidate"]
+        self.assertEqual(candidate["brightRunSamples"], [5, 8])
+        self.assertEqual(candidate["brightRunLength"], 4)
+        self.assertEqual(candidate["candidateSample"], 8)
+        self.assertEqual(candidate["medianLuma"], 71)
+        self.assertEqual(window.best_image, bytes([7]))
+        self.assertEqual(window.summary()["eligibleBrightPairsSeen"], 4)
+        self.assertFalse(window.summary()["safeToMoveOrResumeAutomation"])
+
+    def test_equal_length_run_prefers_lower_brightness_spread(self):
+        window = BriefBrightWindow()
+        for level in [8, 65, 120, 10, 55, 59, 9]:
+            window.observe(metrics(level), b"local")
+        candidate = window.summary()["candidate"]
+        self.assertEqual(candidate["brightRunSamples"], [5, 6])
+        self.assertEqual(candidate["brightRunLumaSpread"], 4)
+
+    def test_later_longer_run_updates_representative(self):
+        window = BriefBrightWindow()
+        for i, level in enumerate([10, 60, 85, 15, 55, 65, 60, 12]):
+            window.observe(metrics(level), bytes([i]))
+        self.assertEqual(window.summary()["candidate"]["brightRunLength"], 3)
+        self.assertEqual(window.summary()["candidate"]["candidateSample"], 7)
+        self.assertEqual(window.best_image, bytes([6]))
+
+    def test_held_frame_history_bounded_to_six(self):
+        window = BriefBrightWindow()
+        for i, level in enumerate([8] + [60] * 30):
+            window.observe(metrics(level), bytes([i]))
+        self.assertEqual(len(window._recent_frames), 6)
+        self.assertEqual(window.summary()["candidate"]["brightRunLength"], 30)
+        self.assertEqual(window.summary()["candidate"]["representativeFrameLimitedToLastSamples"], 6)
+        self.assertFalse(window.summary()["lightingCycleVerified"])
+
+    def test_missing_png_offline_still_computes_candidate(self):
+        window = BriefBrightWindow()
+        for level in [9, 56, 62, 65, 8]:
+            window.observe(metrics(level))
+        self.assertEqual(window.summary()["candidate"]["brightRunLength"], 3)
+        self.assertIsNone(window.best_image)
+
     def test_invalid_values_fail_closed(self):
         for value in [None, {}, metrics(float("nan")), metrics(True), metrics(-5)]:
             with self.subTest(value=value), self.assertRaises(ValueError):
