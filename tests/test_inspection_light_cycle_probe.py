@@ -333,6 +333,97 @@ class ObserverTests(unittest.TestCase):
         self.assertFalse(stored["publiclyShareable"])
         self.assertFalse(stored["externalUploads"])
 
+    def test_mixed_below_threshold_captures_one_opt_in_review_frame(self):
+        # Mirrors the real 10-s result: luma 2..44, <45 throughout,
+        # visible but still insufficient to certify a lighting cycle.
+        levels = [2, 5, 10, 20, 44, 12, 39, 3, 33, 20]
+        blacks = [.9284, .70, .45, .32, .40, .26, .0871, .85, .20, .30]
+        values = [sample(x, b) for x, b in zip(levels, blacks)]
+        with (
+            patch.object(probe, "screenshot_png",
+                         side_effect=[b"\\x89PNG\\r\\n\\x1a\\n" + bytes([i]) * 200
+                                      for i in range(10)]),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_visibility_sample=True,
+                capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "low-light-visibility-needs-review")
+        self.assertEqual(result["lightCycle"]["status"], "calibrating")
+        self.assertEqual(result["screenshotsSaved"], 1)
+        self.assertEqual(result["lowLightSample"]["sample"], 7)
+        self.assertEqual(result["lowLightSample"]["medianLuma"], 39)
+        self.assertEqual(result["lowLightSample"]["nearBlackFraction"], .0871)
+        self.assertEqual(result["lowLightSample"]["status"],
+                         "low-light-review-candidate")
+        self.assertTrue(Path(result["lowLightImage"]).is_file())
+        self.assertEqual(len(list(self.destination.rglob("*.png"))), 1)
+        self.assertIsNone(result["brightWindowImage"])
+        self.assertIsNone(result["captureDiagnosticImage"])
+        self.assertIsNone(result["recoveryImage"])
+        self.assertEqual(result["movementCommandsSent"], 0)
+        self.assertFalse(result["autonomousMovementRestarted"])
+        self.assertFalse(result["rankingEligible"])
+        stored = json.loads(Path(result["reportFile"]).read_text())
+        self.assertEqual(stored["screenshot"]["file"], "low-light-review.png")
+        self.assertTrue(stored["screenshot"]["humanReviewRequired"])
+        self.assertFalse(stored["screenshot"]["captureVisibilityVerified"])
+        self.assertFalse(stored["publiclyShareable"])
+        self.assertFalse(stored["externalUploads"])
+
+    def test_mixed_low_light_without_opt_in_does_not_save_png(self):
+        values = [sample(20, .20)] * 10
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "lighting-cycle-not-confirmed")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertIsNone(result["lowLightImage"])
+        self.assertFalse(list(self.destination.rglob("*.png")))
+
+    def test_full_near_black_diagnostic_precedes_lowlight_review(self):
+        values = [sample(1, .9602)] * 10
+        with (
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting", side_effect=values),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_visibility_sample=True,
+                capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "capture-visibility-needs-review")
+        self.assertEqual(result["screenshotsSaved"], 1)
+        self.assertIsNone(result["lowLightImage"])
+        self.assertTrue(Path(result["captureDiagnosticImage"]).is_file())
+
+    def test_world_change_discards_lowlight_review_image(self):
+        original_close = FakeWorldGuard.close
+
+        def changed(self):
+            self.reason = "local-world-or-instance-changed"
+            return original_close(self)
+
+        with (
+            patch.object(FakeWorldGuard, "close", changed),
+            patch.object(probe, "screenshot_png",
+                         return_value=b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(20, .20)] * 10),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_visibility_sample=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["screenshotsSaved"], 0)
+        self.assertFalse(self.destination.exists())
+
     def test_dark_without_diagnostic_opt_in_remains_numeric_only(self):
         with (
             patch.object(probe, "screenshot_png",
