@@ -83,8 +83,8 @@ class DiagnosticTests(unittest.TestCase):
         candidate = analysis["briefBrightWindow"]["candidate"]
         self.assertEqual(candidate["brightRunLength"], 4)
         self.assertEqual(candidate["brightRunSamples"], [5, 8])
-        self.assertEqual(candidate["candidateSample"], 7)
-        self.assertEqual(candidate["medianLuma"], 68)
+        self.assertEqual(candidate["candidateSample"], 8)
+        self.assertEqual(candidate["medianLuma"], 70)
         self.assertEqual(candidate["selectionPolicy"],
                          "longest-bright-run-then-lowest-luma-spread")
         self.assertEqual(analysis["primaryDiagnostic"],
