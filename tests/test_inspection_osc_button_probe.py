@@ -48,6 +48,76 @@ class ButtonProbeTests(unittest.TestCase):
             with self.subTest(wrong=wrong), self.assertRaises(ValueError):
                 p.look_right_packet(wrong)
 
+    def test_analog_packet_uses_full_bounded_axis_and_zero_release(self):
+        packet = p.look_horizontal_probe_packet(True)
+        released = p.look_horizontal_probe_packet(False)
+        self.assertTrue(packet.startswith(b"/input/LookHorizontal\0"))
+        self.assertEqual(struct.unpack(">f", packet[-4:])[0],
+                         struct.unpack(">f", p.osc_packet("/input/LookHorizontal", 0.80)[-4:])[0])
+        self.assertEqual(struct.unpack(">f", released[-4:])[0], 0.0)
+        self.assertEqual(p.ANALOG_PULSES, 2)
+        self.assertLessEqual(p.ANALOG_HOLD_SECONDS, 0.5)
+        for bad in (1, 0, "True", None):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                p.look_horizontal_probe_packet(bad)
+
+    def test_analog_dry_run_is_inert_and_exposes_test_value(self):
+        output = io.StringIO()
+        with (patch.object(p, "run_probe", side_effect=AssertionError("No live probe")),
+              redirect_stdout(output)):
+            code = p.main(["--world-id", WORLD, "--mode", "analog"])
+        self.assertEqual(code, 0)
+        result = json.loads(output.getvalue())
+        self.assertEqual(result["status"], "dry-run")
+        self.assertEqual(result["mode"], "analog")
+        self.assertEqual(result["wouldSend"], "/input/LookHorizontal")
+        self.assertEqual(result["value"], 0.8)
+        self.assertFalse(result["recordedOrUploaded"])
+
+    def test_analog_live_probe_sends_two_short_pulses_and_three_zeroes(self):
+        sock = Mock()
+        clock = itertools.count()
+        with (patch.object(p.sys, "platform", "win32"),
+              patch.object(p, "corroborate_world", return_value={
+                  "status": "corroborated", "worldId": WORLD,
+                  "joinFingerprint": "a" * 64}),
+              patch.object(p, "get_window", return_value=(42, {})),
+              patch.object(p, "is_active", return_value=True),
+              patch.object(p, "WorldSessionGuard", FakeWorldGuard),
+              patch.object(p, "EmergencyStop", FakeHotkey),
+              patch.object(p.socket, "socket", return_value=sock),
+              patch.object(p.time, "monotonic", side_effect=lambda: next(clock)),
+              redirect_stdout(io.StringIO())):
+            result = p.run_probe(WORLD, focus_seconds=0, mode="analog")
+        self.assertEqual(result["status"], "sent-unverified")
+        self.assertEqual(result["mode"], "analog")
+        self.assertEqual(result["oscAddress"], "/input/LookHorizontal")
+        self.assertEqual(result["pulsesSent"], 2)
+        self.assertFalse(result["cameraMotionVerified"])
+        packets = [c.args[0] for c in sock.sendto.call_args_list]
+        self.assertEqual(len(packets), 5)
+        values = [round(struct.unpack(">f", x[-4:])[0], 2) for x in packets]
+        self.assertEqual(values, [0.8, 0.0, 0.8, 0.0, 0.0])
+        self.assertEqual({c.args[1] for c in sock.sendto.call_args_list},
+                         {("127.0.0.1", 9000)})
+        sock.close.assert_called_once()
+
+    def test_analog_focus_loss_prevents_turning(self):
+        sock = Mock()
+        with (patch.object(p.sys, "platform", "win32"),
+              patch.object(p, "corroborate_world", return_value={
+                  "status": "corroborated", "worldId": WORLD,
+                  "joinFingerprint": "a" * 64}),
+              patch.object(p, "get_window", return_value=(42, {})),
+              patch.object(p, "is_active", return_value=False),
+              patch.object(p, "WorldSessionGuard", FakeWorldGuard),
+              patch.object(p, "EmergencyStop", FakeHotkey),
+              patch.object(p.socket, "socket", return_value=sock),
+              redirect_stdout(io.StringIO())):
+            result = p.run_probe(WORLD, focus_seconds=0, mode="analog")
+        self.assertEqual(result["status"], "stopped")
+        sock.sendto.assert_not_called()
+
     def test_default_cli_never_contacts_client_or_sends_osc(self):
         output = io.StringIO()
         with (patch.object(p, "run_probe", side_effect=AssertionError("Must be inert")),

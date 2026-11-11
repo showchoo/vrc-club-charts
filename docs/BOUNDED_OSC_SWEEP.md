@@ -38,6 +38,28 @@ VRChatのOSCを有効にし、Action Menu / OSC Debug画面を閉じます。実
 
 結果の status: sent-unverified はコマンド送信完了のみを示します。**実際に視点が動いたかは目視確認が必要**です。UDP/OSCの送信成功だけで視点移動が成功したとは判定できません。
 
+## アナログ入力のデッドゾーン切り分け（2026-11-11）
+
+Windows実機ではOSC Debugで受信が見えるものの、アナログ0.35とボタン式LookRightの双方で右回転を目視確認できませんでした。VRChat公式フィードバックには、2024年の更新でLookHorizontalのデッドゾーンがおよそ50%になったという利用者報告があります（https://feedback.vrchat.com/open-beta/p/1489-vive-controllers-default-wand-binding-has-analog-locomotion-rotation-speed）。現在も同じ挙動とは限らないため、**通常巡回コードの入力値は変更せず**診断専用モードを追加しました。
+
+最新版を取得後、まずdry-run:
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode analog
+~~~
+
+同じWorldのPrivateインスタンスに手動で再入室し、他の参加者がいないこと、録画・操作の権利を確認してください。VRChatのOSCを有効にし、Action MenuとOSC Debugを閉じてください。3分以内に次を実行します。
+
+~~~powershell
+py -3 scripts/inspection_osc_button_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --mode analog --live --confirm-private-instance --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+実行後8秒以内にVRChatを最前面へ戻し、マウス・キーボード・ゲームパッドから手を離してください。0.80（-1～1の範囲）のアナログ右回転を0.4秒ずつ2回だけ送信し、それぞれ最後に0.0へ戻します。歩行・録画・Geminiへの送信はしません。Ctrl+Shift+F12で停止できます。
+
+sent-unverified は送信完了だけを示し、実際に回転したことの証明ではありません。**目視で右回転したか**の結果をもとに、入力値の較正か、VRChat側の入力競合・デスクトップ設定の調査を次に行います。
+
 ## 1. Windows上で準備
 
 PowerShellをVRC Club ChartsのローカルGitチェックアウトで開きます。
