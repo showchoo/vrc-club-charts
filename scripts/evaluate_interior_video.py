@@ -272,9 +272,36 @@ def main(argv: list[str] | None = None) -> int:
         validate_media(video)
         if not args.confirm_sharing:
             raise ValueError("Use --confirm-sharing only after checking recording consent and rights")
+        metadata = quality = None
+        if args.analyze:
+            # Do full local verification before uploading a new video.
+            # Imports are delayed to avoid a circular import with the
+            # timeline validator, which imports validate_analysis above.
+            try:
+                from scripts.inspection_media_verify import verify_mp4
+                from scripts.inspection_visual_quality import assess_video_quality
+                from scripts.inspection_evidence_timeline import attach_verified_timeline
+            except ModuleNotFoundError:
+                from inspection_media_verify import verify_mp4
+                from inspection_visual_quality import assess_video_quality
+                from inspection_evidence_timeline import attach_verified_timeline
+            metadata = verify_mp4(video)
+            quality = assess_video_quality(video, metadata=metadata)
+            if quality.get("status") != "ok":
+                raise ValueError("Video quality must be verified before Gemini upload")
         analysis = (ask_gemini(video, args.model) if args.analyze
                     else validate_analysis(json.loads(args.analysis_json.read_text(encoding="utf-8"))))
         report = create_report(args.world_id, video, args.source, analysis, args.model)
+        if args.analyze:
+            # Direct analysis must produce the same verifiable private draft
+            # metadata as the batch queue. No publication is authorized.
+            report = attach_verified_timeline(report, metadata=metadata,
+                                              visual_quality=quality)
+            report["consent"] = {
+                "recordingConsentConfirmed": True,
+                "aiAnalysisConsentConfirmed": True,
+                "permissionToPublishVisualEstimate": False,
+            }
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except (OSError, ValueError, RuntimeError, TimeoutError, json.JSONDecodeError) as exc:
