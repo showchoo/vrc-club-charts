@@ -404,6 +404,43 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(result["screenshotsSaved"], 0)
         self.assertFalse(self.destination.exists())
 
+
+    def test_focused_window_geometry_refreshed_before_capture(self):
+        initial = {"left": 0, "top": 0, "width": 640, "height": 480}
+        final = {"left": 120, "top": 60, "width": 800, "height": 600}
+        areas = []
+        with (
+            patch.object(probe, "get_window",
+                         side_effect=[(333, initial), (333, final)]),
+            patch.object(probe, "screenshot_png",
+                         side_effect=lambda hwnd, area:
+                         (areas.append(dict(area)) or
+                          b"\\x89PNG\\r\\n\\x1a\\n" + b"x" * 200)),
+            patch.object(probe, "sample_lighting",
+                         side_effect=[sample(1, .96)] * 10),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "capture-visibility-needs-review")
+        self.assertEqual(result["captureRegion"], final)
+        self.assertEqual(areas, [final] * 10)
+
+    def test_window_swap_before_capture_discards_all_evidence(self):
+        with (
+            patch.object(probe, "get_window", side_effect=[
+                (333, {"left": 0, "top": 0, "width": 640, "height": 480}),
+                (444, {"left": 0, "top": 0, "width": 640, "height": 480})]),
+            patch.object(probe, "screenshot_png",
+                         side_effect=AssertionError("No capture after HWND change")),
+        ):
+            result = probe.run_live(
+                world_id=WORLD, seconds=10, out_dir=self.destination,
+                focus_seconds=0, capture_dark_diagnostic=True)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "world-window-changed-before-capture")
+        self.assertFalse(self.destination.exists())
+
     def test_lost_foreground_before_observation_creates_no_files(self):
         with (
             patch.object(probe, "is_active", return_value=False),
