@@ -152,7 +152,8 @@ def read_report(path: Path) -> dict:
     if (not isinstance(report, dict) or report.get("schemaVersion") != 1 or
             report.get("source") != SOURCE or
             report.get("status") not in ("lighting-cycle-not-confirmed",
-                                         "recovered-stable-light-observed") or
+                                         "recovered-stable-light-observed",
+                                         "brief-brightness-opportunity-observed") or
             report.get("privateLocalOnly") is not True or
             report.get("publiclyShareable") is not False or
             report.get("rankingEligible") is not False or
@@ -165,7 +166,19 @@ def read_report(path: Path) -> dict:
         raise DiagnosticError("Invalid World identity in lighting report")
     if not path.parent.name.startswith(world + "_"):
         raise DiagnosticError("Lighting report folder does not match World identity")
-    state = report.get("lightingCycle")
+    if report["status"] == "brief-brightness-opportunity-observed":
+        screenshot = report.get("screenshot")
+        bright_window = report.get("briefBrightWindow")
+        if (not isinstance(screenshot, dict) or
+                screenshot.get("file") != "bright-window-candidate.png" or
+                screenshot.get("stableLightingRecoveryConfirmed") is not False or
+                screenshot.get("humanReviewRequired") is not True or
+                not isinstance(bright_window, dict) or
+                bright_window.get("status") != "brief-brightness-opportunity" or
+                bright_window.get("lightingCycleVerified") is not False or
+                bright_window.get("safeToMoveOrResumeAutomation") is not False):
+            raise DiagnosticError("Unverified bright frame needs restricted provenance")
+        state = report.get("lightingCycle")
     if (not isinstance(state, dict) or
             state.get("status") not in STATES or
             type(state.get("samples")) is not int):
