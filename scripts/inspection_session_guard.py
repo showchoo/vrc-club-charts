@@ -12,9 +12,9 @@ import threading
 from typing import Callable
 
 try:
-    from scripts.inspection_world_log import corroborate_world
+    from scripts.inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
 except ModuleNotFoundError:
-    from inspection_world_log import corroborate_world
+    from inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
 
 FINGERPRINT_RE = re.compile(r"[0-9a-f]{64}\Z")
 
@@ -55,7 +55,7 @@ class WorldSessionGuard:
         if self.reason is not None:
             return False
         try:
-            result = self.check_fn(self.world_id, max_age_seconds=900)
+            result = self.check_fn(self.world_id, max_age_seconds=MAX_ACTIVE_SESSION_AGE_SECONDS)
         except Exception:
             self._fail("local-log-read-error")
             return False
