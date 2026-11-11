@@ -21,6 +21,7 @@ from pathlib import Path
 
 try:
     from scripts.inspection_light_cycle import LightCycleTracker, sample_lighting
+    from scripts.diagnose_light_cycle_report import analyze_samples
     from scripts.inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from scripts.inspection_session_guard import WorldSessionGuard
     from scripts.inspection_emergency_stop import EmergencyStop
@@ -28,6 +29,7 @@ try:
     from scripts.auto_process_interior_queue import ROOT, atomic_json
 except ModuleNotFoundError:
     from inspection_light_cycle import LightCycleTracker, sample_lighting
+    from diagnose_light_cycle_report import analyze_samples
     from inspection_world_log import corroborate_world, MAX_ACTIVE_SESSION_AGE_SECONDS
     from inspection_session_guard import WorldSessionGuard
     from inspection_emergency_stop import EmergencyStop
@@ -182,6 +184,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
         "observationSecondsMaximum": seconds,
         "lightingCycle": observation["state"],
         "luminanceSamples": observation["samples"],
+        "calibrationDiagnostics": analyze_samples(observation["samples"]),
         "screenshot": (
             {"file": "recovery.png",
              "sha256": hashlib.sha256(recovered).hexdigest()}
@@ -212,6 +215,7 @@ def run_live(*, world_id: str, seconds: int, out_dir: Path,
                 "autonomousMovementRestarted": False}
     return {
         "status": data["status"], "lightCycle": observation["state"],
+        "calibrationDiagnostics": data["calibrationDiagnostics"],
         "reportFile": str(output / "lighting-cycle.json"),
         "recoveryImage": str(output / "recovery.png") if stable else None,
         "screenshotsSaved": 1 if stable else 0,
