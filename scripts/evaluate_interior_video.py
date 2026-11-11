@@ -193,6 +193,24 @@ def ask_gemini(video: Path, model: str) -> dict:
             "Check API key access, model availability, and proxy/network settings. "
             "No automatic retry or ranking update was performed."
         ) from None
+    except Exception as exc:
+        # google-genai uses httpx/httpx2 for network transport. These failures
+        # (e.g. "Server disconnected without sending a response") happen
+        # before any model response and are not Gemini JSON errors. Do not
+        # expose raw upstream text, proxy URLs, or embedded credentials.
+        transport_error = any(
+            cls.__name__ == "TransportError"
+            and cls.__module__.split(".", 1)[0] in {"httpx", "httpx2"}
+            for cls in type(exc).__mro__
+        )
+        if not transport_error:
+            raise
+        raise RuntimeError(
+            f"Gemini {phase} transport failed (connection/response interrupted). "
+            "Check a tiny text-only request first; if that works, try a smaller "
+            "local video file (for example 2 FPS, 960px wide, 600kbps). "
+            "No draft was saved or ranking updated."
+        ) from None
     finally:
         # Best effort; the local video never enters GitHub or the production DB.
         if file_ref is not None and getattr(file_ref, "name", None):
