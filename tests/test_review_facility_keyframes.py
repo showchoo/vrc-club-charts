@@ -38,6 +38,12 @@ class ReviewKeyframeTests(unittest.TestCase):
         self.addCleanup(tmp.cleanup)
         self.root = Path(tmp.name)
 
+    def test_model_prompt_forbids_stage_inference_for_elevated_dj_booth(self):
+        from scripts.inspection_facility_inventory import MODEL_INSTRUCTIONS
+        self.assertIn("raised stage", MODEL_INSTRUCTIONS)
+        self.assertIn("out of camera view or occluded", MODEL_INSTRUCTIONS)
+        self.assertIn('return "not_visible" for dj_booth', MODEL_INSTRUCTIONS)
+
     def test_human_false_positive_note_stays_private_and_original_unchanged(self):
         folder = create_private_evidence(self.root)
         original_manifest = (folder / "frames.json").read_bytes()
