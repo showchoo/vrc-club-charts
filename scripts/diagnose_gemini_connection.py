@@ -90,6 +90,7 @@ def diagnostics(key: str, *, probe_fn=probe, environ=None) -> dict:
     result = {
         "schemaVersion": 1,
         "apiKeyPresent": bool(key),
+        "keyLooksTruncated": bool(key and len(key) < 20),
         "keyHasOuterWhitespace": bool(key and key != key.strip()),
         "keyHasQuoteCharacters": bool(key and ('"' in key or "'" in key)),
         # Google AI Studio began issuing AQ.-prefixed authorization keys by
@@ -110,6 +111,9 @@ def diagnostics(key: str, *, probe_fn=probe, environ=None) -> dict:
     }
     if not key:
         result["status"] = "missing-api-key"
+        return result
+    if len(key) < 20:
+        result["status"] = "invalid-key-input-length"
         return result
     first = probe_fn(MODEL_LIST_URL, key)
     result["modelList"] = first
