@@ -92,7 +92,15 @@ def diagnostics(key: str, *, probe_fn=probe, environ=None) -> dict:
         "apiKeyPresent": bool(key),
         "keyHasOuterWhitespace": bool(key and key != key.strip()),
         "keyHasQuoteCharacters": bool(key and ('"' in key or "'" in key)),
-        "keyLooksLikeStandardGoogleKey": bool(key and key.startswith("AIza")),
+        # Google AI Studio began issuing AQ.-prefixed authorization keys by
+        # default in May 2026. A non-AIza prefix is not evidence of a bad key.
+        # Only report the public key *family*, never any prefix/characters.
+        "keyFamily": (
+            "authorization" if key.startswith("AQ.")
+            else "legacy-standard" if key.startswith("AIza")
+            else "missing" if not key
+            else "unrecognized"
+        ),
         "googleApiKeyAlsoSet": bool(env.get("GOOGLE_API_KEY")),
         "proxyEnvironmentPresent": any(
             bool(env.get(name)) for name in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
