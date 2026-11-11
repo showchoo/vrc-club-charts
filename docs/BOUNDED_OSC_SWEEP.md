@@ -50,6 +50,32 @@ py -3 scripts/inspection_position_step_probe.py --world-id wrld_b2d9f284-3a77-4a
 
 次の段階は、今回の実機で動作を確認した後、複数の撮影位置を撮り分けるプランナーを別機能として開発することです。階段検出・移動経路の正確な安全確認ができるまでは、無監督での段差移動は解禁しません。
 
+## 照明回復を自動観測し、安定したフレームを記録する（2026-11-11）
+
+**新しい試験機能：** `scripts/inspection_light_cycle_probe.py`。今のWorldは時間経過でフロアが暗くなるため、OSC移動をさせずに**照明の周期を非公開で観測**できる専用モードを追加しました。
+
+**検出の流れ：** (1) 最初の連続3フレームで明るく安定した基準を測る → (2) 基準から十分暗くなった状態を連続2フレームで確認 → (3) 元の明るさの86%以上に戻り、連続3フレームの明るさが安定したら「照明回復候補」と判定します。観測は1秒間隔、初期設定60秒・最大120秒。明るさの閾値は実機未校正で、ストロボや局所的な演出を完全に判別できません。最初から暗いときには、いったん安定した明るい基準が見つかるまで待ちます。
+
+**回復候補が見つかった場合：** その瞬間のVRChatクライアント画面だけをローカルPNG 1枚とし、光量変化の数値ログを `%USERPROFILE%\Videos\VRCClubCharts\private-light-recovery` に保存します。これにより「照明が回復した瞬間の再観察」を自動化できます。**回復したからといって、勝手に前進・回転・階段移動を再開することはありません。** 撮影権利があるPrivate Worldのみ。Gemini・GitHub・公開サイトへの画像転送はなし。Worldログが変わる、VRChatのフォーカスを失う、Ctrl+Shift+F12を押すと停止します。
+
+まず、**VRChatに触らないDry-run**：
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 90
+~~~
+
+実Worldに入室し、OSCの自動移動なしで照明の暗転→回復を観測したい場合は、録画・参加者の権利と運営許可がある**人のいないPrivateインスタンス**に限定して、次を手動実行します。コマンド実行後8秒以内にVRChatを最前面に戻し、観察中はフォーカスを保持してください。
+
+~~~powershell
+py -3 scripts/inspection_light_cycle_probe.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 90 --live --confirm-private-instance --confirm-recording-rights --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+終了後に `status: recovered-stable-light-observed` が出れば、定義した明暗の回復条件を観測でき、`recoveryImage` にローカル証拠画像が保存されています。出力 `lighting-cycle-not-confirmed` は基準・暗転・回復の一部を確認できなかった状態であり、プログラムの通信失敗ではありません。どちらも衝突安全性、World内移動、DJブース・配信動作の証明ではありません。
+
+**次の開発段階：** 複数の光量周期を比較し、回復した瞬間の安全なカメラ撮影を通常の設備調査と連携します。自動歩行を再開するには、前方の安全、Worldの衝突判定、未知の階段・段差、本人または第三者の在室状況などを別に検証する必要があります。
+
 ## 暗転・照明フェードを伴うクラブ（2026-11-11）
 
 今回の実機Worldは、時間経過とともに室内照明が落ちて暗くなります。従来の16×9や192×108のスクリーンショット差分のみでは、**暗転をキャラクター移動と誤認する偽陽性**と、**暗くて微小移動を検出できない偽陰性**の両方が起き得ます。GeminiのDJ設備「見えない」判定も、単に暗転していたか、撮影位置が低くて隠れていた可能性を残します。
