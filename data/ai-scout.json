@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-10T02:04:22+00:00",
+  "updatedAt": "2026-11-11T00:02:08+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 4,
-    "pending": 179
+    "newAssessments": 1,
+    "pending": 182
   },
   "scored": [
     {
@@ -611,6 +611,17 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
+      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
+      "name": "Neptune Night Club",
+      "author": "Plutto2Times",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
+    },
+    {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
       "name": "Oh's Party Ballroom",
       "author": "emymin",
@@ -738,16 +749,6 @@
       "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
     },
     {
-      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
-      "name": "kakuhira's club house",
-      "author": "kakuhira",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
-    },
-    {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
       "name": "Lights Out Night Club",
       "author": "Lights Out Host",
@@ -856,7 +857,7 @@
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
-      "checkedAt": "2026-11-03T23:58:03+00:00",
+      "checkedAt": "2026-11-11T00:02:02+00:00",
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
@@ -896,8 +897,8 @@
       "status": "assessed"
     },
     "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d": {
-      "checkedAt": "2026-11-03T01:33:58+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-11-11T00:02:08+00:00",
+      "status": "provider-unavailable"
     },
     "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
       "checkedAt": "2026-11-03T23:58:06+00:00",
