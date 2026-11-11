@@ -62,6 +62,45 @@ class DiagnosticTests(unittest.TestCase):
         self.assertEqual(path.read_bytes(), before)
         self.assertEqual(list(self.folder.iterdir()), [path])
 
+
+    def test_variable_bright_pairs_are_relevant_but_never_recovered(self):
+        levels = [5, 7, 70, 186, 10, 8, 60, 100, 11, 10]
+        result = diag.analyze_samples(samples(levels, black=.3))
+        self.assertEqual(result["primaryDiagnostic"],
+                         "no-three-consecutive-eligible-stable-frames")
+        opportunity = result["briefBrightWindow"]
+        self.assertEqual(opportunity["status"], "brief-brightness-opportunity")
+        self.assertEqual(opportunity["candidate"]["candidateSample"], 4)
+        self.assertEqual(opportunity["candidate"]["medianLuma"], 186)
+        self.assertFalse(opportunity["lightingCycleVerified"])
+        self.assertFalse(opportunity["safeToMoveOrResumeAutomation"])
+        self.assertFalse(result["originalReportModified"])
+
+    def test_new_private_bright_candidate_report_can_be_reanalyzed(self):
+        values = samples([5, 7, 70, 120, 9, 10, 60, 90, 7, 8],
+                         black=.2)
+        path = fixture(self.folder, values)
+        report = json.loads(path.read_text(encoding="utf-8"))
+        report["status"] = "brief-brightness-opportunity-observed"
+        report["briefBrightWindow"] = diag.analyze_samples(values)["briefBrightWindow"]
+        report["screenshot"] = {
+            "file": "bright-window-candidate.png",
+            "sha256": "a" * 64,
+            "humanReviewRequired": True,
+            "stableLightingRecoveryConfirmed": False,
+        }
+        path.write_text(json.dumps(report), encoding="utf-8")
+        before = path.read_bytes()
+        analyzed = diag.read_report(path)
+        self.assertEqual(analyzed["sourceStatus"], report["status"])
+        self.assertEqual(analyzed["briefBrightWindow"]["status"],
+                         "brief-brightness-opportunity")
+        self.assertEqual(path.read_bytes(), before)
+        report["screenshot"]["stableLightingRecoveryConfirmed"] = True
+        path.write_text(json.dumps(report), encoding="utf-8")
+        with self.assertRaisesRegex(diag.DiagnosticError, "restricted provenance"):
+            diag.read_report(path)
+
     def test_high_but_unstable_lighting_fails_three_frame_baseline(self):
         values = samples([60, 80] * 45, black=.2)
         data = diag.analyze_samples(values)
