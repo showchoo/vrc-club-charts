@@ -12,6 +12,7 @@ import argparse
 import json
 import math
 import statistics
+import re
 from pathlib import Path
 
 try:
@@ -19,14 +20,12 @@ try:
         BASELINE_MAX_SPREAD, BASELINE_MIN_MEDIAN, CALIBRATION_SAMPLES,
         MAX_VALID_NEAR_BLACK,
     )
-    from scripts.inspection_light_cycle_probe import WORLD_ID
     from scripts.auto_process_interior_queue import ROOT
 except ModuleNotFoundError:
     from inspection_light_cycle import (
         BASELINE_MAX_SPREAD, BASELINE_MIN_MEDIAN, CALIBRATION_SAMPLES,
         MAX_VALID_NEAR_BLACK,
     )
-    from inspection_light_cycle_probe import WORLD_ID
     from auto_process_interior_queue import ROOT
 
 MAX_INPUT_BYTES = 128 * 1024
@@ -35,6 +34,7 @@ STATES = frozenset((
     "recovered-stable-light",
 ))
 SOURCE = "local-supervised-stationary-light-cycle"
+WORLD_ID = re.compile(r"wrld_[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\Z")
 
 
 class DiagnosticError(ValueError):
