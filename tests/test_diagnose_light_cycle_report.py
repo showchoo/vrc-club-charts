@@ -78,13 +78,13 @@ class DiagnosticTests(unittest.TestCase):
 
 
     def test_longer_bright_window_outweighs_shorter_brighter_peak(self):
-        values = samples([6, 105, 186, 8, 63, 72, 68, 70, 5], black=.25)
+        values = samples([6, 105, 186, 8, 63, 76, 68, 72, 5], black=.25)
         analysis = diag.analyze_samples(values)
         candidate = analysis["briefBrightWindow"]["candidate"]
         self.assertEqual(candidate["brightRunLength"], 4)
         self.assertEqual(candidate["brightRunSamples"], [5, 8])
         self.assertEqual(candidate["candidateSample"], 8)
-        self.assertEqual(candidate["medianLuma"], 70)
+        self.assertEqual(candidate["medianLuma"], 72)
         self.assertEqual(candidate["selectionPolicy"],
                          "longest-bright-run-then-lowest-luma-spread")
         self.assertEqual(analysis["primaryDiagnostic"],
