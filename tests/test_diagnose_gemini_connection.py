@@ -45,7 +45,7 @@ class GeminiRestDiagnosticTests(unittest.TestCase):
         self.assertNotIn("candidates", json.dumps(report))
 
     def test_html_400_does_not_echo_key_or_body_and_skips_post(self):
-        key = "AIza_SECRET"
+        key = "AIza_TEST_SECRET_WITH_SUFFICIENT_LENGTH"
         requests = []
         def sender(request, timeout):
             requests.append(request)
