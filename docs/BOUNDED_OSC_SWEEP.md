@@ -12,6 +12,33 @@ VRChat公式ドキュメント： [OSC Input Controller](https://docs.vrchat.com
 - これは**ワールドを順次巡回する機能ではありません**。ワールド変更、アカウントのログイン、パブリックインスタンスへの自動入室、DJ機材のクリック・実動作検証、ランキングの自動公開は行いません。
 - 本機能はGitHubで実装・オフライン検証されますが、**実際のWindows VRChatクライアントでの動作確認は未実施**です。
 
+## 実機成功：0.80のOSC右回転を通常スイープへ採用（2026-11-11）
+
+VRChatの完全再起動とOSC再有効化の後、Windowsデスクトップ実機で以下を目視確認しました。
+
+- Quick Menu：OSCのQuickMenuToggleRight入力で自動的に開いた
+- 視点の右回転：OSCのLookHorizontal=0.80を2回送信し、マウス・ゲームパッドに触れずに実際に回転した
+- 正確な原因（再起動の効果、デッドゾーンのしきい値）は未確定。以前の0.35の失敗が再起動前の状態によるものだった可能性もある
+- 左回転 -0.35、歩行、4回連続スイープによる部屋全体のカバー率は実機で未確認
+
+この観測を受け、通常の短時間OSCスイープで使う turn_right の入力を0.35から**0.80**へ更新しました。1操作あたり最大0.48秒、最大4回、各操作終了時に0へ戻し、フォーカス喪失・World変更・Ctrl+Shift+F12で停止する既存制限は維持します。**0.80で右回転することと、正確な角度や安全な全域観測ができることは別です。**
+
+ローカルPCで最新版に更新して短時間のスイープを再確認：
+
+~~~powershell
+cd C:\Users\showchoo_main\vrc-club-charts
+git pull --ff-only
+py -3 -m unittest tests.test_windows_vrchat_inspector tests.test_inspection_sweep
+~~~
+
+対象WorldのPrivateインスタンスに手動入室し、参加者不在・撮影の権利・OSCが有効であることを確認してから、入室3分以内に以下を実行します。
+
+~~~powershell
+py -3 scripts/run_one_world_inspection.py --world-id wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79 --seconds 30 --sweep --private-instance-confirmed --verify-local-log --confirm-platform-authorization --acknowledge-automation-risk
+~~~
+
+30秒の無音MP4と非公開の監査JSONをローカルへ保存します。Geminiアップロード・DJ設備の機能確認・公開ランキング更新は行いません。実機スイープの正常動作はこの更新を適用した後に別途確認が必要です。
+
 ## Windows 64-bit HWNDエラーとOSCボタン式の診断
 
 2026-11-11の実機テストでは、PowerShell経由のWindowsウィンドウ検出が OverflowError: int too long to convert となる場合がありました。Windowsのウィンドウハンドル（HWND）に対応するctypesのポインター幅の型宣言を修正しました。更新とオフライン回帰試験：
