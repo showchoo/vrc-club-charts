@@ -36,7 +36,13 @@ recording, with at most 2 real timestamps (seconds into this video) and
 confidence in [0,1]; otherwise use "unclear" and an empty evidence array.
 "not_visible" means not observed in the shown frames, NOT proof the facility
 does not exist elsewhere in the World. If the object might be decoration or an
-unrecognized UI, use "unclear". Do not infer whether any equipment operates,
+unrecognized UI, use "unclear". A raised stage, empty platform, lighting,
+video screen, or a DJ-themed room must NEVER by itself be counted as a
+visible DJ booth or DJ decks. If the DJ platform is elevated, behind a wall,
+out of camera view or occluded, return "not_visible" for dj_booth unless
+its actual booth structure is distinctly visible in at least one frame.
+When visibility is ambiguous, use "unclear" instead of inventing a 90% sighting.
+Do not infer whether any equipment operates,
 supports live streaming, has URL access, or works for DJs. Do not identify users.
 Never quote on-screen text, avatars, usernames or personal information.
 """
