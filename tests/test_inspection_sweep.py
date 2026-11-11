@@ -80,6 +80,49 @@ class BoundedSweepTests(unittest.TestCase):
         self.assertEqual(report["observations"], 3)
         self.assertEqual(records[-1]["action"], "stop")
 
+    def test_dark_real_png_signature_stops_before_any_camera_turn(self):
+        original = b"\x89PNG\r\n\x1a\nsynthetic-content"
+        ctl, logs = FakeController(), []
+        with patch.object(sweep, "one_frame_low_light", return_value={
+            "status": "low-visibility", "visualNavigationShouldPause": True
+        }):
+            result = sweep.run_sweep(
+                controller=ctl, capture_png=lambda: original,
+                still_safe=lambda: True, seconds_left=lambda: 40,
+                log_action=logs.append, turns=4)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "low_visibility_or_invalid_image")
+        self.assertEqual(result["executedTurns"], 0)
+        self.assertEqual(ctl.actions, [])
+        self.assertEqual(logs[-1]["safetyDecision"], "low_visibility_or_invalid_image")
+
+    def test_lighting_transition_stops_before_second_turn(self):
+        samples = iter([
+            b"\x89PNG\r\n\x1a\nbefore",
+            b"\x89PNG\r\n\x1a\nafter",
+        ])
+        controller, logs = FakeController(), []
+        with (
+            patch.object(sweep, "one_frame_low_light", return_value={
+                "status": "not-near-black", "visualNavigationShouldPause": False
+            }),
+            patch.object(sweep, "analyze_png_pair", return_value={
+                "status": "suspected-lighting-transition",
+                "visualNavigationShouldPause": True,
+            }),
+            patch.object(sweep, "signature", side_effect=[(80,)*9, (120,)*9]),
+        ):
+            result = sweep.run_sweep(
+                controller=controller, capture_png=lambda: next(samples),
+                still_safe=lambda: True, seconds_left=lambda: 40,
+                log_action=logs.append, turns=4)
+        self.assertEqual(result["status"], "stopped")
+        self.assertEqual(result["reason"], "lighting_transition_or_low_visibility")
+        self.assertEqual(result["executedTurns"], 1)
+        self.assertEqual(sum(action == "turn_right" for action, _ in controller.actions), 1)
+        self.assertEqual(logs[-1]["action"], "stop")
+        self.assertEqual(result["viewChangesObserved"], 0)
+
     def test_focus_loss_never_sends_an_action(self):
         report, ctl, records = self.run_sweep([], safe=lambda: False)
         self.assertEqual(report["status"], "stopped")
