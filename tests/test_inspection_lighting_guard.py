@@ -54,8 +54,9 @@ class LightingGuardTests(unittest.TestCase):
     def test_invalid_samples_fail_closed(self):
         for a, b in ((b"", b""), (b"\x00"*16, b"\x00"*15),
                      (b"invalid", b"invalid")):
-            with self.subTest(length=(len(a), len(b)), self.assertRaises(ValueError):
-                light.analyze_luma_pair(a, b)
+            with self.subTest(length=(len(a), len(b))):
+                with self.assertRaises(ValueError):
+                    light.analyze_luma_pair(a, b)
 
     def test_low_light_single_frame_with_real_png(self):
         try:
