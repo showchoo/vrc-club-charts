@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-11T00:10:01+00:00",
+  "updatedAt": "2026-11-12T01:37:26+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -356,6 +356,57 @@
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
       "checkedAt": "2026-11-04T17:04:46+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_5724ad84-c238-4793-a4ca-ced5a4ba6241",
+      "name": "Lost in a Vortex ［Club］",
+      "author": "ZIPPY251",
+      "checkedAt": "2026-11-12T01:37:25+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_86d3f49f-f66a-4019-acee-9fe759a83edc",
+      "name": "Lunar Night Club",
+      "author": "NeonSkittlesPup",
+      "checkedAt": "2026-11-12T01:37:25+00:00",
+      "metadataStatus": "official_nonpublic",
+      "method": "gemini-grounded-search-v1",
+      "status": "non_public",
+      "summaryJa": "公式APIで非公開Worldと確認。掲載対象外。",
+      "sources": [],
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_6c1a0b57-2391-4c56-94c8-b89b534844ed",
+      "name": "Mamacitas Spanish Night Club",
+      "author": "Golis22",
+      "checkedAt": "2026-11-12T01:37:25+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_4a35e054-acdc-4504-a1a1-5c8f48856203",
+      "name": "Neon Viper",
+      "author": "BadKarma8489",
+      "checkedAt": "2026-11-12T01:37:25+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
