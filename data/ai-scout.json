@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-11T00:02:08+00:00",
+  "updatedAt": "2026-11-12T01:31:33+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 1,
-    "pending": 182
+    "newAssessments": 3,
+    "pending": 180
   },
   "scored": [
     {
@@ -548,18 +548,6 @@
   ],
   "candidates": [
     {
-      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
-      "name": "Club Orion",
-      "author": "AcChosen",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "LIGHTING",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
-    },
-    {
       "id": "wrld_94270b27-d54f-4375-aa08-68117559b735",
       "name": "Avinity ; Oasis",
       "author": "Unknown",
@@ -649,16 +637,6 @@
       "url": "https://vrcmap.com/world/wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483"
     },
     {
-      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
-      "name": "Audiolinkバチバチワールド",
-      "author": "しゃちょー",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
-    },
-    {
       "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
       "name": "Cafe＆Club CYBERIA",
       "author": "PhysisKITE",
@@ -667,16 +645,6 @@
         "CYBER"
       ],
       "url": "worlds/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6.html"
-    },
-    {
-      "id": "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e",
-      "name": "Club Cybercore",
-      "author": "Βigby",
-      "sourceType": "catalog",
-      "signals": [
-        "CYBER"
-      ],
-      "url": "worlds/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e.html"
     },
     {
       "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
@@ -749,6 +717,16 @@
       "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
     },
     {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
+    },
+    {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
       "name": "Lights Out Night Club",
       "author": "Lights Out Host",
@@ -777,15 +755,35 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
+    },
+    {
+      "id": "wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682",
+      "name": "Neon Catnip - Customizable DJ Venue",
+      "author": "DJ Megu",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
+    },
+    {
+      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
+      "name": "Shatoo's Dance Stage",
+      "author": "Shatoo",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
     "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79": {
-      "checkedAt": "2026-11-05T00:22:13+00:00",
+      "checkedAt": "2026-11-12T01:31:25+00:00",
       "status": "assessed"
     },
     "wrld_95883f50-4838-4cea-9e80-3347c5caaf5e": {
-      "checkedAt": "2026-11-05T00:22:15+00:00",
+      "checkedAt": "2026-11-12T01:31:28+00:00",
       "status": "insufficient-image"
     },
     "wrld_492121dd-f7ea-46ab-aade-968e1a91899b": {
@@ -813,7 +811,7 @@
       "status": "assessed"
     },
     "wrld_099295a5-d221-4128-8f01-55cd81d71839": {
-      "checkedAt": "2026-11-05T00:22:18+00:00",
+      "checkedAt": "2026-11-12T01:31:30+00:00",
       "status": "assessed"
     },
     "wrld_4f015255-390a-44cb-9e81-bd2021eb970a": {
@@ -989,7 +987,7 @@
       "status": "assessed"
     },
     "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e": {
-      "checkedAt": "2026-11-04T17:05:08+00:00",
+      "checkedAt": "2026-11-12T01:31:33+00:00",
       "status": "assessed"
     },
     "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80": {
