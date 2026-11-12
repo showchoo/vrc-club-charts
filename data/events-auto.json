@@ -36,6 +36,42 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-7304019f49d200cdd93c",
+    "name": "【次回 営業 日のご案内】 Club Moon Hopper Vol․83 11/15(sun) 21:50〜24:00 TimeTable DJ 22:00~ _Ryou_ (@Ryou_ …",
+    "start": "2026-11-15T12:50:00Z",
+    "end": null,
+    "organizer": "@ClubMoonHopper",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/ClubMoonHopper/status/2120358356678545725?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "7304019f49d200cdd93c",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-a493f9d977daedcbcdf2",
+    "name": "🎂 VRChatライブ 🎂 『Lumina』ワールド公開2周年🎉 el ma Riuワンオフアバター2体目💎 「UL」お披露目ソロ ライブ します🥳🫶 ⏰11/18(水)22:15 開場 🫶 …",
+    "start": "2026-11-18T13:15:00Z",
+    "end": null,
+    "organizer": "@el_ma_riu",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/el_ma_riu/status/2120471613913104893?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "a493f9d977daedcbcdf2",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-7177e8df9bc7a47832ec",
     "name": "【ライブ出演 告知 】 「 VRChat 最大級 ライブイベント 」 ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter 🗓 開催 日程 DAY1：2026.11.2…",
     "start": "2026-11-21T17:20:00Z",
