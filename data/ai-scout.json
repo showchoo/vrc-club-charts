@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T01:31:33+00:00",
+  "updatedAt": "2026-11-13T00:18:52+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -548,6 +548,18 @@
   ],
   "candidates": [
     {
+      "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
+      "name": "Club Orion",
+      "author": "AcChosen",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "LIGHTING",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79.html"
+    },
+    {
       "id": "wrld_94270b27-d54f-4375-aa08-68117559b735",
       "name": "Avinity ; Oasis",
       "author": "Unknown",
@@ -637,6 +649,16 @@
       "url": "https://vrcmap.com/world/wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483"
     },
     {
+      "id": "wrld_099295a5-d221-4128-8f01-55cd81d71839",
+      "name": "Audiolinkバチバチワールド",
+      "author": "しゃちょー",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_099295a5-d221-4128-8f01-55cd81d71839.html"
+    },
+    {
       "id": "wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6",
       "name": "Cafe＆Club CYBERIA",
       "author": "PhysisKITE",
@@ -647,6 +669,16 @@
       "url": "worlds/wrld_950a1c35-8d2e-4c44-8fa4-239b989ac4c6.html"
     },
     {
+      "id": "wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e",
+      "name": "Club Cybercore",
+      "author": "Βigby",
+      "sourceType": "catalog",
+      "signals": [
+        "CYBER"
+      ],
+      "url": "worlds/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e.html"
+    },
+    {
       "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
       "name": "Club Jinja",
       "author": "はるみやにき",
@@ -655,36 +687,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html"
-    },
-    {
-      "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
-      "name": "Club Rayne",
-      "author": "Candy Rayne",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462.html"
-    },
-    {
-      "id": "wrld_99056035-58bd-4ad7-8edd-e90360312490",
-      "name": "Consilium",
-      "author": "Tsuβaki",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_99056035-58bd-4ad7-8edd-e90360312490.html"
-    },
-    {
-      "id": "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80",
-      "name": "DanceStage",
-      "author": "Asaka․",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80.html"
     },
     {
       "id": "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f",
@@ -835,16 +837,16 @@
       "status": "assessed"
     },
     "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462": {
-      "checkedAt": "2026-11-05T00:22:21+00:00",
+      "checkedAt": "2026-11-13T00:18:45+00:00",
       "status": "assessed"
     },
     "wrld_99056035-58bd-4ad7-8edd-e90360312490": {
-      "checkedAt": "2026-11-06T00:13:40+00:00",
+      "checkedAt": "2026-11-13T00:18:47+00:00",
       "status": "assessed"
     },
     "wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f": {
-      "checkedAt": "2026-11-06T00:13:43+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-11-13T00:18:52+00:00",
+      "status": "insufficient-image"
     },
     "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2": {
       "checkedAt": "2026-11-07T22:43:28+00:00",
@@ -991,7 +993,7 @@
       "status": "assessed"
     },
     "wrld_cadc17a9-1c49-4c8c-b8dd-40e648794e80": {
-      "checkedAt": "2026-11-04T17:05:38+00:00",
+      "checkedAt": "2026-11-13T00:18:49+00:00",
       "status": "assessed"
     },
     "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b": {
