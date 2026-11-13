@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-12T01:37:26+00:00",
+  "updatedAt": "2026-11-13T00:38:14+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -429,6 +429,19 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_2e4d3fe6-3255-4e53-9905-6089bf141358",
+      "name": "Night Club ナイトクラブ",
+      "author": "Purabe（プラベ）",
+      "checkedAt": "2026-11-13T00:38:13+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
       "name": "NOIR X ECLIPSE",
       "author": "Dustyᵀᴹ",
@@ -455,6 +468,19 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_3481e0e3-58fa-410c-9f7d-0f4c13f4e9af",
+      "name": "ORBITER 9",
+      "author": "Cloma",
+      "checkedAt": "2026-11-13T00:38:13+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
       "name": "particle abyss 2.0",
       "author": "Cyberƴ",
@@ -472,6 +498,32 @@
       "name": "Poolside Chill House",
       "author": "JimmyyJames",
       "checkedAt": "2026-11-06T00:29:26+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_ba037688-5248-4b4a-bdea-070ace1a2b85",
+      "name": "PREY",
+      "author": "Lightning4D",
+      "checkedAt": "2026-11-13T00:38:13+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_ef66230d-9a3a-4a98-a704-cfebeb25cd90",
+      "name": "Project Vertigo",
+      "author": "NinaV2",
+      "checkedAt": "2026-11-13T00:38:13+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
