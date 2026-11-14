@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-13T00:38:14+00:00",
+  "updatedAt": "2026-11-14T00:25:28+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -533,10 +533,62 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_06fdbbc8-21b0-41fd-85db-492fd087c950",
+      "name": "Richj's Wild Motion Millionaire Club",
+      "author": "RichieRichJ",
+      "checkedAt": "2026-11-14T00:25:27+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_a92b6b6c-f31f-4d79-a6ff-d20b50e4641f",
+      "name": "Saiko Blossom Fantasies",
+      "author": "Sakumi_Saiko",
+      "checkedAt": "2026-11-14T00:25:27+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_bd302e3d-0951-4596-99a3-ae99aad7b1d9",
+      "name": "Spanish Cooming Soon Club",
+      "author": "врзешка",
+      "checkedAt": "2026-11-14T00:25:27+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_5927be27-1e70-4f4a-98fb-439d343933ed",
       "name": "stadium rave A （audiolink party world ）",
       "author": "ALDUMGAMES",
       "checkedAt": "2026-11-06T00:29:26+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_83ca36bf-69f5-4c4d-bf0a-1d11a03ed2aa",
+      "name": "Subway",
+      "author": "AyahuyA l あやふや",
+      "checkedAt": "2026-11-14T00:25:27+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
