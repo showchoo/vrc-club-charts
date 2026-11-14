@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-14T00:25:28+00:00",
+  "updatedAt": "2026-11-14T23:14:11+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -589,6 +589,57 @@
       "name": "Subway",
       "author": "AyahuyA l あやふや",
       "checkedAt": "2026-11-14T00:25:27+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_63039b3d-42e8-4f40-9825-cb51ba99a16d",
+      "name": "Tainted Sins V1",
+      "author": "Tainted Sins",
+      "checkedAt": "2026-11-14T23:14:10+00:00",
+      "metadataStatus": "official_nonpublic",
+      "method": "gemini-grounded-search-v1",
+      "status": "non_public",
+      "summaryJa": "公式APIで非公開Worldと確認。掲載対象外。",
+      "sources": [],
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_ce4feb59-8cf3-4119-988c-dbb1c317dee3",
+      "name": "THE BILLIONAIRE CLUB",
+      "author": "tonystarkvr",
+      "checkedAt": "2026-11-14T23:14:10+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_3ba1c875-76c9-4778-923c-a053bcdd30f2",
+      "name": "The Dingo Denǃ",
+      "author": "CoffeeBandit`",
+      "checkedAt": "2026-11-14T23:14:10+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_5daa2bd4-d8e8-4c19-b9f6-6ec8d6182abc",
+      "name": "The Mush Pit",
+      "author": "Bella Strange~",
+      "checkedAt": "2026-11-14T23:14:10+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
