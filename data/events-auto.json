@@ -18,8 +18,26 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-30f12fcb3f91d5dd7a84",
+    "name": "📢‼️ 明日 は VRC祭り 出演‼️📢 朝は警戒荘でボドゲ配信、夜は ライブ ☀️🌙 明日 は VRChat 尽くしの土曜日🔥 🎵シアター ライブ Special🎵 ﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋﹋…",
+    "start": "2026-11-14T12:00:00Z",
+    "end": null,
+    "organizer": "@dadada_datarou",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/dadada_datarou/status/2121222721959026771?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "30f12fcb3f91d5dd7a84",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-21168796bcc43a9d4735",
-    "name": "ワンマン開催記念ヴァーチャルミニライブ『U1』 開催決定 ☆彡 ういはら初の VRChat 上でのヴァーチャルライブが開催されます！ 日時： 2026年11月14日（土） 開場 / 開演： 2…",
+    "name": "ワンマン 開催 記念ヴァーチャルミニライブ『U1』 開催決定 ☆彡 ういはら初の VRChat 上でのヴァーチャルライブが 開催 されます！ 日時 ： 2026年11月14日（土） 開場 / …",
     "start": "2026-11-14T13:00:00Z",
     "end": null,
     "organizer": "@u1_8ra",
@@ -72,6 +90,24 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-5bd72681475b1040b02c",
+    "name": "【 ライブ 出演のお知らせ📢】 来たる11/22❗️そして12/12,13‼️ ⚔️⚔️Autonomy vol.4 ⚔️⚔️ またまた帰ってまいりました VRC 最大級の音楽祭Autonom…",
+    "start": "2026-11-22T08:30:00Z",
+    "end": null,
+    "organizer": "@namibito7",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/namibito7/status/2121196383533428920?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "5bd72681475b1040b02c",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-cd4f5d552782d7670d92",
     "name": "【お知らせ】 『瑠璃色のぬいぐるみ VRChat 2nd Anniversary LIVE』 VRChat を始めて2周年！時が経つの早い 素敵なゲストの皆さんと一緒にライブを 開催 します！…",
     "start": "2026-11-27T12:50:00Z",
@@ -85,6 +121,25 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "cd4f5d552782d7670d92",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-7e29a99d540f6ea6e54e",
+    "name": "🚨✨重大 告知 ！！！ ✨🚨 VRC A-POP DANCE NIGHT # VRC えーだん ✨Vol.1 開催 決定✨ 📅 2026.12.11（金） 🕘 21:00 START 今回ゲス…",
+    "start": "2026-12-11T12:00:00Z",
+    "end": null,
+    "organizer": "@vrca_dan",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ",
+      "DANCE"
+    ],
+    "url": "https://x.com/vrca_dan/status/2121182259663548522?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "7e29a99d540f6ea6e54e",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
