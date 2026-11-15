@@ -1,5 +1,5 @@
 {
   "schemaVersion": 1,
-  "policy": "Exclude catalog Worlds whose recent source-reported single-build file size is at or below 100 MB; unknown or unverified remain.",
+  "policy": "Exclude recently observed source-reported single-build size <=100MB; unknown remain visible",
   "worlds": []
 }
