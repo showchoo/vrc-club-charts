@@ -37,11 +37,11 @@ CATALOG = ROOT / "data/worlds.json"
 SQL_URL = "https://www.dolthub.com/api/v1alpha1/hiinaspace/vrcwscrape/main"
 USER_AGENT = "VRCClubCharts/1.0 (+https://github.com/showchoo/vrc-club-charts)"
 MAX_WORLDS = 250
-MAX_REQUESTS = 20
-BATCH = 20
+MAX_REQUESTS = 85
+BATCH = 3
 MAX_RESPONSE_BYTES = 180_000
 MIN_GAP_SECONDS = .8
-MAX_SCAN_SECONDS = 480
+MAX_SCAN_SECONDS = 840
 
 
 class SizeCollectionError(ValueError):
