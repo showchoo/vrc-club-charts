@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-14T22:57:42+00:00",
+  "updatedAt": "2026-11-15T23:22:52+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 180
+    "newAssessments": 2,
+    "pending": 181
   },
   "scored": [
     {
@@ -345,6 +345,29 @@
       "assessedAt": "2026-11-06T23:43:34+00:00"
     },
     {
+      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
+      "name": "IOLITE",
+      "author": "わヴぇふぃる",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "青を基調としたステージ背景やDJブースらしい意匠が確認でき、クラブ空間としてのビジュアルが表現されています。",
+      "cautionsJa": "プロモーション用画像の可能性が高く、実際のワールド内の広さやライティングの動作は不明です。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-15T23:22:44+00:00"
+    },
+    {
       "id": "wrld_7da653ea-7eab-432a-90ba-fa158398d47e",
       "name": "Midnight Street Club",
       "author": "nnnnnnなす",
@@ -521,29 +544,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-15T22:14:54+00:00"
-    },
-    {
-      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
-      "name": "Club Catnip - V1.222",
-      "author": "TGCFabian",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "ステージ背面のサイケデリックな背景や床面の模様など、ネオンカラーを基調としたポップなクラブ空間が確認できます。",
-      "cautionsJa": "静止画のため、実際の照明の演出効果やダンスフロア周辺の実際の広さや構造については判断できません。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-06T16:10:39+00:00"
     }
   ],
   "candidates": [
@@ -622,6 +622,17 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
+    },
+    {
       "id": "wrld_6b1b8977-51c7-48be-b097-f735ddc0e5fb",
       "name": "SinghaSiam",
       "author": "Unknown",
@@ -668,6 +679,16 @@
       "url": "worlds/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e.html"
     },
     {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html"
+    },
+    {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
       "name": "Club Rayne",
       "author": "Candy Rayne",
@@ -708,14 +729,14 @@
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     },
     {
-      "id": "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6",
-      "name": "IOLITE",
-      "author": "わヴぇふぃる",
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6.html"
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
     },
     {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
@@ -726,16 +747,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
-    },
-    {
-      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
-      "name": "Lights Out Night Club",
-      "author": "Lights Out Host",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
       "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
@@ -766,16 +777,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
-    },
-    {
-      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
-      "name": "Shatoo's Dance Stage",
-      "author": "Shatoo",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
@@ -852,7 +853,7 @@
       "status": "assessed"
     },
     "wrld_d0cf5a00-cf53-4188-8bc1-a36fb9f6e9a6": {
-      "checkedAt": "2026-11-08T22:52:37+00:00",
+      "checkedAt": "2026-11-15T23:22:44+00:00",
       "status": "assessed"
     },
     "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33": {
@@ -860,12 +861,12 @@
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
-      "checkedAt": "2026-11-08T22:52:48+00:00",
+      "checkedAt": "2026-11-15T23:22:48+00:00",
       "status": "assessed"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-11-08T22:52:59+00:00",
-      "status": "assessed"
+      "checkedAt": "2026-11-15T23:22:52+00:00",
+      "status": "provider-unavailable"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
       "checkedAt": "2026-11-08T22:53:07+00:00",
