@@ -1,46 +1,48 @@
 #!/usr/bin/env python3
-"""One-request public DoltHub VRChat World PC package size probe (no credentials)."""
+"""Read-only 20-World integration probe for publicly mirrored VRChat PC sizes."""
 from __future__ import annotations
-import json
-import urllib.parse
-import urllib.request
-import urllib.error
 
-WORLD_ID = "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92"
-BASE = "https://www.dolthub.com/api/v1alpha1/hiinaspace/vrcwscrape/main"
-QUERY = (
-    "SELECT fm.world_id, fm.file_type, fm.last_scrape_time, "
-    "JSON_UNQUOTE(JSON_EXTRACT(fm.file_metadata, '$.name')) AS package_name, "
-    "JSON_UNQUOTE(JSON_EXTRACT(fm.file_metadata, "
-    "CONCAT('$.versions[', JSON_LENGTH(fm.file_metadata, '$.versions') - 1, "
-    "'].file.sizeInBytes'))) AS latest_size_bytes "
-    "FROM file_metadata fm WHERE fm.world_id = '" + WORLD_ID + "' "
-    "AND fm.file_type = 'UNITY_PACKAGE' LIMIT 5"
-)
+import datetime as dt
+import json
+
+try:
+    from scripts.update_world_sizes import CATALOG, fetch_batch, extract_windows_rows
+except ModuleNotFoundError:
+    from update_world_sizes import CATALOG, fetch_batch, extract_windows_rows
+
 
 def main():
-    u = BASE + "?" + urllib.parse.urlencode({"q": QUERY})
-    req = urllib.request.Request(u, headers={
-        "Accept": "application/json",
-        "User-Agent": "VRCClubCharts/1.0 (+https://github.com/showchoo/vrc-club-charts)"
-    })
+    catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+    ids = sorted({
+        row["id"] for row in catalog
+        if isinstance(row, dict) and isinstance(row.get("id"), str)
+    })[:20]
+    today = dt.datetime.now(dt.timezone.utc).date()
     try:
-        with urllib.request.urlopen(req, timeout=25) as response:
-            raw = response.read(100_001)
-            print(json.dumps({"httpStatus": response.status, "bytes": len(raw)}))
-        if len(raw) > 100_000:
-            raise ValueError("response-too-large")
-        data = json.loads(raw.decode("utf-8"))
+        results = fetch_batch(ids)
+        accepted = extract_windows_rows(results, set(ids), today)
         print(json.dumps({
-            "queryStatus": data.get("query_execution_status"),
-            "message": str(data.get("query_execution_message") or "")[:250],
-            "columnNames": [x.get("columnName") for x in data.get("schema", []) if isinstance(x, dict)],
-            "rows": data.get("rows", [])[:5],
-        }, ensure_ascii=False, indent=2))
-    except urllib.error.HTTPError as exc:
-        print(json.dumps({"httpStatus": exc.code, "error": "http-error"}))
+            "status": "read-only-dolthub-pc-source-check",
+            "worldsQueried": len(ids),
+            "packageRowsReturned": len(results),
+            "freshUnambiguousWindowsPackages": len(accepted),
+            "staleOrUnknownWorlds": len(ids) - len(accepted),
+            "windowsExamples": [
+                {"worldId": key,
+                 "sizeBytes": value["sizeBytes"],
+                 "metadataScrapedOn": value["metadataScrapedOn"],
+                 "wouldDelist": value["sizeBytes"] <= 100 * 1024 * 1024}
+                for key, value in list(accepted.items())[:4]
+            ],
+            "databaseModified": False,
+            "catalogModified": False,
+        }, indent=2, ensure_ascii=False))
     except Exception as exc:
-        print(json.dumps({"errorType": type(exc).__name__}))
+        # This integration probe must FAIL when the SQL/HTTP source stops
+        # working; a green check would give false confidence.
+        print(json.dumps({"status": "failed", "type": type(exc).__name__}))
+        raise SystemExit(2)
+
 
 if __name__ == "__main__":
     main()
