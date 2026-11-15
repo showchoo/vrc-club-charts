@@ -113,7 +113,10 @@ def collect(*, catalog_path: Path = CATALOG,
         prior = {}
     # Preserve historical (but stale) source observations without using them
     # for a new public delisting until refreshed.
-    output = {wid: row for wid, row in prior.items() if wid in ids}
+    output = {
+        wid: {k: v for k, v in row.items() if k != "fresh"}
+        for wid, row in prior.items() if wid in ids
+    }
     fetch = fetcher if fetcher is not None else fetch_public_size
     pause = sleep if sleep is not None else time.sleep
     requests = errors = no_size = newly_measured = 0
