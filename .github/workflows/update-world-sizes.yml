@@ -7,7 +7,6 @@ on:
     paths:
       - 'scripts/update_world_sizes.py'
       - 'scripts/world_size_policy.py'
-      - 'data/world-size-evidence.json'
       - '.github/workflows/update-world-sizes.yml'
   schedule:
     # Weekly early Monday in JST; one bounded scan of the curated catalog.
