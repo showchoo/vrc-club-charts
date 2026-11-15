@@ -1,0 +1,22 @@
+name: Probe PC package-size public evidence API
+
+on:
+  pull_request:
+    paths:
+      - "scripts/probe_dolthub_public_sql.py"
+      - ".github/workflows/probe-dolthub-sql.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Probe one publicly available VRChat World package
+        run: python scripts/probe_dolthub_public_sql.py
