@@ -1,49 +1,44 @@
-# 掲載クラブの100MB以下除外ルール
+# 掲載クラブの100MB以下除外ルール（PC版パッケージ）
 
-## 目的
+## 対象と判定基準
 
-VRC Club Chartsに掲載するDJクラブWorldのうち、**公開のファイルサイズが100MB以下と確認できたWorldだけ**を、公開一覧・ランキング・World詳細ページ・検索インデックス対象から外します。ちょうど100MBも除外対象です。100MB超は残します。容量不明のWorldは誤削除を避けるために残します。
+VRC Club ChartsのDJクラブWorldで、**Windows PC版の最新UnityPackageが100MiB（104,857,600バイト）以下**と最近のメタデータで確認できたものだけ、公開一覧・ランキング・World詳細ページ・検索インデックスから除外します。**100MiBちょうども除外**です。容量が100MiBを超えるWorld、Quest版しか分からないWorld、古い情報しかないWorld、容量不明のWorldは掲載を維持します。
 
-### 重要：このサイトから非掲載にするだけ
+100MBという運用基準をファイル容量の2進単位（100MiB）で定義します。報告では正確なバイト数も保存するため、しきい値付近の丸め誤差で誤判定しません。
 
-- VRChat本体のWorldや作者のデータを消去する処理ではありません。
-- data/worlds.json、ユーザーのお気に入り確認、レビュー、Supabaseの審査・調査履歴は削除しません。
-- 公開処理の共通入口 published_worlds() で除外するため、将来Supabaseから同期されても確認済みの小容量Worldが掲載され直さないようにします。
-- 容量データが変わり100MB超となった場合、次の確認で再掲載可能です。
-- 公開一覧を絞り込む条件であり、イベントやDJ情報の履歴を削除する条件ではありません。
+### 削除するのは「公開掲載」だけ
 
-## どの容量を測定するのか
+- VRChat本体のWorldを削除しません。
+- GitHubの data/worlds.json やユーザーのお気に入り確認、レビュー、Supabaseの管理・調査履歴は削除しません。
+- これらの記録を保存したまま、中央の published_worlds() 掲載判定で表示対象から除きます。
+- 最新のPC版が100MiB超になった場合は再掲載可能です。
+- イベントやDJ出演履歴を一括削除しません。
 
-現行のGitHubカタログ200件・Supabaseの公開承認テーブルには、**Worldのサイズ値がありません**。
+## ファイルサイズの取得元
 
-ファイルサイズの補助情報源として、第三者の公開サイト [Worlds on VRChat (VRCW)](https://en.vrcw.net/) の各World詳細ページにある File size を参照します。これは**公式VRChat APIの当日実測ではありません**。また、そのページでは「どのプラットフォームのビルドか」が明記されない場合があります。そのため、証拠ファイルに platformInterpretation: unspecified-single-reported-build としてその不確実性を残します。
+[hiinaspace/vrcwscrape](https://github.com/hiinaspace/vrcwscrape) が、VRChatの公開Worldとバージョン別ファイル情報（ShowFile API）をミラーした、[DoltHub公開データベース](https://www.dolthub.com/repositories/hiinaspace/vrcwscrape)を使用します。**第三者によるミラーであり、当日現在の公式サイズを保証するものではありません。**
 
-**VRChatのPC版とQuest版の容量を混同しないこと。** VRChat公式はAndroid/Quest Worldの100MB制限を説明していますが、これは「PC版が100MB以下である」証明にはなりません。PC版のサイズが必要なら、対象WorldのWindows用パッケージという区別ができる別データで確認してください。
+- public DoltHub SQLから World ID、UnityPackageファイルID、ファイル名、最新版のversion、sizeInBytes、メタデータの取得日時を取得します。
+- ファイル名に standalonewindows が含まれるPCパッケージのみ採用。Quest/Android版は決して代用しません。
+- 同じWorldにWindows版の複数パッケージがあり、サイズが一致していることを確認できない場合は「容量不明」として扱います。
+- **ミラーのファイルメタデータ取得日が90日より古いと除外不可**。今日のGitHub取得日が新しくても、2026年5月取得など古いVRChatデータは使いません。
+- 実際のWorldパッケージをダウンロードしたり、VRChatへログインしたりしません。明示的な元データの数値だけを使います。
 
-当サイトの100MBルールは、現段階では**第三者サイトの単一の公開ファイルサイズ表記に基づく暫定的な非掲載**です。誤判定が発見されたら証拠を修正・削除して復帰できます。
+先行実装はVRCWページの単一「File size」を利用しようとしましたが、GitHub Actionsから5回の取得がすべて失敗しました。容量を0件しか確認できず、PC/Questの区別も曖昧だったため、上記の**Windows版メタデータ限定方式**に切り替えています。
 
-## 自動更新と保護条件
+## サイトへの適用
 
-- scripts/update_world_sizes.py は data/worlds.json にあるWorld IDだけを、第三者サイトの公開HTMLから収集します。
-- 1回最大200 World、約0.7秒以上の間隔で確認し、最大10分で停止します。元のWorldデータ/ファイルのダウンロードやVRChatへのログインは行いません。
-- **単一で曖昧さのない数値**（例：File size 82.84MB）だけを採用し、ダウンロードエラー・ID不一致・サイズなし・重複したサイズ表記では除外しません。
-- data/world-size-evidence.json にWorld ID、数値、取得日、根拠のURL、プラットフォーム未確定の明示を記録します。
-- 取得から45日を超えた容量はサイトからの自動除外に使いません（古いデータだけで無期限に隠さない）。
-- ワールドの作成者、スクリーンショット、DJ配信設備の動作を容量から推測しません。
-- GitHub Actionsの Refresh public World file sizes を初回は main への実装反映時、以後は毎週実行します。第三者サイトに接続できない場合は未確認のWorldを残します。
+GitHubの data/world-size-evidence.json に、正確なバイト数、PCというプラットフォーム、元パッケージID/バージョン、参照元URL、ミラーの最終取得日とGitHubの確認日を記録します。サイズの根拠が不明ならWorldは掲載されたままです。データは版管理し、表示の除外だけを復旧可能にします。
 
-## 動作確認
+scripts/update_world_sizes.py がGitHub Actionsで最大200のカタログWorldを20IDずつまとめて、週1回、公開SQLの読み取りで確認します。検証結果は scripts/world_size_policy.py により、公開ランキングと個別ページの両方へ適用されます。取得不能になった場合も掲載データを破棄しません。
 
-データなしの初期状態では除外対象0件です。最新データが登録されると、scripts/dj_stream_policy.py の共通掲載判定が更新されます。
-
-公開サイトをビルドすると、該当Worldのランキング、クラブ一覧、詳細ページ、サイトマップから除外されます。一方、ソースのWorldカタログとユーザー承認履歴は保持されます。
-
-ローカルでテストする場合：
+## ローカルでの検証
 
 ~~~powershell
 py -3 -m unittest discover -s tests -p test_world_size_policy.py -v
+py -3 scripts/update_world_sizes.py --max-requests 10
 py -3 scripts/build_rankings.py
 py -3 scripts/validate_catalog.py
 ~~~
 
-world-size-evidence.json を消すと非掲載になっていたWorldが再び掲載され得るため、通常は削除せずGitで版管理してください。
+ネットワークやミラーの都合により、**容量不明のWorldは残ります**。削除件数については実際のデータ取得を確認するまでは断定できません。発見数・除外数・取得不能数をGitHub Actionsログで確認してください。
