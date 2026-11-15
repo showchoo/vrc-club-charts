@@ -36,7 +36,7 @@ scripts/update_world_sizes.py がGitHub Actionsで最大200のカタログWorld�
 
 ~~~powershell
 py -3 -m unittest discover -s tests -p test_world_size_policy.py -v
-py -3 scripts/update_world_sizes.py --max-requests 10
+py -3 scripts/update_world_sizes.py --max-requests 85
 py -3 scripts/build_rankings.py
 py -3 scripts/validate_catalog.py
 ~~~
