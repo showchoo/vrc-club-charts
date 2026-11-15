@@ -16,7 +16,7 @@ def main():
     ids = sorted({
         row["id"] for row in catalog
         if isinstance(row, dict) and isinstance(row.get("id"), str)
-    })[:20]
+    })[:3]
     today = dt.datetime.now(dt.timezone.utc).date()
     try:
         results = fetch_batch(ids)
