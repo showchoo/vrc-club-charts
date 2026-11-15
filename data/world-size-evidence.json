@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
-  "policy": "Exclude recently observed source-reported single-build size <=100MB; unknown remain visible",
+  "schemaVersion": 2,
+  "policy": "Only recent Windows Unity package size <=100MiB can delist a World; unknown stays",
   "worlds": []
 }
