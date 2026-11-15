@@ -1,0 +1,48 @@
+name: Refresh public World file sizes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_world_sizes.py'
+      - 'scripts/world_size_policy.py'
+      - 'data/world-size-evidence.json'
+      - '.github/workflows/update-world-sizes.yml'
+  schedule:
+    # Weekly early Monday in JST; one bounded scan of the curated catalog.
+    - cron: '16 18 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vcc-world-file-sizes
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch source-reported World sizes (no actual World asset downloads)
+        run: python scripts/update_world_sizes.py --max-requests 200
+      - name: Refresh rank outputs using reversible eligibility rule
+        run: |
+          python scripts/build_rankings.py
+          python scripts/validate_catalog.py
+      - name: Record World sizes and public ranking changes
+        run: |
+          git config user.name "vrc-club-charts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/world-size-evidence.json data/weekly-ranking.json
+          git diff --cached --quiet && exit 0
+          git commit -m "data: refresh external World file sizes and public exclusions"
+          git pull --rebase origin main
+          git push

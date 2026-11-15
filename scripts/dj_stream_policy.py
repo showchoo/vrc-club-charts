@@ -12,6 +12,11 @@ import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
+try:
+    from scripts.world_size_policy import excluded_world_ids
+except ModuleNotFoundError:
+    from world_size_policy import excluded_world_ids
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "dj-stream-verifications.json"
 OWNER_REGISTRY = ROOT / "data" / "owner-favorite-confirmations.json"
@@ -136,12 +141,15 @@ def published_worlds(worlds: list[dict], verified: dict[str, dict]) -> list[dict
     # Exact owner confirmations are admitted as a separately labeled trust
     # source. They do NOT receive the independently verified stream badge.
     owner_confirmed = load_owner_confirmed()
+    excluded_by_size = excluded_world_ids()
     result = []
     for item in worlds:
         if not isinstance(item, dict):
             continue
         wid = item.get("id")
         if not isinstance(wid, str) or not WORLD_ID.fullmatch(wid):
+            continue
+        if wid in excluded_by_size:
             continue
         status = str(item.get("releaseStatus") or "").strip().casefold()
         if status in {"private", "hidden", "unpublished", "pending"}:

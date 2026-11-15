@@ -36,6 +36,16 @@ admitted** public DJ World pages, using explicit same-creator or shared-genre
 signals. It never implies functional DJ equipment verification. See the
 [production rollout and related World guide](docs/DEPLOYMENT_AND_RELATED_WORLDS.md).
 
+## Minimum World size for public DJ club listing
+
+The site now removes public DJ club cards, rankings, profiles and sitemap
+entries for Worlds whose **reported file size is 100 MB or less**.
+A bounded, source-labeled [World file-size evidence collector](docs/WORLD_SIZE_PUBLICATION_POLICY.md)
+checks public VRCW listings and stores observations separately from the
+original catalog. Unknown sizes remain visible. No VRChat or Supabase
+World is deleted. The external File size field does not independently
+establish a current Windows/PC bundle size; results are reversible.
+
 ## Local patrol restricted to Google Calendar workdays (JST)
 
 The future local inspection schedule will run **only on dates with a confirmed
