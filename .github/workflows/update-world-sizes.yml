@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Read publicly mirrored Windows asset sizes (no actual World asset downloads)
-        run: python scripts/update_world_sizes.py --max-requests 20
+        run: python scripts/update_world_sizes.py --max-requests 85
       - name: Refresh rank outputs using reversible eligibility rule
         run: |
           python scripts/build_rankings.py
