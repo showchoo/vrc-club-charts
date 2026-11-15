@@ -38,13 +38,15 @@ signals. It never implies functional DJ equipment verification. See the
 
 ## Minimum World size for public DJ club listing
 
-The site now removes public DJ club cards, rankings, profiles and sitemap
-entries for Worlds whose **reported file size is 100 MB or less**.
-A bounded, source-labeled [World file-size evidence collector](docs/WORLD_SIZE_PUBLICATION_POLICY.md)
-checks public VRCW listings and stores observations separately from the
-original catalog. Unknown sizes remain visible. No VRChat or Supabase
-World is deleted. The external File size field does not independently
-establish a current Windows/PC bundle size; results are reversible.
+The site removes public DJ club cards, rankings, profiles and sitemap
+entries for Worlds whose **recent Windows PC asset-bundle size is <=100 MiB**.
+A bounded [World file-size evidence collector](docs/WORLD_SIZE_PUBLICATION_POLICY.md)
+reads PC-specific UnityPackage version and exact sizeInBytes from the
+public DoltHub mirror of VRChat file metadata, without downloading Worlds.
+Only Windows builds with source metadata scraped in the last 90 days
+qualify; Quest-only, stale and unknown sizes remain visible. Catalog,
+user favorites, history and Supabase records are never deleted.
+This is a reversible *site-delisting* rule, not deletion from VRChat.
 
 ## Local patrol restricted to Google Calendar workdays (JST)
 
