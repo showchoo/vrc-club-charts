@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-14T23:14:11+00:00",
+  "updatedAt": "2026-11-15T23:28:25+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -675,6 +675,45 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_c80885cb-561c-4a2a-becc-559709006fe9",
+      "name": "The Sinner's Garden - Disco Map",
+      "author": "Petals for Amor",
+      "checkedAt": "2026-11-15T23:28:23+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_4390d8ab-fb0b-4e21-8c41-4f3883895016",
+      "name": "The Syndicate Garage",
+      "author": "【Kay】",
+      "checkedAt": "2026-11-15T23:28:23+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_16baa8ad-1395-4546-9670-771a7759b3c4",
+      "name": "The Uma Clubǃ",
+      "author": "DufVR",
+      "checkedAt": "2026-11-15T23:28:23+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2",
       "name": "TUBE VR - IN THE DANCE",
       "author": "Hadean",
@@ -718,6 +757,19 @@
       "name": "アストロビーチ",
       "author": "チョス_Thoth",
       "checkedAt": "2026-11-07T22:54:24+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_501c9f08-cd8c-4b77-94d9-69e631ff5374",
+      "name": "中文歌友会-体育场EMF舞台旧",
+      "author": "小杨又失利了",
+      "checkedAt": "2026-11-15T23:28:23+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
