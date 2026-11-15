@@ -30,7 +30,7 @@ VRC Club ChartsのDJクラブWorldで、**Windows PC版の最新UnityPackageが1
 
 GitHubの data/world-size-evidence.json に、正確なバイト数、PCというプラットフォーム、元パッケージID/バージョン、参照元URL、ミラーの最終取得日とGitHubの確認日を記録します。サイズの根拠が不明ならWorldは掲載されたままです。データは版管理し、表示の除外だけを復旧可能にします。
 
-scripts/update_world_sizes.py がGitHub Actionsで最大200のカタログWorldを20IDずつまとめて、週1回、公開SQLの読み取りで確認します。検証結果は scripts/world_size_policy.py により、公開ランキングと個別ページの両方へ適用されます。取得不能になった場合も掲載データを破棄しません。
+scripts/update_world_sizes.py がGitHub Actionsで最大200のカタログWorldを3IDずつまとめて、週1回、公開SQLの読み取りで確認します。検証結果は scripts/world_size_policy.py により、公開ランキングと個別ページの両方へ適用されます。取得不能になった場合も掲載データを破棄しません。
 
 ## ローカルでの検証
 
