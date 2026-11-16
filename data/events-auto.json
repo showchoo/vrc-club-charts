@@ -1,18 +1,37 @@
 [
   {
-    "id": "feed-7304019f49d200cdd93c",
-    "name": "【次回 営業 日のご案内】 Club Moon Hopper Vol․83 11/15(sun) 21:50〜24:00 TimeTable DJ 22:00~ _Ryou_ (@Ryou_ …",
-    "start": "2026-11-15T12:50:00Z",
+    "id": "feed-f9529e812318ffb051ed",
+    "name": "Quest Dance party Club No.284 [ VRC Quest対応DJイベント] 📅11月17日(火) OPEN 20:40 JST～ START 21:00 JST～ 今…",
+    "start": "2026-11-17T11:40:00Z",
     "end": null,
-    "organizer": "@ClubMoonHopper",
+    "organizer": "@ClubDanceparty",
     "worldName": "VRChat",
     "genres": [
-      "DJ"
+      "DJ",
+      "DANCE"
     ],
-    "url": "https://x.com/ClubMoonHopper/status/2120358356678545725?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/ClubDanceparty/status/2121725493125034198?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "7304019f49d200cdd93c",
+    "upstreamId": "f9529e812318ffb051ed",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-occ_b0ad3ffdfdcdc6d877ab",
+    "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━━…",
+    "start": "2026-11-21T16:20:00Z",
+    "end": null,
+    "organizer": "@AUTONOMY_event",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/AUTONOMY_event/status/2121890952470282631?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "occ_b0ad3ffdfdcdc6d877ab",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -54,19 +73,37 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-cd4f5d552782d7670d92",
-    "name": "【お知らせ】 『瑠璃色のぬいぐるみ VRChat 2nd Anniversary LIVE』 VRChat を始めて2周年！時が経つの早い 素敵なゲストの皆さんと一緒にライブを 開催 します！…",
-    "start": "2026-11-27T12:50:00Z",
+    "id": "feed-26b7d47cd691fe2ad9bd",
+    "name": "🔥 VRC ライブ 告知 🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍ…",
+    "start": "2026-11-26T12:50:00Z",
     "end": null,
-    "organizer": "@luliilo_nui",
+    "organizer": "@Kagarihi_vr",
     "worldName": "VRChat",
     "genres": [
       "LIVE"
     ],
-    "url": "https://x.com/luliilo_nui/status/2119384445971034617?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/Kagarihi_vr/status/2121821211097534568?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "cd4f5d552782d7670d92",
+    "upstreamId": "26b7d47cd691fe2ad9bd",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-60c54db6f2d514ee7d2a",
+    "name": "【 VRChat DJ Event】 IN THE DUSK 5th Phase 2026/11/28(Sat) Start 23:00 JST Group + ---DJs--- cruca…",
+    "start": "2026-11-28T14:00:00Z",
+    "end": null,
+    "organizer": "@hellneko_mstdn",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/hellneko_mstdn/status/2115078782277267817?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "60c54db6f2d514ee7d2a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
