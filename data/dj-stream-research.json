@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-15T23:28:25+00:00",
+  "updatedAt": "2026-11-17T02:33:47+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -494,6 +494,19 @@
       "requiresHumanVerification": true
     },
     {
+      "id": "wrld_56195c9e-dac2-4c9b-ab89-2b53b7443037",
+      "name": "PJKT˸ Fest 2026 - Hub Pre-Release",
+      "author": "Karet",
+      "checkedAt": "2026-11-17T02:33:47+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
       "id": "wrld_7a8df832-92c2-4988-901a-da3f3f9b3aa8",
       "name": "Poolside Chill House",
       "author": "JimmyyJames",
@@ -770,6 +783,45 @@
       "name": "中文歌友会-体育场EMF舞台旧",
       "author": "小杨又失利了",
       "checkedAt": "2026-11-15T23:28:23+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_3c876c92-c72e-4e0a-9ad0-37109affc346",
+      "name": "水八咫電気",
+      "author": "COMA․",
+      "checkedAt": "2026-11-17T02:33:47+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_5631758f-5975-487f-a15d-efa39385ca9b",
+      "name": "爆音大聖堂",
+      "author": "COMA․",
+      "checkedAt": "2026-11-17T02:33:47+00:00",
+      "metadataStatus": "official_public",
+      "method": "gemini-grounded-search-v1",
+      "status": "research_unavailable",
+      "summaryJa": "調査APIまたは公式情報にアクセスできないため保留。",
+      "sources": [],
+      "errorType": "HTTPError",
+      "requiresHumanVerification": true
+    },
+    {
+      "id": "wrld_ebc4bce3-2372-4b1e-ab0c-f9e1f8095958",
+      "name": "超！寝転ん盆踊り2026",
+      "author": "Nekoro",
+      "checkedAt": "2026-11-17T02:33:47+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
