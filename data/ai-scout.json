@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-15T23:22:52+00:00",
+  "updatedAt": "2026-11-17T02:27:59+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 2,
-    "pending": 181
+    "newAssessments": 3,
+    "pending": 180
   },
   "scored": [
     {
@@ -167,6 +167,29 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-11T22:52:52+00:00"
+    },
+    {
+      "id": "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6",
+      "name": "Club Catnip - V1.222",
+      "author": "TGCFabian",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6.html",
+      "visualPotential": 65,
+      "factors": {
+        "visual": 3,
+        "lighting": 4,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "色鮮やかな照明効果やステージ上の装飾がクラブの雰囲気を演出しています。",
+      "cautionsJa": "静止画のため、実際の動的な照明や音響の演出効果までは判断できません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-17T02:27:53+00:00"
     },
     {
       "id": "wrld_e024db2c-c35f-41a1-8413-27e5a81dac6e",
@@ -523,27 +546,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-14T22:17:36+00:00"
-    },
-    {
-      "id": "wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528",
-      "name": "Club Astra",
-      "author": "ZIPPY251",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_a5ecc19c-33bb-467d-98a4-7fd1a7823528.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "青と黄色のネオンライトが配置されたクラブ風の空間が確認できます。",
-      "cautionsJa": "マーケティング用画像が含まれており、実際のワールドの質感や立体感は異なる可能性があります。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-15T22:14:54+00:00"
     }
   ],
   "candidates": [
@@ -609,17 +611,6 @@
         "EXPERIMENTAL"
       ],
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
-    },
-    {
-      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
-      "name": "Neptune Night Club",
-      "author": "Plutto2Times",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
@@ -749,14 +740,14 @@
       "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
+      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
+      "name": "Lights Out Night Club",
+      "author": "Lights Out Host",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
+      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
@@ -777,6 +768,16 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
+    },
+    {
+      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
+      "name": "Shatoo's Dance Stage",
+      "author": "Shatoo",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
@@ -793,7 +794,7 @@
       "status": "assessed"
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
-      "checkedAt": "2026-11-10T02:04:13+00:00",
+      "checkedAt": "2026-11-17T02:27:49+00:00",
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
@@ -821,7 +822,7 @@
       "status": "assessed"
     },
     "wrld_a8af4fce-2648-4740-a0f0-5960bdffd3c6": {
-      "checkedAt": "2026-10-06T16:10:39+00:00",
+      "checkedAt": "2026-11-17T02:27:53+00:00",
       "status": "assessed"
     },
     "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439": {
@@ -865,11 +866,11 @@
       "status": "assessed"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-11-15T23:22:52+00:00",
-      "status": "provider-unavailable"
+      "checkedAt": "2026-11-17T02:27:56+00:00",
+      "status": "assessed"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
-      "checkedAt": "2026-11-08T22:53:07+00:00",
+      "checkedAt": "2026-11-17T02:27:59+00:00",
       "status": "insufficient-image"
     },
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
