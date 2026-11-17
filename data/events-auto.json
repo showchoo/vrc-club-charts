@@ -19,9 +19,45 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-occ_b0ad3ffdfdcdc6d877ab",
-    "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━━…",
+    "id": "feed-0ca01a8881abe95f3690",
+    "name": "📢お知らせ📷 11/20(金)・21(土) 21:00 open 21:20start 学園祭の軽音部みたいなVRコピーバンド ライブイベント 「青春軽音部学園祭」 at VRchat 本日 …",
+    "start": "2026-11-20T12:00:00Z",
+    "end": null,
+    "organizer": "@seisyun_keion",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/seisyun_keion/status/2122158270886670769?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0ca01a8881abe95f3690",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-occ_c663e0d899a33decae40",
+    "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━…",
     "start": "2026-11-21T16:20:00Z",
+    "end": null,
+    "organizer": "@AUTONOMY_event",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/AUTONOMY_event/status/2122253343141802339?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "occ_c663e0d899a33decae40",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-0e9150c367457d6881dc",
+    "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━…",
+    "start": "2026-11-21T17:20:00Z",
     "end": null,
     "organizer": "@AUTONOMY_event",
     "worldName": "VRChat",
@@ -31,7 +67,7 @@
     "url": "https://x.com/AUTONOMY_event/status/2121890952470282631?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "occ_b0ad3ffdfdcdc6d877ab",
+    "upstreamId": "0e9150c367457d6881dc",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -86,24 +122,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "26b7d47cd691fe2ad9bd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-60c54db6f2d514ee7d2a",
-    "name": "【 VRChat DJ Event】 IN THE DUSK 5th Phase 2026/11/28(Sat) Start 23:00 JST Group + ---DJs--- cruca…",
-    "start": "2026-11-28T14:00:00Z",
-    "end": null,
-    "organizer": "@hellneko_mstdn",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/hellneko_mstdn/status/2115078782277267817?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "60c54db6f2d514ee7d2a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
