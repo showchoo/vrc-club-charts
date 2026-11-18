@@ -1,19 +1,18 @@
 [
   {
-    "id": "feed-f9529e812318ffb051ed",
-    "name": "Quest Dance party Club No.284 [ VRC Quest対応DJイベント] 📅11月17日(火) OPEN 20:40 JST～ START 21:00 JST～ 今…",
-    "start": "2026-11-17T11:40:00Z",
+    "id": "feed-f77df643c4923370b073",
+    "name": "11/20（金）は、 VRChat DJイベント 「のぶのーび」第6回！ たかぽんは26:00〜27:00に出演します。 22:45 OPEN ／23:00 START 29:00（翌朝5:0…",
+    "start": "2026-11-19T21:00:00Z",
     "end": null,
-    "organizer": "@ClubDanceparty",
+    "organizer": "@__iGod",
     "worldName": "VRChat",
     "genres": [
-      "DJ",
-      "DANCE"
+      "DJ"
     ],
-    "url": "https://x.com/ClubDanceparty/status/2121725493125034198?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/__iGod/status/2122684865229492622?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "f9529e812318ffb051ed",
+    "upstreamId": "f77df643c4923370b073",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -37,7 +36,7 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-occ_c663e0d899a33decae40",
+    "id": "feed-occ_1ef767343108b0a24135",
     "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━…",
     "start": "2026-11-21T16:20:00Z",
     "end": null,
@@ -46,10 +45,10 @@
     "genres": [
       "LIVE"
     ],
-    "url": "https://x.com/AUTONOMY_event/status/2122253343141802339?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/AUTONOMY_event/status/2122615748384190850?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "occ_c663e0d899a33decae40",
+    "upstreamId": "occ_1ef767343108b0a24135",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -110,7 +109,7 @@
   },
   {
     "id": "feed-26b7d47cd691fe2ad9bd",
-    "name": "🔥 VRC ライブ 告知 🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍ…",
+    "name": "🔥 VRC ライブ告知🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍﾞﾘ…",
     "start": "2026-11-26T12:50:00Z",
     "end": null,
     "organizer": "@Kagarihi_vr",
@@ -122,6 +121,60 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "26b7d47cd691fe2ad9bd",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-0a79f2dee3a009fcee68",
+    "name": "【💐ギグ 出演情報💐】 11月29日(日) 20:30〜 OPEN 『kasousuisou5』 VR イベント \"仮想水槽\"にバンドセット「キヌ+」のベース演奏で 参加 します。 とんでもな…",
+    "start": "2026-11-29T11:30:00Z",
+    "end": null,
+    "organizer": "@isagen7",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/isagen7/status/2122625983442501699?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0a79f2dee3a009fcee68",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-b5e78355f4890f1491d0",
+    "name": "重力異常の会場で立体的に楽しむ ライブイベント を 開催 します 『kasousuisou5』 2026.11.29 20:30 OPEN 21:00 START (JST) VRChat (…",
+    "start": "2026-11-29T11:30:00Z",
+    "end": null,
+    "organizer": "@Kasousuisou",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/Kasousuisou/status/2122525653904056720?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "b5e78355f4890f1491d0",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-5b7b0c57356cbbf2719a",
+    "name": "【お知らせ📣】 VRChat バンドによるリアル ライブイベント 『ミュートできない夜 -UNMUTED NIGHT-』 サポートとしてジャンクと夢二が出演します🔥 ►2026年12月5日(土…",
+    "start": "2026-12-05T05:50:00Z",
+    "end": null,
+    "organizer": "@PHANTOM25100",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/PHANTOM25100/status/2122646209794027925?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "5b7b0c57356cbbf2719a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
