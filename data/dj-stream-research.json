@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-17T02:33:47+00:00",
+  "updatedAt": "2026-11-18T01:46:20+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -19,7 +19,7 @@
       "id": "wrld_252e3107-9ae4-4513-a17a-321909162e21",
       "name": "After Dark Night Club",
       "author": "₥₳J₳․₴Ø₥₥ɆR",
-      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "checkedAt": "2026-11-18T01:46:19+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -45,7 +45,7 @@
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
       "name": "AudioLink ClubSystem",
       "author": "JJavierPV",
-      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "checkedAt": "2026-11-18T01:46:19+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -71,7 +71,7 @@
       "id": "wrld_4f015255-390a-44cb-9e81-bd2021eb970a",
       "name": "Beach in a Bottle",
       "author": "∗Lotus∗",
-      "checkedAt": "2026-11-04T16:40:15+00:00",
+      "checkedAt": "2026-11-18T01:46:19+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -187,7 +187,7 @@
       "id": "wrld_2acdf41c-4714-427b-98d7-4fee07ac6439",
       "name": "Club Earthquake 〖Night pool〗",
       "author": "ro_tta",
-      "checkedAt": "2026-11-04T17:04:46+00:00",
+      "checkedAt": "2026-11-18T01:46:19+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
