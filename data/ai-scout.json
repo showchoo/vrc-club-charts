@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-18T01:36:09+00:00",
+  "updatedAt": "2026-11-19T01:11:55+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 180
+    "newAssessments": 2,
+    "pending": 181
   },
   "scored": [
     {
@@ -483,6 +483,29 @@
       "assessedAt": "2026-10-11T22:52:50+00:00"
     },
     {
+      "id": "wrld_2760e034-4ef5-49c8-bcb3-035734df721d",
+      "name": "カラクリクラブ․2",
+      "author": "COMA․",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_2760e034-4ef5-49c8-bcb3-035734df721d.html",
+      "visualPotential": 60,
+      "factors": {
+        "visual": 3,
+        "lighting": 3,
+        "spatial": 3,
+        "originality": 3
+      },
+      "reasonJa": "暗い空間の中にネオン調の装飾やタイトルロゴ、特徴的なオブジェが配置されているのが確認できます。",
+      "cautionsJa": "サムネイル画像では全体のレイアウトやライティングの詳細な変化を完全に把握することはできません。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-19T01:11:49+00:00"
+    },
+    {
       "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
       "name": "AudioLink ClubSystem",
       "author": "JJavierPV",
@@ -525,27 +548,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-26T23:07:03+00:00"
-    },
-    {
-      "id": "wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043",
-      "name": "Brick House Night Club",
-      "author": "BadKarma8489",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_e3e774ac-95e1-42a3-8e38-5a7317acd043.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "ステージ上の大型スクリーンやDJブース、色とりどりのフロアライトが配置された一般的なナイトクラブの空間が確認できます。",
-      "cautionsJa": "静止画であるため、実際の照明の点滅パターンや音響演出、インタラクティブな要素は判断できません。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-14T22:17:36+00:00"
     }
   ],
   "candidates": [
@@ -741,6 +743,16 @@
       "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
     },
     {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
+    },
+    {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
       "name": "Lights Out Night Club",
       "author": "Lights Out Host",
@@ -769,16 +781,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
-      "name": "Shatoo's Dance Stage",
-      "author": "Shatoo",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
@@ -919,7 +921,7 @@
       "status": "assessed"
     },
     "wrld_0508f15f-869b-44d4-b538-1f6615fd5273": {
-      "checkedAt": "2026-11-03T23:58:13+00:00",
+      "checkedAt": "2026-11-19T01:11:47+00:00",
       "status": "insufficient-image"
     },
     "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350": {
@@ -927,7 +929,7 @@
       "status": "assessed"
     },
     "wrld_252e3107-9ae4-4513-a17a-321909162e21": {
-      "checkedAt": "2026-11-06T23:43:41+00:00",
+      "checkedAt": "2026-11-19T01:11:55+00:00",
       "status": "assessed"
     },
     "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc": {
@@ -1007,7 +1009,7 @@
       "status": "assessed"
     },
     "wrld_2760e034-4ef5-49c8-bcb3-035734df721d": {
-      "checkedAt": "2026-11-06T00:13:49+00:00",
+      "checkedAt": "2026-11-19T01:11:49+00:00",
       "status": "assessed"
     },
     "wrld_7eaf3905-10f8-4528-9aa3-8b1a4ccc2d05": {
@@ -1019,7 +1021,7 @@
       "status": "assessed"
     },
     "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e": {
-      "checkedAt": "2026-11-06T23:43:38+00:00",
+      "checkedAt": "2026-11-19T01:11:52+00:00",
       "status": "insufficient-image"
     }
   }
