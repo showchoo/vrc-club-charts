@@ -18,7 +18,43 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-occ_43758a47962c9657ef8e",
+    "id": "feed-78c414dc2fed3f145c53",
+    "name": "今夜 から、 VRChat で音楽フェス「ESPERA」が始まります。🎧 11/20（金）は青色クラブで21:30 開場 、22:00からDJ。11/21（土）は13:00 開場 で、なつめい…",
+    "start": "2026-11-20T12:30:00Z",
+    "end": null,
+    "organizer": "@RedtuneJP",
+    "worldName": "VRChat",
+    "genres": [
+      "MUSIC"
+    ],
+    "url": "https://x.com/RedtuneJP/status/2123436479108284585?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "78c414dc2fed3f145c53",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-7109da3278db35cfc769",
+    "name": "📢 VRChat の DJ やシンガーが大阪に集結‼「めっちゃ騒いじゃOSAKA ぷち」 開催 🎉 📅11月21日15～22時 📍心斎橋のSubculBar「なぅ!!」 💴1ドリンク付1500…",
+    "start": "2026-11-21T13:00:00Z",
+    "end": null,
+    "organizer": "@mecha_meta",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/mecha_meta/status/2123243446853087545?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "7109da3278db35cfc769",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-occ_007790290557b85db9a4",
     "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━…",
     "start": "2026-11-21T16:20:00Z",
     "end": null,
@@ -27,10 +63,28 @@
     "genres": [
       "LIVE"
     ],
-    "url": "https://x.com/AUTONOMY_event/status/2122978128196739311?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/AUTONOMY_event/status/2123340502732796052?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "occ_43758a47962c9657ef8e",
+    "upstreamId": "occ_007790290557b85db9a4",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-0245a5968cc4d1154850",
+    "name": "❖━━━＼PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━━━━…",
+    "start": "2026-11-21T17:20:00Z",
+    "end": null,
+    "organizer": "@AUTONOMY_event",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/AUTONOMY_event/status/2123340508336467994?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0245a5968cc4d1154850",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -49,24 +103,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "occ_023a76b2216fc98211b2",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7177e8df9bc7a47832ec",
-    "name": "【ライブ出演 告知 】 「 VRChat 最大級 ライブイベント 」 ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter 🗓 開催 日程 DAY1：2026.11.2…",
-    "start": "2026-11-21T17:20:00Z",
-    "end": null,
-    "organizer": "@Deden_VRC",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/Deden_VRC/status/2113412588235374708?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7177e8df9bc7a47832ec",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -91,7 +127,7 @@
   },
   {
     "id": "feed-26b7d47cd691fe2ad9bd",
-    "name": "🔥 VRC ライブ告知🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍﾞﾘ…",
+    "name": "🔥 VRC ライブ 告知 🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍ…",
     "start": "2026-11-26T12:50:00Z",
     "end": null,
     "organizer": "@Kagarihi_vr",
@@ -103,24 +139,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "26b7d47cd691fe2ad9bd",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-60c54db6f2d514ee7d2a",
-    "name": "【 VRChat DJ Event】 IN THE DUSK 5th Phase 2026/11/28(Sat) Start 23:00 JST Group + ---DJs--- cruca…",
-    "start": "2026-11-28T14:00:00Z",
-    "end": null,
-    "organizer": "@hellneko_mstdn",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/hellneko_mstdn/status/2115078782277267817?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "60c54db6f2d514ee7d2a",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -162,24 +180,6 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-b2251b1266e87f06cce7",
-    "name": "VRChat 最大級の ライブイベント Autonomy vol.4 in Vket 2026 Winter IVIフルメンバーで激熱参戦します！！🔥 出演 日時 🎤 DAY2：12月12日(…",
-    "start": "2026-12-12T09:00:00Z",
-    "end": null,
-    "organizer": "@IVIartistgroup",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/IVIartistgroup/status/2113202119511789778?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "b2251b1266e87f06cce7",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-de9127484d23fc5fff0d",
     "name": "🪐年末イベント出演情報🪐ˎˊ˗ VRChat 最大級 ライブイベント 「Autonomy vol.4 in Vket 2026 Winter」 Hiphop Tomodachiの初出演が決定し…",
     "start": "2026-12-12T09:00:00Z",
@@ -194,24 +194,6 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "de9127484d23fc5fff0d",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-d09cd1a42d7b23acb6f2",
-    "name": "⚔ 告知 ⚔ Vket公認 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter 193出演します！！！ DAY3：2026.12…",
-    "start": "2026-12-12T18:20:00Z",
-    "end": null,
-    "organizer": "@193IQ3_kashikoi",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/193IQ3_kashikoi/status/2113213698357760028?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "d09cd1a42d7b23acb6f2",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
