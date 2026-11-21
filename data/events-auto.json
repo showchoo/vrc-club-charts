@@ -1,60 +1,6 @@
 [
   {
-    "id": "feed-0ca01a8881abe95f3690",
-    "name": "📢お知らせ📷 11/20(金)・21(土) 21:00 open 21:20start 学園祭の軽音部みたいなVRコピーバンド ライブイベント 「青春軽音部学園祭」 at VRchat 本日 …",
-    "start": "2026-11-20T12:00:00Z",
-    "end": null,
-    "organizer": "@seisyun_keion",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/seisyun_keion/status/2122158270886670769?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "0ca01a8881abe95f3690",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-78c414dc2fed3f145c53",
-    "name": "今夜 から、 VRChat で音楽フェス「ESPERA」が始まります。🎧 11/20（金）は青色クラブで21:30 開場 、22:00からDJ。11/21（土）は13:00 開場 で、なつめい…",
-    "start": "2026-11-20T12:30:00Z",
-    "end": null,
-    "organizer": "@RedtuneJP",
-    "worldName": "VRChat",
-    "genres": [
-      "MUSIC"
-    ],
-    "url": "https://x.com/RedtuneJP/status/2123436479108284585?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "78c414dc2fed3f145c53",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-7109da3278db35cfc769",
-    "name": "📢 VRChat の DJ やシンガーが大阪に集結‼「めっちゃ騒いじゃOSAKA ぷち」 開催 🎉 📅11月21日15～22時 📍心斎橋のSubculBar「なぅ!!」 💴1ドリンク付1500…",
-    "start": "2026-11-21T13:00:00Z",
-    "end": null,
-    "organizer": "@mecha_meta",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ"
-    ],
-    "url": "https://x.com/mecha_meta/status/2123243446853087545?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "7109da3278db35cfc769",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
-    "id": "feed-occ_007790290557b85db9a4",
+    "id": "feed-occ_479267127aa13d8d968d",
     "name": "❖━━━＼出演者PR動画公開！／━━━❖ 【Vket公認】 VRChat 最大級 ライブイベント ⚔ Autonomy vol.4 ⚔ in Vket 2026 Winter ❖━━━━━━━…",
     "start": "2026-11-21T16:20:00Z",
     "end": null,
@@ -66,7 +12,7 @@
     "url": "https://x.com/AUTONOMY_event/status/2123340502732796052?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "occ_007790290557b85db9a4",
+    "upstreamId": "occ_479267127aa13d8d968d",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -144,6 +90,24 @@
     "confidence": 0.9
   },
   {
+    "id": "feed-0a79f2dee3a009fcee68",
+    "name": "【💐ギグ 出演情報💐】 11月29日(日) 20:30〜 OPEN 『kasousuisou5』 VRイベント\"仮想水槽\"にバンドセット「キヌ+」のベース演奏で 参加 します。 とんでもないワ…",
+    "start": "2026-11-29T11:30:00Z",
+    "end": null,
+    "organizer": "@isagen7",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/isagen7/status/2122625983442501699?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0a79f2dee3a009fcee68",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
     "id": "feed-b5e78355f4890f1491d0",
     "name": "重力異常の会場で立体的に楽しむ ライブイベント を 開催 します 『kasousuisou5』 2026.11.29 20:30 OPEN 21:00 START (JST) VRChat (…",
     "start": "2026-11-29T11:30:00Z",
@@ -175,6 +139,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "5b7b0c57356cbbf2719a",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-5cdb9abc0a15e1e04e2b",
+    "name": "SOURCE : LOCATION #2 Number 9は、フィールドレコーディングを中心としたVR音楽イベントを再び 開催 します。 音と映像を通して、場所の記憶や風景を再発見しましょう。…",
+    "start": "2026-12-05T12:00:00Z",
+    "end": null,
+    "organizer": "@teinemaeda2023",
+    "worldName": "VRChat",
+    "genres": [
+      "MUSIC"
+    ],
+    "url": "https://x.com/teinemaeda2023/status/2121908753192865959?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "5cdb9abc0a15e1e04e2b",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
