@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T23:47:35+00:00",
+  "updatedAt": "2026-11-23T00:17:38+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
@@ -626,6 +626,17 @@
       "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
     },
     {
+      "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
+      "name": "Oh's Party Ballroom",
+      "author": "emymin",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK",
+        "STAGE"
+      ],
+      "url": "worlds/wrld_856c161d-b995-4349-8a72-d10ad498300a.html"
+    },
+    {
       "id": "wrld_6b1b8977-51c7-48be-b097-f735ddc0e5fb",
       "name": "SinghaSiam",
       "author": "Unknown",
@@ -672,6 +683,16 @@
       "url": "worlds/wrld_9d0f0e14-f5cb-44ac-9022-86b701fa353e.html"
     },
     {
+      "id": "wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe",
+      "name": "Club Jinja",
+      "author": "はるみやにき",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_ac0d4b09-01b9-4efa-84b6-99e6113f51fe.html"
+    },
+    {
       "id": "wrld_40989115-5a3f-41ef-afbc-50e5ac9c4462",
       "name": "Club Rayne",
       "author": "Candy Rayne",
@@ -712,6 +733,16 @@
       "url": "worlds/wrld_93b579a8-2e50-40a1-96c2-42aadf03d19f.html"
     },
     {
+      "id": "wrld_b0f29164-495d-443b-869d-afc6bc99e3f2",
+      "name": "Girl's night",
+      "author": "Ame୨୧",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
+    },
+    {
       "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
       "name": "kakuhira's club house",
       "author": "kakuhira",
@@ -720,16 +751,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
-    },
-    {
-      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
-      "name": "Lights Out Night Club",
-      "author": "Lights Out Host",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
       "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
@@ -760,26 +781,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
-    },
-    {
-      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
-      "name": "Shatoo's Dance Stage",
-      "author": "Shatoo",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
-    },
-    {
-      "id": "wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f",
-      "name": "Solitude （Club Set）",
-      "author": "Atom_ilalia",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK"
-      ],
-      "url": "worlds/wrld_eb503f20-2270-4ecb-8622-9ecf080ea51f.html"
     }
   ],
   "attempts": {
@@ -864,7 +865,7 @@
       "status": "assessed"
     },
     "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89": {
-      "checkedAt": "2026-11-15T23:22:48+00:00",
+      "checkedAt": "2026-11-23T00:17:27+00:00",
       "status": "assessed"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
@@ -900,11 +901,11 @@
       "status": "assessed"
     },
     "wrld_7ba19072-cf2e-4fbb-b18e-644666e4a19d": {
-      "checkedAt": "2026-11-14T00:19:30+00:00",
+      "checkedAt": "2026-11-23T00:17:35+00:00",
       "status": "assessed"
     },
     "wrld_3b6d25b1-8dfd-4e92-b66b-a67075953cf8": {
-      "checkedAt": "2026-11-14T00:19:32+00:00",
+      "checkedAt": "2026-11-23T00:17:38+00:00",
       "status": "insufficient-image"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
@@ -1004,7 +1005,7 @@
       "status": "assessed"
     },
     "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab": {
-      "checkedAt": "2026-11-14T00:19:27+00:00",
+      "checkedAt": "2026-11-23T00:17:30+00:00",
       "status": "assessed"
     },
     "wrld_2760e034-4ef5-49c8-bcb3-035734df721d": {
