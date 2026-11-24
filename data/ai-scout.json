@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-23T00:17:38+00:00",
+  "updatedAt": "2026-11-24T04:16:59+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 180
+    "newAssessments": 2,
+    "pending": 181
   },
   "scored": [
     {
@@ -615,17 +615,6 @@
       "url": "worlds/wrld_95883f50-4838-4cea-9e80-3347c5caaf5e.html"
     },
     {
-      "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
-      "name": "Neptune Night Club",
-      "author": "Plutto2Times",
-      "sourceType": "catalog",
-      "signals": [
-        "AUDIOLINK",
-        "STAGE"
-      ],
-      "url": "worlds/wrld_1910ed89-05b9-44e7-b127-9a69b8b976be.html"
-    },
-    {
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
       "name": "Oh's Party Ballroom",
       "author": "emymin",
@@ -753,14 +742,14 @@
       "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
     },
     {
-      "id": "wrld_53631603-d238-43f5-bb72-c71b63d16c50",
-      "name": "LIQUID ˸ LAB",
-      "author": "Italiandogs",
+      "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
+      "name": "Lights Out Night Club",
+      "author": "Lights Out Host",
       "sourceType": "catalog",
       "signals": [
         "AUDIOLINK"
       ],
-      "url": "worlds/wrld_53631603-d238-43f5-bb72-c71b63d16c50.html"
+      "url": "worlds/wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89.html"
     },
     {
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
@@ -781,6 +770,16 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_d2ce9adb-944d-43bb-b98d-0d9907be1682.html"
+    },
+    {
+      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
+      "name": "Shatoo's Dance Stage",
+      "author": "Shatoo",
+      "sourceType": "catalog",
+      "signals": [
+        "STAGE"
+      ],
+      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
@@ -797,7 +796,7 @@
       "status": "assessed"
     },
     "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be": {
-      "checkedAt": "2026-11-17T02:27:49+00:00",
+      "checkedAt": "2026-11-24T04:16:53+00:00",
       "status": "assessed"
     },
     "wrld_856c161d-b995-4349-8a72-d10ad498300a": {
@@ -869,11 +868,11 @@
       "status": "assessed"
     },
     "wrld_53631603-d238-43f5-bb72-c71b63d16c50": {
-      "checkedAt": "2026-11-17T02:27:56+00:00",
+      "checkedAt": "2026-11-24T04:16:55+00:00",
       "status": "assessed"
     },
     "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6": {
-      "checkedAt": "2026-11-17T02:27:59+00:00",
+      "checkedAt": "2026-11-24T04:16:57+00:00",
       "status": "insufficient-image"
     },
     "wrld_7da653ea-7eab-432a-90ba-fa158398d47e": {
@@ -909,7 +908,7 @@
       "status": "insufficient-image"
     },
     "wrld_aa51adba-1554-4d53-b9a5-fa1501ed32d2": {
-      "checkedAt": "2026-11-14T00:19:35+00:00",
+      "checkedAt": "2026-11-24T04:16:59+00:00",
       "status": "insufficient-image"
     },
     "wrld_1c01d4a5-521a-47bd-9172-f36a8c712384": {
