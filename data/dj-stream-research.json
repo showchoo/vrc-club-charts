@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-23T00:24:07+00:00",
+  "updatedAt": "2026-11-24T04:22:01+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -419,7 +419,7 @@
       "id": "wrld_1910ed89-05b9-44e7-b127-9a69b8b976be",
       "name": "Neptune Night Club",
       "author": "Plutto2Times",
-      "checkedAt": "2026-11-20T01:23:18+00:00",
+      "checkedAt": "2026-11-24T04:22:00+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -445,7 +445,7 @@
       "id": "wrld_654d9708-c6ad-4120-a8cc-52048fea24d7",
       "name": "NOIR X ECLIPSE",
       "author": "Dustyᵀᴹ",
-      "checkedAt": "2026-11-20T01:23:18+00:00",
+      "checkedAt": "2026-11-24T04:22:00+00:00",
       "metadataStatus": "unavailable",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -458,7 +458,7 @@
       "id": "wrld_856c161d-b995-4349-8a72-d10ad498300a",
       "name": "Oh's Party Ballroom",
       "author": "emymin",
-      "checkedAt": "2026-11-20T01:23:18+00:00",
+      "checkedAt": "2026-11-24T04:22:00+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -484,7 +484,7 @@
       "id": "wrld_68a3f45f-869e-4cc0-a907-7a7adcbe181c",
       "name": "particle abyss 2.0",
       "author": "Cyberƴ",
-      "checkedAt": "2026-11-20T01:23:18+00:00",
+      "checkedAt": "2026-11-24T04:22:00+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
