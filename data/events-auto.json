@@ -1,24 +1,5 @@
 [
   {
-    "id": "feed-f27023aa55920c6d40aa",
-    "name": "Quest Dance party Club No.285 [ VRC Quest対応 DJイベント ] 📅11月24日(火) OPEN 20:40 JST～ START 21:00 JST～…",
-    "start": "2026-11-24T11:40:00Z",
-    "end": null,
-    "organizer": "@ClubDanceparty",
-    "worldName": "VRChat",
-    "genres": [
-      "DJ",
-      "DANCE"
-    ],
-    "url": "https://x.com/ClubDanceparty/status/2124777311308570770?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "f27023aa55920c6d40aa",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-26b7d47cd691fe2ad9bd",
     "name": "🔥 VRC ライブ告知🔥 \"夜行決戦\" 11/26(木) OPEN ：21:50 at RIPPLE2 (StrollZ Group +) StrollZとのツーマンゴリラ🔥🔥🔥 ﾍﾞﾘﾍﾞﾘ…",
     "start": "2026-11-26T12:50:00Z",
@@ -38,7 +19,7 @@
   },
   {
     "id": "feed-16e51427436d8bbe501c",
-    "name": "🌀 ライブ のお知らせ🌀 いつも警戒ちゃん（ @Keikai_Gumin ）とやっているリアル ライブ をVRの世界（ VRChat ）でやります！！ ▼▲▼▲▼▲▼ ARSNOVA vol.…",
+    "name": "🌀ライブのお知らせ🌀 いつも警戒ちゃん（ @Keikai_Gumin ）とやっているリアルライブをVRの世界（ VRChat ）でやります！！ ▼▲▼▲▼▲▼ ARSNOVA vol.03 2…",
     "start": "2026-11-27T11:45:00Z",
     "end": null,
     "organizer": "@takahashilouie",
@@ -50,6 +31,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "16e51427436d8bbe501c",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-0db3e3ef0990774c7ba6",
+    "name": "📢 ライブ 出演決定！！ 【Trinity Tails × Vket コラボ音楽 ライブ 】 📅 11/28(土) 21:00 OPEN 📍 VRChat ｜Vket Stage 🚪 Trin…",
+    "start": "2026-11-28T12:00:00Z",
+    "end": null,
+    "organizer": "@erurun_33",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/erurun_33/status/2125152447832174742?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "0db3e3ef0990774c7ba6",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -74,7 +73,7 @@
   },
   {
     "id": "feed-7753401b48cf891abf88",
-    "name": "🌟 VRChatライブ開催 のお知らせ🌟 11月30日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期 ライブイベント です✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オリジ…",
+    "name": "🌟 VRChat ライブ開催のお知らせ🌟 11月30日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期ライブイベントです✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オリジナル…",
     "start": "2026-11-30T12:30:00Z",
     "end": null,
     "organizer": "@o_ChinaAi_o",
@@ -92,7 +91,7 @@
   },
   {
     "id": "feed-7a2bda94ce8bb7d5f423",
-    "name": "#KeyHolderCrew #VRAutonomy #Vket #Vket2026Winter 【出演情報】 VRChat 最大級 ライブイベント 「Autonomy vol.4 in Vk…",
+    "name": "#KeyHolderCrew #VRAutonomy #Vket #Vket2026Winter 【出演情報】 VRChat 最大級ライブイベント 「Autonomy vol.4 in Vke…",
     "start": "2026-12-13T12:30:00Z",
     "end": null,
     "organizer": "@KeyHolder_Crew",
