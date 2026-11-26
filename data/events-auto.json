@@ -37,7 +37,7 @@
   },
   {
     "id": "feed-0db3e3ef0990774c7ba6",
-    "name": "📢 ライブ 出演決定！！ 【Trinity Tails × Vket コラボ音楽 ライブ 】 📅 11/28(土) 21:00 OPEN 📍 VRChat ｜Vket Stage 🚪 Trin…",
+    "name": "📢 ライブ出演決定！！ 【Trinity Tails × Vket コラボ音楽ライブ】 📅 11/28(土) 21:00 OPEN 📍 VRChat ｜Vket Stage 🚪 Trinity…",
     "start": "2026-11-28T12:00:00Z",
     "end": null,
     "organizer": "@erurun_33",
@@ -49,6 +49,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "0db3e3ef0990774c7ba6",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-b5e78355f4890f1491d0",
+    "name": "重力異常の会場で立体的に楽しむライブイベントを 開催 します 『kasousuisou5』 2026.11.29 20:30 OPEN 21:00 START (JST) VRChat (Fr…",
+    "start": "2026-11-29T11:30:00Z",
+    "end": null,
+    "organizer": "@Kasousuisou",
+    "worldName": "VRChat",
+    "genres": [
+      "LIVE"
+    ],
+    "url": "https://x.com/Kasousuisou/status/2122525653904056720?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "b5e78355f4890f1491d0",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
@@ -73,7 +91,7 @@
   },
   {
     "id": "feed-7753401b48cf891abf88",
-    "name": "🌟 VRChat ライブ開催のお知らせ🌟 11月30日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期ライブイベントです✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オリジナル…",
+    "name": "🌟 VRChat ライブ 開催 のお知らせ🌟 11月30日(月) 21:30 OPEN 『ちなあいLIVE』♪ ちなあい主催 定期ライブイベントです✨ おもちなつ・羽澄愛 ソロ枠あり🎤 オリジ…",
     "start": "2026-11-30T12:30:00Z",
     "end": null,
     "organizer": "@o_ChinaAi_o",
@@ -85,6 +103,24 @@
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
     "upstreamId": "7753401b48cf891abf88",
+    "upstreamCategory": "music",
+    "autoImported": true,
+    "confidence": 0.9
+  },
+  {
+    "id": "feed-c39f12e89f506b351709",
+    "name": "一週間後、12月2日水曜日22時は VRChat レギュラーの DJイベント #GrooveNoir です。ハウス・ディスコ・ソウルなど、90分のフリー DJ セットを毎月お届けしています。会…",
+    "start": "2026-12-02T13:00:00Z",
+    "end": null,
+    "organizer": "@dj_tsumugi",
+    "worldName": "VRChat",
+    "genres": [
+      "DJ"
+    ],
+    "url": "https://x.com/dj_tsumugi/status/2125441018791428304?utm_source=yjrealtime&utm_medium=search",
+    "source": "KAFKA2306/cast_event_cal public event feed",
+    "sourceProvider": "cast_event_cal",
+    "upstreamId": "c39f12e89f506b351709",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
