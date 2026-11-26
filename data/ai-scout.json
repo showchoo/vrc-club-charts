@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-25T03:01:43+00:00",
+  "updatedAt": "2026-11-26T02:11:58+00:00",
   "methodVersion": "1.0",
   "modelConfigured": true,
   "scope": "Visual impressions from one public thumbnail only; not World craftsmanship",
   "summary": {
     "totalCandidates": 207,
     "assessed": 24,
-    "newAssessments": 3,
-    "pending": 180
+    "newAssessments": 2,
+    "pending": 181
   },
   "scored": [
     {
@@ -121,6 +121,27 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-11-06T00:13:59+00:00"
+    },
+    {
+      "id": "wrld_62bc3ff0-2e97-4257-8256-304636d3773e",
+      "name": "Afterdark Apartment ［2026 Updateǃ］",
+      "author": "Reava_レイ",
+      "sourceType": "catalog",
+      "signals": [],
+      "url": "worlds/wrld_62bc3ff0-2e97-4257-8256-304636d3773e.html",
+      "visualPotential": 70,
+      "factors": {
+        "visual": 4,
+        "lighting": 3,
+        "spatial": 4,
+        "originality": 3
+      },
+      "reasonJa": "落ち着いた色合いのモダンなキッチンのインテリアが細かく作り込まれています。",
+      "cautionsJa": "画像はプロモーション用の加工が施されている可能性があり、実際のワールドの質感とは異なる場合があります。",
+      "confidence": "low",
+      "method": "single-thumbnail-ai-image-assessment",
+      "model": "gemini-3.5-flash-lite",
+      "assessedAt": "2026-11-26T02:11:58+00:00"
     },
     {
       "id": "wrld_d934a1b8-6848-4175-9fff-c1c26af2b92b",
@@ -527,27 +548,6 @@
       "method": "single-thumbnail-ai-image-assessment",
       "model": "gemini-3.5-flash-lite",
       "assessedAt": "2026-10-06T12:51:30+00:00"
-    },
-    {
-      "id": "wrld_0a2ce717-688c-4bcd-857f-37491f6dc808",
-      "name": "BLANK SPACE",
-      "author": "ChaikaRaven",
-      "sourceType": "catalog",
-      "signals": [],
-      "url": "worlds/wrld_0a2ce717-688c-4bcd-857f-37491f6dc808.html",
-      "visualPotential": 55,
-      "factors": {
-        "visual": 3,
-        "lighting": 3,
-        "spatial": 3,
-        "originality": 2
-      },
-      "reasonJa": "赤く怪しい光を放つ壁面や天井の照明、散らばる破片が退廃的なクラブ空間を演出しています。",
-      "cautionsJa": "サムネイル全体に大きなロゴが配置されているため、実際の空間デザインの詳細や視認性については不鮮明な部分があります。",
-      "confidence": "low",
-      "method": "single-thumbnail-ai-image-assessment",
-      "model": "gemini-3.5-flash-lite",
-      "assessedAt": "2026-10-26T23:07:03+00:00"
     }
   ],
   "candidates": [
@@ -743,6 +743,16 @@
       "url": "worlds/wrld_b0f29164-495d-443b-869d-afc6bc99e3f2.html"
     },
     {
+      "id": "wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33",
+      "name": "kakuhira's club house",
+      "author": "kakuhira",
+      "sourceType": "catalog",
+      "signals": [
+        "AUDIOLINK"
+      ],
+      "url": "worlds/wrld_93923db0-58eb-4f09-8e8b-8a47f7325b33.html"
+    },
+    {
       "id": "wrld_1b80e09e-99f0-4b68-8289-0acd55c48a89",
       "name": "Lights Out Night Club",
       "author": "Lights Out Host",
@@ -771,16 +781,6 @@
         "AUDIOLINK"
       ],
       "url": "worlds/wrld_5ba82632-3195-4358-b8f7-e0e63983abb6.html"
-    },
-    {
-      "id": "wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab",
-      "name": "Shatoo's Dance Stage",
-      "author": "Shatoo",
-      "sourceType": "catalog",
-      "signals": [
-        "STAGE"
-      ],
-      "url": "worlds/wrld_3dddfdf9-08dd-48c1-8045-2933d48932ab.html"
     }
   ],
   "attempts": {
@@ -921,7 +921,7 @@
       "status": "assessed"
     },
     "wrld_0508f15f-869b-44d4-b538-1f6615fd5273": {
-      "checkedAt": "2026-11-19T01:11:47+00:00",
+      "checkedAt": "2026-11-26T02:11:43+00:00",
       "status": "insufficient-image"
     },
     "wrld_a2a9c62d-7e56-4c43-a6ed-af0e01342350": {
@@ -929,7 +929,7 @@
       "status": "assessed"
     },
     "wrld_252e3107-9ae4-4513-a17a-321909162e21": {
-      "checkedAt": "2026-11-19T01:11:55+00:00",
+      "checkedAt": "2026-11-26T02:11:52+00:00",
       "status": "assessed"
     },
     "wrld_3a77fd61-5571-4dae-9700-b9f5d4792cdc": {
@@ -1021,8 +1021,12 @@
       "status": "assessed"
     },
     "wrld_b0d2702a-1704-40b1-8f54-4ad65dbbba0e": {
-      "checkedAt": "2026-11-19T01:11:52+00:00",
+      "checkedAt": "2026-11-26T02:11:46+00:00",
       "status": "insufficient-image"
+    },
+    "wrld_62bc3ff0-2e97-4257-8256-304636d3773e": {
+      "checkedAt": "2026-11-26T02:11:58+00:00",
+      "status": "assessed"
     }
   }
 }
