@@ -1,6 +1,6 @@
 {
   "methodVersion": "gemini-grounded-search-v1",
-  "updatedAt": "2026-11-25T03:07:14+00:00",
+  "updatedAt": "2026-11-26T02:22:07+00:00",
   "worlds": [
     {
       "id": "wrld_cb038e55-713b-4aa7-a1d2-d4f37a403c92",
@@ -226,7 +226,7 @@
       "id": "wrld_b2d9f284-3a77-4a8a-a58e-f8427f87ba79",
       "name": "Club Orion",
       "author": "AcChosen",
-      "checkedAt": "2026-11-23T00:24:06+00:00",
+      "checkedAt": "2026-11-26T02:22:06+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -264,7 +264,7 @@
       "id": "wrld_492121dd-f7ea-46ab-aade-968e1a91899b",
       "name": "Cyberpunk City Rave",
       "author": "Coldcancer",
-      "checkedAt": "2026-11-23T00:24:06+00:00",
+      "checkedAt": "2026-11-26T02:22:06+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -290,7 +290,7 @@
       "id": "wrld_2299385b-be7f-48d6-a843-b221646e89ce",
       "name": "Dragon Rave",
       "author": "Coldcancer",
-      "checkedAt": "2026-11-23T00:24:06+00:00",
+      "checkedAt": "2026-11-26T02:22:06+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
@@ -355,7 +355,7 @@
       "id": "wrld_5ba82632-3195-4358-b8f7-e0e63983abb6",
       "name": "LOST COLONY RAVE V2.5",
       "author": "booploops",
-      "checkedAt": "2026-11-23T00:24:06+00:00",
+      "checkedAt": "2026-11-26T02:22:06+00:00",
       "metadataStatus": "official_public",
       "method": "gemini-grounded-search-v1",
       "status": "research_unavailable",
