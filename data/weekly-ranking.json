@@ -956,6 +956,55 @@
       }
     },
     {
+      "id": "wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
+      "name": "CLUB OBLIQUE",
+      "author": "yossy222",
+      "genres": [
+        "CLUB",
+        "DJ"
+      ],
+      "officialTags": [
+        "author_tag_club",
+        "author_tag_dj",
+        "author_tag_audiolink",
+        "author_tag_astra",
+        "author_tag_ai",
+        "system_approved"
+      ],
+      "source": "https://vrchat.com/home/world/wrld_030e5a14-ed70-4466-b705-660d0ff04c65/info",
+      "editorialStatus": "unreviewed",
+      "chartEligible": true,
+      "djStreamVerification": null,
+      "djStreamTested": false,
+      "djStreamOwnerConfirmed": false,
+      "ownerStreamConfirmation": null,
+      "publicationBasis": "dj-tag",
+      "releaseStatus": "public",
+      "availabilityStatus": "available",
+      "thumbnail": null,
+      "capacity": null,
+      "recommendedCapacity": null,
+      "worldUpdatedAt": null,
+      "totals": {
+        "visits": null,
+        "favorites": null
+      },
+      "weekly": {
+        "visits": null,
+        "favorites": null
+      },
+      "scores": {
+        "trending": 0.0,
+        "craftsmanship": null,
+        "overall": null
+      },
+      "movement": {
+        "overall": null,
+        "trending": null,
+        "craftsmanship": null
+      }
+    },
+    {
       "id": "wrld_a99f8cae-b6fb-4df7-92de-daeb5af74898",
       "name": "Cozy DJ Studio",
       "author": "Kampfhase",

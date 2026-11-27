@@ -1448,5 +1448,61 @@
     "discoverySources": [
       "sia_vr_club"
     ]
+  },
+  {
+    "id": "wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
+    "name": "CLUB OBLIQUE",
+    "author": "yossy222",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "method": "official-vrchat-dj-tag"
+    },
+    "note": "Official public World DJ tag; live playback not independently tested",
+    "reviewedAt": "2026-11-27T05:08:18.568580+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "official_public_page",
+      "directory-seed"
+    ]
+  },
+  {
+    "id": "wrld_d61e43d1-da99-4907-9f9d-ec773143d60c",
+    "name": "Club Twilight Official",
+    "author": "Twilight Studio",
+    "status": "approved",
+    "classification": {
+      "verdict": "club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description explicitly states it is a nightclub featuring a central DJ booth and live DJ sets",
+        "Tags include author_tag_club and author_tag_dance"
+      ],
+      "reasonJa": "説明文にナイトクラブ、DJブース、ライブDJセットの開催が明記されており、タグにもクラブやダンスが含まれているため。",
+      "imageConsidered": true
+    },
+    "note": "Official public World verified; Gemini and independent nightlife evidence agreed",
+    "reviewedAt": "2026-11-27T05:08:20.085463+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "official_public_page",
+      "directory-seed"
+    ]
+  },
+  {
+    "id": "wrld_71a7428c-fecb-40a5-b2ac-032569083522",
+    "name": "",
+    "author": "",
+    "status": "excluded_nonpublic",
+    "classification": {},
+    "note": "Official VRChat releaseStatus: private",
+    "reviewedAt": "2026-11-27T05:08:20.161127+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1"
   }
 ]

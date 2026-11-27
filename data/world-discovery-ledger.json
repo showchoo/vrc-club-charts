@@ -34,10 +34,10 @@
   {
     "id": "wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
     "name": "CLUB OBLIQUE",
-    "authorHint": "Unverified",
+    "authorHint": "yossy222",
     "firstSeenAt": "2026-11-27",
     "lastSeenAt": "2026-11-27",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "official_public_page",
@@ -54,6 +54,12 @@
       {
         "source": "directory-seed",
         "ref": "https://vrchat.com/home/launch?worldId=wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
+        "firstSeenAt": "2026-11-27",
+        "lastSeenAt": "2026-11-27"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_030e5a14-ed70-4466-b705-660d0ff04c65/info",
         "firstSeenAt": "2026-11-27",
         "lastSeenAt": "2026-11-27"
       }
@@ -2084,34 +2090,6 @@
     ]
   },
   {
-    "id": "wrld_71a7428c-fecb-40a5-b2ac-032569083522",
-    "name": "OSCLΛ ｜ Electronic DJ Club",
-    "authorHint": "Unverified",
-    "firstSeenAt": "2026-11-27",
-    "lastSeenAt": "2026-11-27",
-    "status": "pending",
-    "evidence": [
-      {
-        "source": "official_public_page",
-        "ref": "https://vrchat.com/home/launch?worldId=wrld_71a7428c-fecb-40a5-b2ac-032569083522",
-        "firstSeenAt": "2026-11-27",
-        "lastSeenAt": "2026-11-27"
-      },
-      {
-        "source": "nominated-url",
-        "ref": "https://vrchat.com/home/launch?worldId=wrld_71a7428c-fecb-40a5-b2ac-032569083522",
-        "firstSeenAt": "2026-11-27",
-        "lastSeenAt": "2026-11-27"
-      },
-      {
-        "source": "directory-seed",
-        "ref": "https://vrchat.com/home/launch?worldId=wrld_71a7428c-fecb-40a5-b2ac-032569083522",
-        "firstSeenAt": "2026-11-27",
-        "lastSeenAt": "2026-11-27"
-      }
-    ]
-  },
-  {
     "id": "wrld_720dce63-a9a7-4f95-af91-3ab9ad7801a9",
     "name": "AudioLink ClubSystem",
     "authorHint": "JJavierPV",
@@ -3860,10 +3838,10 @@
   {
     "id": "wrld_d61e43d1-da99-4907-9f9d-ec773143d60c",
     "name": "Club Twilight Official",
-    "authorHint": "Unverified",
+    "authorHint": "Twilight Studio",
     "firstSeenAt": "2026-11-27",
     "lastSeenAt": "2026-11-27",
-    "status": "pending",
+    "status": "published",
     "evidence": [
       {
         "source": "official_public_page",
@@ -3880,6 +3858,12 @@
       {
         "source": "directory-seed",
         "ref": "https://vrchat.com/home/launch?worldId=wrld_d61e43d1-da99-4907-9f9d-ec773143d60c",
+        "firstSeenAt": "2026-11-27",
+        "lastSeenAt": "2026-11-27"
+      },
+      {
+        "source": "catalog",
+        "ref": "https://vrchat.com/home/world/wrld_d61e43d1-da99-4907-9f9d-ec773143d60c/info",
         "firstSeenAt": "2026-11-27",
         "lastSeenAt": "2026-11-27"
       }
