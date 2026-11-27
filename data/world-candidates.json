@@ -1,119 +1,56 @@
 [
   {
-    "id": "wrld_6e65c9b1-3f5f-4e8f-80db-d360f996a144",
-    "name": "Axe Throwing Club 2․0",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-231650",
+    "id": "wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
+    "name": "CLUB OBLIQUE",
+    "authorHint": "Unverified",
+    "source": "https://vrchat.com/home/launch?worldId=wrld_030e5a14-ed70-4466-b705-660d0ff04c65",
     "sourceCategories": [
-      "sia_vr_club"
+      "official_public_page",
+      "directory-seed"
     ],
-    "confidenceScore": 88,
+    "confidenceScore": 95,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club",
+      "source:directory-seed",
       "+explicit-club-name"
     ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
+    "firstDiscoveredAt": "2026-11-27",
+    "lastSeenAt": "2026-11-27"
   },
   {
-    "id": "wrld_86fa07f1-c71f-4851-9b0c-0c73019b3d68",
-    "name": "Club BEBE CARROT",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-231352",
+    "id": "wrld_d61e43d1-da99-4907-9f9d-ec773143d60c",
+    "name": "Club Twilight Official",
+    "authorHint": "Unverified",
+    "source": "https://vrchat.com/home/launch?worldId=wrld_d61e43d1-da99-4907-9f9d-ec773143d60c",
     "sourceCategories": [
-      "sia_vr_club"
+      "official_public_page",
+      "directory-seed"
     ],
-    "confidenceScore": 88,
+    "confidenceScore": 95,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club",
+      "source:directory-seed",
       "+explicit-club-name"
     ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
+    "firstDiscoveredAt": "2026-11-27",
+    "lastSeenAt": "2026-11-27"
   },
   {
-    "id": "wrld_192ac5c3-e1ca-43c9-ae78-501c0fa40acc",
-    "name": "club bunny",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-231542",
+    "id": "wrld_71a7428c-fecb-40a5-b2ac-032569083522",
+    "name": "OSCLΛ ｜ Electronic DJ Club",
+    "authorHint": "Unverified",
+    "source": "https://vrchat.com/home/launch?worldId=wrld_71a7428c-fecb-40a5-b2ac-032569083522",
     "sourceCategories": [
-      "sia_vr_club"
+      "official_public_page",
+      "directory-seed"
     ],
-    "confidenceScore": 88,
+    "confidenceScore": 95,
     "confidence": "awaiting-public-metadata",
     "reasons": [
-      "source:sia-vr-club",
+      "source:directory-seed",
       "+explicit-club-name"
     ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_57039e2c-4632-4b28-a6b5-5fb1c6230483",
-    "name": "青色クラブ ⁄ AOIRO CLUB ［ Ver2․XX ］",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-231114",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-11-04",
-    "lastSeenAt": "2026-11-04"
-  },
-  {
-    "id": "wrld_b9060e41-962d-4a40-88d4-40f1738bd47b",
-    "name": "Club BlueSphere",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230777",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 88,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club",
-      "+explicit-club-name"
-    ],
-    "firstDiscoveredAt": "2026-11-05",
-    "lastSeenAt": "2026-11-05"
-  },
-  {
-    "id": "wrld_94270b27-d54f-4375-aa08-68117559b735",
-    "name": "Avinity ; Oasis",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230705",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-05",
-    "lastSeenAt": "2026-11-05"
-  },
-  {
-    "id": "wrld_6b1b8977-51c7-48be-b097-f735ddc0e5fb",
-    "name": "SinghaSiam",
-    "authorHint": "",
-    "source": "https://sia-vr.com/vrchat-world-230856",
-    "sourceCategories": [
-      "sia_vr_club"
-    ],
-    "confidenceScore": 72,
-    "confidence": "awaiting-public-metadata",
-    "reasons": [
-      "source:sia-vr-club"
-    ],
-    "firstDiscoveredAt": "2026-11-05",
-    "lastSeenAt": "2026-11-05"
+    "firstDiscoveredAt": "2026-11-27",
+    "lastSeenAt": "2026-11-27"
   }
 ]
