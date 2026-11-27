@@ -36,6 +36,16 @@ BUILD_STEPS = (
 )
 
 
+def normalize_vercel_directory_urls(text: str, base: str) -> str:
+    """Use the non-redirecting /worlds URL on Vercel only."""
+    for suffix in ("worlds/", "worlds/index.html"):
+        old = base + suffix
+        # Exact URL boundaries: do not rewrite /worlds/<WorldId>.html.
+        for boundary in ('"', "'", "<"):
+            text = text.replace(old + boundary, base + "worlds" + boundary)
+    return text
+
+
 def main() -> int:
     if not VERCEL_BASE.startswith("https://"):
         raise SystemExit("VCC_PUBLIC_BASE_URL must use HTTPS")
@@ -64,6 +74,7 @@ def main() -> int:
             original = path.read_text(encoding="utf-8")
             modified = original.replace(PAGES_BASE, VERCEL_BASE)
             modified = modified.replace(PAGES_BASE.removesuffix("/"), VERCEL_BASE.removesuffix("/"))
+            modified = normalize_vercel_directory_urls(modified, VERCEL_BASE)
             if modified != original:
                 path.write_text(modified, encoding="utf-8")
 

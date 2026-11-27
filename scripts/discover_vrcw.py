@@ -187,12 +187,20 @@ def priority_seeds(today: str) -> list[dict]:
             continue
         # Directory nominations are not equivalent to owner-provided club links.
         # These require explicit nightclub-like names *and* official World lookup.
-        directory = item.get("type") == "source-listed-club"
+        official_page = item.get("type") == "official-public-page"
+        directory = item.get("type") == "source-listed-club" or official_page
         hint = str(item.get("nameHint") or "").strip()[:120]
         club_named = bool(CLUB_NAME.search(hint)) and not BLOCKED_NAME.search(hint)
         source_url = str(item.get("source") or "")
+        if official_page and source_url not in {
+            "https://vrchat.com/home/launch?worldId=" + wid,
+            "https://vrchat.com/home/world/" + wid,
+            "https://vrchat.com/home/world/" + wid + "/info",
+        }:
+            continue
         vrcmap_reference = directory and source_url.startswith("https://vrcmap.com/world/")
-        categories = (["vrcmap_reference", "directory-seed"] if vrcmap_reference else
+        categories = (["official_public_page", "directory-seed"] if official_page else
+                      ["vrcmap_reference", "directory-seed"] if vrcmap_reference else
                       ["vrcw_club", "directory-seed"]) if directory else ["direct-world-link"]
         out.append({
             "id": wid,

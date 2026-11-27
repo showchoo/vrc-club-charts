@@ -567,6 +567,7 @@ def main() -> int:
     latest_state = latest_state if isinstance(latest_state, dict) else {}
     health = latest_state.get("sourceHealth", {})
     health = health if isinstance(health, dict) else {}
+    health.update(source_health)
     health["sia_vr_club"] = sia_health
     health.update({
         "vrcw_directory": {"lastAttemptAt": today,
@@ -576,6 +577,10 @@ def main() -> int:
         "vrchat_world_search": {"lastAttemptAt": today,
                                 "status": "ok" if official_ok else "unavailable"},
     })
+    live_source_ok = bool(successful_sources or related_checked or vrcw_ok or official_ok
+                          or sia_health.get("status") == "ok")
+    latest_state["lastDiscoveryAttempt"] = today
+    latest_state["discoveryStatus"] = "ok" if live_source_ok else "degraded_upstream_unavailable"
     latest_state["sourceHealth"] = health
     STATE.write_text(json.dumps(latest_state, ensure_ascii=False, indent=2)
                      + "\n", encoding="utf-8")
@@ -617,12 +622,11 @@ def main() -> int:
             last_seen = dt.date.fromisoformat(str(old.get("lastSeenAt") or old.get("firstDiscoveredAt")))
         except Exception:
             continue
-        if last_seen >= cutoff:
+        if last_seen >= cutoff or not live_source_ok:
             by_id[wid] = old
 
-    if not successful_sources and not vrcw_ok and not official_ok and not by_id:
-        print("ERROR: all discovery sources failed; preserving previous candidate file")
-        return 2
+    if not live_source_ok:
+        print("WARN: live discovery sources unavailable; preserving unresolved leads and processing offline evidence")
 
     # Discovery only collects leads. The separate Gemini classifier verifies
     # official public VRChat metadata before any automatic catalog admission.
@@ -639,7 +643,7 @@ def main() -> int:
 
     OUT.write_text(json.dumps(candidates, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {OUT}: {len(candidates)} unresolved candidates")
-    return 0
+    return 0 if live_source_ok else 3
 
 
 if __name__ == "__main__":

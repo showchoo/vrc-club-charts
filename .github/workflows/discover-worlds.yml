@@ -35,13 +35,18 @@ jobs:
         with:
           python-version: "3.12"
       - name: Discover public club candidates
+        id: discovery
         env:
           VRC_USER_AGENT: ${{ vars.VRC_USER_AGENT }}
           VCC_DISCOVERY_PAGES_PER_SOURCE: "12"
           VCC_DISCOVERY_VERIFY_PER_RUN: "16"
           PYTHONUNBUFFERED: "1"
         run: |
-          python scripts/discover_worlds.py
+          status=0
+          python scripts/discover_worlds.py || status=$?
+          if [ "$status" -ne 0 ] && [ "$status" -ne 3 ]; then exit "$status"; fi
+          echo "degraded=$([ "$status" -eq 3 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          if [ "$status" -eq 3 ]; then echo "::warning::Live discovery sources unavailable; offline leads and source health preserved"; fi
           python scripts/build_rankings.py
           python scripts/build_discovery_ledger.py
       - name: Commit candidate queue
@@ -60,3 +65,9 @@ jobs:
         env:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python scripts/sync_discovery_to_supabase.py
+
+      - name: Report upstream outage
+        if: steps.discovery.outputs.degraded == 'true'
+        run: |
+          echo "::error::Live discovery sources unavailable; queue and health report committed. Restore an authorized live source."
+          exit 3
