@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "wrld_5afa5c1e-6ee5-4c75-aebb-31a9f815a660",
+    "name": "バチボコバトルアリーナ Bachi-Boko Battle Arena",
+    "authorHint": "",
+    "source": "https://sia-vr.com/vrchat-world-260488",
+    "sourceCategories": [
+      "sia_vr_club"
+    ],
+    "confidenceScore": 72,
+    "confidence": "awaiting-public-metadata",
+    "reasons": [
+      "source:sia-vr-club"
+    ],
+    "firstDiscoveredAt": "2026-11-28",
+    "lastSeenAt": "2026-11-28"
+  }
+]

@@ -37,47 +37,47 @@
   },
   "sourceHealth": {
     "vrcmap_music": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_new": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "unavailable",
       "errorType": "RuntimeError"
     },
     "vrcmap_cafe": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_japan": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_trending": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "skipped_host_unreachable"
     },
     "vrcmap_chill": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "skipped_host_unreachable"
     },
     "vrcw_directory": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "disabled"
     },
     "vrchat_world_search": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "unavailable"
     },
     "vrcmap_related": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "skipped_host_unreachable",
       "seedsChecked": 0,
       "unregisteredLinks": 0
     },
     "sia_vr_club": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "status": "ok",
       "articlesChecked": 5,
       "leads": 5,
@@ -96,19 +96,19 @@
       }
     },
     "vrcmap_detail_scan": {
-      "lastAttemptAt": "2026-11-27",
+      "lastAttemptAt": "2026-11-28",
       "selected": 0,
       "eligible_ids": 0,
-      "elapsedSeconds": 41.8
+      "elapsedSeconds": 42.5
     }
   },
   "vrcmapRelatedSeedIndex": 10,
-  "siaVrNextIndex": 28,
-  "vrcmapSourceNextIndex": 3,
+  "siaVrNextIndex": 33,
+  "vrcmapSourceNextIndex": 4,
   "siaVrSecondaryIndexes": {
-    "sia_vr_music": 20,
-    "sia_vr_bar": 20
+    "sia_vr_music": 22,
+    "sia_vr_bar": 22
   },
-  "lastDiscoveryAttempt": "2026-11-27",
+  "lastDiscoveryAttempt": "2026-11-28",
   "discoveryStatus": "ok"
 }
