@@ -1504,5 +1504,30 @@
     "policyRevision": "dj-tag-auto-admission-20261105-v1",
     "source": "auto-discovery",
     "classifierRevision": "dj-tag-auto-admission-20261105-v1"
+  },
+  {
+    "id": "wrld_5afa5c1e-6ee5-4c75-aebb-31a9f815a660",
+    "name": "バチボコバトルアリーナ Bachi-Boko Battle Arena",
+    "author": "くろまるこ",
+    "status": "needs_review",
+    "classification": {
+      "verdict": "not_club",
+      "confidence": 1.0,
+      "evidence": [
+        "Description explicitly states it is a casual multiplayer PvP world",
+        "Tags include author_tag_game, author_tag_pvp, and author_tag_shooting",
+        "Thumbnail text indicates it is a PvP game world"
+      ],
+      "reasonJa": "説明文やタグから対戦アクションやPvPを楽しむためのゲームワールドであることが明確であり、クラブや音楽イベント用ではありません。",
+      "imageConsidered": true
+    },
+    "note": "Gemini verdict or independent evidence insufficient; human review required",
+    "reviewedAt": "2026-11-28T08:01:46.508496+00:00",
+    "policyRevision": "dj-tag-auto-admission-20261105-v1",
+    "source": "auto-discovery",
+    "classifierRevision": "dj-tag-auto-admission-20261105-v1",
+    "discoverySources": [
+      "sia_vr_club"
+    ]
   }
 ]
