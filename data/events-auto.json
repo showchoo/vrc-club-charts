@@ -1,23 +1,5 @@
 [
   {
-    "id": "feed-16e51427436d8bbe501c",
-    "name": "🌀ライブのお知らせ🌀 いつも警戒ちゃん（ @Keikai_Gumin ）とやっているリアルライブをVRの世界（ VRChat ）でやります！！ ▼▲▼▲▼▲▼ ARSNOVA vol.03 2…",
-    "start": "2026-11-27T11:45:00Z",
-    "end": null,
-    "organizer": "@takahashilouie",
-    "worldName": "VRChat",
-    "genres": [
-      "LIVE"
-    ],
-    "url": "https://x.com/takahashilouie/status/2124697505099362343?utm_source=yjrealtime&utm_medium=search",
-    "source": "KAFKA2306/cast_event_cal public event feed",
-    "sourceProvider": "cast_event_cal",
-    "upstreamId": "16e51427436d8bbe501c",
-    "upstreamCategory": "music",
-    "autoImported": true,
-    "confidence": 0.9
-  },
-  {
     "id": "feed-0db3e3ef0990774c7ba6",
     "name": "📢 ライブ出演決定！！ 【Trinity Tails × Vket コラボ音楽ライブ】 📅 11/28(土) 21:00 OPEN 📍 VRChat ｜Vket Stage 🚪 Trinity…",
     "start": "2026-11-28T12:00:00Z",
@@ -72,19 +54,19 @@
     "confidence": 0.9
   },
   {
-    "id": "feed-7a2bda94ce8bb7d5f423",
-    "name": "#KeyHolderCrew #VRAutonomy #Vket #Vket2026Winter 【出演情報】 VRChat 最大級ライブイベント 「Autonomy vol.4 in Vke…",
-    "start": "2026-12-13T12:30:00Z",
+    "id": "feed-occ_bfaa0d1def9017fd0bb5",
+    "name": "❄️ YSSストリート ライブ in Vket 2026 Winter｜#YSS_ VRC ━━━━━━━━━━━━━━ 📅 12/6(日) 🕙 21:50 OPEN / 22:00 STAR…",
+    "start": "2026-12-06T12:50:00Z",
     "end": null,
-    "organizer": "@KeyHolder_Crew",
+    "organizer": "@VrcYss",
     "worldName": "VRChat",
     "genres": [
       "LIVE"
     ],
-    "url": "https://x.com/KeyHolder_Crew/status/2124601314093232563?utm_source=yjrealtime&utm_medium=search",
+    "url": "https://x.com/VrcYss/status/2126288451087847442?utm_source=yjrealtime&utm_medium=search",
     "source": "KAFKA2306/cast_event_cal public event feed",
     "sourceProvider": "cast_event_cal",
-    "upstreamId": "7a2bda94ce8bb7d5f423",
+    "upstreamId": "occ_bfaa0d1def9017fd0bb5",
     "upstreamCategory": "music",
     "autoImported": true,
     "confidence": 0.9
